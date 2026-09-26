@@ -1,0 +1,34 @@
+{
+  "id": "pmc-pmc10579850",
+  "format": "jats",
+  "flavor": "pmc",
+  "title": "Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation",
+  "identifiers": {
+    "pmcid": "PMC10579850",
+    "pmid": "37854874",
+    "doi": "10.12688/f1000research.130458.2"
+  },
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=10579850",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Okyere S, Ackora-Prah J, Bonyah E, Akwasi Adarkwa S. Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation. F1000Research. 2023;12:445. doi:10.12688/f1000research.130458.2",
+  "features": [
+    "nested-sections",
+    "sub-article",
+    "lists",
+    "declarations",
+    "orcid",
+    "tables",
+    "inline-math",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "figures",
+    "mixed-citation",
+    "code"
+  ],
+  "notes": "F1000Research software tool article: 17 <preformat preformat-type=\"computer code\"> blocks, and four open peer-review reports as <sub-article>s. PMC's rendering is used because Europe PMC's drops the license URL."
+}

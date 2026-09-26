@@ -1,0 +1,25 @@
+{
+  "id": "epmc-pmc12951538",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Multi‐country foodborne event caused by cereulide in infant formula products 19 February 2026",
+  "identifiers": {
+    "pmcid": "PMC12951538",
+    "pmid": "41778099",
+    "doi": "10.2903/j.efsa.2026.9984"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12951538/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Multi‐country foodborne event caused by cereulide in infant formula products 19 February 2026. EFSA Journal. 2026;24(3):e9984. doi:10.2903/j.efsa.2026.9984",
+  "features": [
+    "no-body",
+    "no-references",
+    "tiny"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#86",
+  "notes": "A PDF-only deposit: front matter and an abstract, no <body>. A parser must not report it as full text (#86)."
+}

@@ -1,0 +1,37 @@
+{
+  "id": "epmc-pmc6913007",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline",
+  "identifiers": {
+    "pmcid": "PMC6913007",
+    "pmid": "31843001",
+    "doi": "10.1186/s13059-019-1905-y"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6913007/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Ou S, Su W, Liao Y, Chougule K, Agda JRA, Hellinga AJ, et al. Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline. Genome Biology. 2019;20:275. doi:10.1186/s13059-019-1905-y",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "orcid",
+    "tables",
+    "table-footnotes",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#111",
+  "notes": "Table 1 sits inside a <p> in 'Setting up a reference annotation for benchmarking', so flattening the paragraph fuses its cells (14.44, 9.11, 23.54 → 14.449.1123.54) (#111). All six <fig>s also sit inside <p> (#130). <permissions> names CC BY 4.0 for the article beside a CC0 waiver for its data."
+}

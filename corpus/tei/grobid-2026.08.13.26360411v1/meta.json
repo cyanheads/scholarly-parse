@@ -1,0 +1,29 @@
+{
+  "id": "grobid-2026.08.13.26360411v1",
+  "format": "tei",
+  "flavor": "grobid",
+  "title": "Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes",
+  "identifiers": {
+    "doi": "10.64898/2026.08.13.26360411"
+  },
+  "url": "https://www.medrxiv.org/content/10.64898/2026.08.13.26360411v1.full.pdf",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Rasooly D, Peloso GM, Giambartolomei C, Nicholls HL, Liu C, Aung N, et al. Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes. medRxiv. 2026. doi:10.64898/2026.08.13.26360411",
+  "features": [
+    "figures",
+    "display-math",
+    "equation-numbers",
+    "acknowledgments",
+    "declarations",
+    "preprint"
+  ],
+  "notes": "processFulltextDocument with consolidateHeader, consolidateCitations, and consolidateFunders off.",
+  "derivedFrom": {
+    "fixture": "medrxiv-2026.08.13.26360411v1",
+    "tool": "grobid 0.9.1"
+  }
+}

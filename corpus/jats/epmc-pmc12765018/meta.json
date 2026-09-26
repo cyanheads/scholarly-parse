@@ -1,0 +1,39 @@
+{
+  "id": "epmc-pmc12765018",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Closed-form spin-relativistic corrections from the Dirac equation enabling a modified Schrödinger solver",
+  "identifiers": {
+    "pmcid": "PMC12765018",
+    "pmid": "41423664",
+    "doi": "10.1038/s41598-025-29243-4"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12765018/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Amaro MB, Nazeef, Dussech CJ, Qi C. Closed-form spin-relativistic corrections from the Dirac equation enabling a modified Schrödinger solver. Scientific Reports. 2025;16:94. doi:10.1038/s41598-025-29243-4",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "appendix",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "formula-graphic-only",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#127",
+  "notes": "Reference labels are numeric-looking text with a trailing period (<label>1.</label>), which a value-coercing XML parser turns into 1 (#127). Appendix A (energy-level tables) is rendered by Europe PMC as a <sec sec-type=\"app\">; PMC's rendering has <app-group><app>. Formulas are GIFs only in this rendering."
+}

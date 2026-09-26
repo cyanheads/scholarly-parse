@@ -1,0 +1,32 @@
+{
+  "id": "epmc-pmc10768028",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Two new genera (Vittiblatta gen. nov. and Planiblatta gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in Vittiblattapunctata sp. nov.",
+  "identifiers": {
+    "pmcid": "PMC10768028",
+    "pmid": "38187161",
+    "doi": "10.3897/zookeys.1187.113403"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10768028/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Luo XX, Deng WB, Che YL, Wang ZQ. Two new genera (Vittiblatta gen. nov. and Planiblatta gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in Vittiblattapunctata sp. nov. ZooKeys. 2023;1187:401–421. doi:10.3897/zookeys.1187.113403",
+  "features": [
+    "nested-sections",
+    "lists",
+    "acknowledgments",
+    "declarations",
+    "orcid",
+    "tables",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "notes": "Pensoft taxonomic paper: species treatments are <sec>s typed taxon-treatment and treatment-* (diagnosis, description, etymology, distribution, material), plus an identification key."
+}

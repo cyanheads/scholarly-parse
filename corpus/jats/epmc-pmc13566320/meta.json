@@ -1,0 +1,33 @@
+{
+  "id": "epmc-pmc13566320",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Pain Without Words: Emoji-Based Assessment of Acute Pain in the Emergency Department—Clinical and Medico-Legal Impact",
+  "identifiers": {
+    "pmcid": "PMC13566320",
+    "pmid": "42739671",
+    "doi": "10.3390/jcm15176666"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13566320/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Cirillo B, Meneghini S, Cirocchi R, Napoletano G, Maiese A, Mingoli A, et al. Pain Without Words: Emoji-Based Assessment of Acute Pain in the Emergency Department—Clinical and Medico-Legal Impact. Journal of Clinical Medicine. 2026;15(17):6666. doi:10.3390/jcm15176666",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "lists",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "figures",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#93",
+  "notes": "Table cells hold emoji (U+1F600 and neighbours), astral-plane characters a character cut can split into lone surrogates (#93)."
+}

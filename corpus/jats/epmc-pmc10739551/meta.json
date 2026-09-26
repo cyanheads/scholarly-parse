@@ -1,0 +1,28 @@
+{
+  "id": "epmc-pmc10739551",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Interdisziplinäre ultraschallgesteuerte minimal-invasive Autopsie bei COVID-19-Verstorbenen auf der Intensivstation einer Universitätsklinik",
+  "identifiers": {
+    "pmcid": "PMC10739551",
+    "pmid": "38051339",
+    "doi": "10.1007/s00292-023-01248-8"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10739551/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Lahmer T, Stock K, Rasch S, Porubsky S, Jeske S, Schustetter C, et al. Interdisziplinäre ultraschallgesteuerte minimal-invasive Autopsie bei COVID-19-Verstorbenen auf der Intensivstation einer Universitätsklinik. Pathologie (Heidelberg, Germany). 2023;44(Suppl 3):193–197. doi:10.1007/s00292-023-01248-8",
+  "features": [
+    "lists",
+    "footnotes",
+    "translated-abstract",
+    "non-english",
+    "figures",
+    "element-citation",
+    "review"
+  ],
+  "notes": "German-language article (xml:lang=\"de\") with an English translated abstract."
+}

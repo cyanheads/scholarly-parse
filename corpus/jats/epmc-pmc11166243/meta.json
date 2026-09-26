@@ -1,0 +1,33 @@
+{
+  "id": "epmc-pmc11166243",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "The gut at war: the consequences of enteropathogenic Escherichia coli infection as a factor of diarrhea and malnutrition",
+  "identifiers": {
+    "pmcid": "PMC11166243",
+    "pmid": "10685124",
+    "doi": "10.1590/S1516-31802000000100006"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11166243/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Fagundes U, Scaletsky ICA. The gut at war: the consequences of enteropathogenic Escherichia coli infection as a factor of diarrhea and malnutrition. São Paulo Medical Journal. 2000;118(1):21–29. doi:10.1590/S1516-31802000000100006",
+  "features": [
+    "body-without-sections",
+    "footnotes",
+    "declarations",
+    "translated-abstract",
+    "tables",
+    "many-tables",
+    "table-spans",
+    "table-footnotes",
+    "figures",
+    "element-citation",
+    "review"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#111",
+  "notes": "Nine <table-wrap>s are direct children of <body>, which holds paragraphs, tables, and figures with no <sec> (#111). Portuguese translated abstract."
+}

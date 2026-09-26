@@ -1,0 +1,31 @@
+{
+  "id": "arxiv-2402.16746v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "Asymptotic-preserving and energy stable dynamical low-rank approximation for thermal radiative transfer equations",
+  "identifiers": {
+    "arxiv": "2402.16746v1",
+    "doi": "10.1137/24M1646303"
+  },
+  "url": "https://arxiv.org/html/2402.16746v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Patwardhan C, Frank M, Kusch J. Asymptotic-preserving and energy stable dynamical low-rank approximation for thermal radiative transfer equations. arXiv:2402.16746v1. 2024.",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "figures",
+    "theorem",
+    "appendix",
+    "preprint",
+    "large"
+  ],
+  "notes": "About 550 inline and 118 display formulas, 65 of them numbered, plus theorem environments and two appendices."
+}

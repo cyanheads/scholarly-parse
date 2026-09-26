@@ -1,0 +1,39 @@
+{
+  "id": "pmc-pmc11701261",
+  "format": "jats",
+  "flavor": "pmc",
+  "title": "Genome-wide chromosome architecture prediction reveals biophysical principles underlying gene structure",
+  "identifiers": {
+    "pmcid": "PMC11701261",
+    "pmid": "39591973",
+    "doi": "10.1016/j.xgen.2024.100698"
+  },
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11701261",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Chiang M, Brackley CA, Naughton C, Nozawa RS, Battaglia C, Marenduzzo D, et al. Genome-wide chromosome architecture prediction reveals biophysical principles underlying gene structure. Cell Genomics. 2024;4(12):100698. doi:10.1016/j.xgen.2024.100698",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "declarations",
+    "multiple-abstracts",
+    "graphical-abstract",
+    "tables",
+    "table-spans",
+    "inline-math",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#69",
+  "notes": "Every reference is a structured <element-citation> with no delimiters between its child elements, and seven carry a Cell-style eLocation page such as <lpage>1659.e26</lpage> that numeric coercion turns into scientific notation (#69, #127)."
+}

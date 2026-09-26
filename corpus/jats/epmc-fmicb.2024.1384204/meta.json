@@ -1,0 +1,35 @@
+{
+  "id": "epmc-fmicb.2024.1384204",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
+  "identifiers": {
+    "pmcid": "PMC12067597",
+    "pmid": "40357412",
+    "doi": "10.3389/fmicb.2024.1384204"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12067597/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "King ML, Bajwa B, Hanna N, Xing X, Low KE, Neuberger P, et al. Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils. Frontiers in Microbiology. 2025;15:1384204. doi:10.3389/fmicb.2024.1384204",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "table-spans",
+    "table-footnotes",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article",
+    "rosetta"
+  ],
+  "notes": "<permissions> names the Creative Commons Attribution License (CC BY) without a version or URL; the version is Frontiers' Crossref license record for the DOI."
+}

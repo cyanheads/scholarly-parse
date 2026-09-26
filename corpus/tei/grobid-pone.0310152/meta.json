@@ -1,0 +1,32 @@
+{
+  "id": "grobid-pone.0310152",
+  "format": "tei",
+  "flavor": "grobid",
+  "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
+  "identifiers": {
+    "doi": "10.1371/journal.pone.0310152"
+  },
+  "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0310152&type=printable",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Ghosh S, Banerjee M, Chattopadhyay AK. Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy. PLOS ONE. 2024;19(9):e0310152. doi:10.1371/journal.pone.0310152",
+  "features": [
+    "nested-sections",
+    "tables",
+    "figures",
+    "display-math",
+    "equation-numbers",
+    "footnotes",
+    "orcid",
+    "research-article",
+    "rosetta"
+  ],
+  "notes": "processFulltextDocument with consolidateHeader, consolidateCitations, and consolidateFunders off.",
+  "derivedFrom": {
+    "fixture": "plos-pone.0310152",
+    "tool": "grobid 0.9.1"
+  }
+}

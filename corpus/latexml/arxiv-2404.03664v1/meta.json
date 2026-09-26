@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2404.03664v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "LLMs in the Heart of Differential Testing: A Case Study on a Medical Rule Engine",
+  "identifiers": {
+    "arxiv": "2404.03664v1"
+  },
+  "url": "https://arxiv.org/html/2404.03664v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Isaku E, Laaber C, Sartaj H, Ali S, Schwitalla T, Nygård JF. LLMs in the Heart of Differential Testing: A Case Study on a Medical Rule Engine. arXiv:2404.03664v1. 2025.",
+  "features": [
+    "nested-sections",
+    "footnotes",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "tables",
+    "figures",
+    "code",
+    "preprint"
+  ],
+  "regression": "cyanheads/arxiv-mcp-server#10",
+  "notes": "Version 1 of a paper now at v4, fetched by its versioned ID (#10); arXiv's abstract page for v1 shows CC BY 4.0. Carries one code listing (ltx_listing)."
+}

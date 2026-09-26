@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto&apos;s thyroiditis and pernicious anemia: a case report</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Maryam</forename><surname>Mansour</surname></persName>
+							<email>maryam.mansour87@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">Al-Quds University</orgName>
+								<address>
+									<settlement>Jerusalem</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Arwa</forename><surname>Shamasnah</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">Al-Quds University</orgName>
+								<address>
+									<settlement>Jerusalem</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Deema</forename><surname>Alsaadi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">Al-Quds University</orgName>
+								<address>
+									<settlement>Jerusalem</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Saja</forename><forename type="middle">Abu</forename><surname>Saif</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">Al-Quds University</orgName>
+								<address>
+									<settlement>Jerusalem</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Akram</forename><surname>Krama</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">Al-Quds University</orgName>
+								<address>
+									<settlement>Jerusalem</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Istishari Arab Hospital</orgName>
+								<address>
+									<settlement>Ramallah</settlement>
+									<country key="PS">Palestine</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto&apos;s thyroiditis and pernicious anemia: a case report</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">BD05BF705167FDCA272E51080EBE5434</idno>
+					<idno type="DOI">10.1186/s13256-024-05002-3</idno>
+					<note type="submission">Received: 18 December 2023 Accepted: 25 November 2024</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Evans syndrome</term>
+					<term>Systemic lupus erythematosus</term>
+					<term>Autoimmune hemolytic anemia</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Background Evans syndrome is a rare disorder characterized by the simultaneous or sequential combination of autoimmune hemolytic anemia and immunological thrombocytopenia, together with a positive direct antiglobulin test. This syndrome, which can be primary or secondary, is a rare initial manifestation of autoimmune diseases, notably systemic lupus erythematosus, with 1.7-2.7% of patients with systemic lupus erythematosus developing secondary Evans syndrome, sometimes preceding the onset of systemic lupus erythematosus symptoms.</p><p>Case presentation A 47-year-old Middle Eastern female presented with symptoms including shortness of breath, chest pain, and weakness. Physical examination revealed pallor, pale conjunctiva, icteric sclera, tachycardia, and tachypnea. She was diagnosed with Evans syndrome owing to hemolytic anemia, thrombocytopenia, and a positive Coombs test, where initial resistance to treatment prompted intensive therapy with methylprednisolone, intravenous immunoglobulin, and rituximab. Subsequent identification of systemic lupus erythematosus on the basis of positive anti-nuclear antibodies and anti-double-stranded deoxyribonucleic acid antibodies led to treatment with mycophenolate mofetil and hydroxychloroquine. Further evaluations uncovered Hashimoto's thyroiditis and pernicious anemia, necessitating thyroxine supplementation and vitamin B12 injections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>Hematologic abnormalities play a crucial role in the diagnostic framework of systemic lupus erythematosus. This case highlights a patient initially diagnosed with Evans syndrome, revealing an underlying systemic lupus erythematosus. The presentation underscores the significance of hematologic manifestations as integral components of the diagnostic framework for autoimmune diseases, emphasizing the intricate relationship between Evans syndrome and systemic lupus erythematosus.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>predicted to occur in 7% of patients with AIHA and 2% of ITP cases <ref type="bibr" target="#b2">[3]</ref>. It is one of the rare manifestations of autoimmune diseases, particularly systemic lupus erythematosus (SLE), and it occasionally occurs before symptoms ever manifest <ref type="bibr" target="#b3">[4]</ref>.</p><p>The complex interaction among autoimmune disorders is a focal point of interest in the medical field, as recent research uncovers potential connections. This includes the intriguing correlation between SLE and Evans syndrome, and its association with other autoimmune diseases (AIDs) <ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref>. As was predicted, 1.7-2.7% of patients with SLE have been observed to have secondary ES <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b8">9]</ref>. Additionally, 34% of SLE-associated ES was also linked to other autoimmune diseases, including Takayasu's arteritis, antiphospholipid syndrome, and even rare autoimmune thyroiditis and autoimmune hepatitis <ref type="bibr" target="#b7">[8]</ref>. Very few case reports of the association of SLE, Evans syndrome, Hashimoto's thyroiditis, and pernicious anemia were found in the literature review, and to the best of our knowledge, our case is one of them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Case presentation</head><p>We report the case of a 47-year-old white Middle Eastern female, who was apparently in good health with no significant medical history until 1 week prior to admission, when she started to complain of new-onset shortness of breath that increased with exertion and was relieved by rest. This was associated with frequent episodes of central chest pain that increased with activity, generalized weakness, fatigue, and decreased appetite and oral intake. Notably, she described progressive tiredness and observed a yellowish discoloration of her face. Over the course of the week, her symptoms gradually intensified to the point where she experienced dizziness upon standing.</p><p>So, she presented to the emergency department and remained hospitalized for 15 days. Initial screening revealed evidence of macrocytic anemia and thrombocytopenia, with a hemoglobin level of 4.5 g/dL, a mean corpuscular volume (MCV) of 120, and a platelet count of 77 × 10 9 /L (Table <ref type="table" target="#tab_0">1</ref>), without signs of active bleeding. Clinical examination revealed an afebrile patient with a pallid appearance, pale conjunctiva, and icteric sclera. Vital signs indicated tachycardia, with a heart rate of 105 beats per minute, and tachypnea, with a respiratory rate of 27 breaths per minute. Other systemic examination yielded normal findings.</p><p>Owing to the patient's hemodynamic instability, admission to the intensive care unit was warranted. An electrocardiogram (ECG) conducted during this period revealed supraventricular tachycardia (SVT), recurring three times within a 3-day span. The SVT episodes were successfully treated with 6 mg of adenosine. Additionally, two units of least-incompatible packed red blood cell concentrates were transfused. A whole-body computed tomography (CT) scan was performed, which revealed an enlarged spleen that measured 14.5 cm in bipolar length. A peripheral blood smear revealed thrombocytopenia and spherocytes without an increase in the number of schistocytes. Markers for hemolysis (Table <ref type="table" target="#tab_1">2</ref>)were requested, and the results demonstrated a positive direct Coombs test, indicating the presence of autoimmune hemolytic anemia (AIHA).</p><p>Viral serologies (Table <ref type="table" target="#tab_2">3</ref>), along with blood, nasal, and rectal swabs, were collected, and cultures were negative, ruling out a current infection. Furthermore, a transthoracic echocardiogram was conducted, yielding normal findings. Further investigation through bone marrow aspiration and biopsy revealed a cellularly reactive bone marrow with erythroid hyperplasia and no morphologic evidence of infiltrative disease or leukemia.</p><p>In light of the hemolytic anemia, thrombocytopenia, and positive direct antiglobulin test (DAT) and after ruling out other possible diagnoses, including thrombotic thrombocytopenic purpura, disseminated intravascular coagulation, paroxysmal nocturnal hemoglobinuria, hemolytic-uremic syndrome, antiphospholipid syndrome, and drug-induced AIHA, a clinical diagnosis of Evans syndrome was established.</p><p>Upon confirming the diagnosis of Evans syndrome, the patient was initiated on an intensive therapeutic regimen after showing resistance to the initial treatment with corticosteroids. This began with a pulse therapy of methylprednisolone at 1 g × 1 for 3 days. Simultaneously, a course of 40 g of IVIG 2 g/kg for 4 days was initiated. In addition, four doses of rituximab at a dosage of 375 mg/ m 2 weekly for 4 weeks were administered. The first two doses were administered while she was in hospital, while the other two doses were administered weekly as an outpatient. After this comprehensive intervention, clinically, the patient became asymptomatic, and her CBC and hemolytic lab tests, including reticulocytes count and LDH, returned to normal.</p><p>Throughout the patient's hospitalization, the emergence of a malar rash on the face, and the occurrence of oral ulceration, prompted the requisition of rheumatological markers. The results revealed positive anti-nuclear antibodies (ANA), positive anti-DsDNA, a decreased C4 level at 4 mg/dL (with a normal range of 10-40 mg/ dL), and an elevated ESR level of 150 (compared with the normal range of less than 20 mm/hour). Notably, the extractable nuclear antigen (ENA) profile yielded negative findings except for SS-A native (SS A/RO60). This constellation of clinical and laboratory evidence aligns with the diagnostic criteria for systemic lupus erythematosus (SLE), as stipulated by the American College of Rheumatology (ACR) <ref type="bibr" target="#b9">[10]</ref>. Consequently, a diagnosis of Evans syndrome concomitant with SLE was conclusively established.</p><p>Following this, mycophenolate mofetil was introduced at 500 mg twice daily. Considering the patient's positive hepatitis B virus core status, lamivudine was initiated at a dosage of 100 mg once daily. Hydroxychloroquine was introduced at 200 mg twice daily as part of the ongoing therapeutic strategy. After this comprehensive management, the patient was discharged and commenced rheumatologic disease outpatient follow-up.</p><p>A few months later, during the patient's ongoing evaluation, the patient reported fatigue and significant weakness. Additional laboratory tests and an autoimmune panel were conducted to explore the possibility of other autoimmune diseases. The results revealed an elevated TSH level at 5.85 mU/L (normal range 0.35-4.94 mU/L), a reduced free T4 level at 0.5 mU/L (normal range 0.7-1.48 mU/L), and positive findings for anti-thyroglobulin antibody and anti-thyroid peroxidase antibody, which confirmed the diagnosis of Hashimoto's thyroiditis. Furthermore, the tests indicated deficient vitamin B12 levels,  and the confirmation of anti-parietal cell and anti-intrinsic factor antibodies confirmed the diagnosis of pernicious anemia. In response to these findings, the patient initiated a therapeutic regimen consisting of thyroxine at 25 mcg and intramuscular vitamin B12 injections. A year later, her general symptoms, including those associated with SLE, as well as her laboratory values, including CBC and liver function, had returned to normal.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>We present a case of systemic lupus erythematosus (SLE) manifesting as Evans syndrome. Our patient presented with shortness of breath, chest pain, fatigue, jaundice, and orthostatic hypotension. Evans syndrome was confirmed as the initial diagnosis, characterized by a combination of AIHA and ITP. Subsequently, SLE was identified on the basis of positive Ds-DNA and positive ANA. Patients diagnosed with SLE should be considered for other autoimmune disorders. Considering the association of SLE with other autoimmune conditions, a comprehensive autoimmune panel was conducted. The results unveiled the coexistence of Hashimoto's thyroiditis and pernicious anemia, highlighting the significance of thorough evaluation in patients diagnosed with SLE. Evans syndrome is a rare disorder, and the most documented cases are in children <ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref><ref type="bibr" target="#b12">[13]</ref><ref type="bibr" target="#b13">[14]</ref>. Consequently, there is limited information available regarding the symptoms and management of Evans syndrome in adults. The disorder is categorized as primary or secondary, and it has links to a number of conditions, including infections, lymphoproliferative disorders, primary immunodeficiency, and autoimmune disorders including rheumatoid arthritis and systemic lupus erythematosus (SLE) <ref type="bibr" target="#b1">[2]</ref>. Approximately 3-15% of individuals with Evans syndrome eventually develop SLE <ref type="bibr" target="#b14">[15]</ref>. Patients with lupus frequently have hematologic symptoms, such as anemia, thrombocytopenia, pancytopenia, and leukopenia <ref type="bibr" target="#b15">[16]</ref>. In our case, secondary Evans syndrome was the initial presentation of SLE, which is a rare manifestation of the disease.</p><p>While diagnosing Evans syndrome (ES), it is crucial to distinguish between primary and secondary cases, as this can impact the treatment approach <ref type="bibr" target="#b4">[5]</ref>. The first-line treatment typically involves corticosteroids, which may induce remission, but they can also lead to exacerbations and recurrences. For refractory cases, second-line treatment options include intravenous immunoglobulins (IVIG), rituximab, splenectomy, cyclosporine, or azathioprine <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b16">17]</ref>. The prompt and accurate recognition of Evans syndrome facilitated the identification of appropriate therapy involving immunosuppressive agents, contributing to a rapid recovery and the restoration of hematologic function <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b16">17,</ref><ref type="bibr" target="#b17">18]</ref>.</p><p>Despite therapy, the vast majority of patients with ES experience persistent relapses, which are linked to a high risk of morbidity and mortality <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b16">17]</ref>. So, its management is still a challenge. Furthermore, it should be noted that the majority of the suggestions made about treatment are derived from single ITP or isolated AIHA cases, as there are very few clinical studies comparing different treatment modalities because of the disease's rarity <ref type="bibr" target="#b2">[3]</ref>.</p><p>The goal of presenting this case is to emphasize the need for awareness of this rare entity. A high index of suspicion among primary care physicians and other specialties is crucial. If observed, it is essential to conduct screening for secondary causes, as their early detection enables timely and suitable intervention.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>Systemic lupus erythematosus (SLE) is a multi-system autoimmune disease that affects any organ in the body. In rare instances, the initial presentation of SLE may manifest as Evans syndrome, which is also an autoimmune disease that includes two or three cytopenias presenting as autoimmune hemolytic anemia and immune thrombocytopenia with or without immune neutropenia. Additionally, other autoimmune diseases may coexist in the same patient. As these diseases are all about immunity, the treatment certainly will be centralized on suppression of the immune system using immunosuppressant drugs, with an emphasis on the idea that the treatment of SLE differs from the treatment of both diseases presenting at the same time in the same patient. However, treatment in the presence of Evans syndrome with SLE is more challenging because of the risk of many relapses and increasing morbidity and mortality.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1</head><label>1</label><figDesc>Complete Hematological and Metabolic profile</figDesc><table><row><cell>Result name</cell><cell>Normal range</cell><cell>Results</cell></row><row><cell>HCT</cell><cell>37.0-51.0</cell><cell>11.2</cell></row><row><cell>Hb</cell><cell>12.0-14.0</cell><cell>4.5</cell></row><row><cell>RBC</cell><cell>4.20-6.30</cell><cell>0.93</cell></row><row><cell>MCHC</cell><cell>31.0-36.0</cell><cell>40.2</cell></row><row><cell>MCH</cell><cell>26.0-32.0</cell><cell>48.4</cell></row><row><cell>MCV</cell><cell>80.0-97.0</cell><cell>120.4</cell></row><row><cell>MPV</cell><cell>8-11</cell><cell>10.8</cell></row><row><cell>PLT</cell><cell>140-440</cell><cell>77</cell></row><row><cell>NEUT</cell><cell>1.8-7.70</cell><cell>17.94</cell></row><row><cell>LYMPH</cell><cell>1-4.8</cell><cell>4.78</cell></row><row><cell>WBC</cell><cell>4-11</cell><cell>23.94</cell></row><row><cell>BASO</cell><cell>0.0-0.2</cell><cell>0.02</cell></row><row><cell>EO</cell><cell>0.00-0.50</cell><cell>0</cell></row><row><cell>PDW</cell><cell>0.1-99.9</cell><cell>11.6</cell></row><row><cell>RDW %</cell><cell>11.0-16.0</cell><cell>37.6</cell></row><row><cell>CRP</cell><cell>0-5</cell><cell>62.77</cell></row><row><cell>Albumin</cell><cell>3.5-5.2</cell><cell>3.88</cell></row><row><cell>Creatinine, serum</cell><cell>0.5-0.9</cell><cell>0.52</cell></row><row><cell>SGPT (ALT)</cell><cell>10-33</cell><cell>26.6</cell></row><row><cell>Blood urea nitrogen</cell><cell>6-20</cell><cell>12.6</cell></row><row><cell>SGOT (AST)</cell><cell>0-32</cell><cell>72.4</cell></row><row><cell>Chloride</cell><cell>98-107</cell><cell>99.1</cell></row><row><cell>Potassium</cell><cell>3.5-5.3</cell><cell>3.09</cell></row><row><cell>Sodium</cell><cell>135-145</cell><cell>136</cell></row><row><cell>Calcium (Ca), serum</cell><cell>8.4-10</cell><cell>8.51</cell></row><row><cell>Mg</cell><cell>1.6-2.6</cell><cell>2</cell></row><row><cell>Troponin high sensitivity quan-</cell><cell>0.008-0.02</cell><cell>0.027</cell></row><row><cell>titative</cell><cell></cell><cell></cell></row></table><note><p>HCT Hematocrit; Hb Hemoglobin; RBC Red blood cell; MCHC Mean corpuscular hemoglobin concentration; MCH Mean corpuscular hemoglobin; MPV Mean platelet volume; PLT Platelets; NEUT Neutrophils; LYMPH Lymhocytes; WBC White blood cell; BASO Basophils; EO Eosinophils; PDW Platelet distribution width; RDW Red cell distribution width; CRP C-reactive protein; ALT Alanine aminotransferase; AST Aspartate aminotransferase; Mg Magnesium</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2</head><label>2</label><figDesc>Labratory results for Hemolytic workup</figDesc><table><row><cell>Test name</cell><cell>Normal range</cell><cell>Results</cell></row><row><cell>Bilirubin (direct)</cell><cell>0-0.2</cell><cell>0.748</cell></row><row><cell>Bilirubin (total)</cell><cell>0-1.2</cell><cell>2.180</cell></row><row><cell>Lactate dehydrogenase total (LDH)</cell><cell>135-214</cell><cell>836</cell></row><row><cell>Haptoglobin</cell><cell>0.3-2</cell><cell>0.01</cell></row><row><cell>Reticulocytes %</cell><cell></cell><cell>25.84</cell></row><row><cell>Direct Coombs test (DCT)</cell><cell></cell><cell>Positive + 4</cell></row><row><cell></cell><cell></cell><cell>(IgG) / + 2</cell></row><row><cell></cell><cell></cell><cell>(C3d)</cell></row><row><cell>Indirect Coombs test (ICT)</cell><cell></cell><cell>Positive + 3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3</head><label>3</label><figDesc>Viral and Serological testing results</figDesc><table><row><cell>Test name</cell><cell>First day of admission</cell><cell>Fifth day of admission</cell><cell>Seventh day</cell></row><row><cell></cell><cell></cell><cell></cell><cell>of admission</cell></row><row><cell>HIV Abs screening</cell><cell>Nonreactive</cell><cell></cell><cell></cell></row><row><cell>Epstein-Barr virus IgG/IgM</cell><cell>Reactive/NR</cell><cell></cell><cell></cell></row><row><cell>HCV</cell><cell>Nonreactive</cell><cell></cell><cell></cell></row><row><cell>HBsAg screening</cell><cell>Nonreactive</cell><cell></cell><cell>Nonreactive</cell></row><row><cell>HBc total</cell><cell></cell><cell>Reactive</cell><cell></cell></row><row><cell>HBc IgM</cell><cell></cell><cell>Nonreactive</cell><cell></cell></row><row><cell>HBsAb (anti-s)</cell><cell></cell><cell></cell><cell>Reactive 87.3</cell></row><row><cell>HBe Ab</cell><cell></cell><cell></cell><cell>Reactive</cell></row></table><note><p>HIV Human immunodeficiency virus; HCV Hepatitis C virus; HBsAg Hepatitis B surface antigen; HBc total Hepatitis B core antibody total; HBsAb Hepatitis B surface antibody; HBeAb Hepatitis B Envelop antibody</p></note></figure>
+		</body>
+		<back>
+
+			
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgements</head><p>The authors thank all participants who took part in the case.</p></div>
+			</div>
+
+
+			
+			<div type="funding">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Funding</head><p>This case report received no specific grant from any funding agency in the public, commercial, or not-for-profit sector.</p></div>
+			</div>
+
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Availability of data and materials</head><p>Information related to the case is available from the corresponding author upon reasonable request.</p></div>
+			</div>
+
+
+			<div type="conflict">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>Authors declare no competing interests.</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author contributions</head><p>MM contributed to the design of the study, data collection, data entry, data interpretation, and drafting of the manuscript. DA, AS, and SA contributed to the design of the study, data collection, and drafting of the manuscript. AK (2024) 18:643 contributed to the design of the study, data interpretation, drafting of the manuscript, and supervision of the work. All authors have read and approved the final manuscript. Each author has participated sufficiently in the work to take public responsibility for the content.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Abbreviations SLE Systemic lupus erythematosus ES Evans syndrome AIHA Autoimmune hemolytic anemia ITP Idiopathic thrombocytopenic purpura AIDs Autoimmune diseases MCV Mean corpuscular volume ECG Electrocardiogram SVT Supraventricular tachycardia CT Computed tomography DAT Direct antiglobulin test IVIG Intravenous immunoglobulin ANA Anti-nuclear antibodies ESR Erythrocyte sedimentation rate Ds-DNA Anti-double-stranded deoxyribonucleic acid antibodies ENA Extractable nuclear antigen ACR American College of Rheumatology TSH Thyroid stimulating hormone Declarations Ethics approval and consent to participate This article does not contain any studies with human participants or animals performed by any of the authors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Consent for publication</head><p>Written informed consent was obtained from the patient for publication of this case report and any accompanying images. A copy of the written consent is available for review by the Editor-in-Chief of this journal.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's Note</head><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Primary thrombocytopenic purpura and acquired hemolytic anemia; evidence for a common etiology</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">S</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Takahashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">T</forename><surname>Duane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Payne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AMA Arch Intern Med</title>
+		<imprint>
+			<biblScope unit="volume">87</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="48" to="65" />
+			<date type="published" when="1951">1951</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Evans syndrome in adults-incidence, prevalence, and survival in a nationwide cohort</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Möller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Andersen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gaist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Frederiksen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Hematol</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1081" to="1090" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Syndrome: from diagnosis to treatment</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Audia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Grienay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Mounier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bonnotte</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Evans</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/jcm9123851</idno>
+		<ptr target="https://doi.org/10.3390/jcm" />
+	</analytic>
+	<monogr>
+		<title level="j">J Clin Med</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page">23851</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Evans syndrome and its link with systemic lupus erythematosus</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mendonca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Srivastava</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kapoor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>Sharma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Saudi J Kidney Dis Transpl</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="147" to="149" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The spectrum of Evans syndrome in adults: new insight into the disease based on the analysis of 68 cases</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Michel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Chanet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dechartres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Morin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Piette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Cirasino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Emilia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Zaja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ruggeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Andrès</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Blood</title>
+		<imprint>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="3167" to="3172" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Experience with Evans syndrome in an academic referral center</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Jaime-Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">N</forename><surname>Guerra-Leal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">López-Razo</forename><surname>On</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Méndez-Ramírez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gómez-Almaguer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Rev Bras Hematol Hemoter</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="230" to="235" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Pediatric lupus: varied haematological picture and presentation</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Thakur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Chandra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Dhingra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Singh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Indian J Hematol Blood Transfusion</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="68" to="70" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Evans syndrome and systemic lupus erythematosus: clinical presentation and outcome</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Costallat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Appenzeller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">T</forename><surname>Costallat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Joint Bone Spine</title>
+		<imprint>
+			<biblScope unit="volume">79</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="362" to="364" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Evans syndrome at childhood-onset systemic lupus erythematosus diagnosis: a large multicenter study</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">E</forename><surname>Lube</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">P</forename><surname>Ferriani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Campos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Terreri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bonfá</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Magalhães</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">E</forename><surname>Aikawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">P</forename><surname>Piotto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">A</forename><surname>Peracchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dos</forename><surname>Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">C</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pediatr Blood Cancer</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="1238" to="1243" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Using the American college of Rheumatology (ACR) and systemic lupus international collaborating clinics (SLICC) criteria to determine the diagnosis of systemic lupus erythematosus (SLE) in patients with subacute cutaneous lupus erythematosus (SCLE)</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Carr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Okawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">P</forename><surname>Werth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Am Acad Dermatol</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="862" to="869" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Evans syndrome: a report on 12 patients</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Ng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Clin Lab Haematol</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="189" to="193" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The spectrum of Evans&apos; syndrome</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Savaşan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Warrier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ravindranath</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Arch Dis Child</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="245" to="248" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Engelfriet CP, von dem Borne AE. The Evans syndrome: characterization of the responsible autoantibodies</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Pegels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">M</forename><surname>Helmerhorst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">F</forename><surname>Van Leeuwen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Van De Plas-Van Dc</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Br J Haematol</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="445" to="450" />
+			<date type="published" when="1982">1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Evans syndrome in childhood: pathophysiology, clinical course, and treatment</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">C</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Pediatr Hematol Oncol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="330" to="338" />
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Autoimmune thrombocytopenic purpura</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Karpatkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Blood</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="329" to="343" />
+			<date type="published" when="1980">1980</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">The 1982 revised criteria for the classification of systemic lupus erythematosus</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">S</forename><surname>Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Fries</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename><surname>Masi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Mcshane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">F</forename><surname>Rothfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">G</forename><surname>Schaller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Talal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">J</forename><surname>Winchester</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Arthritis Rheum</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1271" to="1277" />
+			<date type="published" when="1982">1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Management of Evans syndrome</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Norton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Roberts</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Br J Haematol</title>
+		<imprint>
+			<biblScope unit="volume">132</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="125" to="137" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The diagnosis and management of the haematologic manifestations of lupus</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Velo-García</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">G</forename><surname>Castro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Isenberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Autoimmun</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="139" to="160" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

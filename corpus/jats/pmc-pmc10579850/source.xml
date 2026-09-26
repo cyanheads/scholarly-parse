@@ -1,0 +1,550 @@
+<?xml version="1.0"  ?><!DOCTYPE pmc-articleset PUBLIC "-//NLM//DTD ARTICLE SET 2.0//EN" "https://dtd.nlm.nih.gov/ncbi/pmc/articleset/nlm-articleset-2.0.dtd"><pmc-articleset><article xml:lang="en" article-type="other" dtd-version="1.4"><processing-meta base-tagset="archiving" mathml-version="3.0" table-model="xhtml" tagset-family="jats"><restricted-by>pmc</restricted-by></processing-meta><front><journal-meta><journal-id journal-id-type="nlm-ta">F1000Res</journal-id><journal-id journal-id-type="iso-abbrev">F1000Res</journal-id><journal-id journal-id-type="pmc-domain-id">2005</journal-id><journal-id journal-id-type="pmc-domain">f1000res</journal-id><journal-id journal-id-type="nlm-id">101594320</journal-id><journal-title-group><journal-title>F1000Research</journal-title></journal-title-group><issn pub-type="epub">2046-1402</issn><publisher><publisher-name>Faculty of 1000 Ltd</publisher-name></publisher></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC10579850</article-id><article-id pub-id-type="pmcid-ver">PMC10579850.2</article-id><article-id pub-id-type="pmcaid">10579850</article-id><article-id pub-id-type="pmcaiid">10580026</article-id><article-id pub-id-type="pmid">37854874</article-id><article-id pub-id-type="doi">10.12688/f1000research.130458.2</article-id><article-version article-version-type="pmc-version">2</article-version><article-categories><subj-group subj-group-type="heading"><subject>Software Tool Article</subject></subj-group><subj-group><subject>Articles</subject></subj-group></article-categories><title-group><article-title>Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation</article-title><fn-group content-type="pub-status"><fn><p>[version 2; peer review: 2 approved]</p></fn></fn-group></title-group><contrib-group><contrib contrib-type="author" corresp="yes"><name name-style="western"><surname>Okyere</surname><given-names initials="S">Samuel</given-names></name><role content-type="http://credit.niso.org/">Conceptualization</role><role content-type="http://credit.niso.org/">Formal Analysis</role><role content-type="http://credit.niso.org/">Investigation</role><role content-type="http://credit.niso.org/">Methodology</role><role content-type="http://credit.niso.org/">Software</role><role content-type="http://credit.niso.org/">Validation</role><role content-type="http://credit.niso.org/">Writing – Original Draft Preparation</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0001-6262-1628</contrib-id><xref rid="c1" ref-type="corresp">a</xref><xref rid="a1" ref-type="aff">1</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Ackora-Prah</surname><given-names initials="J">Joseph</given-names></name><role content-type="http://credit.niso.org/">Conceptualization</role><role content-type="http://credit.niso.org/">Formal Analysis</role><role content-type="http://credit.niso.org/">Methodology</role><role content-type="http://credit.niso.org/">Resources</role><role content-type="http://credit.niso.org/">Software</role><role content-type="http://credit.niso.org/">Supervision</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0001-9488-9610</contrib-id><xref rid="a1" ref-type="aff">1</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Bonyah</surname><given-names initials="E">Ebenezer</given-names></name><role content-type="http://credit.niso.org/">Conceptualization</role><role content-type="http://credit.niso.org/">Formal Analysis</role><role content-type="http://credit.niso.org/">Methodology</role><role content-type="http://credit.niso.org/">Resources</role><role content-type="http://credit.niso.org/">Software</role><role content-type="http://credit.niso.org/">Supervision</role><role content-type="http://credit.niso.org/">Validation</role><xref rid="a2" ref-type="aff">2</xref><xref rid="a3" ref-type="aff">3</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Akwasi Adarkwa</surname><given-names initials="S">Samuel</given-names></name><role content-type="http://credit.niso.org/">Data Curation</role><role content-type="http://credit.niso.org/">Methodology</role><role content-type="http://credit.niso.org/">Resources</role><role content-type="http://credit.niso.org/">Software</role><role content-type="http://credit.niso.org/">Writing – Review &amp; Editing</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-1610-9225</contrib-id><xref rid="a4" ref-type="aff">4</xref></contrib><aff id="a1">
+<label>1</label>Mathematics, Kwame Nkrumah University of Science and Technology, Kumasi, Ghana</aff><aff id="a2">
+<label>2</label>Department of Mathematics and Applied Mathematics, University of Johannesburg, Johannesburg 2006, South Africa</aff><aff id="a3">
+<label>3</label>Mathematics Education, Akenten Appiah-Menka University of Skills Training and Enterpreneurial Development,, Kumasi, Ghana</aff><aff id="a4">
+<label>4</label>Department of Statistical Sciences, Kumasi Technical University, Kumasi, Ashanti Region, Ghana</aff></contrib-group><author-notes><corresp id="c1">
+<label>a</label>
+<email xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:okyere2015@gmail.com">okyere2015@gmail.com</email>
+</corresp><fn fn-type="COI-statement"><p>No competing interests were disclosed.</p></fn></author-notes><pub-date pub-type="epub"><day>25</day><month>9</month><year>2023</year></pub-date><pub-date pub-type="collection"><year>2023</year></pub-date><volume>12</volume><issue-id pub-id-type="pmc-issue-id">426325</issue-id><elocation-id>445</elocation-id><history><date date-type="accepted"><day>14</day><month>9</month><year>2023</year></date></history><pub-history><event event-type="pmc-release"><date><day>25</day><month>09</month><year>2023</year></date></event><event event-type="pmc-live"><date><day>18</day><month>10</month><year>2023</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2026-09-21 12:14:52.413"><day>21</day><month>09</month><year>2026</year></date></event><event event-type="original-publication" specific-use="live"><article-id pub-id-type="pmcaiid">10579850</article-id><article-id pub-id-type="doi">10.12688/f1000research.130458.1</article-id><article-version>1</article-version><pub-date><day>26</day><month>04</month><year>2023</year></pub-date></event><event event-type="pmc-published-version" specific-use="live"><article-id pub-id-type="pmcaiid">10579850</article-id><article-id pub-id-type="doi">10.12688/f1000research.130458.1</article-id><article-version>1</article-version><pub-date><day>26</day><month>04</month><year>2023</year></pub-date></event><event event-type="pmc-published-version" specific-use="live"><article-id pub-id-type="pmcaiid">10580026</article-id><article-id pub-id-type="doi">10.12688/f1000research.130458.2</article-id><article-version>2</article-version><pub-date><day>25</day><month>09</month><year>2023</year></pub-date></event></pub-history><permissions><copyright-statement>Copyright: © 2023 Okyere S et al.</copyright-statement><copyright-year>2023</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access article distributed under the terms of the Creative Commons Attribution Licence, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="f1000research-12-155959.pdf"/><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pdf" xlink:href="f1000research-12-155959.pdf"/><abstract><p>
+<bold>Background:</bold> This paper presents a newly developed Matlab code for the numerical simulation of compartmental/deterministic models. It addresses modeling and simulation issues concerning compartmental models. The code is easy to understand and edit for the simulation of compartmental models. An alternative codes for statistical software package R has been proposed for the same model. R software is freely available for use.</p><p>
+<bold>Methods:</bold> We proposed a basic SEIR model for illustration purposes. Matlab and R software codes are developed for the SEIR model which users can follow and easily understand the computations.</p><p>
+<bold>Results:</bold> The two codes work on all Matlab and R versions. For models with more compartments, we suggest using higher version of Matlab and R. Matlab works on windows, Mac and Linux</p><p>
+<bold>Conclusions:</bold> New Matlab software codes purposely for numerical simulations of classical deterministic models which can run on any version of Matlab has been introduced in this paper. This code can be edited/modify to suit any deterministic models and any desired output required. An alternative open source free version has been written in R has been provided as well</p></abstract><kwd-group kwd-group-type="author"><kwd>Compartmental Models</kwd><kwd>Numerical Simulation</kwd><kwd>Matlab software codes</kwd><kwd>R software codes</kwd></kwd-group><funding-group><funding-statement>The author(s) declared that no grants were involved in supporting this work.</funding-statement></funding-group><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-license-ref</meta-name><meta-value>CC BY</meta-value></custom-meta></custom-meta-group></article-meta><notes notes-type="version-changes"><sec sec-type="version-changes"><label>Revised</label><title>Amendments from Version 1</title><p>An inclusion of R software codes in the main body. Deletion of Figure 7 in version 1 and an inclusion of Figure 7, and a new Figure 8 – 12. An inclusion of additional author’s affiliation. No changes in the abstract, authorship list, the title, and tables and references.</p></sec></notes></front><body><sec sec-type="intro" id="sec1"><title>Introduction</title><p>With the help of a programming language that represents matrix and array mathematics directly, MATLAB combines a desktop environment tailored for iterative analysis and design processes.
+<sup>
+<xref rid="ref1" ref-type="bibr">1</xref>
+</sup> The Live Editor for writing scripts that mix code, output, and formatted text in an executable notebook is part of it.
+<sup>
+<xref rid="ref1" ref-type="bibr">1</xref>
+</sup> The Windows requirements are Windows 10 (version 20H2 or higher), Windows 11, Windows Server 2019, and Windows Server 2022. Many scientists and mathematicians choose to use this program since it can be accessed across all popular platforms, including Linux, Mac, and Windows, and because it can be used to explore, model, and analyze data.
+<sup>
+<xref rid="ref1" ref-type="bibr">1</xref>
+</sup> Matlab software has been used to run numerical simulations of compartmental models in epidemiology.
+<sup>
+<xref rid="ref2" ref-type="bibr">2</xref>
+</sup>
+<sup>–</sup>
+<sup>
+<xref rid="ref11" ref-type="bibr">11</xref>
+</sup>
+</p><p>There are several fundamental compartmental models described using differential equations. The basic ones include Susceptible - Infected (SI), Susceptible - Infected - Recovered (SIR),
+<sup>
+<xref rid="ref12" ref-type="bibr">12</xref>
+</sup>
+<sup>,</sup>
+<sup>
+<xref rid="ref13" ref-type="bibr">13</xref>
+</sup> Susceptible - Infected - Susceptible (SIS),
+<sup>
+<xref rid="ref14" ref-type="bibr">14</xref>
+</sup> Susceptible - Infected - Recovered - Vaccinated (SIRV),
+<sup>
+<xref rid="ref15" ref-type="bibr">15</xref>
+</sup> Susceptible - Exposed - Infected - Recovered (SEIR) models.
+<sup>
+<xref rid="ref4" ref-type="bibr">4</xref>
+</sup> The purpose of this study is to make public new Matlab codes that authors have been utilising in their work to aid researchers, especially students, who rely on deterministic or compartmental modeling of epidemiology in the numerical simulation of their research projects. This well-detailed code, in our opinion, might be extremely helpful to them as many of them struggle to do the numerical simulations due to the dearth of research that specifically tackles numerical simulation of deterministic models and also to provide users more freedom for coding in Matlab. Recently, researchers have started sharing their codes and providing detailed explanation on how to use them. To provide users extra coding freedom, Guo
+<italic toggle="yes">et al.</italic>
+<sup>
+<xref rid="ref16" ref-type="bibr">16</xref>
+</sup> presented newly developed visualization framework called OpenSeesPyView, which is a Python programming-based graphical user interface (GUI) for OpenSeesPy, a prevalent finite element solver in earthquake engineering. The R package ag5Tools was written by Brown et al.
+<sup>
+<xref rid="ref17" ref-type="bibr">17</xref>
+</sup> and offers a streamlined interface for downloading and retrieving AgERA5 data. With the help of the program, time-series data for groups of geographic points may be easily extracted and converted into a format that can be employed in statistical models used in agricultural research. The Rcall interface, developed by Egert and Kreutz,
+<sup>
+<xref rid="ref18" ref-type="bibr">18</xref>
+</sup> gives users access to a large range of techniques written in MATLAB and R. The program is MATLAB-based and offers direct access to R-based tools and methodologies, such as those found on Bioconductor or CRAN. ShinyGAStool, an open source tool created by Hoffmann et al.,
+<sup>
+<xref rid="ref19" ref-type="bibr">19</xref>
+</sup> allows users to easily execute a candidate gene association analysis from a web browser using huge datasets. The remaining section are group as follows: The method section, where we demonstrate how to use the Matlab software codes. we look at the implementation, operation and discussions and limitations. The last section is the concluding section. The software section has the alternative software codes in R.</p></sec><sec sec-type="methods" id="sec2"><title>Methods</title><sec id="sec3"><title>Implementation</title><p>We demonstrate how to use the matlab software codes with the SEIR compartmental model depicted in
+<xref rid="f1" ref-type="fig">Figure 1</xref>. The population is partitioned into four (4) compartments: Susceptible, exposed, infected and recovered. Individuals are recruited into the susceptible class at a rate
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M1" display="inline" overflow="scroll"><mml:mi mathvariant="normal">Ω</mml:mi></mml:math>
+</inline-formula> and they die at a rate
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M2" display="inline" overflow="scroll"><mml:mi>μ</mml:mi></mml:math>
+</inline-formula>. The transmission rate is
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M3" display="inline" overflow="scroll"><mml:mi>β</mml:mi></mml:math>
+</inline-formula> and the recovery rate is
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M4" display="inline" overflow="scroll"><mml:mi>γ</mml:mi></mml:math>
+</inline-formula>. The rate at which exposed individuals become infectious is
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M5" display="inline" overflow="scroll"><mml:mi>α</mml:mi></mml:math>
+</inline-formula> and the disease-induced death rate is
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M6" display="inline" overflow="scroll"><mml:mi>σ</mml:mi></mml:math>
+</inline-formula>.</p><fig position="float" fig-type="figure" id="f1" orientation="portrait"><label>Figure 1. </label><caption><title>Model dynamics flowchart.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr1" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0000.jpg"/></fig><p>The model is described by the following ordinary differential equations.
+<disp-formula id="e1">
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M7" display="block" overflow="scroll"><mml:mtable columnalign="left" displaystyle="true"><mml:mtr><mml:mtd><mml:mfrac><mml:mi mathvariant="italic">dS</mml:mi><mml:mi mathvariant="italic">dt</mml:mi></mml:mfrac><mml:mo>=</mml:mo><mml:mi mathvariant="normal">Ω</mml:mi><mml:mo>−</mml:mo><mml:mi>β</mml:mi><mml:mfrac><mml:mtext mathvariant="italic">IS</mml:mtext><mml:mi>N</mml:mi></mml:mfrac><mml:mo>−</mml:mo><mml:mi mathvariant="italic">μS</mml:mi><mml:mo>,</mml:mo></mml:mtd></mml:mtr><mml:mtr><mml:mtd><mml:mfrac><mml:mi mathvariant="italic">dE</mml:mi><mml:mi mathvariant="italic">dt</mml:mi></mml:mfrac><mml:mo>=</mml:mo><mml:mi>β</mml:mi><mml:mfrac><mml:mtext mathvariant="italic">IS</mml:mtext><mml:mi>N</mml:mi></mml:mfrac><mml:mo>−</mml:mo><mml:mfenced close=")" open="("><mml:mrow><mml:mi>α</mml:mi><mml:mo>+</mml:mo><mml:mi>μ</mml:mi></mml:mrow></mml:mfenced><mml:mi>E</mml:mi><mml:mo>,</mml:mo></mml:mtd></mml:mtr><mml:mtr><mml:mtd><mml:mfrac><mml:mi mathvariant="italic">dI</mml:mi><mml:mi mathvariant="italic">dt</mml:mi></mml:mfrac><mml:mo>=</mml:mo><mml:mi mathvariant="italic">αE</mml:mi><mml:mo>−</mml:mo><mml:mfenced close=")" open="("><mml:mrow><mml:mi>γ</mml:mi><mml:mo>+</mml:mo><mml:mi>σ</mml:mi><mml:mo>+</mml:mo><mml:mi>μ</mml:mi></mml:mrow></mml:mfenced><mml:mi>I</mml:mi><mml:mo>,</mml:mo></mml:mtd></mml:mtr><mml:mtr><mml:mtd><mml:mfrac><mml:mi mathvariant="italic">dR</mml:mi><mml:mi mathvariant="italic">dt</mml:mi></mml:mfrac><mml:mo>=</mml:mo><mml:mi mathvariant="italic">γI</mml:mi><mml:mo>−</mml:mo><mml:mi mathvariant="italic">μR</mml:mi><mml:mo>,</mml:mo></mml:mtd></mml:mtr></mml:mtable></mml:math>
+<label>(1)</label>
+</disp-formula>with initial conditions
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M8" display="inline" overflow="scroll"><mml:mi>S</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>≥</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mi>E</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>≥</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mi>I</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>≥</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mspace width="0.35em"/><mml:mtext>and</mml:mtext><mml:mspace width="0.35em"/><mml:mi>R</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>≥</mml:mo><mml:mn>0</mml:mn></mml:math>
+</inline-formula>.</p><p>For the purposes of the simulations, the following parameter values are chosen and is given in
+<xref rid="T1" ref-type="table">Table 1</xref>. The initial conditions chosen are
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M9" display="inline" overflow="scroll"><mml:mi>S</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>=</mml:mo><mml:mn>1000</mml:mn><mml:mo>,</mml:mo><mml:mi>E</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>=</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mi>I</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>=</mml:mo><mml:mn>1</mml:mn><mml:mo>,</mml:mo><mml:mi>R</mml:mi><mml:mfenced close=")" open="("><mml:mn>0</mml:mn></mml:mfenced><mml:mo>=</mml:mo><mml:mn>0</mml:mn></mml:math>
+</inline-formula>.</p><table-wrap position="float" id="T1" orientation="portrait"><label>Table 1. </label><caption><title>Parameter values and description.</title></caption><table frame="hsides" rules="groups" content-type="article-table"><thead><tr><th align="left" colspan="1" rowspan="1" valign="top">Parameter</th><th align="left" colspan="1" rowspan="1" valign="top">Description</th><th align="left" colspan="1" rowspan="1" valign="top">Value</th><th align="left" colspan="1" rowspan="1" valign="top">Source</th></tr></thead><tbody><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M10" display="inline" overflow="scroll"><mml:mi mathvariant="normal">Ω</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">Recruitment</td><td align="left" colspan="1" rowspan="1" valign="top">29.08</td><td align="left" colspan="1" rowspan="1" valign="top">
+<sup>
+<xref rid="ref2" ref-type="bibr">2</xref>
+</sup>
+</td></tr><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M11" display="inline" overflow="scroll"><mml:mi>β</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">Transmission rate</td><td align="left" colspan="1" rowspan="1" valign="top">0.9</td><td align="left" colspan="1" rowspan="1" valign="top">
+<sup>
+<xref rid="ref2" ref-type="bibr">2</xref>
+</sup>
+</td></tr><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M12" display="inline" overflow="scroll"><mml:mi>α</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">infectiousness of the exposed individuals</td><td align="left" colspan="1" rowspan="1" valign="top">0.3</td><td align="left" colspan="1" rowspan="1" valign="top">assumed</td></tr><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M13" display="inline" overflow="scroll"><mml:mi>μ</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">natural rate of death</td><td align="left" colspan="1" rowspan="1" valign="top">0.4252912
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M14" display="inline" overflow="scroll"><mml:mo>×</mml:mo><mml:msup><mml:mn>10</mml:mn><mml:mrow><mml:mo>−</mml:mo><mml:mn>4</mml:mn></mml:mrow></mml:msup></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">
+<sup>
+<xref rid="ref2" ref-type="bibr">2</xref>
+</sup>
+</td></tr><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M15" display="inline" overflow="scroll"><mml:mi>γ</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">Recovery rate of infected individuals</td><td align="left" colspan="1" rowspan="1" valign="top">0.1</td><td align="left" colspan="1" rowspan="1" valign="top">assumed</td></tr><tr><td align="left" colspan="1" rowspan="1" valign="top">
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M16" display="inline" overflow="scroll"><mml:mi>σ</mml:mi></mml:math>
+</inline-formula>
+</td><td align="left" colspan="1" rowspan="1" valign="top">Disease-induced death rate</td><td align="left" colspan="1" rowspan="1" valign="top">0.003286</td><td align="left" colspan="1" rowspan="1" valign="top">assumed</td></tr></tbody></table></table-wrap><p>Once you have your model and parameter values clearly defined, you can then open the matlab editor window which is shown in
+<xref rid="f2" ref-type="fig">Figure 2</xref>. Input or copy the codes and paste at the new script.</p><fig position="float" fig-type="figure" id="f2" orientation="portrait"><label>Figure 2. </label><caption><title>Matlab Editor window.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr2" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0001.jpg"/></fig><p>The numerical Matlab software codes used for model (1)</p><p>
+<monospace>
+<styled-content style="font-size:15px;color:#228B22">% It is the SEIR model Matlab software codes.</styled-content>
+</monospace>
+</p><p>
+<monospace>
+<styled-content style="font-size:15px;color:#0000FF">function</styled-content> [t,S,E,I,R]=SEIR_MODEL(Omega,beta,mu,sigma,alpha,gamma,N,S0,E0,I0,R0,MaxTime)</monospace>
+</p><p>
+<monospace>% where Omega=Ω, beta=β, mu=μ, sigma=σ, alpha=α,gamma=γ</monospace>
+</p></sec><sec id="sec4"><title>Operation</title><p>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+<styled-content style="font-size:15px;color:#228B22">% Define the parameters</styled-content>
+<styled-content style="font-size:15px;color:#0000FF">if</styled-content> nargin==0
+  Omega=20;
+  beta=0.3;
+  mu=0.00004252912;
+  alpha=0.3;
+  sigma=0.003286;
+  gamma=0.1;
+%The initial condition
+  S0=1000;
+  E0=0;
+  I0=1;
+  R0=0.0;
+  MaxTime=120;
+<styled-content style="font-size:15px;color:#0000FF">end</styled-content></preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+S=S0;E=E0;I=I0;R=R0;
+N=S+E+I+R;
+<styled-content style="font-size:15px;color:#228B22">% The main iteration</styled-content>
+options=odeset(<styled-content style="font-size:15px;color:#A020F0">'RelTol'</styled-content>,1e-5);
+[t,pop]=ode45(@Diff_2_6,[0 MaxTime],[S E I R],options,[Omega gamma beta mu sigma alpha N]);</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+S=pop(:,1);E=pop(:,2);I=pop(:,3);R=pop(:,4);
+<styled-content style="font-size:15px;color:#228B22">% plots the graphs with scaled colours</styled-content>
+<styled-content style="font-size:15px;color:#228B22">% k=black colour, b=blue colour, g=green, m=mangetta</styled-content>
+figure(1)
+Y=plot(t,S,<styled-content style="font-size:15px;color:#A020F0">'b.'</styled-content>);
+legend(Y,<styled-content style="font-size:15px;color:#A020F0">'Susceptible'</styled-content>)
+xlabel <styled-content style="font-size:15px;color:#A020F0">'Time (days)'</styled-content>
+ylabel <styled-content style="font-size:15px;color:#A020F0">'S(t)'</styled-content></preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+figure(2)
+T=plot(t,E,<styled-content style="font-size:15px;color:#A020F0">'.g'</styled-content>);
+legend(T,<styled-content style="font-size:15px;color:#A020F0">'Exposed'</styled-content>)
+xlabel <styled-content style="font-size:15px;color:#A020F0">'Time (days)'</styled-content>
+ylabel <styled-content style="font-size:15px;color:#A020F0">'E(t)'</styled-content></preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+figure(3)
+f=plot(t,I,<styled-content style="font-size:15px;color:#A020F0">'.m'</styled-content>);
+legend(f,<styled-content style="font-size:15px;color:#A020F0">'Infected with Monkeypox'</styled-content>)
+xlabel <styled-content style="font-size:15px;color:#A020F0">'Time (days)'</styled-content>
+ylabel <styled-content style="font-size:15px;color:#A020F0">'I(t)'</styled-content></preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+figure(4)
+h=plot(t,R,<styled-content style="font-size:15px;color:#A020F0">'.g'</styled-content>);
+legend(h,<styled-content style="font-size:15px;color:#A020F0">'Recovered'</styled-content>)
+xlabel <styled-content style="font-size:15px;color:#A020F0">'Time (days)'</styled-content>
+ylabel <styled-content style="font-size:15px;color:#A020F0">'R(t)'</styled-content></preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+figure(5)
+W=plot(t,S,<styled-content style="font-size:15px;color:#A020F0">'.-b'</styled-content>,t,E,<styled-content style="font-size:15px;color:#A020F0">'.-g'</styled-content>,t,I,<styled-content style="font-size:15px;color:#A020F0">'.-m'</styled-content>t,R,<styled-content style="font-size:15px;color:#A020F0">'.-k'</styled-content>);
+legend(W,'Recovered')
+xlabel 'Time (days)'
+ylabel 'R(t)'</preformat>
+</p><p>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+<styled-content style="font-size:15px;color:#228B22">% calculates the differential rates used in the integration.</styled-content>
+<styled-content style="font-size:15px;color:#0000FF">function</styled-content> dpop=Diff_2_6(t,pop, parameter)
+Omega=parameter(1);gamma=parameter(2);beta=parameter(3);mu=parameter(4);sigma=parameter(5);alpha=parameter(6);N=parameter(7);
+S=pop(1);E=pop(2);I=pop(3);R=pop(4);
+dpop=zeros(4,1);
+dpop(1)=Omega-(beta*I*S)./(N)-mu*S;
+dpop(2)=(beta*(I)*S)./(N)-(alpha+mu)*E;
+dpop(3)=alpha*E-(gamma+mu+sigma).*I;
+dpop(4)=gamma*I-mu*R;</preformat>
+</p><p>Upon running the codes, the simulation results are shown in
+<xref rid="f3" ref-type="fig">Figures 3</xref>–
+<xref rid="f7" ref-type="fig">7</xref>.</p><fig position="float" fig-type="figure" id="f3" orientation="portrait"><label>Figure 3. </label><caption><title>Susceptible compartment.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr3" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0002.jpg"/></fig><fig position="float" fig-type="figure" id="f4" orientation="portrait"><label>Figure 4. </label><caption><title>Exposed compartment.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr4" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0003.jpg"/></fig><fig position="float" fig-type="figure" id="f5" orientation="portrait"><label>Figure 5. </label><caption><title>Infected compartment.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr5" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0004.jpg"/></fig><fig position="float" fig-type="figure" id="f6" orientation="portrait"><label>Figure 6. </label><caption><title>Recovered compartment.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr6" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0005.jpg"/></fig><fig position="float" fig-type="figure" id="f7" orientation="portrait"><label>Figure 7. </label><caption><title>Dynamics of all compartments.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr7" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0006.jpg"/></fig></sec></sec><sec sec-type="discussion" id="sec5"><title>Discussion</title><p>In
+<xref rid="f3" ref-type="fig">Figures 3</xref>–
+<xref rid="f6" ref-type="fig">6</xref>, are reported, the numerical solutions of system (1) for a period of 120 days. These codes can be modified for any compartmental models. The ‘figure’ command produces the output given in
+<xref rid="f3" ref-type="fig">Figures 3</xref>–
+<xref rid="f6" ref-type="fig">6</xref>. The steps or procedures listed in the codes have to be followed carefully in order not to encounter errors. The parameters can be represented with letters for instance
+<inline-formula>
+<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" id="M17" display="inline" overflow="scroll"><mml:mi mathvariant="normal">Ω</mml:mi></mml:math>
+</inline-formula> can be written in the codes as Omega as Matlab doesn’t recognize the parameters listed in the code. The code written in the editor window can be seen in
+<xref rid="f7" ref-type="fig">Figure 7</xref>. The SEIR model is extended, and an alternative software, R codes has been provided at the appendix section. Using the same initial conditions and parameter values given in
+<xref rid="T1" ref-type="table">Table 1</xref>, the output figures for the R code are given by
+<xref rid="f8" ref-type="fig">Figures 8</xref>–
+<xref rid="f10" ref-type="fig">10</xref>. Users who cannot afford Matlab software can freely use the R software codes for the numerical simulation. The two software codes gives the same output results.</p><p>% The R software codes
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Load required packages
+library(deSolve)
+library(ggplot2)
+# Define the SEIR model function
+SEIR_model &lt;- function(time, state, parameters) {
+ with(as.list(c(state, parameters)), {
+ # Differential equations
+ dS &lt;- Omega - (beta * S * I) / N - S * mu
+ dE &lt;- (beta * S * I) / N - (alpha + mu) * E
+ dI &lt;- alpha * E - (gamma + sigma + mu) * I
+ dR &lt;- gamma * I - mu * R
+ # Return the derivatives
+ return(list(c(dS, dE, dI, dR)))
+ })
+}
+# Define the model parameters
+parameters &lt;- list(
+ Omega = 20, # Recruitment rate
+ mu = 0.00004252912, # Death rate
+ beta = 0.3, # Transmission rate
+ gamma = 0.1, # Recovery rate
+ alpha = 0.3, # Rate from exposed to infected
+ sigma = 0.003286 # Disease-induced death rate
+)</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Initial conditions
+initial_state &lt;- c(
+ S = 1000, # Initial susceptible population
+ E = 0, # Initial exposed population
+ I = 1, # Initial infected population
+ R = 0.0 # Initial recovered population
+)
+N = 1001</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Time points to solve the model
+times &lt;- seq(0, 120, by = 1)</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Solve the differential equations
+out &lt;- as.data.frame(ode(y = initial_state, times = times, func = SEIR_model, parms = parameters))</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Plot the results for Susceptible
+ggplot(out, aes(x = time, y = value, color = variable)) +
+ geom_line(aes(y = S, color = "Susceptible")) +
+ labs(x = "Time", y = "Number of individuals") +
+ labs(x = "Time", y = "Number of individuals", color = "Compartment") +
+ scale_color_manual(values = c("blue")) +
+ theme_classic()</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Plot the result for Exposed
+ggplot(out, aes(x = time, y = value, color = variable)) +
+ geom_line(aes(y = E, color = "Exposed")) +
+ labs(x = "Time", y = "Number of individuals") +
+ labs(x = "Time", y = "Number of individuals", color = "Compartment") +
+ scale_color_manual(values = c("green")) +
+ theme_classic()</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Plot the result for Infected
+ggplot(out, aes(x = time, y = value, color = variable)) +
+ geom_line(aes(y = I, color = "Infected")) +
+ labs(x = "Time", y = "Number of individuals") +
+ labs(x = "Time", y = "Number of individuals", color = "Compartment") +
+ scale_color_manual(values = c("red")) +
+ theme_classic()</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Plot the results for recovered
+ggplot(out, aes(x = time, y = value, color = variable)) +
+ geom_line(aes(y = R, color = "Recovered")) +
+ labs(x = "Time", y = "Number of individuals") +
+ labs(x = "Time", y = "Number of individuals", color = "Compartment") +
+ scale_color_manual(values = c("black")) +
+ theme_classic()</preformat>
+<preformat preformat-type="computer code" position="float" xml:space="preserve" orientation="portrait">
+# Plot the results for all compartments
+ggplot (out, aes(x = time)) +
+ geom_line(aes(y = S, color = "Susceptible")) +
+ geom_line(aes(y = E, color = "Exposed")) +
+ geom_line(aes(y = I, color = "Infected")) +
+ geom_line(aes(y = R, color = "Recovered")) +
+ labs(title = "SEIR Model",
+  x = "Time",
+  y = "Population",
+  color = "Compartment") +
+ scale_color_manual(values = c("Susceptible" = "blue", "Exposed" = "green", "Infected" = "red", "Recovered" = "black"))+
+ theme_classic()</preformat>
+</p><p>% The results of the numerical simulation gives
+<xref rid="f8" ref-type="fig">Figures 8</xref>-
+<xref rid="f12" ref-type="fig">12</xref>.</p><fig position="float" fig-type="figure" id="f8" orientation="portrait"><label>Figure 8. </label><caption><title>Susceptible compartment using R.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr8" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0007.jpg"/></fig><fig position="float" fig-type="figure" id="f9" orientation="portrait"><label>Figure 9. </label><caption><title>Exposed compartment using R.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr9" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0008.jpg"/></fig><fig position="float" fig-type="figure" id="f10" orientation="portrait"><label>Figure 10. </label><caption><title>Infected compartment using R.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr10" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0009.jpg"/></fig><fig position="float" fig-type="figure" id="f11" orientation="portrait"><label>Figure 11. </label><caption><title>Recovered compartment using R.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr11" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0010.jpg"/></fig><fig position="float" fig-type="figure" id="f12" orientation="portrait"><label>Figure 12. </label><caption><title>All the compartments using R.</title></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr12" position="float" orientation="portrait" xlink:href="f1000research-12-155959-g0011.jpg"/></fig><sec id="sec6"><title>Limitations</title><p>MATLAB can disable some advanced graphics rendering features by switching to software OpenGL by ignoring extra legend entries.</p><p>R on the other hand, has a limited memory capacity which can be a problem when working with large data sets or running computationally-intensive analyses. It can be relatively slow compared to other programming languages like Matlab, C++ or Python, especially for certain types of calculations. It also has limited graphical capabilities.</p></sec></sec><sec sec-type="conclusion" id="sec8"><title>Conclusion</title><p>This work seeks to introduce new matlab software codes purposely for numerical simulations of classical compartmental models which can run on any version of Matlab. The intended targets are researchers and students who uses Matlab for their analysis. These codes can be edited/modify to suit any deterministic models and any desire output required. The SEIR deterministic model was used to give a much insight about the codes. Alternatively, a deterministic SEIR codes written in R software is provided for those who wants to use freely available software. Despite the limitations of the R software, the deterministic model implemented in the R code can still be a useful tool for understanding the basic dynamics of disease transmission.</p></sec></body><back><sec sec-type="data-availability" id="sec12"><title>Data availability statement</title><sec id="sec13"><title>Underlying data</title><p>OSF: Raw_data_monkeypox.
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="DOI:%2010.17605/OSF.IO/2J5R9" ext-link-type="uri">DOI: 10.17605/OSF.IO/2J5R9</ext-link>.</p><p>This project contains the following underlying data:</p><p>Data_used.pdf (data input into matlab simulations)</p></sec><sec id="sec14"><title>Extended data</title><p>OSF: Output_data
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="DOI:%2010.17605/OSF.IO/7EJUP" ext-link-type="uri">DOI: 10.17605/OSF.IO/7EJUP</ext-link>.</p><p>This project contains the following extended data:</p><p>MATLAB Command Window1.pdf (Matlab output data that accompanied the numerical simulation figures)</p><p>Data are available under the terms of the
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://creativecommons.org/licenses/by/1.0/" ext-link-type="uri">Creative Commons Zero “No rights reserved” data waiver</ext-link> (CC0 1.0 Public domain dedication).</p></sec><sec id="sec9"><title>Software availability</title><p>Source code available from:
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/okyere2015/Matlab_codes/releases/tag/v2.0.1" ext-link-type="uri">https://github.com/okyere2015/Matlab_codes/releases/tag/v2.0.1</ext-link>.</p><p>Archived source code at the time of publication:
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://doi.org/10.5281/zenodo.7671815" ext-link-type="uri">https://doi.org/10.5281/zenodo.7671815</ext-link>.</p><p>License:
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://creativecommons.org/licenses/by/2.0/" ext-link-type="uri">Apache 2.0</ext-link>
+</p></sec></sec><ref-list><title>References</title><ref id="ref1"><label>1</label><mixed-citation publication-type="other">
+<collab>MATLAB, Math</collab>:
+<article-title>Graphics. Programming.</article-title>
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.mathworks.com/products/matlab.html" ext-link-type="uri">Reference Source</ext-link>
+</mixed-citation></ref><ref id="ref2"><label>2</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Okyere</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Ackora-Prah</surname><given-names>J</given-names></name>
+</person-group>:
+<article-title>A mathematical model of transmission dynamics of SARS CoV-2 (COVID-19) with an underlying condition of diabetes.</article-title>
+<source>
+<italic toggle="yes">Int. J. Math. Math. Sci.</italic>
+</source>
+<year>2022</year>;<volume>2022</volume>:<fpage>1</fpage>–<lpage>15</lpage>. Article ID 7984818.
+<pub-id pub-id-type="doi">10.1155/2022/7984818</pub-id>
+</mixed-citation></ref><ref id="ref3"><label>3</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Okyere</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Ackora-Prah</surname><given-names>J</given-names></name>
+</person-group>:
+<article-title>Modelling and analysis of monkeypox disease using fractional derivatives.</article-title>
+<source>
+<italic toggle="yes">Results in engineering.</italic>
+</source>
+<year>2023</year>; Vol.<volume>17</volume>:<fpage>100786</fpage>.
+<issn>2590–1230</issn>.
+<pub-id pub-id-type="doi">10.1016/j.rineng.2022.100786</pub-id>
+<pub-id pub-id-type="pmid">36467285</pub-id><pub-id pub-id-type="pmcid">PMC9705013</pub-id></mixed-citation></ref><ref id="ref4"><label>4</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Okyere</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Oduro</surname><given-names>FT</given-names></name>
+<name name-style="western"><surname>Bonyah</surname><given-names>E</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Epidemiological model of Influenza A (H1N1) transmission in Ashanti Region of Ghana.</article-title>
+<source>
+<italic toggle="yes">J. Public Health Epidemiol.</italic>
+</source>
+<year>April, 2013</year>;<volume>5</volume>(<issue>4</issue>):<fpage>160</fpage>–<lpage>166</lpage>.
+<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://academicjournals.org/journal/JPHE/article-full-text-pdf/3F850195114" ext-link-type="uri">Reference Source</ext-link>
+</mixed-citation></ref><ref id="ref5"><label>5</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Kim</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Seo</surname><given-names>YB</given-names></name>
+<name name-style="western"><surname>Jung</surname><given-names>E</given-names></name>
+</person-group>:
+<article-title>Prediction of COVID-19 transmission dynamics using a mathematical model considering behavior changes in Korea.</article-title>
+<source>
+<italic toggle="yes">Epidemiol. Health.</italic>
+</source>
+<year>2020</year>;<volume>42</volume>:<fpage>e2020026</fpage>.
+<pub-id pub-id-type="doi">10.4178/epih.e2020026</pub-id>
+<pub-id pub-id-type="pmid">32375455</pub-id><pub-id pub-id-type="pmcid">PMC7285444</pub-id></mixed-citation></ref><ref id="ref6"><label>6</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Habenom</surname><given-names>H</given-names></name>
+<name name-style="western"><surname>Aychluh</surname><given-names>M</given-names></name>
+<name name-style="western"><surname>Suthar</surname><given-names>DL</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Modeling and analysis on the transmission of covid-19 Pandemic in Ethiopia.</article-title>
+<source>
+<italic toggle="yes">Alex. Eng. J.</italic>
+</source>
+<year>2022</year>;<volume>61</volume>(<issue>7</issue>):<fpage>5323</fpage>–<lpage>5342</lpage>.
+<pub-id pub-id-type="doi">10.1016/j.aej.2021.10.054</pub-id>
+</mixed-citation></ref><ref id="ref7"><label>7</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Ahmed</surname><given-names>I</given-names></name>
+<name name-style="western"><surname>Modu</surname><given-names>GU</given-names></name>
+<name name-style="western"><surname>Yusuf</surname><given-names>A</given-names></name>
+<etal/>
+</person-group>:
+<article-title>
+A mathematical model of coronavirus disease (COVID-19) containing asymptomatic and symptomatic classes.
+</article-title>
+<source>
+<italic toggle="yes">Elsevier public health emergency collection, Results Phys.</italic>
+</source>
+<year>2021</year>;<volume>21</volume>:<fpage>103776</fpage>.
+<pub-id pub-id-type="doi">10.1016/j.rinp.2020.103776</pub-id>
+
+<pub-id pub-id-type="pmid">33432294</pub-id><pub-id pub-id-type="pmcid">PMC7787076</pub-id></mixed-citation></ref><ref id="ref8"><label>8</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Agarwal</surname><given-names>P</given-names></name>
+<name name-style="western"><surname>Nieto</surname><given-names>JJ</given-names></name>
+<name name-style="western"><surname>Ruzhansky</surname><given-names>M</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Analysis of Infectious disease problems (Covid-19) and their global impact.</article-title>
+<source>
+<italic toggle="yes">J. Nanobiotechnol.</italic>
+</source>
+<year>2021</year>.</mixed-citation></ref><ref id="ref9"><label>9</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Ghosh</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Chatterjee</surname><given-names>AN</given-names></name>
+<name name-style="western"><surname>Roy</surname><given-names>PK</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Mathematical Modeling and Control of the Cell Dynamics in Leprosy.</article-title>
+<source>
+<italic toggle="yes">Comput. Math. Model.</italic>
+</source>
+<year>2021</year>;<volume>32</volume>:<fpage>52</fpage>–<lpage>74</lpage>.
+<pub-id pub-id-type="doi">10.1007/s10598-021-09516-z</pub-id>
+</mixed-citation></ref><ref id="ref10"><label>10</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Clark</surname><given-names>A</given-names></name>
+<name name-style="western"><surname>Jit</surname><given-names>M</given-names></name>
+<name name-style="western"><surname>Warren-Gash</surname><given-names>C</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Global, regional, and national estimates of the population at increased risk of severe COVID-19 due to underlying health conditions in 2020: A modelling study.</article-title>
+<source>
+<italic toggle="yes">Lancet Glob. Health.</italic>
+</source>
+<year>2020</year>;<volume>8</volume>:<fpage>e1003</fpage>–<lpage>e1017</lpage>.
+<pub-id pub-id-type="doi">10.1016/S2214-109X(20)30264-3</pub-id>
+
+<pub-id pub-id-type="pmid">32553130</pub-id><pub-id pub-id-type="pmcid">PMC7295519</pub-id></mixed-citation></ref><ref id="ref11"><label>11</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Nana-Kyere</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Boateng</surname><given-names>FA</given-names></name>
+<name name-style="western"><surname>Jonathan</surname><given-names>P</given-names></name>
+<etal/>
+</person-group>:
+<article-title>Global Analysis and optimal control model of COVID-19.</article-title>
+<source>
+<italic toggle="yes">Comput. Math. Methods Med.</italic>
+</source>
+<year>2022</year>;<volume>2022</volume>:<fpage>20</fpage>. Article ID 9491847.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1155/2022/9491847</pub-id><pub-id pub-id-type="pmcid">PMC8813235</pub-id><pub-id pub-id-type="pmid">35126644</pub-id></mixed-citation></ref><ref id="ref12"><label>12</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Harko</surname><given-names>T</given-names></name>
+<name name-style="western"><surname>Lobo</surname><given-names>FS</given-names></name>
+<name name-style="western"><surname>Mak</surname><given-names>MK</given-names></name>
+</person-group>:
+<article-title>Exact analytical solutions of the Susceptible-Infected-Recovered (SIR) epidemic model and of the SIR model with equal death and birth rates.</article-title>
+<source>
+<italic toggle="yes">Appl. Math. Comput.</italic>
+</source>
+<year>2014</year>;<volume>236</volume>:<fpage>184</fpage>–<lpage>194</lpage>.
+<pub-id pub-id-type="doi">10.1016/j.amc.2014.03.030</pub-id>
+</mixed-citation></ref><ref id="ref13"><label>13</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Schlickeiser</surname><given-names>R</given-names></name>
+<name name-style="western"><surname>Kröger</surname><given-names>M</given-names></name>
+</person-group>:
+<article-title>Analytical solution of the SIR-model for the temporal evolution of epidemics. Part B: Semi-time case.</article-title>
+<source>
+<italic toggle="yes">J. Phys. A.</italic>
+</source>
+<year>2021</year>;<volume>54</volume>(<issue>17</issue>):<fpage>175601</fpage>.
+<pub-id pub-id-type="doi">10.1088/1751-8121/abed66</pub-id>
+</mixed-citation></ref><ref id="ref14"><label>14</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Alah</surname><given-names>MA</given-names></name>
+<name name-style="western"><surname>Abdeen</surname><given-names>S</given-names></name>
+<name name-style="western"><surname>Tayar</surname><given-names>E</given-names></name>
+<etal/>
+</person-group>:
+<article-title>The story behind the first few cases of monkeypox infection in non-endemic countries.</article-title>
+<source>
+<italic toggle="yes">J. Infect. Public Health.</italic>
+</source>
+<year>2022</year>; Volume<volume>15</volume>(Issue<issue>9</issue>): Pages<fpage>970</fpage>–<lpage>974</lpage>.
+<pub-id pub-id-type="doi">10.1016/j.jiph.2022.07.014</pub-id>
+<pub-id pub-id-type="pmid">35952458</pub-id><pub-id pub-id-type="pmcid">PMC9534129</pub-id></mixed-citation></ref><ref id="ref15"><label>15</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Schlickeiser</surname><given-names>R</given-names></name>
+<name name-style="western"><surname>Kröger</surname><given-names>M</given-names></name>
+</person-group>:
+<article-title>Analytical Modeling of the Temporal Evolution of Epidemics Outbreaks Accounting for Vaccinations.</article-title>
+<source>
+<italic toggle="yes">Physics.</italic>
+</source>
+<year>2021</year>;<volume>3</volume>(<issue>2</issue>):<fpage>386</fpage>–<lpage>426</lpage>.
+<pub-id pub-id-type="doi">10.3390/physics3020028</pub-id>
+</mixed-citation></ref><ref id="ref16"><label>16</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Guo</surname><given-names>J</given-names></name>
+<name name-style="western"><surname>Ye</surname><given-names>A</given-names></name>
+<name name-style="western"><surname>Wang</surname><given-names>X</given-names></name>
+<etal/>
+</person-group>:
+<article-title>OpenSeesPyView: Python programming-based visualization and post-processing tool for OpenSeesPy.</article-title>
+<source>
+<italic toggle="yes">SoftwareX.</italic>
+</source>
+<year>2023</year>; Volume<volume>21</volume>:<fpage>101278</fpage>.
+<pub-id pub-id-type="doi">10.1016/j.softx.2022.101278</pub-id>
+</mixed-citation></ref><ref id="ref17"><label>17</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Brown</surname><given-names>D</given-names></name>
+<name name-style="western"><surname>Sousa</surname><given-names>K</given-names><prefix>de</prefix></name>
+<name name-style="western"><surname>Etten</surname><given-names>J</given-names><prefix>van</prefix></name>
+</person-group>:
+<article-title>ag5Tools: An R package for downloading and extracting agrometeorological data from the AgERA5 database.</article-title>
+<source>
+<italic toggle="yes">SoftwareX.</italic>
+</source>
+<year>2023</year>;<volume>21</volume>:<fpage>101267</fpage>.
+<pub-id pub-id-type="doi">10.1016/j.softx.2022.101267</pub-id>
+</mixed-citation></ref><ref id="ref18"><label>18</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Egert</surname><given-names>J</given-names></name>
+<name name-style="western"><surname>Kreutz</surname><given-names>C</given-names></name>
+</person-group>:
+<article-title>Rcall: An R interface for MATLAB.</article-title>
+<source>
+<italic toggle="yes">SoftwareX.</italic>
+</source>
+<year>2023</year>; Volume<volume>21</volume>:<fpage>101276</fpage>.
+<pub-id pub-id-type="doi">10.1016/j.softx.2022.101276</pub-id>
+</mixed-citation></ref><ref id="ref19"><label>19</label><mixed-citation publication-type="journal">
+<person-group person-group-type="author">
+<name name-style="western"><surname>Hoffmann</surname><given-names>TJ</given-names></name>
+<name name-style="western"><surname>Miaskowski</surname><given-names>C</given-names></name>
+<name name-style="western"><surname>Kober</surname><given-names>KM</given-names></name>
+</person-group>:
+<article-title>ShinyGAStool: A user-friendly tool for candidate gene association studies.</article-title>
+<source>
+<italic toggle="yes">SoftwareX.</italic>
+</source>
+<year>2023</year>; volume<volume>21</volume>:<fpage>101274</fpage>.
+<pub-id pub-id-type="doi">10.1016/j.softx.2022.101274</pub-id>
+<pub-id pub-id-type="pmcid">PMC13463389</pub-id><pub-id pub-id-type="pmid">42592379</pub-id></mixed-citation></ref></ref-list></back><sub-article article-type="reviewer-report" id="report209183"><front-stub><article-id pub-id-type="doi">10.5256/f1000research.155959.r209183</article-id><title-group><article-title>Reviewer response for version 2</article-title></title-group><contrib-group><contrib contrib-type="author"><name name-style="western"><surname>Teklu</surname><given-names initials="SW">Shewafera Wondimagegnhu</given-names></name><xref rid="r209183a1" ref-type="aff">1</xref><role>Referee</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-9073-6075</contrib-id></contrib><aff id="r209183a1">
+<label>1</label>Department of Mathematics, Debre Berhan University, Debre Birhan, Amhara, Ethiopia</aff></contrib-group><author-notes><fn fn-type="COI-statement"><p>
+<bold>Competing interests: </bold>No competing interests were disclosed.</p></fn></author-notes><pub-date pub-type="epub"><day>17</day><month>10</month><year>2023</year></pub-date><permissions><copyright-statement>Copyright: © 2023 Teklu SW</copyright-statement><copyright-year>2023</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access peer review report distributed under the terms of the Creative Commons Attribution Licence, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><related-article xmlns:xlink="http://www.w3.org/1999/xlink" related-article-type="peer-reviewed-article" ext-link-type="doi" id="relatedArticleReport209183" xlink:href="10.12688/f1000research.130458.2">Version 2</related-article><custom-meta-group><custom-meta><meta-name>recommendation</meta-name><meta-value>approve</meta-value></custom-meta></custom-meta-group></front-stub><body><p>I have read the author's revised manuscript and since the authors addressed the given comments the revised manuscript can be indexed.</p><p>Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?</p><p>Partly</p><p>Is the rationale for developing the new software tool clearly explained?</p><p>Partly</p><p>Is the description of the software tool technically sound?</p><p>Yes</p><p>Are sufficient details of the code, methods and analysis (if applicable) provided to allow replication of the software development and its use by others?</p><p>Partly</p><p>Is sufficient information provided to allow interpretation of the expected output datasets and any results generated using the tool?</p><p>Partly</p><p>Reviewer Expertise:</p><p>Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiology.</p><p>I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.</p></body></sub-article><sub-article article-type="reviewer-report" id="report209184"><front-stub><article-id pub-id-type="doi">10.5256/f1000research.155959.r209184</article-id><title-group><article-title>Reviewer response for version 2</article-title></title-group><contrib-group><contrib contrib-type="author"><name name-style="western"><surname>Kotola</surname><given-names initials="BS">Belela Samuel</given-names></name><xref rid="r209184a1" ref-type="aff">1</xref><role>Referee</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0003-4879-0921</contrib-id></contrib><aff id="r209184a1">
+<label>1</label>Department of Mathematics, Oda Bultum University, Asebe Teferi, Oromia, Ethiopia</aff></contrib-group><author-notes><fn fn-type="COI-statement"><p>
+<bold>Competing interests: </bold>No competing interests were disclosed.</p></fn></author-notes><pub-date pub-type="epub"><day>17</day><month>10</month><year>2023</year></pub-date><permissions><copyright-statement>Copyright: © 2023 Kotola BS</copyright-statement><copyright-year>2023</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access peer review report distributed under the terms of the Creative Commons Attribution Licence, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><related-article xmlns:xlink="http://www.w3.org/1999/xlink" related-article-type="peer-reviewed-article" ext-link-type="doi" id="relatedArticleReport209184" xlink:href="10.12688/f1000research.130458.2">Version 2</related-article><custom-meta-group><custom-meta><meta-name>recommendation</meta-name><meta-value>approve</meta-value></custom-meta></custom-meta-group></front-stub><body><p>The article has been revised in requested manner. </p><p> Therefore, I would like to recommend  an acceptance for this article.</p><p>Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?</p><p>Yes</p><p>Is the rationale for developing the new software tool clearly explained?</p><p>Yes</p><p>Is the description of the software tool technically sound?</p><p>Yes</p><p>Are sufficient details of the code, methods and analysis (if applicable) provided to allow replication of the software development and its use by others?</p><p>Yes</p><p>Is sufficient information provided to allow interpretation of the expected output datasets and any results generated using the tool?</p><p>Partly</p><p>Reviewer Expertise:</p><p>Mathematical modeling</p><p>I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.</p></body></sub-article><sub-article article-type="reviewer-report" id="report188924"><front-stub><article-id pub-id-type="doi">10.5256/f1000research.143219.r188924</article-id><title-group><article-title>Reviewer response for version 1</article-title></title-group><contrib-group><contrib contrib-type="author"><name name-style="western"><surname>Teklu</surname><given-names initials="SW">Shewafera Wondimagegnhu</given-names></name><xref rid="r188924a1" ref-type="aff">1</xref><role>Referee</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-9073-6075</contrib-id></contrib><aff id="r188924a1">
+<label>1</label>Department of Mathematics, Debre Berhan University, Debre Birhan, Amhara, Ethiopia</aff></contrib-group><author-notes><fn fn-type="COI-statement"><p>
+<bold>Competing interests: </bold>No competing interests were disclosed.</p></fn></author-notes><pub-date pub-type="epub"><day>4</day><month>9</month><year>2023</year></pub-date><permissions><copyright-statement>Copyright: © 2023 Teklu SW</copyright-statement><copyright-year>2023</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access peer review report distributed under the terms of the Creative Commons Attribution Licence, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><related-article xmlns:xlink="http://www.w3.org/1999/xlink" related-article-type="peer-reviewed-article" ext-link-type="doi" id="relatedArticleReport188924" xlink:href="10.12688/f1000research.130458.1">Version 1</related-article><custom-meta-group><custom-meta><meta-name>recommendation</meta-name><meta-value>approve-with-reservations</meta-value></custom-meta></custom-meta-group></front-stub><body><p>Comments to the Authors</p><p> Title: Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation</p><p> The authors proposed new Matlab Software Codes for Numerical Simulation and also an alternative codes for statistical software package R has been proposed for the same compartmental model.</p><p>  
+<list list-type="order"><list-item><p>In their discussion section the authors written as the SEIR model is extended, and alternative software, R codes has been provided at the appendix section. In their manuscript I did not find the appendix section and I have seen only the MATLAB code to illustrate the proposed SIER model. Give the R code on the revised manuscript!</p></list-item><list-item><p>The authors needs to disclose the numerical codes using MATLAB and R software for potential new researchers and possibly students but they should refine the two codes separately and compare and contrast them with the proposed trivial SIER model.</p></list-item><list-item><p>I do not think, with these current details, that the manuscript can be accepted. It needs a modification.</p></list-item></list>
+</p><p>Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?</p><p>Partly</p><p>Is the rationale for developing the new software tool clearly explained?</p><p>Partly</p><p>Is the description of the software tool technically sound?</p><p>Yes</p><p>Are sufficient details of the code, methods and analysis (if applicable) provided to allow replication of the software development and its use by others?</p><p>Partly</p><p>Is sufficient information provided to allow interpretation of the expected output datasets and any results generated using the tool?</p><p>Partly</p><p>Reviewer Expertise:</p><p>Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiology.</p><p>I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard, however I have significant reservations, as outlined above.</p></body></sub-article><sub-article article-type="reviewer-report" id="report200352"><front-stub><article-id pub-id-type="doi">10.5256/f1000research.143219.r200352</article-id><title-group><article-title>Reviewer response for version 1</article-title></title-group><contrib-group><contrib contrib-type="author"><name name-style="western"><surname>Kotola</surname><given-names initials="BS">Belela Samuel</given-names></name><xref rid="r200352a1" ref-type="aff">1</xref><role>Referee</role><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0003-4879-0921</contrib-id></contrib><aff id="r200352a1">
+<label>1</label>Department of Mathematics, Oda Bultum University, Asebe Teferi, Oromia, Ethiopia</aff></contrib-group><author-notes><fn fn-type="COI-statement"><p>
+<bold>Competing interests: </bold>No competing interests were disclosed.</p></fn></author-notes><pub-date pub-type="epub"><day>4</day><month>9</month><year>2023</year></pub-date><permissions><copyright-statement>Copyright: © 2023 Kotola BS</copyright-statement><copyright-year>2023</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access peer review report distributed under the terms of the Creative Commons Attribution Licence, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><related-article xmlns:xlink="http://www.w3.org/1999/xlink" related-article-type="peer-reviewed-article" ext-link-type="doi" id="relatedArticleReport200352" xlink:href="10.12688/f1000research.130458.1">Version 1</related-article><custom-meta-group><custom-meta><meta-name>recommendation</meta-name><meta-value>approve-with-reservations</meta-value></custom-meta></custom-meta-group></front-stub><body><p>First and for most I would like to acknowledge the editor for giving me this chance for reviewing the article. Depend up on my back ground knowledge I have reviewed the article as follow.</p><p> The researcher has been defined MATLAB as a programming language that represents matrix and array mathematics directly, providing a desktop environment for iterative analysis and design processes. Moreover, the area where it is widely used was described by the authors so that to be by scientists and mathematicians for exploring, modeling, and analyzing data across various platforms.</p><p> The study has been aimed to make public new Matlab codes that authors have been using to aid researchers in numerical simulations of deterministic or compartmental models in epidemiology; which is the fundamental and timely objectives. Researchers have also started sharing their codes and providing detailed explanations on how to use them.</p><p> This work introduces an editable and modified Matlab software codes for numerical simulations of classical compartmental models, suitable for researchers, students and for those seeking freely available software.</p><p> Finally I recommend the article to be indexed after the following question and recommendation are addressed.</p><p> RECOMMENDATION:
+<list list-type="order"><list-item><p>Some of the graphs can be plotted in a single window, so I recommend the authors plot some of the graphs, such as susceptible class, infected class, and exposed class, in a single window editor. Plotting in such a way can help us compare the relationships and differences among the plotted classes.</p></list-item><list-item><p>An author has stated the disadvantage of MATLAB as it disables advanced graphics rendering features by using OpenGL, and while R also has limited memory capacity, slowness, and limited graphical capabilities, making it suitable for large data sets and computationally intensive analyses, which one is the best? As an author, which software do you recommend to researchers? For what reason do you recommend it?</p></list-item></list>
+</p><p>Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?</p><p>Yes</p><p>Is the rationale for developing the new software tool clearly explained?</p><p>Yes</p><p>Is the description of the software tool technically sound?</p><p>Yes</p><p>Are sufficient details of the code, methods and analysis (if applicable) provided to allow replication of the software development and its use by others?</p><p>Yes</p><p>Is sufficient information provided to allow interpretation of the expected output datasets and any results generated using the tool?</p><p>Partly</p><p>Reviewer Expertise:</p><p>Mathematical modeling</p><p>I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard, however I have significant reservations, as outlined above.</p></body></sub-article></article></pmc-articleset>

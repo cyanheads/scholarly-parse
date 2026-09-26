@@ -1,0 +1,27 @@
+{
+  "id": "arxiv-pone.0310152",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "Effect of Vaccine Dose Intervals: Considering Immunity Levels, Vaccine Efficacy, and Strain Variants for Disease Control Strategy",
+  "identifiers": {
+    "arxiv": "2505.21132v1",
+    "doi": "10.1371/journal.pone.0310152"
+  },
+  "url": "https://arxiv.org/html/2505.21132v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Ghosh S, Banerjee M, Chattopadhyay AK. Effect of Vaccine Dose Intervals: Considering Immunity Levels, Vaccine Efficacy, and Strain Variants for Disease Control Strategy. arXiv:2505.21132v1. 2025.",
+  "features": [
+    "nested-sections",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "tables",
+    "figures",
+    "research-article",
+    "rosetta"
+  ]
+}

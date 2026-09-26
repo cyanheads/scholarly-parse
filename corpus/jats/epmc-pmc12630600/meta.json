@@ -1,0 +1,36 @@
+{
+  "id": "epmc-pmc12630600",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Exploring potential hidden aspects of quantum field theory through numerical solution of the Klein–Gordon equation using the Yee algorithm",
+  "identifiers": {
+    "pmcid": "PMC12630600",
+    "pmid": "41258237",
+    "doi": "10.1038/s41598-025-24512-8"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12630600/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Honarbakhsh B. Exploring potential hidden aspects of quantum field theory through numerical solution of the Klein–Gordon equation using the Yee algorithm. Scientific Reports. 2025;15:40756. doi:10.1038/s41598-025-24512-8",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "formula-graphic-only",
+    "figures",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#142",
+  "notes": "Every <fig> holds its pointers only inside <alternatives> (a content-type=\"image\" JPEG and a content-type=\"thumb\" GIF), with no direct <graphic> child (#142). Europe PMC's rendering also carries all 213 inline and 33 display formulas as <inline-graphic>/<graphic> GIFs only; PMC's own rendering of the same article has <alternatives> with <tex-math> and MathML."
+}

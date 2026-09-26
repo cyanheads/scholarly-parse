@@ -34,6 +34,10 @@ corpus/<format>/<fixture-id>/
 
 `features` names what the fixture exercises, from the vocabulary in `tests/corpus/features.ts`. `regression` is set only for a fixture that reproduces a known bug. `derivedFrom` is set when the source was produced from another fixture (a Grobid TEI generated from a PDF).
 
+## Adding a fixture
+
+`bun run scripts/corpus/add.ts <kind> <identifier> [--features a,b] [--regression cyanheads/<repo>#N] [--id <fixture-id>] [--notes "…"]` fetches one document, confirms its license from its own metadata, writes `source.*` and `meta.json`, and regenerates `ATTRIBUTION.md`. A license outside the allowlist exits non-zero and writes nothing. Kinds are `epmc` and `pmc` (JATS), `arxiv` and `ar5iv` (LaTeXML), `pdf` and `html` with `--doi`, and `grobid`, which runs a PDF fixture through a local Grobid server. `--dry-run` verifies without writing. The script's header documents each kind and where its license comes from.
+
 ## Rules
 
 - **Open licenses only.** CC BY, CC BY-SA, CC0, or public domain, confirmed from the document's own license statement or the publisher's metadata — never assumed from the venue. No NC or ND licenses, no "free to read" without a license.

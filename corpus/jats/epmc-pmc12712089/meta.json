@@ -1,0 +1,35 @@
+{
+  "id": "epmc-pmc12712089",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method",
+  "identifiers": {
+    "pmcid": "PMC12712089",
+    "pmid": "41407764",
+    "doi": "10.1038/s41598-025-30797-6"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12712089/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Fahim MM, Ahmed HM, Dib KA, Samir I. Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method. Scientific Reports. 2025;15:43949. doi:10.1038/s41598-025-30797-6",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "figures",
+    "element-citation",
+    "mixed-citation",
+    "citation-alternatives",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#135",
+  "notes": "Every inline and display formula is a bare <tex-math> wrapping a full LaTeX document (\\documentclass[12pt]{minimal}…\\begin{document}), with no <alternatives> and no MathML — the dominant Scientific Reports deposit shape (#135). 17 <disp-formula>s sit inside <p> (#130)."
+}

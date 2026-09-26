@@ -1,0 +1,24 @@
+{
+  "id": "arxiv-1906.00591v1",
+  "format": "pdf",
+  "title": "Evaluating Gender Bias in Machine Translation",
+  "identifiers": {
+    "arxiv": "1906.00591v1"
+  },
+  "url": "https://arxiv.org/pdf/1906.00591v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Stanovsky G, Smith NA, Zettlemoyer L. Evaluating Gender Bias in Machine Translation. arXiv:1906.00591v1. 2019.",
+  "features": [
+    "two-column",
+    "hyphenation",
+    "page-furniture",
+    "tables",
+    "figures",
+    "preprint"
+  ],
+  "notes": "ACL 2019 two-column conference layout as posted to arXiv, with the arXiv identifier stamp down the first page's margin. The same version's ar5iv render is latexml/ar5iv-1906.00591."
+}

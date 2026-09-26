@@ -1,0 +1,32 @@
+{
+  "id": "epmc-pmc10742731",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Minimal Linear Codes Constructed from Sunflowers",
+  "identifiers": {
+    "pmcid": "PMC10742731",
+    "pmid": "38136549",
+    "doi": "10.3390/e25121669"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10742731/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Wu X, Lu W. Minimal Linear Codes Constructed from Sunflowers. Entropy. 2023;25(12):1669. doi:10.3390/e25121669",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "declarations",
+    "inline-math",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "element-citation",
+    "theorem",
+    "research-article"
+  ],
+  "notes": "28 <statement>s labelled Theorem, Lemma, Proposition, Corollary, Remark, Example, and Proof."
+}

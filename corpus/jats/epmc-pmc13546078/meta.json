@@ -1,0 +1,38 @@
+{
+  "id": "epmc-pmc13546078",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Comparative Cardiovascular Outcomes of GLP‐1 Receptor Agonists Versus Bariatric Surgery: A Systematic Review and Network Meta‐Analysis",
+  "identifiers": {
+    "pmcid": "PMC13546078",
+    "pmid": "42700367",
+    "doi": "10.1002/edm2.70311"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13546078/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Shirmohammadi E, Ghasemloo N, Ebrahimi N, Mohammadzadeh N, Ehtemami A, Babaei M, et al. Comparative Cardiovascular Outcomes of GLP‐1 Receptor Agonists Versus Bariatric Surgery: A Systematic Review and Network Meta‐Analysis. Endocrinology, Diabetes & Metabolism. 2026;9(5):e70311. doi:10.1002/edm2.70311",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "boxed-text",
+    "definition-list",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "multiple-abstracts",
+    "graphical-abstract",
+    "tables",
+    "table-footnotes",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "review"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#148",
+  "notes": "The body opens with a titled <def-list> (Abbreviations) outside any <sec> (#148). Europe PMC's rendering also wraps each figure's <graphic> pointers in <alternatives> (#142), nests the reference list at body/sec/sec/ref-list (#116), and labels references with a trailing period, '1.' (#127)."
+}

@@ -1,0 +1,26 @@
+{
+  "id": "medrxiv-2026.05.05.26351600v2",
+  "format": "html",
+  "flavor": "medrxiv.org",
+  "title": "Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology",
+  "identifiers": {
+    "doi": "10.64898/2026.05.05.26351600"
+  },
+  "url": "https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2.full",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Vo JN, Wu YM, Wang R, Pham T, Cao X, Yeung S, et al. Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology. medRxiv. 2026. doi:10.64898/2026.05.05.26351600",
+  "features": [
+    "page-furniture",
+    "figures",
+    "acknowledgments",
+    "declarations",
+    "footnotes",
+    "preprint"
+  ],
+  "regression": "cyanheads/biorxiv-mcp-server#51",
+  "notes": "The medRxiv (Highwire) v2 full-text page from #51, whose extracted Markdown runs to about 13,600 words while the extractor's own word count was reported as 113. Five inline figures; Table 1 is a caption linking to a separate table page."
+}

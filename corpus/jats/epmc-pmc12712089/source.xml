@@ -1,0 +1,1474 @@
+
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">
+<article article-type="research-article" xml:lang="en" dtd-version="1.4"><?da-xref-anchor-style superscripted?><processing-meta base-tagset="archiving" mathml-version="3.0" table-model="xhtml" tagset-family="jats"><restricted-by>pmc</restricted-by></processing-meta><front><journal-meta><journal-id journal-id-type="nlm-ta">Sci Rep</journal-id><journal-id journal-id-type="iso-abbrev">Sci Rep</journal-id><journal-id journal-id-type="pmc-domain-id">1579</journal-id><journal-id journal-id-type="pmc-domain">scirep</journal-id><journal-id journal-id-type="nlm-id">101563288</journal-id><journal-title-group><journal-title>Scientific Reports</journal-title></journal-title-group><issn pub-type="epub">2045-2322</issn><?publisher_abbrev naturepg?><publisher><publisher-name>Nature Publishing Group</publisher-name></publisher></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC12712089</article-id><article-id pub-id-type="pmcid-ver">PMC12712089.1</article-id><article-id pub-id-type="pmcaid">12712089</article-id><article-id pub-id-type="pmcaiid">12712089</article-id><article-id pub-id-type="pmid">41407764</article-id><article-id pub-id-type="doi">10.1038/s41598-025-30797-6</article-id><article-id pub-id-type="publisher-id">30797</article-id><article-version article-version-type="pmc-version">1</article-version><article-categories><subj-group subj-group-type="heading"><subject>Article</subject></subj-group></article-categories><title-group><article-title>Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method</article-title></title-group><contrib-group><contrib contrib-type="author" corresp="yes"><name name-style="western"><surname>Fahim</surname><given-names initials="MM">Mina M.</given-names></name><address><email>Mina.fahim@bue.edu.eg</email></address><xref ref-type="aff" rid="Aff1">1</xref><xref ref-type="aff" rid="Aff2">2</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Ahmed</surname><given-names initials="HM">Hamdy M.</given-names></name><xref ref-type="aff" rid="Aff3">3</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Dib</surname><given-names initials="KA">K. A.</given-names></name><xref ref-type="aff" rid="Aff2">2</xref></contrib><contrib contrib-type="author"><name name-style="western"><surname>Samir</surname><given-names initials="I">Islam</given-names></name><xref ref-type="aff" rid="Aff4">4</xref></contrib><aff id="Aff1"><label>1</label><institution-wrap><institution-id institution-id-type="ROR">https://ror.org/0066fxv63</institution-id><institution-id institution-id-type="GRID">grid.440862.c</institution-id><institution-id institution-id-type="ISNI">0000 0004 0377 5514</institution-id><institution>Basic Science Department, Faculty of Engineering, </institution><institution>The British University in Egypt, </institution></institution-wrap>El shorouk, Cairo, Egypt </aff><aff id="Aff2"><label>2</label><institution-wrap><institution-id institution-id-type="ROR">https://ror.org/023gzwx10</institution-id><institution-id institution-id-type="GRID">grid.411170.2</institution-id><institution-id institution-id-type="ISNI">0000 0004 0412 4537</institution-id><institution>Mathematics Department, Faculty of Science, </institution><institution>Fayoum University, </institution></institution-wrap>Fayoum, Egypt </aff><aff id="Aff3"><label>3</label><institution-wrap><institution-id institution-id-type="ROR">https://ror.org/02pyw9g57</institution-id><institution-id institution-id-type="GRID">grid.442744.5</institution-id><institution>Physics and Engineering Mathematics Department, </institution><institution>Higher Institute of Engineering, El-shorouk Academy, </institution></institution-wrap>El- Shorouk City, Cairo, Egypt </aff><aff id="Aff4"><label>4</label><institution-wrap><institution-id institution-id-type="ROR">https://ror.org/00cb9w016</institution-id><institution-id institution-id-type="GRID">grid.7269.a</institution-id><institution-id institution-id-type="ISNI">0000 0004 0621 1570</institution-id><institution>Physics and Engineering Mathematics Department, Faculty of Engineering, </institution><institution>Ain Shams University, </institution></institution-wrap>Abbassia, Cairo, Egypt </aff></contrib-group><pub-date pub-type="epub"><day>17</day><month>12</month><year>2025</year></pub-date><pub-date pub-type="collection"><year>2025</year></pub-date><volume>15</volume><issue-id pub-id-type="pmc-issue-id">478255</issue-id><elocation-id>43949</elocation-id><history><date date-type="received"><day>5</day><month>9</month><year>2025</year></date><date date-type="accepted"><day>27</day><month>11</month><year>2025</year></date></history><pub-history><event event-type="pmc-release"><date><day>17</day><month>12</month><year>2025</year></date></event><event event-type="pmc-live"><date><day>19</day><month>12</month><year>2025</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2025-12-19 00:25:14.340"><day>19</day><month>12</month><year>2025</year></date></event></pub-history><permissions><copyright-statement>© The Author(s) 2025</copyright-statement><copyright-year>2025</copyright-year><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p><bold>Open Access</bold> This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://creativecommons.org/licenses/by/4.0/">http://creativecommons.org/licenses/by/4.0/</ext-link>.</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="41598_2025_Article_30797.pdf"><?pdf-name 41598_2025_Article_30797.pdf?><?pdf-size 2797183?><?pdf-md5 8c044dbe6e26df0ad50e0be185f0e4c9?><?pdf-image-server-status NEVER_LOAD?><?pdf-cloudpmc-urn urn:app:2417/12712089/8c044dbe6e26/41598_2025_Article_30797.pdf?></self-uri><abstract id="Abs1"><p id="Par1">In this work, a sixth–order extension of the nonlinear Schrödinger equation (NLSE) within its integrable hierarchy is investigated to model higher–order nonlinear and dispersive effects relevant to optical fiber systems and nonlinear wave propagation. By employing the Improved Modified Extended Tanh Function Method, a comprehensive family of exact analytical solutions is derived, encompassing bright and dark solitons, singular soliton structures, and singular periodic solutions. In addition, solution families expressed in terms of Jacobi elliptic functions, Weierstrass doubly periodic elliptic functions, and exponential profiles are obtained. The novelty of this study lies in extending the analytical framework of the NLSE hierarchy to its sixth–order integrable form and in uncovering new soliton and elliptic wave structures. The obtained results reveal rich nonlinear dynamics associated with higher–order dispersion and nonlinearity and clarify the transition between periodic and localized behaviors. Two– and three–dimensional graphical simulations further illustrate the spatiotemporal evolution of the derived solutions. Overall, the findings deepen the understanding of advanced nonlinear wave mechanisms and offer potential implications for ultrafast optical and nonlinear waveguide systems.</p></abstract><kwd-group xml:lang="en"><title>Keywords</title><kwd>Integrable hierarchy systems</kwd><kwd>Nonlinear dispersive media</kwd><kwd>Optical systems</kwd><kwd>Complex pulse modulation</kwd></kwd-group><kwd-group kwd-group-type="npg-subject"><title>Subject terms</title><kwd>Mathematics and computing</kwd><kwd>Optics and photonics</kwd><kwd>Physics</kwd></kwd-group><funding-group><award-group><funding-source><institution>British University in Egypt (BUE)</institution></funding-source></award-group><open-access><p>Open access funding provided by The Science, Technology &amp; Innovation Funding Authority (STDF) in cooperation with The Egyptian Knowledge Bank (EKB).</p></open-access></funding-group><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-license-ref</meta-name><meta-value>CC BY</meta-value></custom-meta><custom-meta><meta-name>issue-copyright-statement</meta-name><meta-value>© Springer Nature Limited 2025</meta-value></custom-meta></custom-meta-group></article-meta></front><body><sec id="Sec1"><title>Introduction</title><p id="Par2">Nonlinear partial differential equations (NPDEs) play a fundamental role in describing complex dynamical processes in nature and technology. Among the most notable nonlinear wave phenomena are solitons—localized and stable wave packets that preserve their shape and velocity over long propagation distances due to the delicate balance between dispersion and nonlinearity. NPDEs also admit other solution types, such as breathers, periodic waves, and rogue waves, the latter being large-amplitude, localized events that appear transiently and capture extreme dynamics in nonlinear systems<sup><xref ref-type="bibr" rid="CR1">1</xref>–<xref ref-type="bibr" rid="CR3">3</xref></sup>. A canonical mathematical model that governs such behaviors is the nonlinear Schrödinger equation (NLSE), which appears in diverse physical contexts, including nonlinear optics, plasma physics, hydrodynamics, and quantum field theory. Owing to its integrability, the NLSE admits exact analytical solutions and provides deep insights into nonlinear wave dynamics.</p><p id="Par3">Although the classical NLSE has been widely investigated, it fails to accurately model scenarios in which higher–order dispersive and nonlinear contributions play a significant role, particularly in optical fiber systems supporting ultrashort and high–intensity pulses. Therefore, several integrable higher–order generalizations have been introduced. Prominent examples include the Hirota equation, which incorporates third–order dispersion <sup><xref ref-type="bibr" rid="CR4">4</xref></sup>, and the Lakshmanan–Porsezian–Daniel (LPD) equation, which accounts for fourth–order effects <sup><xref ref-type="bibr" rid="CR5">5</xref>,<xref ref-type="bibr" rid="CR6">6</xref></sup>. These extensions preserve integrability while substantially enhancing the physical fidelity of the governing models.</p><p id="Par4">In many modern photonic and quantum systems, wave packets may evolve on time scales comparable to the carrier frequency, where classical approximations such as the slowly varying envelope approximation cease to be sufficient. In such regimes, ultrashort (sub-picosecond or femtosecond) optical pulses <sup><xref ref-type="bibr" rid="CR7">7</xref>,<xref ref-type="bibr" rid="CR8">8</xref></sup>, strongly nonlinear matter waves in Bose–Einstein condensates, and intense Langmuir wave packets in plasma require the inclusion of higher-order dispersive and nonlinear effects <sup><xref ref-type="bibr" rid="CR9">9</xref></sup>. In fiber optics, for example, third-order dispersion and self-steepening become significant for picosecond pulses, while fourth- and sixth-order dispersion terms become relevant for femtosecond pulses propagating in photonic-crystal fibers, dispersion-engineered fibers, and microstructured waveguides. These higher-order contributions also capture delayed nonlinear responses, Raman-type effects, and ultrafast saturation of the Kerr nonlinearity.</p><p id="Par5">The hierarchical extension of the NLSE, often referred to as the generalized nonlinear Schrödinger hierarchy, has been developed to characterize systems that require successive higher–order corrections while preserving integrability <sup><xref ref-type="bibr" rid="CR10">10</xref>–<xref ref-type="bibr" rid="CR12">12</xref></sup>. In this work, we focus on the sixth–order member of this hierarchy, given by<disp-formula id="Equ1"><label>1</label><tex-math id="d33e252"><?equation-image-name d33e252.gif?><?equation-image-status READY?><?equation-image-md5 c9c3d0c2a9f410f14af3ead684a0ada6?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c9c3d0c2a9f4/d33e252.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \begin{aligned}&amp;i\psi _x+\frac{1}{2}\psi _{tt}+\psi |\psi |^2-i\alpha _3\left( \psi _{ttt}+6|\psi |^2\psi _{t}\right) +\alpha _{4}\left( \psi _{tttt}+8|\psi |^2 \psi _{tt}+6\psi |\psi |^4+4\psi |\psi _{t}|^2+6\psi _{t}^{2}\psi ^{*}+2\psi ^2\psi ^{*}_{tt}\right) \\&amp;+i \alpha _{5}\left( \psi _{ttttt}+10|\psi |^2\psi _{ttt}+30|\psi |^4\psi _{t}+10\psi \psi _{t}\psi ^{*}_{tt}+10\psi \psi ^{*}_{t}\psi _{tt}+20\psi ^{*}\psi _{t}\psi _{tt}+10\psi ^{2}_{t}\psi ^{*}_{t}\right) +\alpha _{6} \psi _{tttttt} \\&amp;+\alpha _{6}\left[ 60\psi ^{*}|\psi _{t}|^2+50(\psi ^*)^2\psi _{tt}+2\psi ^*_{tttt} \right] \psi ^2+\alpha _{6}\psi \left[ 12\psi ^*\psi _{tttt}+8\psi _t\psi ^*_{ttt}+22|\psi _{tt}|^2 \right] +\alpha _{6}\psi \left[ 18\psi _{ttt}\psi ^*_{t}+70(\psi ^*)^2 \psi _{t}^2 \right] \\&amp;+20\alpha _{6}\psi _t^2\psi _{tt}^*+10\alpha _{6}\psi _t\left[ 5\psi _{tt}\psi ^{*}_{t}+3\psi ^*\psi _{ttt} \right] +20\alpha _{6}\psi ^*\psi ^2_{tt}+10\alpha _{6}\psi ^3\left[ (\psi _t^*)^2+2\psi ^*\psi ^*_{tt} \right] +20\alpha _{6}\psi |\psi |^6=0. \end{aligned} \end{aligned}$$\end{document}</tex-math></disp-formula>This equation generalizes well-known integrable NLSE-type models. Specifically, setting <inline-formula id="IEq1"><tex-math id="d33e257"><?equation-image-name d33e257.gif?><?equation-image-status READY?><?equation-image-md5 a1f9653583fde6d176370d8bc704d110?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/a1f9653583fd/d33e257.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5=\alpha _6=0$$\end{document}</tex-math></inline-formula> yields the LPD equation <sup><xref ref-type="bibr" rid="CR3">3</xref></sup>, while <inline-formula id="IEq2"><tex-math id="d33e265"><?equation-image-name d33e265.gif?><?equation-image-status READY?><?equation-image-md5 4ad014a27292a68ab9bbd86fb48a6fc5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4ad014a27292/d33e265.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4=\alpha _5=\alpha _6=0$$\end{document}</tex-math></inline-formula>, recovers the Hirota equation <sup><xref ref-type="bibr" rid="CR10">10</xref></sup>. Despite the theoretical significance of the sixth-order extension, systematic analytical studies and explicit solution constructions for this model remain scarce in the literature. This motivates the present investigation.</p><p id="Par6">From a physical perspective, the coefficients <inline-formula id="IEq3"><tex-math id="d33e276"><?equation-image-name d33e276.gif?><?equation-image-status READY?><?equation-image-md5 dcc97abf2535f6574e5202e36d66f93b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dcc97abf2535/d33e276.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3, \alpha _4$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq4"><tex-math id="d33e280"><?equation-image-name d33e280.gif?><?equation-image-status READY?><?equation-image-md5 95a312c5b3c1fd0bd063a603429c8813?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/95a312c5b3c1/d33e280.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq5"><tex-math id="d33e284"><?equation-image-name d33e284.gif?><?equation-image-status READY?><?equation-image-md5 fc67ae54b70e002dd0238575b639b2ec?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fc67ae54b70e/d33e284.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _6$$\end{document}</tex-math></inline-formula> represent progressively higher-order dispersive and nonlinear contributions : <inline-formula id="IEq6"><tex-math id="d33e288"><?equation-image-name d33e288.gif?><?equation-image-status READY?><?equation-image-md5 2b68e0af25e0797db8aa7d17f89998da?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/2b68e0af25e0/d33e288.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq7"><tex-math id="d33e292"><?equation-image-name d33e292.gif?><?equation-image-status READY?><?equation-image-md5 747151c3abb377383564fa4b151932b3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/747151c3abb3/d33e292.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4$$\end{document}</tex-math></inline-formula> is associated with third, and fourth-order dispersion, nonlinear dispersion, and self-frequency shift effects; <inline-formula id="IEq8"><tex-math id="d33e297"><?equation-image-name d33e297.gif?><?equation-image-status READY?><?equation-image-md5 95a312c5b3c1fd0bd063a603429c8813?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/95a312c5b3c1/d33e297.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5$$\end{document}</tex-math></inline-formula> governs fifth-order nonlinear dispersion and ultrafast self-steepening interactions; and <inline-formula id="IEq9"><tex-math id="d33e301"><?equation-image-name d33e301.gif?><?equation-image-status READY?><?equation-image-md5 fc67ae54b70e002dd0238575b639b2ec?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fc67ae54b70e/d33e301.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _6$$\end{document}</tex-math></inline-formula> corresponds to sixth-order dispersion and high-order nonlinear responses, which become significant in the propagation of ultrashort pulses where higher-order spectral broadening and nonlinear refractive index saturation occur. Such effects are particularly relevant in the design of high-power fiber lasers, super continuum generation in photonic-crystal fibers, and the manipulation of matter-wave solitons in condensates subjected to higher-order effective interactions.</p><p id="Par7">Recently, many researchers have been actively modifying and applying various ansatz-based methods and analytical techniques to obtain soliton solutions. Among the commonly used methods are the Fan sub-equation method <sup><xref ref-type="bibr" rid="CR13">13</xref></sup>, the extended simplest equation method<sup><xref ref-type="bibr" rid="CR14">14</xref></sup>, the new extended auxiliary equation method <sup><xref ref-type="bibr" rid="CR15">15</xref>,<xref ref-type="bibr" rid="CR16">16</xref></sup>, the solitary wave ansatz method <sup><xref ref-type="bibr" rid="CR17">17</xref></sup>, the Sardar sub-equation method <sup><xref ref-type="bibr" rid="CR18">18</xref></sup>, the modified extended direct algebraic method <sup><xref ref-type="bibr" rid="CR19">19</xref>–<xref ref-type="bibr" rid="CR21">21</xref></sup>, the improved modified extended tanh function method <sup><xref ref-type="bibr" rid="CR22">22</xref>–<xref ref-type="bibr" rid="CR24">24</xref></sup>, and the Jacobi elliptic function method <sup><xref ref-type="bibr" rid="CR25">25</xref></sup>, as well as the F-expansion method <sup><xref ref-type="bibr" rid="CR26">26</xref></sup>. In addition, other effective approaches such as the sine-Gordon method <sup><xref ref-type="bibr" rid="CR27">27</xref></sup>, the Hirota bilinear method <sup><xref ref-type="bibr" rid="CR28">28</xref>–<xref ref-type="bibr" rid="CR30">30</xref></sup>, and the exp(<inline-formula id="IEq10"><tex-math id="d33e365"><?equation-image-name d33e365.gif?><?equation-image-status READY?><?equation-image-md5 ebbfd5dfdc072c6854311c1b21f04243?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ebbfd5dfdc07/d33e365.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\phi (\zeta )$$\end{document}</tex-math></inline-formula>)-function method <sup><xref ref-type="bibr" rid="CR31">31</xref></sup> have also been employed to derive analytical soliton solutions.</p><p id="Par8">Several researchers have investigated the stability of soliton solutions using analytical and numerical methods to better understand their dynamical behavior <sup><xref ref-type="bibr" rid="CR32">32</xref>,<xref ref-type="bibr" rid="CR33">33</xref></sup>. These studies provide insight into the robustness and persistence of solitons under perturbations in nonlinear systems.</p><p id="Par9"><bold>Motivation and research gap.</bold> Higher–order NLSE hierarchies are essential for understanding ultrashort pulse propagation and strong nonlinear wave interactions. However, analytical results for the sixth–order NLSE member remain limited. In particular, explicit soliton and periodic solutions, along with their physical characteristics, have not been sufficiently reported. Elucidating the structure of such higher–order solitary waves provides deeper insight into pulse–shaping mechanisms and nonlinear dispersion balances in advanced optical and quantum systems.</p><p id="Par10"><bold>Objective.</bold> The main objective of this work is to derive exact closed-form solutions for the sixth-order NLSE hierarchy and analyze the corresponding nonlinear wave structures.</p><p id="Par11"><bold>Method and contributions.</bold> To achieve this, we utilize the improved modified extended tanh function method, a powerful symbolic technique for solving nonlinear evolution equations. The major contributions are summarized as follows:<list list-type="bullet"><list-item><p id="Par12">Analytical investigation of the sixth-order NLSE hierarchy and its physical relevance.</p></list-item><list-item><p id="Par13">Construction of new exact solutions, including bright, dark, and singular solitons.</p></list-item><list-item><p id="Par14">Derivation of additional periodic solutions expressed in terms of Jacobi and Weierstrass elliptic functions.</p></list-item><list-item><p id="Par15">Numerical visualization of selected solutions in 2D and 3D to illustrate propagation dynamics.</p></list-item></list></p></sec><sec id="Sec2"><title>Proposed technique</title><p id="Par16">We briefly outline the steps involved in the improved modified extended tanh function method (IMETFM) <sup><xref ref-type="bibr" rid="CR22">22</xref>–<xref ref-type="bibr" rid="CR24">24</xref></sup>.</p><p id="Par17">First, we assume that the nonlinear partial differential equation can be expressed in terms of <inline-formula id="IEq11"><tex-math id="d33e420"><?equation-image-name d33e420.gif?><?equation-image-status READY?><?equation-image-md5 d807e01f4c7ec429a451b2d23d6f370a?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d807e01f4c7e/d33e420.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\psi$$\end{document}</tex-math></inline-formula> and its partial derivatives as follows:<disp-formula id="Equ2"><label>2</label><tex-math id="d33e424"><?equation-image-name d33e424.gif?><?equation-image-status READY?><?equation-image-md5 d3ba8e48a437180b066d9e67c58d270d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d3ba8e48a437/d33e424.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \mathcal {P}(\psi ,\psi _t,\psi _x,\psi _{xt},\psi _{xx},\ldots ) = 0. \end{aligned}$$\end{document}</tex-math></disp-formula>To reduce Eq. (<xref rid="Equ2" ref-type="disp-formula">2</xref>), we assume a traveling wave transformation for the wave envelope<disp-formula id="Equ27"><tex-math id="d33e432"><?equation-image-name d33e432.gif?><?equation-image-status READY?><?equation-image-md5 c7bc4e6be95eb007c6ea13cba8bfb236?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c7bc4e6be95e/d33e432.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\psi (x,t)=\psi (\zeta ),$$\end{document}</tex-math></disp-formula>where <inline-formula id="IEq12"><tex-math id="d33e436"><?equation-image-name d33e436.gif?><?equation-image-status READY?><?equation-image-md5 ff6a127297a496d03b4f2f268a7f5d40?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ff6a127297a4/d33e436.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\zeta = x - \nu t$$\end{document}</tex-math></inline-formula> with <inline-formula id="IEq13"><tex-math id="d33e441"><?equation-image-name d33e441.gif?><?equation-image-status READY?><?equation-image-md5 fdd4c0663db434d78ba85750741258ec?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fdd4c0663db4/d33e441.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\nu \ne 0$$\end{document}</tex-math></inline-formula>, which converts the function <inline-formula id="IEq14"><tex-math id="d33e445"><?equation-image-name d33e445.gif?><?equation-image-status READY?><?equation-image-md5 d807e01f4c7ec429a451b2d23d6f370a?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d807e01f4c7e/d33e445.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\psi$$\end{document}</tex-math></inline-formula> into a function of a single-variable form. Substituting this transformation into Eq. (<xref rid="Equ2" ref-type="disp-formula">2</xref>) yields the following ordinary differential equation:<disp-formula id="Equ3"><label>3</label><tex-math id="d33e452"><?equation-image-name d33e452.gif?><?equation-image-status READY?><?equation-image-md5 46e701832abd52348bcd77630698d8f0?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/46e701832abd/d33e452.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \mathcal {P}(\psi ,\psi ^{(1)},\psi ^{(2)},\psi ^{(3)},\psi ^{(4)},\ldots ) = 0. \end{aligned}$$\end{document}</tex-math></disp-formula>The next step in applying the IMETFM is to assume that the solution of Eq. (<xref rid="Equ3" ref-type="disp-formula">3</xref>) has the finite series form<disp-formula id="Equ4"><label>4</label><tex-math id="d33e460"><?equation-image-name d33e460.gif?><?equation-image-status READY?><?equation-image-md5 4a4288c8ccb485876457f6c6e43a917c?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4a4288c8ccb4/d33e460.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (\zeta ) = \sum _{i=-N}^{N} c_i \phi ^{i}(\zeta ), \end{aligned}$$\end{document}</tex-math></disp-formula>where <inline-formula id="IEq15"><tex-math id="d33e466"><?equation-image-name d33e466.gif?><?equation-image-status READY?><?equation-image-md5 67fd45c4f14d8f00887191518d1add23?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/67fd45c4f14d/d33e466.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$c_N^2 + c_{-N}^2 \ne 0$$\end{document}</tex-math></inline-formula>, and the function <inline-formula id="IEq16"><tex-math id="d33e470"><?equation-image-name d33e470.gif?><?equation-image-status READY?><?equation-image-md5 dbad5f9d7f55b89bdfb479db045fb482?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dbad5f9d7f55/d33e470.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\phi$$\end{document}</tex-math></inline-formula> satisfies the extended Riccati equation<disp-formula id="Equ5"><label>5</label><tex-math id="d33e474"><?equation-image-name d33e474.gif?><?equation-image-status READY?><?equation-image-md5 cfdd61b32ef9f45c67fedc57f9657b48?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/cfdd61b32ef9/d33e474.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \phi ' = \sqrt{d_0 + d_1 \phi + d_2 \phi ^2 + d_3 \phi ^3 + d_4 \phi ^4}. \end{aligned}$$\end{document}</tex-math></disp-formula>The integer <italic toggle="yes">N</italic> is determined by applying the homogeneous balance principle, which balances the highest-order derivative term with the highest-order nonlinear term in Eq. (<xref rid="Equ3" ref-type="disp-formula">3</xref>).</p><p id="Par18">Substituting Eq. (<xref rid="Equ4" ref-type="disp-formula">4</xref>) into Eq. (<xref rid="Equ3" ref-type="disp-formula">3</xref>), while taking Eq. (<xref rid="Equ5" ref-type="disp-formula">5</xref>) into account, results in a polynomial in <inline-formula id="IEq17"><tex-math id="d33e496"><?equation-image-name d33e496.gif?><?equation-image-status READY?><?equation-image-md5 dbad5f9d7f55b89bdfb479db045fb482?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dbad5f9d7f55/d33e496.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\phi$$\end{document}</tex-math></inline-formula>. By equating the coefficients of the obtained polynomial in <inline-formula id="IEq18"><tex-math id="d33e500"><?equation-image-name d33e500.gif?><?equation-image-status READY?><?equation-image-md5 dbad5f9d7f55b89bdfb479db045fb482?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dbad5f9d7f55/d33e500.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\phi$$\end{document}</tex-math></inline-formula> to zero, we obtain a system of nonlinear algebraic equations involving the parameters of the original equation, the Riccati equation, and the finite series form. This system can be solved using symbolic computation software such as <italic toggle="yes">Mathematica</italic>.</p></sec><sec id="Sec3"><title>Methodology and findings</title><p id="Par19">We now apply the improved modified extended tanh function method to Eq.(<xref rid="Equ1" ref-type="disp-formula">1</xref>). Assuming the wave envelope as:<disp-formula id="Equ6"><label>6</label><tex-math id="d33e515"><?equation-image-name d33e515.gif?><?equation-image-status READY?><?equation-image-md5 4144929657dafcdc91692d7533112f05?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4144929657da/d33e515.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t) = \mathcal {R}(\zeta )e^{i(\omega t-kx+\theta )}, \end{aligned}$$\end{document}</tex-math></disp-formula>where <inline-formula id="IEq19"><tex-math id="d33e520"><?equation-image-name d33e520.gif?><?equation-image-status READY?><?equation-image-md5 ff6a127297a496d03b4f2f268a7f5d40?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ff6a127297a4/d33e520.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\zeta = x - \nu t$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq20"><tex-math id="d33e524"><?equation-image-name d33e524.gif?><?equation-image-status READY?><?equation-image-md5 aa38bcde27049dc52e1ddeec54c7a5a3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/aa38bcde2704/d33e524.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\nu$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq21"><tex-math id="d33e528"><?equation-image-name d33e528.gif?><?equation-image-status READY?><?equation-image-md5 edd700580a15597cfa6d9d815ad4671e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/edd700580a15/d33e528.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\theta$$\end{document}</tex-math></inline-formula>, <italic toggle="yes">k</italic>, <inline-formula id="IEq22"><tex-math id="d33e536"><?equation-image-name d33e536.gif?><?equation-image-status READY?><?equation-image-md5 0fa42dae2c49469603b7ff148a034c7d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/0fa42dae2c49/d33e536.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\omega$$\end{document}</tex-math></inline-formula>, represent the soliton speed, phase constant, wave number, and soliton frequency, respectively. Inserting the wave envelope assumption in Eq. (<xref rid="Equ6" ref-type="disp-formula">6</xref>) into Eq. (<xref rid="Equ1" ref-type="disp-formula">1</xref>), then splitting the obtained equation into its real,and imaginary components, then we get the following:</p><p id="Par20">The real component is given by:<disp-formula id="Equ28"><tex-math id="d33e548"><?equation-image-name d33e548.gif?><?equation-image-status READY?><?equation-image-md5 59e37779b10075db5feff305469d8288?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/59e37779b100/d33e548.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {R} \left( -2 \alpha _6 \omega ^6 + 2 \alpha _5 \omega ^5 + 2 \alpha _4 \omega ^4 - 2 \alpha _3 \omega ^3 + 2k - \omega ^2\right) + \mathcal {R}^3 \left( 60 \alpha _6 \omega ^4 - 40 \alpha _5 \omega ^3 - 24 \alpha _4 \omega ^2 + 12 \alpha _3 \omega + 2\right) +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ29"><tex-math id="d33e551"><?equation-image-name d33e551.gif?><?equation-image-status READY?><?equation-image-md5 9873e6ecb0f37ec939b227a802443965?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/9873e6ecb0f3/d33e551.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {R} \left( \mathcal {R}'\right) ^2 \left( -300 \alpha _6 \nu ^2 \omega ^2 + 100 \alpha _5 \nu ^2 \omega + 20 \alpha _4 \nu ^2\right) + 40 \alpha _6 \mathcal {R}^7 + \mathcal {R}^5 \left( -180 \alpha _6 \omega ^2 + 60 \alpha _5 \omega + 12 \alpha _4\right) +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ30"><tex-math id="d33e554"><?equation-image-name d33e554.gif?><?equation-image-status READY?><?equation-image-md5 9c16f8940a2169d47c40eb594792fe35?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/9c16f8940a21/d33e554.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$280 \alpha _6 \nu ^2 \mathcal {R}^3 \left( \mathcal {R}'\right) ^2 + \mathcal {R}'' \left( 30 \alpha _6 \nu ^2 \omega ^4 - 20 \alpha _5 \nu ^2 \omega ^3 - 12 \alpha _4 \nu ^2 \omega ^2 + 6 \alpha _3 \nu ^2 \omega + \nu ^2\right) +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ31"><tex-math id="d33e557"><?equation-image-name d33e557.gif?><?equation-image-status READY?><?equation-image-md5 5950af657ff292fe300408e17d40ca0e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/5950af657ff2/d33e557.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$84 \alpha _6 \nu ^4 \mathcal {R} \left( \mathcal {R}''\right) ^2 + 112 \alpha _6 \nu ^4 \mathcal {R} \mathcal {R}^{(3)} \mathcal {R}' + 140 \alpha _6 \nu ^4 \left( \mathcal {R}'\right) ^2 \mathcal {R}'' + \mathcal {R}^2 \mathcal {R}'' \left( -300 \alpha _6 \nu ^2 \omega ^2 + 100 \alpha _5 \nu ^2 \omega + 20 \alpha _4 \nu ^2\right) + 140 \alpha _6 \nu ^2 \mathcal {R}^4 \mathcal {R}'' +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ32"><tex-math id="d33e560"><?equation-image-name d33e560.gif?><?equation-image-status READY?><?equation-image-md5 853a38359c5e6b4c1b5614b14ef85669?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/853a38359c5e/d33e560.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$2 \alpha _6 \nu ^6 \mathcal {R}^{(6)} + \mathcal {R}^{(4)} \left( -30 \alpha _6 \nu ^4 \omega ^2 + 10 \alpha _5 \nu ^4 \omega + 2 \alpha _4 \nu ^4\right) + 28 \alpha _6 \nu ^4 \mathcal {R}^2 \mathcal {R}^{(4)} = 0.$$\end{document}</tex-math></disp-formula>The imaginary component reads:<disp-formula id="Equ33"><tex-math id="d33e564"><?equation-image-name d33e564.gif?><?equation-image-status READY?><?equation-image-md5 4d21ce9610ad58345d6d2de6c9dcd125?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4d21ce9610ad/d33e564.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\left( -12 \alpha _6 \nu \omega ^5 + 10 \alpha _5 \nu \omega ^4 + 8 \alpha _4 \nu \omega ^3 - 6 \alpha _3 \nu \omega ^2 - 2 \nu \omega + 2\right) \mathcal {R}' + \left( 240 \alpha _6 \nu \omega ^3 - 120 \alpha _5 \nu \omega ^2 - 48 \alpha _4 \nu \omega + 12 \alpha _3 \nu \right) \mathcal {R}^2 \mathcal {R}' +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ34"><tex-math id="d33e567"><?equation-image-name d33e567.gif?><?equation-image-status READY?><?equation-image-md5 3629336245efb43457a1ad829b7093ed?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/3629336245ef/d33e567.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\left( 20 \alpha _5 \nu ^3 - 120 \alpha _6 \nu ^3 \omega \right) \mathcal {R}'^3 + \left( 80 \alpha _5 \nu ^3 - 480 \alpha _6 \nu ^3 \omega \right) \mathcal {R} \mathcal {R}' \mathcal {R}'' + \left( 60 \alpha _5 \nu - 360 \alpha _6 \nu \omega \right) \mathcal {R}^4 \mathcal {R}' +$$\end{document}</tex-math></disp-formula><disp-formula id="Equ35"><tex-math id="d33e570"><?equation-image-name d33e570.gif?><?equation-image-status READY?><?equation-image-md5 90cce3e87b808799a42fee10077a5afb?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/90cce3e87b80/d33e570.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\left( 2 \alpha _5 \nu ^5 - 12 \alpha _6 \nu ^5 \omega \right) \mathcal {R}^{(5)} + \left( 40 \alpha _6 \nu ^3 \omega ^3 - 20 \alpha _5 \nu ^3 \omega ^2 - 8 \alpha _4 \nu ^3 \omega + 2 \alpha _3 \nu ^3\right) \mathcal {R}^{(3)} + \left( 20 \alpha _5 \nu ^3 - 120 \alpha _6 \nu ^3 \omega \right) \mathcal {R}^{(3)} \mathcal {R}^2 = 0.$$\end{document}</tex-math></disp-formula>Equating the coefficients of the imaginary parts to zero, we derive the following relationships:<disp-formula id="Equ36"><tex-math id="d33e575"><?equation-image-name d33e575.gif?><?equation-image-status READY?><?equation-image-md5 6a8e897fd7e86fe39a554c14b1448bf7?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/6a8e897fd7e8/d33e575.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} \nu&amp;= \frac{1250 \alpha _5^3}{216 \alpha _4^4 + 810 \alpha _3 \alpha _5 \alpha _4^2 - 72 \alpha _4^3 \mathcal {L} - 15 \alpha _5 \alpha _4 \left( 25 \alpha _5 + 14 \alpha _3 \mathcal {L}\right) + 25 \alpha _5^2 \left( 18 \alpha _3^2 + 5 \mathcal {L}\right) }, \\ \omega&amp;= \frac{\mathcal {L} - 3 \alpha _4}{10 \alpha _5}, \\ \alpha _6&amp;= \frac{\alpha _5 (\mathcal {L} + 3 \alpha _4)}{9 \alpha _3}, \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>where <inline-formula id="IEq23"><tex-math id="d33e579"><?equation-image-name d33e579.gif?><?equation-image-status READY?><?equation-image-md5 d9126404cbc69632cedfc28e29070441?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d9126404cbc6/d33e579.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {L} = \sqrt{9 \alpha _4^2 + 15 \alpha _3 \alpha _5}$$\end{document}</tex-math></inline-formula>.</p><p id="Par21">Applying the balancing principle by balancing the highest order derivative term <inline-formula id="IEq24"><tex-math id="d33e585"><?equation-image-name d33e585.gif?><?equation-image-status READY?><?equation-image-md5 880f3b96540acdf38b73b9c698b0a399?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/880f3b96540a/d33e585.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {R}^{(6)}$$\end{document}</tex-math></inline-formula> with the highest nonlinear term <inline-formula id="IEq25"><tex-math id="d33e589"><?equation-image-name d33e589.gif?><?equation-image-status READY?><?equation-image-md5 f30e7b21642f067e833e0b342119d9a4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/f30e7b21642f/d33e589.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {R}^7$$\end{document}</tex-math></inline-formula> in the real part, we obtain that <inline-formula id="IEq26"><tex-math id="d33e593"><?equation-image-name d33e593.gif?><?equation-image-status READY?><?equation-image-md5 4a00f63ca6267bcd5d1bf846f89c5fc8?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4a00f63ca626/d33e593.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$N = 1$$\end{document}</tex-math></inline-formula>. Consequently, we express <inline-formula id="IEq27"><tex-math id="d33e597"><?equation-image-name d33e597.gif?><?equation-image-status READY?><?equation-image-md5 58c791573a0216db962864449a605740?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/58c791573a02/d33e597.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\mathcal {R}(\zeta )$$\end{document}</tex-math></inline-formula> as:<disp-formula id="Equ7"><label>7</label><tex-math id="d33e601"><?equation-image-name d33e601.gif?><?equation-image-status READY?><?equation-image-md5 19e1d3bf4c4199326699d4ad99c77860?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/19e1d3bf4c41/d33e601.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \mathcal {R}(\zeta ) = c_0 + c_1 \phi + c_{-1} \phi ^{-1}. \end{aligned}$$\end{document}</tex-math></disp-formula>Substituting Eq. (<xref rid="Equ7" ref-type="disp-formula">7</xref>) into the real part and considering the extended Riccati equation in Eq. (<xref rid="Equ5" ref-type="disp-formula">5</xref>), we obtain a polynomial in <inline-formula id="IEq28"><tex-math id="d33e613"><?equation-image-name d33e613.gif?><?equation-image-status READY?><?equation-image-md5 dbad5f9d7f55b89bdfb479db045fb482?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dbad5f9d7f55/d33e613.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\phi$$\end{document}</tex-math></inline-formula>. By equating the coefficients of this polynomial to zero, we derive different algebraic systems based on the values of <inline-formula id="IEq29"><tex-math id="d33e617"><?equation-image-name d33e617.gif?><?equation-image-status READY?><?equation-image-md5 c0e87d750f04f333f94700266e593a9d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c0e87d750f04/d33e617.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0, d_1, d_2, d_3, d_4$$\end{document}</tex-math></inline-formula>, which are then solved using Mathematica.</p><sec id="Sec4"><title>Localized solitons</title><p id="Par22">When <inline-formula id="IEq30"><tex-math id="d33e625"><?equation-image-name d33e625.gif?><?equation-image-status READY?><?equation-image-md5 bbd5ce6b340d85340e5a31884a06683e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/bbd5ce6b340d/d33e625.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_0=d_1=d_3=0\}$$\end{document}</tex-math></inline-formula>, we attain the following result.<disp-formula id="Equ37"><tex-math id="d33e629"><?equation-image-name d33e629.gif?><?equation-image-status READY?><?equation-image-md5 d67ff33e1d7e41f57e98350416998933?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d67ff33e1d7e/d33e629.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= \sqrt{-d_4}\,\nu , \qquad c_0 = c_{-1} = 0, \\ k&amp;= \tfrac{1}{2}\Big [ \omega ^{2} - 2\nu ^{6} d_{2}^{3}\alpha _{6} + 2\omega ^{3}\!\big (\alpha _{3} - \omega (\alpha _{4} + \omega \alpha _{5}) + \omega ^{3}\alpha _{6}\big ) \\&amp;\quad - \nu ^{2} d_{2}\!\big (1 + 6\omega \alpha _{3} - 4\omega ^{2}(3\alpha _{4} + 5\omega \alpha _{5}) + 30\omega ^{4}\alpha _{6}\big ) - 2\nu ^{4} d_{2}^{2}\!\big (\alpha _{4} + 5\omega (\alpha _{5} - 3\omega \alpha _{6})\big ) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, the preceding solution set admits the following bright soliton.<disp-formula id="Equ8"><label>8</label><tex-math id="d33e633"><?equation-image-name d33e633.gif?><?equation-image-status READY?><?equation-image-md5 6e9d4327206d8a13df575ca98a30a4ab?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/6e9d4327206d/d33e633.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{d_2} \text {sech}\left( \sqrt{d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4-72 \mathcal {L} \alpha _4^3+810 \alpha _3 \alpha _5 \alpha _4^2-15 \alpha _5 \left( 14 \mathcal {L} \alpha _3+25 \alpha _5\right) \alpha _4+25 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \alpha _5^2}, \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq31"><tex-math id="d33e638"><?equation-image-name d33e638.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e638.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq32"><tex-math id="d33e642"><?equation-image-name d33e642.gif?><?equation-image-status READY?><?equation-image-md5 c0fcebbe7c98cfefe1cd6783c96bdee1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c0fcebbe7c98/d33e642.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2}{4 d_4}\}$$\end{document}</tex-math></inline-formula>, we attain the following result.<disp-formula id="Equ38"><tex-math id="d33e647"><?equation-image-name d33e647.gif?><?equation-image-status READY?><?equation-image-md5 39efd19630cc50da5ab6bbe732e5ff31?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/39efd19630cc/d33e647.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= \sqrt{-d_4}\,\nu , \qquad c_0 = c_{-1} = 0, \\ k&amp;= \tfrac{1}{2}\Big ( -5\nu ^6 d_2^3 \alpha _6 - 3\nu ^4 d_2^2 \big (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6)\big ) \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ). \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, We get the following dark soliton.<disp-formula id="Equ9"><label>9</label><tex-math id="d33e651"><?equation-image-name d33e651.gif?><?equation-image-status READY?><?equation-image-md5 bd80f0643d33b5b210b9af424529a878?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/bd80f0643d33/d33e651.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{625 \sqrt{2} \alpha _5^3 \sqrt{d_2} \tanh \left( \frac{\sqrt{-d_2} \zeta }{\sqrt{2}}\right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4-72 \mathcal {L} \alpha _4^3+810 \alpha _3 \alpha _5 \alpha _4^2-15 \alpha _5 \left( 14 \mathcal {L} \alpha _3+25 \alpha _5\right) \alpha _4+25 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \alpha _5^2}, \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq33"><tex-math id="d33e656"><?equation-image-name d33e656.gif?><?equation-image-status READY?><?equation-image-md5 2c273ff65f6349583a949db2c5fe9dd3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/2c273ff65f63/d33e656.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_0=d_1=0,\;\;d_2= \frac{d_3^2}{4 d_4}\}$$\end{document}</tex-math></inline-formula>, we get the following result.<disp-formula id="Equ39"><tex-math id="d33e660"><?equation-image-name d33e660.gif?><?equation-image-status READY?><?equation-image-md5 fddd076b2c756ea39a6f63e112b73866?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fddd076b2c75/d33e660.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= \frac{i d_3 \nu }{4 \sqrt{d_4}}, \quad c_1 = i \sqrt{d_4}\, \nu , \quad c_{-1} = 0, \\ k&amp;= \frac{1}{1024 d_4^3} \Big [ 5 \alpha _6 d_3^6 \nu ^6 - 24 d_4 d_3^4 \nu ^4 \!\left( 5\omega (\alpha _5 - 3 \alpha _6 \omega ) + \alpha _4 \right) \\&amp;\quad + 64 d_4^2 d_3^2 \nu ^2 \!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1 \right) \\&amp;\quad + 512 d_4^3 \omega ^2 \!\left( 2 \omega (\alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3) + 1 \right) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, the preceding result yields the following dark soliton.<disp-formula id="Equ10"><label>10</label><tex-math id="d33e664"><?equation-image-name d33e664.gif?><?equation-image-status READY?><?equation-image-md5 282e4352636af9494a0dd8dcbd1a3357?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/282e4352636a/d33e664.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= -\frac{625 i \alpha _5^3 \left( 2 \sqrt{d_2 d_4} \left( \tanh \left( \frac{\sqrt{d_2} \zeta }{2}\right) +1\right) +d_3\right) \times e^{i (\theta -k x+t \omega )}}{2 \sqrt{d_4} \left( -216 \alpha _4^4-810 \alpha _3 \alpha _5 \alpha _4^2+72 \alpha _4^3 \mathcal {L}+15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) -25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec><sec id="Sec5"><title>Singular periodic solutions and singular solitons</title><p id="Par23">When <inline-formula id="IEq34"><tex-math id="d33e672"><?equation-image-name d33e672.gif?><?equation-image-status READY?><?equation-image-md5 8f8e6b17bb49d5d5ea24049897082dae?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f8e6b17bb49/d33e672.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_3=d_4=d_1=0\}$$\end{document}</tex-math></inline-formula>, we get the following solution set :<disp-formula id="Equ40"><tex-math id="d33e676"><?equation-image-name d33e676.gif?><?equation-image-status READY?><?equation-image-md5 1d2dd1c9d3b3591c6bb22abb63eb51fb?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/1d2dd1c9d3b3/d33e676.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= c_1 = 0, \quad c_{-1} = \sqrt{-d_0}\,\nu , \\ k&amp;= \frac{1}{2}\Big [ 2\omega ^3\!\left( \alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3\right) - 2\alpha _6 d_2^3 \nu ^6 - 2 d_2^2 \nu ^4 \!\left( 5\omega (\alpha _5 - 3\alpha _6 \omega ) + \alpha _4\right) \\&amp;\quad - d_2 \nu ^2 \!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1\right) + \omega ^2 \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Consequently, we obtain the following singular periodic solution and singular soliton, respectively.<disp-formula id="Equ11"><label>11</label><tex-math id="d33e680"><?equation-image-name d33e680.gif?><?equation-image-status READY?><?equation-image-md5 2feedcf85f08671b99fba2edd1c75254?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/2feedcf85f08/d33e680.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{d_2} \csc \left( \sqrt{-d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )} }{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }, \end{aligned}$$\end{document}</tex-math></disp-formula><disp-formula id="Equ12"><label>12</label><tex-math id="d33e684"><?equation-image-name d33e684.gif?><?equation-image-status READY?><?equation-image-md5 94f7341d61c0922c35e41c6761113dc2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/94f7341d61c0/d33e684.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{-d_2} \text {csch}\left( \sqrt{-d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )} }{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5\mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq35"><tex-math id="d33e689"><?equation-image-name d33e689.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e689.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq36"><tex-math id="d33e693"><?equation-image-name d33e693.gif?><?equation-image-status READY?><?equation-image-md5 c0fcebbe7c98cfefe1cd6783c96bdee1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c0fcebbe7c98/d33e693.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2}{4 d_4}\}$$\end{document}</tex-math></inline-formula>, we obtain the following results.</p><sec id="Sec6"><title>Result 1</title><p id="Par24"><disp-formula id="Equ41"><tex-math id="d33e700"><?equation-image-name d33e700.gif?><?equation-image-status READY?><?equation-image-md5 85735ed262cd6967292b660ba94473da?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/85735ed262cd/d33e700.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_{-1}&amp;= \frac{i d_2 \nu }{2\sqrt{d_4}}, \quad c_0 = c_1 = 0, \\ k&amp;= \tfrac{1}{2}\Big [ -5\nu ^6 d_2^3 \alpha _6 - 3\nu ^4 d_2^2(\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6)) + \omega ^2\!\big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) \\&amp;\quad + \nu ^2 d_2\!\big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Consequently, the previous result admits the following singular periodic solution, and singular soliton, respectively.<disp-formula id="Equ13"><label>13</label><tex-math id="d33e704"><?equation-image-name d33e704.gif?><?equation-image-status READY?><?equation-image-md5 35113c6414affd5aad1117d98f0b079e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/35113c6414af/d33e704.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{625 i \sqrt{2} \alpha _5^3 d_2 \cot \left( \frac{\sqrt{d_2} \zeta }{\sqrt{2}}\right) \times e^{i (\theta -k x+t \omega )}}{\sqrt{d_2} \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }, \end{aligned}$$\end{document}</tex-math></disp-formula><disp-formula id="Equ14"><label>14</label><tex-math id="d33e708"><?equation-image-name d33e708.gif?><?equation-image-status READY?><?equation-image-md5 b986df52b2ceb188c98a2f56855af058?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b986df52b2ce/d33e708.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{625 \sqrt{2} \alpha _5^3 d_2 \coth \left( \frac{\sqrt{-d_2} \zeta }{\sqrt{2}}\right) \times e^{i (\theta -k x+t \omega )}}{\sqrt{d_2} \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec><sec id="Sec7"><title>Result 2</title><p id="Par25"><disp-formula id="Equ42"><tex-math id="d33e715"><?equation-image-name d33e715.gif?><?equation-image-status READY?><?equation-image-md5 4843df27a2962530def24ee3f87c7aa9?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4843df27a296/d33e715.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= 0, \quad c_1 = i\sqrt{d_4}\,\nu , \quad c_{-1} = \frac{i d_2 \nu }{2\sqrt{d_4}}, \\ k&amp;= \tfrac{1}{2}\Big [ -5\nu ^6 d_2^3 \alpha _6 - 3\nu ^4 d_2^2\!\big (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6)\big ) \\&amp;\quad + \omega ^2\!\big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2\!\big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, we associate with the preceding solution set, the following singular soliton, and singular periodic solution, respectively.<disp-formula id="Equ15"><label>15</label><tex-math id="d33e719"><?equation-image-name d33e719.gif?><?equation-image-status READY?><?equation-image-md5 42ba6d878980cfbce1f5d367ab7ca244?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/42ba6d878980/d33e719.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \sqrt{2} \alpha _5^3 \sqrt{d_2} \text {csch}\left( \sqrt{2} \sqrt{-d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )}}{-216 \alpha _4^4-810 \alpha _3 \alpha _5 \alpha _4^2+72 \alpha _4^3 \mathcal {L}+15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) -25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }, \end{aligned}$$\end{document}</tex-math></disp-formula><disp-formula id="Equ16"><label>16</label><tex-math id="d33e723"><?equation-image-name d33e723.gif?><?equation-image-status READY?><?equation-image-md5 be122588afc5bac55555ce7ca2cb1525?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/be122588afc5/d33e723.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 i \sqrt{2} \alpha _5^3 \sqrt{d_2} \csc \left( \sqrt{2} \sqrt{d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq37"><tex-math id="d33e728"><?equation-image-name d33e728.gif?><?equation-image-status READY?><?equation-image-md5 bbd5ce6b340d85340e5a31884a06683e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/bbd5ce6b340d/d33e728.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_0=d_1=d_3=0\}$$\end{document}</tex-math></inline-formula>, we attain the following result.<disp-formula id="Equ43"><tex-math id="d33e732"><?equation-image-name d33e732.gif?><?equation-image-status READY?><?equation-image-md5 d67ff33e1d7e41f57e98350416998933?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d67ff33e1d7e/d33e732.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= \sqrt{-d_4}\,\nu , \qquad c_0 = c_{-1} = 0, \\ k&amp;= \tfrac{1}{2}\Big [ \omega ^{2} - 2\nu ^{6} d_{2}^{3}\alpha _{6} + 2\omega ^{3}\!\big (\alpha _{3} - \omega (\alpha _{4} + \omega \alpha _{5}) + \omega ^{3}\alpha _{6}\big ) \\&amp;\quad - \nu ^{2} d_{2}\!\big (1 + 6\omega \alpha _{3} - 4\omega ^{2}(3\alpha _{4} + 5\omega \alpha _{5}) + 30\omega ^{4}\alpha _{6}\big ) - 2\nu ^{4} d_{2}^{2}\!\big (\alpha _{4} + 5\omega (\alpha _{5} - 3\omega \alpha _{6})\big ) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, the following singular periodic solution is obtained<disp-formula id="Equ17"><label>17</label><tex-math id="d33e736"><?equation-image-name d33e736.gif?><?equation-image-status READY?><?equation-image-md5 665381cd49c7b2a4520a77813d48e1ec?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/665381cd49c7/d33e736.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{d_2} \sec \left( \sqrt{-d_2} \zeta \right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq38"><tex-math id="d33e742"><?equation-image-name d33e742.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e742.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq39"><tex-math id="d33e746"><?equation-image-name d33e746.gif?><?equation-image-status READY?><?equation-image-md5 c0fcebbe7c98cfefe1cd6783c96bdee1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c0fcebbe7c98/d33e746.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2}{4 d_4}\}$$\end{document}</tex-math></inline-formula>, the following result is obtained.<disp-formula id="Equ44"><tex-math id="d33e750"><?equation-image-name d33e750.gif?><?equation-image-status READY?><?equation-image-md5 39efd19630cc50da5ab6bbe732e5ff31?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/39efd19630cc/d33e750.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= \sqrt{-d_4}\,\nu , \qquad c_0 = c_{-1} = 0, \\ k&amp;= \tfrac{1}{2}\Big ( -5\nu ^6 d_2^3 \alpha _6 - 3\nu ^4 d_2^2 \big (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6)\big ) \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ). \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, the latter admits the following singular periodic solution.<disp-formula id="Equ18"><label>18</label><tex-math id="d33e754"><?equation-image-name d33e754.gif?><?equation-image-status READY?><?equation-image-md5 90a3ab348600fe48c51ae3efd0b43660?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/90a3ab348600/d33e754.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{625 \sqrt{2} \alpha _5^3 \sqrt{-d_2} \tan \left( \frac{\sqrt{d_2} \zeta }{\sqrt{2}}\right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4-72 \mathcal {L} \alpha _4^3+810 \alpha _3 \alpha _5 \alpha _4^2-15 \alpha _5 \left( 14 \mathcal {L} \alpha _3+25 \alpha _5\right) \alpha _4+25 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \alpha _5^2}. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec></sec><sec id="Sec8"><title>Jacobi elliptic functions and weierstrass solution</title><p id="Par26">When <inline-formula id="IEq40"><tex-math id="d33e762"><?equation-image-name d33e762.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e762.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq41"><tex-math id="d33e766"><?equation-image-name d33e766.gif?><?equation-image-status READY?><?equation-image-md5 498963459e520d6fbc9728e9c9f1dcd0?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/498963459e52/d33e766.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2 m^2 \left( 1-m^2\right) }{d_4 \left( 2 m^2-1\right) ^2}\}$$\end{document}</tex-math></inline-formula>, we get the following results.</p><sec id="Sec9"><title>Result 1</title><p id="Par27"><disp-formula id="Equ45"><tex-math id="d33e773"><?equation-image-name d33e773.gif?><?equation-image-status READY?><?equation-image-md5 16703a7d177674ccaa3e4b0a1cfd105f?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/16703a7d1776/d33e773.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= \sqrt{-d_4}\,\nu , \quad c_0 = c_{-1} = 0, \\ k&amp;= \omega ^3\!\left( \alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3\right) - \frac{1}{2} d_2 \nu ^2\!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1\right) \\&amp;\quad + \frac{\alpha _6 d_2^3 (2 m^4 - 2 m^2 - 1) \nu ^6}{(1 - 2 m^2)^2} - \frac{d_2^2 (2 m^4 - 2 m^2 + 1) \nu ^4 \left[ 5 \omega (\alpha _5 - 3 \alpha _6 \omega ) + \alpha _4\right] }{(1 - 2 m^2)^2} + \frac{\omega ^2}{2}, \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>which admits the following Jacobi elliptic function solution.<disp-formula id="Equ19"><label>19</label><tex-math id="d33e777"><?equation-image-name d33e777.gif?><?equation-image-status READY?><?equation-image-md5 ef6c342ebb090f18c3f94199a144dd93?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ef6c342ebb09/d33e777.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{\frac{d_2 m^2}{2 m^2-1}} \text {cn}\left( \left. \zeta \sqrt{\frac{d_2}{2 m^2-1}}\right| m\right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec><sec id="Sec10"><title>Result 2</title><p id="Par28"><disp-formula id="Equ46"><tex-math id="d33e784"><?equation-image-name d33e784.gif?><?equation-image-status READY?><?equation-image-md5 98a0f0a9de4e3e4b8e2e0c7facee7822?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/98a0f0a9de4e/d33e784.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= c_0 = 0, \quad c_{-1} = \frac{i d_2 m \sqrt{m^2-1} \,\nu }{\sqrt{-4 d_4 m^4 + 4 d_4 m^2 - d_4}}, \\ k&amp;= \omega ^3\!\left( \alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3\right) - \frac{1}{2} d_2 \nu ^2\!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1\right) \\&amp;\quad + \frac{\alpha _6 d_2^3 (2 m^4 - 2 m^2 - 1) \nu ^6}{(1 - 2 m^2)^2} - \frac{d_2^2 (2 m^4 - 2 m^2 + 1) \nu ^4 \left[ 5 \omega (\alpha _5 - 3 \alpha _6 \omega ) + \alpha _4\right] }{(1 - 2 m^2)^2} + \frac{\omega ^2}{2}, \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>which admits another Jacobi elliptic solution.<disp-formula id="Equ20"><label>20</label><tex-math id="d33e788"><?equation-image-name d33e788.gif?><?equation-image-status READY?><?equation-image-md5 14e5028463e0a368b033e83ceb632a51?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/14e5028463e0/d33e788.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 d_2 \sqrt{1-m^2} \text {cn}\left( \left. \zeta \sqrt{\frac{d_2}{2 m^2-1}}\right| m\right) ^{-1} \times e^{i (\theta -k x+t \omega )}}{\sqrt{d_2 \left( 2 m^2-1\right) } \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq42"><tex-math id="d33e793"><?equation-image-name d33e793.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e793.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq43"><tex-math id="d33e797"><?equation-image-name d33e797.gif?><?equation-image-status READY?><?equation-image-md5 944e3d3c6b26899077e729ca5ec791bf?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/944e3d3c6b26/d33e797.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2 \left( 1-m^2\right) }{d_4 \left( 2-m^2\right) ^2}\}$$\end{document}</tex-math></inline-formula>, we get the following results.</p></sec><sec id="Sec11"><title>Result 1</title><p id="Par29"><disp-formula id="Equ47"><tex-math id="d33e804"><?equation-image-name d33e804.gif?><?equation-image-status READY?><?equation-image-md5 cf9e3e47c10f8446015d88b520bec0da?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/cf9e3e47c10f/d33e804.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= c_{-1} = 0, \quad c_1 = \sqrt{-d_4}\,\nu , \\ k&amp;= \frac{1}{2}\Big [ -\frac{2(10 - 10 m^2 + m^4)\,\nu ^6 d_2^3 \alpha _6}{(-2 + m^2)^2} - \frac{2(6 - 6 m^2 + m^4)\,\nu ^4 d_2^2 (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6))}{(-2 + m^2)^2} \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, we obtain the following Jacobi elliptic function solution.<disp-formula id="Equ21"><label>21</label><tex-math id="d33e808"><?equation-image-name d33e808.gif?><?equation-image-status READY?><?equation-image-md5 188a70d19566a4d545c4ae7e92902c76?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/188a70d19566/d33e808.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{\frac{m^2}{2-m^2}} \text {dn}\left( \left. \zeta \sqrt{\frac{d_2}{2-m^2}}\right| m\right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec><sec id="Sec12"><title>Result 2</title><p id="Par30"><disp-formula id="Equ48"><tex-math id="d33e815"><?equation-image-name d33e815.gif?><?equation-image-status READY?><?equation-image-md5 b04356d10882195d8b1a17154079077f?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b04356d10882/d33e815.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= c_0 = 0, \quad c_{-1} = \frac{i d_2 m \sqrt{m^2-1}\,\nu }{\sqrt{-4 d_4 m^4 + 4 d_4 m^2 - d_4}}, \\ k&amp;= \frac{1}{2}\Big [ -\frac{2(10 - 10 m^2 + m^4)\,\nu ^6 d_2^3 \alpha _6}{(-2 + m^2)^2} - \frac{2(6 - 6 m^2 + m^4)\,\nu ^4 d_2^2 (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6))}{(-2 + m^2)^2} \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ], \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>which admits another Jacobi elliptic function solution.<disp-formula id="Equ22"><label>22</label><tex-math id="d33e819"><?equation-image-name d33e819.gif?><?equation-image-status READY?><?equation-image-md5 497eec4b92a524dca08d250853db46c2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/497eec4b92a5/d33e819.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 d_2 \sqrt{1-m^2}\text {dn}\left( \left. \zeta \sqrt{\frac{d_2}{2-m^2}}\right| m\right) ^{-1}\times e^{i (\theta -k x+t \omega )}}{m \sqrt{2-m^2} \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq44"><tex-math id="d33e824"><?equation-image-name d33e824.gif?><?equation-image-status READY?><?equation-image-md5 fb449cde04d8fb749b2fc593f8768137?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fb449cde04d8/d33e824.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{ d_1=d_3=0$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq45"><tex-math id="d33e828"><?equation-image-name d33e828.gif?><?equation-image-status READY?><?equation-image-md5 15738076d1f3a3d28ddd2574a29abcad?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/15738076d1f3/d33e828.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_0=\frac{d_2^2 m^2}{d_4 \left( m^2+1\right) ^2}\}$$\end{document}</tex-math></inline-formula>, we get the following results.</p></sec><sec id="Sec13"><title>Result 1</title><p id="Par31"><disp-formula id="Equ49"><tex-math id="d33e835"><?equation-image-name d33e835.gif?><?equation-image-status READY?><?equation-image-md5 0b3c242be81b78df10d88479e22f515f?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/0b3c242be81b/d33e835.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= c_{-1} = 0, \quad c_1 = \sqrt{-d_4}\,\nu , \\ k&amp;= \frac{1}{2}\Big [ -\frac{2(1 + 8 m^2 + m^4)\,\nu ^6 d_2^3 \alpha _6}{(1 + m^2)^2} - \frac{2(1 + 4 m^2 + m^4)\,\nu ^4 d_2^2 (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6))}{(1 + m^2)^2} \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ], \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>which reads the following Jacobi elliptic solution.<disp-formula id="Equ23"><label>23</label><tex-math id="d33e839"><?equation-image-name d33e839.gif?><?equation-image-status READY?><?equation-image-md5 3514786b5e46a4d5861c2ffbbc062d56?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/3514786b5e46/d33e839.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 \sqrt{\frac{d_2 m^2}{m^2+1}} \text {sn}\left( \left. \zeta \sqrt{-\frac{d_2}{m^2+1}}\right| m\right) \times e^{i (\theta -k x+t \omega )}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec><sec id="Sec14"><title>Result 2</title><p id="Par32"><disp-formula id="Equ50"><tex-math id="d33e846"><?equation-image-name d33e846.gif?><?equation-image-status READY?><?equation-image-md5 48207ad482bdbcfd26db36e47e8d3e6c?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/48207ad482bd/d33e846.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_0&amp;= c_1 = 0, \quad c_{-1} = \frac{d_2 m \nu }{\sqrt{-d_4 m^4 - 2 d_4 m^2 - d_4}}, \\ k&amp;= \frac{1}{2}\Big [ -\frac{2(1 + 8 m^2 + m^4)\,\nu ^6 d_2^3 \alpha _6}{(1 + m^2)^2} - \frac{2(1 + 4 m^2 + m^4)\,\nu ^4 d_2^2 (\alpha _4 + 5\omega (\alpha _5 - 3\omega \alpha _6))}{(1 + m^2)^2} \\&amp;\quad + \omega ^2 \big (1 + 2\omega (\alpha _3 - \omega (\alpha _4 + \omega \alpha _5) + \omega ^3\alpha _6)\big ) + \nu ^2 d_2 \big (-1 - 6\omega \alpha _3 + 2\omega ^2(6\alpha _4 + 5\omega (2\alpha _5 - 3\omega \alpha _6))\big ) \Big ], \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>which derive the following Jacobi elliptic solution.<disp-formula id="Equ24"><label>24</label><tex-math id="d33e850"><?equation-image-name d33e850.gif?><?equation-image-status READY?><?equation-image-md5 a37249e1cb4591c94b47e1c2df5004ed?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/a37249e1cb45/d33e850.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{1250 \alpha _5^3 d_2\text {sn}\left( \left. \zeta \sqrt{-\frac{d_2}{m^2+1}}\right| m\right) ^{-1}\times e^{i (\theta -k x+t \omega )}}{\left( \sqrt{\frac{d_2 \left( m^2+1\right) }{d_4}} \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula>When <inline-formula id="IEq46"><tex-math id="d33e855"><?equation-image-name d33e855.gif?><?equation-image-status READY?><?equation-image-md5 43162f92436256e808f95b17ed691324?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/43162f924362/d33e855.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_2=d_4=0\}$$\end{document}</tex-math></inline-formula>, the following result is revealed.<disp-formula id="Equ51"><tex-math id="d33e859"><?equation-image-name d33e859.gif?><?equation-image-status READY?><?equation-image-md5 28ef16728c8bfdd9a92db0715277ba28?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/28ef16728c8b/d33e859.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_{-1}&amp;= \sqrt{-d_0}\, \nu , \quad c_1 = 0, \\ d_3&amp;= \frac{8 c_0^3}{\sqrt{-d_0}\, \nu ^3}, \quad d_1 = -\frac{4 c_0 \sqrt{-d_0}}{\nu }, \\ k&amp;= \omega ^3\!\left( \alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3\right) - 3 c_0^2\!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1\right) \\&amp;\quad - 46 c_0^4\!\left( 5 \omega (\alpha _5 - 3 \alpha _6 \omega ) + \alpha _4\right) - 396 \alpha _6 c_0^6 + \frac{\omega ^2}{2}. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, we attain the following Weierstrass elliptic function solution.<disp-formula id="Equ25"><label>25</label><tex-math id="d33e863"><?equation-image-name d33e863.gif?><?equation-image-status READY?><?equation-image-md5 27a02cab5bc2123e9232a0a4af682ce2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/27a02cab5bc2/d33e863.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \left( c_0+\frac{1250 i \alpha _5^3 \sqrt{d_0}\wp \left( \zeta ;-\frac{4 d_1}{d_3},-\frac{4 d_0}{d_3}\right) ^{-1}}{216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) } \right) \times e^{i (\theta -k x+t \omega )} . \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec></sec><sec id="Sec15"><title>Exponential solution</title><p id="Par33">When <inline-formula id="IEq47"><tex-math id="d33e871"><?equation-image-name d33e871.gif?><?equation-image-status READY?><?equation-image-md5 0e219d25331fcf5071980e2604edb00e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/0e219d25331f/d33e871.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\{d_3=d_4=0, d_0=\frac{d_1^2}{4 d_2}\}$$\end{document}</tex-math></inline-formula>, the following result is obtained.<disp-formula id="Equ52"><tex-math id="d33e875"><?equation-image-name d33e875.gif?><?equation-image-status READY?><?equation-image-md5 1b7ccf967b48fcbf54f3c1f5bd5a91a8?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/1b7ccf967b48/d33e875.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \left\{ \begin{aligned} c_1&amp;= 0, \quad c_0 = \frac{1}{2} i \sqrt{d_2}\, \nu , \quad c_{-1} = \frac{i d_1 \nu }{2 \sqrt{d_2}}, \\ k&amp;= \frac{1}{16}\Big [ 8 \omega ^2 \!\left( 2\omega (\alpha _6 \omega ^3 - \omega (\alpha _5 \omega + \alpha _4) + \alpha _3) + 1 \right) + 5 \alpha _6 d_2^3 \nu ^6 \\&amp;\quad - 6 d_2^2 \nu ^4 \!\left( 5\omega (\alpha _5 - 3 \alpha _6 \omega ) + \alpha _4 \right) + 4 d_2 \nu ^2 \!\left( 30 \alpha _6 \omega ^4 - 4 \omega ^2 (5 \alpha _5 \omega + 3 \alpha _4) + 6 \alpha _3 \omega + 1 \right) \Big ]. \end{aligned} \right. \end{aligned}$$\end{document}</tex-math></disp-formula>Then, We obtain the following exponential solution.<disp-formula id="Equ26"><label>26</label><tex-math id="d33e879"><?equation-image-name d33e879.gif?><?equation-image-status READY?><?equation-image-md5 d578fff1dda616ae942cc175281c8188?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d578fff1dda6/d33e879.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\begin{aligned} \psi (x,t)= \frac{625 i \alpha _5^3 \sqrt{d_2} \left( 2 d_2 e^{\sqrt{d_2} \zeta }+d_1\right) \left( d_1-2 d_2 e^{\sqrt{d_2} \zeta }\right) ^{-1}\times e^{i (\theta -k x+t \omega )}}{ \left( 216 \alpha _4^4+810 \alpha _3 \alpha _5 \alpha _4^2-72 \alpha _4^3 \mathcal {L}-15 \alpha _5 \alpha _4 \left( 25 \alpha _5+14 \alpha _3 \mathcal {L}\right) +25 \alpha _5^2 \left( 18 \alpha _3^2+5 \mathcal {L}\right) \right) }. \end{aligned}$$\end{document}</tex-math></disp-formula></p></sec></sec><sec id="Sec16"><title>Results and discussion</title><p id="Par34">This section presents the dynamical behavior of the obtained solutions for the sixth–order integrable NLSE. Five classes of nonlinear wave structures are examined: bright solitons, dark solitons, singular solitons, singular periodic solutions, and Jacobi elliptic solutions. In the case of the Jacobi elliptic solution, the relation and transition between the periodic and localized (soliton) structures are demonstrated. For each case, both 2D and 3D plots illustrate the evolution of the wave amplitude over space and time, confirming the analytical results.</p><sec id="Sec17"><title>Bright soliton dynamics</title><p id="Par35">Figure <xref rid="Fig1" ref-type="fig">1</xref> shows the bright soliton solution defined by Eq. (<xref rid="Equ8" ref-type="disp-formula">8</xref>), represented in both two and three dimensions under identical parameter settings: <inline-formula id="IEq48"><tex-math id="d33e897"><?equation-image-name d33e897.gif?><?equation-image-status READY?><?equation-image-md5 4433f6708020320fce57d0ead98659d5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4433f6708020/d33e897.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = 3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq49"><tex-math id="d33e901"><?equation-image-name d33e901.gif?><?equation-image-status READY?><?equation-image-md5 4f3e1eb8f09ad8876423a580a2af1101?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4f3e1eb8f09a/d33e901.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq50"><tex-math id="d33e905"><?equation-image-name d33e905.gif?><?equation-image-status READY?><?equation-image-md5 8f0bde63b1f996d26ad896c5944661a1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f0bde63b1f9/d33e905.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 2$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq51"><tex-math id="d33e910"><?equation-image-name d33e910.gif?><?equation-image-status READY?><?equation-image-md5 50cefe47ff9ea93a1839d92992a4e96b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/50cefe47ff9e/d33e910.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = 1$$\end{document}</tex-math></inline-formula>, and shown at three different snapshots. Bright solitons retain a localized peak as they propagate, owing to the balance between dispersion and nonlinear self-focusing. The soliton maintains its amplitude and width for all plotted time instances <inline-formula id="IEq52"><tex-math id="d33e914"><?equation-image-name d33e914.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e914.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t = 1, 5, 10$$\end{document}</tex-math></inline-formula>, demonstrating stable and localized propagation.<fig id="Fig1" position="float" orientation="portrait"><label>Fig. 1</label><caption><p>Bright soliton solution of Eq. (<xref rid="Equ8" ref-type="disp-formula">8</xref>) visualized in two and three dimensions under identical parameter settings: <inline-formula id="IEq53"><tex-math id="d33e927"><?equation-image-name d33e927.gif?><?equation-image-status READY?><?equation-image-md5 4433f6708020320fce57d0ead98659d5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4433f6708020/d33e927.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = 3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq54"><tex-math id="d33e931"><?equation-image-name d33e931.gif?><?equation-image-status READY?><?equation-image-md5 4f3e1eb8f09ad8876423a580a2af1101?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/4f3e1eb8f09a/d33e931.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq55"><tex-math id="d33e935"><?equation-image-name d33e935.gif?><?equation-image-status READY?><?equation-image-md5 8f0bde63b1f996d26ad896c5944661a1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f0bde63b1f9/d33e935.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 2$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq56"><tex-math id="d33e939"><?equation-image-name d33e939.gif?><?equation-image-status READY?><?equation-image-md5 50cefe47ff9ea93a1839d92992a4e96b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/50cefe47ff9e/d33e939.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = 1$$\end{document}</tex-math></inline-formula>, and in three different time instances <inline-formula id="IEq57"><tex-math id="d33e944"><?equation-image-name d33e944.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e944.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t=1,5,10$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO1" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig1_HTML.jpg"><?image-name 41598_2025_30797_Fig1_HTML.jpg?><?image-size 33620?><?image-md5 d9e44e5ca2d6236d62aa8fc89eb22157?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 667?><?image-original-width 1788?><?image-scaled-height 267?><?image-scaled-width 715?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d9e44e5ca2d6/41598_2025_30797_Fig1_HTML.jpg?><?thumb-name 41598_2025_30797_Fig1_HTML.gif?><?thumb-size 8264?><?thumb-md5 b2c2a94e87676c702b225e7a9e5d1848?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 75?><?thumb-scaled-width 200?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/b2c2a94e8767/41598_2025_30797_Fig1_HTML.gif?></graphic></fig></p></sec><sec id="Sec18"><title>Dark soliton dynamics</title><p id="Par36">Figure <xref rid="Fig2" ref-type="fig">2</xref> displays the dark soliton solution governed by Eq. (<xref rid="Equ9" ref-type="disp-formula">9</xref>), visualized in both two and three dimensions under identical parameter settings: <inline-formula id="IEq58"><tex-math id="d33e960"><?equation-image-name d33e960.gif?><?equation-image-status READY?><?equation-image-md5 9491a5fed4ae4e142032b47ee91b2cb6?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/9491a5fed4ae/d33e960.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -1$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq59"><tex-math id="d33e964"><?equation-image-name d33e964.gif?><?equation-image-status READY?><?equation-image-md5 b25d3ba2963a741ea83df91fa6791d9d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b25d3ba2963a/d33e964.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq60"><tex-math id="d33e968"><?equation-image-name d33e968.gif?><?equation-image-status READY?><?equation-image-md5 1e7585d7e9b09ce0ce33693bbc775d37?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/1e7585d7e9b0/d33e968.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 1.5$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq61"><tex-math id="d33e973"><?equation-image-name d33e973.gif?><?equation-image-status READY?><?equation-image-md5 50cefe47ff9ea93a1839d92992a4e96b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/50cefe47ff9e/d33e973.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = 1$$\end{document}</tex-math></inline-formula>, and in three different time instances. Unlike bright solitons, dark solitons exhibit a localized dip on a continuous background. The structure remains stable for all time levels, reflecting the phase–shifted wave nature observed in defocusing nonlinear media.<fig id="Fig2" position="float" orientation="portrait"><label>Fig. 2</label><caption><p>Dark soliton solution for Eq. (<xref rid="Equ9" ref-type="disp-formula">9</xref>) visualized in two and three dimensions under identical parameter settings: <inline-formula id="IEq62"><tex-math id="d33e986"><?equation-image-name d33e986.gif?><?equation-image-status READY?><?equation-image-md5 9491a5fed4ae4e142032b47ee91b2cb6?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/9491a5fed4ae/d33e986.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -1$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq63"><tex-math id="d33e990"><?equation-image-name d33e990.gif?><?equation-image-status READY?><?equation-image-md5 b25d3ba2963a741ea83df91fa6791d9d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b25d3ba2963a/d33e990.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq64"><tex-math id="d33e994"><?equation-image-name d33e994.gif?><?equation-image-status READY?><?equation-image-md5 1e7585d7e9b09ce0ce33693bbc775d37?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/1e7585d7e9b0/d33e994.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 1.5$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq65"><tex-math id="d33e998"><?equation-image-name d33e998.gif?><?equation-image-status READY?><?equation-image-md5 50cefe47ff9ea93a1839d92992a4e96b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/50cefe47ff9e/d33e998.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = 1$$\end{document}</tex-math></inline-formula>, and in three different time instances <inline-formula id="IEq66"><tex-math id="d33e1003"><?equation-image-name d33e1003.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e1003.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t=1,5,10$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO2" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig2_HTML.jpg"><?image-name 41598_2025_30797_Fig2_HTML.jpg?><?image-size 37099?><?image-md5 792d6cb08d71ffcdc424416d57d893c8?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 660?><?image-original-width 1799?><?image-scaled-height 264?><?image-scaled-width 719?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/792d6cb08d71/41598_2025_30797_Fig2_HTML.jpg?><?thumb-name 41598_2025_30797_Fig2_HTML.gif?><?thumb-size 8905?><?thumb-md5 62c65d9b54a97f98d89e9677540a3d59?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 73?><?thumb-scaled-width 200?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/62c65d9b54a9/41598_2025_30797_Fig2_HTML.gif?></graphic></fig></p></sec><sec id="Sec19"><title>Singular soliton behavior</title><p id="Par37">Figure <xref rid="Fig3" ref-type="fig">3</xref> illustrates the singular soliton solution of Eq. (<xref rid="Equ14" ref-type="disp-formula">14</xref>), visualized in both two and three dimensions under identical parameter settings: <inline-formula id="IEq67"><tex-math id="d33e1019"><?equation-image-name d33e1019.gif?><?equation-image-status READY?><?equation-image-md5 f5bbf84c09d2613507a022961b3fe41d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/f5bbf84c09d2/d33e1019.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -0.01$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq68"><tex-math id="d33e1023"><?equation-image-name d33e1023.gif?><?equation-image-status READY?><?equation-image-md5 5af77b23f1ba8165ebbaa1f2177e5bd2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/5af77b23f1ba/d33e1023.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 0.5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq69"><tex-math id="d33e1027"><?equation-image-name d33e1027.gif?><?equation-image-status READY?><?equation-image-md5 fe542b04ba5d2fd0026e36e1cf69a603?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fe542b04ba5d/d33e1027.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = -3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq70"><tex-math id="d33e1032"><?equation-image-name d33e1032.gif?><?equation-image-status READY?><?equation-image-md5 d433921b44e4f2b14f5e074e36d908f3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d433921b44e4/d33e1032.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -1.5$$\end{document}</tex-math></inline-formula>, and in three different time instances. Singular solitons represent a special class of nonlinear wave structures characterized by an infinite or extremely large amplitude at specific spatial points. Such solutions often arise in physical systems where nonlinear effects dominate over dispersion, leading to energy localization and field blow-up. In applications, singular solitons can model intense wave focusing in optical fibers, plasma collapses, or energy concentration in shallow-water dynamics. Singular solitons develop sharp peaks, indicating points where the amplitude becomes extremely large due to dominant nonlinear amplification. The plots show steep localized gradients, highlighting wave concentration phenomena.<fig id="Fig3" position="float" orientation="portrait"><label>Fig. 3</label><caption><p>Singular soliton solution for Eq. (<xref rid="Equ14" ref-type="disp-formula">14</xref>), visualized in two and three dimensions under identical parameter settings: <inline-formula id="IEq71"><tex-math id="d33e1045"><?equation-image-name d33e1045.gif?><?equation-image-status READY?><?equation-image-md5 f5bbf84c09d2613507a022961b3fe41d?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/f5bbf84c09d2/d33e1045.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -0.01$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq72"><tex-math id="d33e1049"><?equation-image-name d33e1049.gif?><?equation-image-status READY?><?equation-image-md5 5af77b23f1ba8165ebbaa1f2177e5bd2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/5af77b23f1ba/d33e1049.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = 0.5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq73"><tex-math id="d33e1053"><?equation-image-name d33e1053.gif?><?equation-image-status READY?><?equation-image-md5 fe542b04ba5d2fd0026e36e1cf69a603?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fe542b04ba5d/d33e1053.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = -3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq74"><tex-math id="d33e1057"><?equation-image-name d33e1057.gif?><?equation-image-status READY?><?equation-image-md5 d433921b44e4f2b14f5e074e36d908f3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d433921b44e4/d33e1057.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -1.5$$\end{document}</tex-math></inline-formula>, and in three different time instances <inline-formula id="IEq75"><tex-math id="d33e1062"><?equation-image-name d33e1062.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e1062.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t=1,5,10$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO3" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig3_HTML.jpg"><?image-name 41598_2025_30797_Fig3_HTML.jpg?><?image-size 40750?><?image-md5 dd2c657e2248664ee6cb06b748a81cda?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 678?><?image-original-width 1786?><?image-scaled-height 271?><?image-scaled-width 714?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/dd2c657e2248/41598_2025_30797_Fig3_HTML.jpg?><?thumb-name 41598_2025_30797_Fig3_HTML.gif?><?thumb-size 9312?><?thumb-md5 5206b951d3f0e0f868d93c61b9d46243?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 76?><?thumb-scaled-width 200?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/5206b951d3f0/41598_2025_30797_Fig3_HTML.gif?></graphic></fig></p></sec><sec id="Sec20"><title>Singular periodic wave profiles</title><p id="Par38">Figure <xref rid="Fig4" ref-type="fig">4</xref> corresponds to the singular periodic solution of Eq. (<xref rid="Equ17" ref-type="disp-formula">17</xref>), visualized in both two and three dimensions under identical parameter settings: <inline-formula id="IEq76"><tex-math id="d33e1078"><?equation-image-name d33e1078.gif?><?equation-image-status READY?><?equation-image-md5 abe515d1359f60889788686cbac35fd9?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/abe515d1359f/d33e1078.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -2$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq77"><tex-math id="d33e1082"><?equation-image-name d33e1082.gif?><?equation-image-status READY?><?equation-image-md5 896197b8390245d2276b0d14a53c7a5c?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/896197b83902/d33e1082.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = -5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq78"><tex-math id="d33e1086"><?equation-image-name d33e1086.gif?><?equation-image-status READY?><?equation-image-md5 e5b572e785e9209bab1a2a1655c079db?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/e5b572e785e9/d33e1086.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = -1$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq79"><tex-math id="d33e1091"><?equation-image-name d33e1091.gif?><?equation-image-status READY?><?equation-image-md5 e62d1871fee2ebc4224b9de6ca894fe2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/e62d1871fee2/d33e1091.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -2.7$$\end{document}</tex-math></inline-formula>, and in three different time instances. These structures periodically develop singular behavior, combining periodic oscillations with sharp amplitude spikes. The plots clearly show repeating localized peaks, indicating strong nonlinear modulation across each period.<fig id="Fig4" position="float" orientation="portrait"><label>Fig. 4</label><caption><p>Singular periodic solution for Eq. (<xref rid="Equ17" ref-type="disp-formula">17</xref>) visualized in two and three dimensions under identical parameter settings: <inline-formula id="IEq80"><tex-math id="d33e1104"><?equation-image-name d33e1104.gif?><?equation-image-status READY?><?equation-image-md5 abe515d1359f60889788686cbac35fd9?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/abe515d1359f/d33e1104.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = -2$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq81"><tex-math id="d33e1108"><?equation-image-name d33e1108.gif?><?equation-image-status READY?><?equation-image-md5 896197b8390245d2276b0d14a53c7a5c?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/896197b83902/d33e1108.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = -5$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq82"><tex-math id="d33e1112"><?equation-image-name d33e1112.gif?><?equation-image-status READY?><?equation-image-md5 e5b572e785e9209bab1a2a1655c079db?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/e5b572e785e9/d33e1112.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = -1$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq83"><tex-math id="d33e1116"><?equation-image-name d33e1116.gif?><?equation-image-status READY?><?equation-image-md5 e62d1871fee2ebc4224b9de6ca894fe2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/e62d1871fee2/d33e1116.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -2.7$$\end{document}</tex-math></inline-formula>, and in three different time instances <inline-formula id="IEq84"><tex-math id="d33e1121"><?equation-image-name d33e1121.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e1121.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t=1,5,10$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO4" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig4_HTML.jpg"><?image-name 41598_2025_30797_Fig4_HTML.jpg?><?image-size 53783?><?image-md5 fc1d1e8ae1811219293424047efe3bc0?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 723?><?image-original-width 1770?><?image-scaled-height 289?><?image-scaled-width 708?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/fc1d1e8ae181/41598_2025_30797_Fig4_HTML.jpg?><?thumb-name 41598_2025_30797_Fig4_HTML.gif?><?thumb-size 11180?><?thumb-md5 1d6ddf1ac9a484293e375e615b335278?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 80?><?thumb-scaled-width 195?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/1d6ddf1ac9a4/41598_2025_30797_Fig4_HTML.gif?></graphic></fig></p></sec><sec id="Sec21"><title>Jacobi elliptic functions and their connection to periodic and soliton solutions</title><p id="Par39">The Jacobi elliptic functions <inline-formula id="IEq85"><tex-math id="d33e1131"><?equation-image-name d33e1131.gif?><?equation-image-status READY?><?equation-image-md5 cf5969cf02808e537633013109ac19c2?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/cf5969cf0280/d33e1131.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{sn}(u,m)$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq86"><tex-math id="d33e1135"><?equation-image-name d33e1135.gif?><?equation-image-status READY?><?equation-image-md5 af32e6c590f8f7055952349ac521a069?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/af32e6c590f8/d33e1135.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{cn}(u,m)$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq87"><tex-math id="d33e1139"><?equation-image-name d33e1139.gif?><?equation-image-status READY?><?equation-image-md5 71948679dcef70e681146535fb573ac3?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/71948679dcef/d33e1139.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{dn}(u,m)$$\end{document}</tex-math></inline-formula> arise naturally in the analysis of nonlinear evolution equations. Depending on the modulus <italic toggle="yes">m</italic>
+<inline-formula id="IEq88"><tex-math id="d33e1146"><?equation-image-name d33e1146.gif?><?equation-image-status READY?><?equation-image-md5 ba04399f336bb00ff98b8ac4c4c7b338?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ba04399f336b/d33e1146.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$(0 \le m \le 1)$$\end{document}</tex-math></inline-formula>, they bridge trigonometric and hyperbolic behaviors, thereby linking periodic and soliton solutions. For <inline-formula id="IEq89"><tex-math id="d33e1151"><?equation-image-name d33e1151.gif?><?equation-image-status READY?><?equation-image-md5 a64e47c8cf0b5b6b4bd870220361cb6a?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/a64e47c8cf0b/d33e1151.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$m \rightarrow 0$$\end{document}</tex-math></inline-formula>, they reduce to trigonometric functions:<disp-formula id="Equ53"><tex-math id="d33e1155"><?equation-image-name d33e1155.gif?><?equation-image-status READY?><?equation-image-md5 ca7504d07f804dc79f97fff1c734c612?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ca7504d07f80/d33e1155.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{sn}(u,0)=\sin (u), \quad \textrm{cn}(u,0)=\cos (u), \quad \textrm{dn}(u,0)=1,$$\end{document}</tex-math></disp-formula>while for <inline-formula id="IEq90"><tex-math id="d33e1159"><?equation-image-name d33e1159.gif?><?equation-image-status READY?><?equation-image-md5 06473ab399409ab3719ed8bf432a02e5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/06473ab39940/d33e1159.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$m\rightarrow 1$$\end{document}</tex-math></inline-formula>, they become hyperbolic:<disp-formula id="Equ54"><tex-math id="d33e1163"><?equation-image-name d33e1163.gif?><?equation-image-status READY?><?equation-image-md5 ed619761a745f466a293ed0f5b0b20c1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/ed619761a745/d33e1163.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{sn}(u,1)=\tanh (u), \quad \textrm{cn}(u,1)=\operatorname {sech}(u), \quad \textrm{dn}(u,1)=\operatorname {sech}(u).$$\end{document}</tex-math></disp-formula>Thus, varying the modulus <italic toggle="yes">m</italic> from 0 to 1 gradually transforms the periodic Jacobi–elliptic waves into solitary structures. Figure <xref rid="Fig5" ref-type="fig">5</xref> illustrates the evolution of the <inline-formula id="IEq91"><tex-math id="d33e1174"><?equation-image-name d33e1174.gif?><?equation-image-status READY?><?equation-image-md5 c7636a7782b526ce4c93a30b7423fcea?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c7636a7782b5/d33e1174.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{cn}(\zeta ,m)$$\end{document}</tex-math></inline-formula> solution in Eq.(<xref rid="Equ19" ref-type="disp-formula">19</xref>), showing its transition from singular periodic (arising when the argument becomes complex) to regular periodic and finally to bright-soliton profiles in 3D, under the parameter set <inline-formula id="IEq92"><tex-math id="d33e1181"><?equation-image-name d33e1181.gif?><?equation-image-status READY?><?equation-image-md5 d8a238e4fce7b424dd5c0f4d6eadfd35?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d8a238e4fce7/d33e1181.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_{2}=2$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq93"><tex-math id="d33e1185"><?equation-image-name d33e1185.gif?><?equation-image-status READY?><?equation-image-md5 38adbf9bf05c290408de28964ee11a1b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/38adbf9bf05c/d33e1185.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _{3}=-3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq94"><tex-math id="d33e1189"><?equation-image-name d33e1189.gif?><?equation-image-status READY?><?equation-image-md5 8f0bde63b1f996d26ad896c5944661a1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f0bde63b1f9/d33e1189.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _{4}=2$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq95"><tex-math id="d33e1193"><?equation-image-name d33e1193.gif?><?equation-image-status READY?><?equation-image-md5 7a1bba31fd550ddf9de1f1ff01425a5e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/7a1bba31fd55/d33e1193.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _{5}=-1$$\end{document}</tex-math></inline-formula>. Figure <xref rid="Fig6" ref-type="fig">6</xref> presents the corresponding 2D profiles for the same parameter values at three representative times <inline-formula id="IEq96"><tex-math id="d33e1201"><?equation-image-name d33e1201.gif?><?equation-image-status READY?><?equation-image-md5 b9f1ef2cc0105e91b5e8e512008254c4?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/b9f1ef2cc010/d33e1201.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t=1,5,10$$\end{document}</tex-math></inline-formula>, highlighting the transition from singular periodic to regular periodic and ultimately to bright-soliton behavior.<fig id="Fig5" position="float" orientation="portrait"><label>Fig. 5</label><caption><p>The Jacobi elliptic function <inline-formula id="IEq97"><tex-math id="d33e1211"><?equation-image-name d33e1211.gif?><?equation-image-status READY?><?equation-image-md5 c7636a7782b526ce4c93a30b7423fcea?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c7636a7782b5/d33e1211.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{cn}(\zeta ,m)$$\end{document}</tex-math></inline-formula> in Eq. (<xref rid="Equ19" ref-type="disp-formula">19</xref>) is illustrated in 3D, showing the transition from singular periodic to regular periodic waves and finally to a bright soliton as the modulus <inline-formula id="IEq98"><tex-math id="d33e1218"><?equation-image-name d33e1218.gif?><?equation-image-status READY?><?equation-image-md5 06473ab399409ab3719ed8bf432a02e5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/06473ab39940/d33e1218.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$m \rightarrow 1$$\end{document}</tex-math></inline-formula>, with <inline-formula id="IEq99"><tex-math id="d33e1222"><?equation-image-name d33e1222.gif?><?equation-image-status READY?><?equation-image-md5 d8a238e4fce7b424dd5c0f4d6eadfd35?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d8a238e4fce7/d33e1222.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = 2$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq100"><tex-math id="d33e1226"><?equation-image-name d33e1226.gif?><?equation-image-status READY?><?equation-image-md5 38adbf9bf05c290408de28964ee11a1b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/38adbf9bf05c/d33e1226.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = -3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq101"><tex-math id="d33e1231"><?equation-image-name d33e1231.gif?><?equation-image-status READY?><?equation-image-md5 8f0bde63b1f996d26ad896c5944661a1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f0bde63b1f9/d33e1231.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 2$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq102"><tex-math id="d33e1235"><?equation-image-name d33e1235.gif?><?equation-image-status READY?><?equation-image-md5 7a1bba31fd550ddf9de1f1ff01425a5e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/7a1bba31fd55/d33e1235.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -1$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO5" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig5_HTML.jpg"><?image-name 41598_2025_30797_Fig5_HTML.jpg?><?image-size 41592?><?image-md5 6571fab9d16070aa7b43642ed89d6256?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 592?><?image-original-width 1990?><?image-scaled-height 237?><?image-scaled-width 796?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/6571fab9d160/41598_2025_30797_Fig5_HTML.jpg?><?thumb-name 41598_2025_30797_Fig5_HTML.gif?><?thumb-size 9521?><?thumb-md5 4b537e1b5a43e312238b8a1d12083d8b?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 59?><?thumb-scaled-width 200?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/4b537e1b5a43/41598_2025_30797_Fig5_HTML.gif?></graphic></fig><fig id="Fig6" position="float" orientation="portrait"><label>Fig. 6</label><caption><p>The Jacobi elliptic function <inline-formula id="IEq103"><tex-math id="d33e1247"><?equation-image-name d33e1247.gif?><?equation-image-status READY?><?equation-image-md5 c7636a7782b526ce4c93a30b7423fcea?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/c7636a7782b5/d33e1247.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\textrm{cn}(\zeta ,m)$$\end{document}</tex-math></inline-formula> in Eq. (<xref rid="Equ19" ref-type="disp-formula">19</xref>) is illustrated in 2D, showing the evolution from singular periodic to regular periodic waves and ultimately to a bright soliton as the modulus <inline-formula id="IEq104"><tex-math id="d33e1254"><?equation-image-name d33e1254.gif?><?equation-image-status READY?><?equation-image-md5 06473ab399409ab3719ed8bf432a02e5?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/06473ab39940/d33e1254.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$m \rightarrow 1$$\end{document}</tex-math></inline-formula>, with <inline-formula id="IEq105"><tex-math id="d33e1258"><?equation-image-name d33e1258.gif?><?equation-image-status READY?><?equation-image-md5 d8a238e4fce7b424dd5c0f4d6eadfd35?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/d8a238e4fce7/d33e1258.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$d_2 = 2$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq106"><tex-math id="d33e1262"><?equation-image-name d33e1262.gif?><?equation-image-status READY?><?equation-image-md5 38adbf9bf05c290408de28964ee11a1b?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/38adbf9bf05c/d33e1262.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _3 = -3$$\end{document}</tex-math></inline-formula>, <inline-formula id="IEq107"><tex-math id="d33e1267"><?equation-image-name d33e1267.gif?><?equation-image-status READY?><?equation-image-md5 8f0bde63b1f996d26ad896c5944661a1?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/8f0bde63b1f9/d33e1267.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _4 = 2$$\end{document}</tex-math></inline-formula>, and <inline-formula id="IEq108"><tex-math id="d33e1271"><?equation-image-name d33e1271.gif?><?equation-image-status READY?><?equation-image-md5 7a1bba31fd550ddf9de1f1ff01425a5e?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/7a1bba31fd55/d33e1271.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$\alpha _5 = -1$$\end{document}</tex-math></inline-formula>, at three representative times <inline-formula id="IEq109"><tex-math id="d33e1275"><?equation-image-name d33e1275.gif?><?equation-image-status READY?><?equation-image-md5 27a3dcae954aa767eef1d0998c24ce07?><?equation-image-cloudpmc-urn urn:cdn:blobs/2417/12712089/27a3dcae954a/d33e1275.gif?>\documentclass[12pt]{minimal}
+				\usepackage{amsmath}
+				\usepackage{wasysym} 
+				\usepackage{amsfonts} 
+				\usepackage{amssymb} 
+				\usepackage{amsbsy}
+				\usepackage{mathrsfs}
+				\usepackage{upgreek}
+				\setlength{\oddsidemargin}{-69pt}
+				\begin{document}$$t = 1, 5, 10.$$\end{document}</tex-math></inline-formula>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="MO6" position="float" orientation="portrait" xlink:href="41598_2025_30797_Fig6_HTML.jpg"><?image-name 41598_2025_30797_Fig6_HTML.jpg?><?image-size 65312?><?image-md5 756ef514388349fc36ff2d29cd802534?><?image-image-server-status LOAD_COMPLETED?><?image-original-height 584?><?image-original-width 1988?><?image-scaled-height 234?><?image-scaled-width 795?><?image-cloudpmc-urn urn:cdn:blobs/2417/12712089/756ef5143883/41598_2025_30797_Fig6_HTML.jpg?><?thumb-name 41598_2025_30797_Fig6_HTML.gif?><?thumb-size 9855?><?thumb-md5 b2decd7428f7345f041518a3765d310d?><?thumb-image-server-status NEVER_LOAD?><?thumb-scaled-height 59?><?thumb-scaled-width 200?><?thumb-cloudpmc-urn urn:cdn:blobs/2417/12712089/b2decd7428f7/41598_2025_30797_Fig6_HTML.gif?></graphic></fig></p><p id="Par40">Overall, the graphical results validate the analytical solutions and demonstrate the complex propagation patterns permitted by the sixth–order NLSE model. The figures highlight the structural evolution, stability characteristics, and nonlinear effects associated with each solution type.</p></sec></sec><sec id="Sec22"><title>Conclusion</title><p id="Par41">In this work, we investigated the sixth-order integrable nonlinear Schrödinger equation within its hierarchy and extended the analytical solution landscape of this model. Using the Improved Modified Extended Tanh Function Method (IMETFM), we systematically derived new families of exact solutions, including bright, dark, singular solitons, singular periodic solutions, and Jacobi and Weierstrass elliptic waveforms.</p><p id="Par42">The novelty of this study lies in providing a unified analytical framework for the sixth-order NLSE that captures localized solitons, singular dispersive structures, and doubly-periodic nonlinear waves. The results demonstrate that higher-order dispersion and nonlinear effects significantly enrich the dynamics compared with the classical NLSE, producing additional wave morphologies and amplitude profiles absent in lower-order models.</p><p id="Par43">Two- and three-dimensional graphical simulations illustrate the propagation, intensity localization, and periodic modulation of the solutions, confirming distinct physical signatures, particularly the sharp energy concentration of singular solitons and the smooth periodic patterns of elliptic solutions.</p><p id="Par44">Physically, higher-order dispersive and nonlinear terms enable a broader range of self-trapped and periodic behaviors. Bright and dark solitons correspond to localized energy packets and intensity depressions, while singular solitons represent ultra-localized energy spikes that can model collapse-like events. Jacobi and Weierstrass elliptic solutions bridge localized and periodic states, showing how continuous modulation of the elliptic modulus transitions the system from periodic oscillations to solitary waves, highlighting the delicate balance between dispersion and nonlinearity.</p><p id="Par45">Overall, these findings underline the physical relevance of the sixth-order NLSE hierarchy and the effectiveness of IMETFM for constructing complex analytical waveforms. Future work may explore stability analysis, perturbation dynamics, and parameter sensitivity.</p></sec></body><back><fn-group><fn><p><bold>Publisher’s note</bold></p><p>Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.</p></fn></fn-group><ack><title>Acknowledgements</title><p>Not Applicable.</p></ack><notes notes-type="author-contribution"><title>Author contributions</title><p>Mina M. Fahim: Formal analysis, Software, Methodology; Hamdy M. Ahmed: Validation, Methodology; K. A. Dib: Resources, Writing–review &amp; editing; Islam Samir: Software, Investigation.</p></notes><notes notes-type="funding-information"><title>Funding</title><p>Open access funding provided by The Science, Technology &amp; Innovation Funding Authority (STDF) in cooperation with The Egyptian Knowledge Bank (EKB).</p></notes><notes notes-type="data-availability"><title>Data availability</title><p>The datasets used and/or analyzed during the current study are available from the corresponding author upon reasonable request.</p></notes><notes><title>Declarations</title><notes id="FPar3" notes-type="COI-statement"><title>Competing interests</title><p id="Par52">The authors declare no competing interests.</p></notes></notes><ref-list id="Bib1"><title>References</title><ref id="CR1"><label>1.</label><citation-alternatives><element-citation id="ec-CR1" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>R</given-names></name></person-group><article-title>On investigation of kink-solitons and rogue waves to a new integrable (3+ 1)-dimensional KdV-type generalized equation in nonlinear sciences</article-title><source>Nonlinear Dyn.</source><year>2025</year><volume>113</volume><issue>9</issue><fpage>10261</fpage><lpage>10276</lpage><pub-id pub-id-type="doi">10.1007/s11071-024-10792-8</pub-id></element-citation><mixed-citation id="mc-CR1" publication-type="journal">Mohan, B., Kumar, S. &amp; Kumar, R. On investigation of kink-solitons and rogue waves to a new integrable (3+ 1)-dimensional KdV-type generalized equation in nonlinear sciences. <italic toggle="yes">Nonlinear Dyn.</italic><bold>113</bold>(9), 10261–10276 (2025).</mixed-citation></citation-alternatives></ref><ref id="CR2"><label>2.</label><citation-alternatives><element-citation id="ec-CR2" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name></person-group><article-title>Rogue-wave structures for a generalized (3+1)-dimensional nonlinear wave equation in liquid with gas bubbles</article-title><source>Phys. Scr.</source><year>2024</year><volume>99</volume><issue>10</issue><fpage>105291</fpage><pub-id pub-id-type="doi">10.1088/1402-4896/ad7cd9</pub-id></element-citation><mixed-citation id="mc-CR2" publication-type="journal">Mohan, B. &amp; Kumar, S. Rogue-wave structures for a generalized (3+1)-dimensional nonlinear wave equation in liquid with gas bubbles. <italic toggle="yes">Phys. Scr.</italic><bold>99</bold>(10), 105291 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR3"><label>3.</label><citation-alternatives><element-citation id="ec-CR3" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>R</given-names></name></person-group><article-title>Higher-order rogue waves and dispersive solitons of a novel P-type (3+1)-D evolution equation in soliton theory and nonlinear waves</article-title><source>Nonlinear Dyn.</source><year>2023</year><volume>111</volume><issue>21</issue><fpage>20275</fpage><lpage>20288</lpage><pub-id pub-id-type="doi">10.1007/s11071-023-08938-1</pub-id></element-citation><mixed-citation id="mc-CR3" publication-type="journal">Mohan, B., Kumar, S. &amp; Kumar, R. Higher-order rogue waves and dispersive solitons of a novel P-type (3+1)-D evolution equation in soliton theory and nonlinear waves. <italic toggle="yes">Nonlinear Dyn.</italic><bold>111</bold>(21), 20275–20288 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR4"><label>4.</label><citation-alternatives><element-citation id="ec-CR4" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Ankiewicz</surname><given-names>A</given-names></name><name name-style="western"><surname>Soto-Crespo</surname><given-names>M</given-names></name><name name-style="western"><surname>Akhmediev</surname><given-names>N</given-names></name></person-group><article-title>Rogue waves and rational solutions of the Hirota equation</article-title><source>Phys. Rev. E</source><year>2010</year><volume>81</volume><issue>4</issue><fpage>046602</fpage><pub-id pub-id-type="doi">10.1103/PhysRevE.81.046602</pub-id><pub-id pub-id-type="pmid">20481848</pub-id></element-citation><mixed-citation id="mc-CR4" publication-type="journal">Ankiewicz, A., Soto-Crespo, M. &amp; Akhmediev, N. Rogue waves and rational solutions of the Hirota equation. <italic toggle="yes">Phys. Rev. E</italic><bold>81</bold>(4), 046602 (2010).<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevE.81.046602</pub-id><pub-id pub-id-type="pmid">20481848</pub-id></mixed-citation></citation-alternatives></ref><ref id="CR5"><label>5.</label><citation-alternatives><element-citation id="ec-CR5" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Serkin</surname><given-names>VN</given-names></name><name name-style="western"><surname>Belyaeva</surname><given-names>TL</given-names></name></person-group><article-title>Optimal control for soliton breathers of the Lakshmanan-Porsezian-Daniel, Hirota, and cmKdV models</article-title><source>Optik</source><year>2018</year><volume>175</volume><fpage>17</fpage><lpage>27</lpage><pub-id pub-id-type="doi">10.1016/j.ijleo.2018.08.140</pub-id></element-citation><mixed-citation id="mc-CR5" publication-type="journal">Serkin, V. N. &amp; Belyaeva, T. L. Optimal control for soliton breathers of the Lakshmanan-Porsezian-Daniel, Hirota, and cmKdV models. <italic toggle="yes">Optik</italic><bold>175</bold>, 17–27 (2018).</mixed-citation></citation-alternatives></ref><ref id="CR6"><label>6.</label><citation-alternatives><element-citation id="ec-CR6" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Kudryashov</surname><given-names>NA</given-names></name></person-group><article-title>The Lakshmanan-Porsezian-Daniel model with arbitrary refractive index and its solution</article-title><source>Optik</source><year>2021</year><volume>241</volume><fpage>167043</fpage><pub-id pub-id-type="doi">10.1016/j.ijleo.2021.167043</pub-id></element-citation><mixed-citation id="mc-CR6" publication-type="journal">Kudryashov, N. A. The Lakshmanan-Porsezian-Daniel model with arbitrary refractive index and its solution. <italic toggle="yes">Optik</italic><bold>241</bold>, 167043 (2021).</mixed-citation></citation-alternatives></ref><ref id="CR7"><label>7.</label><citation-alternatives><element-citation id="ec-CR7" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Iqbal</surname><given-names>I</given-names></name></person-group><article-title>Soliton unveilings in optical fiber transmission: Examining soliton structures through the Sasa-Satsuma equation</article-title><source>Results in Physics</source><year>2024</year><volume>60</volume><fpage>107648</fpage><pub-id pub-id-type="doi">10.1016/j.rinp.2024.107648</pub-id></element-citation><mixed-citation id="mc-CR7" publication-type="journal">Iqbal, I. Soliton unveilings in optical fiber transmission: Examining soliton structures through the Sasa-Satsuma equation. <italic toggle="yes">Results in Physics</italic><bold>60</bold>, 107648 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR8"><label>8.</label><mixed-citation publication-type="other">Younas, T., &amp; Ahmad, J. Dynamical behavior of the higher-order cubic-quintic nonlinear Schrödinger equation with stability analysis. <italic toggle="yes">J. Opt.</italic> 1–23 (2024)</mixed-citation></ref><ref id="CR9"><label>9.</label><citation-alternatives><element-citation id="ec-CR9" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mostafa</surname><given-names>MA</given-names></name><etal/></person-group><article-title>Langmuir wave dynamics and plasma instabilities: Insights from generalized coupled nonlinear Schrödinger equations</article-title><source>Mod. Phys. Lett. B</source><year>2024</year><volume>38</volume><issue>36</issue><fpage>2450366</fpage><pub-id pub-id-type="doi">10.1142/S0217984924503664</pub-id></element-citation><mixed-citation id="mc-CR9" publication-type="journal">Mostafa, M. A. et al. Langmuir wave dynamics and plasma instabilities: Insights from generalized coupled nonlinear Schrödinger equations. <italic toggle="yes">Mod. Phys. Lett. B</italic><bold>38</bold>(36), 2450366 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR10"><label>10.</label><citation-alternatives><element-citation id="ec-CR10" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Ankiewicz</surname><given-names>A</given-names></name><name name-style="western"><surname>Kedziora</surname><given-names>DJ</given-names></name><name name-style="western"><surname>Chowdury</surname><given-names>A</given-names></name><name name-style="western"><surname>Bandelow</surname><given-names>U</given-names></name><name name-style="western"><surname>Akhmediev</surname><given-names>N</given-names></name></person-group><article-title>Infinite hierarchy of nonlinear Schrödinger equations and their solutions</article-title><source>Phys. Rev. E</source><year>2016</year><volume>93</volume><issue>1</issue><fpage>012206</fpage><pub-id pub-id-type="doi">10.1103/PhysRevE.93.012206</pub-id><pub-id pub-id-type="pmid">26871072</pub-id></element-citation><mixed-citation id="mc-CR10" publication-type="journal">Ankiewicz, A., Kedziora, D. J., Chowdury, A., Bandelow, U. &amp; Akhmediev, N. Infinite hierarchy of nonlinear Schrödinger equations and their solutions. <italic toggle="yes">Phys. Rev. E</italic><bold>93</bold>(1), 012206 (2016).<pub-id pub-id-type="pmid">26871072</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevE.93.012206</pub-id></mixed-citation></citation-alternatives></ref><ref id="CR11"><label>11.</label><citation-alternatives><element-citation id="ec-CR11" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Chowdury</surname><given-names>A</given-names></name><name name-style="western"><surname>Krolikowski</surname><given-names>W</given-names></name></person-group><article-title>Breather-to-soliton transformation rules in the hierarchy of nonlinear Schrödinger equations</article-title><source>Phys. Rev. E</source><year>2017</year><volume>95</volume><issue>6</issue><fpage>062226</fpage><pub-id pub-id-type="doi">10.1103/PhysRevE.95.062226</pub-id><pub-id pub-id-type="pmid">28709292</pub-id></element-citation><mixed-citation id="mc-CR11" publication-type="journal">Chowdury, A. &amp; Krolikowski, W. Breather-to-soliton transformation rules in the hierarchy of nonlinear Schrödinger equations. <italic toggle="yes">Phys. Rev. E</italic><bold>95</bold>(6), 062226 (2017).<pub-id pub-id-type="pmid">28709292</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevE.95.062226</pub-id></mixed-citation></citation-alternatives></ref><ref id="CR12"><label>12.</label><citation-alternatives><element-citation id="ec-CR12" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mathanaranjan</surname><given-names>T</given-names></name></person-group><article-title>Solitary wave structures, conservation laws and dynamical analysis of the Heisenberg ferromagnet-type equation</article-title><source>Mod. Phys. Lett. B</source><year>2025</year><volume>2025</volume><fpage>2550229</fpage></element-citation><mixed-citation id="mc-CR12" publication-type="journal">Mathanaranjan, T. Solitary wave structures, conservation laws and dynamical analysis of the Heisenberg ferromagnet-type equation. <italic toggle="yes">Mod. Phys. Lett. B</italic><bold>2025</bold>, 2550229 (2025).</mixed-citation></citation-alternatives></ref><ref id="CR13"><label>13.</label><citation-alternatives><element-citation id="ec-CR13" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Khatri</surname><given-names>H</given-names></name><name name-style="western"><surname>Malik</surname><given-names>A</given-names></name><name name-style="western"><surname>Gautam</surname><given-names>MG</given-names></name></person-group><article-title>Traveling, periodic and localized solitary waves solutions of the (4+1)-dimensional nonlinear Fokas equation</article-title><source>SN Appl. Sci.</source><year>2020</year><volume>2</volume><issue>11</issue><fpage>1829</fpage><pub-id pub-id-type="doi">10.1007/s42452-020-03615-z</pub-id></element-citation><mixed-citation id="mc-CR13" publication-type="journal">Khatri, H., Malik, A. &amp; Gautam, M. G. Traveling, periodic and localized solitary waves solutions of the (4+1)-dimensional nonlinear Fokas equation. <italic toggle="yes">SN Appl. Sci.</italic><bold>2</bold>(11), 1829 (2020).</mixed-citation></citation-alternatives></ref><ref id="CR14"><label>14.</label><citation-alternatives><element-citation id="ec-CR14" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>El Sheikh</surname><given-names>MMA</given-names></name><name name-style="western"><surname>Ahmed</surname><given-names>HM</given-names></name><name name-style="western"><surname>Arnous</surname><given-names>AH</given-names></name><name name-style="western"><surname>Rabie</surname><given-names>WB</given-names></name><name name-style="western"><surname>Biswas</surname><given-names>A</given-names></name><name name-style="western"><surname>Khan</surname><given-names>S</given-names></name><name name-style="western"><surname>Alshomrani</surname><given-names>AS</given-names></name></person-group><article-title>Optical solitons with differential group delay for coupled Kundu-Eckhaus equation using extended simplest equation approach</article-title><source>Optik</source><year>2020</year><volume>208</volume><fpage>164051</fpage><pub-id pub-id-type="doi">10.1016/j.ijleo.2019.164051</pub-id></element-citation><mixed-citation id="mc-CR14" publication-type="journal">El Sheikh, M. M. A. et al. Optical solitons with differential group delay for coupled Kundu-Eckhaus equation using extended simplest equation approach. <italic toggle="yes">Optik</italic><bold>208</bold>, 164051 (2020).</mixed-citation></citation-alternatives></ref><ref id="CR15"><label>15.</label><citation-alternatives><element-citation id="ec-CR15" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mathanaranjan</surname><given-names>T</given-names></name><name name-style="western"><surname>Hashemi</surname><given-names>MS</given-names></name><name name-style="western"><surname>Rezazadeh</surname><given-names>H</given-names></name><name name-style="western"><surname>Akinyemi</surname><given-names>L</given-names></name><name name-style="western"><surname>Bekir</surname><given-names>A</given-names></name></person-group><article-title>Chirped optical solitons and stability analysis of the nonlinear Schrödinger equation with nonlinear chromatic dispersion</article-title><source>Commun. Theor. Phys.</source><year>2023</year><volume>75</volume><issue>8</issue><fpage>085005</fpage><pub-id pub-id-type="doi">10.1088/1572-9494/ace3b0</pub-id></element-citation><mixed-citation id="mc-CR15" publication-type="journal">Mathanaranjan, T., Hashemi, M. S., Rezazadeh, H., Akinyemi, L. &amp; Bekir, A. Chirped optical solitons and stability analysis of the nonlinear Schrödinger equation with nonlinear chromatic dispersion. <italic toggle="yes">Commun. Theor. Phys.</italic><bold>75</bold>(8), 085005 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR16"><label>16.</label><citation-alternatives><element-citation id="ec-CR16" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>El-Ganaini</surname><given-names>S</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>H</given-names></name></person-group><article-title>A variety of new soliton structures and various dynamical behaviors of a discrete electrical lattice with nonlinear dispersion via variety of analytical architectures</article-title><source>Math. Methods Appl. Sci.</source><year>2023</year><volume>46</volume><issue>2</issue><fpage>2746</fpage><lpage>2772</lpage><pub-id pub-id-type="doi">10.1002/mma.8673</pub-id></element-citation><mixed-citation id="mc-CR16" publication-type="journal">El-Ganaini, S. &amp; Kumar, H. A variety of new soliton structures and various dynamical behaviors of a discrete electrical lattice with nonlinear dispersion via variety of analytical architectures. <italic toggle="yes">Math. Methods Appl. Sci.</italic><bold>46</bold>(2), 2746–2772 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR17"><label>17.</label><citation-alternatives><element-citation id="ec-CR17" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Kumar</surname><given-names>H</given-names></name><name name-style="western"><surname>Chand</surname><given-names>F</given-names></name></person-group><article-title>Optical solitary wave solutions for the higher order nonlinear Schrödinger equation with self-steepening and self-frequency shift effects</article-title><source>Opt. Laser Technol.</source><year>2013</year><volume>54</volume><fpage>265</fpage><lpage>273</lpage><pub-id pub-id-type="doi">10.1016/j.optlastec.2013.05.031</pub-id></element-citation><mixed-citation id="mc-CR17" publication-type="journal">Kumar, H. &amp; Chand, F. Optical solitary wave solutions for the higher order nonlinear Schrödinger equation with self-steepening and self-frequency shift effects. <italic toggle="yes">Opt. Laser Technol.</italic><bold>54</bold>, 265–273 (2013).</mixed-citation></citation-alternatives></ref><ref id="CR18"><label>18.</label><citation-alternatives><element-citation id="ec-CR18" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Ibrahim</surname><given-names>S</given-names></name><name name-style="western"><surname>Ashir</surname><given-names>AM</given-names></name><name name-style="western"><surname>Sabawi</surname><given-names>YA</given-names></name><name name-style="western"><surname>Baleanu</surname><given-names>D</given-names></name></person-group><article-title>Realization of optical solitons from nonlinear Schrödinger equation using modified Sardar sub-equation technique</article-title><source>Opt. Quant. Electron.</source><year>2023</year><volume>55</volume><issue>7</issue><fpage>617</fpage><pub-id pub-id-type="doi">10.1007/s11082-023-04776-y</pub-id></element-citation><mixed-citation id="mc-CR18" publication-type="journal">Ibrahim, S., Ashir, A. M., Sabawi, Y. A. &amp; Baleanu, D. Realization of optical solitons from nonlinear Schrödinger equation using modified Sardar sub-equation technique. <italic toggle="yes">Opt. Quant. Electron.</italic><bold>55</bold>(7), 617 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR19"><label>19.</label><citation-alternatives><element-citation id="ec-CR19" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Ali</surname><given-names>MH</given-names></name><name name-style="western"><surname>El-Owaidy</surname><given-names>HM</given-names></name><name name-style="western"><surname>Ahmed</surname><given-names>HM</given-names></name><name name-style="western"><surname>El-Deeb</surname><given-names>AA</given-names></name><name name-style="western"><surname>Samir</surname><given-names>I</given-names></name></person-group><article-title>Optical solitons and complexitons for generalized Schrödinger-Hirota model by the modified extended direct algebraic method</article-title><source>Opt. Quant. Electron.</source><year>2023</year><volume>55</volume><issue>8</issue><fpage>675</fpage><pub-id pub-id-type="doi">10.1007/s11082-023-04962-y</pub-id></element-citation><mixed-citation id="mc-CR19" publication-type="journal">Ali, M. H., El-Owaidy, H. M., Ahmed, H. M., El-Deeb, A. A. &amp; Samir, I. Optical solitons and complexitons for generalized Schrödinger-Hirota model by the modified extended direct algebraic method. <italic toggle="yes">Opt. Quant. Electron.</italic><bold>55</bold>(8), 675 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR20"><label>20.</label><citation-alternatives><element-citation id="ec-CR20" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Vahidi</surname><given-names>J</given-names></name><name name-style="western"><surname>Zabihi</surname><given-names>A</given-names></name><name name-style="western"><surname>Rezazadeh</surname><given-names>H</given-names></name><name name-style="western"><surname>Ansari</surname><given-names>R</given-names></name></person-group><article-title>New extended direct algebraic method for the resonant nonlinear Schrödinger equation with Kerr law nonlinearity</article-title><source>Optik</source><year>2021</year><volume>227</volume><fpage>165936</fpage><pub-id pub-id-type="doi">10.1016/j.ijleo.2020.165936</pub-id></element-citation><mixed-citation id="mc-CR20" publication-type="journal">Vahidi, J., Zabihi, A., Rezazadeh, H. &amp; Ansari, R. New extended direct algebraic method for the resonant nonlinear Schrödinger equation with Kerr law nonlinearity. <italic toggle="yes">Optik</italic><bold>227</bold>, 165936 (2021).</mixed-citation></citation-alternatives></ref><ref id="CR21"><label>21.</label><citation-alternatives><element-citation id="ec-CR21" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Rabiea</surname><given-names>WB</given-names></name><name name-style="western"><surname>Hussein</surname><given-names>HH</given-names></name><name name-style="western"><surname>Ahmed</surname><given-names>HM</given-names></name><name name-style="western"><surname>Alnahhass</surname><given-names>M</given-names></name><name name-style="western"><surname>Alexan</surname><given-names>W</given-names></name></person-group><article-title>Abundant solitons for highly dispersive nonlinear Schrödinger equation with sextic-power law refractive index using modified extended direct algebraic method</article-title><source>Alex. Eng. J.</source><year>2024</year><volume>86</volume><fpage>680</fpage><lpage>689</lpage><pub-id pub-id-type="doi">10.1016/j.aej.2023.12.022</pub-id></element-citation><mixed-citation id="mc-CR21" publication-type="journal">Rabiea, W. B., Hussein, H. H., Ahmed, H. M., Alnahhass, M. &amp; Alexan, W. Abundant solitons for highly dispersive nonlinear Schrödinger equation with sextic-power law refractive index using modified extended direct algebraic method. <italic toggle="yes">Alex. Eng. J.</italic><bold>86</bold>, 680–689 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR22"><label>22.</label><mixed-citation publication-type="other">Fahim, M. M., Ahmed, H. M., Dib, K. A., &amp; Samir, I. Derivation of dispersive solitons with quadrupled power law of nonlinearity using improved modified extended tanh function method. <italic toggle="yes">J. Opt.</italic> 1–10 (2024).</mixed-citation></ref><ref id="CR23"><label>23.</label><citation-alternatives><element-citation id="ec-CR23" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Samir</surname><given-names>I</given-names></name><etal/></person-group><article-title>Unraveling solitons dynamics in system of dispersive NLSE with Kudryashov’s law of nonlinearity using improved modified extended tanh function method</article-title><source>Alexandria Eng. J.</source><year>2024</year><volume>91</volume><fpage>419</fpage><lpage>428</lpage><pub-id pub-id-type="doi">10.1016/j.aej.2024.02.020</pub-id></element-citation><mixed-citation id="mc-CR23" publication-type="journal">Samir, I. et al. Unraveling solitons dynamics in system of dispersive NLSE with Kudryashov’s law of nonlinearity using improved modified extended tanh function method. <italic toggle="yes">Alexandria Eng. J.</italic><bold>91</bold>, 419–428 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR24"><label>24.</label><mixed-citation publication-type="other">Samir, I. &amp; Ahmed, H. M. Retrieval of solitons and other wave solutions for stochastic nonlinear Schrödinger equation with non-local nonlinearity using the improved modified extended tanh-function method. <italic toggle="yes">J. Opt.</italic> 1–10 (2024)</mixed-citation></ref><ref id="CR25"><label>25.</label><citation-alternatives><element-citation id="ec-CR25" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Farooq</surname><given-names>A</given-names></name><name name-style="western"><surname>Muhammad</surname><given-names>IK</given-names></name><name name-style="western"><surname>MA</surname><given-names>WX</given-names></name></person-group><article-title>Exact solutions for the improved mKdv equation with conformable derivative by using the Jacobi elliptic function expansion method</article-title><source>Opt. Quant. Electron.</source><year>2024</year><volume>56</volume><issue>4</issue><fpage>542</fpage><pub-id pub-id-type="doi">10.1007/s11082-023-06258-7</pub-id></element-citation><mixed-citation id="mc-CR25" publication-type="journal">Farooq, A., Muhammad, I. K. &amp; MA, W. X. Exact solutions for the improved mKdv equation with conformable derivative by using the Jacobi elliptic function expansion method. <italic toggle="yes">Opt. Quant. Electron.</italic><bold>56</bold>(4), 542 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR26"><label>26.</label><citation-alternatives><element-citation id="ec-CR26" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Kumar</surname><given-names>H</given-names></name><name name-style="western"><surname>Chand</surname><given-names>F</given-names></name></person-group><article-title>Chirped and chirpfree soliton solutions of generalized nonlinear Schrödinger equation with distributed coefficients</article-title><source>Optik</source><year>2014</year><volume>125</volume><issue>12</issue><fpage>2938</fpage><lpage>2949</lpage><pub-id pub-id-type="doi">10.1016/j.ijleo.2013.12.072</pub-id></element-citation><mixed-citation id="mc-CR26" publication-type="journal">Kumar, H. &amp; Chand, F. Chirped and chirpfree soliton solutions of generalized nonlinear Schrödinger equation with distributed coefficients. <italic toggle="yes">Optik</italic><bold>125</bold>(12), 2938–2949 (2014).</mixed-citation></citation-alternatives></ref><ref id="CR27"><label>27.</label><citation-alternatives><element-citation id="ec-CR27" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Ali Akbar</surname><given-names>M</given-names></name><etal/></person-group><article-title>Soliton solutions to the Boussinesq equation through sine-Gordon method and Kudryashov method</article-title><source>Results Phys.</source><year>2021</year><volume>25</volume><fpage>104228</fpage><pub-id pub-id-type="doi">10.1016/j.rinp.2021.104228</pub-id></element-citation><mixed-citation id="mc-CR27" publication-type="journal">Ali Akbar, M. et al. Soliton solutions to the Boussinesq equation through sine-Gordon method and Kudryashov method. <italic toggle="yes">Results Phys.</italic><bold>25</bold>, 104228 (2021).</mixed-citation></citation-alternatives></ref><ref id="CR28"><label>28.</label><citation-alternatives><element-citation id="ec-CR28" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name></person-group><article-title>Painlevé analysis, restricted bright-dark N-solitons, and N-rogue waves of a (4+1)-dimensional variable-coefficient generalized KP equation in nonlinear sciences</article-title><source>Nonlinear Dyn.</source><year>2025</year><volume>113</volume><issue>10</issue><fpage>11893</fpage><lpage>11906</lpage><pub-id pub-id-type="doi">10.1007/s11071-024-10645-4</pub-id></element-citation><mixed-citation id="mc-CR28" publication-type="journal">Mohan, B. &amp; Kumar, S. Painlevé analysis, restricted bright-dark N-solitons, and N-rogue waves of a (4+1)-dimensional variable-coefficient generalized KP equation in nonlinear sciences. <italic toggle="yes">Nonlinear Dyn.</italic><bold>113</bold>(10), 11893–11906 (2025).</mixed-citation></citation-alternatives></ref><ref id="CR29"><label>29.</label><citation-alternatives><element-citation id="ec-CR29" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name></person-group><article-title>A direct symbolic computation of center-controlled rogue waves to a new Painlevé-integrable (3+1)-D generalized nonlinear evolution equation in plasmas</article-title><source>Nonlinear Dyn.</source><year>2023</year><volume>111</volume><issue>17</issue><fpage>16395</fpage><lpage>16405</lpage><pub-id pub-id-type="doi">10.1007/s11071-023-08683-5</pub-id></element-citation><mixed-citation id="mc-CR29" publication-type="journal">Kumar, S. &amp; Mohan, B. A direct symbolic computation of center-controlled rogue waves to a new Painlevé-integrable (3+1)-D generalized nonlinear evolution equation in plasmas. <italic toggle="yes">Nonlinear Dyn.</italic><bold>111</bold>(17), 16395–16405 (2023).</mixed-citation></citation-alternatives></ref><ref id="CR30"><label>30.</label><citation-alternatives><element-citation id="ec-CR30" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mohan</surname><given-names>B</given-names></name><name name-style="western"><surname>Kumar</surname><given-names>S</given-names></name></person-group><article-title>Generalization and analytic exploration of soliton solutions for nonlinear evolution equations via a novel symbolic approach in fluids and nonlinear sciences</article-title><source>Chin. J. Phys.</source><year>2024</year><volume>92</volume><fpage>10</fpage><lpage>21</lpage><pub-id pub-id-type="doi">10.1016/j.cjph.2024.09.004</pub-id></element-citation><mixed-citation id="mc-CR30" publication-type="journal">Mohan, B. &amp; Kumar, S. Generalization and analytic exploration of soliton solutions for nonlinear evolution equations via a novel symbolic approach in fluids and nonlinear sciences. <italic toggle="yes">Chin. J. Phys.</italic><bold>92</bold>, 10–21 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR31"><label>31.</label><citation-alternatives><element-citation id="ec-CR31" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mathanaranjan</surname><given-names>T</given-names></name></person-group><article-title>The fractional perturbed nonlinear Schrödinger equation in nanofibers: Soliton solutions and dynamical behaviors</article-title><source>Comput. Model. Fract. Order Syst.</source><year>2024</year><volume>75</volume><issue>8</issue><fpage>155</fpage><lpage>167</lpage></element-citation><mixed-citation id="mc-CR31" publication-type="journal">Mathanaranjan, T. The fractional perturbed nonlinear Schrödinger equation in nanofibers: Soliton solutions and dynamical behaviors. <italic toggle="yes">Comput. Model. Fract. Order Syst.</italic><bold>75</bold>(8), 155–167 (2024).</mixed-citation></citation-alternatives></ref><ref id="CR32"><label>32.</label><citation-alternatives><element-citation id="ec-CR32" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mathanaranjan</surname><given-names>T</given-names></name><name name-style="western"><surname>Yesmakhanova</surname><given-names>K</given-names></name><name name-style="western"><surname>Myrzakulov</surname><given-names>R</given-names></name><name name-style="western"><surname>Naizagarayeva</surname><given-names>A</given-names></name></person-group><article-title>Optical wave structures and stability analysis of integrable Zhanbota equation</article-title><source>Mod. Phys. Lett. B</source><year>2025</year><volume>39</volume><issue>22</issue><fpage>2550071</fpage><pub-id pub-id-type="doi">10.1142/S021798492550071X</pub-id></element-citation><mixed-citation id="mc-CR32" publication-type="journal">Mathanaranjan, T., Yesmakhanova, K., Myrzakulov, R. &amp; Naizagarayeva, A. Optical wave structures and stability analysis of integrable Zhanbota equation. <italic toggle="yes">Mod. Phys. Lett. B</italic><bold>39</bold>(22), 2550071 (2025).</mixed-citation></citation-alternatives></ref><ref id="CR33"><label>33.</label><citation-alternatives><element-citation id="ec-CR33" publication-type="journal"><person-group person-group-type="author"><name name-style="western"><surname>Mathanaranjan</surname><given-names>T</given-names></name><name name-style="western"><surname>Tharsana</surname><given-names>S</given-names></name><name name-style="western"><surname>Dilakshi</surname><given-names>G</given-names></name></person-group><article-title>Solitonic wave structures and stablility analysis for the M-fractional generalized coupled nonlinear Schrödinger-KdV equations</article-title><source>Int. J. Appl. Comput. Math.</source><year>2024</year><volume>10</volume><issue>6</issue><fpage>165</fpage><pub-id pub-id-type="doi">10.1007/s40819-024-01794-6</pub-id></element-citation><mixed-citation id="mc-CR33" publication-type="journal">Mathanaranjan, T., Tharsana, S. &amp; Dilakshi, G. Solitonic wave structures and stablility analysis for the M-fractional generalized coupled nonlinear Schrödinger-KdV equations. <italic toggle="yes">Int. J. Appl. Comput. Math.</italic><bold>10</bold>(6), 165 (2024).</mixed-citation></citation-alternatives></ref></ref-list></back></article>

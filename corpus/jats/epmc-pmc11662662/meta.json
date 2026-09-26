@@ -1,0 +1,36 @@
+{
+  "id": "epmc-pmc11662662",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "UHRF1 ubiquitin ligase activity supports the maintenance of low-density CpG methylation",
+  "identifiers": {
+    "pmcid": "PMC11662662",
+    "pmid": "39607687",
+    "doi": "10.1093/nar/gkae1105"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11662662/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Tiedemann RL, Hrit J, Du Q, Wiseman AK, Eden HE, Dickson BM, et al. UHRF1 ubiquitin ligase activity supports the maintenance of low-density CpG methylation. Nucleic Acids Research. 2024;52(22):13733–13756. doi:10.1093/nar/gkae1105",
+  "features": [
+    "nested-sections",
+    "acknowledgments",
+    "declarations",
+    "multiple-abstracts",
+    "graphical-abstract",
+    "orcid",
+    "tables",
+    "inline-math",
+    "display-math",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#115",
+  "notes": "Mixed citations end in runs of adjacent <pub-id>s with no text between them (DOI then PMCID), 74 such transitions, which fuse into one token when flattened (#115). Formulas are bare, preamble-wrapped <tex-math>."
+}

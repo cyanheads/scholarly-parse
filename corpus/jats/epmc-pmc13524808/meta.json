@@ -1,0 +1,35 @@
+{
+  "id": "epmc-pmc13524808",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Machine learning-based tool to assess risk of hemodynamically significant PDA in extremely premature infants",
+  "identifiers": {
+    "pmcid": "PMC13524808",
+    "pmid": "41162564",
+    "doi": "10.1038/s41390-025-04489-w"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13524808/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Küng E, Göral K, Unterasinger L, Schilhart-Wallisch C, Berger A, Wisgrill L, et al. Machine learning-based tool to assess risk of hemodynamically significant PDA in extremely premature infants. Pediatric Research. 2025;100(1):270. doi:10.1038/s41390-025-04489-w",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "lists",
+    "footnotes",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "table-spans",
+    "table-footnotes",
+    "figures",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#134",
+  "notes": "The structured abstract's Impact section is a bullet <list> of three items, which fuse at their boundaries when the abstract is flattened (#134). PMC's own rendering nests that list inside a <p>; Europe PMC's places it directly in the abstract <sec>."
+}

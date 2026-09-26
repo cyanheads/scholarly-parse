@@ -1,0 +1,2635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils</title>
+				<funder ref="#_ghfepXV">
+					<orgName type="full">Piikani Nation</orgName>
+				</funder>
+				<funder ref="#_GaUktvS">
+					<orgName type="full">AgriScience Projects Program Canadian Agricultural Projects and the Resilience Institute</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author>
+							<persName><forename type="first">Jianling</forename><surname>Fan</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Nanjing University of Information Science and Technology</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Abou</forename><surname>Sami</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">Shouke Zhang, Zhejiang Agriculture and Forestry University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><surname>Fayssal</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Forestry</orgName>
+								<address>
+									<settlement>Sofia</settlement>
+									<country key="BG">Bulgaria</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Xingang</forename><surname>Zhou</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">Shouke Zhang, Zhejiang Agriculture and Forestry University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">Northeast Agricultural University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marissa</forename><forename type="middle">L</forename><surname>King</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="institution">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Barinder</forename><surname>Bajwa</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Naomi</forename><surname>Hanna</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Xiaohui</forename><surname>Xing</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="institution">University of Lethbridge</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kristin</forename><forename type="middle">E</forename><surname>Low</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="institution">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Patrick</forename><surname>Neuberger</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Erin</forename><surname>Hall</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Michael</forename><surname>Veltri</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="institution">University of Lethbridge</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Brett</forename><surname>Weighill</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="institution">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Leeann</forename><surname>Klassen</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Noreen</forename><forename type="middle">Plain</forename><surname>Eagle</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="institution">University of Lethbridge</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">William</forename><surname>Big Bull</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="institution">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Laura</forename><forename type="middle">S</forename><surname>Lynes</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tony</forename><surname>Montina</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Philippe</forename><forename type="middle">J</forename><surname>Thomas</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="institution">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Monika</forename><forename type="middle">A</forename><surname>Gorzelak</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Department of Chemistry and Biochemistry</orgName>
+								<orgName type="institution">Lethbridge Research and Development Centre, Agriculture and Agri-Food Canada</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="department">Department of Geography and Environment</orgName>
+								<orgName type="institution">University of Lethbridge</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff7">
+								<orgName type="department">Piikani Nation Lands Department</orgName>
+								<orgName type="institution" key="instit1">Peigan Board of Education</orgName>
+								<orgName type="institution" key="instit2">Piikani Nation</orgName>
+								<address>
+									<settlement>Brocket</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff9">
+								<orgName type="department">Environment and Climate Change Canada</orgName>
+								<orgName type="institution">The Resilience Institute</orgName>
+								<address>
+									<settlement>Canmore</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">D</forename><forename type="middle">Wade</forename><surname>Abbott</surname></persName>
+							<email>wade.abbott@agr.gc.ca</email>
+							<affiliation key="aff6">
+								<orgName type="institution">University of Lethbridge</orgName>
+								<address>
+									<settlement>Lethbridge</settlement>
+									<region>AB</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff10">
+								<orgName type="institution">National Wildlife Research Centre</orgName>
+								<address>
+									<settlement>Ottawa</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E0D6F823E14ADD7A24A004146DA1D51A</idno>
+					<note type="submission">RECEIVED February ACCEPTED May PUBLISHED April CITATION</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Sweetgrass</term>
+					<term>Anthoxanthum nitens</term>
+					<term>soil microbiome</term>
+					<term>glycomics</term>
+					<term>Indigenous knowledge</term>
+					<term>transdisciplinary</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Sweetgrass (Anthoxanthum nitens) is a culturally and environmentally significant perennial grass to many Indigenous Peoples; however, little is known about the potential of Sweetgrass as a contributor to soil health, biodiversity, and climate adaptation. Here, a team of transdisciplinary experts from academia, a non-governmental organization, and a First Nation community collaborated to investigate the structural composition of the rhizomes, stems, and leaves of greenhouse-grown Sweetgrass in comparison to other Poaceae grass members found in a nearby field. The data shows that the monosaccharide composition of A. nitens was evenly distributed throughout the three tissues, and that cellulose was the predominant polysaccharide followed by glucuronoararbinoxylans. There were lesser amounts of xyloglucans, mixed-linkage glucans, homogalacturonans, and rhamnogalacturonans as the hemicellulosic and pectic polysaccharides, respectively. The carbohydrate composition seen in A. nitens was consistent with the other Poaceae grasses evaluated in this study, with the exception of Setaria chondrachne, which contained elevated pectin levels in its stems and leaves. Additionally, the analysis of the carbohydrate content within the soil samples revealed a higher abundance of carbohydrates within greenhouse soil when compared to field soil samples, with significantly more mannose, galactose, and galacturonic acid. Further, there were structural differences in the microbial communities across sampling sites, including a significant increase in the abundance of Bacillus spp. in the greenhouse soil. Overall, this study provides the glycome and associated soil microbial community baseline for greenhouse-grown Sweetgrass.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Introduction</head><p>Anthoxanthum nitens (Weber) Y. Schouten &amp; Veldkamp (aka., Hierochloe odorata (L.) P. Beauv), commonly known as Sweetgrass, is a perennial Poaceae grass found throughout North America, Europe, and Asia. In Canada, Sweetgrass is considered a culturally and environmentally significant plant for First Nations, Inuit and Métis peoples and is commonly used for ceremonial protocol, medicine, as a material for weaving baskets or other crafts <ref type="bibr" target="#b44">(Moerman, 1998;</ref><ref type="bibr" target="#b34">Kavasch and Baar, 1999;</ref><ref type="bibr" target="#b69">Shebitz and Kimmerer, 2005)</ref>, or as a parable by Elders <ref type="bibr" target="#b6">(Brant, 2022)</ref>. Sweetgrass, especially the roots, are scented with a vanilla-like fragrance that is produced by coumarin <ref type="bibr" target="#b71">(Ueyama et al., 1991)</ref>. This volatile compound along with its coumadin and warfarin derivates have demonstrated anticoagulant activity <ref type="bibr">(Sharifi-Rad et al., 2021)</ref>. Additionally, coumarin and its 5,8-dihydroxycoumarin and 5-hydroxy-8-O-βd-glucopyranosycoumarin derivatives have also been explored for their antioxidant properties. Sweetgrass extracts have previously shown a decrease in lipid oxidation in in vitro assays <ref type="bibr" target="#b61">(Pukalskas et al., 2002)</ref> and rats administered ethanol <ref type="bibr" target="#b17">(Dobrzyńska et al., 2013)</ref>.</p><p>While the volatile and antioxidant properties of Sweetgrass have been well-documented, the carbohydrate profile, or glycome, of this plant remains relatively unknown. Sweetgrass has been previously analyzed for its fiber content in the search for sustainable materials to reinforce polymeric composites, revealing contents of 70.4% cellulose, 21.5% hemicellulose, and 8.1% lignin <ref type="bibr" target="#b16">(Dalmis et al., 2020)</ref>. However, this study did not investigate the polysaccharide profile within the plant and differences between its tissues. Using glycomics to profile the carbohydrate content of Sweetgrass, the potential Sweetgrass has for carbon sequestration can start to be revealed, as this rhizomatous grass stores carbon in its extensive rhizome network within soil <ref type="bibr" target="#b80">(Winslow, 2000;</ref><ref type="bibr" target="#b54">Panchal et al., 2022)</ref>. Sweetgrass has an expansive habitat much of which is vulnerable to the impacts of climate change, especially drought in prairie regions <ref type="bibr" target="#b67">(Schneider, 2013)</ref>. Thus, evaluating the carbon sequestration potential of Sweetgrass carbohydrates and the impact of a decline in abundance <ref type="bibr" target="#b68">(Shebitz and Kimmerer, 2004</ref>) are important considerations.</p><p>The flow of carbohydrates within and between different ecosystems is deeply dependent on the composition of the soil microbial communities within each environment <ref type="bibr" target="#b38">(Low et al., 2023)</ref>. Plants interact with the soil microbial community through the production of root exudates, mucilage, and other secretions <ref type="bibr" target="#b31">(Jones et al., 2009)</ref>. Root exudates are primarily composed of carbohydrates, along with amino acids, organic acids, fatty acids, and secondary metabolites <ref type="bibr" target="#b3">(Bais et al., 2006;</ref><ref type="bibr" target="#b31">Jones et al., 2009;</ref><ref type="bibr" target="#b75">Vranova et al., 2013)</ref>. Exudate carbohydrates are quickly utilized by bacteria and fungi, which contributes to the assembly of the soil microbial community <ref type="bibr" target="#b86">(Zhalnina et al., 2018)</ref>. Depending on the exudate composition, plants can modify the soil through changing the soil pH, attracting beneficial microbes, and chelating or releasing toxic compounds <ref type="bibr" target="#b73">(Vives-Peris et al., 2020)</ref>. In addition to rhizodeposition, carbohydrates can also enter the soil through manure or compost, or as plant cell wall biomass in litter, where decomposition by soil microorganisms influences the turnover of soil organic matter <ref type="bibr" target="#b65">(Schimel and Schaeffer, 2012)</ref>. Unlike root exudates, recalcitrant cell wall polysaccharides require complex enzymatic pathways produced by capable microorganisms to be digested <ref type="bibr" target="#b57">(Pérez et al., 2002)</ref>. Overall, carbohydrates stemming from root exudates or cell wall litter not only mediate interaction between plants and soil microbiota, but also affect interactions between microbial members of the soil community <ref type="bibr" target="#b63">(Sasse et al., 2018)</ref>.</p><p>This study was conducted in partnership with the Piikani Nation, a proud First Nation community in southern Alberta, Canada and member of the Blackfoot Confederacy; the Resilience Institute, a climate-focused charity with a long-standing relationship with the Piikani Nation; two federal government departments: Environment and Climate Change Canada and Agriculture and Agri-Food Canada; and the University of Lethbridge. The Piikani Nation has ∼4,200 registered members, where an estimated 40% of the members live off reserve in urban centers that surround Nation lands. They occupy two reserves; the main reserve along Alberta Highway No. 3 covers an area of 42,6127 hectares (105,200 acres) and the timber reserve (No. 147B) located in the Porcupine Hills to the northwest corner covers an area of 2,979 hectares (7,360 acres). Similar to many Indigenous communities, the Piikani Nation commonly uses Sweetgrass for cultural purposes, but it is becoming harder to find on the land <ref type="bibr" target="#b59">(Plain Eagle, 2023)</ref>. Here, the monosaccharide composition of the rhizome, stem, and leaf fractions of greenhouse-grown Sweetgrass was determined and compared to other Poaceae grass members collected from a nearby field on Piikani Nation lands. The chemical structures of polysaccharides were investigated using glycosidic linkage analysis by gas chromatography-mass spectrometry (GC-MS) and gas chromatography-flame ionization detection (GC-FID) analyses. Additionally, greenhouse and field soils associated with each plant were assessed for their chemical and carbohydrate content. Lastly, greenhouse and field soil samples were assessed using 16S rRNA gene sequencing to determine the bacterial composition of the soil microbial communities as a function of their habitats and growing conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Materials and methods . Collection of grass and soil samples</head><p>Prior to sample collection, the Piikani Nation and their community partners at the Resilience Institute, hosted a Sweetgrass Partnership Ceremony (September 9, 2022, Piikani Reserve 147 and 147B). Scientists from the University of Lethbridge and Agriculture and Agri-Food Canada, the president of the Resilience Institute, and invited guests joined Elders and other knowledge holders from the Piikani Nation for the ceremony. Elder Peter Strikes with a Gun gave a blessing for the collaborative work and expressed how Sweetgrass represented a symbol not just of their history, but of their future (Strikes with a Gun, 2022). Following the ceremony, a traditional Blackfoot meal was provided consisting of Saskatoon berry soup and fry bread. This Partnership Ceremony was an essential part of the research method for this study and paved the way for the collection of samples.</p><p>Guided by Piikani knowledge holders and students, six grass samples were collected from a 1 m 2 nursery bed located within a greenhouse next to the Piikani Nation Secondary School (Brocket, AB, Canada; 49.54332 • N, 113.75018 • W) on October 4, 2022. Additionally, six grass samples were collected from a 5 m 2 section within a field on the main Piikani Reserve where Sweetgrass used to be commonly gathered (Brocket, AB, Canada; 49.54925 • N, 113.73252 • W; October 4, 2022). All plant samples were dug out and divided into leaf; stem; and rhizome tissues; each tissue sample was immediately frozen on dry ice and stored at -80 • C. Soil and plant samples were freeze-dried and ball-milled to a fine powder using a Mixer Mill MM400 (Retsch, Germany), and stored at room temperature until processed further.</p><p>Soil samples associated with the plants collected from the greenhouse (n = 6) and field (n = 6) sampling sites, were also collected from the top layer (0-15 cm), and immediately frozen on dry ice and stored at -80 • C until further processing. Soil samples were then sieved (2 mm) before being divided into two parts: one for 16S rRNA gene sequencing and microbial community analysis, and the second for glycomics. Additionally, six soil samples were collected from a "baseline" sampling site located adjacent to the greenhouse, which was the site originally used to collect soil for use in the greenhouse that was supplemented with bloodmeal as a fertilizer. Baseline soil samples were treated similarly to the greenhouse and field soils, except baseline soil samples were only studied using 16S rRNA gene sequencing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. Identification of grass species through ITS sequencing</head><p>To identify the grass species that were collected from the greenhouse and field sites, the internal transcribed spacer 1 (ITS1) region was used for DNA barcoding. DNA was extracted from all greenhouse leaf samples (50 mg) using the DNeasy Plant Pro kit (Qiagen, Canada) following the manufacturer's instructions. The ITS1 region was targeted for amplification by PCR using the primers: ITS-p5 (CCTTATCAYTTAGAGGAAGGAG) and ITS-p4 (CCGCTTAKTGATATGCTTAAA) <ref type="bibr" target="#b12">(Cheng et al., 2016)</ref>. Amplification was performed using iProof TM High-Fidelity DNA polymerase (Bio-Rad, Canada) with PCR cycles as follows: initial denaturation step of 98 • C for 1 min before 16 cycles of: 98 • C for 10 s, 58-0.5 • C cycle -1 for 20 s, and 72 • C for 1 min, before 30 cycles of: 98 • C for 10 s, 52 • C for 20 s, and 72 • C for 1 min, with a final extension at 72 • C for 5 min. PCR products (∼750 bp) were sent for Sanger sequencing (Eurofins Genomics, Canada), and sequencing results were paired using Sequencher (version 5.4.6) and run through NCBI's nucleotide BLAST suite <ref type="bibr" target="#b0">(Altschul et al., 1990)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. Preparation of alcohol insoluble residue</head><p>Alcohol insoluble residue (AIR) of rhizome, stem, and leaf sections of the greenhouse and field grass samples, along with the soil collected from each collection site, were prepared according to the literature <ref type="bibr" target="#b55">(Pattathil et al., 2012)</ref> with modifications <ref type="bibr" target="#b83">(Wood et al., 2018;</ref><ref type="bibr" target="#b36">Klassen et al., 2023)</ref>. Briefly, 100 mg of each ball-milled plant sample and 10 g of each ball-milled soil sample was suspended in 40 mL of 80% (v/v) ethanol and placed on a rotator for 8 h, for a total of three washes, followed by a single wash of acetone and methanol, each for 20 min. Samples were centrifuged (3,000 × g, 30 min) between solvent washes and the supernatant was discarded. The residue after the final wash was vacuum-dried by SpeedVac (Thermo Scientific, USA).</p><p>. Preparation of partially methylated alditol acetates from plant cell walls Cell wall residue from AIR was de-starched by incubation with α-amylase (E-BLAAM, Megazyme) in 100 mM maleic acid buffer (pH 6.0) containing 100 mM NaCl and 3 mM CaCl 2 for 8 h at 70 • C followed by incubation with amyloglucosidase (E-AMGDFPD, Megazyme) for 4 h at 50 • C. The de-starched samples were extensively dialyzed (MWCO 3.5 kDa) against deionized water and then freeze-dried. For linkage analysis of neutral sugars, 5 mg of each AIR was permethylated by 0.6 mL of methyl iodide in 1 mL of dimethyl sulfoxide (DMSO) with the presence of excess amount of sodium hydroxide (NaOH) <ref type="bibr" target="#b32">(Jones et al., 2020;</ref><ref type="bibr" target="#b39">Low et al., 2020;</ref><ref type="bibr" target="#b2">Badhan et al., 2022)</ref>. The methylation product was cleaned up by partition between dichloromethane and 10% (v/v) acetic acid over ice one time and then with deionized water three times. The final lower phase was evaporated to dryness, and then the methylation process was repeated two more times. The per-O-methylated samples were subsequently hydrolyzed to monosaccharides with 2 mL of 4 M trifluoroacetic acid (TFA) for 4 h at 100 • C, reduced with 10 mg of sodium borodeuteride (NaBD 4 , 99 atom % D, Alfa Aesar) dissolved in 1 mL of deionized water for 16 h at room temperature <ref type="bibr" target="#b39">(Low et al., 2020)</ref>, and then peracetylated with 2.5 mL of mixture of acetic anhydride and TFA (5:1, v/v) at 60 • C for 1 h <ref type="bibr" target="#b75">(Voiges et al., 2012;</ref><ref type="bibr" target="#b62">Robb et al., 2022;</ref><ref type="bibr" target="#b12">Chang et al., 2023)</ref>. The resulting partially methylated alditol acetates (PMAAs) were redissolved in 3 mL of dichloromethane, and washed with saturated deionized water solution of sodium bicarbonate then deionized water three times. After that, the lower phase was passed through a glass wool-plugged Pasteur pipette loaded with anhydrous sodium sulfate powder <ref type="bibr">(Yu et al., 2017)</ref>, followed by evaporation to dryness and redissolved in ethyl acetate for GC-MS analysis. In a separate experiment, uronic acids in approximately 5 mg of dry AIR powder were carboxyl reduced to 6,6-dideuterated neutral sugars by NaBD 4 reduction of their methyl esters generated by weak methanolysis (0.5 M methanolic HCl, 80 • C, 20 min) <ref type="bibr" target="#b14">(Chong et al., 2019;</ref><ref type="bibr" target="#b25">Hosain et al., 2019;</ref><ref type="bibr">Muhidinov et al., 2020)</ref>, followed by converting to PMAAs using the same procedure as described above. Two technical replicates were conducted for each sample.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. GC-MS analysis of PMAAs</head><p>All PMAA samples were tested on an Agilent 7890A-5977B GC-MS system (Agilent Technologies, Santa Clara, CA) installed with a medium-polarity Supelco SP-2380 column (60 m × 0.25 mm × 0.2 µm; Sigma-Aldrich, USA) with a constant flow rate of helium (0.8 mL min -1 ). Samples were injected at an inlet temperature of 250 • C with a 10:1 split ratio. The oven temperature was programmed to start at 120 • C (hold 1 min) followed by increasing at 3 • C min -1 to 200 • C (hold 50 min) then 3 • C min -1 to 250 • C (hold 20 min). The EI-MS spectra of the PMAAs were interpreted by comparing them with those of reference derivatives and by referring to the literature <ref type="bibr" target="#b11">(Carpita and Shea, 1989)</ref>. The glycosidic linkage composition (mol%) was calculated following the published protocol <ref type="bibr" target="#b58">(Pettolino et al., 2012)</ref>. Visualization of the plant glycosidic linkage data was carried out using R (version 4.2.2) in R-studio (version 2022.02.3 Build 492) with the packages: ggplot2 <ref type="bibr" target="#b77">(Wickham, 2016)</ref> and reshape2 <ref type="bibr" target="#b76">(Wickham, 2007)</ref>. Correlations amongst the glycosidic linkages present within the rhizome, stem, and leaf tissues of the greenhouse and field plants were analyzed with principal component analysis (PCA) plots using R in R-studio with the packages: dplyr <ref type="bibr" target="#b79">(Wickham et al., 2023)</ref>, forcats <ref type="bibr" target="#b78">(Wickham, 2023)</ref>, and ggplot2 <ref type="bibr" target="#b77">(Wickham, 2016)</ref>. Polysaccharide compositions were estimated from the linkage data (Supplementary Tables <ref type="table">S3</ref>, <ref type="table">S4</ref>) by adapting the published calculations from <ref type="bibr" target="#b58">Pettolino et al. (2012)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. Analysis of total carbohydrate content and monosaccharide composition of soil samples</head><p>In experimental duplicates, ball-milled air powder of soil (250 mg) was hydrolyzed by magnetic stirring in 1 mL of 12 M H 2 SO 4 for 2 h, followed by adding 11 mL of deionized water to dilute the acid and then incubation at 100 • C for 2 h with magnetic stirring. The hydrolysate was transferred to a 50 mL tube, along with 12 mL of deionized water used to wash the original tube for hydrolysis. Samples were centrifuged three times (3,000 × g, 10 min), where between spins the resulting supernatants were pooled with three deionized water washes of the pellet. 5 M NaOH solution (2 mL) was added to neutralize each supernatant. The resulting hydrolysates of soil samples were filtered (0.2 µm) for monosaccharide analysis using high-performance anion-exchange chromatography with pulsed amperometric detection (HPAEC-PAD), while hydrolysates were not filtered for the soil total carbohydrate assay.</p><p>The total carbohydrate contents of the soil AIRs were determined calorimetrically using the phenol-sulphuric acid assay <ref type="bibr" target="#b18">(Dubois et al., 1956)</ref>. Briefly, 2 mL of the above-mentioned hydrolysate was mixed with 50 µL of 80% phenol water solution, immediately followed by adding 3 mL of 18 M H 2 SO 4 . The solutions were vortexed and then cooled to room temperature followed by reading the absorbance at 490 nm with a Varian Cary 300 UV-Vis spectrophotometer (Agilent Technologies, Santa Clara, CA) against a reagent blank prepared from 2 mL of deionized water instead of the hydrolysate. The carbohydrate content of each soil sample was measured against a calibration curve prepared from 20 to 60 µg mL -1 of glucose solution. Total carbohydrate content was calculated based on the soil dry weight, where the mean ± standard deviation (n = 2) was used to plot the data in GraphPad Prism (version 8.0.2). Absolute monosaccharide quantification was performed using HPAEC-PAD on all greenhouse and field soil samples. HPAEC-PAD was performed with a Dionex ICS-3000 chromatography system (Thermo Scientific) equipped with an autosampler and a pulsed amperometric (PAD) detector. 10 µL of each hydrolyzed sample was injected onto an analytical (3 × 150 mm) CarboPac PA20 column (Thermo Scientific) with a CarboPac PA20 guard column (Thermo Scientific). Neutral and uronic acid sugar samples were eluted at a flow rate of 0.3 mL min -1 with a background of NaOH (buffer A), and a gradient of sodium acetate (NaOAc; buffer B) (Supplementary Table <ref type="table">S1</ref>) at 15 • C, where amino sugars were eluted similarly but with a different gradient (Supplementary Table <ref type="table">S2</ref>). The elution of each run was monitored with a PAD detector (standard quadratic waveform). For quantification of neutral and uronics, a mixture of monosaccharides was used in a known concentration series with the following concentrations for a 1X solution with 99 µM maltotriose used as an internal standard (ISTD): 119 µM fucose (Fuc), 132 µM arabinose (Ara), 132 µM ribose (Rib), 110 µM galactose (Gal), 110 µM glucose (Glc), 110 µM mannose (Man), 132 µM xylose (Xyl), 121 µM rhamnose (Rha), 110 µM glucosamine (GlcN), 101 µM guluronic acid (GulA), 98 µM galacturonic acid (GalA), 101 µM mannuronic acid (ManA), and 101 µM glucuronic acid (GlcA). For amino sugar quantification, a mixture of monosaccharides was used in a known concentration series with the following concentrations for a 1X solution with 99 µM maltotriose used as an ISTD: 112 µM GlcN, 112 µM galactosamine (GalN), and 112 µM mannosamine (ManN). Monosaccharide quantification was performed using Chromeleon software (Thermo Scientific) from triplicate HPAEC-PAD injections. The mean ± standard deviation (n = 3) was used to plot the data in GraphPad Prism (version 8.0.2). To compare differences in the amount of monosaccharides in the greenhouse and field soils, a two-way analysis of variance (ANOVA) test using a false discovery approach was conducted using GraphPad Prism (version 8.0.2).</p><p>. S rRNA gene sequencing of soil microbial communities DNA was extracted from all baseline, field, and greenhouse rhizosphere soil samples (250 mg, 2 mm sieved) using the PowerSoil Pro kit (Qiagen, Canada) following the manufacturer's instructions. Purified DNA samples were sent to Génome Québec (Montréal, QC, Canada) for Illumina MiSeq PE250 16S rRNA gene sequencing using the primers 515F (GTGCCAGCMGCCGCGGTAA) and 806R (GGACTACHVGGGTWTCTAAT) targeting the V4 region. A total of 908,770 paired end reads were quality trimmed using Trimmomatic <ref type="bibr" target="#b5">(Bolger et al., 2014)</ref> with a sliding window of 5:20. Trimmed fasta files were merged and classified using Kraken 2 <ref type="bibr" target="#b82">(Wood et al., 2019)</ref> according to the Silva 138 SSU database. Bracken <ref type="bibr" target="#b40">(Lu et al., 2017)</ref> was used to estimate bacterial and archaeal abundance at the genus level. Community analysis, statistics, and plotting of the Bracken output files were performed using R (version 4.2.2) in R-studio (version 2022.02.3 Build 492) with the packages: phyloseq (McMurdie and Holmes, 2013), ggplot2 <ref type="bibr" target="#b77">(Wickham, 2016)</ref>, picante <ref type="bibr" target="#b35">(Kembel et al., 2010)</ref>, rioja <ref type="bibr" target="#b33">(Juggins, 2022)</ref>, and vegan <ref type="bibr" target="#b52">(Oksanen et al., 2023)</ref>.</p><p>Statistical analyses were carried out using normalized read abundances and classification at the genus level. Normalized read abundances were calculated with the "decostand()" function (method = total) from the vegan package <ref type="bibr" target="#b52">(Oksanen et al., 2023)</ref>. Non-metric multi-dimensional scaling (NMDS) analyses based on Bray-Curtis dissimilarity were performed using the vegdist() function of vegan <ref type="bibr" target="#b52">(Oksanen et al., 2023)</ref>, to visualize the separation between soil sampling sites. A permutational multivariant analysis of variance (PERMANOVA) was used to assess the effect of soil type on the compositions of rhizosphere-associated microbial communities, using the adonis2 function in vegan <ref type="bibr" target="#b52">(Oksanen et al., 2023)</ref> with 999 permutations. Observed OTUs, Chao1, Shannon, and Simpson indices were calculated in R as a measure of community alpha diversity using the estimate richness function in the phyloseq package <ref type="bibr" target="#b43">(McMurdie and Holmes, 2013)</ref>. Changes in alpha diversity between the different sampling locations were assessed using the Kruskal-Wallis test with post-hoc Dunn's multiple comparison in GraphPad Prism (version 8.0.2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. Soil chemistry</head><p>Soils were very dry upon arrival in the lab and determined to contain 0% moisture using the thermogravimetric method and thus were only air-dried at room temperature for 24 h and ground to 2 mm. A subsample of each soil was fine ground to 60 µm. NO 3 -N and NH 4 -N were extracted from the 2 mm subsample using a 2.0 M KCl extraction at 25 • C and measured with an Autoanalyzer 3 (EasyChem Pro, Systea Analytical Technology, Anagni, Italy). The 2 mm subsample was used to determine pH with a 2:1 soil slurry (water:soil) and an Orion Star 211 pH probe (ThermoFisher Scientific, USA). The 60 µm ground sample was analyzed for total carbon (TC) and total nitrogen (TN) using dry combustion with an Elemental analyzer (CE Instruments). Total organic carbon (TOC) was determined by acidification with 0.6 N HCl and inorganic carbon was calculated by determining the difference between TC and TOC. Changes in the soil physio-chemical data parameters were assessed in R-studio (version 2023.06.1 Build 524) using a Kruskal-Wallis test with a post-hoc two sided Dunn test, that included a Benjamani-Hochberg multiple comparisons correction factor from the FSA (version 0.9.5) package <ref type="bibr" target="#b51">(Ogle et al., 2023)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>. ITS sequencing DNA barcoding using the ITS1 region was used to identify the grass species that were collected from the greenhouse and field sites. Based on the top BLAST hit, all six greenhouse samples were confirmed to be Sweetgrass (A. nitens, Table <ref type="table">1</ref>), whereas the field samples were identified as different grass species including blue wild rye (Elymus glaucus), Pumpelly's bromegrass</p><p>TABLE Identification of grass species collected from the greenhouse and field sites within the Piikani Nation using ITS sequence similarity. Sample Top BLAST hit Percent identity (%) GH1 Anthoxanthum nitens voucher CMN:CAN 97.3 GH2 Anthoxanthum nitens voucher CMN:CAN 98.1 GH3 Anthoxanthum nitens voucher CMN:CAN 97.7 GH4 Anthoxanthum nitens voucher CMN:CAN 97.9 GH5 Anthoxanthum nitens voucher CMN:CAN 97.6 GH6 Anthoxanthum nitens voucher CMN:CAN 98.3 F1 Elymus glaucus strain QH-5 83.6 F2 Bromus pumpellianus voucher CAN:528978 96.3 F3 Setaria chondrachne voucher HCCN-PJ008548-PB-261 79.5 F4 Elymus repens isolate ER1 92.5 F5 Elymus repens isolate ER1 89.4 F6 Elymus repens isolate ER1 98.9 Top BLAST hit is displayed.</p><p>(Bromus pumpellianus), couch grass (Elymus repens), and Setaria chondrachne (Table <ref type="table">1</ref>).</p><p>. Glycosidic linkage composition of greenhouse-grown Sweetgrass rhizome, stem, and leaf sections</p><p>The rhizomes, stems, and leaves of greenhouse-grown Sweetgrass tissues were assessed for their polysaccharide content through monosaccharide composition and glycosidic linkage analysis. The comparison of the individual monosaccharides based on relative abundances within the three Sweetgrass tissue sections, revealed a consistent monosaccharide distribution throughout the plant (Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>). Glucose (Glc) was the predominant monosaccharide (58.1-59.3%), followed by xylose (Xyl; 22.3-26.8%), arabinose (Ara; 5.3-7.1%), uronic acids (Ur. acid; 4.8-5.5%), galactose (Gal; 2.7-3.9%), mannose (Man; 0.6-2.2%), and trace amounts of rhamnose (Rha; 0.7-0.9%) and fucose (Fuc; 0.1%). The primary glucose linkages were 4-Glcp, 4,6-Glcp, and t-Glcp, whereby all three linkages were abundant in the three Sweetgrass tissues (A. nitens; Figure <ref type="figure">1B</ref>; Supplementary Table <ref type="table">S3</ref>). As the samples were de-starched prior to undergoing glycosidic linkage analysis, a majority of the 4-Glcp was presumed to stem from cellulose, which is consistent with the previous study <ref type="bibr" target="#b16">(Dalmis et al., 2020)</ref>, while the 4,6-Glcp and t-Glcp linkages likely accounted for xyloglucans and mixed-linkage glucans. The second most abundant polysaccharide found throughout Sweetgrass was determined to be glucuronoararbinoxylans (GAX) based on the presence and relative abundances of the 4-Xylp, 3,4-Xylp, 2,4-Xylp, t-Araf, and t-GlcAp linkages (Figure <ref type="figure">1B</ref>; Supplementary Table <ref type="table">S3</ref>) <ref type="bibr" target="#b28">(Izydorczyk and Biliaderis, 1995;</ref><ref type="bibr" target="#b69">Smith and Harris, 1999)</ref>. Additionally, the presence of various rhamnose linkages (i.e., t-Rhap, 2-Rhap, 4-Rhap, 2,3-Rhap, 2,4-Rhap, 3,4-Rhap, and 2,3,4-Rhap) is indicative of rhamnogalacturonans being present within Sweetgrass <ref type="bibr" target="#b58">(Pettolino et al., 2012)</ref>. However, these rhamnose linkages were sporadically present within the stem and leaf tissues of Sweetgrass, whereas all seven were present within the rhizomes (Figure <ref type="figure">1B</ref>; Supplementary Table <ref type="table">S3</ref>). In terms of uronic acid abundances within Sweetgrass, 4-GalAp and t-GalAp were present throughout the plant, therefore it was predicted that homogalacturonans (HGs) composed 1.4-4.1% of the total linkages in Sweetgrass.</p><p>. Glycosidic linkage composition of the rhizome, stem, and leaf sections of other grass species collected from a nearby field A higher degree of glycosidic diversity was seen between the three tissue sections of each field grass species. Interestingly, the stems of S. chondrachne contained the highest abundance of uronic acid (22.8%; Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>), mostly attributed to 4-GalAp and t-GlcAp whose abundances were increased within this section (Supplementary Figure <ref type="figure">S1</ref>). Additionally, S. chondrachne</p><p>TABLE Relative monosaccharide composition (Mol %) calculated from glycosidic linkage compositions for rhizome (R), stems (S), and leaves (L) harvested from A. nitens, E. glaucus, B. pumpellianus, S. chondrachne, and E. repens. Monosaccharide A. nitens E. glaucus B. pumpellianus S. chondrachne E. repens R S L R S L R S L R S L R S L Ara 6.0 5.3 7.1 11.9 6.4 6.8 9.1 6.6 6.1 10.0 7.3 6.5 9.0 7.3 6.2 Fuc 0.1 0.1 0.1 0.2 0.0 0.1 0.2 0.1 0.0 0.1 0.1 0.0 0.1 0.1 0.0 Gal 3.8 2.7 3.9 11.8 2.0 3.2 5.2 3.2 2.7 5.1 5.2 2.8 5.8 3.8 2.4 Glc 58.1 59.0 59.3 42.3 48.7 51.9 49.2 57.9 62.8 53.8 42.5 52.8 51.4 56.1 54.6 Man 2.2 0.6 1.1 5.3 0.6 1.2 2.8 0.9 0.6 2.5 1.9 0.4 3.6 1.6 0.6 Rha 0.9 0.7 0.7 1.4 0.3 0.4 0.9 0.4 0.3 0.9 0.7 0.2 1.2 0.6 0.3 Xyl 23.7 26.8 22.3 21.8 39.7 30.6 29.0 27.6 24.1 24.5 19.6 27.8 24.9 26.6 31.4 GalA 2.6 2.7 3.1 3.1 0.4 3.1 1.3 1.0 0.9 1.2 16.1 6.3 1.4 1.8 2.3 GlcA 2.5 2.1 2.4 2.0 1.5 2.1 2.4 2.0 1.9 1.9 6.6 2.8 2.2 2.0 1.8 Two separate experiments were conducted for each sample.</p><p>leaves also contained increased uronic acid levels (9.2%), with increased 4-GalAp and t-GlcAp but to a lesser extent than the stem section. Based on the abundances of these two uronic acid linkages, homogalacturonan is predicted to be more abundant within this field grass species. Specifically, based upon the proportion of 3,4-GalAp to 4-GalAp and the presence of rhamnose linkages (i.e., t-Rhap, 2,3-Rhap, 2,3,4-Rhap), where some of the GalA could be attributed to rhamnogalacturonan II <ref type="bibr" target="#b58">(Pettolino et al., 2012)</ref>. Further, the 4-ManAp linkage was only found in the stem and leaf tissues of S. chondrachne (Supplementary Figure <ref type="figure">S1</ref>). In contrast, the stem section of E. glaucus had the highest abundance of xylose (39.9%), whereas its rhizomes contained higher amounts of arabinose (11.9%), galactose (11.8%), mannose (5.3%), and rhamnose (1.4%) (Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>) in comparison to the other tissue sections of E. glaucus. Intriguingly, the leaves of E. glaucus had a similar neutral monosaccharide profile as the stems, and similar uronic acid content as the rhizomes. Increased levels of arabinose and galactose linkages such as t-Arap, 6-Galp, 3,6-Galp are indicative of arabinogalactans, whereas the presence of mannose linkages (i.e., 4-Manp, 4,6-Manp) could be attributed to homomannan, glucomannan, or glucogalactomannan <ref type="bibr" target="#b58">(Pettolino et al., 2012)</ref>. With E. repens and E. glaucus being members of the same genus, the monosaccharide profiles of both showed comparable compositions. However, less dramatic proportions of xylose and galactose were seen in the E. repens stem and rhizome tissues, respectively (Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>). The stems and leaves of B. pumpellianus had similar profiles to each other, whereas the rhizomes of B. pumpellianus had increased levels of xylose (29.0%), arabinose (9.1%), galactose (5.2%), and mannose (2.8%) in comparison to its stem and leaf sections (Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>).</p><p>. Comparison of glycosidic linkage compositions across plant sections and between different grass species Amongst all grass species analyzed, the rhizome section of each plant contained an increased relative abundance of mannose and rhamnose (Figure <ref type="figure">1A</ref>; Table <ref type="table">2</ref>), where a greater amount of diverse glycosidic linkages, such as 3,4-Rhap, 2-Rhaf, 2,4,6-Manp, 4,6-Manp, 2,4-Manp, and 2-Galp, were commonly found in the rhizomes but seldomly found in the other plant tissue sections of Sweetgrass and the field grasses (Supplementary Figure <ref type="figure">S1</ref>). The examination of the glycosidic linkage profiles of Sweetgrass and the field grasses revealed that the 2,4-GlcAp/2,4-GalAp, 3-GalAp, 2-Rhap, 2,3-Glcp linkages were consistently present in all three Sweetgrass tissues, but sporadically found in the field grass sections. Based on the linkage data for each plant tissue, PCA plotting revealed closely grouped data points belonging to the six greenhouse-grown Sweetgrass plants suggesting that these samples contained similar linkage compositions for their rhizome and stem sections (Figure <ref type="figure">1C</ref>). The leaves of B. pumpellianus were aligned within the confidence interval of the leaves from Sweetgrass, indicating possible similarities between the two species. The most drastic difference in linkage compositions between greenhousegrown Sweetgrass and the field grass species was seen in the rhizomes, where no overlap was observed (Figure <ref type="figure">1C</ref>).</p><p>The major polysaccharides estimated to be present in the cell walls of all the grass species (Figure <ref type="figure">2</ref>) were cellulose (24-52%) and glucuronoarabinoxylans (19-39%). Xyloglucan was calculated to be present in significant amounts (6-11%), while minor levels of arabinans, arabinogalactans, heteromannans, mixed linked glucans, rhamnogalacturonans, and homogalacturonans were detected in the majority of the samples. The stems of S. ). The following abbreviations were used for their respective polysaccharides: AB, arabinan; AG, arabinogalactan; GAX, glucuronoarabinoxylan; HM, heteromannan; XG, xyloglucan; RG, rhamnogalacturonan; HG, homogalacturonan; CE, cellulose; MLG, mixed linked glucan; UA, unassigned linkages.</p><p>chondrachne contained elevated levels of homogalacturonan (15%) whilst only comprising 1-3% of the cell walls in the tissues of other grass species. Homogeneity in the polysaccharide composition amongst the tissues in A. nitens and E. repens was observed, in which the relative composition of the polysaccharides were consistent between the tissues of the grass species.</p><p>. Carbohydrate content of soils associated with greenhouse-grown Sweetgrass and other species collected from a nearby field The total carbohydrate content was the highest amongst the greenhouse soil samples associated with the Sweetgrass plants at 10.1 ± 1.9% (Figure <ref type="figure">3</ref>), whereby the field soil samples ranged from 4.6 ± 1.1 to 9.2 ± 1.8%. HPAEC-PAD analysis revealed that glucose was the most abundant monosaccharide within the soil samples, accounting for 30.2 µg mg -1 in the greenhouse samples and 9.7-20.9 µg mg -1 in the field samples (Figure <ref type="figure">3</ref>). Further, significantly elevated amounts of glucose, galactose, mannose, xylose, and galacturonic acid were also seen in greenhouse soil samples (P &lt; 0.05). In contrast, all field soil samples contained higher amounts of glucosamine in comparison to greenhouse soil, where this difference was significant (P &lt; 0.05; Figure <ref type="figure">3</ref>) in all except for the comparison between B. pumpellianus and greenhouse soils. Whereas, relatively consistent amounts of arabinose and xylose were seen amongst all soil samples, with lesser amounts of fucose, rhamnose, ribose, and other amino sugars and uronic acids.</p><p>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>S microbial community analysis of greenhouse, field, and baseline soil samples</head><p>The greenhouse, field, and baseline soil samples significantly differed in their bacterial community composition (Figure <ref type="figure">4A</ref>; PERMANOVA: R 2 = 0.76, P = 0.001). Richness indices (observed, Chao1) were significantly higher in greenhouse soil samples (P &lt; 0.05; Figure <ref type="figure">4B</ref>) in comparison to baseline soil samples. Furthermore, soil bacterial alpha-diversity (Shannon and Simpson indices) at the genus level was also significantly higher in greenhouse soil (P &lt; 0.05; Figure <ref type="figure">4B</ref>) in comparison to baseline but not field soil samples. Although field soil samples did not show significant differences in bacterial diversity, these samples were marginally higher in richness and alpha-diversity values compared to baseline samples. Further, the dendrogram shown in Figure <ref type="figure">4C</ref> illustrates the clustering pattern of the samples according to the three sampling sites, where field and baseline samples are most related to each other.</p><p>Amongst all soil samples analyzed, the most abundant bacterial phyla were Actinobacteria and Proteobacteria, where on average, these phyla comprised 42% of the greenhouse, 51% of the baseline, and 47% of the field soil microbial communities (Figure <ref type="figure">4C</ref>). Many of the genera belonging to these phyla were seen to have similar relative abundances across the three sampling sites (e.g., Iamia, Mycobacterium, Pseudonocardia, Reyranella, Sphingomonas, and uncultured Xanthobacteraceae; Figure <ref type="figure">5</ref>). The six greenhouse soil samples contained a higher relative abundance of Firmicutes in comparison to baseline and field soil samples (Figure <ref type="figure">4C</ref>), as an increased proportion of Bacillus members was seen in the greenhouse soil and members of the Planifilum genera were only detected in this sample (Figure <ref type="figure">5</ref>). Additionally, members belonging to the JCM 18977 (Actinobacteria), and Truepera genera (Deinococcota) were also only detected in greenhouse soil samples. In contrast, there was a higher relative abundance of Chloroflexi seen in the field soil samples (Figure <ref type="figure">4C</ref>), where uncultured Anaerolineaceae were drastically increased within these samples (Figure <ref type="figure">5</ref>). The baseline field samples contained greater relative abundances of Verrucomicrobia and Actinobacteria, in comparison to the greenhouse and field soil samples (Figure <ref type="figure">4C</ref>). Members belonging to the candidatus Udaeobacter and Chtoniobacter genera, and Gaiella, Conexibacter, Solirubrobacter, and Nocardioides genera were increased (Figure <ref type="figure">5</ref>), an observation largely attributed to the increased relative abundances of Verrucomicrobia and Actinobacteria, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. Soil chemistry</head><p>Soil chemical analysis revealed significantly higher total nitrogen, total carbon, total organic carbon, and NH 3 -N in the greenhouse compared to baseline soils. Greenhouse soils had significantly higher NO 3 -N than both baseline and field soils. Field soils had significantly higher pH values compared to the greenhouse soils (Table <ref type="table">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Sweetgrass (A. nitens) and the four different field grass species analyzed within this study, are all Graminacous monocots belonging to the Poaceae family. Therefore, it is not surprising to see that these grass species have a similar polysaccharide profile to each other and to other Poaceae members <ref type="bibr" target="#b69">(Smith and Harris, 1999;</ref><ref type="bibr" target="#b22">Gibeaut et al., 2005)</ref>. In the glycomics analysis conducted here, cellulose and GAX were determined to be the predominant polysaccharides in Sweetgrass and the field grass species, where each species contained smaller proportions of other hemicelluloses (i.e., mixed-linkage glucans, xyloglucans, mannans) and pectic polysaccharides (i.e., homogalacturonan, rhamnogalacturonan) (Figure <ref type="figure">2</ref>). In comparison, the cellulose content of Sweetgrass stems was previously reported to be 70.4% through gravimetric analysis <ref type="bibr" target="#b16">(Dalmis et al., 2020)</ref>. Xylan polysaccharides, such as heteroxylans, arabinoxylans, and GAX, typically represent 20-30% of the total cell wall content within Poaceae grass species <ref type="bibr" target="#b23">(Hatfield et al., 2017)</ref>, and were determined here to represent 19-32% of the tissue cell walls of various Poaceae species. Within the primary cell walls, Poaceae GAX typically contains more Araf residues within the GAX backbone <ref type="bibr" target="#b64">(Scheller and Ulvskov, 2010)</ref>, where secondary cell walls also contain some GlcAp or MeGlcAp substituents as well <ref type="bibr" target="#b56">(Peña et al., 2016)</ref>. These Araf residues are often esterified with coumaric or ferulic acids <ref type="bibr" target="#b7">(Buanafina, 2009)</ref>. In comparison, woody and herbaceous eudicots contain glucuronoxylans <ref type="bibr" target="#b56">(Peña et al., 2016)</ref>. It is hypothesized that commelinids, including Poaceae grasses, incorporate Araf residues into glucuronoxylan polysaccharides to form GAX, whereby this addition may provide GAX with certain physical properties, allowing it to replace the function of xyloglucan and/or pectin as a cross linker <ref type="bibr" target="#b10">(Carpita, 1996)</ref>. The walls of the Poaceae are further distinguished by the presence of variable amounts of (1,3; 1,4)-linked β-glucans <ref type="bibr" target="#b11">(Carpita and Gibeaut, 1993;</ref><ref type="bibr" target="#b69">Smith and Harris, 1999)</ref>, where these are widely distributed as non-cellulosic matrix phase polysaccharides within the cell walls <ref type="bibr" target="#b8">(Burton and Fincher, 2009)</ref>. Here, the presence of the 3-Glcp and 4-Glcp linkages throughout all Sweetgrass and field grass tissue sections, indicates the presence of (1,3; 1,4)-glucans (Supplementary Figure <ref type="figure">S1</ref>; Supplementary Tables <ref type="table">S3</ref>, <ref type="table">S4</ref>).</p><p>The only striking difference in carbohydrate composition was seen in the stems of S. chondrachne, as these samples contained elevated levels of GalA and GlcA uronic acids (Figures <ref type="figure">1A</ref>, <ref type="figure">2</ref>; Table <ref type="table">2</ref>). This suggested an increased amount of HG within the stems of this plant. Pectins make up ∼5% of growing cell walls in Poaceae species <ref type="bibr" target="#b74">(Vogel, 2008)</ref>, whereas it constitutes ∼0.1% in mature cell walls <ref type="bibr" target="#b27">(Ishii, 1997)</ref>. Potentially, this increased abundance of pectin seen within S. chondrachne signifies that this plant was actively growing, as pectins allow for primary cell wall extension and plant growth to occur <ref type="bibr" target="#b81">(Wolf and Greiner, 2012)</ref>.</p><p>Carbohydrates commonly account for 5-20% of soil organic matter <ref type="bibr" target="#b70">(Swincer et al., 1969)</ref>. Here, the carbohydrate content of the soil AIR samples ranged from 4.6 to 10.1% (Figure <ref type="figure">2</ref>), where the highest value was seen in the greenhouse soil. Greenhouse soil samples were enriched with statistically higher amounts of mannose, galactose, and galacturonic acid (Figure <ref type="figure">3</ref>). The addition of bloodmeal has been previously shown to increase the total organic carbon within the soil <ref type="bibr" target="#b15">(Ciavatta et al., 1997)</ref>, positively impacting the relationship between soil microbial diversity and biomass <ref type="bibr">(Bastida et al., 2021)</ref>. Therefore, as bloodmeal was used to help initiate the greenhouse nursery bed soil, it is most likely that the fertilizer increased available nitrogen and organic carbon in the greenhouse soil (Table <ref type="table">3</ref>).</p><p>The available nutrients of each soil supported a particular microbial community that utilized enzymes to deconstruct available organic carbon (i.e., polysaccharides) into usable energy (i.e., monosaccharides). The high amount of glucose present with each sample is indicative of cellulose and hemicellulose deposition. Further, the presence of mannose, xylose, galactose, and arabinose within these soil samples suggests a role in hemicellulose turnover, as all four monosaccharides are present in hemicellulose polysaccharides. Proteobacteria, Firmicutes, Acidobacteria, Bacteroidetes, Actinobacteria, and Verrucomicrobia are all known phyla that contain cellulolytic members <ref type="bibr" target="#b37">(López-Mondéjar et al., 2019)</ref> and were represented in each of the soils. The higher amount of monosaccharides related to hemicellulose turnover in the greenhouse soil again suggests a higher rate of turnover, which is supported by an increased abundance of members shown to deconstruct hemicelluloses, such as Bacillus and Streptomyces. Assuming that the litter decomposition accounts for a fraction of soil monosaccharides, the abundances of GalA and GlcA observed can also be attributed to pectin degradation <ref type="bibr" target="#b9">(Caffall and Mohnen, 2009)</ref> most likely by Proteobacteria, Firmicutes, and Bacteroidetes members. Whereas some of the GlcA may also come from bacterial cell wall polysaccharides <ref type="bibr" target="#b72">(Vinnitskiy et al., 2015)</ref>. As the amount of GlcA and GalA were higher in the greenhouse samples, and variable in the field samples, it suggests that there is higher cell and litter deposition and turnover in the greenhouse soil samples.</p><p>TABLE Soil physiochemical parameters of baseline, field, and greenhouse soils affected by Sweetgrass (A. nitens). Soil type TN (g kg -1 ) TC (g kg -1 ) TOC (g kg -1 ) pH NO 3 -N (µg g -1 ) NH 3 (µg g -1 ) Greenhouse 0.071 ± 0.0025 (a) 1.67 ± 0.0879 (a) 1.57 ± 0.07 (a) 7.22 ± 0.07 (a) 482.12 ± 44.94 (a) 22.46 ± 4.13 (a) Baseline 0.024 ± 0.0003 (b) 0.39 ± 0.0036 (b) 0.32 ± 0.01 (b) 8.15 ± 0.01 (ab) 3.34 ± 0.70 (b) 3.29 ± 0.11 (b) Field 0.047 ± 0.0025 (ab) 0.63 ± 0.0274 (ab) 0.54 ± 0.03 (b) 8.47 ± 0.03 (b) 3.08 ± 0.25 (b) 7.68 ± 0.53 (ab) Parameters include TN, total nitrogen; TC, total carbon; TOC, total organic carbon; pH, NO3-N, nitrate; NH3-N, ammonia (n = 6). Different letters (a, b) signifies a statistical difference (P &lt; 0.05). n = 6.</p><p>In contrast, very little ManA and GulA were detected in the soil samples, where GulA was higher in the field samples. GulA and ManA are commonly used as indicators for the presence of alginate, a common polysaccharide in bacterial biofilms <ref type="bibr" target="#b21">(Gheorghita et al., 2022)</ref>. The production of extracellular polysaccharides by bacterial species, can facilitate prolonged cellular hydration and nutrient resupply in dry soil environments <ref type="bibr" target="#b53">(Or et al., 2007)</ref>. Additionally, this can affect the soil structure by promoting water retention and aggregate formation <ref type="bibr" target="#b13">(Chenu and Roberson, 1996;</ref><ref type="bibr" target="#b24">Henao and Mazeau, 2009)</ref>. Lastly, amino sugars are present in soil and account for a generous fraction of soil nitrogen content <ref type="bibr" target="#b26">(Indorf et al., 2011)</ref>. Amino sugars (i.e., MurN, GlcN, GalN, ManN) are also present in the cell wall components of both bacteria and fungi in the form of peptidoglycan and chitin, respectively <ref type="bibr" target="#b30">(Joergensen, 2018)</ref>. Here, GalN and GlcN were detected in each sample with higher amounts of both being seen in field soil samples (Figure <ref type="figure">3</ref>), which can be presumably traced to bacterial and fungal cell wall metabolism <ref type="bibr" target="#b1">(Amelung et al., 1999)</ref>.</p><p>Correlating the soil microbiome with the plant and soil glycomes is challenging as the interactions are highly complex and variables in the current study were limited. The composition of soil microbiomes can vary to the extent where there is not a "typical" soil microbiome that can be found amongst different soil types (e.g., clay, loam). This statement is also true if multiple soil samples are collected from sites that are centimeters apart, due to the spatial variability of soil and specific characteristics of each sampling site <ref type="bibr">(O'Brien et al., 2016)</ref>. Thus, inconsistency seen between the total carbohydrate content of the field soil samples may be partially explained by differences in the soil sampling sites, where soil samples collected from the field site were inconsistent in the distances between sampling locations. In contrast, all six soil samples collected from the greenhouse were gathered from the same 1 m 2 nursery bed. Furthermore, the composition of above-ground plant species cannot be used to predict the soil microbiome composition, as many soil bacteria may be associated with a broad range of plant taxa. However, taxonomic analysis of soil samples can provide insight regarding ecological services that may be occurring in the soil <ref type="bibr" target="#b4">(Banerjee and Van Der Heijden, 2023)</ref>. These insights could potentially be used as biological indicators to assess soil conditions and health.</p><p>Several other factors such as; soil pH, nitrogen availability, soil organic matter, moisture, season, and temperature, can directly or indirectly influence the spatial structure of soil microbial communities, with pH having a profound impact on bacteria <ref type="bibr">(Rousk et al., 2010;</ref><ref type="bibr" target="#b47">Murphy et al., 2016)</ref>. A less alkaline pH in the greenhouse soil (Table <ref type="table">3</ref>) could contribute to the differences in community structure between the greenhouse, field and baseline soils (Figures <ref type="figure">4</ref>, <ref type="figure">5</ref>). While soil moisture was not measured in the field, the plants were collected during a drought (Supplementary Table <ref type="table">S6</ref>) and soils were assessed to contain 0% moisture in the lab. In contrast, greenhouse soil samples were watered to field moist conditions. Previous studies have shown that drier soils result in more restrained microbial dispersion, as microbes are limited to soil pores <ref type="bibr" target="#b29">(Jansson and Hofmockel, 2018)</ref>. In terms of soil microbial members, the relative abundance of Actinobacteria has been shown to increase under dry conditions, where this phylum becomes established as a dominant group in the soil environment <ref type="bibr" target="#b48">(Naylor et al., 2017;</ref><ref type="bibr" target="#b60">Preece et al., 2019)</ref>. In contrast, the abundance of Proteobacteria is negatively correlated with drought conditions <ref type="bibr" target="#b60">(Preece et al., 2019)</ref>.</p><p>Here, an elevated abundance of Actinobacteria and a decreased abundance of Proteobacteria were seen in baseline soil samples (Figure <ref type="figure">4C</ref>). Further, the relative abundances of these two phyla were also slightly higher in field soil samples, in comparison to greenhouse samples.</p><p>Soil amendments, such as the use of organic fertilizers (i.e., bloodmeal) have been previously shown to increase the relative abundances of Firmicutes and Proteobacteria within a soil microbial community <ref type="bibr" target="#b66">(Schlatter et al., 2019)</ref>. Here, the abundance of Proteobacteria was similar between the greenhouse and field soils, and was significantly reduced in the baseline soils. However, the relative abundance of Firmicutes increased in greenhouse soil samples (Figure <ref type="figure">4C</ref>), which is likely the result of the bloodmeal amendments <ref type="bibr" target="#b20">(Francioli et al., 2016)</ref>. Specifically, there was a drastic increase in the abundance of Firmicutes members belonging to the Bacillus genus (Figure <ref type="figure">5</ref>). This result may reflect a "healthy soil microbiome" as Bacillus species are commonly associated with beneficial effects within a soil ecosystem, such as phosphate solubilization and siderophore production to aid in iron uptake <ref type="bibr" target="#b19">(Fierer and Jackson, 2006)</ref>. Additionally, Bacillus members are also associated with the promotion of plant growth <ref type="bibr" target="#b41">(Lugtenberg and Kamilova, 2009)</ref> and disease suppression <ref type="bibr" target="#b87">(Zhou et al., 2023)</ref>, having a direct effect on plant health.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>Through a collaboration with a climate-focused charity and a First Nations community, glycomics traits associated with greenhouse-grown Sweetgrass were determined to predominantly contain cellulose and GAX polysaccharides, with an even monosaccharide distribution between the rhizomes, stems, and leaves. Within the soil microbial communities associated with Sweetgrass, an increased relative abundance of Firmicutes members was seen in comparison to the baseline and field soils and bacterial members belonging to the Planifilum, Truepera, and</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIGURE</head><figDesc>FIGURE Carbohydrate content of greenhouse-grown Sweetgrass and other grass species. (A) Relative monosaccharide composition (mol%) of the cell walls present in the rhizome, stem, and leaf sections of greenhouse-grown Sweetgrass (Anthoxanthum nitens), and field grass species: Elymus glaucus, Setaria chondrachne, Elymus repens, and Bromus pumpellianus. (B) Relative composition (mol%) of glycosidic linkages present in the cell walls of greenhouse-grown Sweetgrass (A. nitens) rhizome, stem, and leaf sections. (C) Principal component analysis of glycosidic linkages obtained from the rhizome, stem, and leaf sections of each grass species; E. glaucus (dark blue), S. chondrachne (yellow), E. repens (light blue), and B. pumpellianus (fuchsia) collected from the field sampling site, and A. nitens (green) collected from the greenhouse.</figDesc><graphic coords="6,56.64,96.39,481.92,443.04" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>FIGURE</head><figDesc>FIGURE Averaged theorized polysaccharide composition for rhizome (R), stems (S), and leaves (L) from A. nitens, E. glaucus, B. pumpellianus, S. chondrachne, and E. repens (n = ). Calculations were adapted from Pettolino et al. (). The following abbreviations were used for their respective polysaccharides: AB, arabinan; AG, arabinogalactan; GAX, glucuronoarabinoxylan; HM, heteromannan; XG, xyloglucan; RG, rhamnogalacturonan; HG, homogalacturonan; CE, cellulose; MLG, mixed linked glucan; UA, unassigned linkages.</figDesc><graphic coords="8,120.64,96.08,354.24,189.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>FIGURE</head><figDesc>FIGURE Carbohydrate content in greenhouse and field soil samples associated with Sweetgrass and other Poaceae grass species. Left y-axis: stacked bar chart of the masses for each monosaccharide present in the soil samples, determined by HPAEC-PAD analysis. Right y-axis: total carbohydrate content of each soil sample, determined by a colorimetric assay. Error bars represent the standard deviation of technical replicates (n = ) from the colorimetric analysis of soil samples.</figDesc><graphic coords="9,156.14,96.31,283.44,213.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>FIGURE</head><figDesc>FIGURE Soil microbial community composition differs between the three Piikani Nation sampling sites. (A) Non-metric multi-dimensional plot comparing the microbial communities of the soil samples collected from the greenhouse (teal), baseline (gray), and field (orange) sites. (B) Boxplots of the observed richness, Chao , Shannon, and inversed Simpson diversity for each sample type. Boxplots and dots are colored to represent the different sample types: baseline (gray), greenhouse (teal), and field (orange). *Signifies a statistical difference (P &lt; . ). (C) Dendrogram showing the similarity clustering of microbial community compositions between soil samples collected from greenhouse, baseline, and field plots in the Piikani Nation. Bar charts underneath, shows the relative community composition for each greenhouse, baseline, and field samples (n = ) at the phylum level.</figDesc><graphic coords="10,56.64,96.87,481.92,352.56" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>FIGURE</head><figDesc>FIGUREBubble plot of different bacterial and archaeal genera that reached a minimum percentage of % relative read abundance in soil microbial communities collected from the greenhouse, baseline, and field sampling sites within the Piikani Nation (n = for each sample type).</figDesc><graphic coords="11,85.14,96.15,425.28,563.28" type="bitmap" /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Frontiers in Microbiology frontiersin.org</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p>JCM 18977 were only detected in the greenhouse soil samples. These observations, along with the traditional knowledge of Piikani Nation provided by knowledge holders, will help inform future work regarding the re-introduction of greenhouse-grown Sweetgrass back into the environment. Further studies will be required to see if the traits associated with the greenhouse cultivated Sweetgrass persist in plants grown and harvested from the field.</p></div>
+<div><head>Acknowledgments</head><p>We thank <rs type="person">Jesse Plain Eagle</rs> and students from the <rs type="institution">Piikani Nation Secondary School</rs> for their assistance during the sample collections. We also thank the <rs type="institution">Resilience Institute</rs> for acting as a bridging organization between the science team and the Indigenous community.</p></div>
+			</div>
+			<div type="funding">
+<div><head>Funding</head><p>The author(s) declare financial support was received for the research, authorship, and/or publication of this article. Funding for this work was provided by <rs type="funder">AgriScience Projects Program Canadian Agricultural Projects and the Resilience Institute</rs> (Project No. <rs type="grantNumber">ASP-265</rs>; <rs type="grantNumber">J-003023</rs>), with contributions from the <rs type="projectName">Environmental Cooperation's Environmental Justice and Climate Resilience</rs> fund. In-kind support was provided by the <rs type="funder">Piikani Nation</rs>.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_GaUktvS">
+					<idno type="grant-number">ASP-265</idno>
+				</org>
+				<org type="funded-project" xml:id="_ghfepXV">
+					<idno type="grant-number">J-003023</idno>
+					<orgName type="project" subtype="full">Environmental Cooperation&apos;s Environmental Justice and Climate Resilience</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability statement</head><p>The data presented in the study are deposited in the NCBI repository, BioProject Accession No: PRJNA1110276.</p></div>
+			</div>
+
+
+			<div type="conflict">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflict of interest</head><p>The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>King ML, Bajwa B, Hanna N, Xing X, Low KE, Neuberger P, Hall E, Veltri M, Weighill B, Klassen L, Plain Eagle N, Big Bull W, Lynes LS, Montina T, Thomas PJ, Gorzelak MA and Abbott DW ( ) Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils. Front. Microbiol. : . doi: <ref type="url" target="https://doi.org/10.3389/fmicb.2024.1384204">.  /fmicb.</ref> . COPYRIGHT This work is authored by King, Bajwa, Hanna, Xing, Low, Neuberger, Hall, Veltri, Weighill, Klassen, Plain Eagle, Big Bull, Lynes, Montina, Thomas, Gorzelak and Abbott. © , His Majesty the King in Right of Canada, as represented by the Ministers of Agriculture and Agri-Food Canada and Environment and Climate Change Canada; Piikani First Nation; and Veltri, Lynes and</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Author contributions MK: Writing -original draft, Visualization, Methodology, Data curation. BB: Writing -review &amp; editing, Methodology. NH: Writing -review &amp; editing, Methodology. XX: Writingreview &amp; editing, Methodology. KL: Writing -review &amp; editing, Methodology. PN: Writing -review &amp; editing, Methodology. EH: Writing -review &amp; editing, Methodology. MV: Writing -review &amp; editing, Methodology. BW: Writing -review &amp; editing, Resources, Methodology, Conceptualization. LK: Writing -review &amp; editing, Visualization, Methodology. NP: Writing -review &amp; editing, Resources, Funding acquisition. WB: Writing -review &amp; editing, Resources, Funding acquisition. LL: Writing -review &amp; editing, Funding acquisition. TM: Writing -review &amp; editing, Supervision, Methodology, Funding acquisition. PT: Writing -review &amp; editing, Funding acquisition. MG: Writing -review &amp; editing, Supervision, Funding acquisition. DA: Writing -review &amp; editing, Supervision, Funding acquisition, Conceptualization.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Publisher's note</head><p>All claims expressed in this article are solely those of the authors and do not necessarily represent those of their affiliated organizations, or those of the publisher, the editors and the reviewers. Any product that may be evaluated in this article, or claim that may be made by its manufacturer, is not guaranteed or endorsed by the publisher.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supplementary material</head><p>The Supplementary Material for this article can be found online at: <ref type="url" target="https://www.frontiersin.org/articles/10.3389/fmicb.2024.1384204/full#supplementary-material">https://www.frontiersin.org/articles/10.3389/fmicb.2024.  1384204/full#supplementary-material</ref> </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Basic local alignment search tool</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Altschul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">W</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Lipman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0022-2836(05)80360-2</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">215</biblScope>
+			<biblScope unit="page" from="403" to="410" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Amino sugars in native grassland soils along a climosequence in north america</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Amelung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">D</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">W</forename><surname>Flach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zech</surname></persName>
+		</author>
+		<idno type="DOI">10.2136/sssaj1999.03615995006300010014x</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Soil Sci. Soc. Am. J</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="86" to="92" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Mechanistic insights into the digestion of complex dietary fibre by the rumen microbiota using combinatorial high-resolution glycomics and transcriptomic analyses</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Badhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Low</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R M</forename><surname>Milani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">O</forename><surname>Polo</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.csbj.2021.12.009</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Struct. Biotechnol. J</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="148" to="164" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The role of root exudates in rhizosphere interactions with plants and other organisms</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">P</forename><surname>Bais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Weir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">G</forename><surname>Perry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gilroy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Vivanco</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev.arplant.57.032905.105159</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Plant Biol</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="233" to="266" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Soil microbial diversity-biomass relationships are driven by soil carbon content across global biomes</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Banerjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G A</forename><surname>Van Der Heijden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Eldridge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>García</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kenny Png</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Bardgett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Delgado-Baquerizo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/s41396-021-00906-0</idno>
+		<idno>doi: 10.1038/s41396-021-00906-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Rev. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="2081" to="2091" />
+			<date type="published" when="2021">2023. 2021</date>
+		</imprint>
+	</monogr>
+	<note>Soil microbiomes and one health ISME J.</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Trimmomatic: a flexible trimmer for Illumina sequence data</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Bolger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lohse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Usadel</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btu170</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="2114" to="2120" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Lessons from our Sweetgrass baskets: A wholistic vision of academic success for indigenous women in higher education</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Brant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Can. J. High. Educ</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="27" to="40" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Feruloylation in grasses: current and future perspectives</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M D O</forename><surname>Buanafina</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mp/ssp067</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Plant</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="861" to="872" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">3;1,4)-β-D-glucans in cell walls of the poaceae, lower plants, and fungi: a tale of two linkages</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Burton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Fincher</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/mp/ssp063</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Plant</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">1,</biblScope>
+			<biblScope unit="page" from="873" to="882" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The structure, function, and biosynthesis of plant cell wall pectic polysaccharides</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">H</forename><surname>Caffall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Mohnen</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.carres.2009.05.021</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Carbohydr. Res</title>
+		<imprint>
+			<biblScope unit="volume">344</biblScope>
+			<biblScope unit="page" from="1879" to="1900" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Structure and biogenesis of the cell walls of grasses</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Carpita</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev.arplant.47.1.445</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Plant Physiol. Plant Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="445" to="476" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Structural models of primary cell walls in flowering plants: consistency of molecular structure with the physical properties of the walls during growth</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Carpita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Gibeaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Carpita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Shea</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1365-313x.1993.tb00007.x</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Linkage Structure of Carbohydrates by Gas Chromatography-Mass Spectrometry (GC-MS) of Partially Methylated Alditol Acetates</title>
+		<meeting><address><addrLine>Boca Raton, FL</addrLine></address></meeting>
+		<imprint>
+			<publisher>CRC Press</publisher>
+			<date type="published" when="1989">1993. 1989</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="30" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The Gram-positive bacterium Romboutsia ilealis harbors a polysaccharide synthase that can produce (1,3;1,4)-β-D-glucans</title>
+		<author>
+			<persName><forename type="first">S.-C</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M.-R</forename><surname>Kao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">K</forename><surname>Saldivar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Díaz-Moreno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Furlanetto</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1755-0998.12438</idno>
+		<idno>doi: 10.1111/1755-0998.12438</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Ecol. Resour</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="138" to="149" />
+			<date type="published" when="2016">2023. 2016</date>
+		</imprint>
+	</monogr>
+	<note>Barcoding the kingdom Plantae: new PCR primers for ITS regions of plants with improved universality and specificity Nat. Commun.</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Diffusion of glucose in microbial extracellular polysaccharide as affected by water potential</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Chenu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>Roberson</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0038-0717(96)00070-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Soil Biol. Biochem</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="877" to="884" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Soluble cell wall carbohydrates and their relationship with sensory attributes in Cabernet Sauvignon wine</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">H</forename><surname>Chong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">T</forename><surname>Cleary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Dokoozlian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Ford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Fincher</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.foodchem.2019.05.020</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Food Chem</title>
+		<imprint>
+			<biblScope unit="volume">298</biblScope>
+			<biblScope unit="page">124745</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Influence of blood meal organic fertilizer on soil organic matter: a laboratory study</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Ciavatta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Govi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Sitti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gessa</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/01904169709365358</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Plant Nutr</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="1573" to="1591" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Characterization of a new natural cellulose based fiber from Hierochloe Odorata</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Dalmis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kökta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Seki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Ç</forename><surname>Kilin</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10570-019-02779-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Cellulose</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="127" to="139" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Effect of sweet grass (Hierochloe odorata) on the physico-chemical properties of liver cell membranes from rats intoxicated with ethanol</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Dobrzyńska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Szachowicz-Petelska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Skrzydlewska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Figaszewski</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.etap.2012.12.014</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Toxicol. Pharmacol</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="247" to="253" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Colorimetric method for determination of sugars and related substances</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dubois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Gilles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">A</forename><surname>Rebers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Smith</surname></persName>
+		</author>
+		<idno type="DOI">10.1021/ac60111a017</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Anal. Chem</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="350" to="356" />
+			<date type="published" when="1956">1956</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">The diversity and biogeography of soil bacterial communities</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Fierer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">B</forename><surname>Jackson</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.0507535103</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl. Acad. Sci. U. S. A</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="page" from="626" to="631" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Mineral vs. organic amendments: microbial community structure, activity and abundance of agriculturally relevant microbes are driven by long-term fertilization strategies</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Francioli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Schulz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Lentendu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Wubet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Buscot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Reitz</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fmicb.2016.01446</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">1446</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Structure of the AlgKX modification and secretion complex required for alginate production and biofilm attachment in Pseudomonas aeruginosa</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Gheorghita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">E</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">N</forename><surname>Kitova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">T</forename><surname>Bui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Pfoh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Low</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41467-022-35131-6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Commun</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">7631</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Changes in cell wall polysaccharides in developing barley (Hordeum vulgare) coleoptiles</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Gibeaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pauly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bacic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Fincher</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00425-005-1481-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Planta</title>
+		<imprint>
+			<biblScope unit="volume">221</biblScope>
+			<biblScope unit="page" from="729" to="738" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Grass cell walls: a story of cross-linking</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Hatfield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Rancour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Marita</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fpls.2016.02056</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Plant Sci</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">2056</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Molecular modelling studies of clayexopolysaccharide complexes: soil aggregation and water retention phenomena</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">J</forename><surname>Henao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Mazeau</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.msec.2009.06.001</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mater. Sci. Eng. C</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="2326" to="2332" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Isolation, structure elucidation, and immunostimulatory activity of polysaccharide fractions from Boswellia carterii frankincense resin</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Hosain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ghosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Bryant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">A</forename><surname>Arivett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Farone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">C</forename><surname>Kline</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijbiomac.2019.04.059</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Biol. Macromol</title>
+		<imprint>
+			<biblScope unit="volume">133</biblScope>
+			<biblScope unit="page" from="76" to="85" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Optimisation of amino sugar quantification by HPLC in soil and plant hydrolysates</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Indorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Dyckmans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">G</forename><surname>Joergensen</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00374-011-0545-5</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biol. Fertil. Soils</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="387" to="396" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Structure and functions of feruloylated polysaccharides</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Ishii</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0168-9452(97)00130-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Plant Sci</title>
+		<imprint>
+			<biblScope unit="volume">127</biblScope>
+			<biblScope unit="page" from="111" to="127" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Cereal arabinoxylans: advances in structure and physicochemical properties</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Izydorczyk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">G</forename><surname>Biliaderis</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0144-8617(95)00077-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Carbohydr. Polym</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="33" to="48" />
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The soil microbiomefrom metagenomics to metaphenomics</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Jansson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Hofmockel</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.mib.2018.01.013</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Opin. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="162" to="168" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Amino sugars as specific indices for fungal and bacterial residues in soil</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">G</forename><surname>Joergensen</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00374-018-1288-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biol. Fertil. Soils</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="559" to="568" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Carbon flow in the rhizosphere: carbon trading at the soil-root interface</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">L</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">D</forename><surname>Finlay</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11104-009-9925-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Plant Soil</title>
+		<imprint>
+			<biblScope unit="volume">321</biblScope>
+			<biblScope unit="page" from="5" to="33" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Analysis of active site architecture and reaction product linkage chemistry reveals a conserved cleavage substrate for an endo-alpha-mannanase within diverse yeast mannans</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">R</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Tingley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Klassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">W</forename><surname>Alexander</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jmb.2019.12.048</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">432</biblScope>
+			<biblScope unit="page" from="1083" to="1097" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Juggins</surname></persName>
+		</author>
+		<ptr target="https://cran.r-project.org/package=rioja" />
+		<title level="m">rioja: Analysis of Quaternary Science Data</title>
+		<imprint>
+			<date type="published" when="2022-01-11">2022. January 11, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b34">
+	<monogr>
+		<title level="m" type="main">American Indian Healing Arts: Herbs, Rituals, and Remedies for Every Season of Life</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">B</forename><surname>Kavasch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Baar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>Thorsons</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b35">
+	<analytic>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">W</forename><surname>Kembel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">D</forename><surname>Cowan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Helmus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">K</forename><surname>Cornwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Morlon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">D</forename><surname>Ackerly</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/bioinformatics/btq166</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Picante: R tools for integrating phylogenies and ecology</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1463" to="1464" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Fluorescence activated cell sorting and fermentation analysis to study rumen microbiome responses to administered live microbials and yeast cell wall derived prebiotics</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Klassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Reintjes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Amundsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fmicb.2022.1020250</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">1020250</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Lignocellulolytic systems of soil bacteria: a vast and diverse toolbox for biotechnological conversion processes</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>López-Mondéjar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Algora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Baldrian</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.biotechadv.2019.03.013</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biotechnol. Adv</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page">107374</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Carbohydrate flow through agricultural ecosystems: implications for synthesis and microbial conversion of carbohydrates</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Low</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P</forename><surname>Tingley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Klassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">L</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Watt</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.biotechadv.2023.108245</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Biotechnol. Adv</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="page">108245</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Combinatorial glycomic analyses to direct CAZyme discovery for the tailored degradation of canola meal non-starch dietary polysaccharides</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">E</forename><surname>Low</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">E</forename><surname>Moote</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Inglis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Venketachalam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Hahn</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/microorganisms8121888</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Microorganisms</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">1888</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Bracken: estimating species abundance in metagenomics data</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">P</forename><surname>Breitwieser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Thielen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Salzberg</surname></persName>
+		</author>
+		<idno type="DOI">10.7717/peerj-cs.104</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PeerJ Comp. Sci</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">104</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b41">
+	<monogr>
+		<author>
+			<persName><forename type="first">B</forename><surname>Lugtenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Kamilova</surname></persName>
+		</author>
+		<title level="m">Plant-growth-promoting rhizobacteria</title>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b42">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1146/annurev.micro.62.081307.162918</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="541" to="556" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Phyloseq: an R package for reproducible interactive analysis and graphics of microbiome census data</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Mcmurdie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Holmes</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0061217</idno>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">61217</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Native American Ethnobotany</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Moerman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>Timber Press</publisher>
+			<pubPlace>Portland, OR</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b45">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">K</forename><surname>Muhidinov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Bobokalonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">B</forename><surname>Ismoilov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Strahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chau</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Characterization of two types of polysaccharides from Eremurus hissaricus roots growing in Tajikistan</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hotchkiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">T</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.foodhyd.2020.105768</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Food Hydrocoll</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="page">105768</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Temporal dynamics in rhizosphere bacterial communities of three perennial grassland species</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Murphy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Foster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Gao</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/agronomy6010017</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Agronomy</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page">17</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Drought and host selection influence bacterial community dynamics in the grass root microbiome</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Naylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Degraaf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Purdom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Coleman-Derr</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/ismej.2017.118</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ISME J</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="2691" to="2704" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b49">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>O'brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Gibbons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Owens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Hampton-Marcell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Johnston</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Spatial scale drives patterns in soil bacterial diversity</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jastrow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename></persName>
+		</author>
+		<idno type="DOI">10.1111/1462-2920.13231</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Environ. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="2039" to="2051" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b51">
+	<monogr>
+		<title level="m" type="main">FSA: Simple Fisheries Stock Assessment Methods</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Ogle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Doll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">P</forename><surname>Wheeler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dinno</surname></persName>
+		</author>
+		<ptr target="https://CRAN.R-project.org/package$=$FSA" />
+		<imprint>
+			<date type="published" when="2023-01-11">2023. January 11, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b52">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S G</forename><surname>Oksanen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Blanchet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kindt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Legendre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Minchin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>O'hara</surname></persName>
+		</author>
+		<ptr target="https://github.com/vegandevs/vegan" />
+		<title level="m">Vegan: Community Ecology Package</title>
+		<imprint>
+			<date type="published" when="2023-01-11">2023. January 11, 2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Physical constraints affecting bacterial habitats and activity in unsaturated porous media -a review</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Or</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">F</forename><surname>Smets</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Wraith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dechesne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Friedman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.advwatres.2006.05.025</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Adv. Water Resour</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="1505" to="1527" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Soil carbon sequestration by root exudates</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Panchal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Preece</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Peñuelas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Giri</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.tplants.2022.04.009</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Trends Plant Sci</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="749" to="757" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Immunological approaches to plant cell wall and biomass characterization: glycome profiling</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Pattathil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Avci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">S</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Hahn</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-61779-956-3_6</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Mol. Biol</title>
+		<imprint>
+			<biblScope unit="volume">908</biblScope>
+			<biblScope unit="page" from="61" to="72" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Structural diversity of xylans in the cell walls of monocots</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Peña</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Backe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Boyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>O'neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">S</forename><surname>York</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00425-016-2527-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Planta</title>
+		<imprint>
+			<biblScope unit="volume">244</biblScope>
+			<biblScope unit="page" from="589" to="606" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Biodegradation and biological treatments of cellulose, hemicellulose and lignin: an overview</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Muñoz-Dorado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>De La Rubia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Martínez</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10123-002-0062-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Int. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="53" to="63" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Determining the polysaccharide composition of plant cell walls</title>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">A</forename><surname>Pettolino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">T</forename><surname>Walsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">B</forename><surname>Fincher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bacic</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/nprot.2012.081</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Protoc</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="1590" to="1607" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b59">
+	<monogr>
+		<author>
+			<persName><forename type="first">Plain</forename><surname>Eagle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename></persName>
+		</author>
+		<title level="m">Discussion About Sweetgrass Prevelance on the Reserve</title>
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Effects of past and current drought on the composition and diversity of soil microbial communities</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Preece</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Verbruggen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">T</forename><surname>Weedon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Peñuelas</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.soilbio.2018.12.022</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Soil Biol. Biochem</title>
+		<imprint>
+			<biblScope unit="volume">131</biblScope>
+			<biblScope unit="page" from="28" to="39" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Identification of radical scavengers in Sweet Grass (Hierochloe odorata)</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Pukalskas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Van Beek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Venskutonis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Linssen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Veldhuizen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Groot</surname></persName>
+		</author>
+		<idno type="DOI">10.1021/jf011016r</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Agric. Food Chem</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="2914" to="2919" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Metabolism of a hybrid algal galactan by members of the human gut microbiome</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Robb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Hobbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Pluvinage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Reintjes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Klassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Monteith</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/ismej.2010.58</idno>
+		<idno>doi: 10.1038/ismej.2010.58</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Chem. Biol</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="1340" to="1351" />
+			<date type="published" when="2010">2022. 2010</date>
+		</imprint>
+	</monogr>
+	<note>Soil bacterial and fungal communities across a pH gradient in an arable soil ISME J</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Feed your friends: do plant exudates shape the root microbiome?</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sasse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Martinoia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Northen</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.tplants.2017.09.003</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Trends Plant Sci</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="25" to="41" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Hemicelluloses</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">V</forename><surname>Scheller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ulvskov</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev-arplant-042809-112315</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Annu. Rev. Plant Biol</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="page" from="263" to="289" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Microbial control over carbon cycling in soil</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schimel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Schaeffer</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fmicb.2012.00348</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Front. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">348</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Biosolids and tillage practices influence soil bacterial communities in dryland wheat</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">C</forename><surname>Schlatter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">H</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">F</forename><surname>Schillinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">I</forename><surname>Bary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Sharratt</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00248-019-01339-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Microb. Ecol</title>
+		<imprint>
+			<biblScope unit="volume">78</biblScope>
+			<biblScope unit="page" from="737" to="752" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Natural coumarins: exploring the pharmacological complexity and underlying molecular mechanisms</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Cruz-Martins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>López-Jornet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Harun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Yeskaliyeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename></persName>
+		</author>
+		<idno type="DOI">10.1155/2021/6492346</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Oxid. Med. Cell. Longev</title>
+		<imprint>
+			<biblScope unit="volume">2021</biblScope>
+			<biblScope unit="page">6492346</biblScope>
+			<date type="published" when="2013">2013. 2021</date>
+			<pubPlace>Edmonton, AB</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>University of Alberta. Sharifi-Rad,</orgName>
+		</respStmt>
+	</monogr>
+	<note>Alberta&apos;s Natural Subregions Under a Changing Climate: Past, Present, and Future</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Population trends and habitat characteristics of Sweetgrass, Anthoxanthum nitens: integration of traditional and scientific ecological knowledge</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Shebitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Kimmerer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Enthnobiol</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="93" to="111" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Reestablishing roots of a Mohawk community and a culturally significant plant: Sweetgrass</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Shebitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Kimmerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">G</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">J</forename><surname>Harris</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0305-1978(98)00068-4</idno>
+		<idno>doi: 10.1016/S0305-1978(98)00068-4 Strikes with a Gun</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Sweetgrass Partner Ceremony</title>
+		<imprint>
+			<publisher>Piikani Nation</publisher>
+			<date type="published" when="1999">2005. 1999. 2022</date>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="33" to="53" />
+		</imprint>
+	</monogr>
+	<note>The polysaccharide composition of Poales cell walls: Poaceae cell walls are not unique Restor. Ecol.</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b70">
+	<analytic>
+		<title level="a" type="main">The extraction, characterization, and significance of soil polysaccharides</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">D</forename><surname>Swincer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Oades</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Greenland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Agronomy</title>
+		<editor>
+			<persName><forename type="first">N</forename><forename type="middle">C</forename><surname>Brady</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Academic Press</publisher>
+			<date type="published" when="1969">1969</date>
+			<biblScope unit="page" from="195" to="235" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Volatile constituents of ethanol extracts of Hierochloe odorata L. var. Pubescens kryl</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ueyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Arai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Hashimoto</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/ffj.2730060108</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Flav. Fragr. J</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="63" to="68" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b72">
+	<analytic>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">Z</forename><surname>Vinnitskiy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">E</forename><surname>Ustyuzhanina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">E</forename><surname>Nifantiev</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11172-015-1010-7</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Natural bacterial and plant biomolecules bearing α-d-glucuronic acid residues</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="1273" to="1301" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Root exudates: from plant to rhizosphere and beyond</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vives-Peris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>De Ollas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gómez-Cadenas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">M</forename><surname>Pérez-Clemente</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00299-019-02447-5</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Plant Cell Rep</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="3" to="17" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Unique aspects of the grass cell wall</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vogel</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pbi.2008.03.002</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Curr. Opin. Plant Biol</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="301" to="307" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Critical re-investigation of the alditol acetate method for analysis of substituent distribution in methyl cellulose</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Voiges</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Adden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Rinken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Mischnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Vranova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Rejsek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">R</forename><surname>Skene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Janous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Formanek</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/jpln.201000360</idno>
+		<idno>doi: 10.1002/jpln.20100</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Plant Nutr. Soil Sci</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="175" to="199" />
+			<date type="published" when="2012">2012. 2013</date>
+		</imprint>
+	</monogr>
+	<note>Methods of collection of plant root exudates in relation to plant metabolism and purpose: a review Cellulose</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Reshaping data with the reshape package</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wickham</surname></persName>
+		</author>
+		<idno type="DOI">10.18637/jss.v021.i12</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J. Stat. Softw</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b77">
+	<monogr>
+		<title level="m" type="main">Ggplot2: Elegant Gaphics for Data Analysis</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wickham</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>Springer-Verlag</publisher>
+			<pubPlace>New York, NY</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b78">
+	<monogr>
+		<title level="m" type="main">Forcats: Tools for Working With Categorical Variables (Factors)</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Wickham</surname></persName>
+		</author>
+		<ptr target="https://forcats.tidyverse.org/" />
+		<imprint>
+			<date type="published" when="2023-01-11">2023. January 11, 2024</date>
+		</imprint>
+	</monogr>
+	<note>Available</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b79">
+	<monogr>
+		<title level="m" type="main">Dplyr: A Grammar of Data Manipulation</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">F R</forename><surname>Wickham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Henry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Vaughan</surname></persName>
+		</author>
+		<ptr target="https://github.com/tidyverse/dplyr" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Propagation protocol for Hierochloe odorata Sweetgrass</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Winslow</surname></persName>
+		</author>
+		<idno type="DOI">10.3368/npj.1.2.102</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Native Plants J</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="102" to="103" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Growth control by cell wall pectins</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Greiner</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00709-011-0371-5</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Protoplasma</title>
+		<imprint>
+			<biblScope unit="volume">249</biblScope>
+			<biblScope unit="page" from="169" to="175" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note>Suppl. 2</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b82">
+	<analytic>
+		<title level="a" type="main">Improved metagenomic analysis with Kraken 2</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">E</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Langmead</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s13059-019-1891-0</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">257</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Genetic and environmental factors contribute to variation in cell wall composition in mature desi chickpea (Cicer arietinum L.) cotyledons</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">T</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Yap</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F</forename><surname>Khor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">L</forename><surname>Lim</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/pce.13196</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Plant Cell Environ</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="2195" to="2208" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b84">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">L</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">E</forename><surname>Yakubov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Stenson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Bulone</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Multi-layer mucilage of Plantago ovata seeds: rheological differences arise from variations in arabinoxylan side chains</title>
+		<idno type="DOI">10.1016/j.carbpol.2017.02.038</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Carbohydr. Polym</title>
+		<imprint>
+			<biblScope unit="volume">165</biblScope>
+			<biblScope unit="page" from="132" to="141" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Dynamic root exudate chemistry and microbial substrate preferences drive patterns in rhizosphere microbial community assembly</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Zhalnina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">B</forename><surname>Louie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Mansoori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">N</forename><surname>Da Rocha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shi</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41564-018-0129-3</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Microbiol</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="470" to="480" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Interspecific plant interaction via root exudates structures the disease suppressiveness of rhizosphere microbiomes</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">R M</forename><surname>Khashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.molp.2023.03.009</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Mol. Plant</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="849" to="864" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,35 @@
+{
+  "id": "epmc-pmc10755735",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "An Ion-Pair Induced Intermediate Complex Captured in Class D Carbapenemase Reveals Chloride Ion as a Janus Effector Modulating Activity",
+  "identifiers": {
+    "pmcid": "PMC10755735",
+    "pmid": "38161376",
+    "doi": "10.1021/acscentsci.3c00609"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10755735/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Zhou Q, Catalán P, Bell H, Baumann P, Cooke R, Evans R, et al. An Ion-Pair Induced Intermediate Complex Captured in Class D Carbapenemase Reveals Chloride Ion as a Janus Effector Modulating Activity. ACS Central Science. 2023;9(12):2339–2349. doi:10.1021/acscentsci.3c00609",
+  "features": [
+    "nested-sections",
+    "lists",
+    "acknowledgments",
+    "declarations",
+    "multiple-abstracts",
+    "orcid",
+    "tables",
+    "table-spans",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#124",
+  "notes": "ACS mixed citations place <name><surname>…</surname><given-names>…</given-names></name> directly in <mixed-citation> with no text between the name parts (#124); some wrap the names in <person-group> instead."
+}

@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2604.21816v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows",
+  "identifiers": {
+    "arxiv": "2604.21816v1"
+  },
+  "url": "https://arxiv.org/html/2604.21816v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Sadani A, Kumar D. Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows. arXiv:2604.21816v1. 2026.",
+  "features": [
+    "nested-sections",
+    "lists",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "tables",
+    "appendix",
+    "figures",
+    "preprint"
+  ],
+  "regression": "cyanheads/arxiv-mcp-server#4",
+  "notes": "Math-heavy prose: about 200 inline <math> elements, each a full MathML tree whose <annotation encoding=\"application/x-tex\"> is the only compact form (#4)."
+}

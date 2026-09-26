@@ -1,0 +1,35 @@
+{
+  "id": "epmc-pmc8371605",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Highly accurate protein structure prediction with AlphaFold",
+  "identifiers": {
+    "pmcid": "PMC8371605",
+    "pmid": "34265844",
+    "doi": "10.1038/s41586-021-03819-2"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8371605/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Jumper J, Evans R, Pritzel A, Green T, Figurnov M, Ronneberger O, et al. Highly accurate protein structure prediction with AlphaFold. Nature. 2021;596(7873):583–589. doi:10.1038/s41586-021-03819-2",
+  "features": [
+    "nested-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "multiple-abstracts",
+    "orcid",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "mixed-citation",
+    "citation-alternatives",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#66",
+  "notes": "64 of 84 <ref>s wrap their citation in <citation-alternatives> (#66). Mixed citations also carry zero-gap <italic> journal title → <bold> volume transitions (#123) and runs of three adjacent <pub-id>s, e.g. ref CR1 (#115)."
+}

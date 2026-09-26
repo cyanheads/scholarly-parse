@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Advanced soliton structures and elliptic wave patterns in a sixthorder nonlinear Schrödinger equation using improved modified extended tanh function method</title>
+				<funder>
+					<orgName type="full">Science, Technology &amp; Innovation Funding Authority (STDF)</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Mina</forename><forename type="middle">M</forename><surname>Fahim</surname></persName>
+							<email>mina.fahim@bue.edu.eg</email>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Basic Science Department</orgName>
+								<orgName type="department" key="dep2">Faculty of Engineering</orgName>
+								<orgName type="institution">The British University in Egypt</orgName>
+								<address>
+									<addrLine>El shorouk</addrLine>
+									<settlement>Cairo</settlement>
+									<country key="EG">Egypt</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Hamdy</forename><forename type="middle">M</forename><surname>2</surname></persName>
+						</author>
+						<author>
+							<persName><surname>Ahmed</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Physics and Engineering Mathematics Department</orgName>
+								<orgName type="institution" key="instit1">Higher Institute of Engineering</orgName>
+								<orgName type="institution" key="instit2">El-shorouk Academy</orgName>
+								<orgName type="institution" key="instit3">El-Shorouk City</orgName>
+								<address>
+									<settlement>Cairo</settlement>
+									<country key="EG">Egypt</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Dib</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Mathematics Department</orgName>
+								<orgName type="department" key="dep2">Faculty of Science</orgName>
+								<orgName type="institution">Fayoum University</orgName>
+								<address>
+									<settlement>Fayoum</settlement>
+									<country key="EG">Egypt</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Islam</forename><surname>Samir</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department" key="dep1">Physics and Engineering Mathematics Department</orgName>
+								<orgName type="department" key="dep2">Faculty of Engineering</orgName>
+								<orgName type="institution">Ain Shams University</orgName>
+								<address>
+									<settlement>Abbassia Cairo</settlement>
+									<country key="EG">Egypt</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Advanced soliton structures and elliptic wave patterns in a sixthorder nonlinear Schrödinger equation using improved modified extended tanh function method</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">8C044DBE6E26DF0AD50E0BE185F0E4C9</idno>
+					<idno type="DOI">10.1038/s41598-025-30797-6</idno>
+					<note type="submission">Received: 5 September 2025; Accepted: 27 November 2025</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Integrable hierarchy systems</term>
+					<term>Nonlinear dispersive media</term>
+					<term>Optical systems</term>
+					<term>Complex pulse modulation</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In this work, a sixth-order extension of the nonlinear Schrödinger equation (NLSE) within its integrable hierarchy is investigated to model higher-order nonlinear and dispersive effects relevant to optical fiber systems and nonlinear wave propagation. By employing the Improved Modified Extended Tanh Function Method, a comprehensive family of exact analytical solutions is derived, encompassing bright and dark solitons, singular soliton structures, and singular periodic solutions. In addition, solution families expressed in terms of Jacobi elliptic functions, Weierstrass doubly periodic elliptic functions, and exponential profiles are obtained. The novelty of this study lies in extending the analytical framework of the NLSE hierarchy to its sixth-order integrable form and in uncovering new soliton and elliptic wave structures. The obtained results reveal rich nonlinear dynamics associated with higherorder dispersion and nonlinearity and clarify the transition between periodic and localized behaviors. Two-and three-dimensional graphical simulations further illustrate the spatiotemporal evolution of the derived solutions. Overall, the findings deepen the understanding of advanced nonlinear wave mechanisms and offer potential implications for ultrafast optical and nonlinear waveguide systems.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>nonlinear matter waves in Bose-Einstein condensates, and intense Langmuir wave packets in plasma require the inclusion of higher-order dispersive and nonlinear effects <ref type="bibr" target="#b8">9</ref> . In fiber optics, for example, third-order dispersion and self-steepening become significant for picosecond pulses, while fourth-and sixth-order dispersion terms become relevant for femtosecond pulses propagating in photonic-crystal fibers, dispersion-engineered fibers, and microstructured waveguides. These higher-order contributions also capture delayed nonlinear responses, Raman-type effects, and ultrafast saturation of the Kerr nonlinearity.</p><p>The hierarchical extension of the NLSE, often referred to as the generalized nonlinear Schrödinger hierarchy, has been developed to characterize systems that require successive higher-order corrections while preserving integrability <ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref> . In this work, we focus on the sixth-order member of this hierarchy, given by</p><p>iψx + 1 2 ψtt + ψ|ψ| 2 -iα3 ( ψttt + 6|ψ| 2 ψt ) + α4 ( ψtttt + 8|ψ| 2 ψtt + 6ψ|ψ| 4 + 4ψ|ψt| 2 + 6ψ 2 t ψ * + 2ψ 2 ψ * tt ) + iα5 ( ψttttt + 10|ψ| 2 ψttt + 30|ψ| 4 ψt + 10ψψtψ * tt + 10ψψ * t ψtt + 20ψ * ψtψtt + 10ψ 2 t ψ * t ) + α6ψtttttt + α6 [ 60ψ * |ψt| 2 + 50(ψ * ) 2 ψtt + 2ψ * tttt ] ψ 2 + α6ψ [ 12ψ * ψtttt + 8ψtψ * ttt + 22|ψtt| 2 ] + α6ψ [ 18ψtttψ * t + 70(ψ * ) 2 ψ 2 t ] + 20α6ψ 2 t ψ * tt + 10α6ψt [5ψttψ * t + 3ψ * ψttt] + 20α6ψ * ψ 2 tt + 10α6ψ 3 [ (ψ * t ) 2 + 2ψ * ψ * tt ] + 20α6ψ|ψ| 6 = 0.</p><p>(</p><p>This equation generalizes well-known integrable NLSE-type models. Specifically, setting α5 = α6 = 0 yields the LPD equation <ref type="bibr" target="#b2">3</ref> , while α4 = α5 = α6 = 0, recovers the Hirota equation <ref type="bibr" target="#b9">10</ref> . Despite the theoretical significance of the sixth-order extension, systematic analytical studies and explicit solution constructions for this model remain scarce in the literature. This motivates the present investigation. From a physical perspective, the coefficients α3, α4, α5, and α6 represent progressively higher-order dispersive and nonlinear contributions : α3, and α4 is associated with third, and fourth-order dispersion, nonlinear dispersion, and self-frequency shift effects; α5 governs fifth-order nonlinear dispersion and ultrafast self-steepening interactions; and α6 corresponds to sixth-order dispersion and high-order nonlinear responses, which become significant in the propagation of ultrashort pulses where higher-order spectral broadening and nonlinear refractive index saturation occur. Such effects are particularly relevant in the design of high-power fiber lasers, super continuum generation in photonic-crystal fibers, and the manipulation of matter-wave solitons in condensates subjected to higher-order effective interactions.</p><p>Recently, many researchers have been actively modifying and applying various ansatz-based methods and analytical techniques to obtain soliton solutions. Among the commonly used methods are the Fan sub-equation method <ref type="bibr" target="#b12">13</ref> , the extended simplest equation method <ref type="bibr" target="#b13">14</ref> , the new extended auxiliary equation method <ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16</ref> , the solitary wave ansatz method <ref type="bibr" target="#b16">17</ref> , the Sardar sub-equation method <ref type="bibr" target="#b17">18</ref> , the modified extended direct algebraic method <ref type="bibr" target="#b18">[19]</ref><ref type="bibr" target="#b19">[20]</ref><ref type="bibr" target="#b20">[21]</ref> , the improved modified extended tanh function method <ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref> , and the Jacobi elliptic function method <ref type="bibr" target="#b24">25</ref> , as well as the F-expansion method <ref type="bibr" target="#b25">26</ref> . In addition, other effective approaches such as the sine-Gordon method <ref type="bibr" target="#b26">27</ref> , the Hirota bilinear method <ref type="bibr" target="#b27">[28]</ref><ref type="bibr" target="#b28">[29]</ref><ref type="bibr">[30]</ref> , and the exp(ϕ(ζ))-function method <ref type="bibr">31</ref> have also been employed to derive analytical soliton solutions.</p><p>Several researchers have investigated the stability of soliton solutions using analytical and numerical methods to better understand their dynamical behavior <ref type="bibr">32,</ref><ref type="bibr">33</ref> . These studies provide insight into the robustness and persistence of solitons under perturbations in nonlinear systems.</p><p>Motivation and research gap. Higher-order NLSE hierarchies are essential for understanding ultrashort pulse propagation and strong nonlinear wave interactions. However, analytical results for the sixth-order NLSE member remain limited. In particular, explicit soliton and periodic solutions, along with their physical characteristics, have not been sufficiently reported. Elucidating the structure of such higher-order solitary waves provides deeper insight into pulse-shaping mechanisms and nonlinear dispersion balances in advanced optical and quantum systems.</p><p>Objective. The main objective of this work is to derive exact closed-form solutions for the sixth-order NLSE hierarchy and analyze the corresponding nonlinear wave structures.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method and contributions.</head><p>To achieve this, we utilize the improved modified extended tanh function method, a powerful symbolic technique for solving nonlinear evolution equations. The major contributions are summarized as follows:</p><p>• Analytical investigation of the sixth-order NLSE hierarchy and its physical relevance.</p><p>• Construction of new exact solutions, including bright, dark, and singular solitons.</p><p>• Derivation of additional periodic solutions expressed in terms of Jacobi and Weierstrass elliptic functions.</p><p>• Numerical visualization of selected solutions in 2D and 3D to illustrate propagation dynamics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Proposed technique</head><p>We briefly outline the steps involved in the improved modified extended tanh function method (IMETFM) <ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref> .</p><p>First, we assume that the nonlinear partial differential equation can be expressed in terms of ψ and its partial derivatives as follows: P(ψ, ψt, ψx, ψxt, ψxx, . . .) = 0.</p><p>(</p><p>To reduce Eq. ( <ref type="formula" target="#formula_1">2</ref>), we assume a traveling wave transformation for the wave envelope</p><formula xml:id="formula_2">ψ(x, t) = ψ(ζ),</formula><p>where ζ = x -νt with ν ̸ = 0, which converts the function ψ into a function of a single-variable form. Substituting this transformation into Eq. ( <ref type="formula" target="#formula_1">2</ref>) yields the following ordinary differential equation: P(ψ, ψ <ref type="bibr" target="#b0">(1)</ref> , ψ <ref type="bibr" target="#b1">(2)</ref> , ψ <ref type="bibr" target="#b2">(3)</ref> , ψ <ref type="bibr" target="#b3">(4)</ref> , . . .) = 0.</p><p>(</p><p>The next step in applying the IMETFM is to assume that the solution of Eq. ( <ref type="formula" target="#formula_3">3</ref>) has the finite series form</p><formula xml:id="formula_4">ψ(ζ) = N ∑ i=-N ciϕ i (ζ),<label>(4)</label></formula><p>where c 2 N + c 2 -N ̸ = 0, and the function ϕ satisfies the extended Riccati equation</p><formula xml:id="formula_5">ϕ ′ = √ d0 + d1ϕ + d2ϕ 2 + d3ϕ 3 + d4ϕ 4 . (<label>5</label></formula><formula xml:id="formula_6">)</formula><p>The integer N is determined by applying the homogeneous balance principle, which balances the highest-order derivative term with the highest-order nonlinear term in Eq. ( <ref type="formula" target="#formula_3">3</ref>). Substituting Eq. ( <ref type="formula" target="#formula_4">4</ref>) into Eq. ( <ref type="formula" target="#formula_3">3</ref>), while taking Eq. ( <ref type="formula" target="#formula_5">5</ref>) into account, results in a polynomial in ϕ. By equating the coefficients of the obtained polynomial in ϕ to zero, we obtain a system of nonlinear algebraic equations involving the parameters of the original equation, the Riccati equation, and the finite series form. This system can be solved using symbolic computation software such as Mathematica.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methodology and findings</head><p>We now apply the improved modified extended tanh function method to Eq.( <ref type="formula" target="#formula_0">1</ref>). Assuming the wave envelope as:</p><formula xml:id="formula_7">ψ(x, t) = R(ζ)e i(ωt-kx+θ) ,<label>(6)</label></formula><p>where ζ = x -νt, and ν, θ, k, ω, represent the soliton speed, phase constant, wave number, and soliton frequency, respectively. Inserting the wave envelope assumption in Eq. ( <ref type="formula" target="#formula_7">6</ref>) into Eq. ( <ref type="formula" target="#formula_0">1</ref>), then splitting the obtained equation into its real,and imaginary components, then we get the following:</p><p>The real component is given by:</p><formula xml:id="formula_8">R ( -2α6ω 6 + 2α5ω 5 + 2α4ω 4 -2α3ω 3 + 2k -ω 2 ) + R 3 ( 60α6ω 4 -40α5ω 3 -24α4ω 2 + 12α3ω + 2 ) + R ( R ′ ) 2 ( -300α6ν 2 ω 2 + 100α5ν 2 ω + 20α4ν 2 ) + 40α6R 7 + R 5 ( -180α6ω 2 + 60α5ω + 12α4 ) + 280α6ν 2 R 3 ( R ′ ) 2 + R ′′ ( 30α6ν 2 ω 4 -20α5ν 2 ω 3 -12α4ν 2 ω 2 + 6α3ν 2 ω + ν 2 ) + 84α6ν 4 R ( R ′′ ) 2 + 112α6ν 4 RR (3) R ′ + 140α6ν 4 ( R ′ ) 2 R ′′ + R 2 R ′′ ( -300α6ν 2 ω 2 + 100α5ν 2 ω + 20α4ν 2 ) + 140α6ν 2 R 4 R ′′ + 2α6ν 6 R (6) + R (4) ( -30α6ν 4 ω 2 + 10α5ν 4 ω + 2α4ν 4 ) + 28α6ν 4 R 2 R (4) = 0.</formula><p>The imaginary component reads:</p><formula xml:id="formula_9">( -12α6νω 5 + 10α5νω 4 + 8α4νω 3 -6α3νω 2 -2νω + 2 ) R ′ + ( 240α6νω 3 -120α5νω 2 -48α4νω + 12α3ν ) R 2 R ′ + ( 20α5ν 3 -120α6ν 3 ω ) R ′3 + ( 80α5ν 3 -480α6ν 3 ω ) RR ′ R ′′ + (60α5ν -360α6νω) R 4 R ′ + ( 2α5ν 5 -12α6ν 5 ω ) R (5) + ( 40α6ν 3 ω 3 -20α5ν 3 ω 2 -8α4ν 3 ω + 2α3ν 3 ) R (3) + ( 20α5ν 3 -120α6ν 3 ω ) R (3) R 2 = 0.</formula><p>Equating the coefficients of the imaginary parts to zero, we derive the following relationships:</p><formula xml:id="formula_10">             ν = 1250α 3 5 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) , ω = L -3α 4 10α5 , α6 = α5(L + 3α4) 9α3 ,</formula><p>where L = √ 9α 2 4 + 15α3α5. Applying the balancing principle by balancing the highest order derivative term R <ref type="bibr" target="#b5">(6)</ref> with the highest nonlinear term R 7 in the real part, we obtain that N = 1. Consequently, we express <ref type="bibr">R(ζ)</ref> as:</p><formula xml:id="formula_11">R(ζ) = c0 + c1ϕ + c-1ϕ -1 . (<label>7</label></formula><formula xml:id="formula_12">)</formula><p>Substituting Eq. ( <ref type="formula" target="#formula_11">7</ref>) into the real part and considering the extended Riccati equation in Eq. ( <ref type="formula" target="#formula_5">5</ref>), we obtain a polynomial in ϕ. By equating the coefficients of this polynomial to zero, we derive different algebraic systems based on the values of d0, d1, d2, d3, d4, which are then solved using Mathematica.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Localized solitons</head><p>When {d0 = d1 = d3 = 0}, we attain the following result.</p><formula xml:id="formula_13">         c1 = √ -d4 ν, c0 = c-1 = 0, k = 1 2 [ ω 2 -2ν 6 d 3 2 α6 + 2ω 3 ( α3 -ω(α4 + ωα5) + ω 3 α6 ) -ν 2 d2 ( 1 + 6ωα3 -4ω 2 (3α4 + 5ωα5) + 30ω 4 α6 ) -2ν 4 d 2 2 ( α4 + 5ω(α5 -3ωα6) ) ] .</formula><p>Then, the preceding solution set admits the following bright soliton.</p><formula xml:id="formula_14">ψ(x, t) = 1250α 3 5 √ d2sech (√ d2ζ</formula><p>)</p><formula xml:id="formula_15">× e i(θ-kx+tω) 216α 4 4 -72Lα 3 4 + 810α3α5α 2 4 -15α5 (14Lα3 + 25α5) α4 + 25 (18α 2 3 + 5L) α 2 5 , (<label>8</label></formula><formula xml:id="formula_16">)</formula><formula xml:id="formula_17">When {d1 = d3 = 0, d0 = d 2 2 4d</formula><p>4 }, we attain the following result.</p><formula xml:id="formula_18">         c1 = √ -d4 ν, c0 = c-1 = 0, k = 1 2 ( -5ν 6 d 3 2 α6 -3ν 4 d 2 2 ( α4 + 5ω(α5 -3ωα6)</formula><p>)</p><formula xml:id="formula_19">+ ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6))</formula><p>) )</p><p>.</p><p>Then, We get the following dark soliton.</p><formula xml:id="formula_20">ψ(x, t) = 625 √ 2α 3 5 √ d2 tanh ( √ -d 2 ζ √ 2</formula><p>)</p><formula xml:id="formula_21">× e i(θ-kx+tω) 216α 4 4 -72Lα 3 4 + 810α3α5α 2 4 -15α5 (14Lα3 + 25α5) α4 + 25 (18α 2 3 + 5L) α 2 5 , (<label>9</label></formula><formula xml:id="formula_22">)</formula><formula xml:id="formula_23">When {d0 = d1 = 0, d2 = d 2 3</formula><p>4d 4 }, we get the following result. <ref type="bibr" target="#b5">6</ref> 3 ν 6 -24d4d <ref type="bibr" target="#b3">4</ref> 3 ν 4 (5ω(α5 -3α6ω) + α4)</p><formula xml:id="formula_24">                 c0 = id3ν 4 √ d4 , c1 = i √ d4 ν, c-1 = 0, k = 1 1024d 3 4 [ 5α6d</formula><formula xml:id="formula_25">+ 64d 2 4 d 2 3 ν 2 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) + 512d 3 4 ω 2 ( 2ω(α6ω 3 -ω(α5ω + α4) + α3) + 1 ) ] .</formula><p>Then, the preceding result yields the following dark soliton.</p><formula xml:id="formula_26">ψ(x, t) = - 625iα 3 5 ( 2 √ d2d4 ( tanh ( √ d 2 ζ 2 ) + 1 ) + d3</formula><p>)</p><formula xml:id="formula_27">× e i(θ-kx+tω) 2 √ d4 (-216α 4 4 -810α3α5α 2 4 + 72α 3 4 L + 15α5α4 (25α5 + 14α3L) -25α 2 5 (18α 2 3 + 5L)) . (<label>10</label></formula><formula xml:id="formula_28">)</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Singular periodic solutions and singular solitons</head><p>When {d3 = d4 = d1 = 0}, we get the following solution set :</p><formula xml:id="formula_29">         c0 = c1 = 0, c-1 = √ -d0 ν, k = 1 2 [ 2ω 3 ( α6ω 3 -ω(α5ω + α4) + α3 ) -2α6d 3 2 ν 6 -2d 2 2 ν 4 (5ω(α5 -3α6ω) + α4) -d2ν 2 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) + ω 2 ] .</formula><p>Consequently, we obtain the following singular periodic solution and singular soliton, respectively.</p><formula xml:id="formula_30">ψ(x, t) = 1250α 3 5 √ d2 csc (√ -d2ζ</formula><p>)</p><formula xml:id="formula_31">× e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) , (<label>11</label></formula><formula xml:id="formula_32">) ψ(x, t) = 1250α 3 5 √ -d2csch (√ -d2ζ</formula><p>)</p><formula xml:id="formula_33">× e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>12</label></formula><formula xml:id="formula_34">)</formula><formula xml:id="formula_35">When {d1 = d3 = 0, d0 = d 2 Result 1            c-1 = id2ν 2 √ d4 , c0 = c1 = 0, k = 1 2 [ -5ν 6 d 3 2 α6 -3ν 4 d 2 2 (α4 + 5ω(α5 -3ωα6)) + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6)) ) ] .</formula><p>Consequently, the previous result admits the following singular periodic solution, and singular soliton, respectively.</p><formula xml:id="formula_36">ψ(x, t) = 625i √ 2α 3 5 d2 cot ( √ d 2 ζ √ 2</formula><p>)</p><formula xml:id="formula_37">× e i(θ-kx+tω) √ d2 (216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)) , (<label>13</label></formula><formula xml:id="formula_38">) ψ(x, t) = 625 √ 2α 3 5 d2 coth ( √ -d 2 ζ √ 2</formula><p>)</p><formula xml:id="formula_39">× e i(θ-kx+tω) √ d2 (216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)) . (<label>14</label></formula><formula xml:id="formula_40">)</formula><formula xml:id="formula_41">Result 2            c0 = 0, c1 = i √ d4 ν, c-1 = id2ν 2 √ d4 , k = 1 2 [ -5ν 6 d 3 2 α6 -3ν 4 d 2 2 ( α4 + 5ω(α5 -3ωα6) ) + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6)) ) ] .</formula><p>Then, we associate with the preceding solution set, the following singular soliton, and singular periodic solution, respectively.</p><formula xml:id="formula_42">ψ(x, t) = 1250 √ 2α 3 5 √ d2csch (√ 2 √ -d2ζ</formula><p>)</p><formula xml:id="formula_43">× e i(θ-kx+tω) -216α 4 4 -810α3α5α 2 4 + 72α 3 4 L + 15α5α4 (25α5 + 14α3L) -25α 2 5 (18α 2 3 + 5L) , (<label>15</label></formula><formula xml:id="formula_44">) ψ(x, t) = 1250i √ 2α 3 5 √ d2 csc (√ 2 √ d2ζ</formula><p>)</p><formula xml:id="formula_45">× e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>16</label></formula><formula xml:id="formula_46">)</formula><p>When {d0 = d1 = d3 = 0}, we attain the following result.</p><formula xml:id="formula_47">         c1 = √ -d4 ν, c0 = c-1 = 0, k = 1 2 [ ω 2 -2ν 6 d 3 2 α6 + 2ω 3 ( α3 -ω(α4 + ωα5) + ω 3 α6 ) -ν 2 d2 ( 1 + 6ωα3 -4ω 2 (3α4 + 5ωα5) + 30ω 4 α6 ) -2ν 4 d 2 2 ( α4 + 5ω(α5 -3ωα6) ) ] .</formula><p>Then, the following singular periodic solution is obtained</p><formula xml:id="formula_48">ψ(x, t) = 1250α 3 5 √ d2 sec (√ -d2ζ</formula><p>)</p><formula xml:id="formula_49">× e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>17</label></formula><formula xml:id="formula_50">)</formula><formula xml:id="formula_51">When {d1 = d3 = 0, d0 = d 2 2 4d 4 }, the following result is obtained.          c1 = √ -d4 ν, c0 = c-1 = 0, k = 1 2 ( -5ν 6 d 3 2 α6 -3ν 4 d 2 2 ( α4 + 5ω(α5 -3ωα6) ) + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6))</formula><p>) )</p><p>.</p><p>Then, the latter admits the following singular periodic solution.</p><formula xml:id="formula_52">ψ(x, t) = 625 √ 2α 3 5 √ -d2 tan ( √ d 2 ζ √ 2</formula><p>)</p><formula xml:id="formula_53">×</formula><p>e i(θ-kx+tω) 216α 4 4 -72Lα 3 4 + 810α3α5α 2 4 -15α5 (14Lα3 + 25α5) α4 + 25 (18α 2 3 + 5L) α 2 5 Jacobi elliptic functions and weierstrass solution</p><formula xml:id="formula_54">When {d1 = d3 = 0, d0 = d 2 2 m 2 (1-m 2 ) d 4( 2m 2 -1)</formula><p>2 }, we get the following results.</p><formula xml:id="formula_55">Result 1            c1 = √ -d4 ν, c0 = c-1 = 0, k = ω 3 ( α6ω 3 -ω(α5ω + α4) + α3 ) - 1 2 d2ν 2 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) + α 6d 3 2 (2m 4 -2m 2 -1)ν 6 (1 -2m 2 ) 2 - d 2 2 (2m 4 -2m 2 + 1)ν 4 [5ω(α5 -3α6ω) + α4] (1 -2m 2 ) 2 + ω 2 2 ,</formula><p>which admits the following Jacobi elliptic function solution.</p><formula xml:id="formula_56">ψ(x, t) = 1250α<label>3</label></formula><formula xml:id="formula_57">5 d 2 m 2 2m 2 -1 cn ζ d 2 2m 2 -1 m × e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>19</label></formula><formula xml:id="formula_58">)</formula><formula xml:id="formula_59">Result 2              c1 = c0 = 0, c-1 = id2m √ m 2 -1 ν √ -4d4m 4 + 4d4m 2 -d4 , k = ω 3 ( α6ω 3 -ω(α5ω + α4) + α3 ) - 1 2 d2ν 2 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) + α 6d 3 2 (2m 4 -2m 2 -1)ν 6 (1 -2m 2 ) 2 - d 2 2 (2m 4 -2m 2 + 1)ν 4 [5ω(α5 -3α6ω) + α4] (1 -2m 2 ) 2 + ω 2 2 ,</formula><p>which admits another Jacobi elliptic solution.</p><formula xml:id="formula_60">ψ(x, t) = 1250α 3 5 d2 √ 1 -m 2 cn ζ d2 2m 2 -1 m -1 × e i(θ-kx+tω) d2 (2m 2 -1) (216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)) . (<label>20</label></formula><formula xml:id="formula_61">)</formula><p>When {d1 = d3 = 0, d0 = d 2 2 (1-m 2 ) d 4( 2-m 2 ) 2 }, we get the following results.</p><formula xml:id="formula_62">Result 1            c0 = c-1 = 0, c1 = √ -d4 ν, k = 1 2 [ - 2(10 -10m 2 + m 4 ) ν 6 d 3 2 α6 (-2 + m 2 ) 2 - 2(6 -6m 2 + m 4 ) ν 4 d 2 2 (α4 + 5ω(α5 -3ωα6)) (-2 + m 2 ) 2 + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6)) ) ] .</formula><p>Then, we obtain the following Jacobi elliptic function solution.</p><formula xml:id="formula_63">ψ(x, t) = 1250α 3 5 m 2 2-m 2 dn ζ d 2 2-m 2 m × e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>21</label></formula><formula xml:id="formula_64">)</formula><formula xml:id="formula_65">Result 2              c1 = c0 = 0, c-1 = id2m √ m 2 -1 ν √ -4d4m 4 + 4d4m 2 -d4 , k = 1 2 [ - 2(10 -10m 2 + m 4 ) ν 6 d 3 2 α6 (-2 + m 2 ) 2 - 2(6 -6m 2 + m 4 ) ν 4 d 2 2 (α4 + 5ω(α5 -3ωα6)) (-2 + m 2 ) 2 + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6)) ) ]</formula><p>, which admits another Jacobi elliptic function solution. ψ(x, t) = 1250α <ref type="bibr" target="#b2">3</ref> 5 d2</p><formula xml:id="formula_66">√ 1 -m 2 dn ζ d 2 2-m 2 m -1 × e i(θ-kx+tω) m √ 2 -m 2 (216α</formula><p>4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)) . (22) Scientific Reports | (2025) 15:43949</p><formula xml:id="formula_67">When {d1 = d3 = 0, d0 = d 2 2 m 2 d 4( m 2 +1)</formula><p>2 }, we get the following results.</p><formula xml:id="formula_68">Result 1            c0 = c-1 = 0, c1 = √ -d4 ν, k = 1 2 [ - 2(1 + 8m 2 + m 4 ) ν 6 d 3 2 α6 (1 + m 2 ) 2 - 2(1 + 4m 2 + m 4 ) ν 4 d 2 2 (α4 + 5ω(α5 -3ωα6)) (1 + m 2 ) 2 + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6))</formula><p>) ] , which reads the following Jacobi elliptic solution.</p><formula xml:id="formula_69">ψ(x, t) = 1250α 3 5 d 2 m 2 m 2 +1 sn ζ -d 2 m 2 +1 m × e i(θ-kx+tω) 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L) . (<label>23</label></formula><formula xml:id="formula_70">)</formula><formula xml:id="formula_71">Result 2              c0 = c1 = 0, c-1 = d2mν √ -d4m 4 -2d4m 2 -d4 , k = 1 2 [ - 2(1 + 8m 2 + m 4 ) ν 6 d 3 2 α6 (1 + m 2 ) 2 - 2(1 + 4m 2 + m 4 ) ν 4 d 2 2 (α4 + 5ω(α5 -3ωα6)) (1 + m 2 ) 2 + ω 2 ( 1 + 2ω(α3 -ω(α4 + ωα5) + ω 3 α6) ) + ν 2 d2 ( -1 -6ωα3 + 2ω 2 (6α4 + 5ω(2α5 -3ωα6)) ) ]</formula><p>, which derive the following Jacobi elliptic solution.</p><formula xml:id="formula_72">ψ(x, t) = 1250α 3 5 d2sn ζ -d2 m 2 +1 m -1 × e i(θ-kx+tω) d2(m 2 +1) d4 (216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)) . (<label>24</label></formula><formula xml:id="formula_73">)</formula><p>When {d2 = d4 = 0}, the following result is revealed.</p><formula xml:id="formula_74">                 c-1 = √ -d0 ν, c1 = 0, d3 = 8c 3 0 √ -d0 ν 3 , d1 = - 4c0 √ -d0 ν , k = ω 3 ( α6ω 3 -ω(α5ω + α4) +<label>α3</label></formula><formula xml:id="formula_75">) -3c 2 0 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) -46c 4 0 (5ω(α5 -3α6ω) + α4) -396α6c 6 0 + ω 2 2 .</formula><p>Then, we attain the following Weierstrass elliptic function solution.</p><formula xml:id="formula_76">ψ(x, t) = ( c0 + 1250iα 3 5 √ d0℘ ( ζ; -4d1 d3 , -4d0<label>d3</label></formula><formula xml:id="formula_77">) -1 216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L)</formula><p>)</p><formula xml:id="formula_78">× e i(θ-kx+tω) . (<label>25</label></formula><formula xml:id="formula_79">)</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Exponential solution</head><formula xml:id="formula_80">When {d3 = d4 = 0, d0 = d 2 1 4d 2 } , the following result is obtained.            c1 = 0, c0 = 1 2 i √ d2 ν, c-1 = id1ν 2 √ d2 , k = 1 16 [ 8ω 2 ( 2ω(α6ω 3 -ω(α5ω + α4) + α3) + 1 ) + 5α6d 3 2 ν 6 -6d 2 2 ν 4 (5ω(α5 -3α6ω) + α4) + 4d2ν 2 ( 30α6ω 4 -4ω 2 (5α5ω + 3α4) + 6α3ω + 1 ) ] .</formula><p>Then, We obtain the following exponential solution.</p><formula xml:id="formula_81">ψ(x, t) = 625iα 3 5 √ d2 (<label>2d2e</label></formula><formula xml:id="formula_82">√ d 2 ζ + d1 ) (<label>d1 -2d2e</label></formula><formula xml:id="formula_83">√ d 2 ζ ) -1 × e i(θ-kx+tω) (216α 4 4 + 810α3α5α 2 4 -72α 3 4 L -15α5α4 (25α5 + 14α3L) + 25α 2 5 (18α 2 3 + 5L))</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results and discussion</head><p>This section presents the dynamical behavior of the obtained solutions for the sixth-order integrable NLSE. Five classes of nonlinear wave structures are examined: bright solitons, dark solitons, singular solitons, singular periodic solutions, and Jacobi elliptic solutions. In the case of the Jacobi elliptic solution, the relation and transition between the periodic and localized (soliton) structures are demonstrated. For each case, both 2D and 3D plots illustrate the evolution of the wave amplitude over space and time, confirming the analytical results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Bright soliton dynamics</head><p>Figure <ref type="figure" target="#fig_1">1</ref> shows the bright soliton solution defined by Eq. ( <ref type="formula" target="#formula_15">8</ref>), represented in both two and three dimensions under identical parameter settings: d2 = 3, α3 = 5, α4 = 2, and α5 = 1, and shown at three different snapshots. Bright solitons retain a localized peak as they propagate, owing to the balance between dispersion and nonlinear self-focusing. The soliton maintains its amplitude and width for all plotted time instances t = 1, 5, 10, demonstrating stable and localized propagation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Dark soliton dynamics</head><p>Figure <ref type="figure" target="#fig_0">2</ref> displays the dark soliton solution governed by Eq. ( <ref type="formula" target="#formula_21">9</ref>), visualized in both two and three dimensions under identical parameter settings: d2 = -1, α3 = 3, α4 = 1.5, and α5 = 1, and in three different time instances. Unlike bright solitons, dark solitons exhibit a localized dip on a continuous background. The structure remains stable for all time levels, reflecting the phase-shifted wave nature observed in defocusing nonlinear media.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Singular soliton behavior</head><p>Figure <ref type="figure" target="#fig_3">3</ref> illustrates the singular soliton solution of Eq. ( <ref type="formula" target="#formula_39">14</ref>), visualized in both two and three dimensions under identical parameter settings: d2 = -0.01, α3 = 0.5, α4 = -3, α5 = -1.5, and in three different time instances. Singular solitons represent a special class of nonlinear wave structures characterized by an infinite or extremely large amplitude at specific spatial points. Such solutions often arise in physical systems where  <ref type="formula" target="#formula_21">9</ref>) visualized in two and three dimensions under identical parameter settings: d2 = -1, α3 = 3, α4 = 1.5, and α5 = 1, and in three different time instances t = 1, 5, 10.  <ref type="formula" target="#formula_15">8</ref>) visualized in two and three dimensions under identical parameter settings: d2 = 3, α3 = 5, α4 = 2, and α5 = 1, and in three different time instances t = 1, 5, 10.</p><p>nonlinear effects dominate over dispersion, leading to energy localization and field blow-up. In applications, singular solitons can model intense wave focusing in optical fibers, plasma collapses, or energy concentration in shallow-water dynamics. Singular solitons develop sharp peaks, indicating points where the amplitude becomes extremely large due to dominant nonlinear amplification. The plots show steep localized gradients, highlighting wave concentration phenomena.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Singular periodic wave profiles</head><p>Figure <ref type="figure" target="#fig_2">4</ref> corresponds to the singular periodic solution of Eq. ( <ref type="formula" target="#formula_49">17</ref>), visualized in both two and three dimensions under identical parameter settings: d2 = -2, α3 = -5, α4 = -1, α5 = -2.7, and in three different time instances. These structures periodically develop singular behavior, combining periodic oscillations with sharp amplitude spikes. The plots clearly show repeating localized peaks, indicating strong nonlinear modulation across each period.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Jacobi elliptic functions and their connection to periodic and soliton solutions</head><p>The Jacobi elliptic functions sn(u, m), cn(u, m), and dn(u, m) arise naturally in the analysis of nonlinear evolution equations. Depending on the modulus m (0 ≤ m ≤ 1), they bridge trigonometric and hyperbolic behaviors, thereby linking periodic and soliton solutions. For m → 0, they reduce to trigonometric functions: sn(u, 0) = sin(u), cn(u, 0) = cos(u), dn(u, 0) = 1, while for m → 1, they become hyperbolic:  <ref type="formula" target="#formula_49">17</ref>) visualized in two and three dimensions under identical parameter settings: d2 = -2, α3 = -5, α4 = -1, α5 = -2.7, and in three different time instances t = 1, 5, 10.  <ref type="formula" target="#formula_39">14</ref>), visualized in two and three dimensions under identical parameter settings: d2 = -0.01, α3 = 0.5, α4 = -3, α5 = -1.5, and in three different time instances t = 1, 5, 10.</p><p>sn(u, 1) = tanh(u), cn(u, 1) = sech(u), dn(u, 1) = sech(u).</p><p>Thus, varying the modulus m from 0 to 1 gradually transforms the periodic Jacobi-elliptic waves into solitary structures. Figure <ref type="figure" target="#fig_5">5</ref> illustrates the evolution of the cn(ζ, m) solution in Eq.( <ref type="formula" target="#formula_57">19</ref>), showing its transition from singular periodic (arising when the argument becomes complex) to regular periodic and finally to brightsoliton profiles in 3D, under the parameter set d2 = 2, α3 = -3, α4 = 2, and α5 = -1. Figure <ref type="figure" target="#fig_4">6</ref> presents the corresponding 2D profiles for the same parameter values at three representative times t = 1, 5, 10, highlighting the transition from singular periodic to regular periodic and ultimately to bright-soliton behavior.</p><p>Overall, the graphical results validate the analytical solutions and demonstrate the complex propagation patterns permitted by the sixth-order NLSE model. The figures highlight the structural evolution, stability characteristics, and nonlinear effects associated with each solution type.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conclusion</head><p>In this work, we investigated the sixth-order integrable nonlinear Schrödinger equation within its hierarchy and extended the analytical solution landscape of this model. Using the Improved Modified Extended Tanh Function Method (IMETFM), we systematically derived new families of exact solutions, including bright, dark, singular solitons, singular periodic solutions, and Jacobi and Weierstrass elliptic waveforms.</p><p>The novelty of this study lies in providing a unified analytical framework for the sixth-order NLSE that captures localized solitons, singular dispersive structures, and doubly-periodic nonlinear waves. The results demonstrate that higher-order dispersion and nonlinear effects significantly enrich the dynamics compared with the classical NLSE, producing additional wave morphologies and amplitude profiles absent in lower-order models.</p><p>Two-and three-dimensional graphical simulations illustrate the propagation, intensity localization, and periodic modulation of the solutions, confirming distinct physical signatures, particularly the sharp energy concentration of singular solitons and the smooth periodic patterns of elliptic solutions.  <ref type="formula" target="#formula_57">19</ref>) is illustrated in 2D, showing the evolution from singular periodic to regular periodic waves and ultimately to a bright soliton as the modulus m → 1, with d2 = 2, α3 = -3, α4 = 2, and α5 = -1, at three representative times t = 1, 5, 10..  <ref type="formula" target="#formula_57">19</ref>) is illustrated in 3D, showing the transition from singular periodic to regular periodic waves and finally to a bright soliton as the modulus m → 1, with d2 = 2, α3 = -3, α4 = 2, and α5 = -1.</p><p>Physically, higher-order dispersive and nonlinear terms enable a broader range of self-trapped and periodic behaviors. Bright and dark solitons correspond to localized energy packets and intensity depressions, while singular solitons represent ultra-localized energy spikes that can model collapse-like events. Jacobi and Weierstrass elliptic solutions bridge localized and periodic states, showing how continuous modulation of the elliptic modulus transitions the system from periodic oscillations to solitary waves, highlighting the delicate balance between dispersion and nonlinearity.</p><p>Overall, these findings underline the physical relevance of the sixth-order NLSE hierarchy and the effectiveness of IMETFM for constructing complex analytical waveforms. Future work may explore stability analysis, perturbation dynamics, and parameter sensitivity. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Dark soliton solution for Eq. (9) visualized in two and three dimensions under identical parameter settings: d2 = -1, α3 = 3, α4 = 1.5, and α5 = 1, and in three different time instances t = 1, 5, 10.</figDesc><graphic coords="8,122.17,272.27,432.00,158.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. Bright soliton solution of Eq. (8) visualized in two and three dimensions under identical parameter settings: d2 = 3, α3 = 5, α4 = 2, and α5 = 1, and in three different time instances t = 1, 5, 10.</figDesc><graphic coords="8,124.69,50.50,429.48,160.20" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 4 .</head><label>4</label><figDesc>Fig. 4. Singular periodic solution for Eq. (17) visualized in two and three dimensions under identical parameter settings: d2 = -2, α3 = -5, α4 = -1, α5 = -2.7, and in three different time instances t = 1, 5, 10.</figDesc><graphic coords="9,129.01,275.03,425.16,173.64" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Singular soliton solution for Eq. (14), visualized in two and three dimensions under identical parameter settings: d2 = -0.01, α3 = 0.5, α4 = -3, α5 = -1.5, and in three different time instances t = 1, 5, 10.</figDesc><graphic coords="9,124.93,50.50,429.24,162.96" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 6 .</head><label>6</label><figDesc>Fig. 6. The Jacobi elliptic function cn(ζ, m) in Eq. (19) is illustrated in 2D, showing the evolution from singular periodic to regular periodic waves and ultimately to a bright soliton as the modulus m → 1, with d2 = 2, α3 = -3, α4 = 2, and α5 = -1, at three representative times t = 1, 5, 10..</figDesc><graphic coords="10,76.45,264.71,477.72,140.40" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 5 .</head><label>5</label><figDesc>Fig. 5. The Jacobi elliptic function cn(ζ, m) in Eq. (19) is illustrated in 3D, showing the transition from singular periodic to regular periodic waves and finally to a bright soliton as the modulus m → 1, with d2 = 2, α3 = -3, α4 = 2, and α5 = -1.</figDesc><graphic coords="10,76.45,50.50,477.72,142.08" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><figDesc>30. Mohan, B. &amp; Kumar, S. Generalization and analytic exploration of soliton solutions for nonlinear evolution equations via a novel symbolic approach in fluids and nonlinear sciences. Chin. J. Phys. 92, 10-21 (2024). 31. Mathanaranjan, T. The fractional perturbed nonlinear Schrödinger equation in nanofibers: Soliton solutions and dynamical behaviors. Comput. Model. Fract. Order Syst. 75(8), 155-167 (2024). 32. Mathanaranjan, T., Yesmakhanova, K., Myrzakulov, R. &amp; Naizagarayeva, A. Optical wave structures and stability analysis of integrable Zhanbota equation. Mod. Phys. Lett. B 39(22), 2550071 (2025). 33. Mathanaranjan, T., Tharsana, S. &amp; Dilakshi, G. Solitonic wave structures and stablility analysis for the M-fractional generalized coupled nonlinear Schrödinger-KdV equations. Int. J. Appl. Comput. Math. 10(6), 165 (2024).</figDesc></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Scientific Reports | (2025) 15:43949</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_1"><p>| https://doi.org/10.1038/s41598-025-30797-6</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_2"><p>4d 4 }, we obtain the following results.Scientific Reports | (2025) 15:43949</p></note>
+		</body>
+		<back>
+
+			
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Acknowledgements</head><p>Not Applicable.</p></div>
+			</div>
+
+
+			<div type="funding">
+<div><head>Funding</head><p>Open access funding provided by The <rs type="funder">Science, Technology &amp; Innovation Funding Authority (STDF)</rs> in cooperation with The Egyptian Knowledge Bank (EKB).</p></div>
+			</div>
+			<listOrg type="funding">
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data availability</head><p>The datasets used and/or analyzed during the current study are available from the corresponding author upon reasonable request.</p></div>
+			</div>
+
+
+			<div type="conflict">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare no competing interests.</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author contributions</head><p>Mina M. Fahim: Formal analysis, Software, Methodology; Hamdy M. Ahmed: Validation, Methodology; K. A. Dib: Resources, Writing-review &amp; editing; Islam Samir: Software, Investigation.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Declarations</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">On investigation of kink-solitons and rogue waves to a new integrable (3+ 1)-dimensional KdVtype generalized equation in nonlinear sciences</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nonlinear Dyn</title>
+		<imprint>
+			<biblScope unit="volume">113</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="10261" to="10276" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Rogue-wave structures for a generalized (3+1)-dimensional nonlinear wave equation in liquid with gas bubbles</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Scr</title>
+		<imprint>
+			<biblScope unit="volume">99</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page">105291</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Higher-order rogue waves and dispersive solitons of a novel P-type (3+1)-D evolution equation in soliton theory and nonlinear waves</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nonlinear Dyn</title>
+		<imprint>
+			<biblScope unit="volume">111</biblScope>
+			<biblScope unit="issue">21</biblScope>
+			<biblScope unit="page" from="20275" to="20288" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Rogue waves and rational solutions of the Hirota equation</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ankiewicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Soto-Crespo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Akhmediev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. E</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">46602</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Optimal control for soliton breathers of the Lakshmanan-Porsezian-Daniel, Hirota, and cmKdV models</title>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">N</forename><surname>Serkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Belyaeva</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<imprint>
+			<biblScope unit="volume">175</biblScope>
+			<biblScope unit="page" from="17" to="27" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The Lakshmanan-Porsezian-Daniel model with arbitrary refractive index and its solution</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">A</forename><surname>Kudryashov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<imprint>
+			<biblScope unit="volume">241</biblScope>
+			<biblScope unit="page">167043</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Soliton unveilings in optical fiber transmission: Examining soliton structures through the Sasa-Satsuma equation</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Iqbal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Results in Physics</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page">107648</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Dynamical behavior of the higher-order cubic-quintic nonlinear Schrödinger equation with stability analysis</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Younas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ahmad</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Opt</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Langmuir wave dynamics and plasma instabilities: Insights from generalized coupled nonlinear Schrödinger equations</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Mostafa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mod. Phys. Lett. B</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">36</biblScope>
+			<biblScope unit="page">2450366</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Infinite hierarchy of nonlinear Schrödinger equations and their solutions</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ankiewicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Kedziora</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chowdury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Bandelow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Akhmediev</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. E</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">12206</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Breather-to-soliton transformation rules in the hierarchy of nonlinear Schrödinger equations</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Chowdury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Krolikowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. E</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">62226</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Solitary wave structures, conservation laws and dynamical analysis of the Heisenberg ferromagnet-type equation</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mathanaranjan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mod. Phys. Lett. B</title>
+		<imprint>
+			<biblScope unit="volume">2025</biblScope>
+			<biblScope unit="page">2550229</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Traveling, periodic and localized solitary waves solutions of the (4+1)-dimensional nonlinear Fokas equation</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Khatri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Malik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Gautam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SN Appl. Sci</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page">1829</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Optical solitons with differential group delay for coupled Kundu-Eckhaus equation using extended simplest equation approach</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M A</forename><surname>El Sheikh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<imprint>
+			<biblScope unit="volume">208</biblScope>
+			<biblScope unit="page">164051</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Chirped optical solitons and stability analysis of the nonlinear Schrödinger equation with nonlinear chromatic dispersion</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mathanaranjan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Hashemi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rezazadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Akinyemi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bekir</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. Theor. Phys</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">85005</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A variety of new soliton structures and various dynamical behaviors of a discrete electrical lattice with nonlinear dispersion via variety of analytical architectures</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>El-Ganaini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Math. Methods Appl. Sci</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="2746" to="2772" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Optical solitary wave solutions for the higher order nonlinear Schrödinger equation with self-steepening and self-frequency shift effects</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chand</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Opt. Laser Technol</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="265" to="273" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Realization of optical solitons from nonlinear Schrödinger equation using modified Sardar sub-equation technique</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ibrahim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">M</forename><surname>Ashir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">A</forename><surname>Sabawi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Baleanu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Opt. Quant. Electron</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">617</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Optical solitons and complexitons for generalized Schrödinger-Hirota model by the modified extended direct algebraic method</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">H</forename><surname>Ali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>El-Owaidy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>El-Deeb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Samir</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Opt. Quant. Electron</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">675</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">New extended direct algebraic method for the resonant nonlinear Schrödinger equation with Kerr law nonlinearity</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vahidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zabihi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rezazadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ansari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<imprint>
+			<biblScope unit="volume">227</biblScope>
+			<biblScope unit="page">165936</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Abundant solitons for highly dispersive nonlinear Schrödinger equation with sextic-power law refractive index using modified extended direct algebraic method</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">B</forename><surname>Rabiea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">H</forename><surname>Hussein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Alnahhass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Alexan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Alex. Eng. J</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="page" from="680" to="689" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Derivation of dispersive solitons with quadrupled power law of nonlinearity using improved modified extended tanh function method</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Fahim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Dib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Samir</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Opt</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Unraveling solitons dynamics in system of dispersive NLSE with Kudryashov&apos;s law of nonlinearity using improved modified extended tanh function method</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Samir</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Alexandria Eng. J</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page" from="419" to="428" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Retrieval of solitons and other wave solutions for stochastic nonlinear Schrödinger equation with nonlocal nonlinearity using the improved modified extended tanh-function method</title>
+		<author>
+			<persName><forename type="first">I</forename><surname>Samir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">M</forename><surname>Ahmed</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Opt</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Exact solutions for the improved mKdv equation with conformable derivative by using the Jacobi elliptic function expansion method</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Farooq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">K</forename><surname>Muhammad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">X</forename><surname>Ma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Opt. Quant. Electron</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">542</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Chirped and chirpfree soliton solutions of generalized nonlinear Schrödinger equation with distributed coefficients</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Chand</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Optik</title>
+		<imprint>
+			<biblScope unit="volume">125</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="2938" to="2949" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Soliton solutions to the Boussinesq equation through sine-Gordon method and Kudryashov method</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ali Akbar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Results Phys</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page">104228</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Painlevé analysis, restricted bright-dark N-solitons, and N-rogue waves of a (4+1)-dimensional variablecoefficient generalized KP equation in nonlinear sciences</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mohan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nonlinear Dyn</title>
+		<imprint>
+			<biblScope unit="volume">113</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="11893" to="11906" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A direct symbolic computation of center-controlled rogue waves to a new Painlevé-integrable (3+1)-D generalized nonlinear evolution equation in plasmas</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Mohan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nonlinear Dyn</title>
+		<imprint>
+			<biblScope unit="volume">111</biblScope>
+			<biblScope unit="issue">17</biblScope>
+			<biblScope unit="page" from="16395" to="16405" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

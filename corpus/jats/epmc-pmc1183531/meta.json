@@ -1,0 +1,38 @@
+{
+  "id": "epmc-pmc1183531",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a Caenorhabditis elegans Genomic RNAi Screen",
+  "identifiers": {
+    "pmcid": "PMC1183531",
+    "pmid": "16103914",
+    "doi": "10.1371/journal.pgen.0010017"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC1183531/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Hansen M, Hsu AL, Dillin A, Kenyon C, Kim S. New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a Caenorhabditis elegans Genomic RNAi Screen. PLoS Genetics. 2005;1(1):e17. doi:10.1371/journal.pgen.0010017",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "definition-list",
+    "footnotes",
+    "glossary",
+    "acknowledgments",
+    "multiple-abstracts",
+    "plain-language-summary",
+    "tables",
+    "table-footnotes",
+    "table-graphic-only",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#111",
+  "notes": "All three <table-wrap>s are graphic-only deposits: a label, caption, and footnotes but no <table> (#111). <permissions> names the Creative Commons Attribution License without a version or URL; the version is PLOS's Crossref license record for the DOI."
+}

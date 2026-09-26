@@ -1,0 +1,32 @@
+{
+  "id": "epmc-pmc8718296",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "An Exploratory Study on the Relationship between Brachial Arterial Blood Flow and Cardiac Output",
+  "identifiers": {
+    "pmcid": "PMC8718296",
+    "pmid": "34976321",
+    "doi": "10.1155/2021/1251199"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8718296/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Jia S, Wu Y, Wang W, Lin W, Chen Y, Zhang H, et al. An Exploratory Study on the Relationship between Brachial Arterial Blood Flow and Cardiac Output. Journal of Healthcare Engineering. 2021;2021:1251199. doi:10.1155/2021/1251199",
+  "features": [
+    "nested-sections",
+    "floats-group",
+    "lists",
+    "nested-lists",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "orcid",
+    "tables",
+    "table-spans",
+    "element-citation",
+    "research-article"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "epmc-pmc13131449",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Field-parallel six-sample microfluidic detection of plant viruses via raffinose-assisted one-pot LAMP-CRISPR/Cas12b",
+  "identifiers": {
+    "pmcid": "PMC13131449",
+    "pmid": "40850686",
+    "doi": "10.1016/j.jare.2025.08.030"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13131449/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Wang J, Yang W, Fang J, Xu H, Li J, Zhang Y, et al. Field-parallel six-sample microfluidic detection of plant viruses via raffinose-assisted one-pot LAMP-CRISPR/Cas12b. Journal of Advanced Research. 2025;83:81. doi:10.1016/j.jare.2025.08.030",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "lists",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "multiple-abstracts",
+    "graphical-abstract",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#134",
+  "notes": "<article-meta> carries three <abstract>s in the order graphical, author-highlights, untyped; the article's own abstract is the third (#134)."
+}

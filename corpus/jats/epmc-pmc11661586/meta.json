@@ -1,0 +1,26 @@
+{
+  "id": "epmc-pmc11661586",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Correction: Seasonal Effects on Gene Expression",
+  "identifiers": {
+    "pmcid": "PMC11661586",
+    "pmid": "39705254",
+    "doi": "10.1371/journal.pone.0316470"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11661586/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Goldinger A, Shakhbazov K, Henders AK, McRae AF, Montgomery GW, Powell JE. Correction: Seasonal Effects on Gene Expression. PLOS ONE. 2024;19(12):e0316470. doi:10.1371/journal.pone.0316470",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "no-abstract",
+    "mixed-citation",
+    "correction",
+    "tiny"
+  ]
+}

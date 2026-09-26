@@ -1,0 +1,25 @@
+{
+  "id": "nature-s41597-024-04291-z",
+  "format": "pdf",
+  "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
+  "identifiers": {
+    "doi": "10.1038/s41597-024-04291-z"
+  },
+  "url": "https://www.nature.com/articles/s41597-024-04291-z.pdf",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Rabbani MAG, Vallejo-Trujillo A, Wu Z, Miedzinska K, Faruque S, Watson KA, et al. Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh. Scientific Data. 2024;11(1):1432. doi:10.1038/s41597-024-04291-z",
+  "features": [
+    "single-column",
+    "running-headers",
+    "hyphenation",
+    "page-furniture",
+    "tables",
+    "figures",
+    "data-paper",
+    "rosetta"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "arxiv-2502.13877v2",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "Near-Optimal List-Recovery of Linear Code Families",
+  "identifiers": {
+    "arxiv": "2502.13877v2"
+  },
+  "url": "https://arxiv.org/html/2502.13877v2",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Li R, Shagrithaya N. Near-Optimal List-Recovery of Linear Code Families. arXiv:2502.13877v2. 2025.",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "tables",
+    "theorem",
+    "preprint"
+  ],
+  "notes": "13 theorem-like environments (ltx_theorem) and 5 proofs."
+}

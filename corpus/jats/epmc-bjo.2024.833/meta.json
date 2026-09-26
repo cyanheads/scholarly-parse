@@ -1,0 +1,33 @@
+{
+  "id": "epmc-bjo.2024.833",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial",
+  "identifiers": {
+    "pmcid": "PMC11733485",
+    "pmid": "39721952",
+    "doi": "10.1192/bjo.2024.833"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11733485/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Moran P, Bick D, Biddle L, Borries B, Kandiyali R, Mgaieth F, et al. Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial. BJPsych Open. 2024;11(1):e12. doi:10.1192/bjo.2024.833",
+  "features": [
+    "nested-sections",
+    "lists",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "orcid",
+    "tables",
+    "table-spans",
+    "table-footnotes",
+    "figures",
+    "mixed-citation",
+    "research-article",
+    "rosetta"
+  ]
+}

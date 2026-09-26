@@ -1,0 +1,40 @@
+{
+  "id": "pmc-pmc12816603",
+  "format": "jats",
+  "flavor": "pmc",
+  "title": "Challenges in global climate models to represent cloud response to aerosols: insights from volcanic eruptions",
+  "identifiers": {
+    "pmcid": "PMC12816603",
+    "pmid": "41413262",
+    "doi": "10.1038/s41467-025-67359-3"
+  },
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=12816603",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Wang Y, Neubauer D, Chen Y, Jordan G, Malavelle F, Yuan T, et al. Challenges in global climate models to represent cloud response to aerosols: insights from volcanic eruptions. Nature Communications. 2025;17:627. doi:10.1038/s41467-025-67359-3",
+  "features": [
+    "nested-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "multiple-abstracts",
+    "orcid",
+    "tables",
+    "table-spans",
+    "table-footnotes",
+    "inline-math",
+    "tex-alternatives",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "mixed-citation",
+    "citation-alternatives",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#135",
+  "notes": "An <inline-formula><alternatives> in a table cell carries a preamble-wrapped <tex-math> (\\documentclass…\\begin{document}) beside <mml:math> (#135). All three <table-wrap>s and both <fig>s sit inside <p> (#111, #130)."
+}

@@ -1,0 +1,33 @@
+{
+  "id": "epmc-s13256-024-05002-3",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto’s thyroiditis and pernicious anemia: a case report",
+  "identifiers": {
+    "pmcid": "PMC11682623",
+    "pmid": "39732732",
+    "doi": "10.1186/s13256-024-05002-3"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11682623/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Mansour M, Shamasnah A, Alsaadi D, Abu Saif S, krama A. Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto’s thyroiditis and pernicious anemia: a case report. Journal of Medical Case Reports. 2024;18:643. doi:10.1186/s13256-024-05002-3",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "definition-list",
+    "footnotes",
+    "glossary",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "table-footnotes",
+    "mixed-citation",
+    "case-report",
+    "rosetta"
+  ]
+}

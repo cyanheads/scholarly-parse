@@ -1,0 +1,38 @@
+{
+  "id": "epmc-pmc10600315",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Measurement of the top quark mass using a profile likelihood approach with the lepton + jets final states in proton–proton collisions at \\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V} $$\\end{document}s=13TeV",
+  "identifiers": {
+    "pmcid": "PMC10600315",
+    "pmid": "37906635",
+    "doi": "10.1140/epjc/s10052-023-12050-4"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10600315/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Tumasyan A, Adam W, Andrejkovic JW, Bergauer T, Chatterjee S, Damanakis K, et al. Measurement of the top quark mass using a profile likelihood approach with the lepton + jets final states in proton–proton collisions at \\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V} $$\\end{document}s=13TeV. The European Physical Journal. C, Particles and Fields. 2023;83(10):963. doi:10.1140/epjc/s10052-023-12050-4",
+  "features": [
+    "lists",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "collab-author",
+    "orcid",
+    "many-authors",
+    "tables",
+    "table-spans",
+    "inline-math",
+    "display-math",
+    "tex-alternatives",
+    "figures",
+    "element-citation",
+    "mixed-citation",
+    "research-article",
+    "large"
+  ],
+  "notes": "CMS Collaboration paper: 2,351 contributors, 2,072 of them with ORCIDs, and the collaboration as a <collab> author."
+}

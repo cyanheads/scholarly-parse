@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh</title>
+				<funder ref="#_QU93nA4">
+					<orgName type="full">Prime Minister&apos;s Office of the Government of Bangladesh</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">Prime Minister&apos;s Fellowship Programme</orgName>
+				</funder>
+				<funder>
+					<orgName type="full">The Roslin Institute</orgName>
+				</funder>
+				<funder ref="#_7DyKMfU">
+					<orgName type="full">Biotechnology and Biological Sciences Research Council</orgName>
+					<orgName type="abbreviated">BBSRC</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Md Ataul</forename><forename type="middle">Goni</forename><surname>Rabbani</surname></persName>
+							<email>m.a.g.rabbani@roslin.ed.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Poultry Production Research Division</orgName>
+								<orgName type="institution">Bangladesh Livestock Research institute (BLRi)</orgName>
+								<address>
+									<addrLine>Savar</addrLine>
+									<postCode>1341</postCode>
+									<settlement>Dhaka</settlement>
+									<country key="BD">Bangladesh</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Adriana</forename><surname>Vallejo-Trujillo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Zhou</forename><surname>Wu</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Katarzyna</forename><surname>Miedzinska</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Shakila</forename><surname>Faruque</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Poultry Production Research Division</orgName>
+								<orgName type="institution">Bangladesh Livestock Research institute (BLRi)</orgName>
+								<address>
+									<addrLine>Savar</addrLine>
+									<postCode>1341</postCode>
+									<settlement>Dhaka</settlement>
+									<country key="BD">Bangladesh</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kellie</forename><forename type="middle">A</forename><surname>Watson</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jacqueline</forename><surname>Smith</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Veterinary Studies</orgName>
+								<orgName type="institution" key="instit1">the Roslin institute and Royal (Dick)</orgName>
+								<orgName type="institution" key="instit2">the University of edinburgh</orgName>
+								<address>
+									<addrLine>easter Bush campus</addrLine>
+									<postCode>EH25 9RG</postCode>
+									<region>Midlothian</region>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">0BDECF6AAA5C295D6172647F12CA5BE1</idno>
+					<idno type="DOI">10.1038/s41597-024-04291-z</idno>
+					<note type="submission">Received: 28 August 2024; Accepted: 4 December 2024;</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Bangladeshi indigenous chicken varieties -Common Deshi, Hilly and Naked Neck are notable for their egg production, meat quality, extraordinary survivability and disease resistance. However, the potential to harness their unique genetic merits are being eroded by various factors, including crossbreeding. In-depth genomic studies have not been carried out on these breeds so far. to this end, blood samples and associated phenotypic metadata have been collected from local, unimproved birds sampled from 8 different locations across the country, and from Bangladesh Livestock Research Institute (BLRI)-improved chickens of the same mentioned breeds. Whole Genome Sequencing (WGS) of 96 selected samples, representing local and improved populations of each breed, has been carried out. Around 22 M high-quality SNPs have been identified, with 25% of these being novel variants previously undescribed in public databases. this data set will allow for genetic comparison between breeds, and between selected and unimproved birds, providing a resource for genomic selection in Bangladeshi breeding schemes to create more productive and resilient poultry stock.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Background &amp; Summary</head><p>There are several native chicken varieties in Bangladesh of which Common Deshi (CD) or Non-descript Deshi, Hilly (HL) and Naked Neck (NN) chickens are noteworthy for their egg production, meat quality and survivability in harsh environmental conditions. Consumers prefer indigenous chicken meat and eggs due to their special characteristics of smell, taste and texture <ref type="bibr" target="#b0">1,</ref><ref type="bibr" target="#b1">2</ref> . Some studies found that around 98% of consumers pay attention to particular qualities such as fat content, meat colour and taste, eggshell colour, size and yolk colour <ref type="bibr" target="#b2">3</ref> . Domestic local chicken is thus preferred over intensively produced commercial hybrid chicken in Bangladesh.</p><p>However, these precious chicken populations have been undergoing genetic erosion since the introduction of improved stocks (both pure lines of different chicken breeds and commercial hybrids) from developed countries. This has occurred as a result of various factors like the incorporation of exotic chicken breeds and commercial hybrids, indiscriminate cross-breeding, sub-optimal breeding strategies and lack of conservation programmes <ref type="bibr" target="#b1">2,</ref><ref type="bibr" target="#b3">4</ref> . Recognising the potential of Bangladeshi local chicken varieties, the Bangladesh Livestock Research Institute (BLRI) started a conservation and improvement programme for the three above-mentioned native chicken varieties around 2011 <ref type="bibr" target="#b4">5</ref> , applying conventional breeding strategies. Both egg production and growth performance have improved significantly as compared to the foundation stock <ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref> . These native chickens maintained by the BLRI are known as 'BLRI Improved Native Chicken' . However, apart from a few studies using RAPD markers, microsatellite markers or partial mitochondrial DNA-loop sequences to understand the maternal origin <ref type="bibr" target="#b8">[9]</ref><ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref> , advanced genomic research on these native breeds has yet to be conducted. In-depth genome-level research on these promising native chicken species will be crucial for the identification of potential genomic regions and candidate genes responsible for productivity improvement, disease resistance and stress tolerance potential, to harvest maximum utilization. In addition, appropriate breeding strategies based on genomic surveys need to be undertaken for the conservation of native chicken germplasms.</p><p>Advances in genomics have enabled Whole Genome Sequencing (WGS), allowing scientists to uncover genomic insights, contributing to livestock breeding and development <ref type="bibr" target="#b12">[13]</ref><ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref><ref type="bibr" target="#b15">[16]</ref><ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref><ref type="bibr" target="#b18">[19]</ref> . For instance, WGS analysis of 234 indigenous African chickens identified around 15 million SNPs, of which 14% represent unique variants, with some being associated with environmental adaptation and other important traits <ref type="bibr" target="#b19">20</ref> .</p><p>In this article, we report whole-genome sequencing data from 96 Bangladeshi native chickens. The samples include BLRI improved native chickens and the same variety of local chickens from eight different locations across the country. The indigenous chicken samples taken from various villages in Bangladesh are referred to here as 'Unimproved Native Chicken' . Paired-end next-generation sequencing for short reads was carried out on all samples with an average 23X coverage and reads mapped to the GRCg7b chicken reference genome (GCA_016699485.1; <ref type="url" target="https://ftp.ensembl.org/pub/release-109/fasta/gallus_gallus/dna/">https://ftp.ensembl.org/pub/release-109/fasta/gallus_gallus/dna/</ref>). More than 22 million biallelic Single Nucleotide Polymorphisms (SNPs) were identified in this study, with 25% being novel variants.</p><p>The utility of data generated from the present study is expected to include helping evaluate genetic variation and diversity of Bangladeshi native chicken varieties, detecting important genomic regions and candidate genes underlying different economic traits of interest (for example, egg production, body weight and stress tolerance ability) and future investigation on genomic selection as a potential strategy in chicken breeding programmes. The data can also help make associations between the genome and the environment using Ecological Niche Modelling (ENM) <ref type="bibr" target="#b20">[21]</ref><ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref><ref type="bibr" target="#b24">[25]</ref> and aid in the development of SNP chips/imputation panels <ref type="bibr" target="#b25">[26]</ref><ref type="bibr" target="#b26">[27]</ref><ref type="bibr" target="#b27">[28]</ref><ref type="bibr" target="#b28">[29]</ref><ref type="bibr" target="#b29">[30]</ref> . This is the first-time whole genome sequencing from Bangladeshi native chicken varieties has been presented, at scale, thus providing a valuable resource for avian researchers to understand the genetics of local chickens. These WGS data will also help to enrich the efforts of the Chicken Genomic Diversity Consortium <ref type="bibr" target="#b30">31</ref> to reveal origins and adaptations of global chicken populations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sampling locations.</head><p>390 blood samples were collected from birds from different geographical locations in Bangladesh (Fig. <ref type="figure" target="#fig_0">1</ref>) between February and June 2022. Of the total samples, 215 blood samples were taken from BLRI-improved chickens represented by three native varieties (Common Deshi, Hilly and Naked Neck) at the BLRI Poultry Research Farm. 175 blood samples were also taken from unimproved indigenous chickens (of the same three breeds) from several villages in eight different geographical locations across the country. While selecting the sampling sites, different environmental or climatic factors like temperature and humidity variation and availability of native chicken variety in that particular region, were taken into consideration. Details of the collected samples are shown in Fig. <ref type="figure" target="#fig_0">1</ref> and described in Supplementary Table <ref type="table" target="#tab_0">1</ref>. Ethical approval. All relevant ethical approvals were obtained from the Animal Experimentation Ethics Committee (AEEC) of BLRI [AEEC/BLRI00116]. In addition, prior collection of blood samples from the village chickens was done with the full consent of the owners. The samples were transported to the United Kingdom under a material transfer agreement (MTA) between BLRI and The University of Edinburgh (MTA Roslin 3324). In addition, import authorization for blood samples was issued under the Trade in Animals and Related Products (Scotland) Regulations (2012).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Blood collection.</head><p>Around 0.5 ml blood was withdrawn from the brachial wing vein (or cutaneous ulnar vein) of the selected healthy chickens using 1.0 ml insulin syringe (JMI Syringes &amp; Medical Devices Limited, Bangladesh) following the procedure stated by Kelly and Alworth <ref type="bibr" target="#b31">32</ref> . Chickens were handled with extreme care, maintaining standard animal handling procedures to ensure minimum stress. Immediately after collection, the blood was gently and carefully spread onto Whatman FTA classic cards (Cat. No: WHAWB120205; Merck, Germany). After completion of blood collection, the FTA cards were kept at room temperature for at least three hours to allow complete drying. Appropriate caution was taken to keep the FTA cards safe from direct sunlight. All air-dried blood samples were then stored safely in double zipper bags until further processing at the Roslin Institute (Edinburgh, UK).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sample selection for WGS.</head><p>For whole genome sequencing, a total of 96 samples were selected from the 390 samples collected. The selected samples consisted of equal numbers of male and female chickens from each of the 6 groups (3 improved and 3 unimproved indigenous chicken varieties) as shown in Table <ref type="table" target="#tab_0">1</ref>. In the case of selecting BLRI-improved native chickens, unrelated chickens were given priority, considering the pedigree data (parental information) of the previous two generations of the sampled chicken populations. Samples from all geographical locations were included while selecting unimproved chickens for WGS. Again, within the same sampling area, individuals were selected from different villages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sample preparation for WGS.</head><p>All the selected blood samples on FTA cards were processed using a QIAamp ® DNA Investigator-50 kit (CAT no: 56504; QIAGEN, Germany). The quality and the quantity of the iso- lated genomic DNA were assessed by three different instruments -NanoDrop 1000 spectrophotometer (Thermo Fisher Scientific, USA), Qubit 4 fluorometer (Invitrogen, USA) and TapeStation 4200 (Agilent Technologies, USA). After normalising to a final volume of 50 μL, the genomic DNA samples were sent to BGI Genomics, Poland for whole genome sequencing (150 bp paired-end, 20X coverage).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Library preparation and sequencing.</head><p>Library preparation was conducted at BGI Genomics in Poland.</p><p>Before sequencing, concentration, integrity and purity of all the genomic DNA samples were again checked. Concentration was determined by Qubit Fluorometer (Invitrogen) and sample integrity and purity were detected by Agarose Gel Electrophoresis (concentration of agarose gel: 1%, voltage: 150 V, electrophoresis time: 40 minutes). Random fragmentation of genomic DNA was done using a Covaris (E220) instrument, then the fragmented genomic DNA was selected by Magnetic beads [Cat no: 1000005278 (MGI Easy DNA Clean Beads; <ref type="url" target="https://en.mgi-tech.com/Products/reagents_info/id/7">https://en.mgi-tech.com/Products/reagents_info/id/7</ref>] to an average size of 200-400 bp. Fragments were then end repaired and 3′ adenylated, with adaptors then ligated to the ends of these 3′ adenylated fragments. PCR was then carried out to amplify the fragments with adaptors and PCR products were purified by magnetic beads. The double stranded PCR products were then denatured and circularised by the splint oligo sequence. The single strand circular DNA (ssCir DNA) was formatted as the final library. The library was then assessed by quality control. The library was amplified with phi29 to make DNA nanoballs (DNB) which have more than 300 copies of each molecule. The DNBs were loaded into the patterned nanoarray and paired end 150 bp reads were generated by combinational Probe-Anchor Synthesis (cPAS). The sequencing was performed using the next generation high-throughput platform at BGI Genomics (DNBSEQ-T7) in paired-end mode (~20X coverage).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data processing.</head><p>Raw reads were filtered using a series of data processing steps to remove adaptor sequences, contamination and low-quality reads. This was done using SOAPnuke software <ref type="bibr" target="#b32">33</ref> by BGI Genomics. Upon receipt of sequence data, quality of the sequences was checked using the FastQC programme (version 0.11.7) <ref type="bibr" target="#b33">34</ref> . For ease of reviewing the sequence quality, FASTQC reports for all 96 samples were aggregated in a single report by the MultiQC (version 1.1) package <ref type="bibr" target="#b34">35</ref> , examples from which are shown in Fig. <ref type="figure" target="#fig_1">2</ref>. No adaptor sequences were present and as the quality of the raw reads was very high, no further quality-based trimming was performed on the sequence reads. Mapping of the sequence reads was performed against the GRCg7b chicken reference genome (<ref type="url" target="https://www.ebi.ac.uk/ena/browser/view/GCA_016699485.1">https://www.  ebi.ac.uk/ena/browser/view/GCA_016699485.1</ref>) using Burrows-Wheeler Aligner (bwa-version 0.7.15) <ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b36">37</ref> with default parameters. Before alignment, sequence dictionary and FASTA index files were created using Samtools (version 1.13) <ref type="bibr" target="#b37">38</ref> which were used by the BWA-MEM programme. The resultant Sequence Alignment Map (SAM) files then underwent some further processing steps such as sorting according to their coordinates using the SortSam programme of Picard tools (version 2.25.4) <ref type="bibr">39</ref> and marking duplicate reads using the MarkDuplicate programme of the same tool. BAM files were then validated to troubleshoot errors such as improper formatting, faulty alignments and incorrect flag values. In addition, different WGS metrics were calculated using both Samtools and Picard tools. Base Quality Score Recalibration (BQSR) was then carried out using the BaseRecalibrator tool from the Genome Analysis Toolkit -GATK (version 4.0.10.1) <ref type="bibr" target="#b38">40,</ref><ref type="bibr" target="#b39">41</ref> to correct the biases in the quality scores assigned by the sequencer. The final recalibrated BAM files were then used for further downstream analysis. The overview of the mapping and variant calling steps is presented in Fig. <ref type="figure" target="#fig_2">3</ref>.</p><p>GATK best practice guidelines for germline short variant discovery were followed for variant calling and SNP detection using the HaplotypeCaller tool with the '-ERC GVCF' settings to generate GVCF files which then underwent joint genotyping using the GenomicsDBImport and then GenotypeGVCFs functions. The Variant Quality Score Recalibration (VQSR) <ref type="bibr" target="#b40">42</ref> function was then applied to perform variant filtration using a set of around one million validated SNPs <ref type="bibr" target="#b25">26</ref> as a training and true set, with over 21 M chicken SNPs from the Ensembl database (release-110) <ref type="bibr" target="#b41">43</ref> used as known variants.</p><p>The following annotations or context statistics were considered during the VQSR step: read depth (DP), variant quality by depth (QD), root mean square mapping quality (MQ), mapping quality rank sum test statistics (MQRankSum), read position rank sum test statistics (ReadPosRankSum), and strand bias statistics (FS and SOR). A tranche sensitivity threshold of 99% was applied for filtering variants. As the final quality control of the called variants, any SNPs with a missing genotype rate more than 10% across the samples were filtered out using VCFtools 44 (version 0.1.13).</p><p>All codes used for the mapping and variant calling steps are included in the Supplementary materials and also available on GitHub.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Records</head><p>All full-length raw sequencing data in FASTQ format can be accessed from the Sequence Read Archive (SRA) of the NCBI database under BioProject accession number PRJNA1027325 <ref type="bibr" target="#b43">45</ref> . The filtered VCF file containing more than 22 million high-quality autosomal biallelic SNPs can also be accessed from the European Necleotide Archive (ENA) and the European Variation Archive (EVA) repositories under the Project accession number PRJEB78357 <ref type="bibr">46,</ref><ref type="bibr" target="#b44">47</ref> and Analysis accession number ERZ24818048.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>technical Validation</head><p>Quality control of sequencing data. The total number of bases generated from the sequencing each sample was from 24 Gb to 28 Gb, with GC content averaging 42%. Around 95.33% of the bases had a minimum Phred scaled quality score of 30 which indicates a base calling accuracy of 99.9%. The average estimated genome coverage across all sample was ~23X (after marking duplicate reads) with the range varying from 20X to 25X. FastQC reports (shown in Fig. <ref type="figure" target="#fig_1">2</ref>) indicate that sequencing quality of all samples was of high-quality. The average mapping rate of the sequence reads against the reference genome was 99.60%, which further confirmed the high quality of the sequencing data.</p><p>Quality control of SNP data. During the variant calling step using GATK best practice guidelines, more than 30 M total variants were identified including more than 26 M SNPs and 4.5 M insertions/deletions (INDELs). VQSR filtering was then applied to ensure identification of high-quality variants and to minimize the number of false positives. More than 1 M validated SNPs <ref type="bibr" target="#b25">26</ref> and about 22 M SNPs from Ensembl <ref type="bibr" target="#b41">43</ref> were used as known variants (training data set) during the VQSR step. The VQSR filtering retained 100% of the SNPs (26.07 M). Next, only the biallelic SNPs (22.75 M) were taken into consideration for downstream analysis which included a further filtering step. SNPs with a missing genotype rate of more than 10% were discarded, which retained around 22 M high-quality SNPs. In this step, minimum genotype quality (GQ) score was considered 20 (-minGQ 20.0), depth of sequence coverage was 3 (-minDP 3), Hardy-Weinberg Equilibrium (HWE) value was 0.00001 (hwe 0.00001) along with the maximum missing rate of genotypes of 10% (-max-missing 0.9) using VCFtools. Annotation of the identified SNPs was done using Ensembl's Variant Effect Predictor-VEP <ref type="bibr" target="#b45">48</ref> (release-110) which revealed that around 75% of the total high-quality variants are already reported in the public databases, but the rest were novel variants. We found that the majority of the identified variants (around 68%) were intronic while around 2% were exonic variants (shown in Table <ref type="table" target="#tab_1">2a</ref>). Again, we found a greater number of variants in unimproved chicken populations compared to improved chickens of the same varieties (Table <ref type="table" target="#tab_1">2b</ref>). Details of SNPs in different annotation categories in both improved and unimproved native chicken populations are given in Supplementary Table <ref type="table" target="#tab_1">2</ref>.</p><p>To determine the quality of SNP calling from the high-throughput sequencing data, the transition/transversion ratio (Ts/Tv) can be employed. We obtained a transition/transversion ratio (Ts/Tv) of 2.453 in the overall populations which is typically found to be ~2 for whole genome sequence data <ref type="bibr" target="#b46">49</ref> . Some previous studies reported a Ts/Tv ratio between 2.17 to 2.69 for different indigenous chicken breeds <ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b47">[50]</ref><ref type="bibr" target="#b48">[51]</ref><ref type="bibr" target="#b49">[52]</ref><ref type="bibr" target="#b50">[53]</ref> . Unless it is too high (&gt;4), a higher Ts/Tv ratio generally indicates better SNP calling <ref type="bibr" target="#b51">54</ref> .</p><p>The proportion of singleton SNPs in the overall population for this study was 13.64% while the unimproved chicken populations have higher percentages compared to the improved populations (Table <ref type="table" target="#tab_1">2b</ref>). These reflect the genetic diversity between the studied chicken populations. In addition, smaller sample size may be also responsible for a large proportion of singleton SNPs <ref type="bibr" target="#b52">55</ref> .</p><p>We observed an average of 1 SNP in every 57 base pairs in 10 kb non-overlapping windows across the studied genome. Indigenous chicken species exhibit higher SNP density mainly due to their greater genetic diversity, exposure to varied environmental conditions and more natural settings or less controlled breeding compared to the commercial breeds <ref type="bibr" target="#b50">53,</ref><ref type="bibr" target="#b53">56,</ref><ref type="bibr" target="#b54">57</ref> . The SNP density across various chromosomes including the sex chromosomes (Z and W) from our study is detailed in Supplementary Table <ref type="table">3</ref> and illustrated in Fig. <ref type="figure">4</ref>. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Density of SNPs across chromosomes (10kb non-overlaping windows)</head><p>Fig. <ref type="figure">4</ref> Chromosome-wise SNP distribution heat map across the Bangladeshi native chicken genome based on more than 22 M identified SNPs. The x-axis represents the chromosome length (Mb) and the y-axis denotes chromosome number.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1</head><label>1</label><figDesc>Fig. 1 Sample collection sites from across Bangladesh. Blue circles indicate unimproved native chicken sampling locations (across the different villages) while the red circle indicates the improved native chicken sampling location (BLRI Headquarters, Dhaka, Bangladesh). The numbers inside the circles indicate the number of samples that were sequenced from each location.</figDesc><graphic coords="2,155.64,46.50,228.00,295.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2</head><label>2</label><figDesc>Fig. 2 Quality control metrics from FastQC analysis. (a) Per sequence quality scores and (b) per sequence GC content.</figDesc><graphic coords="4,98.64,46.50,456.00,200.76" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3</head><label>3</label><figDesc>Fig. 3 Overview of the sequence alignment, variant calling and variant filtration process.</figDesc><graphic coords="5,98.64,46.50,456.00,246.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Selected</figDesc><table><row><cell></cell><cell></cell><cell></cell><cell cols="2">Number of samples</cell></row><row><cell>Population Type</cell><cell>Chicken Variety</cell><cell>Sampling location</cell><cell>Male</cell><cell>Female</cell></row><row><cell></cell><cell>Common Deshi (CD)</cell><cell>BLRI HQ*, Savar, Dhaka</cell><cell>8</cell><cell></cell></row><row><cell>BLRI-Improved</cell><cell>Hilly (HL)</cell><cell>BLRI HQ, Savar, Dhaka</cell><cell>8</cell><cell></cell></row><row><cell>chickens (n = 48)</cell><cell>Naked Neck (NN)</cell><cell>BLRI HQ, Savar, Dhaka</cell><cell>8</cell><cell></cell></row><row><cell></cell><cell cols="2">A. BLRI-Improved sub-total =</cell><cell>24</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Monirumpur, Jessore</cell><cell>1</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Dhamrai, Dhaka</cell><cell>2</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Sadar, Mymensingh</cell><cell>1</cell><cell></cell></row><row><cell></cell><cell>Common Deshi (CD)</cell><cell>Bhaluka, Mymensingh Chhagalnaiya, Feni</cell><cell>1 1</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Gopalpur, Tangail</cell><cell>1</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Sadar, Gaibandha</cell><cell>1</cell><cell></cell></row><row><cell></cell><cell></cell><cell>a. Sub-total of Unimproved CD =</cell><cell>8</cell><cell></cell></row><row><cell>Unimproved chickens (n = 48)</cell><cell>Hilly (HL)</cell><cell>Naikhongchhari, Bandarban BLRI Regional Research Farm, Naiknongchhari, Bandarban</cell><cell>5 3</cell><cell></cell></row><row><cell></cell><cell></cell><cell>b. Sub-total of Unimproved HL =</cell><cell>8</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Dhamrai, Dhaka</cell><cell>2</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Naikhongchhari, Bandarban</cell><cell>2</cell><cell></cell></row><row><cell></cell><cell>Naked Neck (NN)</cell><cell>Sadar, Mymensingh Bhaluka, Mymensingh</cell><cell>0 2</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Gopalpur, Tangail</cell><cell>2</cell><cell></cell></row></table><note><p>c. Sub-total of Unimproved NN = 8 B. Unimproved sub-total (a + b + c) = 24 Total (A + B)= 48 samples (total = 96) for WGS from BLRI improved native chicken (n = 48) and unimproved native chickens from local villages (n = 48). * Poultry Research Farm, BLRI Headquarters, Savar, Dhaka-1341, Bangladesh.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 .</head><label>2</label><figDesc>(a) SNPs in different annotation categories for overall Bangladeshi native chicken populations. (b) Sumary statistics of SNPs in Bangladeshi improved and unimproved native chicken populations. CD = Common Deshi, HL = Hilly, NN = Naked Neck, Imp = BLRI Improved native chickens and Unimp=Unimproved native chickens from different localities of Bangladesh.</figDesc><table><row><cell>Variant Categories</cell><cell></cell><cell>Variant Counts</cell><cell>Variants %</cell><cell>% of Total</cell><cell></cell></row><row><cell>(a)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Synonymous variant</cell><cell>232,772</cell><cell>1.050</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Missense variant</cell><cell>140,947</cell><cell>0.636</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Stop-gained variant</cell><cell>2,040</cell><cell>0.009</cell><cell></cell><cell></cell></row><row><cell>Exonic Variants</cell><cell>Stop-lost variant</cell><cell>246</cell><cell>0.001</cell><cell>1.702</cell><cell></cell></row><row><cell></cell><cell>Start-lost variant</cell><cell>1,050</cell><cell>0.005</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Stop-retained variant</cell><cell>171</cell><cell>0.001</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Coding sequence variant</cell><cell>1</cell><cell>0.000</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Splice acceptor variant</cell><cell>1,925</cell><cell>0.009</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Splice donor variant</cell><cell>2,733</cell><cell>0.012</cell><cell></cell><cell></cell></row><row><cell>Splicing Variants</cell><cell>Splice donor 5 th base variant Splice region variant</cell><cell>3,120 46,812</cell><cell>0.014 0.211</cell><cell>0.468</cell><cell></cell></row><row><cell></cell><cell>Splice donor region variant</cell><cell>9,705</cell><cell>0.044</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Splice polypyrimidine tract variant</cell><cell>39,445</cell><cell>0.178</cell><cell></cell><cell></cell></row><row><cell>Intronic Variants</cell><cell>Intron variant</cell><cell>15,111,660</cell><cell>68.181</cell><cell>68.181</cell><cell></cell></row><row><cell>Intergenic Variants</cell><cell>Intergenic variant</cell><cell>2,964,795</cell><cell>13.377</cell><cell>13.377</cell><cell></cell></row><row><cell>Regulatory Variants</cell><cell>Upstream gene variant Downstream gene variant</cell><cell>1,342,998 835,260</cell><cell>6.059 3.769</cell><cell>9.828</cell><cell></cell></row><row><cell>UTR variants</cell><cell>5 prime UTR variant 3 prime UTR variant</cell><cell>144,292 473,793</cell><cell>0.651 2.138</cell><cell>2.789</cell><cell></cell></row><row><cell>Other variants</cell><cell>Mature miRNA variant Non-coding transcript exon variant</cell><cell>230 809,920</cell><cell>0.001 3.654</cell><cell>3.655</cell><cell></cell></row><row><cell>Total =</cell><cell></cell><cell>22,163,915</cell><cell>100.00</cell><cell>100.00</cell><cell></cell></row><row><cell>(b)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Chicken populations</cell><cell>Total SNPs</cell><cell>Novel SNPs</cell><cell cols="3">Novel SNPs % Ts/Tv Ratio Singletons (%)</cell></row><row><cell>CD_Imp</cell><cell>14,585,310</cell><cell>1,646,054</cell><cell>11.29</cell><cell>2.482</cell><cell>16.57</cell></row><row><cell>CD_Unimp</cell><cell>17,142,624</cell><cell>2,677,720</cell><cell>15.62</cell><cell>2.475</cell><cell>23.61</cell></row><row><cell>HL_Imp</cell><cell>13,792,070</cell><cell>1,493,434</cell><cell>10.83</cell><cell>2.485</cell><cell>14.8</cell></row><row><cell>HL_Unimp</cell><cell>15,873,233</cell><cell>2,257,509</cell><cell>14.22</cell><cell>2.479</cell><cell>20.84</cell></row><row><cell>NN_Imp</cell><cell>11,889,880</cell><cell>992,111</cell><cell>8.34</cell><cell>2.492</cell><cell>12.52</cell></row><row><cell>NN_Unimp</cell><cell>17,041,300</cell><cell>2,632,800</cell><cell>15.45</cell><cell>2.475</cell><cell>23.11</cell></row><row><cell>Overall Bangladeshi native chicken population</cell><cell>22,163,915</cell><cell>5,553,897</cell><cell>25.1</cell><cell>2.453</cell><cell>13.64</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>Scientific Data | (2024) 11:1432 | https://doi.org/10.1038/s41597-024-04291-z</p></note>
+		</body>
+		<back>
+
+			<div type="funding">
+<div><head>acknowledgements</head><p>The authors would like to thank the <rs type="institution" subtype="infrastructure">BGI Genomics sequencing facility in Poland</rs> for carrying out the whole genome sequencing of the chicken samples. MAGR was funded through the <rs type="funder">Prime Minister's Fellowship Programme</rs> under the <rs type="funder">Prime Minister's Office of the Government of Bangladesh</rs> [Grant no <rs type="grantNumber">03.03.2690.094.18.04.22-94</rs>] and the project carried out as part of the <rs type="funder">Biotechnology and Biological Sciences Research Council (BBSRC)</rs> award number <rs type="grantNumber">BBS/E/RL/230001</rs> A. The authors also thankful to the authority concerned of <rs type="institution">Bangladesh Livestock Research Institute (BLRI)</rs> and <rs type="funder">The Roslin Institute</rs>, and owners of the sampled chickens.</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funding" xml:id="_QU93nA4">
+					<idno type="grant-number">03.03.2690.094.18.04.22-94</idno>
+				</org>
+				<org type="funding" xml:id="_7DyKMfU">
+					<idno type="grant-number">BBS/E/RL/230001</idno>
+				</org>
+			</listOrg>
+
+			<listOrg type="infrastructure">
+				<org type="infrastructure">					<orgName type="extracted">BGI Genomics sequencing facility in Poland</orgName>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Code availability</head><p>WGS data analyses from 96 Bangladeshi indigenous chickens were performed using standard bioinformatic tools in the Scientific Linux 7-based High Performance Computing (HPC) system (Eddie) of the University of Edinburgh. The codes used along with versions and parameters of the primary software/tools are available on GitHub (<ref type="url" target="https://github.com/MAGRabbani/WGS_of_BDchicken_data_analysis_codes">https://github.com/MAGRabbani/WGS_of_BDchicken_data_analysis_codes</ref>) and also included in the supplementary materials.</p></div>
+			</div>
+
+
+			<div type="conflict">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Competing interests</head><p>The authors declare no competing interests.</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>author contributions</head><p>J.S. and M.A.G.R. conceived the research project; M.A.G.R. obtained funding; M.A.G.R. and S.F. led sample collection; M.A.G.R. and K.M. prepared samples for sequencing; M.A.G.R. carried out all bioinformatic analyses, A.V.T. and Z.W. supervised the bioinformatics analysis; K.W. and J.S. supervised the project; M.A.G.R. drafted the original manuscript. All authors contributed to and approved the final manuscript.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Poultry production profile and expected future projection in Bangladesh</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">C</forename><surname>Das</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Worlds Poult Sci J</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="99" to="118" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Indigenous chicken genetic resources in Bangladesh: current status and future outlook</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K F H</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S A</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">K</forename><surname>Deb</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Animal Genetic Resources Information</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="73" to="84" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Estimating consumer preferences and willingness to pay for the underutilised indigenous chicken products</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">K</forename><surname>Bett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><forename type="middle">M</forename><surname>Nwankwo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Bokelmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Food Policy</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="218" to="225" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Scavenging Poultry for Poverty Alleviation: A Review of Experiences with a Focus on Bangladesh</title>
+		<author>
+			<persName><forename type="first">Fakhrul</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Jabbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Ex situ improvement of indigenous chicken in Bangladesh</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faruque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">N</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K F H</forename><surname>Bhuiyan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tropical Agricultural Research</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page">13</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Evaluation of the performance of native chicken and estimation of heritability for body weight</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faruque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Afroz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Rahman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Bangladesh Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="93" to="101" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Breeding for the improvement of indigenous chickens of Bangladesh: performance of foundation stock</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faruque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Y</forename><surname>Ali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">F</forename><surname>Joy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Asian Journal of Medical and Biological Research</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="80" to="87" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Progress in the Performance of Indigenous Chickens Selected for Economic Traits in Bangladesh</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Sultana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faruque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K F H</forename><surname>Bhuiyan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Agriculture, Food and Environment</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Analysis of genetic diversity in bangladeshi chicken using RAPD markers</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B R</forename><surname>Mollah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">B</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Ali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Alam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biotechnology</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="462" to="467" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Genetic diversity and population structure of indigenous chicken of Bangladesh using microsatellite markers</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Rashid</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Asian-Australas J Anim Sci</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="1732" to="1740" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Genetic diversity and maternal origin of Bangladeshi chicken</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">S A</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Faruque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">K F H</forename><surname>Bhuiyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Beja-Pereira</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Rep</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="4123" to="4128" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Genetic diversity of Bangladeshi native chickens based on complete sequence of mitochondrial DNA D-loop region</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Islam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">A M</forename><surname>Osman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Nishibori</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Br Poult Sci</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page" from="628" to="637" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">A review of challenges to genetic improvement of indigenous livestock for improved food production in Nigeria</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Okpeku</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">M</forename><surname>Ogah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Adeleke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">African Journal of Food, Agriculture, Nutrition and Development</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="13959" to="13978" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Emerging Genetic Tools to Investigate Molecular Pathways Related to Heat Stress in Chickens: A</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Perini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Review. Animals (Basel)</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="1" to="19" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Genome-wide association studies for complex traits: consensus, uncertainty and challenges</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Mccarthy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Genetics</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">5 9</biblScope>
+			<biblScope unit="page" from="356" to="369" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A large-scale genome-wide association study of Asian populations uncovers genetic factors influencing eight quantitative traits</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">S</forename><surname>Cho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Genetics</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="527" to="534" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Multi-Platform Next-Generation Sequencing of the Domestic Turkey (Meleagris gallopavo): Genome Assembly and Analysis</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Dalloul</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Biol</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">1000475</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Genome-wide association studies</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Uffelmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Reviews Methods Primers 2021</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1 1</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Integrated Environmental and Genomic Analysis Reveals the Drivers of Local Adaptation in African Indigenous Chickens</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Gheyas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Mol Biol Evol</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="4268" to="4285" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Whole genome sequences of 234 indigenous african chickens from Ethiopia</title>
+		<author>
+			<persName><forename type="first">Almas</forename><surname>Gheyas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Data</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Ecological niche modelling for delineating livestock ecotypes and exploring environmental genomic adaptation: The example of Ethiopian village chicken</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vallejo-Trujillo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">755</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Use of geographic information system tools to predict animal breed suitability for different agro-ecological zones</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lozano-Jaramillo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W M</forename><surname>Bastiaansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Dessie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Komen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Animal</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1536" to="1543" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">The fate of the Arctic seaweed Fucus distichus under climate change: an ecological niche modeling approach</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jueterbock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Smolina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Coyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Hoarau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1712" to="1724" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Muscarella</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Methods Ecol Evol</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1198" to="1205" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Maximum entropy modeling of species geographic distributions</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">P</forename><surname>Aneja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">P</forename><surname>Arya</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ecol Modell</title>
+		<imprint>
+			<biblScope unit="volume">190</biblScope>
+			<biblScope unit="page" from="231" to="259" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Development of a high density 600K SNP genotyping array for chicken</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Kranis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Design of low density SNP chips for genotype imputation in layer chicken</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Herry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genet</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">108</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b27">
+	<analytic>
+		<title level="a" type="main">A new multipoint method for genome-wide association studies by imputation of genotypes</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Marchini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Howie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mcvean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Donnelly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Genetics</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="7" to="39" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Genotype Imputation with Millions of Reference Samples</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">L</forename><surname>Browning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Browning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The American Journal of Human Genetics</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page" from="116" to="126" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Population-specific genotype imputations using minimac or IMPUTE2</title>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">M</forename><surname>Van Leeuwen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Protocols</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1285" to="1296" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b30">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Fourth Report on Chicken Genes and Chromosomes</title>
+		<imprint>
+			<biblScope unit="volume">162</biblScope>
+			<biblScope unit="page" from="405" to="527" />
+			<date type="published" when="2022">2022. 2022</date>
+		</imprint>
+	</monogr>
+	<note>Cytogenet Genome Res</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Techniques for collecting blood from the domestic chicken</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">C</forename><surname>Alworth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Lab Animal</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="359" to="361" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b32">
+	<monogr>
+		<title level="m" type="main">SOAPnuke: a MapReduce acceleration-supported software for integrated quality control and preprocessing of highthroughput sequencing data</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b33">
+	<analytic>
+		<title level="a" type="main">FastQC A Quality Control tool for High Throughput Sequence Data</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Simon</surname></persName>
+		</author>
+		<ptr target="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" />
+	</analytic>
+	<monogr>
+		<title level="j">Babraham Bioinformatics</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Data and text mining MultiQC: summarize analysis results for multiple tools and samples in a single report</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ewels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ns Magnusson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Lundin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">K</forename><surname>Aller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="3047" to="3048" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Fast and accurate short read alignment with Burrows-Wheeler transform</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Durbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1754" to="1760" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.6084/M9.FIGSHARE.963153.V1</idno>
+		<ptr target="https://doi.org/10.6084/M9.FIGSHARE.963153" />
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+	<note type="report_type">Preprint</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b37">
+	<analytic>
+		<title level="a" type="main">The Sequence Alignment/Map format and SAMtools</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Li</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="2078" to="2079" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Genomics in the Cloud: Using Docker, GATK, and WDL in Terra</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">A</forename><surname>Van Der Auwera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">D</forename><surname>O'connor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<pubPlace>O&apos;Reilly Media, Sebastopol, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Best Practices for Variant Calling with the GATK</title>
+		<ptr target="https://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1" />
+		<imprint/>
+		<respStmt>
+			<orgName>Broad Institute</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Variant Quality Score Recalibration (VQSR) -GATK</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Caetano-Anolles</surname></persName>
+		</author>
+		<ptr target="https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR" />
+		<imprint>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b41">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">W</forename><surname>Harrison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="891" to="899" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b42">
+	<analytic>
+		<title level="a" type="main">The variant call format and VCFtools</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Danecek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="2156" to="2158" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b43">
+	<analytic>
+		<title/>
+		<ptr target="https://identifiers.org/ncbi/insdc.sra:SRP467265" />
+	</analytic>
+	<monogr>
+		<title level="j">NCBI Sequence Read Archive</title>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b44">
+	<monogr>
+		<title/>
+		<author>
+			<orgName type="collaboration">EVA European Variant Archive</orgName>
+		</author>
+		<ptr target="https://www.ebi.ac.uk/eva/?eva-study=PRJEB78357" />
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b45">
+	<analytic>
+		<title level="a" type="main">The Ensembl Variant Effect Predictor</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Mclaren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Variant Association Tools for Quality Control and Analysis of Large-Scale Sequence and Genotyping Array Data</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">T</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Leal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The American Journal of Human Genetics</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="page" from="770" to="783" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Whole Genome Re-Sequencing of Three Domesticated Chicken Breeds</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Oh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Zoolog Sci</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="73" to="77" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Genome-wide characterization of genetic variants and putative regions under selection in meat and egg-type chicken lines</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Boschiero</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b49">
+	<analytic>
+		<title level="a" type="main">A survey of functional genomic variation in domesticated chickens</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F L</forename><surname>Derks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genet Sel Evol</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page">17</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Whole-genome sequencing revealed genetic diversity, structure and patterns of selection in Guizhou indigenous chickens</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Xu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Genome measures used for quality control are dependent on gene function and ancestry</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Raskin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">C</forename><surname>Samuels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Shyr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="318" to="323" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Genetic diversity and adaptation to environmental challenges of Ethiopian indigenous chicken</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vallejo-Trujillo</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<pubPlace>Nottingham</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>University of</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Genetics of adaptation in modern chicken</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Qanbari</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS Genet</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">1007989</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Artificial selection footprints in indigenous and commercial chicken genomes</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Genomics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,25 @@
+{
+  "id": "nature-s41598-025-30797-6",
+  "format": "pdf",
+  "title": "Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method",
+  "identifiers": {
+    "doi": "10.1038/s41598-025-30797-6"
+  },
+  "url": "https://www.nature.com/articles/s41598-025-30797-6.pdf",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Fahim MM, Ahmed HM, Dib KA, Samir I. Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method. Scientific Reports. 2025;15(1):43949. doi:10.1038/s41598-025-30797-6",
+  "features": [
+    "single-column",
+    "running-headers",
+    "page-furniture",
+    "display-math",
+    "equation-numbers",
+    "figures",
+    "research-article"
+  ],
+  "notes": "Equation-dense single-column journal layout (40 numbered display equations). The same work's JATS is jats/epmc-pmc12712089."
+}

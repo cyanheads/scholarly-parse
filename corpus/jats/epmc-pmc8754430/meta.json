@@ -1,0 +1,38 @@
+{
+  "id": "epmc-pmc8754430",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "pH-dependent 11° F1FO ATP synthase sub-steps reveal insight into the FO torque generating mechanism",
+  "identifiers": {
+    "pmcid": "PMC8754430",
+    "pmid": "34970963",
+    "doi": "10.7554/eLife.70016"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8754430/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Yanagisawa S, Frasch WD. pH-dependent 11° F1FO ATP synthase sub-steps reveal insight into the FO torque generating mechanism. eLife. 2021;10:e70016. doi:10.7554/eLife.70016",
+  "features": [
+    "nested-sections",
+    "sub-article",
+    "boxed-text",
+    "lists",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "orcid",
+    "tables",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "research-article"
+  ],
+  "notes": "eLife article with its editor's evaluation, decision letter, and author response as <sub-article>s; the review documents quote the reviewers in <disp-quote>."
+}

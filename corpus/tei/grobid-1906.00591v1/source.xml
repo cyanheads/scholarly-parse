@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Evaluating Gender Bias in Machine Translation</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2019-06-03">3 Jun 2019</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author>
+							<persName><forename type="first">Gabriel</forename><surname>Stanovsky</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Paul G. Allen School of Computer Science &amp; Engineering</orgName>
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Allen Institute for Artificial Intelligence</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Noah</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+							<email>nasmith@cs.washington.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">Paul G. Allen School of Computer Science &amp; Engineering</orgName>
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Allen Institute for Artificial Intelligence</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Paul G. Allen School of Computer Science &amp; Engineering</orgName>
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Evaluating Gender Bias in Machine Translation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2019-06-03">3 Jun 2019</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">63E1A84DBCB56B1F424D245D903F3C73</idno>
+					<idno type="arXiv">arXiv:1906.00591v1[cs.CL]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We present the first challenge set and evaluation protocol for the analysis of gender bias in machine translation (MT). Our approach uses two recent coreference resolution datasets composed of English sentences which cast participants into non-stereotypical gender roles (e.g., "The doctor asked the nurse to help her in the operation"). We devise an automatic gender bias evaluation method for eight target languages with grammatical gender, based on morphological analysis (e.g., the use of female inflection for the word "doctor"). Our analyses show that four popular industrial MT systems and two recent state-of-the-art academic MT models are significantly prone to genderbiased translation errors for all tested target languages. Our data and code are publicly available at <ref type="url" target="file://localhost/opt/grobid/grobid-home/tmp/shorturl.at/dimuD">shorturl.at/dimuD</ref>.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Learned models exhibit social bias when their training data encode stereotypes not relevant for the task, but the correlations are picked up anyway. Notable examples include gender biases in visual SRL (cooking is stereotypically done by women, construction workers are stereotypically men; <ref type="bibr" target="#b25">Zhao et al., 2017)</ref>, lexical semantics ("man is to computer programmer as woman is to homemaker"; <ref type="bibr" target="#b4">Bolukbasi et al., 2016)</ref>, and natural language inference (associating women with gossiping and men with guitars; <ref type="bibr" target="#b22">Rudinger et al., 2017)</ref>.</p><p>In this work, we conduct the first large-scale multilingual evaluation of gender-bias in machine translation (MT), following recent small-scale qualitative studies which observed that online MT services, such as Google Translate or Microsoft Translator, also exhibit biases, e.g., translating nurses as females and programmers as males, regardless of context <ref type="bibr" target="#b2">(Alvarez-Melis and Jaakkola, 2017;</ref><ref type="bibr" target="#b11">Font and Costa-Jussà, 2019)</ref>. Google Trans-</p><p>The doctor asked the nurse to help her in the procedure El doctor le pidio a la enfermera que le ayudara con el procedimiento Figure <ref type="figure">1</ref>: An example of gender bias in machine translation from English (top) to Spanish (bottom). In the English source sentence, the nurse's gender is unknown, while the coreference link with "her" identifies the "doctor" as a female. On the other hand, the Spanish target sentence uses morphological features for gender: "el doctor" (male), versus "la enfermera" (female). Aligning between source and target sentences reveals that a stereotypical assignment of gender roles changed the meaning of the translated sentence by changing the doctor's gender.</p><p>late recently tried to mitigate these biases by allowing users to sometimes choose between gendered translations <ref type="bibr">(Kuczmarski, 2018)</ref>.</p><p>As shown in Figure <ref type="figure">1</ref>, we use data introduced by two recent coreference gender-bias studies: the Winogender <ref type="bibr" target="#b23">(Rudinger et al., 2018)</ref>, and the WinoBias <ref type="bibr" target="#b26">(Zhao et al., 2018)</ref> datasets. Following the Winograd schema <ref type="bibr" target="#b17">(Levesque, 2011)</ref>, each instance in these datasets is an English sentence which describes a scenario with human entities, who are identified by their role (e.g., "the doctor" and "the nurse" in Figure <ref type="figure">1</ref>), and a pronoun ("her" in the example), which needs to be correctly resolved to one of the entities ("the doctor" in this case). <ref type="bibr" target="#b23">Rudinger et al. (2018)</ref> and <ref type="bibr" target="#b26">Zhao et al. (2018)</ref> found that while human agreement on the task was high (roughly 95%), coreference resolution models often ignore context and make socially biased predictions, e.g., associating the feminine pronoun "her" with the stereotypically female "nurse."</p><p>We observe that for many target languages, a faithful translation requires a similar form of (at least implicit) gender identification. In addition, in the many languages which associate between biological and grammatical gender (e.g., most Romance, Germanic, Slavic, and Semitic languages; <ref type="bibr" target="#b7">Craig, 1986;</ref><ref type="bibr" target="#b18">Mucchi-Faina, 2005;</ref><ref type="bibr" target="#b6">Corbett, 2007)</ref>, the gender of an animate object can be identified via morphological markers. For instance, when translating our running example in Figure <ref type="figure">1</ref> to Spanish, a valid translation may be: "La doctora le pidio a la enfermera que le ayudara con el procedimiento," which indicates that the doctor is a woman, by using a feminine suffix inflection ("doctora") and the feminine definite gendered article ("la"). However, a biased translation system may ignore the given context and stereotypically translate the doctor as male, as shown at the bottom of the figure.</p><p>Following these observations, we design a challenge set approach for evaluating gender bias in MT using a concatenation of Winogender and WinoBias. We devise an automatic translation evaluation method for eight diverse target languages, without requiring additional gold translations, relying instead on automatic measures for alignment and morphological analysis (Section 2). We find that four widely used commercial MT systems and two recent state-of-the-art academic models are significantly gender-biased on all tested languages (Section 3). Our method and benchmarks are publicly available, and are easily extensible with more languages and MT models.</p><p>2 Challenge Set for Gender Bias in MT We compose a challenge set for gender bias in MT (which we dub "WinoMT") by concatenating the Winogender and WinoBias coreference test sets. Overall, WinoMT contains 3,888 instances, and is equally balanced between male and female genders, as well as between stereotypical and nonstereotypical gender-role assignments (e.g., a female doctor versus a female nurse). Additional dataset statistics are presented in Table <ref type="table" target="#tab_0">1</ref>.</p><p>We use WinoMT to estimate the gender-bias of an MT model, M , in target-language L by performing following steps (exemplified in Figure <ref type="figure">1</ref>): (1) Translate all of the sentences in WinoMT into L using M , thus forming a bilingual corpus of English and the target language L.</p><p>(2) Align between the source and target translations, using fast align <ref type="bibr" target="#b8">(Dyer et al., 2013)</ref>, trained on the automatic translations from from step (1). We then map the English entity annotated in the coreference datasets to its translation (e.g., align between "the doctor" and "el doctor" in Figure <ref type="figure">1</ref>).</p><p>(3) Finally, we extract the target-side entity's gender using simple heuristics over languagespecific morphological analysis, which we perform using off-the-shelf tools for each target language, as discussed in the following section. This process extracts the translated genders, according to M , for all of the entities in WinoMT, which we can then evaluate against the gold annotations provided by the original English dataset.</p><p>This process can introduce noise into our evaluation in steps ( <ref type="formula">2</ref>) and ( <ref type="formula">3</ref>), via wrong alignments or erroneous morphological analysis. In Section 3, we will present a human evaluation showing these errors are infrequent.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Evaluation</head><p>In this section, we briefly describe the MT systems and the target languages we use, our main results, and their human validation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Experimental Setup</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MT systems</head><p>We test six widely used MT models, representing the state of the art in both commercial and academic research: (1) Google Translate,<ref type="foot" target="#foot_0">foot_0</ref> (2) Microsoft Translator,<ref type="foot" target="#foot_1">foot_1</ref> (3) Amazon Translate,<ref type="foot" target="#foot_2">foot_2</ref> (4) SYSTRAN,<ref type="foot" target="#foot_3">foot_3</ref> (5) the model of <ref type="bibr" target="#b20">Ott et al. (2018)</ref>, which recently achieved the best performance on English-to-French translation on the WMT'14 test set, and (6) the model of <ref type="bibr" target="#b9">Edunov et al. (2018)</ref>, the WMT'18 winner on English-to-German translation. We query the online API for the first four commercial MT systems, while for the latter two academic models we use the pretrained models provided by the Fairseq</p><formula xml:id="formula_0">Google Translate Microsoft Translator Amazon Translate * SYSTRAN Acc ∆ G ∆ S Acc ∆ G ∆ S Acc ∆ G ∆ S Acc ∆ G ∆ S</formula><p>ES 53.1 23.4 21.3 47.3 36.8 23.2 59.4 15.4 22.3 45.6 46.3 15.0 FR 63.6 6.4 26.7 44.7 36.4 29.7 55.2 17.7 24.9 45.0 44.0 9.4 IT 39.6 32.9 21.5 39.8 39.8 17.0 42.4 27.8 18.5 38.9 47.5 9.4 RU 37.7 36.8 11.4 36.8 42.1 8.5 39.7 34.7 9.2 37.3 44.1 9.3 UK 38.4 43.6 10.8 41.3 46.9 11.8 ---28.9 22.4 12.9 HE 53.7 7.9 37.8 48.1 14.9 32.9 50.5 10.3 47.3 46.6 20.5 24.5 AR 48.5 43.7 16.1 47.3 48.3 13.4 49.8 38.5 19.0 47.0 49.4 5.3 DE 59.4 12.5 12.5 74.1 0.0 30.2 62.4 12.0 16.7 48.6 34.5 10.3</p><p>Table 2: Performance of commercial MT systems on the WinoMT corpus on all tested languages, categorized by their family: Spanish, French, Italian, Russian, Ukrainian, Hebrew, Arabic, and German. Acc indicates overall gender accuracy (% of instances the translation had the correct gender), ∆ G denotes the difference in performance (F 1 score) between masculine and feminine scores, and ∆ S is the difference in performance (F 1 score) between pro-stereotypical and anti-stereotypical gender role assignments (higher numbers in the two latter metrics indicate stronger biases). Numbers in bold indicate best accuracy for the language across MT systems (row), and underlined numbers indicate best accuracy for the MT system across languages (column). * Amazon Translate does not have a trained model for English to Ukrainian.</p><p>Acc <ref type="bibr" target="#b20">(Ott et al., 2018)</ref> 49.4 2.6 16.1 DE (Edunov et al., 2018) 52.5 7.3 8.4 </p><formula xml:id="formula_1">∆ G ∆ S FR</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Target languages and morphological analysis</head><p>We selected a set of eight languages with grammatical gender which exhibit a wide range of other linguistic properties (e.g., in terms of alphabet, word order, or grammar), while still allowing for highly accurate automatic morphological analysis. These languages belong to four different families: (1) Romance languages: Spanish, French, and Italian, all of which have gendered noundeterminer agreement and spaCy morphological analysis support <ref type="bibr">(Honnibal and Montani, 2017)</ref>.</p><p>(2) Slavic languages (Cyrillic alphabet): Russian and Ukrainian, for which we use the morphological analyzer developed by <ref type="bibr" target="#b16">Korobov (2015)</ref>.</p><p>(3) Semitic languages: Hebrew and Arabic, each with a unique alphabet. For Hebrew, we use the analyzer developed by <ref type="bibr" target="#b0">Adler and Elhadad (2006)</ref>, while gender inflection in Arabic can be easily 5 <ref type="url" target="https://github.com/pytorch/fairseq">https://github.com/pytorch/fairseq</ref> identified via the ta marbuta character, which uniquely indicates feminine inflection. (4) Germanic languages: German, for which we use the morphological analyzer developed by <ref type="bibr" target="#b1">Altinok (2018)</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Results</head><p>Our main findings are presented in Tables <ref type="table" target="#tab_2">2</ref> and <ref type="table" target="#tab_1">3</ref>. For each tested MT system and target language we compute three metrics with respect to their ability to convey the correct gender in the target language. Ultimately, our analyses indicate that all tested MT systems are indeed gender biased. First, the overall system Accuracy is calculated by the percentage of instances in which the translation preserved the gender of the entity from the original English sentence. We find that most tested systems across eight tested languages perform quite poorly on this metric. The best performing model on each language often does not do much better than a random guess for the correct inflection. An exception to this rule is the translation accuracies on German, where three out of four systems acheive their best performance. This may be explained by German's similarity to the English source language <ref type="bibr" target="#b13">(Hawkins, 2015)</ref>.</p><p>In Table 4: Performance of Google Translate on Spanish, Russian, and Ukranian gender prediction accuracy (% correct) on the original WinoMT corpus, versus a modified version of the dataset where we add sterotypical gender adjectives (see Section 3.3).</p><p>cantly better on male roles, which may stem from these being more frequent in the training set. Perhaps most tellingly, ∆ S measures the difference in performance (F 1 score) between stereotypical and non-stereotypical gender role assignments, as defined by <ref type="bibr" target="#b26">Zhao et al. (2018)</ref> who use statistics provided by the US Department of Labor. 6 This metric shows that all tested systems have a significant and consistently better performance when presented with pro-stereotypical assignments (e.g., a female nurse), while their performance deteriorates when translating antistereotypical roles (e.g., a male receptionist). For instance, Figure <ref type="figure">2</ref> depicts Google Translate absolute accuracies on stereotypical and nonstereotypical gender roles across all tested languages. Other tested systems show similar trends.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Fighting Bias with Bias</head><p>Finally, we tested whether we can affect the translations by automatically creating a version of WinoMT with the adjectives "handsome" and "pretty" prepended to male and female entities, respectively. For example, the sentence in Figure <ref type="figure">1</ref> will be converted to: "The pretty doctor asked the 6 <ref type="url" target="https://www.bls.gov/cps/cpsaat11.htm">https://www.bls.gov/cps/cpsaat11.htm</ref> nurse to help her in the operation". We are interested in evaluating whether this "corrects" the profession bias by mixing signals, e.g., while "doctor" biases towards a male translation, "pretty" tugs the translation towards a female inflection. Our results show that this improved performance in some languages, significantly reducing bias in Spanish, Russian, and Ukrainian (see Table <ref type="table">4</ref>). Admittedly, this is impractical as a general debiasing scheme, since it assumes oracle coreference resolution, yet it attests to the relation between coreference resolution and MT, and serves as a further indication of gender bias in MT.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Human Validation</head><p>We estimate the accuracy of our gender bias evaluation method by randomly sampling 100 instances of all translation systems and target languages, annotating each sample by two target-language native speakers (resulting in 9,600 human annotations). Each instance conformed to a format similar to that used by our automatic gender detection algorithm: human annotators were asked to mark the gender of an entity within a given targetlanguage sentence. (e.g., see "el doctor" as highlighted in the Spanish sentence in Figure <ref type="figure">1</ref>). By annotating at the sentence-level, we can account for both types of possible errors, i.e., alignment and gender extraction.</p><p>We compare the sentence-level human annotations to the output of our automatic method, and find that the levels of agreement for all languages and systems were above 85%, with an average agreement on 87% of the annotations. In comparison, human inter-annotator agreement was 90%, due to noise introduced by several incoherent translations.</p><p>Our errors occur when language-specific id-</p><p>Source [Target lang.] Predicted translation Phenomenon</p><p>The janitor does not like the baker because she always messes up the kitchen.</p><p>[ES] Al conserje no le gusta el panadero porque ella siempre desordena la cocina.</p><p>Biased translation, giving "baker" a male inflection, with a mismatched pronoun reference.</p><p>The janitor does not like the pretty baker because she always messes up the kitchen.</p><p>[ES] Al conserje no le gusta la panadera bonita porque ella siempre desordena la cocina.</p><p>Adding a stereotypically female adjective "fixes" the translation.</p><p>The counselor asked the guard a few questions and praised her for the good work.</p><p>[FR] Le conseiller a posé quelques questions à la garde et l'a louée pour le bon travail.</p><p>French uses "garde" for both male and female guards, allowing for a more direct translation from English.</p><p>Table 5: Examples of Google Translate's output for different sentences in the WinoMT corpus. Words in blue, red, and orange indicate male, female and neutral entities, respectively.</p><p>iosyncrasies introduce ambiguity to the morphological analysis. For example, gender for certain words in Hebrew cannot be distinguished without diacritics (e.g., the male and female versions of the word "baker" are spelled identically), and the contracted determiner in French and Italian (l') is used for both masculine and feminine nouns. In addition, some languages have only male or female inflections for professions which were stereotypically associated with one of the genders, for example "sastre" (tailor) in Spanish or "soldat" (soldier) in French, which do not have female inflections. See Table <ref type="table">5</ref> for detailed examples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Discussion</head><p>Related work This work is most related to several recent efforts which evaluate MT through the use of challenge sets. Similarly to our use WinoMT, these works evaluate MT systems (either manually or automatically) on test sets which are specially created to exhibit certain linguistic phenomena, thus going beyond the traditional BLEU metric <ref type="bibr" target="#b21">(Papineni et al., 2002)</ref>. These include challenge sets for languagespecific idiosyncrasies <ref type="bibr" target="#b15">(Isabelle et al., 2017)</ref>, discourse phenomena <ref type="bibr" target="#b3">(Bawden et al., 2018)</ref>, pronoun translation <ref type="bibr" target="#b19">(Müller et al., 2018;</ref><ref type="bibr" target="#b24">Webster et al., 2018)</ref>, or coreference and multiword expressions <ref type="bibr" target="#b5">(Burchardt et al., 2017)</ref>.</p><p>Limitations and future work While our work presents the first large-scale evaluation of gender bias in MT, it still suffers from certain limitations which could be addressed in follow up work. First, like some of the challenge sets discussed above, WinoMT is composed of synthetic English source-side examples. On the one hand, this allows for a controlled experiment environment, while, on the other hand, this might intro-duce some artificial biases in our data and evaluation. Ideally, WinoMT could be augmented with natural "in the wild" instances, with many source languages, all annotated with ground truth entity gender. Second, similar to any medium size test set, it is clear that WinoMT serves only as a proxy estimation for the phenomenon of gender bias, and would probably be easy to overfit. A larger annotated corpus can perhaps provide a better signal for training. Finally, even though in Section 3.3 we show a very rudimentary debiasing scheme which relies on oracle coreference system, it is clear that this is not applicable in a real-world scenario. While recent research has shown that getting rid of such biases may prove to be very challenging <ref type="bibr" target="#b10">(Elazar and Goldberg, 2018;</ref><ref type="bibr" target="#b12">Gonen and Goldberg, 2019)</ref>, we hope that this work will serve as a first step for developing more gender-balanced MT models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Conclusions</head><p>We presented the first large-scale multilingual quantitative evidence for gender bias in MT, showing that on eight diverse target languages, all four tested popular commercial systems and two recent state-of-the-art academic MT models are significantly prone to translate based on gender stereotypes rather than more meaningful context. Our data and code are publicly available at <ref type="url" target="file://localhost/opt/grobid/grobid-home/tmp/shorturl.at/dimuD">shorturl.at/dimuD</ref>.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>The coreference test sets and resulting WinoMT corpus statistics (in number of instances).</figDesc><table><row><cell></cell><cell cols="3">Winogender WinoBias WinoMT</cell></row><row><cell>Male</cell><cell>240</cell><cell>1582</cell><cell>1826</cell></row><row><cell>Female</cell><cell>240</cell><cell>1586</cell><cell>1822</cell></row><row><cell>Neutral</cell><cell>240</cell><cell>0</cell><cell>240</cell></row><row><cell>Total</cell><cell>720</cell><cell>3168</cell><cell>3888</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 3 :</head><label>3</label><figDesc>Performance of recent state-of-the-art academic translation models from English to French and German. Metrics are the same as those in Table2.</figDesc><table><row><cell>toolkit. 5</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 ,</head><label>2</label><figDesc>∆ G denotes the difference in performance (F 1 score) between male and female translations. Interestingly, all systems, except Microsoft Translator on German, perform signifi-Google Translate's performance on gender translation on our tested languages. The performance on the stereotypical portion of WinoMT is consistently better than that on the non-stereotypical portion. The other MT systems we tested display similar trends.</figDesc><table><row><cell></cell><cell>100</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Accuracy (%)</cell><cell>40 60 80</cell><cell>67</cell><cell>46</cell><cell>80</cell><cell>54</cell><cell cols="3">52 Stereotypical Non-Stereotypical 44 46 30 33 35</cell><cell>76</cell><cell>38</cell><cell>60</cell><cell>44</cell><cell>69</cell><cell>57</cell></row><row><cell></cell><cell>20</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell cols="2">ES</cell><cell cols="2">FR</cell><cell>IT</cell><cell>RU</cell><cell>UK</cell><cell cols="2">HE</cell><cell cols="2">AR</cell><cell>DE</cell></row><row><cell cols="6">Figure 2: Original +Adj</cell><cell>∆</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>ES</cell><cell></cell><cell cols="4">53.1 63.5 +10.4</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>RU</cell><cell></cell><cell cols="4">37.7 48.9 +11.2</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>UK</cell><cell></cell><cell cols="3">38.4 42.9</cell><cell>+4.5</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>https://translate.google.com</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>https://www.bing.com/translator</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3" xml:id="foot_2"><p>https://aws.amazon.com/translate</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4" xml:id="foot_3"><p>http://www.systransoft.com</p></note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><head>Acknowledgments</head><p>We would like to thank <rs type="person">Mark Yatskar</rs>, <rs type="person">Iz Beltagy</rs>, <rs type="person">Tim Dettmers</rs>, <rs type="person">Ronan Le Bras</rs>, <rs type="person">Kyle Richardson</rs>, <rs type="person">Ariel</rs> and <rs type="person">Claudia Stanovsky</rs>, and <rs type="person">Paola Virga</rs> for many insightful discussions about the role gender plays in the languages evaluated in this work, as well as the reviewers for their helpful comments.</p></div>
+			</div>			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">An unsupervised morpheme-based HMM for Hebrew morphological disambiguation</title>
+		<author>
+			<persName><forename type="first">Meni</forename><surname>Adler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Elhadad</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACL</title>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<monogr>
+		<title level="m" type="main">DEMorphy, German language morphological analyzer</title>
+		<author>
+			<persName><forename type="first">Duygu</forename><surname>Altinok</surname></persName>
+		</author>
+		<idno>CoRR, abs/1803.00902</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A causal framework for explaining the predictions of black-box sequence-to-sequence models</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Alvarez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-Melis</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tommi</forename><forename type="middle">S</forename><surname>Jaakkola</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Evaluating discourse phenomena in neural machine translation</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Bawden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rico</forename><surname>Sennrich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Birch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Haddow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NAACL-HLT</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Man is to computer programmer as woman is to homemaker? debiasing word embeddings</title>
+		<author>
+			<persName><forename type="first">Tolga</forename><surname>Bolukbasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai-Wei</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">Y</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Venkatesh</forename><surname>Saligrama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Tauman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kalai</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NIPS</title>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A linguistic evaluation of rule-based, phrase-based, and neural mt engines</title>
+		<author>
+			<persName><forename type="first">Aljoscha</forename><surname>Burchardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vivien</forename><surname>Macketanz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Dehdari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georg</forename><surname>Heigold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan-Thorsten</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Williams</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Prague Bulletin of Mathematical Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="159" to="170" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">G</forename><surname>Greville</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Corbett</surname></persName>
+		</author>
+		<title level="m">Gender and noun classes</title>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">Colette G</forename><surname>Craig</surname></persName>
+		</author>
+		<title level="m">Noun Classes and Categorization: Proceedings of a Symposium on Categorization and Noun Classification</title>
+		<imprint>
+			<publisher>John Benjamins Publishing Company</publisher>
+			<date type="published" when="1986">1986</date>
+			<biblScope unit="volume">7</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A simple, fast, and effective reparameterization of ibm model 2</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Dyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Chahuneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><forename type="middle">A</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">HLT-NAACL</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Understanding back-translation at scale</title>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Myle</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Auli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Grangier</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1808.09381</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Adversarial removal of demographic attributes from text data</title>
+		<author>
+			<persName><forename type="first">Yanai</forename><surname>Elazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Goldberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Equalizing gender biases in neural machine translation with word embeddings techniques</title>
+		<author>
+			<persName><forename type="first">Joel</forename><forename type="middle">Escudé</forename><surname>Font</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">R</forename><surname>Costa-Jussà</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Lipstick on a pig: Debiasing methods cover up systematic gender biases in word embeddings but do not remove them</title>
+		<author>
+			<persName><forename type="first">Hila</forename><surname>Gonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoav</forename><surname>Goldberg</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>HLT-NAACL</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">A</forename><surname>Hawkins</surname></persName>
+		</author>
+		<title level="m">A Comparative Typology of English and German: Unifying the Contrasts</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>Routledge</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<monogr>
+		<title level="m" type="main">2017. spaCy 2: Natural language understanding with Bloom embeddings, convolutional neural networks and incremental parsing</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Honnibal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ines</forename><surname>Montani</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>To appear</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A challenge set approach to evaluating machine translation</title>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Isabelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Cherry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><forename type="middle">F</forename><surname>Foster</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Morphological analyzer and generator for Russian and Ukrainian languages</title>
+		<author>
+			<persName><forename type="first">Mikhail</forename><surname>Korobov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Analysis of Images, Social Networks and Texts</title>
+		<editor>
+			<persName><forename type="first">Mikhail</forename><surname>Yu</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Natalia</forename><surname>Khachay</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Alexander</forename><surname>Konstantinova</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Panchenko</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">I</forename><surname>Dmitry</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Valeri</forename><forename type="middle">G</forename><surname>Ignatov</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Labunets</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Springer International Publishing. James Kuczmarski</publisher>
+			<date type="published" when="2015">2015. 2018</date>
+			<biblScope unit="volume">542</biblScope>
+			<biblScope unit="page" from="320" to="332" />
+		</imprint>
+	</monogr>
+	<note>Reducing gender bias in google translate</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The Winograd schema challenge</title>
+		<author>
+			<persName><forename type="first">Hector</forename><forename type="middle">J</forename><surname>Levesque</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI Spring Symposium: Logical Formalizations of Commonsense Reasoning</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Visible or influential? language reforms and gender (in) equality</title>
+		<author>
+			<persName><forename type="first">Angelica</forename><surname>Mucchi-Faina</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Science Information</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="189" to="215" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<monogr>
+		<title level="m" type="main">A large-scale test set for the evaluation of context-aware pronoun translation in neural machine translation</title>
+		<author>
+			<persName><forename type="first">Mathias</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annette</forename><surname>Rios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Voita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rico</forename><surname>Sennrich</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>CoRR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<monogr>
+		<author>
+			<persName><forename type="first">Myle</forename><surname>Ott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergey</forename><surname>Edunov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Grangier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Auli</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1806.00187</idno>
+		<title level="m">Scaling neural machine translation</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Bleu: a method for automatic evaluation of machine translation</title>
+		<author>
+			<persName><forename type="first">Kishore</forename><surname>Papineni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salim</forename><surname>Roukos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todd</forename><surname>Ward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Jing</forename><surname>Zhu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACL</title>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Social bias in elicited natural language inferences</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Rudinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chandler</forename><surname>May</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Van Durme</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EthNLP@EACL</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Gender bias in coreference resolution</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Rudinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Naradowsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Leonard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Van Durme</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NAACL-HLT</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Mind the gap: A balanced corpus of gendered ambiguous pronouns</title>
+		<author>
+			<persName><forename type="first">Kellie</forename><surname>Webster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marta</forename><surname>Recasens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vera</forename><surname>Axelrod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Baldridge</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="605" to="617" />
+		</imprint>
+	</monogr>
+	<note>Transactions of the Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Men also like shopping: Reducing gender bias amplification using corpus-level constraints</title>
+		<author>
+			<persName><forename type="first">Jieyu</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianlu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Yatskar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicente</forename><surname>Ordonez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai-Wei</forename><surname>Chang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Gender bias in coreference resolution: Evaluation and debiasing methods</title>
+		<author>
+			<persName><forename type="first">Jieyu</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianlu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Yatskar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicente</forename><surname>Ordonez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai-Wei</forename><surname>Chang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NAACL-HLT</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

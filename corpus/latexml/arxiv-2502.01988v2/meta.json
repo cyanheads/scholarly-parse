@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2502.01988v2",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "ReMiDi: Reconstruction of Microstructure Using a Differentiable Diffusion MRI Simulator",
+  "identifiers": {
+    "arxiv": "2502.01988v2"
+  },
+  "url": "https://arxiv.org/html/2502.01988v2",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "attribution": "Khole PP, Petiwala ZK, Magesh SP, Mirafzali E, Gupta U, Li JR, et al. ReMiDi: Reconstruction of Microstructure Using a Differentiable Diffusion MRI Simulator. arXiv:2502.01988v2. 2025.",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "inline-math",
+    "display-math",
+    "tables",
+    "figures",
+    "algorithm",
+    "appendix",
+    "preprint"
+  ],
+  "notes": "CC BY-SA. Two algorithm floats (ltx_float_algorithm) rendered as numbered listing lines."
+}

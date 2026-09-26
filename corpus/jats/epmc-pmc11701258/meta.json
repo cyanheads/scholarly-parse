@@ -1,0 +1,34 @@
+{
+  "id": "epmc-pmc11701258",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "scTrends: A living review of commercial single-cell and spatial 'omic technologies",
+  "identifiers": {
+    "pmcid": "PMC11701258",
+    "pmid": "39667347",
+    "doi": "10.1016/j.xgen.2024.100723"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11701258/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "De Jonghe J, Opzoomer JW, Vilas-Zornoza A, Nilges BS, Crane P, Vicari M, et al. scTrends: A living review of commercial single-cell and spatial 'omic technologies. Cell Genomics. 2024;4(12):100723. doi:10.1016/j.xgen.2024.100723",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "multiple-abstracts",
+    "graphical-abstract",
+    "collab-author",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "many-references",
+    "review"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#116",
+  "notes": "All 147 references sit at body/sec[@sec-type='ref-list']/sec/ref-list, inside <body> and with no <back> list (#116). The scTrends Consortium is a <collab> author."
+}

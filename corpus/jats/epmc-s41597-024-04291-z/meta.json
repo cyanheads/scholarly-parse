@@ -1,0 +1,37 @@
+{
+  "id": "epmc-s41597-024-04291-z",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
+  "identifiers": {
+    "pmcid": "PMC11668823",
+    "pmid": "39719437",
+    "doi": "10.1038/s41597-024-04291-z"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11668823/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Rabbani MAG, Vallejo-Trujillo A, Wu Z, Miedzinska K, Faruque S, Watson KA, et al. Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh. Scientific Data. 2024;11:1432. doi:10.1038/s41597-024-04291-z",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "table-spans",
+    "table-footnotes",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "data-paper",
+    "rosetta"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#123",
+  "notes": "Mixed citations place an <italic> journal title directly against a <bold> volume with no text between them (e.g. 'Worlds Poult Sci J' + '64'), 45 such transitions (#123)."
+}

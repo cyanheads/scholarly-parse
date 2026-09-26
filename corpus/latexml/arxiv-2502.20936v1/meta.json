@@ -1,0 +1,28 @@
+{
+  "id": "arxiv-2502.20936v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "WebFAQ: A Multilingual Collection of Natural Q&A Datasets for Dense Retrieval",
+  "identifiers": {
+    "arxiv": "2502.20936v1"
+  },
+  "url": "https://arxiv.org/html/2502.20936v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Dinzinger M, Caspari L, Dastidar KG, Mitrović J, Granitzer M. WebFAQ: A Multilingual Collection of Natural Q&A Datasets for Dense Retrieval. arXiv:2502.20936v1. 2025.",
+  "features": [
+    "nested-sections",
+    "lists",
+    "footnotes",
+    "inline-math",
+    "tables",
+    "table-spans",
+    "figures",
+    "appendix",
+    "preprint"
+  ],
+  "notes": "Seven tables, several with spanning header cells, and 15 footnotes."
+}

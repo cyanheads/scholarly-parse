@@ -1,0 +1,35 @@
+{
+  "id": "epmc-pmc10787328",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Bio-Experiential Technology to Support Persons With Dementia and Care Partners at Home (TEND): Protocol for an Intervention Development Study",
+  "identifiers": {
+    "pmcid": "PMC10787328",
+    "pmid": "38157239",
+    "doi": "10.2196/52799"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10787328/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Rochon EA, Sy M, Phillips M, Anderson E, Plys E, Ritchie C, et al. Bio-Experiential Technology to Support Persons With Dementia and Care Partners at Home (TEND): Protocol for an Intervention Development Study. JMIR Research Protocols. 2023;12:e52799. doi:10.2196/52799",
+  "features": [
+    "nested-sections",
+    "definition-list",
+    "footnotes",
+    "glossary",
+    "acknowledgments",
+    "declarations",
+    "structured-abstract",
+    "orcid",
+    "figures",
+    "supplementary-material",
+    "media",
+    "element-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#112",
+  "notes": "Body sections nest four levels deep (#112). Back matter carries a <glossary> of abbreviations."
+}

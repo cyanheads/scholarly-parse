@@ -1,0 +1,26 @@
+{
+  "id": "ar5iv-1906.00591",
+  "format": "latexml",
+  "flavor": "ar5iv",
+  "title": "Evaluating Gender Bias in Machine Translation",
+  "identifiers": {
+    "arxiv": "1906.00591"
+  },
+  "url": "https://ar5iv.labs.arxiv.org/html/1906.00591",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Stanovsky G, Smith NA, Zettlemoyer L. Evaluating Gender Bias in Machine Translation. arXiv:1906.00591. 2019.",
+  "features": [
+    "nested-sections",
+    "footnotes",
+    "inline-math",
+    "tables",
+    "table-spans",
+    "figures",
+    "preprint"
+  ],
+  "notes": "ar5iv render of a single-version 2019 paper (ACL 2019)."
+}

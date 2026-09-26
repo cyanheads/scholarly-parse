@@ -81,6 +81,10 @@ export const FEATURES = [
   'large',
   // The same work is present in other formats in the corpus
   'rosetta',
+  // Formulas carried only as images (<graphic>/<inline-graphic>), with no TeX or MathML
+  'formula-graphic-only',
+  // A JATS record with front matter and abstract but no <body> (a PDF-only deposit)
+  'no-body',
 ] as const;
 
 export type Feature = (typeof FEATURES)[number];

@@ -1,0 +1,25 @@
+{
+  "id": "medrxiv-2026.08.13.26360411v1",
+  "format": "pdf",
+  "title": "Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes",
+  "identifiers": {
+    "doi": "10.64898/2026.08.13.26360411"
+  },
+  "url": "https://www.medrxiv.org/content/10.64898/2026.08.13.26360411v1.full.pdf",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Rasooly D, Peloso GM, Giambartolomei C, Nicholls HL, Liu C, Aung N, et al. Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes. medRxiv. 2026. doi:10.64898/2026.08.13.26360411",
+  "features": [
+    "single-column",
+    "hyphenation",
+    "tables",
+    "figures",
+    "preprint",
+    "large"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#144",
+  "notes": "The medRxiv PDF Unpaywall serves for this DOI (#144): 41 pages, with the title in the PDF Info dictionary and as the first line of page 1. The same work's Europe PMC JATS is jats/epmc-ppr1299678."
+}

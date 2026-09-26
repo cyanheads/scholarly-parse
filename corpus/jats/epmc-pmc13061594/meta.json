@@ -1,0 +1,26 @@
+{
+  "id": "epmc-pmc13061594",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Editorial: Innovations in development, translational research and manufacturing of CAR T cells",
+  "identifiers": {
+    "pmcid": "PMC13061594",
+    "pmid": "41970506",
+    "doi": "10.3389/fimmu.2024.1504906"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13061594/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Krones D, Koehl U, Negre H, Rafiq Q, Goldrick S, Hudecek M. Editorial: Innovations in development, translational research and manufacturing of CAR T cells. Frontiers in Immunology. 2026;15:1504906. doi:10.3389/fimmu.2024.1504906",
+  "features": [
+    "body-without-sections",
+    "declarations",
+    "no-abstract",
+    "no-references",
+    "editorial"
+  ],
+  "notes": "Research Topic editorial: paragraphs directly in <body>, no abstract, no reference list."
+}

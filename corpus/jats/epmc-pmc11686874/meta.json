@@ -1,0 +1,29 @@
+{
+  "id": "epmc-pmc11686874",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "The interplay between sex hormones, mitochondrial dysfunction, and intervertebral disc degeneration: insights beyond Qiu et al.",
+  "identifiers": {
+    "pmcid": "PMC11686874",
+    "pmid": "39741256",
+    "doi": "10.1186/s12967-024-06026-5"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11686874/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Lu YJ, Wang HK, Lin YH. The interplay between sex hormones, mitochondrial dysfunction, and intervertebral disc degeneration: insights beyond Qiu et al. Journal of Translational Medicine. 2024;22:1162. doi:10.1186/s12967-024-06026-5",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "no-abstract",
+    "mixed-citation",
+    "letter",
+    "tiny"
+  ]
+}

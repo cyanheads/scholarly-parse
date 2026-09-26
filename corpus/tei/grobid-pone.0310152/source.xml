@@ -1,0 +1,1389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability  status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2024-09-19">September 19, 2024</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author>
+							<persName><forename type="first">Samiran</forename><surname>Ghosh</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Indian Institute of Technology Kanpur</orgName>
+								<address>
+									<region>Kanpur</region>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution">Chulalongkorn University Faculty of Medicine</orgName>
+								<address>
+									<country key="TH">THAILAND</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Malay</forename><surname>Banerjee</surname></persName>
+							<idno type="ORCID">0000-0003-4327-5904</idno>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Applied Mathematics and Data Science</orgName>
+								<orgName type="laboratory">Aston Centre for Artificial Intelligence Research and Applications (ACAIRA)</orgName>
+								<orgName type="institution">Aston University</orgName>
+								<address>
+									<settlement>Birmingham</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Amit</forename><forename type="middle">K</forename><surname>Chattopadhyay</surname></persName>
+							<email>a.k.chattopadhyay@aston.ac.uk</email>
+							<idno type="ORCID">0000-0001-5499-6008</idno>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Applied Mathematics and Data Science</orgName>
+								<orgName type="laboratory">Aston Centre for Artificial Intelligence Research and Applications (ACAIRA)</orgName>
+								<orgName type="institution">Aston University</orgName>
+								<address>
+									<settlement>Birmingham</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2024-09-19">September 19, 2024</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">DBB4250F7D150253F9943C4D798235FB</idno>
+					<idno type="DOI">10.1371/journal.pone.0310152</idno>
+					<note type="submission">Received: March 8, 2024 Accepted: August 25, 2024</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break. The model incorporates comorbidity and multiple-vaccine doses through a system of coupled integro-differential equations to analyze the epidemic rate and intensity from a knowledge of the basic reproduction number and time-distributed rate functions. Our modeling results show that the interval between vaccine doses is a key control parameter that can be tuned to significantly influence disease spread. We show that multiple doses induce a hysteresis effect in immunity levels that offers a better mitigation alternative compared to frequent vaccination which is less cost-effective while being more intrusive. Optimal dosing intervals, emphasizing the cost-effectiveness of each vaccination effort, and determined by various factors such as the level of immunity and efficacy of vaccines against different strains, appear to be crucial in disease management. The model is sufficiently generic that can be extended to accommodate specific disease forms.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>In recent decades, the global population has faced a series of viral outbreaks, each leaving a significant impact on health, society, and the economy. These include the SARS epidemic of 2002-2003 <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b1">2]</ref>, the H5N1 influenza outbreak in 2005 <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4]</ref>, the H1N1 influenza pandemic in 2009 <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6]</ref>, the Ebola crisis in 2014 <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8]</ref>, and currently, the ongoing and unpredictable COVID-19 pandemic <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b9">10]</ref>, which has persisted for more than two years. These successive epidemics have posed substantial challenges to public health, social structures, and economic systems worldwide.</p><p>The field of epidemic modeling has witnessed significant advancements, expanding beyond simple models to embrace more intricate frameworks. Noteworthy developments include the evolution towards multi-compartment models <ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref><ref type="bibr" target="#b12">[13]</ref>, models with time-varying or nonlinear disease transmission rates <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref>, multipatch models <ref type="bibr" target="#b15">[16]</ref><ref type="bibr" target="#b16">[17]</ref><ref type="bibr" target="#b17">[18]</ref>, agent based models <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>, and multigroup models <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b21">22]</ref>. Furthermore, the exploration of spatiotemporal aspects has led to the formulation and study of spatiotemporal models, as evidenced by <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref>. Some other analyzes on the dynamics of SIR models can be found in the literature <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b25">26]</ref>. For a comprehensive exploration of these topics, one can refer to monographs such as <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b27">28]</ref>.</p><p>Vaccination stands as a cornerstone in combatting the spread of infections, with established vaccines for diseases like measles, typhoid, poliomyelitis, tuberculosis, malaria, Haemophilus influenzae type-b (Hib), Japanese encephalitis, pneumococcal disease, meningococcal meningitis, and the more recently developed COVID-19, according to the World Health Organization <ref type="bibr">[29]</ref>. Concurrently, ongoing efforts are directed towards developing vaccines and monoclonal antibodies for diseases such as enterotoxigenic Escherichia coli, herpes simplex virus, shigella, norovirus, and improved influenza <ref type="bibr">[29]</ref>. As vaccination programs progress, critical questions arise regarding the availability of vaccines, the rate at which vaccine efficacy diminishes, and the optimal dosage regimen, especially in scenarios of limited vaccine supply. The focus shifts to determining the optimal interval between consecutive vaccine doses, a crucial consideration to avoid unnecessary doses and the associated hysteresis effect, thereby optimizing the use of vaccines and financial resources. In the context of the Oxford/AstraZeneca COVID-19 (AZD1222) vaccine groups, it has already been shown that accurate implementation of dosage intervals plays a key role in vaccine efficacy <ref type="bibr" target="#b28">[30]</ref>. This is somewhat complementary to optimizing vaccine dosing schedules that can prolong immunity and suppress the emergence of new variants of SARS-CoV-2 potentially due to intermittent lapses in protection <ref type="bibr" target="#b29">[31]</ref>. None of these approaches though incorporate the crucial comorbidity factor that is the central premise of this study, in conjunction with dosage interval moderation.</p><p>Determining a suitable and optimal gap between two consecutive vaccinations plays a pivotal role in controlling an epidemic and minimizing economic costs for several reasons. First and foremost, the timing of vaccine doses directly influences the development and sustainability of immunity within the population. A well-calibrated gap allows for the optimal buildup of immune responses, providing a more robust shield against the spread of infectious diseases. Moreover, finding the right interval between vaccine doses is crucial for preventing the resurgence of infections. Administering doses too closely may lead to a diminishing effect, potentially causing a hysteresis effect, where the immunity gained from the first dose interferes with the effectiveness of the subsequent doses. On the other hand, spacing doses too far apart may leave individuals vulnerable to infection during the gap, reducing the overall efficacy of the vaccination strategy. Another less discussed issue is the in vitro versus in vivo modes of operation: a vaccine developed under laboratory conditions may not be as effective in real-life situation. More importantly, with other variants, e.g. the Delta variant, the booster dose may lose potency faster than anticipated, facts that have been recently modeled <ref type="bibr" target="#b30">[32]</ref>.</p><p>From an economic perspective, the cost associated with vaccination programs is a significant consideration. Frequent vaccination incurs not only direct costs related to the purchase and administration of vaccines but also indirect costs tied to the disruption of regular activities, strain on healthcare resources, and potential economic losses due to illness and workforce absenteeism. Therefore, optimizing the vaccination gap is crucial in striking a balance between widespread infection and the financial investment required for effective immunization programs.</p><p>Compartmental epidemic models, where each compartment is determined by the daily number of cases and disease transmission rates, recovery, and death rates are distributed over the time-since-infection, offer a more accurate depiction of epidemic progression compared to classical SIR-type models <ref type="bibr" target="#b31">[33]</ref><ref type="bibr" target="#b32">[34]</ref><ref type="bibr" target="#b33">[35]</ref>. In this study, we present an epidemic model where all parameters are distributed over time following an infection, thereby accounting for the dynamically changing level of immunity in the population. The level of immunity in the population is influenced by the acquired immunity of the recovered and multiple vaccine doses administered in the population at specified intervals. Additionally, we introduce a comorbid compartment with higher infectivity, implicitly capturing the impact of multiple strains on determining the number and height of epidemic peaks within a specific time interval. We estimate all relevant time-distributed parameters using available clinical and experimental data. Our modeling results reveal that the coexistence of multiple strains can influence the frequency and height of epidemic outbreaks. Furthermore, our findings indicate that frequent vaccine administration may not be necessary and could be substituted by an effective immunity memory build-up through a hysteresis effect. The optimal gap between two consecutive vaccines should be determined by analyzing the level of immunity in the population. To address this, we formulate an optimal control problem aimed at minimizing both the number of infections and the economic costs related to vaccination. The primary objective of this work is to achieve a clear understanding of the optimal gap between two consecutive vaccinations, a dimension that has not been thoroughly explored in the existing literature.</p><p>The article is structured as follows: In Section 2, we formulate the model incorporating time-distributed parameters and the dynamic level of immunity, additionally introducing a model that considers the impact of multiple strains. The calculation of the basic reproduction number is presented in the same section. Section 3 is dedicated to the estimation of relevant time-distributed rate functions, using available clinical and experimental data. The results and findings, including the influence of multiple strains and the observed hysteresis effect resulting from the gap between consecutive vaccine doses, are discussed in Section 4.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Model formulation</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Basic model</head><p>We consider a population with four compartments: susceptible individuals (S(t)), infected individuals (I(t)), recovered individuals (R(t)) and dead individuals (D(t)). It is assumed that the sum of these compartments remains constant and equals the total population N, i.e., SðtÞ þ IðtÞ þ RðtÞ þ DðtÞ ¼ N; for all t � 0:</p><p>Let J(t) denote the number of newly infected individuals at time t, which is governed by the following equation</p><formula xml:id="formula_1">dSðtÞ dt ¼ À JðtÞ:<label>ð2Þ</label></formula><p>The classical SIR-type epidemic models assume that the number of newly infected individuals is proportional to the product of the number of infected I(t) and the number of susceptible S(t) at time t. However, in more realistic scenarios, this assumption is not true, and the disease transmission rate depends upon time-since-infection for the infected individuals <ref type="bibr" target="#b31">[33]</ref>. Since the viral load dynamics within an infected individual varies with time-since-infection, the infectivity of the infected individuals also varies with time-since-infection <ref type="bibr" target="#b33">[35]</ref>. Here, we consider the number of new infections determined by time-since-infection dependent transmission rate, given by the following equation:</p><formula xml:id="formula_2">JðtÞ ¼ SðtÞ N Z t 0 bðt À ZÞJðZÞdZ:<label>ð3Þ</label></formula><p>We assume here that the infection transmission rate at time t from the individuals J(η) infected at time η depends on the time difference t -η. In the case of respiratory viral infections, it depends on the viral load in the upper respiratory tract. We will specify the function β(t) below.</p><p>Similarly, the number of newly recovered R n (t) and dead individuals D n (t) can be described by the following equations: R n ðtÞ � dRðtÞ dt ¼</p><formula xml:id="formula_3">Z t 0 rðt À ZÞJðZÞdZ; D n ðtÞ � dDðtÞ dt ¼ Z t 0 dðt À ZÞJðZÞdZ:<label>ð4Þ</label></formula><p>Distributed recovery and death rates r(η) and d(η) assume the probability of recovery and death as functions of time-since-infection η. They are determined from the immunological (clinical) data (see Section 3). Finally, differentiating equality (1) and taking into account (2)-(4), we obtain the equations for S(t) and I(t) as follows:</p><formula xml:id="formula_4">dSðtÞ dt ¼ À SðtÞ N Z t 0 bðt À ZÞJðZÞdZ;<label>ð5Þ</label></formula><formula xml:id="formula_5">dIðtÞ dt ¼ SðtÞ N Z t 0 bðt À ZÞJðZÞdZ À Z t 0 rðt À ZÞJðZÞdZ À Z t 0 dðt À ZÞJðZÞdZ:<label>ð6Þ</label></formula><p>Completing them by equations ( <ref type="formula" target="#formula_1">2</ref>) and (4), we obtain the formulation of an immuno-epidemiological model with distributed infectivity, recovery and death rates.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Vaccination and immunity</head><p>The level of immunity in the population plays an important role in combating the progression of the epidemic. This level of immunity can vary over time based on several important factors, such as the rate of vaccination, time-post-vaccination-dependent vaccine effectiveness, and time-post-recovery-dependent acquired immunity.</p><p>To account for the influence of vaccination on epidemic progression, we introduce a new variable m(t) corresponding to the immunity level in the population. First, we analyze the relationship of the immunity level with vaccination. This is hypothesized through the constitutive relation</p><formula xml:id="formula_6">mðtÞ ¼ 1 N Z t 0 �ðt À ZÞV 0 ðZÞdZ;<label>ð7Þ</label></formula><p>where V(t) is the number of vaccinated individuals at time t, and V 0 (t) is the rate of vaccination, the function ϕ(t) describes how immunity changes with time. It is a positive function with ϕ(0) = 1 (if a vaccine is initially fully efficient), otherwise ϕ(0) &gt; 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 &lt; ϕ(t) &lt; 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.1">Multiple vaccination doses.</head><p>Now, we incorporate the impact of multiple vaccine doses in the population at various intervals. The expression for the immunity level m(t) is then provided as follows:</p><formula xml:id="formula_7">mðtÞ ¼ 1 N X K i¼1 Z t 0 � i ðt À ZÞV 0 i ðZÞdZ ! :<label>ð8Þ</label></formula><p>Here V i (t) and ϕ i (t) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from i = 1. K is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses i and i + 1 are administrated with a time gap T i,i+1 , and the first dose was started from t = T 0 . Then for any i 2 {1, 2, � � �, K}, we have</p><formula xml:id="formula_8">V i ðtÞ ¼ 0; t &lt; T 0 þ T 1;2 þ T 2;3 þ � � � þ T iÀ 1;i positive; t � T 0 þ T 1;2 þ T 2;3 þ � � � þ T iÀ 1;i : 8 &gt; &gt; &gt; &lt; &gt; &gt; &gt; :<label>ð9Þ</label></formula><p>Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.2">Acquired immunity of recovered.</head><p>Next, consider the acquired immunity of the recovered individuals. Then the effective immunity at time t coming from both the vaccination of healthy susceptible S and the infection acquired immunity is given by:</p><formula xml:id="formula_9">m 1 ðtÞ ¼ a N X K i¼1 Z t 0 � i ðt À ZÞV 0 i ðZÞdZ ! þ ð1 À bÞ N Z t 0 cðt À ZÞR n ðZÞdZ;<label>ð10Þ</label></formula><p>and the effective immunity at time t coming from vaccination of comorbid class P(t) is given by:</p><formula xml:id="formula_10">m 2 ðtÞ ¼ 1 À a N X K i¼1 Z t 0 � i ðt À ZÞV 0 i ðZÞdZ ! þ b N Z t 0 �cðt À ZÞR n ðZÞdZ;<label>ð11Þ</label></formula><p>where, 0 &lt; � &lt; 1 is a constant, α is the proportion of healthy susceptible S who are newly vaccinated. The value of � &lt; 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter b characterizes the proportion of comorbidity among the newly recovered individuals while the function ψ(t) describes how acquired immunity changes over time. We choose functions ϕ j and ψ j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider ϕ j � ϕ and ψ j � ψ, for j = 1, 2, � � �, K. Moreover, to account for "bounded" infection growth, we impose a constraint on the population immunity level: 0 &lt; m 1 (t) + m 2 (t) &lt; 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.3">Impact of multiple strains.</head><p>Immunity in the population corresponds to the decrease of the number of susceptible individuals. As such, instead of equality (1), we have</p><formula xml:id="formula_11">SðtÞ ¼ N À ðIðtÞ þ DðtÞ þ PðtÞ þ m 1 ðtÞNÞ:<label>ð12Þ</label></formula><p>Note that m 2 (t) does not appear in the Eq <ref type="bibr" target="#b11">(12)</ref> because m 2 (t) is the level of immunity in the comorbid class; it is only considered later in the equation for P(t), where P(t) is the predisposed comorbid population. Let, J 1 (t) represents the number of daily new infection in the healthy susceptible class S(t) and J 2 (t) represents the number of daily new cases in the comorbid class P(t). Then the total number of daily new cases is given by</p><formula xml:id="formula_12">JðtÞ ¼ J 1 ðtÞ þ J 2 ðtÞ;</formula><p>where,</p><formula xml:id="formula_13">J 1 ðtÞ ¼ SðtÞ N Z t 0 bðt À ZÞJðZÞdZ; J 2 ðtÞ ¼ kPðtÞ N Z t 0 bðt À ZÞJðZÞdZ;</formula><p>κ &gt; 1 is a constant, which signifies that the comorbid individuals are more prone to the infection as compared to the non-comorbid individuals. The governing equation for the comorbid class P(t) is given by</p><formula xml:id="formula_14">PðtÞ ¼ b Z t 0 R n ðZÞdZ À Z t 0 J 2 ðZÞdZ À m 2 ðtÞN:<label>ð13Þ</label></formula><p>The equation for the infected compartment is given by</p><formula xml:id="formula_15">dI dt ¼ SðtÞ þ kPðtÞ N Z t 0 bðt À ZÞJðZÞdZ À Z t 0 rðt À ZÞJðZÞdZ À Z t 0 dðt À ZÞJðZÞdZ:<label>ð14Þ</label></formula><p>Finally the equations for the recovered and death compartments are</p><formula xml:id="formula_16">dR dt ¼ ð1 À bÞR n ðtÞ; dD dt ¼ Z t 0 dðt À ZÞJðZÞdZ ð¼ D n ðtÞÞ;<label>ð15Þ</label></formula><p>where, R n ðtÞ ¼</p><formula xml:id="formula_17">Z t 0 rðt À ZÞJðZÞdZ;</formula><p>which represents the daily sum of completely recovered individuals (with proportion (1 -b)) and comorbid individuals (with proportion b). We obtain complete model ( <ref type="formula" target="#formula_9">10</ref>)-(15) with distributed infection, recovery and death rates, and population immunity. The corresponding flowchart is shown in Fig <ref type="figure" target="#fig_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Basic reproduction number</head><p>In the beginning of epidemic, assume that I = P = D = m 1 = 0. Then, using (2), we can write Eq <ref type="bibr" target="#b4">(5)</ref> in the following form:</p><formula xml:id="formula_18">S 0 ðtÞ ¼ S N Z t 0 bðt À ZÞS 0 ðZÞdZ:<label>ð16Þ</label></formula><p>Suppose, S(t) = N -�e λt . Then from the above equation we get,</p><formula xml:id="formula_19">dSðtÞ dt ¼ À �le lt ¼ N À �e lt N Z t 0 bðt À ZÞðÀ �lÞe lZ dZ:<label>ð17Þ</label></formula><p>Now equating the terms with the first power of � in both sides we get:</p><formula xml:id="formula_20">e lt ¼ Z t 0 bðt À ZÞe lZ dZ ) 1 ¼ Z t 0 bðt À ZÞe À lðtÀ ZÞ dZ:<label>ð18Þ</label></formula><p>The dispersion relation (the relation involving the parameters that determine the stability) can be obtained by setting λ = 0 and the dispersion relation is given by:</p><formula xml:id="formula_21">Z t 0 bðt À ZÞdZ ¼ 1;</formula><p>which can be written as</p><formula xml:id="formula_22">Z t 0 bðxÞdx ¼ 1:</formula><p>If we assume that β(x) &gt; 0 for 0 � x � τ and β(x) = 0 for x &gt; τ, where, τ is assumed to be the average disease duration. Then we can define the basic reproduction number as</p><formula xml:id="formula_23">R 0 ¼ Z t 0 bðxÞdx:<label>ð19Þ</label></formula><p>Then λ in (18) is positive (epidemic growth) if and only if R 0 &gt; 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Note</head><p>The derivation of basic reproduction number remains unaltered even if we assume a reproduction substituting of the form S(t) = N -�a λt , where a &gt; 0. 3 Parameter estimation</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Statistical toolbox</head><p>The estimations and curve fittings are done by minimizing the Sum of Squared Errors (SSE). For the curve fitting to data we mainly use the 'Curve Fitting Toolbox', which is a collection of graphical user interfaces (GUIs) and M-file functions built on the MATLAB technical computing environment <ref type="bibr">[36]</ref>. The toolbox provides the fitted curve along with the goodness of fit. Gamma distributions are estimated using the inbuilt function fitdist(:,gamma) in MATLAB. This function is used to fit a vector of data X = (x 1 , x 2 , � � �, x n ) by a gamma distribution of the form 1 b a GðaÞ x aÀ 1 e À x=b , where a and b are the shape and scale parameters. This function gives the maximum likelihood estimators of a and b for the gamma distribution which are the solutions of the simultaneous equations</p><formula xml:id="formula_24">log â À CðâÞ ¼ log � X= Y n i¼1 x i !1=n 0 @ 1 A ; b ¼ � X=â;</formula><p>where � X is the sample mean of the data X and C is the digamma function given by</p><formula xml:id="formula_25">CðxÞ ¼ G 0 ðxÞ=GðxÞ:</formula><p>The function fitdist(:,gamma) estimates the shape and scale parameters with 95% confidence interval.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Choice of vaccination function V(t)</head><p>We assume that the vaccination function V(t) that is started at time t = t 0 , follows the function</p><formula xml:id="formula_26">VðtÞ ¼ 0; t &lt; t 0 L½N À ðN À V 0 Þe À kðtÀ t 0 Þ �; t � t 0 : (<label>ð20Þ</label></formula><p>where, N is the total population size, L is the proportion of the population expected to be vaccinated, k is the rate of vaccination, V 0 is the number of vaccination at time t = t 0 , and the associated parameter values are listed in Table <ref type="table" target="#tab_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Estimation of ϕ(t) and ψ(t)</head><p>Due to the lack of availability of sector data, that is separate data incorporating the impacts of comorbidity and the ones without, we take an initial simplifying step by assuming that ϕ j � ϕ and ψ j � ψ, for j = 1, 2, � � �, N. We use the data of vaccine-induced immunity from <ref type="bibr" target="#b33">[35]</ref> and fit (least square fitting) the function ϕ(t) as follows (see Fig <ref type="figure" target="#fig_1">2a</ref> and <ref type="figure" target="#fig_1">2b</ref>)</p><formula xml:id="formula_27">�ðtÞ ¼ a 1 e À tÀ b 1 c 1 À � 2 ;<label>ð21Þ</label></formula><p>where, a 1 = 0.9411 with 95% CI (0.8886, 0.9937), b 1 = 117.8 with 95% CI (113.5, 122), and c 1 = 92.44 with 95% CI (86.06, 98.82) (Fig <ref type="figure" target="#fig_1">2a</ref>). The goodness of fit is as follows: SSE = 0.2807, Rsquare = 0.9308, Adjusted R-square = 0.9273 and RMSE = 0.08483.</p><p>Now we fit the same data of vaccine-induced immunity with a stretched power-law function given by</p><formula xml:id="formula_28">�ðtÞ ¼ a 2 t b 2 e À c 2 t d 2 ;<label>ð22Þ</label></formula><p>where, a 2 = 0.01152 with 95% CI (-.001766, 0.02481), b 2 = 1.023 with 95% CI (0.719, 1.328), c 2 = 5.01 × 10 -6 with 95% CI (-1.398 × 10 -5 , 2.4 × 10 -5 ), d 2 = 2.412 with 95% CI (1.747, 3.077) (Fig <ref type="figure" target="#fig_1">2b</ref>). The goodness of fit is as follows: SSE = 0.2218, R-square = 0.9453, Adjusted Rsquare = 0.941 and RMSE = 0.0764. It must be noted that death due to natural causes versus death due to infection have two different timescales of operation; the former is way more protracted than the latter, an aspect that plays a major role in ascribing average values to death rates in comorbidity models. We observe that the stretched power law function <ref type="bibr" target="#b21">(22)</ref> gives better fitting to the data as compared to the Gaussian function <ref type="bibr" target="#b20">(21)</ref>. To check the robustness of the choice of the stretched power law function <ref type="bibr" target="#b21">(22)</ref> we compared the goodness of fit with other possible candidates such as the Gaussian function and, acquisition-fading function.</p><p>The function for the effectiveness of acquired immunity ψ(t) is fitted to the data available in <ref type="bibr" target="#b35">[38]</ref>, by the following function (Fig <ref type="figure" target="#fig_2">3</ref>):</p><formula xml:id="formula_29">cðtÞ ¼ a 3 e À tÀ b 3 c 3 À � 2 ;<label>ð23Þ</label></formula><p>where, a 3 = 1.035 with 95% CI (0.8742, 1.195), b 3 = -206.6 with 95% CI (-704.3, 291) and c 3 = 1133 with 95% CI (500.3, 1765).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Estimation of transmission rate β(τ)</head><p>We assume that the transmission rate β(τ) is proportional to the viral load P(τ), i.e., β(τ) = cP (τ), where, c is a proportionality constant and it depends upon the transmission rate (which mainly depends on the behavioral aspects and not on the virus variants) between infected and  <ref type="bibr" target="#b33">[35,</ref><ref type="bibr" target="#b34">37]</ref> • induced immunity (Fig <ref type="figure" target="#fig_1">2a</ref>)</p><formula xml:id="formula_30">ψ(t)</formula><p>effectiveness of infection Eq (23) <ref type="bibr" target="#b33">[35,</ref><ref type="bibr" target="#b35">38]</ref> • acquired immunity (Fig <ref type="figure" target="#fig_1">2b</ref>)</p><formula xml:id="formula_31">P(τ)</formula><p>Viral load Eq <ref type="bibr" target="#b23">(24)</ref> (Fig <ref type="figure" target="#fig_2">3</ref>) <ref type="bibr" target="#b33">[35,</ref><ref type="bibr" target="#b36">39,</ref><ref type="bibr" target="#b37">40]</ref> (Fig <ref type="figure" target="#fig_2">3</ref>)</p><formula xml:id="formula_32">r(t), d(t)</formula><p>and death rates Eq (25) <ref type="bibr" target="#b33">[35]</ref> and death rates (Fig <ref type="figure" target="#fig_4">5</ref>)</p><formula xml:id="formula_33">V(</formula><p>t) total vaccination function Eq (20) - <ref type="url" target="https://doi.org/10.1371/journal.pone.0310152.t001">https://doi.org/10.1371/journal.pone.0310152.t001</ref>  susceptible individuals. We fit the function P(τ) with the experimental data of viral load depending on the number of hours post-infection as available in <ref type="bibr" target="#b36">[39]</ref>. In <ref type="bibr" target="#b36">[39]</ref>, the authors experimented to understand the viral replication kinetics of SARS-CoV-2 variants in ex vivo cultures of the human respiratory tract and the experiment was performed up to 71 hourspost-infection. Also, we assume that after 10 days of the days-post-infection, the viral load becomes negligible <ref type="bibr" target="#b37">[40]</ref>. Using all these information, we fit P(τ) by the following function (Fig <ref type="figure" target="#fig_3">4</ref>):</p><formula xml:id="formula_34">PðtÞ ¼ a 4 e À tÀ b 4 c 4 À � 2 ;<label>ð24Þ</label></formula><p>where, a 4 = 1.829 × 10 5 with 95% CI (1.805 × 10 5 , 1.852 × 10 5 ), b 4 = 3.136 with 95% CI (3.073, 3.2) and c 4 = 1.294 with 95% CI (1.234, 1.353). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">Estimation of r(t) and d(t)</head><p>In the literature on epidemic modelling, the choice of gamma distributions to model distributed recovery period is well known <ref type="bibr" target="#b38">[41]</ref><ref type="bibr" target="#b39">[42]</ref><ref type="bibr" target="#b40">[43]</ref>. However, the use of bimodal gamma distributions in epidemic modeling can indeed provide a more accurate representation of the recovery or death rate functions when there are distinct groups with different time intervals. From a linear combination of two different gamma distributions, we can capture the variability in the recovery or death times more effectively. The recovery and death distributions used in <ref type="bibr" target="#b33">[35]</ref> and are given by:</p><formula xml:id="formula_35">rðtÞ ¼ p 0 F 1 ðtÞ; dðtÞ ¼ ð1 À p 0 ÞF 2 ðtÞ;<label>ð25Þ</label></formula><p>where,</p><formula xml:id="formula_36">F 1 ðtÞ ¼ 0:85 b a 1 1 Gða 1 Þ t a 1 À 1 e À t b 1 þ 0:15 d c 1 1 Gðc 1 Þ t c 1 À 1 e À t d 1</formula><p>with estimated parameter values a 1 = 32.17136, b 1 = 0.2206, c 1 = 65.40545, d 1 = 0.210 (Fig <ref type="figure" target="#fig_4">5a</ref>)  </p><formula xml:id="formula_37">F 2 ðtÞ ¼ 0:94 b a 2 2 Gða 2 Þ t a 2 À 1 e À t b 2 þ 0:06 d c 2 2 Gðc 2 Þ t c 2 À 1 e À t d 2<label>and</label></formula><p>with estimated parameter values a 2 = 36.02855, b 2 = 0.57511, c 2 = 140.11379, d 2 = 0.27636 (Fig <ref type="figure" target="#fig_4">5b</ref>). p 0 is the survival probability which is assumed to be p 0 = 0.9975. All other parameter values are listed in the Table <ref type="table" target="#tab_0">1</ref>.</p><p>4 Results and findings</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Impact of multiple strains</head><p>In this section, we study the influence of the existence of multiple strains on the epidemic progression in a population. Here the parameter κ accounts for the existence of multiple strains. A higher value of κ implies the co-existence of prominent strains with very different transmission rates. In Fig <ref type="figure" target="#fig_5">6</ref>, we plot I(t) for different choices of κ. We observe that as the value of κ increases, the number of epidemic peaks also increases and the peaks appear relatively frequently. This finding points to multiple infection waves for epidemics driven by multiple strains compared to a single wave for single-strained infections. However, the maximum height of individual peaks is seen to decrease as has been recently observed with the Covid second and third waves <ref type="bibr" target="#b8">[9]</ref>. To explain the sensitivity of the model parameters on the model outcome I(t), we randomly chose 20 values of c 3 (in formula (23)) within the interval [1033, 1233]. The outcome I(t) is shown in Fig 7. In this figure, the bold color curves correspond to c 3 = 1133, while the light color curves correspond to the 20 randomly chosen values of c 3 . This simulation result demonstrates that the model outcome I(t) is sensitive to the model parameters, although the principal trend of the outcome remains largely unchanged.</p><p>Another important observation is that the first epidemic peak is not sensitive to the parameter c 3 . This is because, at the beginning of the epidemic, the acquired immunity function (as described in ( <ref type="formula" target="#formula_29">23</ref>)) is not very influential, and as the epidemic progresses, this acquired immunity function causes variations in I(t). Similar sensitivity analyzes were performed for other parameters, but the main trend of the outcome remained nearly the same.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Effect of interval between successive vaccine doses: Hysteresis effect</head><p>In this section, we investigate the effect of the gap between two consecutive doses of vaccination. We assume a time range from 0 to T = 2000 days (which is almost 5.5 years), where we're trying to control an epidemic. To explain the effect we consider three scenarios as follows:</p><p>Scenario-1: Vaccine doses administered with 4 months gap.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario-2: Vaccine doses administered with 8 months gap.</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario-3: Vaccine doses administered with 12 months gap.</head><p>For simplicity, we assumed that each vaccine dose has the same efficacy. From Fig <ref type="figure" target="#fig_7">8</ref>, we observe that Scenario-1 and Scenario-2 depict almost the same epidemic progression whereas Scenario-3 depicts a different type of progression. The result shows that instead of administrating the vaccine with a gap of 4 months, a vaccination spanning a gap of 8 months produces the same type of epidemic progression, though the level of immunity is slightly less. Also, we note that Scenario-1 requires repeated vaccinations compared to Scenario-2 within the period 0 to 2000 days, but both scenarios eventually accord the same level of immunity. This is a key observation that can help us to avoid unnecessary vaccinations. On the other hand, from Fig <ref type="figure" target="#fig_7">8</ref> (e) and 8(f), we observe that if the vaccination gap is larger (i.e., 1 year in this case), then consecutive epidemic peaks can appear in future. Thus a proper gap should be maintained to minimize future epidemic outbreaks. The summary of these observations is the need to exercise optimal control.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Optimization problem</head><p>Based on the previous numerical results, we can consider the following optimization problem:</p><formula xml:id="formula_38">J ðnÞ ¼ min n2N; 0�mðt;nÞ�1 c Z T 0 Iðt; nÞdt þ dn;<label>ð26Þ</label></formula><p>where T &gt; 0 is the maximum time we consider. n is the number of vaccination campaigns administrated in the population during the time interval [0, T]. We assume that T = an, for some a &gt; 0, i.e., two vaccination campaigns are considered with a gap of a time units. d is a positive constant that accounts for the cumulative cost per vaccination campaign. m(t; n) and I (t; n) denote the level of immunity and number of infected at time t for a given n, respectively. I(t; n) is the solution of our model for a particular choice of n. c is a positive constant that accounts for the cost due to infection for an infected individual. The above cost function J ðnÞ can equivalently be written as a function of a as follows: where, I(t; a) denotes the number of infected at time t for a given a. The Fig <ref type="figure" target="#fig_8">9</ref> shows the plot of the cost function defined in relation <ref type="bibr" target="#b26">(27)</ref>. Fig <ref type="figure" target="#fig_8">9</ref> provides valuable insights into the behavior of the cost function concerning the gap between two consecutive vaccinations. Fig <ref type="figure" target="#fig_8">9</ref> shows that the cost function more or less remains at the minimum when the gap between two successive vaccinations falls within the range of 3 to 8 months. However, the plot takes an interesting turn when the gap between consecutive vaccinations exceeds 9 months. Beyond this point, the cost function begins to rise abruptly. This critical observation suggests that excessively long intervals between vaccinations can be counterproductive, potentially leading to a surge in disease transmission and associated costs. This result shows that frequent vaccinations may not always be necessary and could potentially lead to diminishing returns, a phenomenon often referred to as hysteresis, whereas, an admissible larger gap between two consecutive vaccinations can effectively control the epidemic along with the minimal cost of vaccination campaign. This finding explains the significance of carefully determining the appropriate gap between two consecutive vaccination campaigns for effective epidemic control while minimizing economic burdens on a country or province.</p><formula xml:id="formula_39">J ðaÞ ¼ min a2R þ ; 0�mðt;nÞ�1 c Z T 0 Iðt; aÞdt þ d T a ;<label>ð27Þ</label></formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Effect of vaccine efficacy and vaccination rate</head><p>A vaccination campaign focuses on two major aspects, the effectiveness of the vaccines and the rate of vaccination. These two factors can depend on the decision-makers. Thus it is important to understand the effect of vaccine efficacy and the rate of vaccination on the cost function. In Fig <ref type="figure" target="#fig_9">10</ref>, we plot the cost function J for two different vaccine efficacies. We notice that if the vaccine efficacy is less (red curve in Fig <ref type="figure" target="#fig_9">10</ref>) then the cost function remain at the minimum if the gap between the successive vaccination varies between 3 to 6 months. In contrast, if the vaccine efficacy is larger (blue curve in Fig <ref type="figure" target="#fig_9">10</ref>) then the cost function stays at a minimum if the gap between the successive vaccinations varies between 3 to 9 months. This observation suggests that highly effective vaccines may allow for more extended gaps between vaccinations, potentially reducing the frequency and cost of vaccination while still achieving effective epidemic control. Fig <ref type="figure" target="#fig_10">11</ref> shows the plot of the cost function J for two different vaccination rates. This figure shows that a higher vaccination rate provides more flexibility in increasing the gap between campaigns while still controlling the epidemic effectively and minimizing costs. The results are reminiscent of the recent experiences concerning COVID-19 vaccines <ref type="bibr" target="#b8">[9]</ref>. This insight suggests that decision-makers should carefully consider both vaccine efficacy and vaccination rate when designing vaccination strategies to achieve cost-effective epidemic control.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Effect of co-existing strains</head><p>The parameter κ accounts for the existence of multiple strains. A higher value of κ implies the co-existence of prominent strains with very different transmission rates. Fig <ref type="figure" target="#fig_11">12</ref> shows that a higher value of κ provides less flexibility in increasing the gap between campaigns.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Discussion and conclusion</head><p>To eradicate an infectious disease through immunization, a single dose of vaccination may not be sufficient; rather, supplemental vaccine doses are essential to keep the level of immunity in the population sufficiently high over time and reduce the number of susceptible in order to achieve disease control or elimination goals [44]. In this regard, the optimal scheduling of successive vaccination is very important, keeping in mind the cost of vaccination. In the context of diseases like Measles and Rubella, the Measles &amp; Rubella Initiative [45] has provided support to measles-burdened countries, focusing on sustaining high immunization coverage of children and supplementing it with supplemental doses. The comprehensive study in this work can be helpful in designing the optimal timing of successive vaccination campaigns.</p><p>In this work, we present a comprehensive immuno-epidemic model that integrates comorbidity and the administration principle of multiple vaccine doses. The study employs a system of integro-differential equations to capture the evolving dynamics of infection and immunity over time. Considering all model parameters distributed over time-since-infection, we analyze for the dynamic changes in population immunity, determined by acquired immunity from recovered individuals and by the vaccine-induced immunity developed through multiple vaccine doses at specified intervals. The introduction of a comorbid compartment with higher infectivity allows us to implicitly capture the impact of multiple strains on the frequency and magnitude of epidemic peaks within specific time intervals.</p><p>We estimate the relevant time-distributed parameters with the help of available clinical and experimental data. Notably, our modeling results point to the substantial influence of coexisting multiple strains on both the frequency and height of epidemic outbreaks. Furthermore, we demonstrate that frequent vaccine administration may not be required and can potentially lead to a hysteresis effect on immunity levels, thus neutralizing the impact of vaccines in the longer run, sort of an anti-microbial effect. This finding challenges the conventional wisdom regarding the necessity of high-frequency vaccination strategies and indicates its negative consequence over a sustained period of administration.</p><p>It is important to mention that, the Table <ref type="table" target="#tab_0">1</ref> enlists parameter values (N, V 0 , L, k, c, α, κ, b, �) that are extracted from data modeling together with functions (ϕ(t), ψ(t), P(τ), r(t), d(t), V(t)) that have been implemented in contemporary references (all cited in the text, with the exception of V(t)). There are no known references to confirm the parameter values predicted. However, as the confidence intervals and supporting sensitivity analysis demonstrate, the model is sufficiently generic and robust against changes in parameter values, a prediction that awaits validation from future experiments.</p><p>A critical insight arising from our findings is the paramount importance of determining the optimal gap between two consecutive vaccine doses. We emphasize that this determination should be driven by a meticulous analysis of the evolving level of immunity within the population. To address this, we propose an optimal control strategy aimed at minimizing both the number of infections and the economic costs associated with vaccination efforts. This approach underscores the need for a tailored and strategic vaccination plan that considers the interplay of factors such as population immunity, vaccine efficacy against different strains, and the cost-effectiveness of each vaccination effort. In summary, our primary objective has been to contribute to the understanding of the optimal gap between two consecutive vaccinations. Our findings highlight the complexity of disease control strategies, advocating for a more nuanced and adaptable approach that accounts for the interplay of immunity dynamics, multiple strains, and vaccination frequency in shaping effective public health interventions.</p><p>The model presented in this study is generic and applicable to various epidemic diseases. In this specific analysis, we have resorted to simplifying assumptions like homogeneous propagation, absence of ethnic migration, and patient compartmentalization, etc. that can be subjectively assessed against specific data through minor modifications of this model. Our assumption of equal effectiveness across all vaccine doses and the lack of differentiation between individuals who received the first, second, or booster dose are the limitations of the present work. Future research could enhance the model's precision by incorporating more accurate data on vaccine efficacy and distinguishing between different doses to calculate immunity levels more effectively. Additionally, the model's assumption of a homogeneous population, with individuals sharing similar immune statuses, overlooks potential variations influenced by factors like age. Subsequent investigations could enrich the model by introducing population heterogeneity through age-structured modeling, providing a more realistic representation of the epidemic dynamics.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig 1 .</head><label>1</label><figDesc>Fig 1. Schematic diagram. Schematic diagram for the system (10)-(15). https://doi.org/10.1371/journal.pone.0310152.g001</figDesc><graphic coords="7,95.98,78.01,479.96,339.08" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig 2 .</head><label>2</label><figDesc>Fig 2. Effectiveness of vaccine-induced immunity. The effectiveness of vaccine-induced immunity ϕ(t) as a function of the days post-vaccination (data source-[35, 37]). The shaded regions represent the 95% confidence interval of the fitted function in the epidemiologically feasible region. (a) corresponds to the formula (21); (b) corresponds to the formula (22). https://doi.org/10.1371/journal.pone.0310152.g002</figDesc><graphic coords="10,200.01,78.01,372.19,578.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig 3 .</head><label>3</label><figDesc>Fig 3. Effectiveness of infection-acquired immunity. The effectiveness of infection-acquired immunity ψ(t) as a function of the days post recovery (data source-[35, 38]). The blue dots are the real data and the red curves are the functions fitted to the data. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text. https://doi.org/10.1371/journal.pone.0310152.g003</figDesc><graphic coords="11,95.98,78.01,479.96,382.51" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig 4 .</head><label>4</label><figDesc>Fig 4. Viral load. Viral load as a function of the days post infection. The blue dots are the real experimental data for Omicron variant taken from [39]. The red curve is the gamma function fitted to the blue dots. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text. https://doi.org/10.1371/journal.pone.0310152.g004</figDesc><graphic coords="12,95.98,78.01,479.96,331.65" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig 5 .</head><label>5</label><figDesc>Fig 5. Time-distributed recovery and death rates. Time-distributed rate functions of (a) recovery and (b) death as functions of days post the onset of infection. The red curves show the best fitted bimodal gamma distributions (Ref. [35]). https://doi.org/10.1371/journal.pone.0310152.g005</figDesc><graphic coords="13,200.01,78.01,350.14,529.40" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig 6 .</head><label>6</label><figDesc>Fig 6. Plot of I(t) for different choice of κ. The associated parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g006</figDesc><graphic coords="14,178.30,367.65,397.64,312.72" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig 7 .</head><label>7</label><figDesc>Fig 7. Plot of I(t) for different choice of κ. (a) κ = 1; (b) κ = 2; (c) κ = 3. The bold colored curves correspond to c 3 = 1133 in formula (23). The light colored curves correspond to 20 randomly chosen values of c 3 in the interval [1033, 1233]. The other associated parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g007</figDesc><graphic coords="15,39.52,78.01,536.49,158.97" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Fig 8 .</head><label>8</label><figDesc>Fig 8. Impact of vaccine dose intervals. (a), (b) correspond to Scenario-1; (c), (d) correspond to Scenario-2; (e), (f) correspond to Scenario-3. The associated parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g008</figDesc><graphic coords="16,37.02,78.01,538.92,324.40" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig 9 .</head><label>9</label><figDesc>Fig 9. Plot of cost function J ðaÞ. Plot of cost function J ðaÞ for c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g009</figDesc><graphic coords="17,200.01,78.01,366.69,302.40" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Fig 10 .</head><label>10</label><figDesc>Fig 10. Plot of cost function J ðaÞ for different vaccine efficacy functions. Green: corresponds to formula (21) and Red: corresponds to formula (21) multiplied by 0.7. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g010</figDesc><graphic coords="18,200.01,78.01,356.09,510.97" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Fig 11 .</head><label>11</label><figDesc>Fig 11. Plot of cost function J ðaÞ for different vaccination rates. The left panel corresponds to formula (20) with the rate of vaccination k = 0.001 (green) and k = 0.003 (red). The right panel corresponds to the plot of the cost function with corresponding colors. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g011</figDesc><graphic coords="20,200.01,78.01,352.57,578.44" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Fig 12 .</head><label>12</label><figDesc>Fig 12. Plot of cost function J ðaÞ for different values of κ. The green and red curves correspond to κ = 2 and κ = 1 respectively. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1. https://doi.org/10.1371/journal.pone.0310152.g012</figDesc><graphic coords="21,148.31,78.01,427.64,311.98" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Parameter values.</figDesc><table><row><cell>Parameters</cell><cell>Description</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" xml:id="foot_0"><p>PLOS ONE | https://doi.org/10.1371/journal.pone.0310152September 19, 2024  </p></note>
+		</body>
+		<back>
+
+			
+			<div type="funding">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The author(s) received no specific funding for this work.</p></div>
+			</div>
+
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The data sources are mentioned in the paper and the related codes are available in the github link: <ref type="url" target="https://github.com/nsamiran/codes_immuno_epidemic_vaccination.git">https://github.com/  nsamiran/codes_immuno_epidemic_vaccination.  git</ref>.</p></div>
+			</div>
+
+
+			<div type="conflict">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The authors have declared that no competing interests exist.</p></div>
+			</div>
+
+
+			<div type="contribution">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Author Contributions</head><p>Conceptualization: Malay Banerjee, Amit K. Chattopadhyay.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data curation: Samiran Ghosh.</head><p>Formal analysis: Samiran Ghosh, Malay Banerjee, Amit K. Chattopadhyay.</p><p>Investigation: Samiran Ghosh, Amit K. Chattopadhyay.</p><p>Methodology: Samiran Ghosh, Malay Banerjee, Amit K. Chattopadhyay.</p><p>Software: Samiran Ghosh.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supervision: Malay Banerjee.</head><p>Validation: Samiran Ghosh.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Visualization: Samiran Ghosh.</head><p>Writing -original draft: Samiran Ghosh, Malay Banerjee, Amit K. Chattopadhyay.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Writing -review &amp; editing:</head><p>Malay Banerjee, Amit K. Chattopadhyay.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Epidemiology, transmission dynamics and control of sars: the 2002-2003 epidemic</title>
+		<author>
+			<persName><forename type="first">Anderson</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fraser</forename><surname>Christophe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ghani</forename><surname>Azra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donnelly</forename><surname>Christl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riley</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ferguson</forename><surname>Neil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1098/rstb.2004.1490</idno>
+		<idno type="PMID">15306395</idno>
+		<ptr target="https://doi.org/10.1098/rstb.2004.1490" />
+	</analytic>
+	<monogr>
+		<title level="s">Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences</title>
+		<imprint>
+			<biblScope unit="volume">359</biblScope>
+			<biblScope unit="page" from="1091" to="1105" />
+			<date type="published" when="1447">1447. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Anatomy of the epidemiological literature on the 2003 sars outbreaks in hong kong and toronto: a time-stratified review</title>
+		<author>
+			<persName><forename type="first">Xing</forename><surname>Weijia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hejblum</forename><surname>Gilles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leung</forename><surname>Gabriel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Valleron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alain-Jacques</forename></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pmed.1000272</idno>
+		<idno type="PMID">20454570</idno>
+		<ptr target="https://doi.org/10.1371/journal.pmed.1000272" />
+	</analytic>
+	<monogr>
+		<title level="j">PLoS medicine</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note>5):e1000272</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Establishment of multiple sublineages of h5n1 influenza virus in asia: implications for pandemic control</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gjd</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">S</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">H</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Rayner</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.0511120103</idno>
+		<idno type="PMID">16473931</idno>
+		<ptr target="https://doi.org/10.1073/pnas.0511120103" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="2845" to="2850" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Predicting the global spread of h5n1 avian influenza</title>
+		<author>
+			<persName><forename type="first">Chmura</forename><surname>Kilpatrick A Marm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aleksei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gibbons</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fleischer</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marra</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daszak</forename><surname>Peter</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.0609227103</idno>
+		<idno type="PMID">17158217</idno>
+		<ptr target="https://doi.org/10.1073/pnas.0609227103" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="issue">51</biblScope>
+			<biblScope unit="page" from="19368" to="19373" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The 2009 a (h1n1) influenza virus pandemic: A review</title>
+		<author>
+			<persName><forename type="first">Girard</forename><surname>Marc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tam</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Assossou</forename><surname>Olga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kieny</forename><surname>Marie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paule</forename></persName>
+		</author>
+		<idno type="DOI">10.1016/j.vaccine.2010.05.031</idno>
+		<idno type="PMID">20553769</idno>
+		<ptr target="https://doi.org/10.1016/j.vaccine.2010.05.031" />
+	</analytic>
+	<monogr>
+		<title level="j">Vaccine</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">31</biblScope>
+			<biblScope unit="page" from="4895" to="4902" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Origins and evolutionary genomics of the 2009 swine-origin h1n1 influenza a epidemic</title>
+		<author>
+			<persName><forename type="first">Smith</forename><surname>Gavin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vijaykrishna</forename><surname>Dhanasekaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Bahl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lycett</forename><surname>Samantha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Worobey</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pybus</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/nature08182</idno>
+		<idno type="PMID">19516283</idno>
+		<ptr target="https://doi.org/10.1038/nature08182" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">459</biblScope>
+			<biblScope unit="issue">7250</biblScope>
+			<biblScope unit="page" from="1122" to="1125" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Ebola 2014-new challenges, new global response and responsibility</title>
+		<author>
+			<persName><forename type="first">Frieden</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damon</forename><surname>Inger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bell</forename><surname>Beth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenyon</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nichol</forename><surname>Stuart</surname></persName>
+		</author>
+		<idno type="DOI">10.1056/NEJMp1409903</idno>
+		<idno type="PMID">25140858</idno>
+		<ptr target="https://doi.org/10.1056/NEJMp1409903" />
+	</analytic>
+	<monogr>
+		<title level="j">The New England Journal of Medicine</title>
+		<imprint>
+			<biblScope unit="volume">371</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<biblScope unit="page" from="1177" to="1180" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The evolution of ebola virus: Insights from the 2013-2016 epidemic</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Holmes Edward</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dudas</forename><surname>Gytis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rambaut</forename><surname>Andrew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andersen</forename><surname>Kristian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/nature19790</idno>
+		<idno type="PMID">27734858</idno>
+		<ptr target="https://doi.org/10.1038/nature" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">538</biblScope>
+			<biblScope unit="issue">7624</biblScope>
+			<biblScope unit="page" from="193" to="200" />
+			<date type="published" when="2016">2016. 19790</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Infection kinetics of covid-19 and containment strategy</title>
+		<author>
+			<persName><forename type="first">Chattopadhyay</forename><surname>Amit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Choudhury</forename><surname>Debajyoti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Goutam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kundu</forename><surname>Bidisha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nath Sujit</forename><surname>Kumar</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41598-021-90698-2</idno>
+		<ptr target="https://doi.org/10.1038/s41598-021-90698-2PMID" />
+	</analytic>
+	<monogr>
+		<title level="j">Scientific reports</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">34078929</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Systematic review of the literature about the effects of the covid-19 pandemic on the lives of school children</title>
+		<author>
+			<persName><surname>Cacho ´n-Zagalaz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Javier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanabrias-Moreno</forename><surname>Sa ´nchez-Zafra Marı ´a</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gonza ´lez-Valero</forename><surname>De ´borah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lara-Sa ´nchez</forename><surname>Gabriel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Amador</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zagalaz-Sa ´nchez</forename><surname>Marı</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luisa</forename></persName>
+		</author>
+		<idno type="DOI">10.3389/fpsyg.2020.569348</idno>
+		<idno type="PMID">33162910</idno>
+		<ptr target="https://doi.org/10.3389/fpsyg.2020.569348" />
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in psychology</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">569348</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Compartmental models in epidemiology</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Brauer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Mathematical epidemiology</title>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="19" to="79" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<monogr>
+		<title level="m" type="main">An introduction to mathematical epidemiology</title>
+		<author>
+			<persName><forename type="first">Martcheva</forename><surname>Maia</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="volume">61</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Modeling epidemics with compartmental models</title>
+		<author>
+			<persName><forename type="first">Tolles</forename><surname>Juliana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luong</forename><surname>Thaibinh</surname></persName>
+		</author>
+		<idno type="DOI">10.1001/jama.2020.8420</idno>
+		<idno type="PMID">32459319</idno>
+		<ptr target="https://doi.org/10.1001/jama.2020.8420" />
+	</analytic>
+	<monogr>
+		<title level="j">Jama</title>
+		<imprint>
+			<biblScope unit="volume">323</biblScope>
+			<biblScope unit="issue">24</biblScope>
+			<biblScope unit="page" from="2515" to="2516" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Some epidemiological models with nonlinear incidence</title>
+		<author>
+			<persName><forename type="first">Hethcote</forename><surname>Herbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Van Den Driessche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<idno type="DOI">10.1007/BF00160539</idno>
+		<idno type="PMID">2061695</idno>
+		<ptr target="https://doi.org/10.1007/BF00160539" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Biology</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="271" to="287" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Adaptive human behavior in epidemiological models</title>
+		<author>
+			<persName><forename type="first">Fenichel</forename><surname>Eli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Castillo-Chavez</forename><surname>Carlos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Graziano</forename><surname>Ceddia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chowell</forename><surname>Gerardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gonzalez</forename><surname>Parra Paula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hickling</forename><surname>Graham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.1011250108</idno>
+		<idno type="PMID">21444809</idno>
+		<ptr target="https://doi.org/10.1073/pnas.1011250108" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="issue">15</biblScope>
+			<biblScope unit="page" from="6306" to="6311" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Multi-patch and multi-group epidemic models: a new framework</title>
+		<author>
+			<persName><forename type="first">Bichara</forename><surname>Derdei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iggidr</forename><surname>Abderrahman</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00285-017-1191-9</idno>
+		<idno type="PMID">29149377</idno>
+		<ptr target="https://doi.org/10.1007/s00285-017-1191-" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Biology</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="107" to="134" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A multipatch malaria model with logistic growth populations</title>
+		<author>
+			<persName><forename type="first">Gao</forename><surname>Daozhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruan</forename><surname>Shigui</surname></persName>
+		</author>
+		<idno type="DOI">10.1137/110850761</idno>
+		<idno type="PMID">23723531</idno>
+		<ptr target="https://doi.org/10.1137/110850761" />
+	</analytic>
+	<monogr>
+		<title level="j">SIAM Journal on Applied Mathematics</title>
+		<imprint>
+			<biblScope unit="volume">72</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="819" to="841" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Understanding the implications of under-reporting, vaccine efficiency and social behavior on the postpandemic spread using physics informed neural networks: A case study of china</title>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Samiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ogueda-Oliva</forename><surname>Alonso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Aditi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Banerjee</forename><surname>Malay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seshaiyer</forename><surname>Padmanabhan</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0290368</idno>
+		<idno type="PMID">37972077</idno>
+		<ptr target="https://doi.org/10.1371/journal.pone.0290368" />
+	</analytic>
+	<monogr>
+		<title level="j">Plos one</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<date type="published" when="2023">0290368. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Covasim: an agent-based model of covid-19 dynamics and interventions</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kerr Cliff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Robyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mistry</forename><surname>Dina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abeysuriya</forename><surname>Romesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rosenfeld</forename><surname>Katherine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hart</forename><surname>Gregory</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pcbi.1009149</idno>
+		<idno type="PMID">34310589</idno>
+		<ptr target="https://doi.org/10.1371/journal.pcbi.1009149" />
+	</analytic>
+	<monogr>
+		<title level="j">PLOS Computational Biology</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1009149</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">A stochastic agent-based model of the sars-cov-2 epidemic in france</title>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Hoertel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blachier</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blanco</forename><surname>Carlos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olfson</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Massetti</forename><surname>Marc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rico</forename><surname>Marina Sa ´nchez</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41591-020-1001-6</idno>
+		<idno type="PMID">32665655</idno>
+		<ptr target="https://doi.org/10.1038/s41591-020-1001-6" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature medicine</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="1417" to="1421" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Global stability analysis with a discretization approach for an age-structured multigroup sir epidemic model</title>
+		<author>
+			<persName><forename type="first">Kuniya</forename><surname>Toshikazu</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.nonrwa.2011.03.011</idno>
+		<ptr target="https://doi.org/10.1016/j.nonrwa.2011.03.011" />
+	</analytic>
+	<monogr>
+		<title level="j">Nonlinear Analysis Real World Application</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="2640" to="2655" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Global stability of multi-group epidemic models with distributed delays</title>
+		<author>
+			<persName><forename type="first">Li</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuai</forename><surname>Zhisheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wang</forename><surname>Chuncheng</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jmaa.2009.09.017</idno>
+		<ptr target="https://doi.org/10.1016/j.jmaa.2009.09.017" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Analysis and Applications</title>
+		<imprint>
+			<biblScope unit="volume">361</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="38" to="47" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Sparse optimal control of pattern formations for an sir reaction-diffusion epidemic model</title>
+		<author>
+			<persName><forename type="first">Chang</forename><surname>Lili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gong</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jin</forename><surname>Zhen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sun</forename><surname>Gui-Quan</surname></persName>
+		</author>
+		<idno type="DOI">10.1137/22M1472127</idno>
+		<ptr target="https://doi.org/10.1137/22M1472127" />
+	</analytic>
+	<monogr>
+		<title level="j">SIAM Journal on Applied Mathematics</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="1764" to="1790" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Spatio-temporal chaos and clustering induced by nonlocal information and vaccine hesitancy in the sir epidemic model</title>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Banerjee Malay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manfredi</forename><surname>Samiran</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Piero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Onofrio</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.chaos.2023.113339</idno>
+		<ptr target="https://doi.org/10.1016/j.chaos.2023.113339" />
+	</analytic>
+	<monogr>
+		<title level="j">Chaos, Solitons &amp; Fractals</title>
+		<imprint>
+			<biblScope unit="volume">170</biblScope>
+			<biblScope unit="page">113339</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Stability analysis of two new sirs models with two viruses</title>
+		<author>
+			<persName><forename type="first">Zhao</forename><surname>Jiandong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wang</forename><surname>Lisha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Han</forename><surname>Zhixia</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00207160.2017.1364369</idno>
+		<ptr target="https://doi.org/10.1080/00207160.2017.1364369" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer Mathematics</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="2026" to="2035" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Dynamical analysis of hyper-sir rumor spreading model</title>
+		<author>
+			<persName><forename type="first">Zhang</forename><surname>Ziyu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mei</forename><surname>Xuehui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiang</forename><surname>Haijun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luo</forename><surname>Xupeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xia</forename><surname>Yang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.amc.2023.127887</idno>
+		<ptr target="https://doi.org/10.1016/j.amc.2023.127887" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Mathematics and Computation</title>
+		<imprint>
+			<biblScope unit="volume">446</biblScope>
+			<biblScope unit="page">127887</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Mathematical models in epidemiology</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Brauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Castillo-Chavez</forename><surname>Carlos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Feng</forename><surname>Zhilan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="volume">32</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Mathematical structures of epidemic systems</title>
+		<author>
+			<persName><forename type="first">Capasso</forename><surname>Vincenzo</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>Springer Science &amp; Business Media</publisher>
+			<biblScope unit="volume">97</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Dosing interval strategies for two-dose covid-19 vaccination in 13 middle-income countries of europe: Health impact modelling and benefit-risk analysis</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.lanepe.2022.100381</idno>
+		<idno type="PMID">35434685</idno>
+		<ptr target="https://doi.org/10.1016/j.lanepe.2022.100381" />
+	</analytic>
+	<monogr>
+		<title level="j">The Lancet Reg Health</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">100381</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b29">
+	<analytic>
+		<title level="a" type="main">A modeling-based approach to optimize covid-19 vaccine dosing schedules for improved protection</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Dogra</surname></persName>
+		</author>
+		<idno type="DOI">10.1172/jci.insight.169860</idno>
+		<idno type="PMID">37227783</idno>
+		<ptr target="https://doi.org/10.1172/jci.insight.169860" />
+	</analytic>
+	<monogr>
+		<title level="j">JCI Insight</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">13</biblScope>
+			<date type="published" when="2023">169860. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Evaluation of waning of sars-cov-2 vaccine-induced immunity: A systematic review and meta-analysis</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Menegale</surname></persName>
+		</author>
+		<idno type="DOI">10.1001/jamanetworkopen.2023.10650</idno>
+		<idno type="PMID">37133863</idno>
+		<ptr target="https://doi.org/10.1001/jamanetworkopen.2023.10650" />
+	</analytic>
+	<monogr>
+		<title level="j">JAMA Netw Open</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<date type="published" when="2023">2310650. 2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b31">
+	<analytic>
+		<title level="a" type="main">An epidemic model with time-distributed recovery and death rates</title>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Samiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volpert</forename><surname>Vitaly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Banerjee</forename><surname>Malay</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11538-022-01028-0</idno>
+		<idno type="PMID">35763126</idno>
+		<ptr target="https://doi.org/10.1007/s" />
+	</analytic>
+	<monogr>
+		<title level="j">Bulletin of Mathematical Biology</title>
+		<imprint>
+			<biblScope unit="volume">84</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page">78</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b32">
+	<analytic>
+		<title level="a" type="main">An age-dependent immuno-epidemiological model with distributed recovery and death rates</title>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Samiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volpert</forename><surname>Vitaly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Banerjee</forename><surname>Malay</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00285-022-01855-8</idno>
+		<idno type="PMID">36625974</idno>
+		<ptr target="https://doi.org/10.1007/s00285-022-01855-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mathematical Biology</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">21</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Immuno-epidemiological model-based prediction of further covid-19 epidemic outbreaks due to immunity waning</title>
+		<author>
+			<persName><forename type="first">Ghosh</forename><surname>Samiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Banerjee</forename><surname>Malay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volpert</forename><surname>Vitaly</surname></persName>
+		</author>
+		<idno type="DOI">10.1051/mmnp/2022017</idno>
+		<ptr target="https://doi.org/10.1051/mmnp/2022017" />
+	</analytic>
+	<monogr>
+		<title level="j">Mathematical Modelling of Natural Phenomena</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Anti-sars-cov-2 igg antibodies after recovery from covid-19 or vaccination in libyan population: comparison of four vaccines</title>
+		<author>
+			<persName><forename type="first">Ebrahim</forename><surname>Fawzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tabal</forename><surname>Salah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lamami</forename><surname>Yosra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alhudiri</forename><surname>Inas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">El</forename><surname>Meshri Salah Edin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Al</forename><surname>Dwigen Samira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<idno type="DOI">10.1101/2022.02.18.22271130</idno>
+		<ptr target="https://doi.org/10.1101/2022.02.18.22271130" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Real-life protection provided by vaccination, booster doses and previous infection against covid-19 infection, hospitalisation or death over time in the czech republic: a whole country retrospective view</title>
+		<author>
+			<persName><forename type="first">Berec</forename><surname>Ludek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Smid</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pribylova</forename><surname>Lenka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Majek</forename><surname>Ondrej</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pavlik</forename><surname>Tomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jarkovsky</forename><surname>Jiri</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/2021.12.10.21267590</idno>
+		<ptr target="https://doi.org/10.1101/2021.12.10.21267590" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Sarscov-2 omicron variant replication in human respiratory tract ex vivo</title>
+		<author>
+			<persName><forename type="first">Chan</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">W</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hui</forename><surname>Kenrie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">Y</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ho</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheung</forename><surname>Man-Chun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ng</forename><surname>Ka-Chun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ching</forename><surname>Rachel</surname></persName>
+		</author>
+		<idno type="DOI">10.21203/rs.3.rs-1189219/v1</idno>
+		<ptr target="https://doi.org/10.21203/rs.3.rs-1189219/v1" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Test to release from isolation after testing positive for sars-cov-2. medRxiv</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Quilty Billy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pulliam</forename><surname>Juliet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pearson</forename><surname>Carl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">B</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+			<biblScope unit="page" from="2022" to="2023" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b38">
+	<analytic>
+		<title level="a" type="main">A statistical method of estimating the periods of incubation and infection of an infectious disease</title>
+		<author>
+			<persName><forename type="first">Bailey</forename><surname>Norman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">J</forename></persName>
+		</author>
+		<idno type="DOI">10.1038/174139a0</idno>
+		<idno type="PMID">13185266</idno>
+		<ptr target="https://doi.org/10.1038/174139a0" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">174</biblScope>
+			<biblScope unit="page" from="139" to="140" />
+			<date type="published" when="1954">1954</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Mathematical and statistical estimation approaches in epidemiology</title>
+		<author>
+			<persName><forename type="first">Chowell</forename><surname>Gerardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyman</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bettencourt</forename><surname>Luı ´s</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Castillo-Chavez</forename><surname>Carlos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Nishiura</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<publisher>Springer</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Realistic distributions of infectious periods in epidemic models: changing patterns of persistence and dynamics</title>
+		<author>
+			<persName><forename type="first">Lloyd</forename><surname>Alun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename></persName>
+		</author>
+		<idno type="DOI">10.1006/tpbi.2001.1525</idno>
+		<idno type="PMID">11589638</idno>
+		<ptr target="https://doi.org/10.1006/tpbi" />
+	</analytic>
+	<monogr>
+		<title level="j">Theoretical population biology</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="59" to="71" />
+			<date type="published" when="1525">2001. 2001. 1525</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

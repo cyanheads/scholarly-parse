@@ -1,0 +1,40 @@
+{
+  "id": "epmc-pmc10702718",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "A secure solution based on load-balancing algorithms between regions in the cloud environment",
+  "identifiers": {
+    "pmcid": "PMC10702718",
+    "pmid": "38077531",
+    "doi": "10.7717/peerj-cs.1513"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10702718/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Eljack S, Jemmali M, Denden M, Turki S, Khedr WM, Algashami AM, et al. A secure solution based on load-balancing algorithms between regions in the cloud environment. PeerJ Computer Science. 2023;9:e1513. doi:10.7717/peerj-cs.1513",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "lists",
+    "footnotes",
+    "declarations",
+    "structured-abstract",
+    "tables",
+    "many-tables",
+    "table-footnotes",
+    "inline-math",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "algorithm",
+    "research-article"
+  ],
+  "notes": "Six algorithm listings are pseudo-code in <preformat> blocks between paragraphs, bordered with runs of underscores. PMC's own rendering nests the same blocks inside <p>."
+}

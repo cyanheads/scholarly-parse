@@ -1,0 +1,39 @@
+{
+  "id": "epmc-pmc12704732",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Volcanic forcing of the Lomagundi–Jatuli carbon isotope excursion",
+  "identifiers": {
+    "pmcid": "PMC12704732",
+    "pmid": "41325523",
+    "doi": "10.1073/pnas.2519431122"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12704732/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Blichert-Toft J, Konhauser K, Coutret B, Pinto M, Agranier A, El Albani A, et al. Volcanic forcing of the Lomagundi–Jatuli carbon isotope excursion. Proceedings of the National Academy of Sciences of the United States of America. 2025;122(49):e2519431122. doi:10.1073/pnas.2519431122",
+  "features": [
+    "nested-sections",
+    "untitled-sections",
+    "footnotes",
+    "acknowledgments",
+    "declarations",
+    "multiple-abstracts",
+    "plain-language-summary",
+    "tables",
+    "inline-math",
+    "display-math",
+    "mathml-only",
+    "equation-numbers",
+    "figures",
+    "supplementary-material",
+    "media",
+    "mixed-citation",
+    "research-article"
+  ],
+  "regression": "cyanheads/pubmed-mcp-server#134",
+  "notes": "The first <abstract> is abstract-type=\"executive-summary\" (the PNAS significance statement), serialized before the untyped abstract (#134)."
+}

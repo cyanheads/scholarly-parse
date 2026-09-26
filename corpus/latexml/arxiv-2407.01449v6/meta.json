@@ -1,0 +1,30 @@
+{
+  "id": "arxiv-2407.01449v6",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "ColPali: Efficient Document Retrieval with Vision Language Models",
+  "identifiers": {
+    "arxiv": "2407.01449v6"
+  },
+  "url": "https://arxiv.org/html/2407.01449v6",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "attribution": "Faysse M, Sibille H, Wu T, Omrani B, Viaud G, Hudelot C, et al. ColPali: Efficient Document Retrieval with Vision Language Models. arXiv:2407.01449v6. 2025.",
+  "features": [
+    "nested-sections",
+    "footnotes",
+    "inline-math",
+    "display-math",
+    "equation-numbers",
+    "tables",
+    "table-spans",
+    "figures",
+    "appendix",
+    "preprint"
+  ],
+  "regression": "cyanheads/arxiv-mcp-server#43",
+  "notes": "CC0. After </article> the page carries about 7.9 KB of site footer, including the LaTeXML logo as a base64 PNG, and every figure <img src> is relative (2407.01449v6/images/…) (#43)."
+}

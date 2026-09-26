@@ -1,0 +1,1923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes</title>
+				<funder ref="#_GTpdSKP #_7xFRTVh">
+					<orgName type="full">Medical Research Council</orgName>
+				</funder>
+				<funder ref="#_wGhntuM">
+					<orgName type="full">Veterans Affairs</orgName>
+				</funder>
+				<funder ref="#_9QCNjUs #_6ztVhGA #_Yw7CwyQ">
+					<orgName type="full">unknown</orgName>
+				</funder>
+				<funder ref="#_PV2H48G">
+					<orgName type="full">Million Veteran Program, Office of Research and Development, Veterans Health Administration</orgName>
+				</funder>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct status="extracted">
+					<analytic>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Danielle</forename><surname>Rasooly</surname></persName>
+							<email>danielle.rasooly@va.gov</email>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Gina</forename><forename type="middle">M</forename><surname>Peloso</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department" key="dep1">Department of Biostatistics</orgName>
+								<orgName type="department" key="dep2">School of Public Health</orgName>
+								<orgName type="institution">Boston University</orgName>
+								<address>
+									<addrLine>801 Massachusetts Ave Crosstown Centre</addrLine>
+									<postCode>02118</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Claudia</forename><surname>Giambartolomei</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Health Data Science Centre</orgName>
+								<orgName type="institution" key="instit1">Integrative Data Analysis Unit</orgName>
+								<orgName type="institution" key="instit2">Human Technopole</orgName>
+								<address>
+									<settlement>Milan</settlement>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Hannah</forename><forename type="middle">L</forename><surname>Nicholls</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">William Harvey Research Institute</orgName>
+								<orgName type="institution" key="instit2">Queen Mary University of London</orgName>
+								<orgName type="institution" key="instit3">Charterhouse Square</orgName>
+								<address>
+									<postCode>EC1M 6BQ</postCode>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Chang</forename><surname>Liu</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="institution">Emory University</orgName>
+								<address>
+									<settlement>Atlanta</settlement>
+									<region>Georgia</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD, PhD</roleName><forename type="first">Nay</forename><surname>Aung</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">William Harvey Research Institute</orgName>
+								<orgName type="institution" key="instit2">Queen Mary University of London</orgName>
+								<orgName type="institution" key="instit3">Charterhouse Square</orgName>
+								<address>
+									<postCode>EC1M 6BQ</postCode>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Hesam</forename><surname>Dashti</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="institution">Broad Institute of MIT and Harvard</orgName>
+								<address>
+									<addrLine>415 Main St.</addrLine>
+									<postCode>02142</postCode>
+									<settlement>Cambridge</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MS</roleName><forename type="first">Kai</forename><surname>Gravel- Pucillo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Jaime</forename><surname>Berumen</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="department">Facultad de Medicina</orgName>
+								<orgName type="institution" key="instit1">Unidad de Medicina Experimental</orgName>
+								<orgName type="institution" key="instit2">Universidad Nacional Autónoma de México</orgName>
+								<address>
+									<settlement>Mexico City</settlement>
+									<country key="MX">Mexico</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD, PhD</roleName><forename type="first">Jesús</forename><surname>Alegre-Díaz</surname></persName>
+							<affiliation key="aff6">
+								<orgName type="department">Facultad de Medicina</orgName>
+								<orgName type="institution" key="instit1">Unidad de Medicina Experimental</orgName>
+								<orgName type="institution" key="instit2">Universidad Nacional Autónoma de México</orgName>
+								<address>
+									<settlement>Mexico City</settlement>
+									<country key="MX">Mexico</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">Pablo</forename><surname>Kuri-Morales</surname></persName>
+							<affiliation key="aff7">
+								<orgName type="institution">Tecnológico de Monterrey</orgName>
+								<address>
+									<addrLine>Proyecto OriGen</addrLine>
+									<settlement>Monterrey</settlement>
+									<country key="MX">Mexico</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD, MPH</roleName><forename type="first">Roberto</forename><surname>Tapia-Conyer</surname></persName>
+							<affiliation key="aff8">
+								<orgName type="department">Faculty of Medicine</orgName>
+								<orgName type="institution">National Autonomous University of Mexico</orgName>
+								<address>
+									<settlement>Mexico City</settlement>
+									<country key="MX">Mexico</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">V</forename><forename type="middle">A</forename><surname>Million</surname></persName>
+							<affiliation key="aff21">
+								<orgName type="institution">Boston Healthcare System</orgName>
+								<address>
+									<postCode>02132</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Veteran</forename><surname>Program</surname></persName>
+							<affiliation key="aff9">
+								<orgName type="institution">Million Veteran Program membership</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">John</forename><surname>Whittaker</surname></persName>
+							<affiliation key="aff10">
+								<orgName type="laboratory">MRC Biostatistics Unit</orgName>
+								<orgName type="institution">University of Cambridge</orgName>
+								<address>
+									<postCode>CB2 OSR</postCode>
+									<settlement>Cambridge</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">Peter</forename><forename type="middle">W F</forename><surname>Wilson</surname></persName>
+							<affiliation key="aff11">
+								<orgName type="institution">Atlanta VA Health Care System</orgName>
+								<address>
+									<addrLine>1670 Clairmont Rd</addrLine>
+									<postCode>30033</postCode>
+									<settlement>Decatur</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff12">
+								<orgName type="department">Department of Medicine</orgName>
+								<orgName type="laboratory">Division of Cardiology</orgName>
+								<orgName type="institution">Emory University School of Medicine</orgName>
+								<address>
+									<addrLine>1639 Pierce Dr NE</addrLine>
+									<postCode>30322</postCode>
+									<settlement>Atlanta</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">Lawrence</forename><forename type="middle">S</forename><surname>Phillips</surname></persName>
+							<affiliation key="aff11">
+								<orgName type="institution">Atlanta VA Health Care System</orgName>
+								<address>
+									<addrLine>1670 Clairmont Rd</addrLine>
+									<postCode>30033</postCode>
+									<settlement>Decatur</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff13">
+								<orgName type="department" key="dep1">Division of Endocrinology and Metabolism</orgName>
+								<orgName type="department" key="dep2">Department of Medicine</orgName>
+								<orgName type="institution">Emory University School of Medicine</orgName>
+								<address>
+									<addrLine>1639 Pierce Dr NE</addrLine>
+									<postCode>30322</postCode>
+									<settlement>Atlanta</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Kelly</forename><surname>Cho</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff14">
+								<orgName type="department" key="dep1">Division of Aging</orgName>
+								<orgName type="department" key="dep2">Brigham and Women&apos;s Hospital</orgName>
+								<orgName type="institution">Harvard Medical School</orgName>
+								<address>
+									<addrLine>75 Francis St.</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">J</forename><forename type="middle">Michael</forename><surname>Gaziano</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff14">
+								<orgName type="department" key="dep1">Division of Aging</orgName>
+								<orgName type="department" key="dep2">Brigham and Women&apos;s Hospital</orgName>
+								<orgName type="institution">Harvard Medical School</orgName>
+								<address>
+									<addrLine>75 Francis St.</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Yan</forename><forename type="middle">V</forename><surname>Sun</surname></persName>
+							<affiliation key="aff15">
+								<orgName type="department">Department of Epidemiology</orgName>
+								<orgName type="institution">Emory University Rollins School of Public Health</orgName>
+								<address>
+									<addrLine>1518 Clifton Rd NE</addrLine>
+									<postCode>30322</postCode>
+									<settlement>Atlanta</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff16">
+								<orgName type="department">Department of Biomedical Informatics</orgName>
+								<orgName type="institution">Emory University School of Medicine</orgName>
+								<address>
+									<addrLine>1639 Pierce Dr NE</addrLine>
+									<postCode>30332</postCode>
+									<settlement>Atlanta</settlement>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>PhD</roleName><forename type="first">Jason</forename><forename type="middle">M</forename><surname>Torres</surname></persName>
+							<affiliation key="aff17">
+								<orgName type="department">Nuffield Department of Population Health</orgName>
+								<orgName type="laboratory">Clinical Trial Service Unit &amp; Epidemiological Studies Unit</orgName>
+								<orgName type="institution">University of Oxford</orgName>
+								<address>
+									<settlement>Oxford</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD PhD</roleName><forename type="first">Alexandre</forename><forename type="middle">C</forename><surname>Pereira</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff14">
+								<orgName type="department" key="dep1">Division of Aging</orgName>
+								<orgName type="department" key="dep2">Brigham and Women&apos;s Hospital</orgName>
+								<orgName type="institution">Harvard Medical School</orgName>
+								<address>
+									<addrLine>75 Francis St.</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff18">
+								<orgName type="department">Heart Institute</orgName>
+								<orgName type="laboratory">Laboratory of Genetics and Molecular Cardiology</orgName>
+								<orgName type="institution">University of São Paulo</orgName>
+								<address>
+									<addrLine>Av Dr Eneas de Carvalho Aguiar 54</addrLine>
+									<postCode>5403000</postCode>
+									<settlement>São Paulo</settlement>
+									<country key="BR">Brazil</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD, PhD</roleName><forename type="first">Juan</forename><forename type="middle">P</forename><surname>Casas</surname></persName>
+							<affiliation key="aff19">
+								<orgName type="institution">Novartis Institute for Biomedical Research</orgName>
+								<address>
+									<settlement>Cambridge</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><roleName>MD</roleName><forename type="first">Jacob</forename><surname>Joseph</surname></persName>
+							<email>jacob.joseph@va.gov</email>
+							<affiliation key="aff0">
+								<orgName type="department">Massachusetts Veterans Epidemiology Research and Information Collaborative (MAVERIC)</orgName>
+								<orgName type="institution">Veterans Affairs Healthcare System</orgName>
+								<address>
+									<addrLine>2 Avenue de Lafayette</addrLine>
+									<postCode>02130</postCode>
+									<settlement>Boston</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff20">
+								<orgName type="institution">Cardiology Section</orgName>
+								<address>
+									<region>VA</region>
+								</address>
+							</affiliation>
+							<affiliation key="aff22">
+								<orgName type="department">Alpert School of Medicine</orgName>
+								<orgName type="institution">Brown University</orgName>
+								<address>
+									<postCode>02903</postCode>
+									<settlement>Warren Providence</settlement>
+									<region>RI</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">A7E50CE93F0B567762A456051954377C</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.9.1" ident="GROBID" when="2026-09-26T15:29+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<label type="revision">0.9.1</label>
+					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], flavor=null, debugLabelingCollector=disabled</label>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Heart failure (HF) is a leading cause of morbidity and mortality. We conducted multiancestry genome-wide association studies of 345,687 HF cases (4,468,166 individuals), and 47,192 and 46,934 cases of HF with preserved (HFpEF) and reduced ejection fraction (HFrEF), respectively, integrating plasma proteomics and multi-tissue transcriptomics to identify druggable targets. Across HF, HFrEF, and HFpEF, we identified 383 loci (166 novel) and 568 genes (375 novel). Eleven novel genes are targets of approved or investigational cardiovascular therapies, supporting indication expansion of aldosterone synthase inhibitors (CYP11B2) and type-II activin receptor antagonists (ACVR2A) to HF. Six cardiomyopathy genes were novel for HF and associated with cardiac structure and function. We identified nearly 100 genes involved in food intake and energy expenditure; metabolism of fatty acids, glucose, and branched-chain amino acids; and mitochondrial proteome, sustaining myocardial energy production. Our findings highlight the primordial role of metabolic pathways and adipokines as therapeutic targets for HF management.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Introduction</head><p>Heart failure (HF) remains a major contributor to global morbidity and mortality, and its growing burden underscores the need to identify novel therapeutic targets. Despite recent improvements in the management of HF with reduced ejection fraction (HFrEF) <ref type="bibr" target="#b0">1,</ref><ref type="bibr" target="#b1">2</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/jYst+BfmC">,</ref> substantial unmet therapeutic needs persist. These needs are even more pronounced in HF with preserved ejection fraction (HFpEF), which has fewer established disease-modifying therapies. This therapeutic gap is further compounded by the global rising prevalence of obesity, a strong risk factor to both HFrEF and HFpEF.</p><p>Since the first large-scale genetic study of HF six years ago <ref type="bibr" target="#b2">3</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/gFQo">,</ref> there has been a rapid expansion in the identification of putative drug targets; however, most studies have been conducted in predominantly European-descent populations <ref type="bibr" target="#b2">[3]</ref><ref type="bibr" target="#b3">[4]</ref><ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/mS1p+fzxe+gFQo+MRzF">,</ref> and few have explicitly distinguished between HFrEF and HFpEF <ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b6">7</ref> . The burden of HF is unevenly distributed across populations <ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b8">9</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/8uxu+KceT">,</ref> with underrepresented racial and ethnic groups experiencing higher incidence, earlier onset, and worse outcomes. These populations remain understudied in genetic research, limiting the discovery of ancestry-shared mechanisms and constraining opportunities for therapeutic target identification.</p><p>To address these gaps, we performed large-scale multi-ancestry genome-wide association studies (GWAS) and plasma proteome-and multi-tissue transcriptome-wide Mendelian randomization (MR) studies of HF, HFpEF, and HFrEF, comprising 345,687 individuals with HF (47,192 with HFpEF and 46,934 with HFrEF) and &gt;4.12 million control individuals, spanning European, African, Asian, and Admixed American ancestries. To improve the generalizability of HF genetic discoveries, we incorporated substantial representation of non-European ancestry populations, including 55,854 individuals with HF (16,023 with HFpEF and 14,160 with HFrEF) and 970,872 control individuals of African, Asian, and Admixed American ancestries. To strengthen the validity of our findings, we triangulated orthogonal evidence spanning cardiac imaging, pathway analysis, RNA expression profiling, functional annotation, and therapeutic tractability assessment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genomic loci associated with HF, HFrEF, and HFpEF</head><p>We meta-analyzed the Million Veteran Program (MVP), HERMES Consortium, Biobank Japan, the Global Biobank Meta-analysis Initiative, the All of Us Research Program, the Mexico City Prospective Study, and FinnGen R12, comprising 4,468,166 individuals, including 345,687 HF cases. The HFpEF analysis included 47,192 cases and a total of 1,514,078 individuals; the HFrEF analysis included 46,934 cases and a total of 1,695,762 individuals (Figure <ref type="figure">1A</ref>). Study characteristics for all included cohorts are provided in Table <ref type="table">S1</ref>.</p><p>We identified 415 independent variants (p &lt; 5 × 10⁻⁸) across 310 genomic loci for HF, defined by merging LD blocks within 250 kb (Table <ref type="table">S2</ref>). Manhattan and quantile-quantile plots are shown in Figure <ref type="figure">1B</ref> and Figure <ref type="figure">S1</ref>. Of these, 146 loci (47.1%) represent novel associations not previously reported in GWAS or MR studies of HF, HFpEF, and HFrEF (Figure <ref type="figure">S2</ref>). For HFpEF, eight loci (3 novel) reached genome-wide significance; novel genes included RUNX1, NPM1P10, and CCDC147 (Table <ref type="table">S3</ref>). For HFrEF, 70 loci (16 novel) reached genome-wide significance (Table <ref type="table">S4</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Gene mapping, fine-mapping and functional analyses</head><p>We mapped GWAS loci to candidate genes using cs2g, variant-to-gene (V2G), MAGMA, and nearest gene approaches, prioritizing the gene most frequently assigned across methods and retaining multiple genes when assignment remained unclear. 72% of loci showed concordance across multiple methods and 37% showed concordance across all methods (Table <ref type="table">S2-S4</ref>). Ensembl VEP annotation showed that most GWAS variants were noncoding and were classified as modifier impact, while the coding variants were largely predicted to be tolerated or benign (Table <ref type="table">S5</ref>). We performed fine-mapping using 90% credible sets across all HF, HFrEF, and HFpEF loci, resolving 46 loci to a single candidate variant and an additional 100 loci to ≤5 candidate variants; the remaining loci retained broader credible sets (&gt;5 variants) (Table <ref type="table">S6</ref>). Exploratory bioinformatic functional enrichment analysis showed that HFrEF was enriched for sarcomere and contractile processes and HFpEF for inflammatory pathways (Table <ref type="table">S7</ref>). Among GWAS-identified genes, 11 were highly expressed (top 25%) exclusively in cardiac or vascular tissue, while 21 were highly expressed exclusively in skeletal muscle, kidney, or adipose tissue, and 133 genes were highly expressed in at least one of these tissues (Figure <ref type="figure">S3-S4</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MR-QTLs for HF, HFpEF, and HFrEF</head><p>We performed proteome-and transcriptome two-sample MR analyses (Figure <ref type="figure">S5</ref>) using plasma protein abundance and gene expression across 49 tissues for 17,079 protein-coding genes. We identified 521 genes whose genetically predicted expression or circulating protein level was associated with HF, HFrEF, and HFpEF (referred to thereafter as "MR genes") that met the Bonferroni significance threshold (p &lt; 1.6 × 10⁻⁶) (Table <ref type="table">S8</ref>-S11). A total of 467 genes were identified for HF, 12 for HFpEF, and 130 for HFrEF (Table <ref type="table">S8</ref>). Of 521 unique MR genes, 119 (22.8%) were also the assigned GWAS gene. Figure <ref type="figure">S6</ref>-S7 shows the distribution across HF phenotypes. For HFpEF, HLA-DRB1, SPPL2C, and FSTL4 were novel, while MYOZ1, HLA-DQA1, TMEM106B was previously reported as HF genes and here refined to HFpEF (Table <ref type="table">S9</ref>). For HFrEF, 53 genes were novel, and for 11 genes, we refined a previously reported HF association to HFrEF (Table <ref type="table">S10</ref>). Among MR genes, 14 were highly expressed (top 25%) exclusively in cardiac or vascular tissue, while 48 were highly expressed exclusively in skeletal muscle, kidney, or adipose tissue, and 233 genes were highly expressed in at least one of these tissues (Table <ref type="table">S12</ref> and Figure <ref type="figure">S3-S4</ref>).</p><p>The MR instruments had a median (IQR) F-statistic of 80.0 (49.1, 165.6), indicating strong instrument strength. For associations with ≥3 instruments (25 HF, 1 HFpEF, 5 HFrEF), no evidence of directional pleiotropy was detected using MR-Egger intercept tests (Table <ref type="table">S8</ref>-10). A total of 215 MR genes out of 521 were in LD (r² ≥ 0.4) with previously reported variants from HF, HFrEF, or HFpEF GWAS or MR studies (Table <ref type="table">S13</ref> and <ref type="table">S14</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Orthogonal evidence supporting genes identified by GWAS and MR</head><p>We aggregated evidence from multiple sources into a composite score: animal genetics, OMIM/ClinGen, cardiac MRI traits relevant to HF, prior GWAS and MR evidence, and OMIM/ClinGen and animal genetics evidence on genes directly linked to our gene findings (Table <ref type="table">S15</ref> to S18). We identified 272 of 732 (37.2%) genes with at least one supporting line of orthogonal evidence (Figure <ref type="figure">S8</ref>). The top 5% of genes by score included established CM genes such as BAG3, TTN, FLNC, and ACTN2, supporting the scoring framework. FKBP7, a novel HFrEF gene identified by MR (β = -0.23; P = 1.63 × 10⁻⁹), achieved the highest score, with supporting evidence from animal genetics exhibiting HF phenotypes and associations with &gt;15 cardiac MRI measures of LV contractility, remodeling, RV remodeling, and diastolic dysfunction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genetically supported drug targets</head><p>Using GWAS and MR, we identified 125 HF, HFpEF, and HFrEF genes annotated as druggable or potentially druggable by Open Targets (Table <ref type="table">S19</ref>). Seventeen genes (11 novel and 6 known) are targets of approved or investigational therapies for cardiovascular disorders (Table <ref type="table">1</ref>). Novel genes include CYP11B2, the target of aldosterone synthase inhibitors, approved for resistant hypertension and under evaluation for incident HF in the Prevent-HF Study <ref type="url" target="https://paperpile.com/c/QhIsH9/gnbU">10 ,</ref> and ACVR2A, the target of type-II activin receptor antagonists approved for pulmonary hypertension and currently evaluated for obesity and combined post-and precapillary pulmonary hypertension associated with HFpEF (CpcPH-HFpEF) <ref type="bibr" target="#b10">11</ref> . We rediscovered the targets of established drugs used in HF management: GUCY1A1 (vericiguat), ATP1B2 (digoxin), and PDE3A (milrinone) for severe HF. We identified PPP1CB, which encodes the PP1 beta catalytic subunit (PP1β), one of the core catalytic isoforms of protein phosphatase 1 (PP1), which is the target of AB-1002, an investigational gene therapy candidate expressing constitutively active, truncated form of protein phosphatase inhibitor-1 to inhibit PP1, currently being tested in a Phase 2 trial <ref type="bibr" target="#b11">12</ref> . At FDR of 5%, we identified the missense variant rs1800437/GIPR associated with HF (p=2×10⁻⁶, β=-0.02). Glucose-dependent insulinotropic polypeptide receptor (GIPR) is one of the targets of tirzepatide, which showed beneficial effects in individuals with obese HFpEF <ref type="bibr" target="#b12">13</ref> . Additional gene targets of licensed or investigational cardiovascular drugs are described in Table <ref type="table">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Shared genetic architecture with dilated and hypertrophic cardiomyopathy</head><p>We integrated previously reported cardiomyopathy (CM) genes from GWAS and comprehensive gene panels with our HF genetic analyses, identifying 14 novel and 26 known cardiomyopathy (CM) genes associated with HF, HFrEF, or HFpEF (Figure <ref type="figure">S9</ref>). Notable novel genes included SSPN, ALPK3, and HSPA4 (Figure <ref type="figure">2A</ref>). ALPK3, an essential component of the sarcomeric Mband, was associated with HF and measures of LV remodeling, including LVM, LVEDV, and LVESV (Figure <ref type="figure">2B</ref>). SSPN, a HFrEF gene, stabilizes the dystrophin-glycoprotein complex (DGC), which preserves sarcolemmal integrity in cardiomyocytes; DAG1, another DGC component, was identified as a HF gene (Figure <ref type="figure">2C</ref>). SSPN was associated with measures of cardiac contractility (LV-GCS and LV-GRS) and LV remodeling (LVESV), supporting its association with HFrEF. HSPA4, which encodes a protective cardiomyocyte chaperone, was associated with both HFrEF and HF. It showed associations with LV contractility (LVEF and LV-GCS), LV remodeling (LVM), and RV remodeling (RVESV), supporting its link to HFrEF and suggesting relevance to diastolic dysfunction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mechanistic pathways underlying genetic associations Cardiovascular/Neurohormonal pathways</head><p>Five novel genes (GUCY1A3, CYP11B2, ENPEP, PDE3A, and PTPRG), and 3 known genes (NOS3, PCSK1, and CASZ1) are associated with effects on the vasculature as the main mechanism of action. GUCY1A3, PDE3A, and NOS3 are all related to the nitric oxide (NO)soluble guanylyl cyclase-cyclic GMP signaling pathway. NOS3 encodes NO, which then binds a receptor encoded by GUCY1A3, and the PDE3A gene encodes an enzyme acting as an intracellular modulator of the response. CYP11B2 (encodes aldosterone synthase) and PCSK1 (an enzyme that uses renin as substrate) are novel genes involved in the renin-angiotensinogen aldosterone (RAAS) pathway. Additional genes in the RAAS pathway are ENPEP, which cleaves angiotensin II, and CASZ1, a mineralocorticoid regulator that regulates aldosterone production.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Hypothalamic leptin-melanocortin pathway</head><p>We identified 17 genes (7 novel, 2 reassigned and 8 known), which are known to be associated with monogenic disorders of obesity or are identified as strong genes for obesity using a rarevariant approach <ref type="bibr" target="#b13">14</ref> . Three novel genes, LEPR, SH2B1, and GNAS, and four known genes, MC4R, SIM1, PCSK1, and BDNF, were mapped to the hypothalamic leptin-melanocortin pathway involved in food intake regulation (Figure <ref type="figure">3A</ref>). To assess whether associations with HF phenotypes were driven by obesity, we compared the GWAS and MR beta coefficients for HF, HFrEF, and HFpEF against those for BMI, finding a strong correlation (r=0.84-0.85; Figure <ref type="figure">3B-C</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Myocardial metabolism</head><p>We identified 24 genes associated with the metabolism of FAs (n=15), glucose (n=6), and branched-chain amino acids (BCAA, n=3), all sources of energy to the myocardium, while 56 genes were mapped to the mitochondria, a key organelle in energy production from FAs, glucose and BCAAs.</p><p>Genes related to triglyceride-rich lipoprotein-mediated lipolysis include LPL, LIPC, and LMF1. LMF1 is required for the activation of LPL, and LIPC enzymes are involved in the lipolysis of circulating lipoproteins (Figure <ref type="figure">4A</ref>). LMF1 showed associations with measures of LV contractility (LV-GCS, and LV-GRS) and LV remodeling (LVEDV and LVESV).</p><p>Genes related to adipocyte-mediated lipolysis include AZGP1, ADCY5, PRKAR2B, CAV1, MAPK3, IRF2BP2, and LIPA. AZGP1 is known to stimulate lipolysis through the cAMP pathway, wherein ADCY5 catalyzes cAMP production from ATP to activate protein kinase (PKA). PRKAR2B encodes the regulatory subunit beta of PKA, a primary intracellular mediator of hormonally stimulated lipolysis. MAPK3, also known as ERK1, is also involved in hormonally induced lipolysis downstream of PKA. CAV1 facilitates PKA-mediated phosphorylation of perilipin. IRF2BP2 suppresses lipolysis in adipocytes by inhibiting hormone-sensitive lipase, a key enzyme in adipocyte lipolysis, while LIPA is involved in non-canonical adipocyte lipolysis (Figure <ref type="figure">4B</ref>).</p><p>Genes involved in long-chain FA (LCFA) oxidation were CD36, SLC27A4, ACACB, ETFDH, and PCCB (Figure <ref type="figure">4C</ref>). CD36 and SLC27A4 are transporters of LCFA channeling FAs into intracellular metabolism. ACACB acts as a potent inhibitor of carnitine palmitoyltransferase 1, the rate-limiting enzyme responsible for the transport of LCFA into the mitochondria. PCCB encodes the beta subunit of the mitochondrial enzyme propionyl-CoA carboxylase, which catalyzes the final step of odd-chain FA oxidation. ETFDH couples LCFA oxidation to oxidative phosphorylation and ATP production.</p><p>Genes involved in BCAA metabolism were BCKDK (novel) and BCKDHA (known), both identified as HF genes, and YBX3 (novel), identified as an MR HFrEF gene. BCKDHA is the active core subunit of the BCKDH complex, which drives the rate-limiting step of BCAA oxidation, while BCKDK inhibits this complex by phosphorylating BCKDHA and thereby controlling the breakdown of BCAAs. YBX3 stabilizes SLC3A2 mRNA (BCAA transporter) and hence promotes the uptake of BCAA into adipocytes, while also facilitating brown adipogenesis and thermogenesis.</p><p>Genes involved in glucose metabolism were SLC2A4RG, SLC37A4, ENO3, VTI1A, BACH1, and PACSIN3. SLC2A4RG is a transcription factor that activates the expression of GLUT4 in adipose and muscle tissues. VTI1A allows GLUT4 to move from intracellular storage sites to the plasma membrane after insulin stimulation, facilitating glucose uptake in adipose and muscle tissues. SLC37A4 enables the hydrolysis of glucose-6-phosphate, with subsequent release of glucose into the bloodstream. PACSIN3 regulates glucose metabolism in adipocytes by increasing trafficking and localization of GLUT1 to the plasma membrane, and ENO3 encodes beta-enolase, a key glycolytic enzyme primarily expressed in skeletal muscle. BACH1 shifts metabolism from oxidative phosphorylation towards glycolysis. BACH1 has 24 genes directly linked to it that were either reported as HF or CM GWAS genes or were supported by animal genetic evidence for HF.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mitochondrial proteome</head><p>Overall, 42 novel, 4 reassigned and 10 known HF, HFrEF, and HFpEF genes were mapped to the mitochondrial proteome based on human mitochondrial proteome annotations integrating experimentally supported and computationally predicted mitochondrial localization (Table <ref type="table">S20</ref>). Of the 56 genes, 13 (23%) had support from at least one orthogonal source. Most genes map to the metabolism of lipids, including LCFA (n=9), amino acids (n=5), oxidative phosphorylation (n=9), and mitochondrial central dogma (n=10).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Adipokines</head><p>We identified 22 genes (14 novel, 7 known, and 1 reassignment) that encode proteins considered as adipokines (Table <ref type="table">S21</ref>). The proposed mechanisms for the 10 novel genes included inflammation (CD14, IL6, TNFS13, ERAP1), lipolysis (AZGP1), thermogenesis (SLIT2 and CRLF1), fibrosis (AZGP1) and angiogenesis (VEGFB). The biological roles of the remaining adipokine genes are described in Table <ref type="table">S21</ref>, including additional genes classified as adipokines that passed FDR 5% in our MR analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Neuregulin-ERBB and activin pathways</head><p>We found multiple genes associated with the neuregulin-ERBB and activin signaling pathways. Within the neuregulin-ERBB pathway, a recognized protective system in HF, we identified the ligands NRG1 and HBEGF, receptor ERRB2, and the intracellular signaling component MAPK3.</p><p>At FDR 5%, we identified the receptors ERBB4 and ERBB3 (Figure <ref type="figure">5A</ref>). Within the activin pathway, which regulates muscle growth and cardiac remodeling, we identified the receptors ACVR2A and TGFBR1, the intracellular signaling mediator SMAD3, and the regulators FSTL3 and SMAD7. FSTL3 inhibits the ligands activin A (INHBA), a target of sotatercept (approved for pulmonary hypertension), and GDF11; both genes were suggestive findings for HF at FDR 5% (Figure <ref type="figure">5B</ref>,<ref type="figure">C</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>In the largest multi-ancestry genetic study to date of HF and its major clinical subtypes, we identified 166 novel loci and 375 novel putatively causal genes associated with HF, HFrEF, and HFpEF. The large catalog of novel and known genes allowed us to resolve, at high resolution, a landscape of HF-relevant pathways with therapeutic potential. Our findings on various interconnected metabolic pathways and adipokines suggest that adipose tissue should be considered as a key target of future interventions for HF, and in particular HFpEF <ref type="bibr" target="#b14">15</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/kqNU">,</ref> prevention and management.</p><p>We identified multiple genes associated with cardiomyocyte contraction such as components of the sarcomere Z-disc, M-band, and dystrophin-glycoprotein complex. In addition, we validated targets of therapies currently approved for the management of different stages of HF (GUCY1A1/Vericiguat, ATP1B2/Digoxin, PDE3A/Milrinone), retroactively confirming the value of human genetics for drug target discovery. Furthermore, we validated targets of JK07 (NRG1) and Baxdrostat (CYP11B2), which are currently under evaluation for HFrEF and HFpEF <ref type="bibr" target="#b15">16</ref> and for the primary prevention of HF <ref type="bibr" target="#b16">17</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/vHe0">,</ref> respectively. Lastly, we identified potential repurposing opportunities for HF involving type-II activin receptor antagonist (ACVR2A) <ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b18">19</ref> and analogues of human leptin (LEPR) <ref type="bibr" target="#b19">20</ref> . This adds to the growing list of genetically-supported cardiometabolic drug targets (IL6, LPA, ADM, PCSK9, ENPEP, CACNB2, EDNRA, MC4R, and RXFP2). Therefore, our results that span the spectrum from known and investigational therapies to repurposing opportunities demonstrate the power of genetically-informed approaches to drug development in HF.</p><p>Interestingly, we mapped nearly 100 genes for HF, HFrEF, and HFpEF to interconnected metabolic pathways relevant to HF, such as food intake, lipolysis, metabolism of FAs, BCAA, glucose, and the mitochondrial proteome which is involved in energy production. Our genetic findings on the leptin-melanocortin pathway further corroborates a pathway that is supported by various randomized trials of incretin-based therapies, which have demonstrated benefits in HFpEF patients, while results in HFrEF remain inconclusive <ref type="bibr" target="#b20">21</ref> . However, our findings of six genes associated with adipocyte-driven lipolysis raise the profile of this mechanism as a therapeutic pathway for HF in addition to weight loss. For example, PRKAR2B is highly expressed in adipose tissue and its disruption in rodent models is associated with a lean phenotype, increased lipolysis, and elevated metabolic rate; our findings on HF suggest that this could be a dual target for weight loss and HF management.</p><p>Lipolysis, either from the adipocyte or lipoprotein-mediated, is the main mechanism for the delivery of free LCFAs to tissues with high energetic demand, such as the myocardium, especially in HF patients. LMF1, LPL, MAPK3, and AZGP1 (involved in lipolysis) and CD36 and SLC27A4 (involved in the internalization of LCFA for further beta oxidation), all supported by MR, showed that an increase in gene expression or protein levels is associated with HF risk reduction. This is consistent with animal genetic studies showing that cardiac-specific overexpression of CD36, CPT1, ACSL1, and ACADL, which increase LCFAO, and cardiac-specific inhibition of ACC2, which increases LCFAO, are protective against HF <ref type="bibr" target="#b21">[22]</ref><ref type="bibr" target="#b22">[23]</ref><ref type="bibr" target="#b23">[24]</ref><ref type="bibr" target="#b24">[25]</ref><ref type="bibr" target="#b25">[26]</ref> .</p><p>Further, human genetic evidence supporting the relevance of cardiac energetics to HF comes from genes associated with BCAA and glucose metabolism. We identified BCKDK, a novel HF gene that is highly expressed in cardiac tissue that inhibits the BCKDH enzyme complex that catalyzes the irreversible step in BCAA catabolism. Interestingly, the alpha subunit of the BCKDH complex is encoded by the BCKDHA gene, which is also highly expressed in cardiac tissue, and is previously reported and replicated by us as a GWAS HF gene. In agreement with our genetic findings, multiple studies have shown that pharmacological inhibition of BCKDK, which increases BCAA catabolism, leads to improvement in cardiac function in various rodent HF models <ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b27">28</ref> . Regarding glucose metabolism, we identified ENO3 and SCL37A4, which are directly involved in glucose processing; SLC2A4RG and BACH1, which are involved as regulators of glucose metabolism; and VTI1A and PACSIN3, which are involved in the trafficking of GLUT1 and GLUT4 receptors to the plasma membrane. All these genes were highly expressed in skeletal muscle, liver, and adipose tissues, further highlighting the relevance of key metabolic tissues as therapeutic targets for HF management.</p><p>The neuregulin-ERBB and the activin signaling pathways were two mechanisms in which we identified multiple genes encoding ligands, receptors, and intracellular mediators of these pathways. Our main finding on the role of neuregulin-ERRB pathway in HF was the association of anti-ErbB2 therapy (used in breast cancer) with cardiac dysfunction as an adverse event, suggesting that agonism of this pathway may be beneficial in HF. Recently, JK07, an agonist of ERBB4 currently in Ph2a study in HFrEF and HFpEF, was tested in a first-in-human study in HFrEF patients with encouraging results <ref type="bibr" target="#b28">29</ref> . Similarly, the activin pathway has multiple investigational drugs, such as Bimagrumab and Sotatercept <ref type="bibr" target="#b29">30</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/6Xd1">,</ref> that could be repurposed for HF management based on our genetic findings.</p><p>We noticed that activin A and NRG4, ligands of the above pathways, have been described as key adipokines with a role in HFpEF <ref type="bibr" target="#b14">15</ref> . This prompted us to revisit our findings with subsequent identification of more than 20 genes, mostly HF-associated, whose soluble proteins can be considered as adipokines, with paracrine or endocrine actions relevant to HFpEF, including inflammation, fibrosis, and angiogenesis, in addition to the lipolysis and thermogenesis mechanisms already described.</p><p>From our novel HFpEF genes, we identified through GWAS, the rs533557749/RUNX1 locus that has various lines of evidence supporting our HFpEF findings. First, RUNX1 is upregulated in cardiac tissue of patients with HCM compared with controls <ref type="bibr" target="#b30">31</ref> . Second, inhibition of RUNX1 either by genetic deletion in cardiomyocytes, RNA interference using adeno-associated virus serotype 9, or through pharmacological inhibition, showed benefit in a mouse HFpEF model <ref type="bibr" target="#b31">32,</ref><ref type="bibr" target="#b32">33</ref> . Third, fibroblast-specific-but not cardiomyocyte-specific-deletion of RUNX1 was found to be protective against adverse cardiac remodeling following myocardial infarction <ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b34">35</ref> . Interestingly, we noticed that CDK6, a MR hit for HF that we replicated, is a known regulator of RUNX1 expression. CDK6 genetic deletion in mice has shown an increase in beige adipose tissue formation and enhanced energy expenditure, findings that appeared mediated by RUNX1 <ref type="bibr" target="#b35">36</ref> . However, we note that this finding was driven by the MVP Asian American cohort and warrants replication.</p><p>Our study has important limitations that highlight directions for future research. First, our novel findings for HFrEF and HFpEF require replication in additional, adequately powered studies with access to these phenotypes, which are currently limited. Second, despite substantial efforts to increase genetic diversity, European ancestry remains the predominant source of evidence, accounting for 67% to 85% of participants. Third, locus independence was defined using ±250kb genomic distance, a common GWAS convention that does not account for long-range LD. Fourth, as is typical in GWAS, assigning genetic loci to their causal genes remains a substantial challenge. To address this, we employed four complementary gene-mapping strategies and incorporated MR-QTL analysis as an orthogonal strategy for discovery. In addition, we emphasized the interpretation of our findings on mechanisms, rather than single genes. Given that multiple genes within a single mechanism are located on different chromosomes, we minimize the risk of spurious findings due to LD. Finally, many identified mechanisms were interconnected with support beyond human genetics.</p><p>In conclusion, we have substantially increased the number of loci and genes associated with HF, HFrEF, and HFpEF. We identified repurposing opportunities for existing investigational CV drugs and multiple novel genes within interconnected metabolic pathways relevant to HF, highlighting potential therapeutic targets for HF prevention and management.</p><p>Table 1. Genetically supported heart failure (HF) and HF subtypes drug targets with approved and investigational therapies. Gene HF Phenotype Genetic evidence for HF Novelty Therapeutic modality Drug Name Condition FDA-approved Cardiovascular/Neurohormonal † CYP11B2 HF GWAS Novel Small molecule Aldosterone synthase inhibitors (Baxdrostat; Lorundrostat) Hypertension Yes (Baxdrostat); Yes (Lorundrostat) GUCY1A1 HF GWAS, MR Novel Small molecule Vericiguat HFrEF Yes ATP1B2 HF MR Novel Small molecule Digoxin, Istaroxime Atrial fibrillation, acute HF Yes (Digoxin), No (Istaroxime) PDE3A HFrEF,HF GWAS Novel Small molecule Milrinone HF, pulmonary hypertension Yes NRG1 HF GWAS, MR Novel Antibody JK07 HF No ENPEP HF MR Novel Small molecule QGC-001 (Firibastat) Hypertension, HF No ADM HF MR Known Antibody Enibarcimab Septic shock, HF No EDNRA HF GWAS Known Small molecule Tezosentan, Bosentan Pulmonary hypertension, diastolic HF Yes (Bosentan); No (Tezosentan) CACNB2 HF GWAS, MR Known Small molecule Calcium channel blockers, Dronedarone Hypertension, coronary artery disease, atrial fibrillation, congestive HF Yes RXFP2 HF GWAS Known Protein Serelaxin** Coronary artery disease, cardiovascular disease, HF, chronic kidney disease No Obesity/Metabolism* LEPR HF MR Novel Protein Metreleptin Lipodystrophy, obesity Yes ACVR2A HF GWAS, MR Novel Protein Sotatercept, Bimagrumab Pulmonary arterial hypertension, obesity Yes (Sotatercept); No (Bimagrumab) MC4R HF GWAS Known Protein Setmelanotide Severe obesity Yes Lipids PCSK9 HF MR Novel Antibody, siRNA Evolocumab, Alirocumab, Inclisiran Hyperlipidemia Yes LPA HF, HFrEF GWAS, MR Known ASO, siRNA Pelacarsen, Olpasiran, Zerlasiran, Lepodisiran ASCVD No Inflammation IL6* HF GWAS Novel Antibody Ziltiviekimab, Pacibekitug ASCVD, HFpEF No Other Mechanisms PPP1CB HF MR Novel AAV AB-1002 HF No *We identified rs1800437/GIPR as associated with HF at FDR of 5% (p= 2E-6). This is one of the targets of tirzepatide that showed beneficial effects in individuals with obese HFpEF <ref type="url" target="https://paperpile.com/c/QhIsH9/gGy2">13</ref> . †We identified AGT as associated with HF at an FDR of 5% in MR analyses. AGT is a target of zilebesiran. **Serelaxin is an agonist of the RXFP1 receptor and a weak agonist of the RXFP2 receptor. The natural ligand for RXFP2 with the highest affinity is INSL3.  C) Figure 5. NRG1-ERBB and Activin Signaling Pathways Implicated in HF. (A) Schematic of NRG1 and HBEGF-ERBB signaling at the cell membrane. NRG1 is a novel HF-associated gene encoding a ligand that signals through its co-receptors ERBB4 and ERBB3, typically via heterodimerization with ERBB2. ERBB4 represents a novel association with HF and HFrEF, while ERBB3 is a previously reported HF association. ERBB2 functions as a co-receptor to ERBB4 and is supported by multiple lines of genetic evidence. HBEGF is a known HF association encoding a ligand for EGFR and ERBB4, with downstream signaling often involving ERBB2-containing receptor dimers. NRG1 and HBEGF signaling converge on activation of the mitogen-activated protein kinase (MAPK)/extracellular signal-regulated kinase (ERK1/2) cascade, including MAPK3, which regulates cellular proliferation, survival, and stress. In Panels A and B, Genes are colored to denote HF phenotype evidence -yellow for HFrEF, blue for HF -and bordered to denote evidence type: solid outline indicates GWAS and MR evidence, dotted outline indicates MR evidence only, and dashed outline indicates GWAS evidence only. Asterisk denotes MR evidence significant at FDR &lt; 5%. Created in BioRender. Rasooly, D. (2026) <ref type="url" target="https://BioRender.com/boc7x42">https://BioRender.com/boc7x42</ref> (B) Schematic of activin type II receptor signaling. Activin A (encoded by INHBA, a novel HF gene) and activin C (encoded by INHBC, a novel HF gene), as well as GDF11, function as ligands for the activin type II co-receptors ACVR2A (a novel HF gene) and ACVR2B. Ligand binding to ACVR2A/B leads to phosphorylation of SMAD3 (a novel HF gene), with downstream transcriptional responses in the nucleus involving SMAD7 (a novel HF gene). Created in BioRender. Rasooly, D. (2026) <ref type="url" target="https://BioRender.com/gdswcdv">https://BioRender.com/gdswcdv</ref> (C) Dot plot showing gene-trait associations across HF phenotypes, cardiac MRI traits, and orthogonal evidence for HF, cardiomyopathy, and cardiovascular disease (OMIM/ClinGen, mouse knockout [KO], and secondary gene evidence) for genes shown in panels A and B. Panels are color-coded</p><p>to match the corresponding schematics (blue, NRG1-ERBB pathway; cream, activin signaling pathway). HF and cardiac MRI associations are shown for GWAS (blue; P &lt; 5 × 10⁻⁸) and MR (red; Bonferroni-significant), where available, and orthogonal evidence is shown in green. For GWAS and MR results, point size reflects statistical significance (-log10[P]). For orthogonal evidence (green points), each point represents an evidence category (e.g., OMIM/ClinGen), and point size reflects the number of HF, cardiomyopathy, or cardiovascular evidence supporting the gene within that category. For genes with multiple MR associations, only the result with the smallest P value is displayed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHODS</head><p>The Million Veteran Program (MVP) is approved by the Department of Veterans Affairs Central Institutional Review Board (IRB). All participants provided written informed consent. This study was conducted in accordance with the principles outlined in the Declaration of Helsinki and has received ethical and study protocol approval by the IRB.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study population</head><p>The HF meta-analysis included 4,468,166 individuals, of whom 345,687 were HF cases and 4,122,479 were control individuals. The HFpEF meta-analysis included 1,514,078 individuals, including 47,192 cases and 1,466,886 control individuals. The HFrEF meta-analysis included 1,695,762 individuals, including 46,934 cases and 1,648,828 control individuals. Individuals were drawn from the Million Veteran Program (MVP) <ref type="bibr" target="#b36">37</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/Xmj9">,</ref> HERMES Consortium <ref type="url" target="https://paperpile.com/c/QhIsH9/MRzF">6 ,</ref> Biobank Japan <ref type="bibr" target="#b37">38</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/YtYw">,</ref> the Global Biobank Meta-analysis Initiative <ref type="bibr" target="#b38">39</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/cU9a">,</ref> the All of Us Research Program <ref type="bibr" target="#b39">40</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/SneM">,</ref> the Mexico City Prospective Study <ref type="bibr" target="#b40">41</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/abg4">,</ref> and FinnGen Release 12 <ref type="bibr" target="#b41">42</ref> . The study population included individuals of European, African, Asian, and Admixed American ancestry. All contributing studies received IRB approval and obtained informed consent.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Million Veteran Program</head><p>The Million Veteran Program (MVP) is a large, voluntary research program embedded within the U.S. Department of Veterans Affairs (VA) health care system, integrating genomic data with longitudinal electronic health record (EHR) data, including diagnostic codes, laboratory measurements, and imaging <ref type="bibr" target="#b36">37</ref> .</p><p>HF cases within the MVP were identified using International Classification of Diseases (ICD)-9 code 428.x and ICD-10 code I50.x in conjunction with echocardiographic data obtained within six months of diagnosis. Accurate subclassification into HFpEF and HFrEF requires reliable capture of left ventricular ejection fraction (LVEF), which is frequently missing or fragmented across structured EHR fields. To overcome this, we applied a validated natural language processing (NLP) pipeline that extracted LVEF values from both structured and unstructured electronic health record (EHR) data, including echocardiogram reports, nuclear medicine reports, cardiac catheterization reports, history and physical examination notes, progress notes, discharge summary notes, and other clinical notes-capturing LVEF values measured outside the VA system and thereby reducing HF misclassification due to incomplete LVEF ascertainment <ref type="bibr" target="#b42">43</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>!This</head><p>comprehensive LVEF capture ensured that we obtained the LVEF measured at the time of HF diagnosis, ensuring accurate HFpEF classification and excluding veterans with recovered LVEF from the HFpEF cohort. Individuals were classified as HFpEF if the first recorded LVEF was ≥50% and as HFrEF if LVEF ≤40%. The phenotyping algorithm, which also incorporated B-type natriuretic peptide (BNP) testing to strengthen HF case ascertainment, achieved a 96% positive predictive value against blinded physician review <ref type="bibr" target="#b43">44</ref> . Cohort curation and validation have been described previously <ref type="bibr" target="#b43">44</ref> and this phenotyping approach has been validated and applied across multiple epidemiological and genomic studies <ref type="bibr" target="#b44">[45]</ref><ref type="bibr" target="#b45">[46]</ref><ref type="bibr" target="#b46">[47]</ref> . Genetic ancestry (European, African American, Asian American, or Hispanic) was assigned using self-report and principal components of ancestry, as previously described <ref type="bibr" target="#b72">73</ref> .</p><p>Genotyping was performed using the MVP 1.0 custom Axiom array, developed as a single assay to be used on the multi-ethnic MVP cohort <ref type="bibr" target="#b47">48</ref> . Standard quality control excluded duplicate or related samples, call rate &lt;98.5%, and sex discrepancies. Imputation was conducted with Minimac4 using the 1000 Genomes Project Phase 3 v5 reference panel. Variants with minor allele frequency &gt;1% were tested for association using PLINK2, adjusting for age, sex, and the first ten genetic principal components.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>HERMES Consortium</head><p>We obtained GWAS summary statistics from the HERMES Consortium, comprising 1,946,349 individuals across 42 studies <ref type="bibr" target="#b5">6</ref> . HF phenotypes were harmonized across studies using a standardized framework, including overall HF, non-ischemic HFrEF (LVEF &lt;50%), and nonischemic HFpEF (LVEF ≥50%), based on physician diagnosis, hospital records, and/or diagnostic codes, with LVEF derived from cardiac imaging where available. Study-level genome-wide association analyses were performed using logistic regression for prevalent outcomes or Cox proportional hazards models for incident outcomes under an additive genetic model, adjusting for age, sex, genetic principal components, and study-specific covariates. Summary statistics were subsequently combined using fixed-effect inverse-variance weighted meta-analysis implemented in METAL. Further details on phenotype harmonization, genotyping, and quality control procedures have been described previously <ref type="bibr" target="#b5">6</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Global Biobank Meta-analysis Initiative</head><p>The Global Biobank Meta-analysis Initiative (GBMI) conducted a large-scale, multi-ancestry HF GWAS leveraging genetic and electronic health record data from 21 biobanks across four continents <ref type="bibr" target="#b38">39</ref> . The discovery analysis, excluding UK Biobank, included 60,605 HF cases and nearly 860,000 control individuals across six ancestral populations. HF was defined using ICD-based phecodes, without separation into clinical subtypes. We used GBMI summary statistics in our HF meta-analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FinnGen R12</head><p>We obtained GWAS summary statistics from FinnGen Release 12 <ref type="bibr" target="#b41">42</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/xOqY">,</ref> including data on 38,165 HF cases of European ancestry. HF was defined using harmonized national ICD-9 and ICD-10 codes derived from Finnish national health registries. Genotyping was performed using genome-wide arrays and imputed to the SISu v4.2 imputation reference panel. Association analyses were conducted using a logistic mixed-model framework under an additive genetic model in Regenie (version 2.2.4), adjusting for age, sex, batch effects, top 10 genetic principal components, Finngen chip version (1 or 2), and legacy genotyping batch. Further details on study design, phenotype definition, and analysis have been described previously <ref type="bibr" target="#b41">42</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Biobank Japan</head><p>For the HFrEF and HFpEF analyses only, we obtained GWAS summary statistics from Biobank Japan <ref type="bibr" target="#b37">38</ref> . In Biobank Japan, HF subtypes were defined based on physician diagnosis and LVEF, with HFrEF defined as LVEF &lt;40% and HFpEF as LVEF &gt;50%. Genome-wide association analyses were performed using Regenie under an additive logistic regression model, adjusting for age, age squared, sex, and the top 10 genetic principal components. Genotypes were arraybased and imputed to a population-specific Japanese reference panel, with variants filtered at minor allele frequency (MAF) ≥ 0.01 and imputation quality score (INFO) &gt; 0.3 prior to analysis. Further details regarding study design, genotyping, imputation, and quality control procedures have been described previously <ref type="bibr" target="#b37">38</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>All of Us Research Program</head><p>In the All of Us Research Program <ref type="url" target="https://paperpile.com/c/QhIsH9/SneM">40 ,</ref> HF cases were identified using electronic health record data mapped to the OMOP common data model. Individuals were classified as HF cases if they had ≥2 occurrences of ICD-9-CM or ICD-10-CM diagnosis codes for HF recorded on distinct dates, including ICD-9-CM codes 398.91 and 428.x and ICD-10-CM codes included I09.81 and I50.x (including all subcategories). Individuals with only a single recorded HF diagnosis code were excluded to improve specificity, and individuals not meeting HF diagnosis criteria were classified as control individuals. Genome-wide association analyses were performed under an additive genetic model using PLINK v2.0, adjusting for age, sex, and the first 20 genetic principal components to account for population structure. Variants were filtered to include those with minor allele frequency (MAF) ≥ 0.01 and imputation quality score (INFO) ≥ 0.3. Standard quality control excluded variants with Hardy-Weinberg equilibrium P &lt; 1×10⁻⁶ in controls and call rate &lt;98.5%, and excluded samples with call rate &lt;98.5%, sex discordance, or excess relatedness. Analyses were performed in a combined multi-ancestry sample, and association results were reported as odds ratios with corresponding standard errors and P values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mexico City Prospective Study</head><p>In the Mexico City Prospective Study (MCPS), HF cases were defined using ICD-10 codes linked to mortality records adjudicated by MCPS investigators. Cases comprised 1,219 deceased individuals whose adjudicated primary cause of death was classified as chronic rheumatic heart disease (I05-I09), hypertensive heart disease (I11), chronic ischaemic heart disease (I25), nonrheumatic valvular disorders (I34-I36), cardiomyopathy (I42), or HF (I50). Controls included 136,285 individuals who were alive as of January 1, 2021 and had no record of these conditions, excluding individuals with uncertain cause of death or a self-reported diagnosis of coronary heart disease at recruitment. Genotyping was performed using the Illumina Global Screening Array with previously described methods for quality control and imputed to the TOPMed reference panel (version r2) <ref type="bibr" target="#b40">41</ref> . Variants with imputation quality r² &gt; 0.4 and effective sample size (N_eff) &gt; 50 were retained <ref type="bibr" target="#b48">49</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/Y6T1">,</ref> yielding 7,375,232 variants for analysis. Genome-wide association analyses were conducted using Regenie v3.1.3 under a logistic regression framework, adjusting for age, age squared, sex, and the first seven genetic principal components. After excluding individuals with missing covariate data, 1,210 cases and 135,727 controls were included in the final analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genome-wide association meta-analysis of HF, HFrEF, and HFpEF</head><p>We conducted inverse variance-weighted fixed-effects meta-analyses of genome-wide association summary statistics using METAL (v2020-05-05) <ref type="bibr" target="#b49">50</ref> . Analyses included seven cohorts across four genetic ancestry groups (European, Asian, African and Admixed American). Variants were retained if minor allele frequency (MAF) was &gt;1% and imputation quality (INFO) &gt;0.3 in contributing studies. Variants in the meta-analysis were aligned to the same effect allele, and ambiguous or poorly imputed variants were excluded.</p><p>Between-study heterogeneity was assessed in METAL. A total of 13,843 FinnGen cases and 121,422 controls overlapped between HERMES (which includes FinnGen R3) and FinnGen R12. To account for this sample overlap, P values were calculated using a sample size-weighted approach incorporating study-specific sample size and effect direction, and effect estimates and standard errors were obtained using inverse variance-weighted meta-analysis. Inflation factors were calculated as the median of the observed test statistics divided by the expected median under the null hypothesis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Genomic risk loci definition and gene annotation</head><p>Genomic risk loci were defined using FUMA (v1.8.0) with the 1000 Genomes Project Phase 3 multi-ancestry reference panel <ref type="bibr" target="#b50">51</ref> . Independent significant variants were identified among genomewide significant SNPs (P ≤ 5 × 10⁻⁸) using linkage disequilibrium (LD)-based clumping (r² ≥ 0.6). Lead SNPs were defined as independent significant variants in low LD with one another (r² &lt; 0.1). Genomic risk loci were constructed by merging LD blocks (r² ≥ 0.6) located within 250 kb of one another. For gene annotation, lead SNPs were mapped to the nearest gene based on physical distance to the transcription start site, using a 10 kb positional mapping window. Functional consequences of variants were annotated using ANNOVAR.</p><p>Gene-level association analyses were conducted using MAGMA (v1.10) <ref type="bibr" target="#b50">51</ref> . SNPs were mapped to genes based on the meta-analysis summary statistics, using a window of 35 kb upstream and 10 kb downstream of each gene. MAGMA performs gene-based association tests using a multiple regression framework that models the joint effects of SNPs within a gene while accounting for LD.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Functional annotation of variants</head><p>Genome-wide significant variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP) to determine predicted molecular consequences and affected feature types <ref type="bibr" target="#b51">52</ref> . Coding variants were further evaluated using in silico prediction tools. Deleteriousness of missense variants was assessed using SIFT (deleterious if &lt;0.05) and PolyPhen-2 ("possibly damaging" or "probably damaging"). AlphaMissense scores were used to classify variants as likely pathogenic (&gt;0.564), ambiguous (0.34-0.564), or likely benign (&lt;0.34). REVEL scores (≥0.5) were used to prioritize missense variants with higher predicted pathogenicity. Combined Annotation Dependent Depletion (CADD) scores were used to quantify deleteriousness, with scores ≥20 considered indicative of high functional impact.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Gene Mapping Methods</head><p>Candidate genes at GWAS loci were prioritized using four complementary approaches: (1) cS2G (combined SNP-to-gene), a heritability-informed framework that integrates multiple SNP-to-gene linking strategies <ref type="url" target="https://paperpile.com/c/QhIsH9/XJF4">53 ;</ref> (2) V2G (variant-to-gene), which integrates functional annotations including eQTLs, chromatin interactions and regulatory element data to link variants to target genes <ref type="url" target="https://paperpile.com/c/QhIsH9/yDjx">54 ;</ref> (3) nearest gene, which assigns each variant to the nearest protein-coding gene based on genomic distance <ref type="bibr" target="#b50">51</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/RFBN">; and (4) MAGMA gene-based association analysis, which aggregates SNP-level  associations within gene boundaries to generate gene-level P values 51</ref> .</p><p>For each locus, genes implicated by all four approaches were considered. The primary assigned gene was defined as the gene most frequently prioritized across methods; when ties occurred, all tied genes were retained.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Credible set analysis of causal variants</head><p>Each independently associated sentinel SNP was fine-mapped separately under a single-causalvariant Bayesian framework. For each sentinel SNP, candidate variants within a ±500 kb window were retrieved using LDlinkR, based on the pooled 1000 Genomes Project reference populations and GRCh37 coordinates <ref type="bibr" target="#b54">55</ref> . Variants returned by LDproxy were matched to the full GWAS summary statistics by genomic position and alleles. Bayesian fine-mapping was performed using the corrcoverage R package to estimate posterior probabilities for candidate variants. Variants were ranked in descending order of posterior probability, and 90% and 95% Bayesian credible sets were constructed by sequentially including variants until their cumulative posterior probability reached or exceeded 0.90 and 0.95, respectively <ref type="bibr" target="#b55">56</ref> .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cis-acting protein quantitative trait loci (pQTL)</head><p>Cis-acting protein quantitative trait loci (cis-pQTLs) were obtained from GWAS summary statistics from the Fenland <ref type="url" target="https://paperpile.com/c/QhIsH9/2Xz4">57 ,</ref> deCODE <ref type="bibr" target="#b57">58</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/vgiS">,</ref> ARIC <ref type="bibr" target="#b58">59</ref> and UK Biobank Olink studies <ref type="bibr" target="#b59">60</ref> . Fenland, deCODE and ARIC quantified plasma proteins using the SOMAscan v4 platform in predominantly Europeanancestry populations, whereas UK Biobank used the Olink platform. The deCODE study included genetic association data for 4,907 proteins measured in 35,559 individuals; Fenland for 3,892 proteins in 10,708 individuals; and ARIC for 2,004 proteins in 7,213 European Americans and 1,618 proteins in 1,871 African Americans. The UK Biobank Olink dataset comprised 2,923 proteins measured in 54,219 individuals.</p><p>To minimize potential bias from horizontal pleiotropy, cis-pQTLs were defined relative to the transcription start site (TSS). In Fenland, cis-pQTLs were defined as variants within ±1 Mb of the TSS <ref type="bibr" target="#b56">57</ref> . Approximate conditional analyses were conducted to identify independent signals based on distance-based clumping, yielding 2,900 genome-wide significant cis-pQTLs across 1,557 genes (P &lt; 1×10⁻¹¹). In ARIC, cis-regions were defined as ±500 kb of the TSS <ref type="bibr" target="#b58">59</ref> . We retained significant independent cis-pQTLs as reported by the study, restricted to a 5% false discovery rate (FDR), resulting in 2,004 and 1,618 unique protein instruments in European American and African American datasets, respectively. Similarly, deCODE used a ±1 Mb window around the TSS <ref type="bibr" target="#b57">58</ref> . We selected significant (P &lt; 1×10⁻⁷) independent cis-pQTLs identified through conditional analyses. After harmonization and removal of duplicate variants by chromosomal position, 5,662 unique cis-pQTLs across 1,663 protein-coding genes (corresponding to 1,674 proteins and 1,703 SOMAmer IDs) were retained. For the UK Biobank Pharma Proteomics Project (UKB-PPP), plasma proteomic profiles were generated using the Olink Explore 3072 platform in 54,219 participants <ref type="bibr" target="#b59">60</ref> . This platform includes 2,941 protein analytes targeting 2,923 unique proteins and is based on proximity extension assay (PEA) technology, in which paired antibodies labeled with complementary oligonucleotides enable detection via next-generation sequencing <ref type="bibr" target="#b59">60</ref> . Instruments were restricted to cis-variants within ±1 Mb of the encoding gene, and unconditional effect estimates were used. A total of 2,057 independent cis-pQTLs meeting a Bonferroni-corrected threshold (P &lt; 1.7×10⁻¹¹) were included. To ensure consistency across datasets and avoid bias introduced by conditioning, we used unconditional effect estimates for all instruments in downstream analyses.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Expression quantitative trait loci (eQTL)</head><p>Cis-eQTL instruments were derived from summary statistics from the eQTLGen Consortium (whole blood; n = 31,684) <ref type="bibr" target="#b60">61</ref> and the Genotype-Tissue Expression (GTEx) Project v8 <ref type="bibr" target="#b61">62</ref> . In GTEx, cis-eQTLs were defined as variants located within ±1 Mb of a gene's transcription start site (TSS) <ref type="bibr" target="#b61">62</ref> . We included 48 GTEx tissues, as whole blood data were obtained from eQTLGen. Independent cis-eQTLs per gene in GTEx were identified using stepwise conditional analysis (up to five rounds) within ±1 Mb of the TSS, performed using individual-level data and adjusting for the peak variant if the association passed P &lt; 1×10⁻⁴. The primary signal was defined as the unconditional association. To identify independent signals, we considered primary and conditional associations that passed P &lt; 5×10⁻⁸ and extracted effect size and standard error estimates from the unconditional association. For eQTLGen, one cis-eQTL per gene was selected, defined as the variant with the lowest P value in the summary statistics.</p><p>Genes represented across multiple pQTL and/or eQTL sources were retained. When instrumental variants were absent from the outcome GWAS, proxy variants were identified using LD (r² ≥ 0.8) based on the 1000 Genomes Project Phase 3 European reference panel. Palindromic variants and non-protein-coding genes were excluded.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mendelian randomization</head><p>We evaluated the effects of cis-eQTLs and cis-pQTLs on HF, HFrEF, and HFpEF using twosample Mendelian randomization implemented in the TwoSampleMR package (v0.5.6) <ref type="bibr" target="#b62">63</ref> . For genes with ≥2 instrumental variables (IVs), MR estimates were derived using the inversevariance-weighted (IVW) method; for genes with a single IV, the Wald ratio was applied. Analyses were performed separately for each QTL dataset (Fenland, deCODE, ARIC European, ARIC African American, UK Biobank Olink, eQTLGen, and each of the 48 GTEx tissues). Statistical significance was defined using a Bonferroni-corrected threshold based on the sum of unique gene-level tests across all QTL sources. The resulting significance thresholds were P &lt; 1.57 × 10⁻⁶ for HF (n=31,822 tests), P &lt; 1.57 × 10⁻⁶ for HFpEF (n=31,763 tests), and P &lt; 1.57 × 10⁻⁶ for HFrEF (n=31,790 tests). For genes identified in multiple QTL datasets, effect estimates were required to be directionally concordant across QTL sources to be considered robust and advanced for follow-up analyses. Because the Bonferroni threshold is conservative, we additionally identified suggestive findings across all three HF phenotypes using a Benjamini-Hochberg false discovery rate (FDR) of 5%.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instrument strength and horizontal pleiotropy</head><p>To assess weak instrument bias, we calculated the proportion of variance explained (𝑅 ! ) and the F-statistic from the first-stage regression of the exposure on the genetic instrument. R² was derived as a function of the effect size estimate, minor allele frequency, standard error, and sample size. The F-statistic was calculated as 𝐹 =</p><formula xml:id="formula_0">" ! ($%!%&amp;) ((%" ! )&amp;</formula><p>, where k denotes the number of instruments and n the sample size; instruments with F &lt; 10 were considered weak. To evaluate the consistency of instrumental variable estimates, we performed heterogeneity tests and reported corresponding p-values, with P &lt; 0.05 indicating evidence of heterogeneity. Directional pleiotropy was assessed using the MR-Egger intercept test for genes with ≥3 instruments, with P &lt; 0.05 indicating evidence of directional pleiotropy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Novelty classification</head><p>To assess the novelty of our findings, results were classified into one of three categories: novel (not previously reported for any HF phenotype), reassigned (previously reported for a different HF phenotype), or not novel (previously reported for the same phenotype). This classification was applied independently to each of the six analyses (GWAS and MR analyses for HF, HFpEF, and HFrEF), evaluated against a curated database of 12 previously published GWAS (genome-wide significance, P &lt; 5 × 10⁻⁸) and MR studies (Bonferroni significance) for HF, HFrEF, and HFpEF <ref type="bibr">3- 7,38,64-69</ref> .</p><p>For GWAS findings, evidence of prior reporting was drawn from two complementary sources: a genomic proximity search identifying any previously reported variant within ±250 kb of each new locus, and gene-level annotations (cS2G, nearest gene, MAGMA, and V2G scores) matched against the same prior literature. For MR findings, novelty was assessed by matching gene names directly against those in the prior literature.</p><p>In both GWAS and MR analyses, classification followed the same phenotype-specific logic. A finding was classified as "not novel" if prior evidence existed for the same HF phenotype (e.g. a new HFpEF locus with a prior HFpEF hit in the region). It was classified as "reassigned" if prior evidence existed only for a different HF subtype (e.g. a new HFpEF locus with only prior HF or HFrEF evidence), suggesting the signal may reflect subtype-specific biology not previously identified. A finding was classified as "novel" if no prior evidence existed for any HF phenotype.</p><p>Gene assignments from each prior study were extracted as follows. For GWAS studies, nearest gene assignments were used from Henry et al. 2025 (Supplementary</p><p>Table 3), Joseph et al., Lee et al. (Supplementary Table 1), Levin et al. (Supplementary Table 2), Rasooly et al. 2023, Shah et al., Wu et al. (Table 1), and Zhou et al. (Table S7); for Enzan et al. (Supplementary Table 2), both nearest gene and prioritized gene assignments were used. For MR studies, Bonferronisignificant results were used from Henry et al. 2022, Rasooly et al. 2023, Rasooly et al. 2025, Schmidt et al., Shah et al., and Zhou et al. Where a source contributed both GWAS and MR findings (Rasooly et al. 2023, Shah et al., and Zhou et al.), both were included.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cardiomyopathy gene sets</head><p>We further evaluated GWAS and MR gene findings against GWAS and comprehensive panel genes for hypertrophic cardiomyopathy (HCM) and dilated cardiomyopathy (DCM). For HCM GWAS genes, we used the nearest gene assignments reported in Supplementary Table <ref type="table">2</ref> of a recent study <ref type="bibr" target="#b69">70</ref> . For DCM, we used the nearest gene annotations reported in Supplementary Table <ref type="table">S8</ref> of a recent study <ref type="bibr" target="#b70">71</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/9lNR">,</ref> maintaining consistency with our approach in HCM. We additionally evaluated all 30 genes from the Invitae Hypertrophic Cardiomyopathy Panel: ACADVL, ACTC1, ACTN2, AGL, ALPK3, BAG3, CACNA1C, CPT2, CSRP3, DES, ELAC2, FHL1, FLNC, GAA, GLA, LAMP2, MTO1, MYBPC3, MYH7, MYL2, MYL3, PLN, PRKAG2, TCAP, TNNC1, TNNI3, TNNT2, TPM1, TTR, and VCL. We also evaluated all 54 genes from the Invitae Dilated Cardiomyopathy and Left Ventricular Noncompaction Panel: ABCC9, ACADVL, ACTC1, ACTN2, ALMS1, ALPK3, BAG3, CPT2, CRYAB, CSRP3, DES, DMD, DNAJC19, DOLK, DSC2, DSG2, DSP, EMD, EYA4, FKRP, FKTN, FLNC, HCN4, JUP, LAMP2, LMNA, MYBPC3, MYH7, MYLK3, PCCA, PCCB, PKP2, PLN, PPCS, RAF1, RBM20, RYR2, SCN5A, SDHA, SGCD, SLC22A5, TAZ, TBX20, TCAP, TMEM43, TMEM70, TNNC1, TNNI3, TNNI3K, TNNT2, TPM1, TTN, TTR, and VCL.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Functional enrichment analysis</head><p>Functional enrichment analysis was performed separately for HF, HFrEF, and HFpEF, incorporating all MR and GWAS results for each HF phenotype, using g:Profiler (version 0.2.4) <ref type="bibr" target="#b71">72</ref> . Genes were tested for overrepresentation in Gene Ontology (GO) terms, KEGG and Reactome pathways, and other curated functional gene sets. Multiple testing was controlled using the g:Profiler set counts and sizes (SCS) correction, with adjusted P &lt; 0.05 considered significant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Linkage disequilibrium</head><p>LD was assessed using the 1000 Genomes Project European reference panel by calculating r² between proposed variants and nearby variants. High LD was defined as r² &gt; 0.8 and moderate LD as 0.4 ≤ r² ≤ 0.8. Analyses were performed both within our current findings-comparing variants identified for HF, HFrEF, and HFpEF-and between these variants and those reported in 12 prior genomic studies of HF, HFrEF, and HFpEF.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ClinGen/OMIM and knockout mouse models</head><p>To assess whether our findings have been previously reported at both the phenotype and gene levels, we examined multiple orthogonal sources of evidence, including disease annotations from ClinGen and Online Mendelian Inheritance in Man (OMIM), as well as animal models (knockout and transgenic). Disease annotation data were retrieved from ClinGen and reviewed and classified for cardiovascular relevance by a cardiologist. We queried OMIM, a comprehensive catalog of human genes and genetic disorders, to identify any reported disorders or traits associated with variation in each gene. We used knockout mouse models from Mouse Genome Informatics (MGI) and the International Mouse Phenotyping Consortium (IMPC), where we extracted phenotypic data for all mutations or alleles of each gene, which were then evaluated by a cardiologist for HF and cardiomyopathy-related phenotypes.</p><p>All entries from these orthogonal sources (ClinGen, OMIM, MGI, and IMPC) were independently reviewed by two cardiologists and classified as: (1) cardiovascular phenotype, or (2) HF and cardiomyopathy phenotype. These classifications were incorporated into a per-gene summary score representing the total number of supporting sources, with positive evidence from ClinGen/OMIM and knockout mouse models contributing to the overall score.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evidence from secondary genes</head><p>We identified genes (referred to as "secondary genes") directly linked to our MR and GWAS findings (or "primary genes"). These were defined using a framework introduced by MacNamara <ref type="bibr" target="#b72">73</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/zMKc">,</ref> which integrates multiple interaction resources to construct a comprehensive protein-protein interaction (PPI) network, including the Human Reference Interactome Mapping Project (Lit-BM) and ligand-receptor interactions from MetaBase. To harmonize data across resources, gene identifiers were mapped to standardized gene symbols, and interactions were aggregated for each gene across all datasets. Because genes and drug targets exert downstream effects through biological networks, we systematically annotated each secondary gene using the same framework applied to primary genes. Specifically, we retrieved OMIM and ClinGen evidence, which was reviewed and classified for cardiovascular relevance by a cardiologist, as well as animal model evidence (knockout and transgenic) from MGI and IMPC, which were reviewed and classified for HF, cardiomyopathy, and cardiovascular relevance by two cardiologists. We further assessed whether secondary genes had prior evidence from HF, HFrEF, or HFpEF GWAS or MR studies, were included in HCM or DCM gene panels, or were identified in the current study. For each primary gene, we quantified the number of HF/cardiomyopathy-positive sources across all of its connected secondary genes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MitoCarta 3.0 Human evidence</head><p>We obtained mitochondrial evidence and functional annotations, including evidence status, submitochondrial localization, and curated mitochondrial pathway assignments, for each gene using Human MitoCarta3.<ref type="url" target="https://paperpile.com/c/QhIsH9/uu0e">0</ref>  <ref type="bibr" target="#b73">74</ref> . Quantitative proteomics metrics were also obtained, including the number of tissues with mass spectrometry support and proteome coverage, as well as heart-specific protein abundance. In addition, subcellular localization data from the Human Protein Atlas were incorporated, including reliability scores. These annotations were used to characterize mitochondrial localization, function, and tissue-specific expression of genes implicated in HF, HFrEF, and HFpEF.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cardiac structure and function</head><p>For each genome-wide significant HF, HFrEF, and HFpEF variant, we evaluated associations with 25 cardiac magnetic resonance (CMR) traits to determine whether variants were also associated with cardiac structure or function at genome-wide significance (P &lt; 5 × 10⁻⁸). The traits included diastolic global longitudinal strain rate (long-axis), ratio of mitral inflow early diastolic velocity (E) to early diastolic strain rate (eSR), left atrial maximum volume, LV global circumferential strain (short-axis), LV global longitudinal strain (long-axis), LV global radial strain (short-axis), LV end-diastolic volume (and indexed to body surface area), LV end-systolic volume (and indexed to body surface area), LV ejection fraction, LV filling pressure, LV mass (and indexed to body surface area), LV stroke volume (and indexed to body surface area), median global myocardial T1 relaxation time, RV global circumferential strain (short-axis), RV global longitudinal strain (long-axis), RV global radial strain (short-axis), RV end-diastolic volume (and indexed to body surface area), RV end-systolic volume, and RV stroke volume (and indexed to body surface area) <ref type="bibr" target="#b74">75</ref> .</p><p>Separately, for genes prioritized by MR for HF, HFrEF, and HFpEF, we performed MR analyses using each of the 25 CMR traits as outcomes. Significance was defined using the same Bonferroni-corrected threshold applied in the primary MR discovery analysis (P &lt; 1.57 × 10⁻⁶), which is more stringent than a Bonferroni-corrected threshold adjusting for the number of tests performed in this analysis. For each gene, we quantified the number of CMR traits with significant MR associations. MR beta concordance between HF, HFrEF, and HFpEF and cardiac MRI traits was determined based on whether effect directions aligned with the expected relationship of each trait with HF risk. Beta SD categories were defined within each trait by calculating the mean and standard deviation of the absolute beta coefficients (|β|), and classifying values according to their standardized distance from the trait-specific mean, using thresholds of &lt;1 SD, 1-2 SD, and ≥2 SD.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Body mass index</head><p>For each genome-wide significant variant, we evaluated associations with body mass index (BMI) <ref type="bibr" target="#b75">76</ref> to determine whether variants were also associated with BMI at genome-wide significance (P &lt; 5 × 10⁻⁸). Separately, for genes prioritized by MR, we performed MR analyses using BMI as the outcome. Significance was defined using the same Bonferroni-corrected threshold applied in the primary MR discovery analysis (P &lt; 1.6 × 10⁻⁶).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evidence from orthogonal sources</head><p>We aggregated evidence from multiple orthogonal sources into a composite score, including: OMIM/ClinGen annotations for HF, cardiomyopathy, or other cardiovascular-related conditions; knockout mouse model evidence for HF, cardiomyopathy, or other cardiovascular-related phenotypes; evidence from cardiac MRI traits capturing cardiac structure and function; and evidence from published GWAS/MR studies of HF and its subtypes (to evaluate replicability), as well as cardiomyopathies (dilated cardiomyopathy or hypertrophic cardiomyopathy GWAS, or a comprehensive cardiomyopathy gene panel). In addition, we performed network-based analyses to identify secondary genes connected to each primary gene. For each secondary gene, we assessed evidence of association with HF or cardiomyopathy using OMIM/ClinGen annotations and knockout mouse model data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Tissue-specific expression profiling</head><p>Candidate genes prioritized from GWAS and MR loci were evaluated for tissue-specific expression using RNA sequencing data from Expression Atlas <ref type="url" target="https://paperpile.com/c/QhIsH9/HINh">77</ref> . Genes were categorized into five tissue groups based on physiological relevance to HF: cardiac (heart, heart left ventricle, atrial appendage), vascular (coronary artery, tibial artery), kidney (kidney, cortex of kidney), skeletal muscle, and adipose tissue. Normalized transcripts per million (TPM) values were used to quantify gene-level RNA expression across tissues; transcripts with a binned expression value of -1 (indicating below detectable threshold) were excluded. For each gene, mean and maximum TPM values were calculated across the constituent tissues within each category. Genes were ranked by RNA expression within each tissue category and classified into top 25%, middle 50%, or bottom 25% tiers relative to the genome-wide distribution of all genes with available expression data in ExpressionAtlas for that tissue category (cardiac: n = 24,025; vascular: n = 23,948; kidney: n = 24,271; skeletal muscle: n = 23,513; adipose: n = 24,367).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Druggability assessment</head><p>Genes were annotated for therapeutic tractability using Open Targets (version 25.12) <ref type="bibr" target="#b77">78</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/Sahl">,</ref> following methods previously described by our group <ref type="bibr" target="#b3">4</ref> . For genes classified as druggable, corresponding compounds were retrieved from ChEMBL (v34) <ref type="bibr" target="#b78">79</ref> <ref type="url" target="https://paperpile.com/c/QhIsH9/deDl">,</ref> including approved and investigational drugs, indications, clinical development phase and mechanism of action (MoA). Translational candidates were defined as genes that are the sole known target of a compound and for which the direction of the MR effect on HF or its subtypes was concordant with the drug's MoA (e.g., genetically predicted increased expression consistent with pharmacologic agonism). FDA-reported cardiac adverse events associated with each compound were extracted to inform safety considerations.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .Figure 2 .Figure 3 .</head><label>123</label><figDesc>Figure 1. Study overview and GWAS results of the multi-ancestry analysis of HF, HFrEF, and HFpEF. (A) We performed a multi-ancestry genome-wide association study (GWAS) of heart failure (HF) including 345,687 cases and 4,122,479 controls (total n = 4,468,166) from the Million Veteran Program, HERMES Consortium, Global Biobank Meta-analysis Initiative, All of Us Research Program, Mexico City Prospective Study and FinnGen Release 12. Subtype-specific analyses were conducted for HF with preserved ejection fraction (HFpEF; 47,192 cases and 1,466,886 controls; total n = 1,514,078) and HF with reduced ejection fraction (HFrEF; 46,934 cases and 1,648,828 controls; total n = 1,695,762). For the HFrEF and HFpEF GWAS analyses, genomic data from Biobank Japan (BBJ) were included. This is indicated by an asterisk because BBJ was excluded from the overall HF analysis, having already been represented in the HERMES study. Across analyses, individuals of European, Asian, African and Admixed American descent were included. Genome-wide significance was defined as P &lt; 5 × 10⁻⁸. Novel loci were</figDesc><graphic coords="13,72.00,86.55,468.00,444.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 4 .Figure 5 .</head><label>45</label><figDesc>Figure 4. Lipoprotein-mediated and adipocyte-mediated lipolysis and long-chain fatty acid oxidation roles in HF. (A) Lipoprotein-mediated lipolysis and key HF-associated genes involved in this pathway are shown. LPL hydrolyzes triglycerides in very-low-density lipoproteins (VLDL) and chylomicrons, generating free fatty acids and monoacylglycerols. LMF1 is required for LPL maturation and activation, and for activation of LPL and LIPC. APOC3 inhibits LPL-mediated lipolysis. LIPC contributes to the release of free fatty acids from circulating lipoproteins, hydrolyzing triglycerides and phospholipids from LDLs and HDLs. Created in BioRender. Rasooly, D. (2026) https://BioRender.com/v473xxh (B) Adipocyte-mediated lipolysis highlighting key HFassociated genes is shown. AZGP1 modulates intracellular signaling through ADCY4 and cAMP, leading to activation of PRKAR2B and downstream phosphorylation events that regulate transcription, including IRF2BP2. PKA signaling cross-talks with the MAPK pathway, resulting in activation of MAPK3, which translocates to the nucleus to regulate gene expression. LIPA mediates lysosomal lipid degradation. CAV1 inhibits MAPK3 signaling. Created in BioRender. Rasooly, D. (2026) https://BioRender.com/5l5c7u6 (C) Long-chain fatty acid oxidation and key HF-associated genes involved in this pathway are shown. Long-chain fatty acids are imported through CD36 and converted to fatty acyl-CoA by SLC27A4. ACACB regulates mitochondrial fatty acid uptake by producing malonyl-CoA, an inhibitor of the carnitine shuttle. Fatty acyl-CoA is subsequently transported into mitochondria via the carnitine shuttle through CACT and undergoes β-oxidation, with electrons transferred to the respiratory chain through ETFDH. PCCB converts propionyl-CoA to succinyl-CoA, linking fatty acid metabolism to the tricarboxylic acid (TCA) cycle and oxidative phosphorylation. Across panels A-C, genes are colored blue to indicate evidence for HF and yellow to indicate evidence for HFrEF. Border style denotes the source of genetic evidence: dotted outlines indicate MR evidence only, dashed outlines indicate GWAS evidence only, and solid outlines indicate support from both GWAS and MR analyses. An asterisk denotes MR associations significant at FDR &lt; 5%. Created in BioRender. Rasooly, D. (2026) https://BioRender.com/m7d2jy0 (D) Dot plot showing gene-trait associations across HF phenotypes, cardiac MRI traits, and orthogonal evidence for HF, cardiomyopathy, and cardiovascular disease (OMIM/ClinGen, mouse knockout [KO], and secondary gene evidence) for genes shown in panels A-C. Panels are color-coded to match the corresponding schematics (pink, lipoprotein-mediated lipolysis; cream, adipocyte-mediated lipolysis; blue, long-chain fatty acid metabolism). HF and cardiac MRI associations are shown for GWAS (blue; P &lt; 5 × 10⁻⁸) and MR (red; Bonferroni-significant), where available, and orthogonal evidence is shown in green. For GWAS and MR results, point size reflects statistical significance (-log10[P]). For orthogonal evidence (green points), each point represents an evidence category (e.g., OMIM/ClinGen), and point size reflects the number of HF, cardiomyopathy, or cardiovascular evidence supporting the gene within that category. For genes with multiple MR associations, only the result with the smallest P value is displayed.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><graphic coords="15,72.00,86.55,468.00,307.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><graphic coords="15,72.00,439.08,398.75,247.14" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><graphic coords="16,72.00,101.09,468.00,293.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><graphic coords="18,72.00,101.09,468.00,310.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><graphic coords="18,72.00,442.08,327.33,260.60" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><graphic coords="19,72.00,101.09,335.85,267.75" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><graphic coords="23,72.00,115.64,302.60,247.80" type="bitmap" /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div><p><rs type="person">A) Leptin-Melanocortin Pathway</rs> B) Acknowledgements We are grateful to all the MVP investigators; a list of MVP investigators can be found in the Supplementary Materials. This research is based on data from the <rs type="funder">Million Veteran Program, Office of Research and Development, Veterans Health Administration</rs>, and was supported by awards #<rs type="grantNumber">MVP037</rs> [<rs type="projectName">BLR&amp;D Merit Award BX005831</rs>], #<rs type="grantNumber">MVP001 [I01-BX004821</rs>], #<rs type="grantNumber">MVP065</rs> [PI: Joseph], #<rs type="grantNumber">MVP000</rs>, and <rs type="funder">Veterans Affairs</rs> Grant <rs type="grantNumber">I01CX001922</rs> (PI: Joseph). We also acknowledge the <rs type="grantName">VA Merit Grant</rs> <rs type="grantNumber">I01-CX001025</rs> (<rs type="projectName">PI: Wilson/Cho</rs>). This publication does not represent the views of the Department of Veterans Affairs or the <rs type="institution">United States Government</rs>. NA and HN acknowledge funding support from the <rs type="funder">Medical Research Council</rs> (<rs type="grantNumber">MR/X020924/1</rs>).</p></div>
+			</div>
+			<listOrg type="funding">
+				<org type="funded-project" xml:id="_PV2H48G">
+					<idno type="grant-number">MVP037</idno>
+					<orgName type="project" subtype="full">BLR&amp;D Merit Award BX005831</orgName>
+				</org>
+				<org type="funding" xml:id="_9QCNjUs">
+					<idno type="grant-number">MVP001 [I01-BX004821</idno>
+				</org>
+				<org type="funding" xml:id="_6ztVhGA">
+					<idno type="grant-number">MVP065</idno>
+				</org>
+				<org type="funding" xml:id="_wGhntuM">
+					<idno type="grant-number">MVP000</idno>
+				</org>
+				<org type="funding" xml:id="_Yw7CwyQ">
+					<idno type="grant-number">I01CX001922</idno>
+					<orgName type="grant-name">VA Merit Grant</orgName>
+				</org>
+				<org type="funded-project" xml:id="_GTpdSKP">
+					<idno type="grant-number">I01-CX001025</idno>
+					<orgName type="project" subtype="full">PI: Wilson/Cho</orgName>
+				</org>
+				<org type="funding" xml:id="_7xFRTVh">
+					<idno type="grant-number">MR/X020924/1</idno>
+				</org>
+			</listOrg>
+
+			<div type="availability">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Availability</head><p>The GWAS summary statistics generated and analyzed in this study will be available through dbGaP under study accession phs001672. The only restriction is that use of the data is limited to health/medical/biomedical purposes and does not include the study of population origins or ancestry.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Code Availability</head><p>We used publicly available software for the analyses, and all software used is listed and described in the Methods section. Statistical analyses were conducted in R version 4.2.1. Mendelian randomization analyses were conducted using the TwoSampleMR package in R (version 0.6.6); standardization of GWAS summary statistics was conducted using MungeSumstats (release 3.20). Imputation was conducted using Minimac4 (version 1.0.0). The GWAS findings were functionally annotated using FUMA (version 1.3.8). Meta-analysis of GWAS summary statistics was conducted using METAL (version released 6 October 2020).</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Disclosures</head><p>JW holds membership of scientific advisory boards/consultancy for Relation Therapeutics and Silence Therapeutics and ownership of GSK shares. JPC is employed full-time by the Novartis Institute of Biomedical Interest (his major contributions to this project were while employed at VA Boston Healthcare System). The remaining authors have no conflicts to disclose.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct status="extracted" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Packer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">383</biblScope>
+			<biblScope unit="page" from="1413" to="1424" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Angiotensin-Neprilysin Inhibition in Heart Failure with Preserved Ejection Fraction</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">D</forename><surname>Solomon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">381</biblScope>
+			<biblScope unit="page" from="1609" to="1620" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Genome-wide association and Mendelian randomisation analysis provide insights into the pathogenesis of heart failure</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Shah</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">163</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Genome-wide association analysis and Mendelian randomization proteomics identify drug targets for heart failure</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rasooly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">3826</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Genetic architecture of heart failure with preserved versus reduced ejection fraction</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Joseph</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">7753</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Genome-wide association study meta-analysis provides insights into the etiology of heart failure and its subtypes</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Henry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Genetics</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="815" to="828" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Large-scale multi-omics identifies drug targets for heart failure with reduced and preserved ejection fraction</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rasooly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Cardiovasc Res</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="293" to="311" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Racial differences in incident heart failure among young adults</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Bibbins-Domingo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">360</biblScope>
+			<biblScope unit="page" from="1179" to="1190" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b8">
+	<analytic>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">P</forename><surname>Chang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Trends in Hospitalizations and Survival of Acute Decompensated Heart Failure in Four US Communities</title>
+		<imprint>
+			<date type="published" when="2005">2005-2014. 2018</date>
+			<biblScope unit="volume">138</biblScope>
+			<biblScope unit="page" from="12" to="24" />
+		</imprint>
+	</monogr>
+	<note>ARIC Study Community Surveillance</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Clinicaltrials</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gov</surname></persName>
+		</author>
+		<ptr target="https://clinicaltrials.gov/study/NCT06677060" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Clinicaltrials</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gov</surname></persName>
+		</author>
+		<ptr target="https://clinicaltrials.gov/study/NCT04945460" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">AB-1002 gene therapy expressing active protein phosphatase inhibitor-1 in heart failure: Rationale and study design of the GenePHIT trial</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">D</forename><surname>Henry</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/ejhf/xuag105</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Eur J Heart Fail</title>
+		<imprint>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Tirzepatide for Heart Failure with Preserved Ejection Fraction and Obesity</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Packer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">392</biblScope>
+			<biblScope unit="page" from="427" to="437" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">The genetics of obesity: aetiology, prevention and therapy</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bonnefond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">S</forename><surname>Bruner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">F A</forename><surname>Grant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Morandi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Froguel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Metab</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="778" to="794" />
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The Adipokine Hypothesis of Heart Failure With a Preserved Ejection Fraction: A Novel Framework to Explain Pathogenesis and Guide Treatment</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Packer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Am Coll Cardiol</title>
+		<imprint>
+			<biblScope unit="volume">86</biblScope>
+			<biblScope unit="page" from="1269" to="1373" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b15">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Clinicaltrials</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gov</surname></persName>
+		</author>
+		<ptr target="https://clinicaltrials.gov/study/NCT06369298" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b16">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Clinicaltrials</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gov</surname></persName>
+		</author>
+		<ptr target="https://clinicaltrials.gov/study/NCT06677060" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Bimagrumab plus semaglutide alone or in combination for the treatment of obesity: a randomized phase 2 trial</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">B</forename><surname>Heymsfield</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Med</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="869" to="882" />
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Imaging-Derived Sarcopenic Obesity and Cardiovascular Outcomes: Insights Into Heart Failure Risk and Muscle Biology</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Sanghvi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jacc.2026.05.022</idno>
+	</analytic>
+	<monogr>
+		<title level="j">J Am Coll Cardiol</title>
+		<imprint>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Leptin Attenuates Cardiac Hypertrophy in Patients With Generalized Lipodystrophy</title>
+		<author>
+			<persName><forename type="first">M.-L</forename><surname>Nguyen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Clin Endocrinol Metab</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page" from="4327" to="e4339" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Do obesity and visceral adiposity promote heart failure with reduced ejection fraction?</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Packer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Eur Heart J</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="12" to="21" />
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">The KLF7/PFKL/ACADL axis modulates cardiac metabolic remodelling during cardiac hypertrophy in male mice</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page">959</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">CD36 attenuates pressure overload-induced myocardial insulin resistance via HSF1dependent HSP90α suppression and competitive disruption of the HSP90α-InsR complex</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Shu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Transl Med</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Preservation of Acyl Coenzyme A Attenuates Pathological and Metabolic Cardiac Remodeling Through Selective Lipid Trafficking</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Goldenberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Circulation</title>
+		<imprint>
+			<biblScope unit="volume">139</biblScope>
+			<biblScope unit="page" from="2765" to="2777" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">CPT1a Expression Is a Critical Cardioprotective Response to Pathological Stress That Enables Rescue by Gene Transfer</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">N</forename><surname>Carley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Circ Res</title>
+		<imprint>
+			<biblScope unit="volume">138</biblScope>
+			<biblScope unit="page">327403</biblScope>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Blunted Cardiac Mitophagy in Response to Metabolic Stress Contributes to HFpEF</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Yoshii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Circ Res</title>
+		<imprint>
+			<biblScope unit="volume">135</biblScope>
+			<biblScope unit="page" from="1004" to="1017" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Therapeutic Effect of Targeting Branched-Chain Amino Acid Catabolic Flux in Pressure-Overload Induced Heart Failure</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Am Heart Assoc</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">11625</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Discovery of First Branched-Chain Ketoacid Dehydrogenase Kinase (BDK) Inhibitor Clinical Candidate PF-07328948</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">J</forename><surname>Filipski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Med Chem</title>
+		<imprint>
+			<biblScope unit="volume">68</biblScope>
+			<biblScope unit="page" from="2466" to="2482" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Single Ascending-Dose Study of Selective ErbB4 Agonist JK07 in Heart Failure With Reduced Ejection Fraction</title>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">H W</forename><surname>Tang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JACC Basic Transl Sci</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">101352</biblScope>
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b29">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Clinicaltrials</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gov</surname></persName>
+		</author>
+		<ptr target="https://clinicaltrials.gov/study/NCT04945460" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Lineage-specific regulatory changes in hypertrophic cardiomyopathy unraveled by single-nucleus RNA-seq and spatial transcriptomics</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cell Discov</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">6</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Targeting RUNX1 protects against diastolic dysfunction in a two-hit mouse model of heart failure with preserved ejection fraction</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A M</forename><surname>Elbassioni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cardiovasc Res</title>
+		<imprint>
+			<biblScope unit="volume">122</biblScope>
+			<biblScope unit="page" from="1318" to="1328" />
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b32">
+	<analytic>
+		<title level="a" type="main">RUNX1: a new beat in the heart of diastolic dysfunction</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">H</forename><surname>Elbatreek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Lefer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cardiovasc Res</title>
+		<imprint>
+			<biblScope unit="volume">122</biblScope>
+			<biblScope unit="page" from="1275" to="1277" />
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Runx1 in Postn-Expressing Fibroblasts But Not Cardiomyocytes Exacerbates Adverse Cardiac Remodeling Post-Myocardial Infarction</title>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">A</forename><surname>Akins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JACC Basic Transl Sci</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">101455</biblScope>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Fibroblast RUNX1 Induces Maladaptive Post-Myocardial Infarction Remodeling</title>
+		<author>
+			<persName><forename type="first">C.-R</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">F</forename><surname>Martin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JACC Basic Transl Sci</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">101487</biblScope>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b35">
+	<analytic>
+		<title level="a" type="main">CDK6 inhibits white to beige fat transition by suppressing RUNX1</title>
+		<author>
+			<persName><forename type="first">X</forename><surname>Hou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">1023</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Million Veteran Program: A mega-biobank to study genetic influences on health and disease</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Gaziano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Clin Epidemiol</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="214" to="223" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Genome-wide analysis of heart failure yields insights into disease heterogeneity and enables prognostic prediction in the Japanese population</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Enzan</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/2024.11.14.24317249</idno>
+		<imprint>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Polygenic risk score from a multi-ancestry GWAS uncovers susceptibility of heart failure</title>
+		<author>
+			<persName><forename type="first">K.-H</forename><forename type="middle">H</forename><surname>Wu</surname></persName>
+		</author>
+		<idno type="DOI">10.1101/2021.12.06.21267389</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b39">
+	<analytic>
+		<title level="a" type="main">All of Us Research Program Investigators et al. The &apos;All of Us&apos; Research Program</title>
+	</analytic>
+	<monogr>
+		<title level="j">N Engl J Med</title>
+		<imprint>
+			<biblScope unit="volume">381</biblScope>
+			<biblScope unit="page" from="668" to="676" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Genotyping, sequencing and analysis of 140,000 adults from Mexico City</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ziyatdinov</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">622</biblScope>
+			<biblScope unit="page" from="784" to="793" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b41">
+	<analytic>
+		<title level="a" type="main">FinnGen provides genetic insights from a well-phenotyped isolated population</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Kurki</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">613</biblScope>
+			<biblScope unit="page" from="508" to="518" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Unlocking echocardiogram measurements for heart disease research through natural language processing</title>
+		<author>
+			<persName><forename type="first">O</forename><forename type="middle">V</forename><surname>Patterson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Cardiovasc Disord</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">151</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Initiation of Statins for Primary Prevention in Heart Failure With Preserved Ejection Fraction</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">R</forename><surname>Orkaby</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JACC Adv</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">100869</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Development and validation of a heart failure with preserved ejection fraction cohort using electronic medical records</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">R</forename><surname>Patel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC Cardiovasc Disord</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">128</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Prognostic Significance of Baseline Serum Sodium in Heart Failure With Preserved Ejection Fraction</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">R</forename><surname>Patel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J Am Heart Assoc</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Common variants in HSPB7 and FRMD4B associated with advanced heart failure</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">P</forename><surname>Cappola</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Circ Cardiovasc Genet</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="147" to="154" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Genotyping Array Design and Data Quality Control in the Million Veteran Program</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Hunter-Zinck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Am J Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page" from="535" to="548" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Genetic analyses of diverse populations improves discovery for complex traits</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">L</forename><surname>Wojcik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">570</biblScope>
+			<biblScope unit="page" from="514" to="518" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b49">
+	<analytic>
+		<title level="a" type="main">METAL: fast and efficient meta-analysis of genomewide association scans</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Willer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">R</forename><surname>Abecasis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bioinformatics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="2190" to="2191" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Functional mapping and annotation of genetic associations with FUMA</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Taskesen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Van Bochoven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Posthuma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">1826</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b51">
+	<analytic>
+		<title level="a" type="main">The Ensembl Variant Effect Predictor</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Mclaren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Genome Biol</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">122</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Combining SNP-to-gene linking strategies to identify disease genes and assess disease omnigenicity</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Gazal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="827" to="836" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Open Targets Genetics: systematic identification of trait-associated genes using large-scale genetics and functional genomics</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ghoussaini</surname></persName>
+		</author>
+		<idno>1311-D1320</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b54">
+	<analytic>
+		<title level="a" type="main">An R Package for Rapidly Calculating Linkage Disequilibrium Statistics in Diverse Populations</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">A</forename><surname>Myers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">J</forename><surname>Chanock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Machiela</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Front Genet</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page">157</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Wellcome Trust Case Control Consortium et al. Bayesian refinement of association signals for 14 loci in 3 common diseases</title>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="1294" to="1301" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Mapping the proteo-genomic convergence of human diseases</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Pietzner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">374</biblScope>
+			<biblScope unit="page">1541</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Large-scale integration of the plasma proteome with genetics and disease</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ferkingstad</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="1712" to="1721" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Plasma proteome analyses in individuals of European and African ancestry identify cis-pQTLs and models for proteome-wide association studies</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="593" to="602" />
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Plasma proteomic associations with genetics and health in the UK Biobank</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">B</forename><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="volume">622</biblScope>
+			<biblScope unit="page" from="329" to="338" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Large-scale cis-and trans-eQTL analyses identify thousands of genetic loci and polygenic scores that regulate blood gene expression</title>
+		<author>
+			<persName><forename type="first">U</forename><surname>Võsa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="1300" to="1310" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b61">
+	<analytic>
+		<title level="a" type="main">The GTEx Consortium atlas of genetic regulatory effects across human tissues</title>
+		<author>
+			<persName><forename type="first">Gtex</forename><surname>Consortium</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">369</biblScope>
+			<biblScope unit="page" from="1318" to="1330" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Conducting a Reproducible Mendelian Randomization Analysis Using the R Analytic Statistical Environment</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Rasooly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">J</forename><surname>Patel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Curr Protoc Hum Genet</title>
+		<imprint>
+			<biblScope unit="volume">101</biblScope>
+			<biblScope unit="page">82</biblScope>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Therapeutic Targets for Heart Failure Identified Using Proteomics and Mendelian Randomization</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Henry</surname></persName>
+		</author>
+		<idno type="DOI">10.1161/CIRCULATIONAHA.121.056663</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Circulation</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Common-variant and rare-variant genetic architecture of heart failure across the allele-frequency spectrum</title>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">S M</forename><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="829" to="838" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Genome-wide association and multi-trait analyses characterize the common genetic architecture of heart failure</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">G</forename><surname>Levin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">6914</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Druggable proteins influencing cardiac structure and function: Implications for heart failure therapies and cancer cardiotoxicity</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">F</forename><surname>Schmidt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Adv</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">4984</biblScope>
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b67">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1101/2021.12.06.21267389v1.full.pdf</idno>
+		<ptr target="https://www.medrxiv.org/content/10.1101/2021.12.06.21267389v1.full.pdf" />
+		<imprint/>
+	</monogr>
+	<note>No title</note>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Global Biobank Meta-analysis Initiative: Powering genetic discovery across human disease</title>
+	</analytic>
+	<monogr>
+		<title level="j">Cell Genomics</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">100192</biblScope>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Large-scale genome-wide association analyses identify novel genetic loci and mechanisms in hypertrophic cardiomyopathy</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Tadros</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="530" to="538" />
+			<date type="published" when="2025">2025</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Genome-wide association analysis provides insights into the molecular etiology of dilated cardiomyopathy</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Zheng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Genet</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page" from="2646" to="2658" />
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b71">
+	<analytic>
+		<title level="a" type="main">g:Profiler-interoperable web service for functional enrichment analysis and gene identifier mapping (2023 update)</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kolberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="207" to="W212" />
+			<date type="published" when="2023">2023</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Network and pathway expansion of genetic disease associations identifies successful drug targets</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Macnamara</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sci Rep</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">20970</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b73">
+	<analytic>
+		<title level="a" type="main">MitoCarta3.0: an updated mitochondrial proteome now with sub-organelle localization and pathway annotations</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rath</surname></persName>
+		</author>
+		<idno>1541-D1547</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Genome-wide analysis of cardiac ventricular phenotypes reveals novel loci and therapeutic targets for heart failure</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">L</forename><surname>Nicholls</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat Commun</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Meta-analysis of genome-wide association studies for height and body mass index in ∼700000 individuals of European ancestry</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Yengo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hum Mol Genet</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="3641" to="3649" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Madrigal</surname></persName>
+		</author>
+		<idno>147-D157</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<date type="published" when="2026">2026</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Open Targets Platform: supporting systematic drug-target identification and prioritisation</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ochoa</surname></persName>
+		</author>
+		<idno>1302-D1310</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct status="extracted" xml:id="b78">
+	<analytic>
+		<title level="a" type="main">The ChEMBL Database in 2023: a drug discovery platform spanning multiple bioactivity data types and time periods</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zdrazil</surname></persName>
+		</author>
+		<idno>1180-D1192</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nucleic Acids Res</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<date type="published" when="2024">2024</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
