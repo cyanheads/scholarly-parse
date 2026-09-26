@@ -1,5 +1,5 @@
 {
-  "why": "CMS Collaboration paper at 1.6 MB: 2,351 contributors (2,072 with ORCIDs, the collaboration itself a <collab>), and all 410 formulas (407 inline, the article title's among them, and 3 display) carry TeX wrapped in a \\documentclass preamble beside MathML and a GIF in <alternatives>. Pins the TeX chosen with its preamble stripped and no MathML text appended, in the title, abstract, body, and table cells, the author list closing on the collaboration, and the two tables and eight figures.",
+  "why": "CMS Collaboration paper at 1.6 MB: 2,351 contributors (2,072 with ORCIDs, the collaboration itself a <collab>), and all 410 formulas (407 inline, the article title's among them, and 3 display) carry TeX wrapped in a \\documentclass preamble beside MathML and a GIF in <alternatives>. Pins the TeX chosen with its preamble stripped and no MathML text appended, in the title, abstract, body, table cells, and reference titles, the author list closing on the collaboration, and the two tables and eight figures.",
   "title": "Measurement of the top quark mass using a profile likelihood approach with the lepton + jets final states in proton–proton collisions at $\\sqrt{s}=13\\,\\text {Te}\\hspace{-.08em}\\text {V}$",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -24,6 +24,7 @@
     "\n\nA. Tumasyan, W. Adam, J. W. Andrejkovic, T. Bergauer,",
     "A. Zhokin, CMS Collaboration  \n*The European Physical Journal. C, Particles and Fields*, 2023, 83(10), 963",
     "| $m_{\\textrm{t}}^\\text {fit}$ | $P_\\text {gof} > 0.2$ | $\\times$ | $\\times$ | $\\times$ | $\\times$ | $\\times$ |",
+    "Observation of top quark production in $\\bar{p}p$ collisions.",
     "$$\n\\begin{aligned} \\lambda (m_{\\textrm{t}}, \\vec {\\theta }, \\vec {\\beta }, \\varOmega | \\text {data})"
   ],
   "notContains": ["\\documentclass", "\\end{document}", "$$\\sqrt", "13TeV"]

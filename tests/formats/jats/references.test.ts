@@ -7,7 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { toMarkdown } from '../../../src/index.js';
-import { paragraphTexts, parseArticle, parseBody } from './helpers.js';
+import { paragraphTexts, parseArticle, parseBody, texMath } from './helpers.js';
 
 /** References of an article whose `<back>` is `back`. */
 const referencesOf = (back: string) => parseArticle({ back, body: '<p>Body.</p>' }).references;
@@ -70,6 +70,23 @@ describe('reference forms', () => {
     expect(mixedCitation('Doe J. The *p53* pathway [2020](draft).')).toBe(
       'Doe J. The \\*p53\\* pathway [2020\\](draft).',
     );
+  });
+
+  it('reads a formula in a citation as math, with the text around it escaped', () => {
+    expect(
+      mixedCitation(
+        `Observation of <inline-formula><alternatives>${texMath('$$\\bar{p}p$$')}` +
+          '<mml:math><mml:mi>p</mml:mi></mml:math></alternatives></inline-formula> collisions at ' +
+          '<inline-formula><mml:math><mml:msqrt><mml:mi>s</mml:mi></mml:msqrt></mml:math></inline-formula>' +
+          ' in *pp*.',
+      ),
+    ).toBe('Observation of $\\bar{p}p$ collisions at $\\sqrt{s}$ in \\*pp\\*.');
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><article-title>The anti-<inline-formula>' +
+        `${texMath('$$k_{T}$$')}</inline-formula> jet algorithm</article-title>` +
+        '<source>JHEP</source><year>2008</year></element-citation></ref></ref-list>',
+    );
+    expect(reference?.text).toBe('The anti-$k_{T}$ jet algorithm. JHEP. 2008.');
   });
 
   it('renders the reference list with each printed label', () => {

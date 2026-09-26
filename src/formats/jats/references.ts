@@ -5,6 +5,7 @@
  */
 import type { Reference } from '../../model/document.js';
 import { escapeInline } from '../../render/escape.js';
+import { inlineMath, joinAdjacentMath } from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
@@ -17,7 +18,7 @@ import {
   textOf,
   type XmlNode,
 } from '../../xml/ordered.js';
-import { rawText, text } from './text.js';
+import { formulaTex, rawText, text } from './text.js';
 
 /** `pub-id-type` → the label a rendered citation shows before the identifier. */
 const PUB_ID_LABELS: Readonly<Record<string, string>> = {
@@ -80,11 +81,7 @@ function parseReference(ref: XmlNode): Reference | undefined {
   const container = findOne(ref, 'citation-alternatives') ?? ref;
   const mixed = findOne(container, 'mixed-citation');
   const element = findOne(container, 'element-citation') ?? findOne(container, 'nlm-citation');
-  const citation = mixed
-    ? renderMixedCitation(mixed)
-    : element
-      ? renderElementCitation(element)
-      : '';
+  const citation = citationMarkdown(mixed ?? element);
   if (!citation) return;
 
   const fields = citationFields(element ?? mixed);
@@ -97,16 +94,60 @@ function parseReference(ref: XmlNode): Reference | undefined {
   return {
     ...(id && { id }),
     ...(label && { label }),
-    text: escapeInline(citation),
+    text: citation,
     ...fields,
   };
 }
 
-/** Readable text of any citation element: `<mixed-citation>`, `<element-citation>`, `<nlm-citation>`. */
-export function renderCitation(node: XmlNode): string {
-  return tagNameOf(node) === 'mixed-citation'
-    ? renderMixedCitation(node)
-    : renderElementCitation(node);
+/**
+ * A citation element — `<mixed-citation>`, `<element-citation>`, `<nlm-citation>` — as
+ * inline Markdown: its text escaped, its formulas inline math. Empty when it has no text.
+ */
+export function citationMarkdown(node: XmlNode | undefined): string {
+  if (!node) return '';
+  const formulas: string[] = [];
+  const plain =
+    tagNameOf(node) === 'mixed-citation'
+      ? renderMixedCitation(node, formulas)
+      : renderElementCitation(node, formulas);
+  let markdown = escapeInline(plain);
+  for (const [index, tex] of formulas.entries()) {
+    markdown = markdown.split(formulaMark(index)).join(inlineMath(tex));
+  }
+  return joinAdjacentMath(markdown);
+}
+
+/** Formula tags a citation can hold. */
+const FORMULA_TAGS: ReadonlySet<string> = new Set(['inline-formula', 'disp-formula']);
+
+/**
+ * Where a citation's formula `index` sits in its text until escaping is done. U+0001
+ * cannot occur in XML 1.0 text, and escaping leaves it alone, so the TeX is restored
+ * as math afterwards rather than escaped as text.
+ */
+function formulaMark(index: number): string {
+  return `\u0001${index}\u0001`;
+}
+
+/**
+ * Text of a node inside a citation, as {@link rawText} reads it, except that each
+ * formula with TeX stands as a {@link formulaMark} and its TeX is added to `formulas`.
+ */
+function citationText(node: XmlNode, formulas: string[]): string {
+  const tag = tagNameOf(node) ?? '';
+  if (FORMULA_TAGS.has(tag)) {
+    const tex = formulaTex(childrenOf(node).filter((child) => tagNameOf(child) !== 'label'));
+    if (!tex) return rawText(node);
+    formulas.push(tex);
+    return formulaMark(formulas.length - 1);
+  }
+  const holdsFormula = [...FORMULA_TAGS].some(
+    (formula) => findAllDescendants(node, formula).length > 0,
+  );
+  if (!holdsFormula) return rawText(node);
+  return childrenOf(node)
+    .map((child) => citationText(child, formulas))
+    .join('');
 }
 
 /** Structured fields from a citation element. */
@@ -206,12 +247,16 @@ function sentence(text: string): string {
  * Other fields follow as written, then the identifiers, labeled and each shown once.
  * A citation with text of its own between the fields is read as written. (#69)
  */
-function renderElementCitation(node: XmlNode): string {
+function renderElementCitation(node: XmlNode, formulas: string[]): string {
   const children = childrenOf(node);
   if (children.some((child) => isTextNode(child) && textOf(child).trim()))
-    return renderMixedCitation(node);
+    return renderMixedCitation(node, formulas);
   const fields = children.filter((child) => !isTextNode(child));
-  const field = (tag: string) => text(fields.find((child) => tagNameOf(child) === tag));
+  const fieldText = (child: XmlNode) => collapseWhitespace(citationText(child, formulas));
+  const field = (tag: string) => {
+    const found = fields.find((child) => tagNameOf(child) === tag);
+    return found ? fieldText(found) : '';
+  };
   const isEditors = (group: XmlNode) => attrOf(group, 'person-group-type') === 'editor';
   // Every name outside an editor group — authors, and translators or compilers — leads.
   const names = (editors: boolean) =>
@@ -251,9 +296,7 @@ function renderElementCitation(node: XmlNode): string {
     [publisher && (place ? `${place}: ${publisher}` : publisher), locator]
       .filter(Boolean)
       .join('; '),
-    ...fields
-      .filter((child) => !PLACED_FIELDS.has(tagNameOf(child) ?? ''))
-      .map((child) => text(child)),
+    ...fields.filter((child) => !PLACED_FIELDS.has(tagNameOf(child) ?? '')).map(fieldText),
   ]
     .filter(Boolean)
     .map(sentence);
@@ -315,7 +358,7 @@ function hasLiteralIdPrefix(rendered: string, pubIdType: string): boolean {
  * and surname against given names (#124). Adjacent elements with nothing between them
  * get one space, and typed identifiers get a label unless the text already names it.
  */
-function renderMixedCitation(node: XmlNode): string {
+function renderMixedCitation(node: XmlNode, formulas: string[]): string {
   let rendered = '';
   let prevWasElement = false;
   for (const child of childrenOf(node)) {
@@ -344,9 +387,9 @@ function renderMixedCitation(node: XmlNode): string {
     } else if (NAME_WRAPPER_TAGS.has(tag)) {
       part = renderNameWrapper(child);
     } else if (CITATION_WRAPPER_TAGS.has(tag)) {
-      part = renderMixedCitation(child);
+      part = renderMixedCitation(child, formulas);
     } else {
-      part = rawText(child);
+      part = citationText(child, formulas);
     }
     if (prevWasElement || labeled) rendered += ' ';
     rendered += part;

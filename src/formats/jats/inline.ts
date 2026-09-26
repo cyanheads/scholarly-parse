@@ -30,8 +30,8 @@ import {
   type XmlNodeList,
 } from '../../xml/ordered.js';
 import type { JatsContext } from './context.js';
-import { renderCitation } from './references.js';
-import { rawText, SILENT_TAGS, selectAlternative, text } from './text.js';
+import { citationMarkdown } from './references.js';
+import { formulaTex, rawText, SILENT_TAGS, selectAlternative, text } from './text.js';
 
 /**
  * Elements that carry no formatting of their own: their content reads in place. Tags
@@ -174,7 +174,7 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
     case 'nlm-citation':
     case 'mixed-citation':
       // A citation inside running text (a dataset in a data-availability statement).
-      return escapeInline(renderCitation(node));
+      return citationMarkdown(node);
     case 'hr':
       return ' ';
     case 'xref':
@@ -263,7 +263,7 @@ export function formulaParts(
   ctx: JatsContext,
 ): { tex: string } | { text: string } | { href: string } | undefined {
   const children = childrenOf(formula).filter((c) => tagNameOf(c) !== 'label');
-  const tex = texOf(children) ?? mathOf(children);
+  const tex = formulaTex(children);
   if (tex) return { tex };
   const plain = text(children.filter((c) => !FORMULA_IMAGE_TAGS.has(tagNameOf(c) ?? '')));
   if (plain) return { text: plain };
@@ -283,33 +283,6 @@ function imageOf(children: XmlNodeList): string | undefined {
         ? imageOf(childrenOf(child))
         : undefined;
     if (href) return href;
-  }
-  return;
-}
-
-function texOf(children: XmlNodeList): string | undefined {
-  for (const child of children) {
-    const tag = tagNameOf(child);
-    const tex =
-      tag === 'tex-math'
-        ? cleanTex(rawText(childrenOf(child)))
-        : tag === 'alternatives'
-          ? texOf(childrenOf(child))
-          : undefined;
-    if (tex) return tex;
-  }
-  return;
-}
-
-function mathOf(children: XmlNodeList): string | undefined {
-  for (const child of children) {
-    const tex =
-      localNameOf(child) === 'math'
-        ? mathmlToTex(child)
-        : tagNameOf(child) === 'alternatives'
-          ? mathOf(childrenOf(child))
-          : undefined;
-    if (tex) return tex;
   }
   return;
 }

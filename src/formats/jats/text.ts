@@ -8,11 +8,12 @@
  * (pubmed-mcp-server#135)
  * @module src/formats/jats/text
  */
-import { cleanTex } from '../../xml/mathml.js';
+import { cleanTex, mathmlToTex } from '../../xml/mathml.js';
 import {
   childrenOf,
   collapseWhitespace,
   isTextNode,
+  localNameOf,
   tagNameOf,
   textOf,
   type XmlNode,
@@ -97,4 +98,40 @@ export function text(
 /** {@link text}, or undefined when empty. */
 export function optionalText(input: XmlNode | XmlNodeList | undefined): string | undefined {
   return text(input) || undefined;
+}
+
+/**
+ * A formula's TeX, from the children of its `<inline-formula>` or `<disp-formula>`: its
+ * `<tex-math>` (directly or under `<alternatives>`), else its MathML converted. Undefined
+ * when it has neither.
+ */
+export function formulaTex(children: XmlNodeList): string | undefined {
+  return texOf(children) ?? mathOf(children);
+}
+
+function texOf(children: XmlNodeList): string | undefined {
+  for (const child of children) {
+    const tag = tagNameOf(child);
+    const tex =
+      tag === 'tex-math'
+        ? cleanTex(rawText(childrenOf(child)))
+        : tag === 'alternatives'
+          ? texOf(childrenOf(child))
+          : undefined;
+    if (tex) return tex;
+  }
+  return;
+}
+
+function mathOf(children: XmlNodeList): string | undefined {
+  for (const child of children) {
+    const tex =
+      localNameOf(child) === 'math'
+        ? mathmlToTex(child)
+        : tagNameOf(child) === 'alternatives'
+          ? mathOf(childrenOf(child))
+          : undefined;
+    if (tex) return tex;
+  }
+  return;
 }
