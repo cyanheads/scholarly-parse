@@ -142,6 +142,47 @@ describe('parsePdf', () => {
     expect(references[2]).toMatchObject({ arxiv: '2101.00001' });
   });
 
+  it('reads headings neither numbered nor named when only the back matter is', async () => {
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            {
+              font: 'bold',
+              size: 20,
+              text: 'How RNA shapes the condensates it joins',
+              x: 72,
+              y: 720,
+            },
+            { size: 9, text: 'Jane Doe and Richard Roe', x: 72, y: 695 },
+            { font: 'bold', size: 12, text: 'RNA AS A SCAFFOLD FOR CONDENSATES', x: 72, y: 660 },
+            ...paragraph(
+              [
+                'Condensates form where many weak contacts add up, and RNA supplies many of',
+                'them at once, so a long transcript can hold a whole droplet together.',
+              ],
+              { y: 645 },
+            ),
+            { font: 'bold', size: 12, text: 'Modified RNA as a Switch', x: 72, y: 610 },
+            ...paragraph(
+              ['A methyl group on one base changes which proteins the transcript can bind.'],
+              { y: 595 },
+            ),
+            { font: 'bold', size: 12, text: 'FUNDING', x: 72, y: 560 },
+            ...paragraph(['This work was supported by a grant from a research council.'], {
+              y: 545,
+            }),
+          ],
+        ],
+      }),
+    );
+    expect(outline(document.body)).toEqual([
+      'RNA AS A SCAFFOLD FOR CONDENSATES',
+      'Modified RNA as a Switch',
+    ]);
+    expect(outline(document.back)).toEqual(['FUNDING']);
+  });
+
   it('reads a two-column page left column first', async () => {
     const left = Array.from(
       { length: 8 },

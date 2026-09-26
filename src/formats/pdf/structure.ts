@@ -79,8 +79,10 @@ export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
   const title = titleOf(layout.lines, layout.bodySize);
   const footnotes = footnoteLines(layout.lines, layout.bodySize);
   let parts = collect(layout, title.lines, footnotes, false);
-  // No section heading was recognized as one: fall back to taking any heading as the first.
-  if (parts.roots.length === 0) parts = collect(layout, title.lines, footnotes, true);
+  // No body section heading was recognized as one, only back matter: fall back to taking
+  // any heading as the first.
+  if (parts.roots.every((raw) => raw === parts.references || isBackMatter(raw)))
+    parts = collect(layout, title.lines, footnotes, true);
   if (!parts.references) ctx.diag.warn('structure-inferred', 'No reference list heading was found');
 
   const result: PdfStructure = {
