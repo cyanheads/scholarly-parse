@@ -9,6 +9,8 @@
  * @module src/render/escape
  */
 
+import { largest } from '../model/extremes.js';
+
 /** ASCII punctuation CommonMark allows a backslash to escape. */
 const ESCAPABLE_AFTER_BACKSLASH = /\\(?=[!-/:-@[-`{-~])/g;
 
@@ -65,7 +67,7 @@ export function escapeTableCell(text: string): string {
 
 /** The shortest backtick fence that no run of backticks inside `text` can close. */
 export function codeFence(text: string, minimum = 3): string {
-  const longest = Math.max(0, ...[...text.matchAll(/`+/g)].map((m) => m[0].length));
+  const longest = Math.max(0, largest([...text.matchAll(/`+/g)].map((m) => m[0].length)));
   return '`'.repeat(Math.max(minimum, longest + 1));
 }
 

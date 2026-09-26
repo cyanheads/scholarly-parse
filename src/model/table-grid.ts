@@ -10,6 +10,8 @@
  * @module src/model/table-grid
  */
 
+import { largest } from './extremes.js';
+
 /**
  * Widest grid a row may occupy, and the ceiling every declared span is clamped to. The
  * widest real row observed is 15 columns; the cap turns `colspan="99999999"` into a
@@ -71,14 +73,14 @@ export function buildGrid(sourceRows: SourceRow[]): { headerRows: number; rows: 
         col += 1;
       }
     }
-    const rightmost = carried.reduce((last, carry, i) => (carry ? i : last), -1);
+    const rightmost = carried.findLastIndex(Boolean);
     while (col <= rightmost) col = carried[col] ? drainCarried(row, col) : col + 1;
     if (source.cells.length === 0) continue;
     for (let i = 0; i < row.length; i++) row[i] ??= '';
     parsed.push({ cells: row, header: source.inHead || source.cells.every((c) => c.header) });
   }
 
-  const width = Math.max(0, ...parsed.map((row) => row.cells.length));
+  const width = Math.max(0, largest(parsed.map((row) => row.cells.length)));
   for (const row of parsed) while (row.cells.length < width) row.cells.push('');
   let headerRows = 0;
   while (parsed[headerRows]?.header) headerRows++;

@@ -76,6 +76,10 @@ describe('code spans', () => {
     expect(codeSpan('a`b')).toBe('``a`b``');
     expect(codeSpan('`edge`')).toBe('`` `edge` ``');
   });
+
+  it('fences text holding hundreds of thousands of backtick runs', () => {
+    expect(codeFence(`${'`a'.repeat(500_000)}\`\`\`\``)).toBe('`````');
+  });
 });
 
 describe('URLs', () => {

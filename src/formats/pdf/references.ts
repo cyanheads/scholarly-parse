@@ -5,6 +5,7 @@
  * @module src/formats/pdf/references
  */
 import type { Reference } from '../../model/document.js';
+import { smallest } from '../../model/extremes.js';
 import { joinLines, lineMarkdown } from './inline.js';
 import { byColumn, type Layout, type Line } from './layout.js';
 import { isCaptionStart } from './lines.js';
@@ -83,7 +84,7 @@ function indentStarts(lines: Line[]): Set<Line> {
   const atEdge = new Set<Line>();
   const indented = new Set<Line>();
   for (const group of byColumn(lines).values()) {
-    const edge = Math.min(...group.map((line) => line.x));
+    const edge = smallest(group.map((line) => line.x));
     for (const line of group) {
       if (line.x <= edge + line.size * 0.4) atEdge.add(line);
       else if (line.x <= edge + line.size * 3) indented.add(line);

@@ -12,6 +12,7 @@ import type {
   SectionKind,
   TableBlock,
 } from '../model/document.js';
+import { largest } from '../model/extremes.js';
 import { codeFence, escapeBlockStart, escapeInline, escapeTableCell, escapeTex } from './escape.js';
 import { FORMULA_IMAGE, link } from './inline.js';
 
@@ -116,13 +117,13 @@ function renderMetadata(document: ScholarlyDocument): string[] {
   const details: string[] = [];
   if (metadata.authors?.length)
     details.push(metadata.authors.map((a) => escapeInline(a.name)).join(', '));
+  const pages = metadata.venue?.pages ?? metadata.venue?.elocationId;
   const venue = [
     metadata.venue?.title && `*${escapeInline(metadata.venue.title)}*`,
     metadata.published?.year,
     metadata.venue?.volume &&
       `${escapeInline(metadata.venue.volume)}${metadata.venue.issue ? `(${escapeInline(metadata.venue.issue)})` : ''}`,
-    (metadata.venue?.pages ?? metadata.venue?.elocationId) &&
-      escapeInline(metadata.venue?.pages ?? metadata.venue?.elocationId ?? ''),
+    pages && escapeInline(pages),
   ].filter(Boolean);
   if (venue.length > 0) details.push(venue.join(', '));
   const idParts = identifierParts(metadata.identifiers ?? {});
@@ -298,7 +299,7 @@ function renderTable(table: TableBlock): string {
   if (table.rows.length === 0) {
     parts.push(`*Table content not available (${table.unextractable ?? 'no-rows'}).*`);
   } else {
-    const width = Math.max(...table.rows.map((row) => row.length));
+    const width = largest(table.rows.map((row) => row.length));
     const cell = (value: string | undefined) => escapeTableCell(value ?? '');
     const headerRows = table.rows.slice(0, table.headerRows);
     const header = Array.from({ length: width }, (_, col) => {

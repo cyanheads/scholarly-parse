@@ -7,6 +7,7 @@
  */
 import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Reference, Section, SectionKind } from '../../model/document.js';
+import { smallest } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
@@ -182,7 +183,7 @@ function footnoteLines(lines: Line[], bodySize: number): Set<Line> {
         !small(line) &&
         (first.column === -1 || line.column === first.column || line.column === -1),
     );
-    const floor = Math.min(...above.map((line) => line.y));
+    const floor = smallest(above.map((line) => line.y));
     if (zone.every((line) => line.y < floor)) for (const line of zone) found.add(line);
   }
   return found;
@@ -626,7 +627,7 @@ function convert(
   );
   const sections = raw.sections
     .map((sub) => convert(sub, kind, layout, ctx))
-    .filter((s): s is Section => s !== undefined);
+    .filter((s) => s !== undefined);
   if (blocks.length === 0 && sections.length === 0 && !printed.title) {
     ctx.sectionIds.delete(id);
     return;

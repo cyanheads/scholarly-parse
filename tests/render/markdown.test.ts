@@ -156,6 +156,15 @@ describe('blocks', () => {
     );
   });
 
+  it('writes a table with hundreds of thousands of rows', () => {
+    const rows = Array.from({ length: 500_000 }, (_, i) => [String(i)]);
+    const lines = blocksMarkdown([{ headerRows: 0, rows, type: 'table' }])
+      .trimEnd()
+      .split('\n');
+    expect(lines).toHaveLength(500_002);
+    expect(lines.at(-1)).toBe('| 499999 |');
+  });
+
   it('says why a table has no content', () => {
     expect(
       blocksMarkdown([

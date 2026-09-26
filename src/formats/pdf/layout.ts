@@ -6,6 +6,7 @@
  * footers, page numbers, and margin text (a publisher sidebar, line numbers) are dropped.
  * @module src/formats/pdf/layout
  */
+import { largest } from '../../model/extremes.js';
 import type { Page, Run } from './load.js';
 
 /** A line of text in one column: one cell for prose, several for a table row. */
@@ -48,7 +49,7 @@ function dominantSize(runs: Run[]): number {
 
 /** Runs sharing a baseline: a superscript or subscript joins the line it sits on. */
 function rows(runs: Run[]): Run[][] {
-  const sorted = [...runs].sort((a, b) => b.y - a.y || a.x - b.x);
+  const sorted = runs.toSorted((a, b) => b.y - a.y || a.x - b.x);
   const result: { base: Run; runs: Run[] }[] = [];
   for (const run of sorted) {
     const row = result.at(-1);
@@ -86,7 +87,7 @@ function left(cell: Run[]): number {
 }
 
 function rightOf(cell: Run[]): number {
-  return Math.max(...cell.map((run) => run.x + run.width));
+  return largest(cell.map((run) => run.x + run.width));
 }
 
 /**
@@ -176,7 +177,7 @@ function makeLine(lineCells: Run[][], page: number, column: number): Line {
     math:
       runs.reduce((n, run) => n + (run.math ? run.text.replace(/\s/g, '').length : 0), 0) / chars,
     page,
-    right: Math.max(...cells.map(rightOf)),
+    right: largest(cells.map(rightOf)),
     size,
     text: cells.map(cellText).join(' '),
     x: left(cells[0] ?? []),

@@ -5,6 +5,7 @@
  * @module src/formats/pdf/blocks
  */
 import type { Block, FigureBlock, TableBlock } from '../../model/document.js';
+import { largest } from '../../model/extremes.js';
 import { cellMarkdown, joinLines, lineMarkdown } from './inline.js';
 import type { Layout, Line } from './layout.js';
 import { CAPTION_START, formulaOf, isCaptionStart } from './lines.js';
@@ -109,7 +110,7 @@ function tableGrid(rows: Line[]): string[][] {
   const split = rows.map(rowCells);
   const extent = (cell: Run[]): [number, number] => [
     cell[0]?.x ?? 0,
-    Math.max(...cell.map((run) => run.x + run.width)),
+    largest(cell.map((run) => run.x + run.width)),
   ];
   const counts = split.map((cells) => cells.length).sort((a, b) => a - b);
   const typical = counts[Math.floor(counts.length / 2)] ?? 0;

@@ -25,6 +25,7 @@ import type {
   Section,
   SectionKind,
 } from '../../model/document.js';
+import { largest } from '../../model/extremes.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import {
   failed,
@@ -159,7 +160,7 @@ function contentRoot(document: Document): Element | undefined {
     prose: proseLength(element),
     size: (element.textContent ?? '').length,
   }));
-  const best = Math.max(...scored.map((c) => c.prose));
+  const best = largest(scored.map((c) => c.prose));
   return scored.filter((c) => c.prose >= best * 0.9).sort((a, b) => a.size - b.size)[0]?.element;
 }
 
@@ -168,9 +169,7 @@ const HEADING_SELECTOR = 'h1, h2, h3, h4, h5, h6';
 
 /** The page's article-title heading: the first `<h1>` in the region. */
 function findTitleHeading(root: Element): Element | undefined {
-  return (
-    Array.from(root.querySelectorAll('h1')).find((h) => isOutlineHeading(h, root)) ?? undefined
-  );
+  return Array.from(root.querySelectorAll('h1')).find((h) => isOutlineHeading(h, root));
 }
 
 /** True when nothing between `heading` and `root` is furniture or a figure or table. */
@@ -330,7 +329,7 @@ function classify(outline: Outline, hasTitleHeading: boolean, ctx: HtmlContext):
         const sections = raw.sections
           .filter((sub) => !container.contains(sub.heading))
           .map((sub) => convert(sub, 'body', ctx, false))
-          .filter((sub): sub is Section => sub !== undefined);
+          .filter((sub) => sub !== undefined);
         if (blocks.length > 0 || sections.length > 0) {
           result.body.push({
             blocks,
@@ -490,7 +489,7 @@ function convert(
   const blocks: Block[] = flowBlocks(raw.nodes, ctx);
   const sections = raw.sections
     .map((sub) => convert(sub, kind, ctx, false))
-    .filter((s): s is Section => s !== undefined);
+    .filter((s) => s !== undefined);
   if (blocks.length === 0 && sections.length === 0) {
     ctx.sectionIds.delete(id);
     return;
