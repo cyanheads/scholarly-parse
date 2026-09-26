@@ -23,6 +23,7 @@
   "contains": [
     "arXiv: 2404.03664v1",
     "**Listing 1.** LLM Prompt",
+    "```\nsystem_msg = f\"\"\"\nYou are a cautious assistant, an expert in medical rules.\n",
     "**Table 1.** Mutation operators",
     "**Figure 3.** Completion rates for all the rules per LLM."
   ]

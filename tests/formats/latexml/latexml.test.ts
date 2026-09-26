@@ -166,6 +166,58 @@ describe('sections and floats', () => {
     );
     expect(blocks(document.body).map((b) => b.type)).toEqual(['paragraph']);
   });
+
+  it('keeps a table set as a panel beside a figure image, after the figure', async () => {
+    const document = await parse(
+      page(`<figure id="F2" class="ltx_figure"><img src="x1.png" class="ltx_graphics ltx_figure_panel">
+        <table class="ltx_tabular ltx_figure_panel"><tbody><tr class="ltx_tr"><td class="ltx_td">What?</td>
+        <td class="ltx_td">Quoi? (fra)</td></tr></tbody></table>
+        <figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Question types.</figcaption></figure>`),
+    );
+    expect(blocks(document.body)).toMatchObject([
+      { caption: 'Question types.', label: 'Figure 2', type: 'figure' },
+      { headerRows: 0, rows: [['What?', 'Quoi? (fra)']], type: 'table' },
+    ]);
+  });
+
+  it('heads a theorem box with its label and title, not the punctuation set after them', async () => {
+    const box = (tag: string, style: string, name = '') =>
+      `<div class="ltx_theorem"><h6 class="ltx_title ltx_runin ltx_title_theorem"><span class="ltx_tag ltx_tag_theorem">
+        <span class="ltx_text ltx_font_bold">${tag}</span></span>${name}<span class="ltx_text ${style}">.</span></h6>
+        <div class="ltx_para"><p class="ltx_p">Body.</p></div></div>`;
+    const document = await parse(
+      page(
+        box('Theorem 1', 'ltx_font_bold') +
+          box('Remark 2', 'ltx_font_italic') +
+          box(
+            'Theorem 3',
+            'ltx_font_bold',
+            '<span class="ltx_text ltx_font_bold"> (Informal)</span>',
+          ),
+      ),
+    );
+    expect(blocks(document.body).map((b) => b.type === 'box' && [b.label, b.title])).toEqual([
+      ['Theorem 1', undefined],
+      ['Remark 2', undefined],
+      ['Theorem 3', '(Informal)'],
+    ]);
+    expect(toMarkdown(document)).toContain('> **Theorem 3 (Informal)**\n>\n> Body.');
+  });
+
+  it('writes a listing line by line, with math as TeX and no line numbers or layout whitespace', async () => {
+    const line = (n: number, content: string) =>
+      `<div class="ltx_listingline">
+            <span class="ltx_tag ltx_tag_listingline">${n}</span>
+          ${content}
+      </div>`;
+    const document = await parse(
+      page(`<div class="ltx_listing">${line(1, 'Input: mesh <math alttext="\\mathcal{M}"><semantics><mi>ℳ</mi><annotation encoding="application/x-tex">\\mathcal{M}</annotation></semantics></math>')}
+        ${line(2, '<span class="ltx_text">\u00a0\u00a0return</span>\u00a0x')}</div>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      { text: 'Input: mesh $\\mathcal{M}$\n  return x', type: 'code' },
+    ]);
+  });
 });
 
 describe('inline text', () => {

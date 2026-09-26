@@ -274,14 +274,25 @@ function figure(element: Element, ctx: LatexmlContext): Block[] {
     if (!panelCaption) continue;
     const parts = captionParts(panelCaption, ctx);
     const panelImage = panel.querySelector(GRAPHICS);
-    const panelSrc = panelImage && graphicSource(panelImage);
     const panelId = panel.getAttribute('id') ?? undefined;
+    const [panelTable] = panelImage ? [] : topTabulars(panel);
+    if (panelTable) {
+      blocks.push(table(panelTable, parts.label, parts.caption, ctx, panelId));
+      continue;
+    }
+    const panelSrc = panelImage && graphicSource(panelImage);
     blocks.push({
       type: 'figure',
       ...(panelId && { id: panelId }),
       ...parts,
       ...(panelSrc && { href: resolveUrl(panelSrc, ctx.baseUrl) }),
     });
+  }
+  // A table set beside the images, in no captioned panel, is content the caption covers;
+  // a tabular holding no text only lays the images out.
+  for (const tabular of tabulars) {
+    if (!captionedPanel(tabular, element) && textOfElement(tabular))
+      blocks.push(table(tabular, undefined, undefined, ctx));
   }
   return blocks;
 }
@@ -340,21 +351,24 @@ function equations(element: Element): Block[] {
   return formulas;
 }
 
-/** A theorem-like environment or proof: its run-in heading becomes the label and title. */
+/**
+ * A theorem-like environment or proof: its run-in heading becomes the label and title.
+ * The rendered heading is bold as a whole, so the source's own bold is dropped, and so
+ * is the closing `.` it sets in a span of its own (bold for a theorem, italic for a
+ * remark).
+ */
 function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
   const heading = childWhere(element, (c) => /^h[1-6]$/.test(tagOf(c)));
   const tagSpan = heading?.querySelector('.ltx_tag');
   const label = textOfElement(tagSpan).replace(/[.:]\s*$/, '') || undefined;
-  const title = heading
-    ? inlineMarkdown(
-        childNodes(heading).filter((n) => n !== tagSpan),
-        ctx,
-      )
-        .replace(/\s+/g, ' ')
-        .trim()
-        .replace(/^\.|\.$/g, '')
-        .trim()
-    : '';
+  const parts = heading ? childNodes(heading).filter((n) => n !== tagSpan) : [];
+  const punctuation = (node: Node | undefined) => /^[\s.:]*$/.test(node?.textContent ?? '');
+  while (parts.length > 0 && punctuation(parts[0])) parts.shift();
+  while (parts.length > 0 && punctuation(parts.at(-1))) parts.pop();
+  const title = inlineMarkdown(parts, ctx)
+    .replace(/\*\*/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/^[\s.:]+|[\s.:]+$/g, '');
   const id = element.getAttribute('id') ?? undefined;
   return {
     type: 'box',
@@ -369,10 +383,23 @@ function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
   };
 }
 
+/**
+ * A listing line's text: math as its TeX, the printed line number and the page's own
+ * layout whitespace (a run holding a line break) dropped. Spaces the listing prints
+ * arrive as no-break spaces.
+ */
+function listingText(node: Node): string {
+  if (node.nodeType === TEXT_NODE)
+    return (node.textContent ?? '').replace(/[ \t\r]*\n[ \t\r\n]*/g, '');
+  if (!isElement(node) || hasClass(node, 'ltx_tag_listingline')) return '';
+  if (tagOf(node) === 'math') return `$${mathTex(node)}$`;
+  return childNodes(node).map(listingText).join('');
+}
+
 /** A LaTeXML listing (algorithms, code): one line per `ltx_listingline`. */
 function listing(element: Element): Block | undefined {
-  const lines = Array.from(element.querySelectorAll('.ltx_listingline')).map(
-    (line) => line.textContent?.replace(/ /g, ' ').replace(/\s+$/, '') ?? '',
+  const lines = Array.from(element.querySelectorAll('.ltx_listingline')).map((line) =>
+    listingText(line).replace(/ /g, ' ').replace(/\s+$/, ''),
   );
   const text = (lines.length > 0 ? lines.join('\n') : (element.textContent ?? '')).replace(
     /^\n+|\s+$/g,

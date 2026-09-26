@@ -24,6 +24,7 @@
   "references": 52,
   "contains": [
     "arXiv: 2502.13877v2",
+    "> **Theorem 1.1 (Theorem 3.1, Informal)**\n",
     "> *For all $R,\\varepsilon\\in(0,1)$, and $q\\geq\\ell^{\\Omega(1/\\varepsilon)}$ a random linear code of rate $R$ is",
     "> **Proof of Lemma 3.3**",
     "q^{n\\ell}\\cdot q^{RnL} \\tag{4}",

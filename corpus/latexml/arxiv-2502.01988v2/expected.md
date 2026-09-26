@@ -159,45 +159,16 @@ and the optimized mesh is obtained as $\mathcal{M}^{*}=\mathcal{D}(\mathbf{z})$.
 **Algorithm 1.** ReMiDi Reconstruction Method
 
 ```
-              
-              
-             Input: Input mesh ℳ∈ℝ315×3\mathcal{M}\in\mathbb{R}^{315\times 3}, loss multiplier kk, learning rate η\eta, reference signal 𝒮ref\mathcal{S}_{\text{ref}}
-
-              
-              
-             Initialize latent vector 𝐳=fE​(ℳ)\mathbf{z}=f_{E}(\mathcal{M})
-
-              
-              
-             while not converged do
-
-              
-              
-              Reconstruct mesh: ℳ=fD​(𝐳)\mathcal{M}=f_{D}(\mathbf{z})
-
-              
-              
-              Simulate signal: 𝒮^=ℱ⁡(ℳ)\hat{\mathcal{S}}=\mathcal{F}(\mathcal{M})
-
-              
-              
-              Compute loss: ℒ=k×‖𝒮^−𝒮ref‖22\mathcal{L}=k\times\|\hat{\mathcal{S}}-\mathcal{S}_{\text{ref}}\|_{2}^{2}
-
-              
-              
-              Backpropagate gradients: ∂ℒ∂𝐳=∂ℒ∂𝒮^⋅∂𝒮​(fD​(𝐳))∂𝐳\frac{\partial\mathcal{L}}{\partial\mathbf{z}}=\frac{\partial\mathcal{L}}{\partial\hat{\mathcal{S}}}\cdot\frac{\partial\mathcal{S}(f_{D}(\mathbf{z}))}{\partial\mathbf{z}}
-
-              
-              
-              Update latent vector: 𝐳←𝐳−η​∂ℒ∂𝐳\mathbf{z}\leftarrow\mathbf{z}-\eta\frac{\partial\mathcal{L}}{\partial\mathbf{z}}
-
-              
-              
-             end while
-
-              
-              
-             Output: Reconstructed mesh ℳ∗\mathcal{M}^{*}
+ Input: Input mesh $\mathcal{M}\in\mathbb{R}^{315\times 3}$, loss multiplier $k$, learning rate $\eta$, reference signal $\mathcal{S}_{\text{ref}}$
+ Initialize latent vector $\mathbf{z}=f_{E}(\mathcal{M})$
+ while not converged do
+  Reconstruct mesh: $\mathcal{M}=f_{D}(\mathbf{z})$
+  Simulate signal: $\hat{\mathcal{S}}=\mathcal{F}(\mathcal{M})$
+  Compute loss: $\mathcal{L}=k\times\|\hat{\mathcal{S}}-\mathcal{S}_{\text{ref}}\|_{2}^{2}$
+  Backpropagate gradients: $\frac{\partial\mathcal{L}}{\partial\mathbf{z}}=\frac{\partial\mathcal{L}}{\partial\hat{\mathcal{S}}}\cdot\frac{\partial\mathcal{S}(f_{D}(\mathbf{z}))}{\partial\mathbf{z}}$
+  Update latent vector: $\mathbf{z}\leftarrow\mathbf{z}-\eta\frac{\partial\mathcal{L}}{\partial\mathbf{z}}$
+ end while
+ Output: Reconstructed mesh $\mathcal{M}^{*}$
 ```
 
 ## 4 Experiments
@@ -211,25 +182,11 @@ The SAE encoder and decoder were designed to learn downsampling and upsampling k
 **Algorithm 2.** Chamfer Distance Computation
 
 ```
-            
-            
-           Require: P1={xi∈ℝ3}i=1nP_{1}=\{x_{i}\in\mathbb{R}^{3}\}_{i=1}^{n}, P2={xj∈ℝ3}j=1mP_{2}=\{x_{j}\in\mathbb{R}^{3}\}_{j=1}^{m}
-
-            
-            
-           Compute: Chamfer distance between P1P_{1} and P2P_{2}
-
-            
-            
-           Forward Distance d1←12​n​∑i=1n|xi−NN⁡(xi,P2)|d_{1}\leftarrow\frac{1}{2n}\sum_{i=1}^{n}|x_{i}-\mathrm{NN}(x_{i},P_{2})|
-
-            
-            
-           Backward Distance d2←12​m​∑j=1m|xj−NN⁡(xj,P1)|d_{2}\leftarrow\frac{1}{2m}\sum_{j=1}^{m}|x_{j}-\mathrm{NN}(x_{j},P_{1})|
-
-            
-            
-           return d1+d2d_{1}+d_{2}
+ Require: $P_{1}=\{x_{i}\in\mathbb{R}^{3}\}_{i=1}^{n}$, $P_{2}=\{x_{j}\in\mathbb{R}^{3}\}_{j=1}^{m}$
+ Compute: Chamfer distance between $P_{1}$ and $P_{2}$
+ Forward Distance $d_{1}\leftarrow\frac{1}{2n}\sum_{i=1}^{n}|x_{i}-\mathrm{NN}(x_{i},P_{2})|$
+ Backward Distance $d_{2}\leftarrow\frac{1}{2m}\sum_{j=1}^{m}|x_{j}-\mathrm{NN}(x_{j},P_{1})|$
+ return $d_{1}+d_{2}$
 ```
 
 To evaluate the mesh reconstruction, we use the Chamfer distance (Barrow et al., 1977), defined between two point clouds $P_{1}$ and $P_{2}$ as shown in Algorithm 2, where $\text{NN}(x,P)=\operatorname{argmin}_{x^{\prime}\in P}\|x-x^{\prime}\|$ is the nearest neighbor function. The Chamfer distance is preferred over RMSE as it does not require point-to-point correspondence and is more robust to local deformations, allowing better comparison of overall shape similarity even when vertex orderings differ or point clouds have different densities. Additionally, to account for the fact that the dMRI signal is invariant to reflections around the center point of the bounding box and the invariance of the dMRI signal to certain rotations when measuring symmetric meshes, we report a modified Chamfer distance $d^{\prime}$ that accounts for both inversions and rotations, computed as $d^{\prime}=\min_{R\in\mathcal{R}}(d(R(\mathcal{M}),\mathcal{M}_{\text{ref}}))$, where $d$ is the standard Chamfer distance, and $R\in\mathcal{R}$, where $\mathcal{R}$ represents all possible rotations around each axis and inversions around the center point.

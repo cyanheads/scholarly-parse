@@ -237,6 +237,9 @@ function extractAuthors(article: Element): { affiliations: string[]; authors: Au
   return { affiliations, authors };
 }
 
+/** A heading that only names the abstract, as templates print it (`Abstract`, `Abstract.`). */
+const ABSTRACT_HEADING = /^abstract[.:]?$/i;
+
 function extractAbstracts(article: Element, ctx: LatexmlContext): Abstract[] {
   return Array.from(article.querySelectorAll('.ltx_abstract')).flatMap((abstract, index) => {
     const heading = childElements(abstract).find((c) => /^h[1-6]$/.test(tagOf(c)));
@@ -257,7 +260,7 @@ function extractAbstracts(article: Element, ctx: LatexmlContext): Abstract[] {
             sections: [],
           },
         ],
-        ...(title && !/^abstract$/i.test(title) && { title }),
+        ...(title && !ABSTRACT_HEADING.test(title) && { title }),
       },
     ];
   });
@@ -278,7 +281,7 @@ function abstractFromBody(
 ): { abstracts: Abstract[]; body: Section[] } {
   const index = body.findIndex((section) => section.title);
   const section = body[index];
-  if (section && !section.label && /^abstract$/i.test(section.title ?? '')) {
+  if (section && !section.label && ABSTRACT_HEADING.test(section.title ?? '')) {
     const part: Section = {
       blocks: section.blocks,
       id: section.id,

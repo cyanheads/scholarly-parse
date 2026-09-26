@@ -4,7 +4,7 @@ Michael Dinzinger, Laura Caspari, Kanishka Ghosh Dastidar, Jelena Mitrović, Mic
 2025  
 arXiv: 2502.20936v1
 
-## Abstract.
+## Abstract
 
 We present WebFAQ, a large-scale collection of open-domain question answering datasets derived from FAQ-style schema.org annotations. In total, the data collection consists of 96 million natural question-answer (QA) pairs across 75 languages, including 47 million (49%) non-English samples. WebFAQ further serves as the foundation for 20 monolingual retrieval benchmarks with a total size of 11.2 million QA pairs (5.9 million non-English). These datasets are carefully curated through refined filtering and near-duplicate detection, yielding high-quality resources for training and evaluating multilingual dense retrieval models. To empirically confirm WebFAQ’s efficacy, we use the collected QAs to fine-tune an in-domain pretrained XLM-RoBERTa model. Through this process of dataset-specific fine-tuning, the model achieves significant retrieval performance gains, which generalize -- beyond WebFAQ -- to other multilingual retrieval benchmarks evaluated in zero-shot setting. Last but not least, we utilize WebFAQ to construct a set of QA-aligned bilingual corpora spanning over 1000 language pairs using state-of-the-art bitext mining and automated LLM-assessed translation evaluation. Due to our advanced, automated method of bitext dataset generation, the resulting bilingual corpora demonstrate higher translation quality compared to similar datasets. WebFAQ and all associated resources are publicly available on GitHub^1 and HuggingFace.^2
 
@@ -53,6 +53,19 @@ Notable datasets in the field of bitext mining include WMT 2019 (Foundation, [n.
 This section describes the methodology used to develop the WebFAQ Q&A dataset, including data collection, language detection, and topic and question type classification. Additionally, Section 3.3 outlines the refined filtering techniques employed to transform the raw QA corpus into a high-quality retrieval dataset with well-defined relevance relationships between queries and documents.
 
 **Figure 2.** Distribution of Question types with examples
+
+|  |  |
+| --- | --- |
+| **What is a collision waiver?** | Kaj je opustitev od trka? (slv) |
+| **How is it like working at Coveo?** | Comment c’est travailler chez Coveo? (fra) |
+| **Is, are, do, does** | Do I need to call ahead? (eng) |
+| **Which sports are popular in Norway?** | Hvilke idretter er populære i Norge? (nor) |
+| **Can, will, may, shall** | Can you guarantee ADA compliance? (eng) |
+| **[No Question Word] Fire Extinguishers** | 消火器 (jpn) |
+| **When will my test results come out?** | Kapan hasil tes saya keluar? (msa) |
+| **Where are the In-person Voting Points?** | On estan els Punts de Votació Presencial? (cat) |
+| **Why does Jekkle promo code not work?** | 為什麼Jekkle促銷碼無效? (zho) |
+| **Who is WordPress suitable for?** | Für wen eignet sich WordPress? (deu) |
 
 ### 3.1 Data Source
 

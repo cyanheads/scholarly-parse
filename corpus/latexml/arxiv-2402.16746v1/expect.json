@@ -31,6 +31,8 @@
   "references": 27,
   "contains": [
     "arXiv: 2402.16746v1",
+    "> **Theorem 1**\n",
+    "> **Remark 1**\n",
     "\\frac{T^{n+1}_{i}-T^{n}_{i}}{\\Delta t}=\\kappa\\hskip 1.42262pt\\sigma^{a}_{i}h^{n+1}_{i}. \\tag{3.3c}\n$$",
     "> *Assume that the time step $\\Delta t$ fulfills the CFL condition for all $k$, such that $\\mu_{k}\\neq 0$,*",
     "> We note that $\\beta_{N}$ remains bounded for all $N$. ∎",

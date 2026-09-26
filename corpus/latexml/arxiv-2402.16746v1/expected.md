@@ -93,7 +93,7 @@ $$
 
 where $\langle g\rangle_{\mu}=0$. Note that since $\langle g\rangle_{\mu}=0$, the total mass of the system is conserved and was used in [23] to construct a numerical scheme that conserves mass in shallow water equations.
 
-> **Remark 1 *.***
+> **Remark 1**
 >
 > The rationale behind calling $h$ the mesoscopic variable instead of the microscopic variable, despite scaling as $\varepsilon^{2}$ is that it arises as the leading scaled quantity in the decomposition of the macroscopic quantity of radiation transport equation, the scalar flux, and does not depend on the angular variable.
 
@@ -282,7 +282,7 @@ To present the algorithm, we denote all quantities of rank $2r$ with hats and th
 
    To set the updated factors, we define $\textbf{P}_{r_{1}}$ and $\textbf{Q}_{r_{1}}$ to be the matrices containing the first $r_{1}$ columns of **P** and **Q**, respectively. $\boldsymbol{\Sigma}_{r_{1}\times r_{1}}$ is set as the diagonal matrix containing the first $r_{1}$ singular values of $\widehat{\textbf{S}}$. Then the updated factors are set as $\textbf{X}^{1}=\widehat{\textbf{X}}\textbf{P}_{r_{1}}$, $\textbf{{V}}^{1}=\widehat{\textbf{{V}}}\textbf{Q}_{r_{1}}$ and $\textbf{S}^{1}=\boldsymbol{\Sigma}_{r_{1}\times r_{1}}$ and, the approximation at time $t_{1}$ is then $\textbf{g}^{1}_{r}=\textbf{X}^{1}\textbf{S}^{1}\textbf{{V}}^{1,\top}$.
 
-> **Remark 2 *.***
+> **Remark 2**
 >
 > Note that often in practice, to truncate the rank, a relative tolerance of the form $\vartheta\cdot\left\lVert\boldsymbol{\Sigma}\right\rVert_{2}$ is used.
 
@@ -300,7 +300,7 @@ $$
 
 where $(\mu_{k})_{k=1,\ldots,N+1}$ and $(w_{k})_{k=1,\ldots,N+1}$ are quadrature points and weights given by the Gauss-Legendre quadrature rule. If we define the matrices $\textbf{T}\in\mathbb{R}^{N\times(N+1)}$, with $T_{ik}=\sqrt{w_{k}}P_{i}(\mu_{k})$, and $\textbf{M}\in\mathbb{R}^{(N+1)\times(N+1)}$, with $\mathrm{M}_{ij}=\mu_{i}\delta_{ij}$, then we can write the flux matrix as $\textbf{A}=\textbf{T}\textbf{M}\textbf{T}^{\top}$. Given $(\left\lvert\textbf{M}\right\rvert)_{ij}=\left\lvert\mathrm{M}_{ij}\right\rvert$ we can define a stabilization matrix for a finite volume discretization as $\left\lvert\textbf{A}\right\rvert=\textbf{T}\left\lvert\textbf{M}\right\rvert\textbf{T}^{\top}$ and $\textbf{A}^{\pm}=\frac{1}{2}\textbf{T}(\textbf{M}\pm\left\lvert\textbf{M}\right\rvert)\textbf{T}^{\top}$.
 
-> **Remark 3 *.***
+> **Remark 3**
 >
 > The choice of the stabilization matrix used here is not the standard Roe matrix $\widetilde{\textbf{T}}\left\lvert\widetilde{\textbf{M}}\right\rvert\widetilde{\textbf{T}}^{\top}$ where $\textbf{A}=\widetilde{\textbf{T}}\widetilde{\textbf{M}}\widetilde{\textbf{T}}^{\top}$ is the eigendecomposition of the flux matrix. That is, the columns of $\widetilde{\textbf{T}}\in\mathbb{R}^{N\times N}$ consist of orthogonal eigenvectors of **A** and $\widetilde{\textbf{M}}\in\mathbb{R}^{N\times N}$ has the corresponding eigenvalues on the diagonal. The factorization of the flux matrix used, consisting of transformation matrices in $\mathbb{R}^{N\times(N+1)}$, is needed for the diagonalization of the modal scheme for showing stability in the energy norm. This choice of stabilization matrix was first presented in [19] for the radiative transport equation.
 
@@ -338,7 +338,7 @@ $$
 \displaystyle\mathcal{L}\textbf{{g}}_{i+1/2} \displaystyle=(\textbf{A}^{+}\mathcal{D}^{-}+\textbf{A}^{-}\mathcal{D}^{+})\textbf{{g}}_{i+1/2}.
 $$
 
-> **Theorem 1 **.****
+> **Theorem 1**
 >
 > *In the limit $\varepsilon\to 0$, the modal macro-micro scheme (3.1) gives a consistent discretization of the diffusion equation*
 >
@@ -402,7 +402,7 @@ $$
 
 Then, for the linearized modal macro-micro scheme, we have the following stability result:
 
-> **Theorem 2 **.****
+> **Theorem 2**
 >
 > *Assume that the time step $\Delta t$ fulfills the CFL condition for all $k$, such that $\mu_{k}\neq 0$,*
 >
@@ -422,7 +422,7 @@ Then, for the linearized modal macro-micro scheme, we have the following stabili
 > e^{n}=\left\lVert aT^{n}+\frac{\varepsilon^{2}}{c}h^{n}\right\rVert^{2}+\left\lVert\frac{\varepsilon}{\gamma_{0}c}\textbf{g}^{n}\right\rVert^{2}+\left\lVert\sqrt{\frac{ac_{\nu}}{2}}T^{n}\right\rVert^{2}.
 > $$
 
-> **Remark 4 *.***
+> **Remark 4**
 >
 > For the sake of compactness, the proof of this theorem, along with all the required lemmas, are presented in Appendix A. The proof follows the energy stability result in [25] and combines it with the results obtained for the modal macro-micro scheme for radiation transport from [19]. It is roughly divided into three parts; the first part bounds $\left\lVert aT^{n+1}+\frac{\varepsilon^{2}}{c}h^{n+1}\right\rVert^{2}+\left\lVert\frac{\varepsilon}{\gamma_{0}c}\textbf{g}^{n+1}\right\rVert^{2}$ from above using (3.3a) and (3.3b). In the second part we derive an upper bound for $\left\lVert\sqrt{\frac{ac_{\nu}}{2}}T^{n+1}\right\rVert^{2}$ from (3.3c). Combining the bounds obtained in the first and the second part, we show energy stability subject to step size restriction given by the CFL condition (3.4) in the third part of the proof.
 
@@ -553,7 +553,7 @@ and $\textbf{{K}}_{i+1/2}(t)=\textbf{{X}}_{i+1/2}(t)^{\top}\textbf{S}(t)\in\math
   \frac{T^{n+1}_{i}-T^{n}_{i}}{\Delta t}=\kappa\hskip 1.42262pt\sigma^{a}_{i}h^{n+1}_{i}. \tag{4.6}
   $$
 
-> **Theorem 3 **.****
+> **Theorem 3**
 >
 > *In the limit $\varepsilon\to 0$, the fixed-rank modal macro-micro BUG scheme given by eqs. 4.2, 4.3, 4.4, 4.5 and 4.6 gives a consistent discretization of the diffusion equation*
 >
@@ -625,7 +625,7 @@ $$
 
 Additionally, we state the following property that we use in the proof of energy stability:
 
-> **Property 1 **.****
+> **Property 1**
 >
 > *For any $\{c_{i}\}_{i=1,\ldots,N_{x}}\in\mathbb{R}$ and $\{d_{i}\}_{i=1,\ldots,N_{x}}\in\mathbb{R}$ we have*
 >
@@ -633,7 +633,7 @@ Additionally, we state the following property that we use in the proof of energy
 > \sum_{i}c_{i}d_{i}=\frac{1}{2}\sum_{i}c^{2}_{i}+\frac{1}{2}\sum_{i}d^{2}_{i}-\frac{1}{2}\sum_{i}(c_{i}-d_{i})^{2}.
 > $$
 
-> **Theorem 4 **.****
+> **Theorem 4**
 >
 > *Assume that the time step $\Delta t$ fulfills the CFL condition (3.4) from Theorem 2. Then, the fixed-rank modal macro-micro BUG scheme given by eqs. 4.2, 4.3, 4.4, 4.5 and 4.6 is energy stable for the linearised problem (3.3), that is,*
 >
@@ -801,7 +801,7 @@ Additionally, we state the following property that we use in the proof of energy
 
 #### 4.1.3 Local mass conservation
 
-> **Theorem 5 **.****
+> **Theorem 5**
 >
 > *The fixed-rank modal macro-micro BUG scheme is locally conservative. I.e., if the scalar flux at time $t_{n}$ is denoted by $\Phi_{i}^{n}=acT_{i}^{n}+\varepsilon^{2}h_{i}^{n}$, where $n\in\{0,1\}$ and $g_{i+1/2,k}^{n+1}=\sum_{\ell,m}X_{i+1/2,\ell}^{n+1}S_{\ell m}^{n+1}V_{km}^{n+1}$ the scheme fulfills the discrete conservation law*
 >
@@ -897,7 +897,7 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
    \frac{T^{n+1}_{i}-T^{n}_{i}}{\Delta t}=\kappa\hskip 1.42262pt\sigma^{a}_{i}h^{n+1}_{i}. \tag{4.21}
    $$
 
-> **Lemma 1 **.****
+> **Lemma 1**
 >
 > *For the proposed modal macro-micro BUG scheme, we have*
 >
@@ -913,7 +913,7 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
 >
 > See Appendix B. ∎
 
-> **Theorem 6 **.****
+> **Theorem 6**
 >
 > *The proposed modal macro-micro BUG scheme is asymptotic-preserving in the sense of Theorem 3.*
 
@@ -984,7 +984,7 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
 
 #### 4.2.1 Energy stability
 
-> **Theorem 7 **.****
+> **Theorem 7**
 >
 > *Assume that the CFL condition (3.4) from Theorem 2 holds. Then the modal macro-micro BUG scheme is energy stable for the linearized problem (3.3), where the energy is the same as defined in Theorem 4.*
 
@@ -1113,7 +1113,7 @@ The work of Chinmay Patwardhan and Martin Frank was funded by the Deutsche Forsc
 
 We start by stating some lemmas and properties used to prove stability in energy norm (Theorem 2) for the linearized modal macro-micro scheme (3.3).
 
-> **Lemma 2 (Lemma 3.3 [19](Summation by parts))**.****
+> **Lemma 2 (Lemma 3.3 [19](Summation by parts))**
 >
 > *For vectors $\boldsymbol{\phi}_{i+1/2},\boldsymbol{\zeta}_{i+1/2}\in\mathbb{R}^{N}$ where $i=0,\ldots,N_{x}$, the equality*
 >
@@ -1123,7 +1123,7 @@ We start by stating some lemmas and properties used to prove stability in energy
 >
 > *holds for periodic or zero values at the boundary.*
 
-> **Lemma 3 **.****
+> **Lemma 3**
 >
 > *Let $\boldsymbol{\phi}_{i+1/2}\in\mathbb{R}^{N+1}$, for $i=0,\ldots,Nx$, then the following inequality holds*
 >
@@ -1157,7 +1157,7 @@ $$
 \frac{1}{\gamma_{0}}\textbf{{b}}=\textbf{a}=(a_{0},0,\ldots,0)^{\top}\in\mathbb{R}^{N},\hskip 18.49988pt\textbf{a}_{f}=(0,a_{0},0,\ldots,0)^{\top}\in\mathbb{R}^{N+1}.
 $$
 
-> **Lemma 4 (Lemma 3.4 [19] ($\mathrm{P}_{N}$ preservation))**.****
+> **Lemma 4 (Lemma 3.4 [19] ($\mathrm{P}_{N}$ preservation))**
 >
 > *For a given vector $\textbf{{g}}\in\mathbb{R}^{N}$ define its extension $\textbf{v}\coloneqq(0,g_{1},\ldots,g_{N})^{\top}\in\mathbb{R}^{N+1}$ as well as $\hat{\textbf{v}}_{i+1/2}\coloneqq\textbf{T}_{f}^{\top}\textbf{v}_{i+1/2}\in\mathbb{R}^{N+1}$. Then,*
 >
@@ -1167,7 +1167,7 @@ $$
 
 Two main properties of the advection operator, $\mathcal{L}$, that are used in proving energy stability are
 
-> **Lemma 5 (Lemma 3.5 [19] (Positivity))**.****
+> **Lemma 5 (Lemma 3.5 [19] (Positivity))**
 >
 > *For a given discrete function $\textbf{{g}}^{n}_{i+1/2}$, the advection operator fulfills the properties*
 >
@@ -1185,7 +1185,7 @@ Two main properties of the advection operator, $\mathcal{L}$, that are used in p
 > \displaystyle+\sum_{i}(\textbf{{g}}_{i+1/2}^{n}-\textbf{{g}}_{i+1/2}^{n+1})^{\top}(\textbf{A}^{+}\mathcal{D}^{+}+\textbf{A}^{-}\mathcal{D}^{-})\textbf{{g}}_{i+1/2}^{n+1}.
 > $$
 
-> **Lemma 6 (Lemma 3.6 [19] (Boundedness))**.****
+> **Lemma 6 (Lemma 3.6 [19] (Boundedness))**
 >
 > *For a given discrete function $\textbf{{g}}^{n}_{i+1/2}$, the advection operator fulfills the property*
 >

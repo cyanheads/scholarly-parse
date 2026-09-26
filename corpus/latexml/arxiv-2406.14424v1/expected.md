@@ -103,110 +103,27 @@ In the following, we describe how CascadeServe decomposes the complicated proble
 **Algorithm 1.** Gear plan optimization
 
 ```
-              1:
-              
-              
-             Inputs: SLO, model_profiles, qps_distribution
-
-              2:
-              
-              
-            // Initial gear plan
-
-              3:
-              
-              
-            gear_plan ←\leftarrow init_plan(qps_distribution, model_profiles, SLO)
-
-              4:
-              
-              
-            error_code ←\leftarrow "ok"
-
-              5:
-              
-              
-            subproblem_modules ←\leftarrow [search_cascades, assign_cascades, place_models, tune_batch_sizes]
-
-              6:
-              
-              
-            cur_subproblem ←0\leftarrow 0
-
-              7:
-              
-              
-            // Optimize one subproblem at a time keeping the others fixed
-
-              8:
-              
-              
-            while not converged do
-
-              9:
-              
-              
-              if cur_subproblem == -1 then
-
-              10:
-              
-              
-               raise Error("infeasible")
-
-              11:
-              
-              
-              end if
-
-              12:
-              
-              
-              module ←\leftarrow subproblem_modules[cur_subproblem]
-
-              13:
-              
-              
-              error_code, gear_plan ←\leftarrow module(error_code, gear_plan)
-
-              14:
-              
-              
-              if error_code == "ok" then
-
-              15:
-              
-              
-                          //Go to the next submodule and optimize
-
-              16:
-              
-              
-               cur_subproblem ←\leftarrow (cur_subproblem + 1) % 4
-
-              17:
-              
-              
-              else
-
-              18:
-              
-              
-                         //Go to the previous submodule and resolve the error
-
-              19:
-              
-              
-               cur_subproblem ←\leftarrow cur_subproblem - 1
-
-              20:
-              
-              
-              end if
-
-              21:
-              
-              
-            end while
+ Inputs: SLO, model_profiles, qps_distribution
+// Initial gear plan
+gear_plan $\leftarrow$ init_plan(qps_distribution, model_profiles, SLO)
+error_code $\leftarrow$ "ok"
+subproblem_modules $\leftarrow$ [search_cascades, assign_cascades, place_models, tune_batch_sizes]
+cur_subproblem $\leftarrow 0$
+// Optimize one subproblem at a time keeping the others fixed
+while not converged do
+  if cur_subproblem == -1 then
+   raise Error("infeasible")
+  end if
+  module $\leftarrow$ subproblem_modules[cur_subproblem]
+  error_code, gear_plan $\leftarrow$ module(error_code, gear_plan)
+  if error_code == "ok" then
+              //Go to the next submodule and optimize
+   cur_subproblem $\leftarrow$ (cur_subproblem + 1) % 4
+  else
+             //Go to the previous submodule and resolve the error
+   cur_subproblem $\leftarrow$ cur_subproblem - 1
+  end if
+end while
 ```
 
 As discussed previously, CascadeServe employs a submodule for each optimization subproblem. These submodules are iteratively optimized with respect to a fixed solution of the other subproblems. CascadeServe cycles through the submodules to derive a joint solution at convergence. Algorithm 1 shows pseudo-code for this procedure, and we put the proof of its convergence in Appendix A.

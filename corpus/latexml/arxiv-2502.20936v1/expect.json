@@ -1,5 +1,5 @@
 {
-  "why": "An acmart paper with spanning header cells: Table 3's dataset names each span six columns and repeat across them, and Table 4's two-line header cells are nested tabulars read as the cell's text, not as tables. Figure 3 is a figure float whose two subfigure panels each hold a tabular: its caption heads the two panel tables (a) and (b), and it counts as no figure. 2 figures: Figures 1 and 2. 1 formula, numbered. 34 references, 14 footnotes (the page's other ltx_note is the license notice). tables is left unasserted: of the 10 top-level tabulars, the one set as a panel beside Figure 2's plot (example questions per question type) does not reach the model, so 9 are parsed.",
+  "why": "An acmart paper with spanning header cells: Table 3's dataset names each span six columns and repeat across them, and Table 4's two-line header cells are nested tabulars read as the cell's text, not as tables. Figure 3 is a figure float whose two subfigure panels each hold a tabular: its caption heads the two panel tables (a) and (b), and it counts as no figure. 2 figures: Figures 1 and 2. 1 formula, numbered. 34 references, 14 footnotes (the page's other ltx_note is the license notice). 10 tables, one per top-level tabular, including the one set as an uncaptioned panel beside Figure 2's plot (example questions per question type), which follows the figure.",
   "title": "WebFAQ: A Multilingual Collection of Natural Q&A Datasets for Dense Retrieval",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -26,6 +26,7 @@
     "Conclusion",
     "Appendix: Full Results"
   ],
+  "tables": 10,
   "figures": 2,
   "formulas": 1,
   "references": 34,
@@ -36,6 +37,7 @@
     "| **Language** | **%** |  | **Language** | **%** |",
     "**Figure 3.** Examples of filtered questions/QA pairs\n\n**(a).** Near-duplicate detection ($\\alpha=0.7$)",
     "| $\\text{Q}_{1}$: Does Chrome have a free VPN? |",
+    "| **What is a collision waiver?** | Kaj je opustitev od trka? (slv) |",
     "\\lambda sim(q,D_{i})+BM25(q,D_{i}) \\tag{1}",
     "- (5) **Definition of cosine similarity threshold.**",
     "- **8** Websites are defined by their *origin*, which includes scheme, host and optionally port."

@@ -4,7 +4,7 @@ Erblin Isaku, Christoph Laaber, Hassan Sartaj, Shaukat Ali, Thomas Schwitalla, J
 2024  
 arXiv: 2404.03664v1
 
-## Abstract.
+## Abstract
 
 The Cancer Registry of Norway (CRN) uses an automated cancer registration support system (CaReSS) to support core cancer registry activities, i.e, data capture, data curation, and producing data products and statistics for various stakeholders. *GURI* is a core component of CaReSS, which is responsible for validating incoming data with medical rules. Such medical rules are manually implemented by medical experts based on medical standards, regulations, and research. Since large language models (LLMs) have been trained on a large amount of public information, including these documents, they can be employed to generate tests for *GURI*. Thus, we propose an LLM-based test generation and differential testing approach (LLMeDiff) to test *GURI*. We experimented with four different LLMs, two medical rule engine implementations, and $58$ real medical rules to investigate the hallucination, success, time efficiency, and robustness of the LLMs to generate tests, and these tests’ ability to find potential issues in *GURI*. Our results showed that *GPT-3.5* hallucinates the least, is the most successful, and is generally the most robust; however, it has the worst time efficiency. Our differential testing revealed 22 medical rules where implementation inconsistencies were discovered (e.g., regarding handling rule versions). Finally, we provide insights for practitioners and researchers based on the results.
 
@@ -49,189 +49,30 @@ Testing *GURI* is essential to ensure the accuracy of the cancer data and statis
 **Listing 1.** LLM Prompt
 
 ```
-            1
-            
-            
-            
-            
-            
-            
-            
-          system_msg = f"""
+system_msg = f"""
+You are a cautious assistant, an expert in medical rules.
+To complete the user task, you need to strictly follow these steps:
 
-            2
-            
-            
-            
-            
-            
-            
-            
-          You are a cautious assistant, an expert in medical rules.
+Follow these steps precisely:
 
-            3
-            
-            
-            
-            
-            
-            
-            
-          To complete the user task, you need to strictly follow these steps:
+Step 1: Clearly articulate the rule in natural language as you were explaining it to a child.
+Step 2: Identify the variable names and generate values according to the rule’s conditions.
+- For satisfying the rule, provide a dictionary (’satisfying_case’) including all variables specified in the rule.
+- For violating the rule, alter ONLY the implied value while keeping other values unchanged; output a dictionary (’violation_case’) for this.
+- For cases that do not apply to the rule, provide a dictionary (’invalid_case’) with invalid values that do not meet any rule condition.
 
-            4
+Step 3: Double check the use of original variable names as properties, and maintain only one value for each variable. Refactor the dictionaries if needed.
 
-            5
-            
-            
-            
-            
-            
-            
-            
-          Follow these steps precisely:
+Step 4: Express your confidence level on the generated test case using a score from 0% to 100%. Output ’confidence_score’ as a string.
 
-            6
+Step 5: Format and output the data as a JSON object. Enclose all properties in double quotes.
+"""
 
-            7
-            
-            
-            
-            
-            
-            
-            
-          Step 1: Clearly articulate the rule in natural language as you were explaining it to a child.
+user_msg = f"""
+Identify the variables and values in the given rule and create a JSON object with the following properties: satisfying_case, violation_case, invalid_case, and confidence_score.
 
-            8
-            
-            
-            
-            
-            
-            
-            
-          Step 2: Identify the variable names and generate values according to the rule’s conditions.
-
-            9
-            
-            
-            
-            
-            
-            
-            
-          - For satisfying the rule, provide a dictionary (’satisfying_case’) including all variables specified in the rule.
-
-            10
-            
-            
-            
-            
-            
-            
-            
-          - For violating the rule, alter ONLY the implied value while keeping other values unchanged; output a dictionary (’violation_case’) for this.
-
-            11
-            
-            
-            
-            
-            
-            
-            
-          - For cases that do not apply to the rule, provide a dictionary (’invalid_case’) with invalid values that do not meet any rule condition.
-
-            12
-
-            13
-            
-            
-            
-            
-            
-            
-            
-          Step 3: Double check the use of original variable names as properties, and maintain only one value for each variable. Refactor the dictionaries if needed.
-
-            14
-
-            15
-            
-            
-            
-            
-            
-            
-            
-          Step 4: Express your confidence level on the generated test case using a score from 0% to 100%. Output ’confidence_score’ as a string.
-
-            16
-
-            17
-            
-            
-            
-            
-            
-            
-            
-          Step 5: Format and output the data as a JSON object. Enclose all properties in double quotes.
-
-            18
-            
-            
-            
-            
-            
-            
-            
-          """
-
-            19
-
-            20
-            
-            
-            
-            
-            
-            
-            
-          user_msg = f"""
-
-            21
-            
-            
-            
-            
-            
-            
-            
-          Identify the variables and values in the given rule and create a JSON object with the following properties: satisfying_case, violation_case, invalid_case, and confidence_score.
-
-            22
-
-            23
-            
-            
-            
-            
-            
-            
-            
-          Rule: {rule}
-
-            24
-            
-            
-            
-            
-            
-            
-            
-          """
+Rule: {rule}
+"""
 ```
 
 Figure 2 shows LLMeDiff’s overview in two stages:

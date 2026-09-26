@@ -31,11 +31,12 @@
     "arXiv: 2502.01988v2",
     "**Algorithm 1.** ReMiDi Reconstruction Method\n\n```",
     "**Algorithm 2.** Chamfer Distance Computation\n\n```",
+    "Input: Input mesh $\\mathcal{M}\\in\\mathbb{R}^{315\\times 3}$, loss multiplier $k$",
     "| Bending & Twisting | 1.709 $\\pm$ 0.261 | 43.73 $\\pm$ 14.99 |",
     "$$\n\\mathbf{z}^{*}=\\operatorname{argmin}_{\\mathbf{z}}\\|\\mathcal{F}(\\mathcal{D}(\\mathbf{z}))-\\mathcal{S}_{\\text{ref}}\\|_{2}^{2}.\n$$",
     "1. A differentiable implementation of SpinDoctor (Li et al., 2019)",
     "**Figure 10.** Cylindrical section of a bent region of neuron (University of California, San Diego, 2021)",
     "- **1** $\\Omega$ generally represents the entire voxel being simulated"
   ],
-  "notContains": ["**Figure.**", "**Table.**"]
+  "notContains": ["**Figure.**", "**Table.**", "ℳ∈ℝ315×3"]
 }
