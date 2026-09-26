@@ -1,0 +1,30 @@
+{
+  "why": "eLife article with three <sub-article>s: the editor's evaluation, the decision letter, and the author response. Pins each as a back section under its own title after the article's back matter, the decision letter's <boxed-text> preamble as a quoted box, and the author response's 17 <disp-quote>s of reviewer text as quotes between the replies. 12 figures: six labelled figures and six figure supplements, each its own <fig>.",
+  "title": "pH-dependent 11° F_1F_O ATP synthase sub-steps reveal insight into the F_O torque generating mechanism",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Most cellular ATP is made by rotary F_1F_O ATP synthases",
+  "sectionTitles": [
+    "Introduction",
+    "Results",
+    "Discussion",
+    "Materials and methods",
+    "Funding Information",
+    "Acknowledgements",
+    "Additional files",
+    "Data availability",
+    "Editor's evaluation",
+    "Decision letter",
+    "Author response"
+  ],
+  "tables": 2,
+  "figures": 12,
+  "formulas": 5,
+  "references": 50,
+  "contains": [
+    "## Decision letter\n\n> Our editorial process produces two outputs",
+    "## Author response\n\n> Essential revisions:\n>\n> 1\\) The Discussion should be restructured",
+    "rotation?\n\nAll completed as requested.\n\n> Reviewer ",
+    "**Figure 2—figure supplement 1.** **Examples each of the first 90° of ATP hydrolysis-driven power strokes"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "why": "Grobid TEI from the Scientific Reports PDF also in the corpus as nature-s41598-025-30797-6: equation-dense, and Grobid's math is plain text. 81 formulas, one per <formula>: Grobid splits most displayed solutions into several pieces (the ψ(x, t) = … line, its × e^{i(…)} factor, a lone closing parenthesis), so the count follows Grobid's segmentation, not the paper's numbered equations. 7 figures: the six captioned figures, plus a <figure> whose figDesc holds reference entries 30–33, which is also why 29 of the paper's 33 references are in the listBibl. No tables. The 3 footnotes hold the page's running header and footer lines. Grobid emitted no Introduction heading, so the first body section is untitled, and its title reads \"sixthorder\" where the paper has \"sixth-order\". The back matter's empty Declarations heading has no content and is dropped.",
+  "title": "Advanced soliton structures and elliptic wave patterns in a sixthorder nonlinear Schrödinger equation using improved modified extended tanh function method",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "In this work, a sixth-order extension of the nonlinear Schrödinger equation (NLSE) within its integrable hierarchy is investigated",
+  "sectionTitles": [
+    "Method and contributions.",
+    "Proposed technique",
+    "Methodology and findings",
+    "Localized solitons",
+    "Singular periodic solutions and singular solitons",
+    "Exponential solution",
+    "Results and discussion",
+    "Bright soliton dynamics",
+    "Jacobi elliptic functions and their connection to periodic and soliton solutions",
+    "Conclusion",
+    "Acknowledgements",
+    "Funding",
+    "Data availability",
+    "Competing interests",
+    "Author contributions"
+  ],
+  "tables": 0,
+  "figures": 7,
+  "formulas": 81,
+  "references": 29,
+  "contains": [
+    "DOI: 10.1038/s41598-025-30797-6",
+    "ψ(x, t) = 1250α 3 5 √ d2sech (√ d2ζ",
+    "Fig. 1. Bright soliton solution of Eq. (8) visualized in two and three dimensions under identical parameter settings",
+    "Open access funding provided by The Science, Technology & Innovation Funding Authority (STDF)",
+    "The authors declare no competing interests."
+  ]
+}

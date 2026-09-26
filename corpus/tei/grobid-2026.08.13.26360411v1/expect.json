@@ -1,0 +1,34 @@
+{
+  "why": "Grobid TEI from the medRxiv preprint PDF also in the corpus as medrxiv-2026.08.13.26360411v1: a long genomics paper whose sections Grobid left unnumbered, so every body heading is a top-level section. 9 figures, one per <figure>: Grobid merged the captions of Figures 1–3 into one element and of Figures 4–5 into another, and the other seven are bare bitmap regions with no caption or URL, which the model keeps and the Markdown does not show. 1 formula: the F-statistic, which the PDF's font encoding turned into punctuation; its $ is escaped so the text does not open math. No tables, no footnotes, 79 references. The \"!This\" heading is Grobid's. The acknowledgments div has no heading, and the data and code availability statements and the disclosures follow it as back matter.",
+  "title": "Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Heart failure (HF) is a leading cause of morbidity and mortality.",
+  "sectionTitles": [
+    "Introduction",
+    "Genomic loci associated with HF, HFrEF, and HFpEF",
+    "Gene mapping, fine-mapping and functional analyses",
+    "MR-QTLs for HF, HFpEF, and HFrEF",
+    "Genetically supported drug targets",
+    "DISCUSSION",
+    "METHODS",
+    "Million Veteran Program",
+    "Mendelian randomization",
+    "Instrument strength and horizontal pleiotropy",
+    "Druggability assessment",
+    "Data Availability",
+    "Code Availability",
+    "Disclosures"
+  ],
+  "tables": 0,
+  "figures": 9,
+  "formulas": 1,
+  "references": 79,
+  "contains": [
+    "Figure 1. Study overview and GWAS results of the multi-ancestry analysis of HF, HFrEF, and HFpEF.",
+    "Figure 4. Lipoprotein-mediated and adipocyte-mediated lipolysis and long-chain fatty acid oxidation roles in HF.",
+    "\" ! (\\$%!%&) ((%\" ! )&",
+    "The GWAS summary statistics generated and analyzed in this study will be available through dbGaP under study accession phs001672.",
+    "The remaining authors have no conflicts to disclose."
+  ]
+}

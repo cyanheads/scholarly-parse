@@ -1,0 +1,32 @@
+{
+  "why": "F1000Research software tool article: 17 <preformat preformat-type=\"computer code\"> blocks of MATLAB and R, their syntax colouring carried in <styled-content> and their indentation in em spaces, and four open peer-review reports as <sub-article>s. Pins each listing as a fenced code block with the <styled-content> text kept and no markup (the leaked-tag invariant skips code blocks), the em-space indentation verbatim, and each report as a back section under its own title.",
+  "title": "Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "**Background:** This paper presents a newly developed Matlab code for the numerical simulation",
+  "sectionTitles": [
+    "Introduction",
+    "Methods",
+    "Implementation",
+    "Operation",
+    "Discussion",
+    "Limitations",
+    "Conclusion",
+    "Data availability statement",
+    "Reviewer response for version 2",
+    "Reviewer response for version 2",
+    "Reviewer response for version 1",
+    "Reviewer response for version 1"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "formulas": 1,
+  "references": 19,
+  "contains": [
+    "```\n% Define the parameters\nif nargin==0\n\u2003\u2003Omega=20;\n",
+    "```\n# Load required packages\nlibrary(deSolve)\nlibrary(ggplot2)\n",
+    "**Figure 12.** **All the compartments using R.**",
+    "## Reviewer response for version 1\n\nComments to the Authors"
+  ],
+  "notContains": ["styled-content", "color:#"]
+}

@@ -1,0 +1,27 @@
+{
+  "why": "A Journal of Translational Medicine letter: seven paragraphs directly in <body> with no section and no abstract, followed by Europe PMC's back matter placed inside <body> as titled <sec>s (acknowledgements, author contributions, funding, data availability, a Declarations section with three subsections, a footnote group, the reference list). Pins the letter as one untitled body section, each back section and the nested declarations under their own headings, the footnote group's wrapper not rendered as a section, and the no-abstract warning.",
+  "title": "The interplay between sex hormones, mitochondrial dysfunction, and intervertebral disc degeneration: insights beyond Qiu et al.",
+  "quality": "structured",
+  "abstractKinds": [],
+  "sectionTitles": [
+    "Acknowledgements",
+    "Author contributions",
+    "Funding",
+    "Data availability",
+    "Declarations",
+    "Ethics approval and consent to participate",
+    "Consent for publication",
+    "Competing interests"
+  ],
+  "tables": 0,
+  "figures": 0,
+  "references": 5,
+  "warnings": ["no-abstract"],
+  "contains": [
+    "Dear Editor,\n\nWe read with great interest the recent work by Qiu et al. [1], which provided",
+    "## Declarations\n\n### Ethics approval and consent to participate\n\nNot applicable.",
+    "- **Publisher’s note** Springer Nature remains neutral with regard to jurisdictional claims",
+    "- [5] Klinge CM. Estrogenic control of mitochondrial function. Redox Biol. 2020;31:101435."
+  ],
+  "notContains": ["**Publisher’s note**\n\nSpringer Nature"]
+}

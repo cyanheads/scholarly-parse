@@ -1,0 +1,41 @@
+{
+  "why": "The math-heavy large fixture: pins display equations as $$ blocks with their printed numbers as \\tag (1.1, subequation 3.3c), theorem-like environments and proofs as quoted boxes, the ltx_paragraph heading nested under 2.1.1, and two appendices after the declaration and acknowledgment sections. 231 formulas: one per equation row across 150 display blocks (101 ltx_equation tables, 49 ltx_equationgroup), 65 of the rows numbered. 15 figures from 27 ltx_figure elements: the five figure floats plus the ten subfigure panels captioned (a)–(d); the other twelve panels have no caption of their own and fold into their float. No tabulars, 27 references. The four author footnotes sit between the keywords paragraph and section 1, all marked †.",
+  "title": "Asymptotic-preserving and energy stable dynamical low-rank approximation for thermal radiative transfer equations",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "The thermal radiative transfer equations model temperature evolution through a background medium as a result of radiation.",
+  "sectionTitles": [
+    "Introduction",
+    "Background",
+    "Thermal radiative transfer equations",
+    "Macro-micro decomposition",
+    "Initial and boundary conditions",
+    "Angular discretization of microscopic variable",
+    "Dynamical low-rank approximation",
+    "Energy stability of modal macro-micro equations",
+    "Dynamical low-rank approximation for the modal macro-micro equations",
+    "Fixed-rank modal macro-micro BUG integrator",
+    "Asymptotic-preserving modification to augmented BUG integrator",
+    "Numerical results",
+    "Rectangular pulse test case",
+    "Absorber test case",
+    "Conclusion",
+    "Declaration of competing interests",
+    "Acknowledgment",
+    "Proof of Theorem 2",
+    "Proof of Lemma 1"
+  ],
+  "tables": 0,
+  "figures": 15,
+  "formulas": 231,
+  "references": 27,
+  "contains": [
+    "arXiv: 2402.16746v1",
+    "\\frac{T^{n+1}_{i}-T^{n}_{i}}{\\Delta t}=\\kappa\\hskip 1.42262pt\\sigma^{a}_{i}h^{n+1}_{i}. \\tag{3.3c}\n$$",
+    "> *Assume that the time step $\\Delta t$ fulfills the CFL condition for all $k$, such that $\\mu_{k}\\neq 0$,*",
+    "> We note that $\\beta_{N}$ remains bounded for all $N$. ∎",
+    "**(b).** $\\varepsilon=10^{-5}$",
+    "- *An asymptotic-preserving, mass conservative and rank-adaptive DLRA integrator:*",
+    "- **†** Jonas Kusch: jonas.kusch@nmbu.no"
+  ]
+}

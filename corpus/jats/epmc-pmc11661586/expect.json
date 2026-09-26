@@ -1,0 +1,16 @@
+{
+  "why": "A PLOS ONE correction notice: one paragraph directly in <body>, no abstract, and Europe PMC's reference list placed inside <body> as a <sec sec-type=\"ref-list\"> titled 'Reference' around an untitled <sec>. Pins the paragraph as the only (untitled) body section with its links kept, the wrapper lifted out into the one-entry reference list rather than rendered as a body section, and the no-abstract warning.",
+  "title": "Correction: Seasonal Effects on Gene Expression",
+  "quality": "structured",
+  "abstractKinds": [],
+  "tables": 0,
+  "figures": 0,
+  "references": 1,
+  "warnings": ["no-abstract"],
+  "contains": [
+    "The accession number appearing in the Data Availability statement is incorrect.",
+    "(accession number: [GSE53195](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53195)).",
+    "## References\n\n- [1] Goldinger A, Shakhbazov K, Henders AK, McRae AF, Montgomery GW, Powell JE (2015) Seasonal Effects on Gene Expression. PLoS ONE 10(5): e0126995."
+  ],
+  "notContains": ["## Reference\n"]
+}

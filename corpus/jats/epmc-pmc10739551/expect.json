@@ -1,0 +1,22 @@
+{
+  "why": "A German-language review article (xml:lang=\"de\") in Pathologie with an English <trans-abstract>. Pins the German abstract as the main one ahead of the translated English one under its own heading, the subtitle joined to the title in the heading, German typography („…“) intact, the German section titles, and the ethics <notes> in back matter. Both <fig>s carry only a graphic, with no label or caption: they count as the two figures but render no Markdown line.",
+  "title": "Interdisziplinäre ultraschallgesteuerte minimal-invasive Autopsie bei COVID-19-Verstorbenen auf der Intensivstation einer Universitätsklinik",
+  "quality": "structured",
+  "abstractKinds": ["main", "translated"],
+  "abstractStartsWith": "In dieser Machbarkeitsstudie führten wir in einem interdisziplinären Team standardisierte ultraschallgesteuerte minimal-invasive Autopsien",
+  "sectionTitles": [
+    "Autopsie 2.0 oder weiter wie bisher?",
+    "Die bettseitige US-MIA ist sicher und kann schnell nahezu autolysefreies Gewebe sichern",
+    "Fazit für die Praxis",
+    "Einhaltung ethischer Richtlinien"
+  ],
+  "tables": 0,
+  "figures": 2,
+  "references": 14,
+  "contains": [
+    "# Interdisziplinäre ultraschallgesteuerte minimal-invasive Autopsie bei COVID-19-Verstorbenen auf der Intensivstation einer Universitätsklinik: Eine Proof-of-Concept-Studie",
+    "## Abstract (translated)\n\nIn this feasibility study, we carried out in an interdisciplinary team standardised",
+    "(„minimally invasive tissue sampling“, MITS)",
+    "- [2] Boor P, Eichhorn P, Hartmann A, et al. Praktische Aspekte von COVID-19-Obduktionen [Practical aspects of COVID-19 autopsies]. Pathologe. 2021;42(2):197–207."
+  ]
+}

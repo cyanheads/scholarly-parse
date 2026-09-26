@@ -1,0 +1,36 @@
+{
+  "why": "Rosetta: the ar5iv (LaTeXML) render of the ACL 2019 paper also in the corpus as PDF (arxiv-1906.00591v1) and Grobid TEI (grobid-1906.00591v1). Pins the column spans in Table 2's header (each system name spans three columns and repeats across them), the six footnotes with their marks left in the text, inline math in captions and cells, and the unnumbered paragraph headings under 3.1 and 4. 5 tables: one tabular in each of the five table floats. 2 figures: both are TikZ drawings LaTeXML inlines as SVG, so each keeps its caption with no image link, and the drawings' own text labels stay out of the Markdown. 28 references.",
+  "title": "Evaluating Gender Bias in Machine Translation",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "We present the first challenge set and evaluation protocol for the analysis of gender bias in machine translation (MT).",
+  "sectionTitles": [
+    "Introduction",
+    "Challenge Set for Gender Bias in MT",
+    "Evaluation",
+    "Experimental Setup",
+    "MT systems",
+    "Target languages and morphological analysis",
+    "Results",
+    "Fighting Bias with Bias",
+    "Human Validation",
+    "Discussion",
+    "Related work",
+    "Limitations and future work",
+    "Conclusions",
+    "Acknowledgments"
+  ],
+  "tables": 5,
+  "figures": 2,
+  "formulas": 0,
+  "references": 28,
+  "contains": [
+    "|  | **Google Translate** | **Google Translate** | **Google Translate** | **Microsoft Translator** |",
+    "$\\Delta_{G}$ denotes the difference in performance ($F_{1}$ score) between male and female translations.",
+    "while for the latter two academic models we use the pretrained models provided by the Fairseq toolkit.^5",
+    "- **5** <https://github.com/pytorch/fairseq>",
+    "**Figure 1.** An example of gender bias in machine translation from English (top) to Spanish (bottom).",
+    "| The janitor does not like **the baker** because **she** always messes up the kitchen. |"
+  ],
+  "notContains": ["El doctor le pidio", "Stereotypical Non-Stereotypical", "**Table.**"]
+}

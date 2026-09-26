@@ -1,0 +1,30 @@
+{
+  "why": "All six <table-wrap>s sit in <floats-group> after <back>, so a body-only walk finds none. Pins them rendered under 'Figures and tables' with their labels and captions, Table 1's spans expanded (a three-column header cell, row-spanning group labels), the three-row headers of Tables 2–4 and 6 merged column by column, the five-part structured abstract, and the ordered list nested inside item (5) of the Discussion's bullet list.",
+  "title": "An Exploratory Study on the Relationship between Brachial Arterial Blood Flow and Cardiac Output",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "We have obtained prospective clinical outcomes using the brachial artery largely",
+  "sectionTitles": [
+    "Background",
+    "Purpose",
+    "Methods",
+    "Results",
+    "Conclusion",
+    "Introduction",
+    "Methods and Materials",
+    "Result",
+    "Discussion",
+    "Conclusions"
+  ],
+  "tables": 6,
+  "figures": 0,
+  "references": 36,
+  "contains": [
+    "## Figures and tables\n\n**Table 1.** Characteristics of participants.",
+    "| Categorical variables | Categorical variables | Categorical variables | Count/mean | *N*%/std. |",
+    "| Gender | Male | Male | 353 | 60.24% |",
+    "| Dist (cm) / Item | Dist (cm) / Level | *N* | *T*-test / Mean ± SD |",
+    "**Table 6.** Descriptive statistics about Rate.",
+    "- (5) Factors causing no sharp changes in the cardiac output and brachial arterial blood flow as follows:\n\n  1. Similarly, the brain, as an important organ"
+  ]
+}

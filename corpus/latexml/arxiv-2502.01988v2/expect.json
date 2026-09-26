@@ -1,0 +1,41 @@
+{
+  "why": "CC BY-SA. Pins the two algorithm floats (ltx_float_algorithm): each renders as its caption paragraph and a code block, not as a figure or a table. 13 figures: the 13 ltx_figure floats; the two algorithm floats are the other two <figure> elements. 1 table: one tabular in the one table float. 18 formulas: one per equation row across 18 unnumbered display equations. 35 references, 1 footnote. Impact Statement is the source's own unnumbered section after the Conclusion, and the appendices A–E follow it.",
+  "title": "ReMiDi: Reconstruction of Microstructure Using a Differentiable Diffusion MRI Simulator",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "We propose ReMiDi, a novel method for inferring neuronal microstructure as arbitrary 3D meshes using a differentiable diffusion Magnetic Resonance Imaging (dMRI) simulator.",
+  "sectionTitles": [
+    "Introduction",
+    "Background",
+    "Bloch-Torrey Partial Differential Equation",
+    "Methods",
+    "Differentiable Simulator",
+    "Reducing Ill-Posedness by Projecting to Latent Space",
+    "Experiments",
+    "Results",
+    "Ablation studies",
+    "Diffusion directions and diffusion times",
+    "Comparison with a Neural Network",
+    "Conclusion",
+    "Impact Statement",
+    "Deformations of Axons",
+    "Spectral Auto-Encoder",
+    "More Details of Reconstructions by ReMiDi",
+    "Latent Space Updates during Reconstruction"
+  ],
+  "tables": 1,
+  "figures": 13,
+  "formulas": 18,
+  "references": 35,
+  "contains": [
+    "arXiv: 2502.01988v2",
+    "**Algorithm 1.** ReMiDi Reconstruction Method\n\n```",
+    "**Algorithm 2.** Chamfer Distance Computation\n\n```",
+    "| Bending & Twisting | 1.709 $\\pm$ 0.261 | 43.73 $\\pm$ 14.99 |",
+    "$$\n\\mathbf{z}^{*}=\\operatorname{argmin}_{\\mathbf{z}}\\|\\mathcal{F}(\\mathcal{D}(\\mathbf{z}))-\\mathcal{S}_{\\text{ref}}\\|_{2}^{2}.\n$$",
+    "1. A differentiable implementation of SpinDoctor (Li et al., 2019)",
+    "**Figure 10.** Cylindrical section of a bent region of neuron (University of California, San Diego, 2021)",
+    "- **1** $\\Omega$ generally represents the entire voxel being simulated"
+  ],
+  "notContains": ["**Figure.**", "**Table.**"]
+}

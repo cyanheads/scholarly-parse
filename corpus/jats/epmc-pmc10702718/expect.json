@@ -1,0 +1,33 @@
+{
+  "why": "Six algorithm listings are <preformat> blocks placed between paragraphs, each bordered with runs of underscores and laid out with no-break spaces (PMC's own rendering nests the same blocks inside <p>). Pins each listing as a fenced code block with its underscores and spacing verbatim rather than escaped into prose, the labelled Example 1 <disp-quote> as a quote, and the table footnotes under their tables. Europe PMC's appended Associated Data section repeats both <supplementary-material>s and the data availability note; it is skipped, so each supplement appears once.",
+  "title": "A secure solution based on load-balancing algorithms between regions in the cloud environment",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "The problem treated in this article is the storage of sensitive data in the cloud environment",
+  "sectionTitles": [
+    "Introduction",
+    "Literature review",
+    "Architecture and model",
+    "Problem description",
+    "Proposed algorithms",
+    "Longest file size algorithm (*LFS*)",
+    "Best-value of four algorithms (*BFO*)",
+    "Experimental and discussion",
+    "Comparison to existing algorithms",
+    "Conclusion",
+    "Supplemental Information",
+    "Funding Statement"
+  ],
+  "tables": 13,
+  "figures": 5,
+  "formulas": 2,
+  "references": 55,
+  "contains": [
+    "```\n_______________________ \nAlgorithm\u00a01\u00a0Scheduling\u00a0of\u00a0a\u00a0list\u00a0F\u00a0Algorithm\u00a0(SCL(F))___________________________ \n",
+    "Algorithm\u00a03\u00a0Third-Grouped\u00a0Excluding-Files\u00a0with\u00a0Minimum-Load\u00a0Algorithm \n(TEM)_____",
+    "> Example 1\n>\n> In this example, we give a scenario that can be realized in a real circumstance.",
+    "**Notes.** Bold indicates the best results and the underline indicates the second-best results.",
+    "**Supplemental Information 1.** **The total instances of 1360 used in the experimental results** (file: peerj-cs-09-1513-s001.txt)"
+  ],
+  "notContains": ["\\_\\_\\_", "## Associated Data"]
+}

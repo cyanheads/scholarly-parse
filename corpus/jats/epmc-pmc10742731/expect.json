@@ -1,0 +1,26 @@
+{
+  "why": "28 <statement>s (seven lemmas, a proposition, four theorems, four corollaries, two remarks, three examples, seven proofs), each labelled by two <bold>s joined with a no-break space, and 78 MathML-only display formulas, 13 of them numbered and many inside the statements. Pins each statement as a quoted box headed by its label, display math inside a proof kept as display math within the box, and the equation numbers as \\tag{}.",
+  "title": "Minimal Linear Codes Constructed from Sunflowers",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Sunflower in coding theory is a class of important subspace codes and can be used to construct linear codes.",
+  "sectionTitles": [
+    "Sunflower",
+    "Euclidean Inner Product",
+    "Minimal Linear Codes",
+    "The Minimality of Linear Codes Constructed from Sunflowers",
+    "Concluding Remarks"
+  ],
+  "tables": 0,
+  "figures": 0,
+  "formulas": 78,
+  "references": 24,
+  "contains": [
+    "> **Lemma 1.**\n>\n> *Let $",
+    "> **Proof.**\n>\n> Since\n>\n> $$\n> \\begin{matrix}",
+    "> **Proposition 1**\n",
+    "> **Theorem 4.**\n",
+    "> **Example 3.**\n",
+    "\\tag{13}\n$$"
+  ]
+}

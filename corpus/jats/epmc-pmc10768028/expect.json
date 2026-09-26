@@ -1,0 +1,38 @@
+{
+  "why": "Pensoft taxonomic paper: six genus and species treatments are <sec sec-type=\"taxon-treatment\"> holding treatment-* subsections (type species or type materials, diagnosis, description, etymology, distribution, and others), plus a dichotomous identification key set as an unlabelled <table-wrap> and one XML-treatment <supplementary-material> per taxon. Pins the treatment hierarchy at its source depth, the key's rows, the ZooBank URLs kept, the invisible U+FEFF treatment labels dropped, and the Additional information subsections. The title is not asserted while its adjacent genus and species <named-content>s run together.",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "This study examines Blattinae samples from Southwest China collected in recent years.",
+  "sectionTitles": [
+    "Introduction",
+    "Materials and methods",
+    "Taxonomy",
+    "Vittiblatta",
+    "Type species.",
+    "Diagnosis.",
+    "Generic description.",
+    "Key to species of *Vittiblatta* Luo & Wang, gen. nov. (males)",
+    "Vittiblatta punctata",
+    "Type materials.",
+    "Ootheca.",
+    "Planiblatta crassispina",
+    "Discussion",
+    "Supplementary Material",
+    "Acknowledgements",
+    "Additional information",
+    "Author ORCIDs",
+    "Data availability"
+  ],
+  "tables": 1,
+  "figures": 7,
+  "references": 54,
+  "contains": [
+    "\n### Vittiblatta punctata\n",
+    "\n#### Ootheca.\n\n11.4 mm long, 5.6 mm wide, reddish brown.",
+    "https://zoobank.org/89FF89FE-72B0-4D24-A2E4-A63B67CB2AFD\n\n#### Type species.",
+    "| – | Pronotum smooth, without punctures | **2** |",
+    "**Supplementary material.** **XML Treatment for Vittiblatta punctata** (file: zookeys.1187.113403-treatment2.xml)",
+    "### Author ORCIDs\n\nXin-Xing Luo <https://orcid.org/0009-0000-6838-1696>"
+  ],
+  "notContains": ["\ufeff"]
+}

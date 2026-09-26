@@ -1,0 +1,23 @@
+{
+  "why": "A Frontiers Research Topic editorial: seventeen paragraphs directly in <body> with no <sec>, no abstract, and no reference list; the articles it introduces are cited by <ext-link> in the running text. Pins the paragraphs as one untitled body section opening straight after the front matter with no invented heading, the links kept, the four back-matter sections, zero references with no References heading, and the no-abstract warning.",
+  "title": "Editorial: Innovations in development, translational research and manufacturing of CAR T cells",
+  "quality": "structured",
+  "abstractKinds": [],
+  "sectionTitles": [
+    "Author contributions",
+    "Conflict of interest",
+    "Generative AI statement",
+    "Publisher’s note"
+  ],
+  "tables": 0,
+  "figures": 0,
+  "references": 0,
+  "warnings": ["no-abstract"],
+  "contains": [
+    "License: <https://creativecommons.org/licenses/by/4.0/>\n\nThe surging development of cellular immunotherapies",
+    "A key contribution in this area comes from the work of [García-Calderón et al.](https://doi.org/10.3389/fimmu.2023.1152498), who performed",
+    "In closing, we extend our sincere appreciation to the authors",
+    "- Edited and Reviewed by: Francesca Granucci, University of Milano-Bicocca, Italy"
+  ],
+  "notContains": ["## References"]
+}

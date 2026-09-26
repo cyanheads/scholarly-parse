@@ -1,0 +1,30 @@
+{
+  "why": "Rosetta: Grobid TEI from the PDF of the ACL 2019 paper also in the corpus as PDF (arxiv-1906.00591v1) and ar5iv LaTeXML (ar5iv-1906.00591). Pins what it shares with the LaTeXML parse (title, abstract opening, the section headings Grobid recovered, Table 1's rows, the Table 1 and Table 3 captions, 4 footnotes) and the counts Grobid emitted. 3 tables: Tables 1, 2, and 3 of the paper's five; Table 4's caption and Table 5's rows flow into the body text, and Table 2's grid also holds Figure 2's chart labels and Table 4's rows. No figures: both figures are vector drawings, and their text lands in the body and in Table 2. 2 formulas: the header text of Tables 2 and 3, misread as math. 27 references of the paper's 28. Footnotes 5 and 6 sit inline in the body, so 4 footnotes. Grobid set section 2's heading inside a paragraph, so it is not a section here.",
+  "title": "Evaluating Gender Bias in Machine Translation",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "We present the first challenge set and evaluation protocol for the analysis of gender bias in machine translation (MT).",
+  "sectionTitles": [
+    "Introduction",
+    "Evaluation",
+    "MT systems",
+    "Target languages and morphological analysis",
+    "Results",
+    "Fighting Bias with Bias",
+    "Human Validation",
+    "Discussion",
+    "Conclusions",
+    "Acknowledgments"
+  ],
+  "tables": 3,
+  "figures": 0,
+  "formulas": 2,
+  "references": 27,
+  "contains": [
+    "The coreference test sets and resulting WinoMT corpus statistics (in number of instances).",
+    "| Male | 240 | 1582 | 1826 |",
+    "Performance of recent state-of-the-art academic translation models from English to French and German.",
+    "and Paola Virga for many insightful discussions",
+    "- **4** http://www.systransoft.com"
+  ]
+}
