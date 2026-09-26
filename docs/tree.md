@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 17:49:41
+Generated on: 2026-09-26 18:00:03
 
 ```text
 scholarly-parse/
@@ -44,7 +44,13 @@ scholarly-parse/
 │   ├── release-github.ts
 │   └── tree.ts
 ├── skills/
+│   ├── add-fixture/
+│   │   └── SKILL.md
+│   ├── add-format/
+│   │   └── SKILL.md
 │   ├── code-simplifier/
+│   │   └── SKILL.md
+│   ├── corpus-sampling/
 │   │   └── SKILL.md
 │   ├── git-wrapup/
 │   │   └── SKILL.md

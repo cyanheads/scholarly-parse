@@ -16,7 +16,7 @@
  * html <url> --doi <doi>        a publisher article page
  * grobid <pdf-fixture-id>       the PDF fixture through a local Grobid    → tei/grobid
  *
- * --features a,b     tags from tests/corpus/features.ts, verified in the file
+ * --features a,b     tags from the tests/corpus/features.ts vocabulary
  * --regression cyanheads/<repo>#N
  * --id <fixture-id>  default: <origin>-<identifier>
  * --notes "…"
