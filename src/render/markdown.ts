@@ -144,17 +144,25 @@ function truncate(text: string, max: number): string {
   return `${cut.slice(0, Math.max(cut.lastIndexOf(' '), max / 2))}…`;
 }
 
+/** An abstract's heading: its own title, else its kind's. */
+export function abstractHeading(abstract: Abstract): string {
+  return abstract.title ?? ABSTRACT_HEADINGS[abstract.kind];
+}
+
 function renderAbstract(abstract: Abstract): string {
   const body = abstract.sections.map((section) => renderSection(section, 3)).filter(Boolean);
   if (body.length === 0) return '';
-  return [`## ${abstract.title ?? ABSTRACT_HEADINGS[abstract.kind]}`, ...body].join('\n\n');
+  return [`## ${abstractHeading(abstract)}`, ...body].join('\n\n');
 }
 
 /**
  * A section heading's text: label, then title, else the kind's default where the
  * section opens that kind (an untitled part of a titled appendix is not a new one).
  */
-function headingText(section: Section, parentKind: SectionKind | undefined): string | undefined {
+export function headingText(
+  section: Section,
+  parentKind: SectionKind | undefined,
+): string | undefined {
   const title =
     section.title ?? (section.kind === parentKind ? undefined : KIND_HEADINGS[section.kind]);
   if (!title) return section.label ? escapeInline(section.label) : undefined;

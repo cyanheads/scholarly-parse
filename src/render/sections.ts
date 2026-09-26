@@ -5,7 +5,7 @@
  * @module src/render/sections
  */
 import type { Abstract, ScholarlyDocument, Section, SectionKind } from '../model/document.js';
-import { renderBlocks } from './markdown.js';
+import { abstractHeading, headingText, renderBlocks, renderSection } from './markdown.js';
 
 /** One section, flattened out of the tree. */
 export interface FlatSection {
@@ -19,6 +19,7 @@ export interface FlatSection {
   markdown: string;
   /** Titles from the top-level section down to this one. */
   path: string[];
+  /** The heading `toMarkdown` gives the section: label and title, or its kind's name when untitled. */
   title?: string;
 }
 
@@ -33,10 +34,10 @@ export function toSections(document: ScholarlyDocument): FlatSection[] {
 }
 
 function visitAbstract(abstract: Abstract, index: number, out: FlatSection[]): void {
-  const title =
-    abstract.title ?? (abstract.kind === 'main' ? 'Abstract' : `Abstract (${abstract.kind})`);
-  const markdown =
-    `## ${title}\n\n${abstract.sections.map((s) => renderSectionAll(s, 3)).join('\n\n')}`.trim();
+  const title = abstractHeading(abstract);
+  const markdown = [`## ${title}`, ...abstract.sections.map((s) => renderSection(s, 3))]
+    .filter(Boolean)
+    .join('\n\n');
   out.push({
     chars: markdown.length,
     id: `abstract-${index + 1}`,
@@ -48,18 +49,15 @@ function visitAbstract(abstract: Abstract, index: number, out: FlatSection[]): v
   });
 }
 
-function renderSectionAll(section: Section, level: number): string {
-  const heading = section.title ? `${'#'.repeat(Math.min(level, 6))} ${section.title}\n\n` : '';
-  const sub = section.sections.map((s) => renderSectionAll(s, level + 1)).join('\n\n');
-  return `${heading}${renderBlocks(section.blocks)}${sub ? `\n\n${sub}` : ''}`.trim();
-}
-
-function visit(section: Section, level: number, parents: string[], out: FlatSection[]): void {
-  const label =
-    section.label && section.title && !section.title.startsWith(section.label)
-      ? `${section.label} `
-      : '';
-  const title = section.title ? `${label}${section.title}` : undefined;
+/** A section's entry, then its subsections'. Headings follow `toMarkdown`'s. */
+function visit(
+  section: Section,
+  level: number,
+  parents: string[],
+  out: FlatSection[],
+  parentKind?: SectionKind,
+): void {
+  const title = headingText(section, parentKind);
   const heading = title ? `${'#'.repeat(Math.min(level + 1, 6))} ${title}\n\n` : '';
   const markdown = `${heading}${renderBlocks(section.blocks)}`.trim();
   const path = title ? [...parents, title] : parents;
@@ -72,5 +70,5 @@ function visit(section: Section, level: number, parents: string[], out: FlatSect
     path,
     ...(title && { title }),
   });
-  for (const sub of section.sections) visit(sub, level + 1, path, out);
+  for (const sub of section.sections) visit(sub, level + 1, path, out, section.kind);
 }
