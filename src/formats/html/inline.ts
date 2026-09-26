@@ -21,6 +21,7 @@ import {
   FORMULA_IMAGE,
   inlineCode,
   inlineMath,
+  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -45,7 +46,7 @@ export function inlineNodesText(nodes: Node[], ctx: HtmlContext): string {
 }
 
 function collapse(text: string): string {
-  return text.replace(/\s+/g, ' ').trim();
+  return joinAdjacentMath(text.replace(/\s+/g, ' ').trim());
 }
 
 /** A `<script>` holding MathJax source: `math/tex`, `math/tex; mode=display`, or `math/mml`. */

@@ -25,14 +25,14 @@ There are several fundamental compartmental models described using differential 
 
 ### Implementation
 
-We demonstrate how to use the matlab software codes with the SEIR compartmental model depicted in Figure 1. The population is partitioned into four (4) compartments: Susceptible, exposed, infected and recovered. Individuals are recruited into the susceptible class at a rate $Ω$ and they die at a rate $μ$. The transmission rate is $β$ and the recovery rate is $γ$. The rate at which exposed individuals become infectious is $α$ and the disease-induced death rate is $σ$.
+We demonstrate how to use the matlab software codes with the SEIR compartmental model depicted in Figure 1. The population is partitioned into four (4) compartments: Susceptible, exposed, infected and recovered. Individuals are recruited into the susceptible class at a rate $\mathrm{Ω}$ and they die at a rate $μ$. The transmission rate is $β$ and the recovery rate is $γ$. The rate at which exposed individuals become infectious is $α$ and the disease-induced death rate is $σ$.
 
 **Figure 1.** **Model dynamics flowchart.**
 
 The model is described by the following ordinary differential equations.
 
 $$
-\begin{matrix}\frac{\mathrm{dS}}{\mathrm{dt}}=Ω−β\frac{\text{IS}}{N}−μS, \\ \frac{\mathrm{dE}}{\mathrm{dt}}=β\frac{\text{IS}}{N}−(α+μ)E, \\ \frac{\mathrm{dI}}{\mathrm{dt}}=αE−(γ+σ+μ)I, \\ \frac{\mathrm{dR}}{\mathrm{dt}}=γI−μR,\end{matrix} \tag{1}
+\begin{matrix}\frac{\mathrm{dS}}{\mathrm{dt}}=\mathrm{Ω}−β\frac{\text{IS}}{N}−μS, \\ \frac{\mathrm{dE}}{\mathrm{dt}}=β\frac{\text{IS}}{N}−(α+μ)E, \\ \frac{\mathrm{dI}}{\mathrm{dt}}=αE−(γ+σ+μ)I, \\ \frac{\mathrm{dR}}{\mathrm{dt}}=γI−μR,\end{matrix} \tag{1}
 $$
 
 with initial conditions $S(0)≥0,E(0)≥0,I(0)≥0, \text{and} R(0)≥0$.
@@ -43,7 +43,7 @@ For the purposes of the simulations, the following parameter values are chosen a
 
 | Parameter | Description | Value | Source |
 | --- | --- | --- | --- |
-| $Ω$ | Recruitment | 29.08 | [2] |
+| $\mathrm{Ω}$ | Recruitment | 29.08 | [2] |
 | $β$ | Transmission rate | 0.9 | [2] |
 | $α$ | infectiousness of the exposed individuals | 0.3 | assumed |
 | $μ$ | natural rate of death | 0.4252912 $×10^{−4}$ | [2] |
@@ -159,7 +159,7 @@ Upon running the codes, the simulation results are shown in Figures 3– 7.
 
 ## Discussion
 
-In Figures 3– 6, are reported, the numerical solutions of system (1) for a period of 120 days. These codes can be modified for any compartmental models. The ‘figure’ command produces the output given in Figures 3– 6. The steps or procedures listed in the codes have to be followed carefully in order not to encounter errors. The parameters can be represented with letters for instance $Ω$ can be written in the codes as Omega as Matlab doesn’t recognize the parameters listed in the code. The code written in the editor window can be seen in Figure 7. The SEIR model is extended, and an alternative software, R codes has been provided at the appendix section. Using the same initial conditions and parameter values given in Table 1, the output figures for the R code are given by Figures 8– 10. Users who cannot afford Matlab software can freely use the R software codes for the numerical simulation. The two software codes gives the same output results.
+In Figures 3– 6, are reported, the numerical solutions of system (1) for a period of 120 days. These codes can be modified for any compartmental models. The ‘figure’ command produces the output given in Figures 3– 6. The steps or procedures listed in the codes have to be followed carefully in order not to encounter errors. The parameters can be represented with letters for instance $\mathrm{Ω}$ can be written in the codes as Omega as Matlab doesn’t recognize the parameters listed in the code. The code written in the editor window can be seen in Figure 7. The SEIR model is extended, and an alternative software, R codes has been provided at the appendix section. Using the same initial conditions and parameter values given in Table 1, the output figures for the R code are given by Figures 8– 10. Users who cannot afford Matlab software can freely use the R software codes for the numerical simulation. The two software codes gives the same output results.
 
 % The R software codes
 

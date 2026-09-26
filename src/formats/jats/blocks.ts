@@ -22,7 +22,7 @@ import type {
 import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis } from '../../render/inline.js';
+import { emphasis, joinAdjacentMath } from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
@@ -98,7 +98,7 @@ interface Flow {
 }
 
 function flushRun(flow: Flow): void {
-  const text = collapseWhitespace(flow.run);
+  const text = joinAdjacentMath(collapseWhitespace(flow.run));
   if (text) flow.blocks.push({ text, type: 'paragraph' });
   flow.run = '';
 }

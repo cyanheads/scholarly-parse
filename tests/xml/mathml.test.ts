@@ -59,6 +59,17 @@ describe('mathmlToTex', () => {
     ).toBe('\\mathrm{sin}x\\text{if true}');
   });
 
+  it('writes a token’s mathvariant as the TeX alphabet it names', () => {
+    expect(
+      tex(
+        '<mml:msub><mml:mi mathvariant="double-struck">F</mml:mi><mml:mi>q</mml:mi></mml:msub>' +
+          '<mml:mi mathvariant="script">C</mml:mi><mml:mi mathvariant="bold">v</mml:mi>' +
+          '<mml:mn mathvariant="bold">0</mml:mn><mml:mi mathvariant="normal">d</mml:mi>' +
+          '<mml:mi mathvariant="italic">x</mml:mi>',
+      ),
+    ).toBe('\\mathbb{F}_q\\mathcal{C}\\mathbf{v}\\mathbf{0}\\mathrm{d}x');
+  });
+
   it('writes fenced groups with their separators and tables as a matrix', () => {
     expect(
       tex('<mml:mfenced open="[" close="]"><mml:mi>a</mml:mi><mml:mi>b</mml:mi></mml:mfenced>'),

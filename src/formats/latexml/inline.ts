@@ -20,6 +20,7 @@ import {
   emphasis,
   inlineCode,
   inlineMath,
+  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -35,7 +36,9 @@ export function inlineMarkdown(nodes: Node[], ctx: LatexmlContext): string {
 
 /** Inline Markdown of an element's content, whitespace collapsed. */
 export function inlineText(element: Element | null | undefined, ctx: LatexmlContext): string {
-  return element ? inlineMarkdown(childNodes(element), ctx).replace(/\s+/g, ' ').trim() : '';
+  return element
+    ? joinAdjacentMath(inlineMarkdown(childNodes(element), ctx).replace(/\s+/g, ' ').trim())
+    : '';
 }
 
 /**

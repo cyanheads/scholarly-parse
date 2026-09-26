@@ -8,6 +8,7 @@ import {
   emphasis,
   inlineCode,
   inlineMath,
+  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -60,6 +61,13 @@ describe('link', () => {
 });
 
 describe('math and code', () => {
+  it('joins inline formulas that touch, leaving an escaped dollar alone', () => {
+    expect(joinAdjacentMath('Suppt$(v)$$:=\\{i\\}$ and $a$ $b$')).toBe(
+      'Suppt$(v):=\\{i\\}$ and $a$ $b$',
+    );
+    expect(joinAdjacentMath('costs \\$$x$')).toBe('costs \\$$x$');
+  });
+
   it('wraps TeX in dollars with whitespace collapsed, and renders empty TeX as nothing', () => {
     expect(inlineMath(' x^2 +\n y ')).toBe('$x^2 + y$');
     expect(inlineMath('  ')).toBe('');

@@ -93,7 +93,7 @@ When atmospheric CO_2 rises—for example, after major volcanism—more CO_2 dis
 The ocean then shifts from absorbing CO_2 to releasing it. This effect is further amplified by the formation of carbonate minerals (such as CaCO_3), which releases about 0.6 mol of CO_2 per mol of carbonate when they precipitate (44–46) according to the reaction:
 
 $$
-\mathrm{Ca}^{2+}+2\mathrm{HCO}_3^−⇋\mathrm{CaCO}_3+\mathrm{CO}_2+H_2O. \tag{[1]}
+\mathrm{Ca}^{2+}+2\mathrm{HCO}_3^−⇋\mathrm{CaCO}_3+\mathrm{CO}_2+\mathrm{H}_2\mathrm{O}. \tag{[1]}
 $$
 
 Input of alkalinity from the modern mid-ocean ridge is negligible (47). Off-axis carbonation of the oceanic crust has been proposed as a potential sink for ocean alkalinity (48). However, comparisons among drill sites reveal that this carbonation flux is only a small fraction of the river flux and its magnitude still highly uncertain (49). Moreover, the δ^{13}C values of carbonate veins in altered oceanic crust are indistinguishable from those of marine carbonate sediments (50). It is therefore reasonable to treat the carbonation flux as part of the broader sedimentary flux, allowing it to be excluded from further consideration in subsequent analyses.
@@ -109,13 +109,13 @@ Organic carbon burial is often considered the primary driver of long-term δ^{13
 The carbon isotope mass balance is partitioned among carbonate species:
 
 $$
-\begin{matrix}δ^{13}C_{\mathrm{sw}}=\frac{[H_2\mathrm{CO}_3]}{\mathrm{DIC}}δ^{13}C_{H_2\mathrm{CO}_3}+\frac{[\mathrm{HCO}_3^-]}{\mathrm{DIC}}δ^{13}C_{\mathrm{HCO}_3^-} \\ +\frac{[\mathrm{CO}_3^{2-}]}{\mathrm{DIC}}δ^{13}C_{\mathrm{CO}_3^{2-}},\end{matrix} \tag{[2]}
+\begin{matrix}\mathrm{δ}^{13}\mathrm{C}_{\mathrm{sw}}=\frac{[\mathrm{H}_2\mathrm{CO}_3]}{\mathrm{DIC}}\mathrm{δ}^{13}\mathrm{C}_{\mathrm{H}_2\mathrm{CO}_3}+\frac{[\mathrm{HCO}_3^-]}{\mathrm{DIC}}\mathrm{δ}^{13}\mathrm{C}_{\mathrm{HCO}_3^-} \\ +\frac{[\mathrm{CO}_3^{2-}]}{\mathrm{DIC}}\mathrm{δ}^{13}\mathrm{C}_{\mathrm{CO}_3^{2-}},\end{matrix} \tag{[2]}
 $$
 
 Using the fractionation factors of Zeebe & Wolf-Gladrow (46) at 20 °C, which we assume are a reasonable assumption for the early Paleoproterozoic ancient ocean:
 
 $$
-δ^{13}C_{\mathrm{dol}}=δ^{13}C_{\mathrm{sw}}+2+10.7\frac{[H_2\mathrm{CO}_3]}{\mathrm{DIC}}+\frac{[\mathrm{HCO}_3^-]}{\mathrm{DIC}}. \tag{[3]}
+\mathrm{δ}^{13}\mathrm{C}_{\mathrm{dol}}=\mathrm{δ}^{13}\mathrm{C}_{\mathrm{sw}}+2+10.7\frac{[\mathrm{H}_2\mathrm{CO}_3]}{\mathrm{DIC}}+\frac{[\mathrm{HCO}_3^-]}{\mathrm{DIC}}. \tag{[3]}
 $$
 
 This emphasizes that isotopic fractionation depends on carbonate speciation in surface waters, controlled by alkalinity and pCO_2. Since [H_2CO_3] ≈ 0.034 × *p*CO_2 (in atm), the modern ocean—with low pCO_2 and high alkalinity—keeps [H_2CO_3] minimal.

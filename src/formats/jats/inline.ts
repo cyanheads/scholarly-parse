@@ -13,6 +13,7 @@ import {
   FORMULA_IMAGE,
   inlineCode,
   inlineMath,
+  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -106,7 +107,7 @@ export function inlineMarkdown(nodes: XmlNodeList, ctx: JatsContext): string {
 export function inlineText(input: XmlNode | XmlNodeList | undefined, ctx: JatsContext): string {
   if (!input) return '';
   const nodes = Array.isArray(input) ? input : childrenOf(input);
-  return inlineMarkdown(nodes, ctx).replace(/\s+/g, ' ').trim();
+  return joinAdjacentMath(inlineMarkdown(nodes, ctx).replace(/\s+/g, ' ').trim());
 }
 
 function inlineNode(node: XmlNode, ctx: JatsContext): string {

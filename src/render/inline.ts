@@ -76,6 +76,15 @@ export function inlineMath(tex: string): string {
   return expression ? `$${expression}$` : '';
 }
 
+/**
+ * Inline Markdown with each pair of touching inline formulas joined into one: `$a$$b$`
+ * would read as a display-math delimiter. Source text never yields `$$` (its dollar
+ * signs are escaped), so every `$$` in inline Markdown is such a seam.
+ */
+export function joinAdjacentMath(markdown: string): string {
+  return markdown.replace(/(?<!\\)\$\$/g, '');
+}
+
 /** Inline code. */
 export function inlineCode(text: string): string {
   return text ? codeSpan(text) : '';

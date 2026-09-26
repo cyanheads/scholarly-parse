@@ -202,10 +202,10 @@ $$
 If we assume that *β*(*x*) > 0 for 0 ≤ *x* ≤ *τ* and *β*(*x*) = 0 for *x* > *τ*, where, *τ* is assumed to be the average disease duration. Then we can define the basic reproduction number as
 
 $$
-\begin{matrix}R_0=∫_0^τβ(x)dx.\end{matrix} \tag{19}
+\begin{matrix}\mathcal{R}_0=∫_0^τβ(x)dx.\end{matrix} \tag{19}
 $$
 
-Then λ in (18) is positive (epidemic growth) if and only if $R_0>1$.
+Then λ in (18) is positive (epidemic growth) if and only if $\mathcal{R}_0>1$.
 
 **Note** The derivation of basic reproduction number remains unaltered even if we assume a reproduction substituting of the form *S*(*t*) = *N* − *ϵa*^{λt}, where *a* > 0.
 
@@ -313,19 +313,19 @@ where, *a*_4 = 1.829 × 10^5 with 95% CI (1.805 × 10^5, 1.852 × 10^5), *b*_4 =
 In the literature on epidemic modelling, the choice of gamma distributions to model distributed recovery period is well known [41–43]. However, the use of bimodal gamma distributions in epidemic modeling can indeed provide a more accurate representation of the recovery or death rate functions when there are distinct groups with different time intervals. From a linear combination of two different gamma distributions, we can capture the variability in the recovery or death times more effectively. The recovery and death distributions used in [35] and are given by:
 
 $$
-\begin{matrix}r(t)=p_0F_1(t), d(t)=(1-p_0)F_2(t),\end{matrix} \tag{25}
+\begin{matrix}r(t)=p_0\mathcal{F}_1(t), d(t)=(1-p_0)\mathcal{F}_2(t),\end{matrix} \tag{25}
 $$
 
 where,
 
 $$
-F_1(t)=\frac{0.85}{b_1^{a_1}Γ(a_1)}t^{a_1-1}e^{-\frac{t}{b_1}}+\frac{0.15}{d_1^{c_1}Γ(c_1)}t^{c_1-1}e^{-\frac{t}{d_1}}
+\mathcal{F}_1(t)=\frac{0.85}{b_1^{a_1}Γ(a_1)}t^{a_1-1}e^{-\frac{t}{b_1}}+\frac{0.15}{d_1^{c_1}Γ(c_1)}t^{c_1-1}e^{-\frac{t}{d_1}}
 $$
 
 with estimated parameter values *a*_1 = 32.17136, *b*_1 = 0.2206, *c*_1 = 65.40545, *d*_1 = 0.210 (Fig 5a) and
 
 $$
-F_2(t)=\frac{0.94}{b_2^{a_2}Γ(a_2)}t^{a_2-1}e^{-\frac{t}{b_2}}+\frac{0.06}{d_2^{c_2}Γ(c_2)}t^{c_2-1}e^{-\frac{t}{d_2}}
+\mathcal{F}_2(t)=\frac{0.94}{b_2^{a_2}Γ(a_2)}t^{a_2-1}e^{-\frac{t}{b_2}}+\frac{0.06}{d_2^{c_2}Γ(c_2)}t^{c_2-1}e^{-\frac{t}{d_2}}
 $$
 
 with estimated parameter values *a*_2 = 36.02855, *b*_2 = 0.57511, *c*_2 = 140.11379, *d*_2 = 0.27636 (Fig 5b). *p*_0 is the survival probability which is assumed to be *p*_0 = 0.9975.
@@ -363,34 +363,34 @@ For simplicity, we assumed that each vaccine dose has the same efficacy. From Fi
 Based on the previous numerical results, we can consider the following optimization problem:
 
 $$
-\begin{matrix}J(n)=\underset{n∈N, 0≤m(t;n)≤1}{\text{min}} c∫_0^TI(t;n)dt+dn,\end{matrix} \tag{26}
+\begin{matrix}\mathcal{J}(n)=\underset{n∈\mathbb{N}, 0≤m(t;n)≤1}{\text{min}} c∫_0^TI(t;n)dt+dn,\end{matrix} \tag{26}
 $$
 
-where *T* > 0 is the maximum time we consider. *n* is the number of vaccination campaigns administrated in the population during the time interval [0, *T*]. We assume that *T* = *an*, for some *a* > 0, i.e., two vaccination campaigns are considered with a gap of *a* time units. *d* is a positive constant that accounts for the cumulative cost per vaccination campaign. *m*(*t*; *n*) and *I*(*t*; *n*) denote the level of immunity and number of infected at time *t* for a given *n*, respectively. *I*(*t*; *n*) is the solution of our model for a particular choice of *n*. *c* is a positive constant that accounts for the cost due to infection for an infected individual. The above cost function $J(n)$ can equivalently be written as a function of *a* as follows:
+where *T* > 0 is the maximum time we consider. *n* is the number of vaccination campaigns administrated in the population during the time interval [0, *T*]. We assume that *T* = *an*, for some *a* > 0, i.e., two vaccination campaigns are considered with a gap of *a* time units. *d* is a positive constant that accounts for the cumulative cost per vaccination campaign. *m*(*t*; *n*) and *I*(*t*; *n*) denote the level of immunity and number of infected at time *t* for a given *n*, respectively. *I*(*t*; *n*) is the solution of our model for a particular choice of *n*. *c* is a positive constant that accounts for the cost due to infection for an infected individual. The above cost function $\mathcal{J}(n)$ can equivalently be written as a function of *a* as follows:
 
 $$
-\begin{matrix}J(a)=\underset{a∈R^+, 0≤m(t;n)≤1}{\text{min}} c∫_0^TI(t;a)dt+d\frac{T}{a},\end{matrix} \tag{27}
+\begin{matrix}\mathcal{J}(a)=\underset{a∈\mathbb{R}^+, 0≤m(t;n)≤1}{\text{min}} c∫_0^TI(t;a)dt+d\frac{T}{a},\end{matrix} \tag{27}
 $$
 
 where, *I*(*t*; *a*) denotes the number of infected at time *t* for a given *a*. The Fig 9 shows the plot of the cost function defined in relation (27). Fig 9 provides valuable insights into the behavior of the cost function concerning the gap between two consecutive vaccinations. Fig 9 shows that the cost function more or less remains at the minimum when the gap between two successive vaccinations falls within the range of 3 to 8 months. However, the plot takes an interesting turn when the gap between consecutive vaccinations exceeds 9 months. Beyond this point, the cost function begins to rise abruptly.
 
-**Fig 9.** **Plot of cost function $J(a)$.** Plot of cost function $J(a)$ for *c* = 0.01, *d* = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 9.** **Plot of cost function $\mathcal{J}(a)$.** Plot of cost function $\mathcal{J}(a)$ for *c* = 0.01, *d* = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 This critical observation suggests that excessively long intervals between vaccinations can be counterproductive, potentially leading to a surge in disease transmission and associated costs. This result shows that frequent vaccinations may not always be necessary and could potentially lead to diminishing returns, a phenomenon often referred to as hysteresis, whereas, an admissible larger gap between two consecutive vaccinations can effectively control the epidemic along with the minimal cost of vaccination campaign. This finding explains the significance of carefully determining the appropriate gap between two consecutive vaccination campaigns for effective epidemic control while minimizing economic burdens on a country or province.
 
 ### 4.4 Effect of vaccine efficacy and vaccination rate
 
-A vaccination campaign focuses on two major aspects, the effectiveness of the vaccines and the rate of vaccination. These two factors can depend on the decision-makers. Thus it is important to understand the effect of vaccine efficacy and the rate of vaccination on the cost function. In Fig 10, we plot the cost function $J$ for two different vaccine efficacies. We notice that if the vaccine efficacy is less (red curve in Fig 10) then the cost function remain at the minimum if the gap between the successive vaccination varies between 3 to 6 months. In contrast, if the vaccine efficacy is larger (blue curve in Fig 10) then the cost function stays at a minimum if the gap between the successive vaccinations varies between 3 to 9 months. This observation suggests that highly effective vaccines may allow for more extended gaps between vaccinations, potentially reducing the frequency and cost of vaccination while still achieving effective epidemic control. Fig 11 shows the plot of the cost function $J$ for two different vaccination rates. This figure shows that a higher vaccination rate provides more flexibility in increasing the gap between campaigns while still controlling the epidemic effectively and minimizing costs. The results are reminiscent of the recent experiences concerning COVID-19 vaccines [9]. This insight suggests that decision-makers should carefully consider both vaccine efficacy and vaccination rate when designing vaccination strategies to achieve cost-effective epidemic control.
+A vaccination campaign focuses on two major aspects, the effectiveness of the vaccines and the rate of vaccination. These two factors can depend on the decision-makers. Thus it is important to understand the effect of vaccine efficacy and the rate of vaccination on the cost function. In Fig 10, we plot the cost function $\mathcal{J}$ for two different vaccine efficacies. We notice that if the vaccine efficacy is less (red curve in Fig 10) then the cost function remain at the minimum if the gap between the successive vaccination varies between 3 to 6 months. In contrast, if the vaccine efficacy is larger (blue curve in Fig 10) then the cost function stays at a minimum if the gap between the successive vaccinations varies between 3 to 9 months. This observation suggests that highly effective vaccines may allow for more extended gaps between vaccinations, potentially reducing the frequency and cost of vaccination while still achieving effective epidemic control. Fig 11 shows the plot of the cost function $\mathcal{J}$ for two different vaccination rates. This figure shows that a higher vaccination rate provides more flexibility in increasing the gap between campaigns while still controlling the epidemic effectively and minimizing costs. The results are reminiscent of the recent experiences concerning COVID-19 vaccines [9]. This insight suggests that decision-makers should carefully consider both vaccine efficacy and vaccination rate when designing vaccination strategies to achieve cost-effective epidemic control.
 
-**Fig 10.** **Plot of cost function $J(a)$ for different vaccine efficacy functions.** Green: corresponds to formula (21) and Red: corresponds to formula (21) multiplied by 0.7. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 10.** **Plot of cost function $\mathcal{J}(a)$ for different vaccine efficacy functions.** Green: corresponds to formula (21) and Red: corresponds to formula (21) multiplied by 0.7. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
-**Fig 11.** **Plot of cost function $J(a)$ for different vaccination rates.** The left panel corresponds to formula (20) with the rate of vaccination *k* = 0.001 (green) and *k* = 0.003 (red). The right panel corresponds to the plot of the cost function with corresponding colors. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 11.** **Plot of cost function $\mathcal{J}(a)$ for different vaccination rates.** The left panel corresponds to formula (20) with the rate of vaccination *k* = 0.001 (green) and *k* = 0.003 (red). The right panel corresponds to the plot of the cost function with corresponding colors. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 ### 4.5 Effect of co-existing strains
 
 The parameter *κ* accounts for the existence of multiple strains. A higher value of *κ* implies the co-existence of prominent strains with very different transmission rates. Fig 12 shows that a higher value of *κ* provides less flexibility in increasing the gap between campaigns.
 
-**Fig 12.** **Plot of cost function $J(a)$ for different values of *κ*.** The green and red curves correspond to *κ* = 2 and *κ* = 1 respectively. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 12.** **Plot of cost function $\mathcal{J}(a)$ for different values of *κ*.** The green and red curves correspond to *κ* = 2 and *κ* = 1 respectively. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 ## 5 Discussion and conclusion
 

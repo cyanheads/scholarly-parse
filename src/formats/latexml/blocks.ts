@@ -29,7 +29,7 @@ import type {
 import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis } from '../../render/inline.js';
+import { emphasis, joinAdjacentMath } from '../../render/inline.js';
 import { type LatexmlContext, SKIP_TAGS } from './context.js';
 import { inlineMarkdown, inlineText, mathTex } from './inline.js';
 
@@ -95,7 +95,7 @@ interface Flow {
 }
 
 function flushRun(flow: Flow): void {
-  const text = flow.run.replace(/\s+/g, ' ').trim();
+  const text = joinAdjacentMath(flow.run.replace(/\s+/g, ' ').trim());
   if (text) flow.blocks.push({ text, type: 'paragraph' });
   flow.run = '';
 }

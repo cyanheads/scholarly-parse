@@ -38,6 +38,20 @@ const OPERATORS: Record<string, string> = {
   '}': '\\}',
 };
 
+/** `mathvariant` values on a token (`<mi mathvariant="double-struck">F</mi>`), and the TeX command for each. */
+const VARIANTS: Record<string, string> = {
+  bold: '\\mathbf',
+  'bold-fraktur': '\\mathfrak',
+  'bold-italic': '\\boldsymbol',
+  'bold-script': '\\mathcal',
+  'double-struck': '\\mathbb',
+  fraktur: '\\mathfrak',
+  monospace: '\\mathtt',
+  normal: '\\mathrm',
+  'sans-serif': '\\mathsf',
+  script: '\\mathcal',
+};
+
 /** True when `s` looks like TeX rather than a plain-text alternative. */
 function looksLikeTex(s: string): boolean {
   return /[\\^_{}]/.test(s);
@@ -92,10 +106,15 @@ function linearizeNode(node: XmlNode): string {
   switch (localNameOf(node)) {
     case 'mi': {
       const text = linearize(kids);
+      const variant = VARIANTS[attrOf(node, 'mathvariant') ?? ''];
+      if (variant && text) return `${variant}{${text}}`;
       return [...text].length > 1 && /^[A-Za-z]+$/.test(text) ? `\\mathrm{${text}}` : text;
     }
-    case 'mn':
-      return linearize(kids);
+    case 'mn': {
+      const text = linearize(kids);
+      const variant = VARIANTS[attrOf(node, 'mathvariant') ?? ''];
+      return variant && variant !== '\\mathrm' && text ? `${variant}{${text}}` : text;
+    }
     case 'mo': {
       const text = linearize(kids);
       return OPERATORS[text] ?? text;
