@@ -280,6 +280,10 @@ Deng et al. (2023) suggested that sclerite L4C has a high diversity in Blattinae
 
 Genital reversal within species is common in Blattodea, such as Blaberidae, most Pseudophyllodromiidae, and some Ectobiidae species (Brown 1975; Nieves and Bohn 1987; Klass 1997). However, our study is the first report of chiral dimorphism of male genitalia within a single species. Chiral dimorphism of male genitalia occurs rarely within an insect species, e.g. Coleoptera: Ahrens and Lago 2008, Hemiptera: Guglielmino et al. 2016, Lepidoptera: Nupponen 2009, Mantodea: Holwell and Herberstein 2010, Phasmatodea: Heleodoro 2022, Trichoptera: Botosaneanu and Hyslop 1998. Schilthuizen (2007, 2013) suggested that this phenomenon might be related to sexual selection. In *Drosophila melanogaster*, this phenomenon is a result from mutations in the allele of Myo31DF (Hozumi et al. 2006; Spéder et al. 2006; Inaki et al. 2018), but whether it is the same in Blattodea needs to be investigated.
 
+## Citation
+
+Luo X-X, Deng W-B, Che Y-L, Wang Z-Q (2023) Two new genera (*Vittiblatta* gen. nov. and *Planiblatta* gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in *Vittiblatta punctata* sp. nov. ZooKeys 1187: 401–421. https://doi.org/10.3897/zookeys.1187.113403
+
 ## Supplementary Material
 
 **Supplementary material.** **XML Treatment for Vittiblatta** (file: zookeys.1187.113403-treatment1.xml)

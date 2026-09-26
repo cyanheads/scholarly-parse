@@ -7,7 +7,14 @@
  */
 import { describe, expect, it } from 'vitest';
 import { toMarkdown } from '../../../src/index.js';
-import { blocksOfType, paragraphTexts, parseArticle, parseBody } from './helpers.js';
+import {
+  article,
+  blocksOfType,
+  paragraphTexts,
+  parse,
+  parseArticle,
+  parseBody,
+} from './helpers.js';
 
 const p = (text: string) => ({ text, type: 'paragraph' });
 
@@ -720,5 +727,37 @@ describe('back matter', () => {
     expect(blocksOfType(document, 'paragraph').map((b) => b.text)).toContain('One.');
     // The untitled opening of a titled sub-article is not headed as another one.
     expect(toMarkdown(document)).toContain('## Decision letter\n\nThe reviewers agree.');
+  });
+
+  it('leads a sub-article with its contributors and their roles, then its author notes', () => {
+    const document = parseArticle({
+      body: '<p>Main text.</p>',
+      tail:
+        '<sub-article id="r1" article-type="reviewer-report"><front-stub><title-group>' +
+        '<article-title>Reviewer report</article-title></title-group><contrib-group>' +
+        '<contrib contrib-type="author"><name><surname>Teklu</surname><given-names>Shewa</given-names>' +
+        '</name><role>Referee</role></contrib><contrib contrib-type="author"><name>' +
+        '<surname>Roe</surname><given-names>Ann</given-names></name></contrib></contrib-group>' +
+        '<author-notes><fn fn-type="COI-statement"><p><bold>Competing interests: </bold>' +
+        'None.</p></fn></author-notes></front-stub><body><p>Sound work.</p></body></sub-article>',
+    });
+    expect(toMarkdown(document)).toContain(
+      '## Reviewer report\n\nShewa Teklu (Referee), Ann Roe\n\n**Competing interests:** None.\n\nSound work.',
+    );
+  });
+
+  it('reads back matter in <front> after the metadata, skipping the history note', () => {
+    const document = parse(
+      article({ body: '<sec><title>Introduction</title><p>Intro.</p></sec>' }).replace(
+        '</article-meta>',
+        '</article-meta><notes notes-type="version-changes"><sec><title>Amendments from ' +
+          'Version 1</title><p>New figures.</p></sec></notes><notes notes-type="article-notes">' +
+          '<sec sec-type="history"><p>Received 2024 Dec 22.</p></sec></notes>',
+      ),
+    );
+    expect(document.back.map((s) => [s.id, s.title])).toEqual([
+      ['front1.1', 'Amendments from Version 1'],
+    ]);
+    expect(toMarkdown(document)).not.toContain('Received');
   });
 });

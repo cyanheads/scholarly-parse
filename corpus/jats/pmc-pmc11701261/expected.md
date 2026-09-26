@@ -284,6 +284,10 @@ where $q$ is the number of partners, $n_i$ is the fraction of structures in netw
 
 All statistical details are indicated in the STAR Methods, results, or figure legends.
 
+## Notes
+
+Published: November 25, 2024
+
 ## Acknowledgments
 
 We thank Ewan McDowall for developing the 3DGene database, Craig Nicol for designing the web page, and the Edinburgh Compute and Data Facility (ECDF; <http://www.ecdf.ed.ac.uk/>). Thanks also to our group members and colleagues, in particular Javier Caceres and Martin Taylor, who provided advice during the project, and Jim Allan and James Ding for comments on the manuscript. This work was funded by the European Research Council (ERC CoG 648050 THREEDCELLPHYSICS), UK Medical Research Council (MR/J00913X/1 and MC_UU_00007/13), and the Wellcome Trust (223097/Z/21/Z).

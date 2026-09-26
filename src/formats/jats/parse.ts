@@ -19,6 +19,7 @@ import {
   parseOrderedXml,
   tagNameOf,
   type XmlNode,
+  type XmlNodeList,
 } from '../../xml/ordered.js';
 import {
   blocksWithoutTitle,
@@ -29,7 +30,7 @@ import {
   parseSection,
 } from './blocks.js';
 import type { JatsContext } from './context.js';
-import { extractAbstracts, extractMetadata, noteOwners } from './front.js';
+import { extractAbstracts, extractMetadata, noteOwners, subArticleFront } from './front.js';
 import { inlineText } from './inline.js';
 import { extractReferences, isAssociatedData } from './references.js';
 import { text } from './text.js';
@@ -69,8 +70,9 @@ export function parseJats(input: string | Uint8Array, options: ParseOptions = {}
   const bodySections = parseBody(findOne(article, 'body'), ctx, 'body', 's');
   const body = bodySections.filter((section) => section.kind === 'body');
   const back = [
+    ...parseBack(childrenOf(front), ctx, 'front'),
     ...bodySections.filter((section) => section.kind !== 'body'),
-    ...parseBack(findOne(article, 'back'), ctx),
+    ...parseBack(childrenOf(findOne(article, 'back')), ctx, 'back'),
     ...parseSubArticles(article, ctx),
   ];
   const floats = flowBlocks(childrenOf(findOne(article, 'floats-group')), ctx);
@@ -185,14 +187,22 @@ function backMatterKind(node: XmlNode): SectionKind | undefined {
   return kindFromTitle(splitSectionNumber(text(findOne(node, 'title')), undefined).title);
 }
 
-/** Back matter: acknowledgments, appendices, declarations, notes; footnotes collected. */
-function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
+/**
+ * Back matter — acknowledgments, appendices, declarations, notes — from the children of
+ * `<back>`, or of `<front>`, which may hold the same elements after its metadata (F1000's
+ * version-change `<notes>`). Footnotes are collected. An untitled wrapper with no content
+ * of its own gives way to its sections.
+ */
+function parseBack(nodes: XmlNodeList, ctx: JatsContext, where: 'back' | 'front'): Section[] {
   const sections: Section[] = [];
   const add = (node: XmlNode, kind: SectionKind) => {
-    const section = parseSection(node, ctx, kind, `back${sections.length + 1}`);
-    if (section) sections.push(section);
+    const section = parseSection(node, ctx, kind, `${where}${sections.length + 1}`);
+    if (!section) return;
+    if (section.title === undefined && section.blocks.length === 0)
+      sections.push(...section.sections);
+    else sections.push(section);
   };
-  for (const child of childrenOf(back)) {
+  for (const child of nodes) {
     switch (tagNameOf(child)) {
       case 'ack':
         add(child, 'acknowledgments');
@@ -216,7 +226,7 @@ function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
         break;
       case 'fn-group': {
         const kind = backMatterKind(child) ?? 'notes';
-        const section = noteGroupSection(child, ctx, kind, `back${sections.length + 1}`);
+        const section = noteGroupSection(child, ctx, kind, `${where}${sections.length + 1}`);
         if (section) sections.push(section);
         else collectFootnotes(child, ctx);
         break;
@@ -224,10 +234,12 @@ function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
       case 'ref-list':
       case 'label':
       case 'title':
+      case 'journal-meta':
+      case 'article-meta':
       case undefined:
         break;
       default:
-        ctx.diag.unhandled(`jats:back/${tagNameOf(child)}`);
+        ctx.diag.unhandled(`jats:${where}/${tagNameOf(child)}`);
         add(child, 'notes');
     }
   }
@@ -236,7 +248,8 @@ function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
 
 /**
  * `<sub-article>` and `<response>` elements — peer-review reports, author responses,
- * translations — each as a back section holding its own body.
+ * translations — each as a back section holding its own body, led by its contributors
+ * and author notes.
  */
 function parseSubArticles(article: XmlNode, ctx: JatsContext): Section[] {
   const subs = [...findAll(article, 'sub-article'), ...findAll(article, 'response')];
@@ -246,6 +259,7 @@ function parseSubArticles(article: XmlNode, ctx: JatsContext): Section[] {
     const id = issueId(ctx.sectionIds, attrOf(sub, 'id'), `sub${index + 1}`);
     const sections = parseBody(findOne(sub, 'body'), ctx, 'sub-article', `${id}-s`);
     if (sections.length === 0) return [];
-    return [{ blocks: [], id, kind: 'sub-article' as const, sections, ...(title && { title }) }];
+    const blocks = subArticleFront(meta, ctx);
+    return [{ blocks, id, kind: 'sub-article' as const, sections, ...(title && { title }) }];
   });
 }

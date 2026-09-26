@@ -288,6 +288,10 @@ R on the other hand, has a limited memory capacity which can be a problem when w
 
 This work seeks to introduce new matlab software codes purposely for numerical simulations of classical compartmental models which can run on any version of Matlab. The intended targets are researchers and students who uses Matlab for their analysis. These codes can be edited/modify to suit any deterministic models and any desire output required. The SEIR deterministic model was used to give a much insight about the codes. Alternatively, a deterministic SEIR codes written in R software is provided for those who wants to use freely available software. Despite the limitations of the R software, the deterministic model implemented in the R code can still be a useful tool for understanding the basic dynamics of disease transmission.
 
+## Revised Amendments from Version 1
+
+An inclusion of R software codes in the main body. Deletion of Figure 7 in version 1 and an inclusion of Figure 7, and a new Figure 8 – 12. An inclusion of additional author’s affiliation. No changes in the abstract, authorship list, the title, and tables and references.
+
 ## Data availability statement
 
 ### Underlying data
@@ -318,6 +322,10 @@ License: [Apache 2.0](https://creativecommons.org/licenses/by/2.0/)
 
 ## Reviewer response for version 2
 
+Shewafera Wondimagegnhu Teklu (Referee)
+
+**Competing interests:** No competing interests were disclosed.
+
 I have read the author's revised manuscript and since the authors addressed the given comments the revised manuscript can be indexed.
 
 Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?
@@ -347,6 +355,10 @@ Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiolog
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.
 
 ## Reviewer response for version 2
+
+Belela Samuel Kotola (Referee)
+
+**Competing interests:** No competing interests were disclosed.
 
 The article has been revised in requested manner.
 
@@ -379,6 +391,10 @@ Mathematical modeling
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.
 
 ## Reviewer response for version 1
+
+Shewafera Wondimagegnhu Teklu (Referee)
+
+**Competing interests:** No competing interests were disclosed.
 
 Comments to the Authors
 
@@ -417,6 +433,10 @@ Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiolog
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard, however I have significant reservations, as outlined above.
 
 ## Reviewer response for version 1
+
+Belela Samuel Kotola (Referee)
+
+**Competing interests:** No competing interests were disclosed.
 
 First and for most I would like to acknowledge the editor for giving me this chance for reviewing the article. Depend up on my back ground knowledge I have reviewed the article as follow.
 

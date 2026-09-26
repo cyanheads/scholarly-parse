@@ -157,9 +157,7 @@ Support for this research was provided by the Robert Wood Johnson Foundation. Th
 - **RDA** — rapid data analysis
 - **TEND** — toolkit for experiential well-being in dementia
 
-## Notes
-
-### Data Availability
+## Data Availability
 
 The data sets generated and analyzed during this study are available from the corresponding author on reasonable request once the trial is complete.
 

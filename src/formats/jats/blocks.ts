@@ -585,7 +585,9 @@ export function noteGroupSection(
 /**
  * One `<sec>`: its first `<title>` and `<label>`, subsections, and every other child as
  * blocks at its position. A section with no blocks and no subsections — a `<sec>` that
- * only wraps a `<ref-list>` — is dropped. (#116, #130)
+ * only wraps a `<ref-list>` — is dropped, and so is Europe PMC's generated
+ * `sec-type="history"` note, whose received and accepted dates the metadata carries.
+ * (#116, #130)
  *
  * An `<fn-group>` with a title naming its notes is a subsection of them, and an untitled
  * one that is all a `<sec>` holds is that section's content when the section's title
@@ -598,6 +600,7 @@ export function parseSection(
   kind: SectionKind,
   fallbackId: string,
 ): Section | undefined {
+  if (attrOf(sec, 'sec-type') === 'history') return;
   const id = issueId(ctx.sectionIds, attrOf(sec, 'id'), fallbackId);
   const lone = loneTitledBlock(sec, ctx);
   if (lone) {

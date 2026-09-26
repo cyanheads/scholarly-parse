@@ -7,6 +7,7 @@ import type {
   Abstract,
   AbstractKind,
   Author,
+  Block,
   DocumentMetadata,
   Identifiers,
   License,
@@ -14,6 +15,7 @@ import type {
   Section,
   Venue,
 } from '../../model/document.js';
+import { escapeInline } from '../../render/escape.js';
 import {
   attrOf,
   childrenOf,
@@ -162,6 +164,31 @@ function contributorName(
   const name = [given, family].filter(Boolean).join(' ') || text(nameNode);
   if (!name) return;
   return { name, ...(family && { family }), ...(given && { given }) };
+}
+
+/**
+ * What a `<sub-article>` shows above its body: who wrote it, each with their role
+ * (`Werner Kühlbrandt (Reviewer)`), then its author notes, such as a reviewer's
+ * competing-interests statement.
+ */
+export function subArticleFront(meta: XmlNode | undefined, ctx: JatsContext): Block[] {
+  const people = findAll(meta, 'contrib-group')
+    .flatMap((group) => findAll(group, 'contrib'))
+    .flatMap((contrib) => {
+      const name = contributorName(contrib)?.name;
+      const role = text(findOne(contrib, 'role'));
+      return name ? [escapeInline(role ? `${name} (${role})` : name)] : [];
+    });
+  const notes = findAll(findOne(meta, 'author-notes'), 'fn').flatMap((fn) =>
+    flowBlocks(
+      childrenOf(fn).filter((child) => tagNameOf(child) !== 'label'),
+      ctx,
+    ),
+  );
+  return [
+    ...(people.length > 0 ? [{ text: people.join(', '), type: 'paragraph' as const }] : []),
+    ...notes,
+  ];
 }
 
 /**
