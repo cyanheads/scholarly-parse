@@ -13,7 +13,14 @@ import type {
   TableBlock,
 } from '../model/document.js';
 import { largest } from '../model/extremes.js';
-import { codeFence, escapeBlockStart, escapeInline, escapeTableCell, escapeTex } from './escape.js';
+import {
+  codeFence,
+  escapeBlockStart,
+  escapeInline,
+  escapeTableCell,
+  escapeTex,
+  foldLineBreaks,
+} from './escape.js';
 import { FORMULA_IMAGE, link } from './inline.js';
 
 /** What to include when rendering. Everything is included by default. */
@@ -262,7 +269,7 @@ const TAG_UNSAFE = /[^\p{L}\p{N}\s.,:;'’′*+\-–—()[\]]/gu;
  */
 function displayMath(tex: string, label: string | undefined): string {
   const tag = label?.replace(TAG_UNSAFE, '').replace(/\s+/g, ' ').trim();
-  const line = `${tex.replace(/\s*\n\s*/g, ' ').trim()}${tag ? ` \\tag{${tag}}` : ''}`;
+  const line = `${foldLineBreaks(tex).trim()}${tag ? ` \\tag{${tag}}` : ''}`;
   return `$$\n${escapeTex(line)}\n$$`;
 }
 

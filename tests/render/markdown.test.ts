@@ -183,6 +183,14 @@ describe('blocks', () => {
     ).toBe('$$\nE = mc^2 \\tag{1}\n$$\n\na < b (2)\n\n[formula] (3)\n');
   });
 
+  it('writes display math holding a long run of spaces in one pass', () => {
+    const spaces = ' '.repeat(100_000);
+    const started = performance.now();
+    const markdown = blocksMarkdown([{ tex: `a${spaces}b\n  c`, type: 'formula' }]);
+    expect(performance.now() - started).toBeLessThan(1_000);
+    expect(markdown).toBe(`$$\na${spaces}b c\n$$\n`);
+  });
+
   it('nests lists, quotes boxes, and fences code', () => {
     expect(
       blocksMarkdown([

@@ -67,6 +67,13 @@ describe('escapeTableCell', () => {
   it('escapes pipes and folds line breaks into spaces', () => {
     expect(escapeTableCell('a | b\n  c')).toBe('a \\| b c');
   });
+
+  it('folds line breaks in one pass over a long run of spaces', () => {
+    const spaces = ' '.repeat(100_000);
+    const started = performance.now();
+    expect(escapeTableCell(`a${spaces}b\n c`)).toBe(`a${spaces}b c`);
+    expect(performance.now() - started).toBeLessThan(1_000);
+  });
 });
 
 describe('code spans', () => {

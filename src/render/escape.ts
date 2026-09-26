@@ -62,7 +62,15 @@ export function escapeTex(tex: string): string {
 
 /** Escape a value for a GFM table cell: pipes and line breaks would break the row. */
 export function escapeTableCell(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\s*\n\s*/g, ' ');
+  return foldLineBreaks(text.replace(/\|/g, '\\|'));
+}
+
+/**
+ * Each whitespace run holding a line break folded to one space, in one pass: `\s*\n\s*`
+ * rescans a long run of spaces from every position in it.
+ */
+export function foldLineBreaks(text: string): string {
+  return text.replace(/\s+/g, (run) => (run.includes('\n') ? ' ' : run));
 }
 
 /** The shortest backtick fence that no run of backticks inside `text` can close. */
