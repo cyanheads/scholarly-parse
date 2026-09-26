@@ -20,12 +20,7 @@ export function detect(input: string | Uint8Array): SourceFormat | undefined {
   const text = head.replace(/^﻿/, '').replace(/^\s+/, '');
   if (!text.startsWith('<')) return;
   // TEI before HTML: OpenAlex serves Grobid's TEI wrapped in an HTML page.
-  if (
-    /<TEI[\s>]|<tei[\s>][\s\S]*<teiheader[\s>]|xmlns=["']http:\/\/www\.tei-c\.org\/ns\/1\.0["']/i.test(
-      text,
-    )
-  )
-    return 'tei';
+  if (/<TEI[\s>]|xmlns=["']http:\/\/www\.tei-c\.org\/ns\/1\.0["']/i.test(text)) return 'tei';
   if (
     /^(?:<!DOCTYPE\s+(?:article|pmc-articleset)\b|<article[\s>]|<pmc-articleset[\s>])/i.test(
       afterProlog(text),
@@ -33,7 +28,8 @@ export function detect(input: string | Uint8Array): SourceFormat | undefined {
   ) {
     return 'jats';
   }
-  if (/\bltx_document\b|<meta[^>]+content=["']LaTeXML/i.test(text)) return 'latexml';
+  // Each `<meta` is read up to the next `<`: a run of unclosed ones is scanned once, not once per tag.
+  if (/\bltx_document\b|<meta[^<>]+content=["']LaTeXML/i.test(text)) return 'latexml';
   if (/<(?:!DOCTYPE\s+html|html|head|body)[\s>]/i.test(text)) return 'html';
   return;
 }

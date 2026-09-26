@@ -44,6 +44,12 @@ describe('detect', () => {
     expect(detect('﻿<!doctype html><html lang="en"><head><title>Article</title>')).toBe('html');
   });
 
+  it('reads a window of unclosed meta tags in one pass', () => {
+    const started = performance.now();
+    expect(detect(`<html>${'<meta '.repeat(13_000)}`)).toBe('html');
+    expect(performance.now() - started).toBeLessThan(100);
+  });
+
   it('returns undefined for anything else', () => {
     expect(detect('plain text, no markup')).toBeUndefined();
     expect(detect('{"title": "json"}')).toBeUndefined();
