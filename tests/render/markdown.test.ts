@@ -345,6 +345,25 @@ describe('toText', () => {
     expect(performance.now() - started).toBeLessThan(1_000);
     expect(text).toContain(`a${run}b`);
   });
+
+  it('reads long runs of unclosed brackets and link destinations in one pass', () => {
+    const brackets = '['.repeat(60_000);
+    const destinations = '[]('.repeat(30_000);
+    const document = documentOf({
+      body: [
+        section('s1', {
+          blocks: [
+            { text: brackets, type: 'paragraph' },
+            { text: destinations, type: 'paragraph' },
+          ],
+        }),
+      ],
+    });
+    const started = performance.now();
+    const text = toText(document, { metadata: false });
+    expect(performance.now() - started).toBeLessThan(1_000);
+    expect(text).toBe(`${brackets}\n\n${destinations}\n`);
+  });
 });
 
 describe('toSections', () => {

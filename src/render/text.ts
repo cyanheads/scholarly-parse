@@ -9,8 +9,10 @@ import { type MarkdownOptions, toMarkdown } from './markdown.js';
 
 /** Inline Markdown this package emits → plain text. */
 export function stripInline(markdown: string): string {
+  // Link text stops at the next bracket, and a destination (`escapeUrl` percent-encodes its
+  // parentheses) at the next parenthesis, so a run of unclosed ones is scanned once.
   return stripCodeSpans(markdown)
-    .replace(/!?\[([^\]]*)\]\(([^)]*)\)/g, '$1')
+    .replace(/!?\[([^[\]]*)\]\([^()]*\)/g, '$1')
     .replace(/<((?:https?|ftp|mailto):[^>]+)>/g, '$1')
     .replace(/(\*\*|~~)(?=\S)([\s\S]*?\S)\1/g, '$2')
     .replace(/(?<![\\*])\*(?=\S)([\s\S]*?\S)\*/g, '$1')
