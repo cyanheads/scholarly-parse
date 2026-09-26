@@ -272,10 +272,59 @@ const FRONT_CLASSES = [
   'ltx_role_thanks',
 ];
 
+/** LaTeXML's sectioning classes and the level each opens. */
+const SECTION_LEVELS: [string, number][] = [
+  ['ltx_chapter', 0],
+  ['ltx_section', 1],
+  ['ltx_appendix', 1],
+  ['ltx_bibliography', 1],
+  ['ltx_acknowledgement', 1],
+  ['ltx_acknowledgements', 1],
+  ['ltx_subsection', 2],
+  ['ltx_subsubsection', 3],
+  ['ltx_paragraph', 4],
+  ['ltx_subparagraph', 5],
+];
+
+function sectionLevel(element: Element): number | undefined {
+  return SECTION_LEVELS.find(([name]) => hasClass(element, name))?.[1];
+}
+
+/** True when a section sits inside an ancestor section of the same or a deeper level. */
+function misplaced(section: Element, level: number, article: Element): boolean {
+  for (let el = section.parentElement; el && el !== article; el = el.parentElement) {
+    const above = sectionLevel(el);
+    if (above !== undefined && above >= level) return true;
+  }
+  return false;
+}
+
+/**
+ * Rebuild the section tree when the markup got it wrong. An inline element LaTeXML
+ * leaves unclosed (a `<span>` around a macro it could not expand) swallows every section
+ * after it, so §4 parses inside a paragraph of §3. Sectioning classes carry their level,
+ * so the tree is rebuilt the way a heading outline is: in document order, each section
+ * under the nearest section before it of a shallower level, else at the top.
+ */
+function repairSectionNesting(article: Element): void {
+  const sections = Array.from(article.querySelectorAll('section')).flatMap((element) => {
+    const level = sectionLevel(element);
+    return level === undefined ? [] : [{ element, level }];
+  });
+  if (!sections.some(({ element, level }) => misplaced(element, level, article))) return;
+  const open: { element: Element; level: number }[] = [];
+  for (const section of sections) {
+    while ((open.at(-1)?.level ?? -1) >= section.level) open.pop();
+    (open.at(-1)?.element ?? article).append(section.element);
+    open.push(section);
+  }
+}
+
 function extractContent(
   article: Element,
   ctx: LatexmlContext,
 ): { back: Section[]; body: Section[]; references: Reference[] } {
+  repairSectionNesting(article);
   const body: Section[] = [];
   const back: Section[] = [];
   // A bibliography placed inside the last section is still the paper's reference list, not section content.

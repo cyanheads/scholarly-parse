@@ -1,15 +1,29 @@
 {
-  "why": "cyanheads/arxiv-mcp-server#10: a versioned ID was silently served as the latest version. This fixture is version 1 of a paper now at v4, fetched by its versioned ID; the assertions pin that the parse keeps the version suffix (2404.03664v1) and reads v1's own title, abstract, opening sections, code listing, and 50-entry bibliography.",
+  "why": "cyanheads/arxiv-mcp-server#10: a versioned ID was silently served as the latest version. This fixture is version 1 of a paper now at v4, fetched by its versioned ID; the assertions pin that the parse keeps the version suffix (2404.03664v1) and reads v1's own title, abstract, opening sections, code listing, and 50-entry bibliography. LaTeXML left an inline element unclosed in section 3, which swallows sections 4–8 and turns the floats after it into spans; the outline is rebuilt from the sectioning classes and the span floats read as figures and tables with their captions.",
   "title": "LLMs in the Heart of Differential Testing: A Case Study on a Medical Rule Engine",
   "quality": "structured",
   "abstractKinds": ["main"],
   "abstractStartsWith": "The Cancer Registry of Norway (CRN) uses an automated cancer registration support system (CaReSS)",
-  "sectionTitles": ["Introduction", "Real-World Application Context", "Approach"],
+  "sectionTitles": [
+    "Introduction",
+    "Real-World Application Context",
+    "Approach",
+    "Experimental Evaluation",
+    "Evaluation Metrics",
+    "RQ3",
+    "Threats to Validity",
+    "Results and Analyses",
+    "Discussion and Lessons Learned",
+    "Related Work",
+    "Conclusions"
+  ],
   "tables": 4,
-  "figures": 2,
+  "figures": 6,
   "references": 50,
   "contains": [
     "arXiv: 2404.03664v1",
-    "**Listing 1.** LLM Prompt"
+    "**Listing 1.** LLM Prompt",
+    "**Table 1.** Mutation operators",
+    "**Figure 3.** Completion rates for all the rules per LLM."
   ]
 }

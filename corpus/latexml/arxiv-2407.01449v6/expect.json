@@ -1,7 +1,8 @@
 {
-  "why": "cyanheads/arxiv-mcp-server#43: after </article> the arXiv page carries about 7.9 KB of site footer (build-log link, the LaTeXML logo as a base64 PNG, error-reporting instructions, funder credits) that leaked into the body. Pins that none of it reaches the Markdown while the paper's own sections, appendices, 26 figures and 61 references do (the relative figure URLs are outside what expect.json can check).",
+  "why": "cyanheads/arxiv-mcp-server#43: after </article> the arXiv page carries about 7.9 KB of site footer (build-log link, the LaTeXML logo as a base64 PNG, error-reporting instructions, funder credits) that leaked into the body. Pins that none of it reaches the Markdown while the paper's own sections, appendices, 26 figures and 61 references do (the relative figure URLs are outside what expect.json can check). A bare tabular holding only a rule, set as a spacer after the abstract, is layout and not an eighth table.",
   "title": "*ColPali*: Efficient Document Retrieval with Vision Language Models",
   "quality": "structured",
+  "tables": 7,
   "abstractKinds": ["main"],
   "abstractStartsWith": "Documents are visually rich structures that convey information through text, but also figures, page layouts",
   "sectionTitles": [
@@ -31,6 +32,7 @@
     "view the build logs",
     "Instructions for reporting errors",
     "We gratefully acknowledge support from our major funders",
-    "data:image/"
+    "data:image/",
+    "**Table.**"
   ]
 }

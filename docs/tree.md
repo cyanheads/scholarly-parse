@@ -150,6 +150,8 @@ scholarly-parse/
 │   │   │   ├── references.test.ts
 │   │   │   ├── sections.test.ts
 │   │   │   └── tables.test.ts
+│   │   ├── latexml/
+│   │   │   └── latexml.test.ts
 │   │   └── pdf/
 │   │       ├── build-pdf.ts
 │   │       └── pdf.test.ts

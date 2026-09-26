@@ -54,14 +54,30 @@ const BLOCK_TAGS: ReadonlySet<string> = new Set([
   'ul',
 ]);
 
+/**
+ * Float classes. LaTeXML writes a float met in inline context as a `<span>` rather than
+ * a `<figure>` (`<span class="ltx_table">` with a `<span class="ltx_caption">`); the
+ * class, not the tag, makes it one.
+ */
+const FLOAT_CLASSES = ['ltx_figure', 'ltx_table', 'ltx_float'];
+
 /** Selector for anything that must not be flattened into a sentence. */
-const BLOCK_SELECTOR = [...BLOCK_TAGS, '.ltx_tabular', '.ltx_equation', '.ltx_equationgroup'].join(
-  ',',
-);
+const BLOCK_SELECTOR = [
+  ...BLOCK_TAGS,
+  '.ltx_tabular',
+  '.ltx_equation',
+  '.ltx_equationgroup',
+  ...FLOAT_CLASSES.map((name) => `.${name}`),
+].join(',');
+
+function isFloat(element: Element): boolean {
+  return tagOf(element) === 'figure' || FLOAT_CLASSES.some((name) => hasClass(element, name));
+}
 
 function isBlock(element: Element): boolean {
   return (
     BLOCK_TAGS.has(tagOf(element)) ||
+    isFloat(element) ||
     hasClass(element, 'ltx_tabular') ||
     hasClass(element, 'ltx_equation') ||
     hasClass(element, 'ltx_equationgroup')
@@ -118,9 +134,12 @@ function renderBlock(element: Element, ctx: LatexmlContext): Block[] {
   if (hasClass(element, 'ltx_theorem') || hasClass(element, 'ltx_proof'))
     return [theorem(element, ctx)];
   if (hasClass(element, 'ltx_listing')) return nonEmpty(listing(element));
-  if (tag === 'figure') return figure(element, ctx);
-  if (tag === 'table' || hasClass(element, 'ltx_tabular'))
+  if (isFloat(element)) return figure(element, ctx);
+  if (tag === 'table' || hasClass(element, 'ltx_tabular')) {
+    // A bare tabular holding nothing (a rule set as a spacer) is layout, not a table.
+    if (!textOfElement(element) && !element.querySelector('img, math')) return [];
     return [table(element, undefined, undefined, ctx)];
+  }
   if (tag === 'ul' || tag === 'ol') return listBlock(element, ctx);
   if (tag === 'dl') return descriptionList(element, ctx);
   if (tag === 'pre') {
@@ -160,6 +179,18 @@ function captionParts(
   return { ...(label && { label }), ...(text && { caption: text }) };
 }
 
+/** A float's caption: `<figcaption>`, or the `ltx_caption` span of a float written as a span. */
+function isCaption(element: Element): boolean {
+  return tagOf(element) === 'figcaption' || hasClass(element, 'ltx_caption');
+}
+
+/** A float's graphics: `<img>`, or the `<object>` LaTeXML embeds an SVG with. */
+const GRAPHICS = 'img, object.ltx_graphics';
+
+function graphicSource(graphic: Element): string | undefined {
+  return graphic.getAttribute('src') ?? graphic.getAttribute('data') ?? undefined;
+}
+
 /** Top-level tabulars in a figure: those not nested inside another tabular. */
 function topTabulars(figure: Element): Element[] {
   return Array.from(figure.querySelectorAll('.ltx_tabular')).filter(
@@ -173,10 +204,10 @@ function topTabulars(figure: Element): Element[] {
  * of their own follow the main figure.
  */
 function figure(element: Element, ctx: LatexmlContext): Block[] {
-  const captionEl = childWhere(element, (c) => tagOf(c) === 'figcaption');
+  const captionEl = childWhere(element, isCaption);
   const { caption, label } = captionParts(captionEl, ctx);
   const id = element.getAttribute('id') ?? undefined;
-  const images = Array.from(element.querySelectorAll('img'));
+  const images = Array.from(element.querySelectorAll(GRAPHICS));
   const tabulars = topTabulars(element);
   const tagClass = captionEl?.querySelector('.ltx_tag')?.className ?? '';
 
@@ -212,7 +243,7 @@ function figure(element: Element, ctx: LatexmlContext): Block[] {
   }
 
   const [image] = images;
-  const src = image?.getAttribute('src');
+  const src = image && graphicSource(image);
   const alt = image?.getAttribute('alt')?.trim();
   const blocks: Block[] = [
     {
@@ -225,10 +256,11 @@ function figure(element: Element, ctx: LatexmlContext): Block[] {
     },
   ];
   for (const panel of Array.from(element.querySelectorAll('figure'))) {
-    const panelCaption = childWhere(panel, (c) => tagOf(c) === 'figcaption');
+    const panelCaption = childWhere(panel, isCaption);
     if (!panelCaption) continue;
     const parts = captionParts(panelCaption, ctx);
-    const panelSrc = panel.querySelector('img')?.getAttribute('src');
+    const panelImage = panel.querySelector(GRAPHICS);
+    const panelSrc = panelImage && graphicSource(panelImage);
     const panelId = panel.getAttribute('id') ?? undefined;
     blocks.push({
       type: 'figure',
