@@ -8,7 +8,7 @@
  * printed as.
  *
  * ```sh
- * bun run scripts/corpus/sample.ts [--source epmc,arxiv,openalex] [--count 20] [--seed N] [--json <file>]
+ * bun run scripts/corpus/sample.ts [--source epmc,arxiv,openalex,pdf,html] [--count 20] [--seed N] [--json <file>]
  * ```
  *
  * Sources, `--count` documents from each:
@@ -18,6 +18,12 @@
  *   (December 2023) → LaTeXML. A paper arXiv could not convert counts as unavailable.
  * - `openalex`: OpenAlex's random sample of CC BY works with cached Grobid output →
  *   TEI. Needs `OPENALEX_API_KEY`; each download draws $0.01 from its daily budget.
+ * - `pdf`: OpenAlex's random sample of CC BY articles with an open-access PDF, each
+ *   fetched from its publisher → PDF. A link that serves anything but a PDF (a viewer, a
+ *   challenge page) counts as unavailable.
+ * - `html`: the same draw's landing pages, fetched from the publisher → publisher HTML.
+ *   A page that blocks the request counts as unavailable. With one seed, `pdf` and
+ *   `html` draw the same works.
  *
  * `--seed` makes a run repeatable; the seed is printed with the report. Requests are
  * paced per upstream (`http.ts`).
@@ -26,21 +32,28 @@
 import { writeFileSync } from 'node:fs';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
+import { parseHtml } from '../../src/formats/html/index.js';
 import { parseJats } from '../../src/formats/jats/index.js';
 import { parseLatexml } from '../../src/formats/latexml/index.js';
+import { parsePdf } from '../../src/formats/pdf/index.js';
 import { parseTei } from '../../src/formats/tei/index.js';
 import type { ParseResult } from '../../src/model/result.js';
 import { toMarkdown } from '../../src/render/markdown.js';
 import { checkInvariants } from '../../tests/corpus/invariants.js';
-import { decode, request } from './http.js';
+import { decode, type HttpResult, request } from './http.js';
 
-type Source = 'epmc' | 'arxiv' | 'openalex';
-const SOURCES: readonly Source[] = ['epmc', 'arxiv', 'openalex'];
-const FORMAT: Record<Source, 'jats' | 'latexml' | 'tei'> = {
+type Source = 'epmc' | 'arxiv' | 'openalex' | 'pdf' | 'html';
+const SOURCES: readonly Source[] = ['epmc', 'arxiv', 'openalex', 'pdf', 'html'];
+const FORMAT: Record<Source, 'jats' | 'latexml' | 'tei' | 'pdf' | 'html'> = {
   arxiv: 'latexml',
   epmc: 'jats',
+  html: 'html',
   openalex: 'tei',
+  pdf: 'pdf',
 };
+
+/** How long a publisher gets to answer: a dead host should not hold a round for minutes. */
+const PUBLISHER_TIMEOUT_MS = 45_000;
 
 /** A parse slower than this is reported as its own class. */
 const SLOW_MS = 5000;
@@ -48,7 +61,7 @@ const SLOW_MS = 5000;
 /** One fetched document, or why none could be fetched. */
 interface Draw {
   bytes?: Uint8Array;
-  /** How `add.ts` names it (`epmc PMC123`, `arxiv 2409.01234v1`), or the OpenAlex work ID. */
+  /** How `add.ts` names it (`epmc PMC123`, `pdf <url> --doi <doi>`), or the OpenAlex work ID. */
   id: string;
   publisher: string;
   source: Source;
@@ -193,29 +206,15 @@ async function drawOpenalex(count: number, seed: number): Promise<Draw[]> {
     console.error('sample: OPENALEX_API_KEY is not set in .env; skipping OpenAlex');
     return [];
   }
-  const params = new URLSearchParams({
-    filter: 'has_content.grobid_xml:true,best_oa_location.license:cc-by',
-    per_page: String(count),
-    sample: String(count),
-    seed: String(seed),
-    select: 'id,primary_location',
-  });
-  const list = await request(
-    `https://api.openalex.org/works?${params}`,
-    'openalex',
-    'application/json',
+  const works = await openalexSample<{
+    id: string;
+    primary_location?: { source?: { display_name?: string; host_organization_name?: string } };
+  }>(
+    'has_content.grobid_xml:true,best_oa_location.license:cc-by',
+    'id,primary_location',
+    count,
+    seed,
   );
-  if (list.status !== 200) throw new Error(`OpenAlex works list answered HTTP ${list.status}`);
-  const works = (
-    JSON.parse(decode(list.bytes)) as {
-      results: {
-        id: string;
-        primary_location?: {
-          source?: { display_name?: string; host_organization_name?: string };
-        };
-      }[];
-    }
-  ).results;
   const draws: Draw[] = [];
   for (const work of works) {
     const workId = work.id.replace(/^https:\/\/openalex\.org\//, '');
@@ -232,6 +231,94 @@ async function drawOpenalex(count: number, seed: number): Promise<Draw[]> {
         ? { bytes: result.bytes, url }
         : { unavailable: `Grobid TEI answered HTTP ${result.status}` }),
     });
+  }
+  return draws;
+}
+
+/** OpenAlex's work list: its seeded random sample under `filter`. Needs no key. */
+async function openalexSample<T>(filter: string, select: string, count: number, seed: number) {
+  const params = new URLSearchParams({
+    filter,
+    per_page: String(count),
+    sample: String(count),
+    seed: String(seed),
+    select,
+  });
+  const list = await request(
+    `https://api.openalex.org/works?${params}`,
+    'openalex',
+    'application/json',
+  );
+  if (list.status !== 200) throw new Error(`OpenAlex works list answered HTTP ${list.status}`);
+  return (JSON.parse(decode(list.bytes)) as { results: T[] }).results;
+}
+
+interface OpenAccessWork {
+  best_oa_location?: {
+    landing_page_url?: string;
+    pdf_url?: string;
+    source?: { display_name?: string; host_organization_name?: string };
+  };
+  doi?: string;
+  id: string;
+}
+
+/** True when the bytes open as a PDF; a PDF link can serve a viewer or challenge page instead. */
+const isPdf = (bytes: Uint8Array) =>
+  new TextDecoder('latin1').decode(bytes.subarray(0, 1024)).includes('%PDF-');
+
+/**
+ * OpenAlex's random sample of CC BY articles, each fetched from its publisher: the
+ * open-access PDF, or the landing page. Each example is `add.ts` arguments.
+ */
+async function drawOpenAccess(
+  source: 'pdf' | 'html',
+  count: number,
+  seed: number,
+): Promise<Draw[]> {
+  const works = await openalexSample<OpenAccessWork>(
+    'best_oa_location.license:cc-by,type:article,has_pdf_url:true',
+    'id,doi,best_oa_location',
+    count,
+    seed,
+  );
+  const draws: Draw[] = [];
+  for (const work of works) {
+    const location = work.best_oa_location;
+    const link = source === 'pdf' ? location?.pdf_url : location?.landing_page_url;
+    const doi = work.doi?.replace(/^https:\/\/doi\.org\//, '');
+    const base = {
+      id: link && doi ? `${source} ${link} --doi ${doi}` : work.id,
+      publisher:
+        location?.source?.host_organization_name ??
+        location?.source?.display_name ??
+        'unknown source',
+      source,
+    };
+    if (!link) {
+      draws.push({ ...base, unavailable: 'no open-access link' });
+      continue;
+    }
+    console.error(`sample: fetching ${draws.length + 1}/${works.length} ${link}`);
+    let result: HttpResult;
+    try {
+      const accept = source === 'pdf' ? 'application/pdf' : 'text/html';
+      result = await request(link, 'publisher', accept, {}, PUBLISHER_TIMEOUT_MS);
+    } catch (error) {
+      // A publisher host that refuses or times out says nothing about the parser.
+      const message = error instanceof Error ? error.message : String(error);
+      draws.push({ ...base, unavailable: `request failed: ${message}` });
+      continue;
+    }
+    const unavailable =
+      result.status !== 200
+        ? `HTTP ${result.status}`
+        : source === 'pdf' && !isPdf(result.bytes)
+          ? `served ${result.contentType || 'no content type'}, not a PDF`
+          : undefined;
+    draws.push(
+      unavailable ? { ...base, unavailable } : { ...base, bytes: result.bytes, url: result.url },
+    );
   }
   return draws;
 }
@@ -256,6 +343,10 @@ function parse(draw: Draw & { bytes: Uint8Array }): ParseResult | Promise<ParseR
       return parseLatexml(draw.bytes, draw.url ? { baseUrl: draw.url } : {});
     case 'openalex':
       return parseTei(draw.bytes);
+    case 'pdf':
+      return parsePdf(draw.bytes);
+    case 'html':
+      return parseHtml(draw.bytes, draw.url ? { baseUrl: draw.url } : {});
   }
 }
 
@@ -273,8 +364,12 @@ async function analyze(draw: Draw): Promise<Outcome> {
   const ms = Math.round(performance.now() - started);
   const classes: string[] = ms > SLOW_MS ? [`slow: parse over ${SLOW_MS / 1000} s`] : [];
   if (!result.ok) {
-    // arXiv serves a notice page for a paper it could not convert: nothing to parse.
-    if (draw.source === 'arxiv' && result.error.reason === 'empty')
+    // arXiv serves a notice page for a paper it could not convert, and a publisher may
+    // answer with a challenge page: nothing to parse either way.
+    if (
+      (draw.source === 'arxiv' && result.error.reason === 'empty') ||
+      (draw.source === 'html' && result.error.reason === 'blocked')
+    )
       return { ...base, classes, ms, unavailable: result.error.message };
     return { ...base, classes: [...classes, `failed: ${result.error.reason}`], ms };
   }
@@ -284,7 +379,7 @@ async function analyze(draw: Draw): Promise<Outcome> {
     document,
     format: FORMAT[draw.source],
     markdown,
-    source: decode(draw.bytes),
+    source: draw.source === 'pdf' ? undefined : decode(draw.bytes),
   });
   classes.push(
     ...problems.map(problemClass),
@@ -299,7 +394,9 @@ async function analyze(draw: Draw): Promise<Outcome> {
 const SOURCE_NAMES: Record<Source, string> = {
   arxiv: 'arXiv LaTeXML',
   epmc: 'Europe PMC JATS',
+  html: 'OpenAlex OA publisher HTML',
   openalex: 'OpenAlex Grobid TEI',
+  pdf: 'OpenAlex OA PDF',
 };
 
 /** A class's rank in the report: breakage first, then gaps, then warnings. */
@@ -361,7 +458,7 @@ function report(outcomes: Outcome[], seed: number, sources: Source[]): string {
   }
   lines.push(
     '',
-    'Turn a class into a fixture with `bun run scripts/corpus/add.ts <example>` (epmc and arxiv examples are add.ts arguments).',
+    'Turn a class into a fixture with `bun run scripts/corpus/add.ts <example>`; every example but an OpenAlex work ID is add.ts arguments.',
   );
   return `${lines.join('\n')}\n`;
 }
@@ -397,8 +494,13 @@ for (const source of sources) {
       ? await drawEpmc(count, random)
       : source === 'arxiv'
         ? await drawArxiv(count, random)
-        : await drawOpenalex(count, seed);
-  for (const draw of draws) outcomes.push(await analyze(draw));
+        : source === 'openalex'
+          ? await drawOpenalex(count, seed)
+          : await drawOpenAccess(source, count, seed);
+  for (const [index, draw] of draws.entries()) {
+    console.error(`sample: parsing ${index + 1}/${draws.length} ${draw.id}`);
+    outcomes.push(await analyze(draw));
+  }
 }
 
 process.stdout.write(report(outcomes, seed, sources));

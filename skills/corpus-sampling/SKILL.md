@@ -1,10 +1,10 @@
 ---
 name: corpus-sampling
 description: >
-  Run a wild-sampling round for scholarly-parse with `scripts/corpus/sample.ts`: draw fresh openly licensed documents from Europe PMC (JATS), arXiv (LaTeXML), and OpenAlex (Grobid TEI), parse each, check the corpus invariants, and read the report of failure classes. Then triage every class against the source, turn each real one into a fixture and a fix through the add-fixture skill, and repeat with new seeds until a round finds no new class. Use when asked to sample, run the wild sampling, find new failures, or measure how a format holds up on documents outside the corpus.
+  Run a wild-sampling round for scholarly-parse with `scripts/corpus/sample.ts`: draw fresh openly licensed documents from Europe PMC (JATS), arXiv (LaTeXML), and OpenAlex (Grobid TEI, and open-access PDFs and publisher pages), parse each, check the corpus invariants, and read the report of failure classes. Then triage every class against the source, turn each real one into a fixture and a fix through the add-fixture skill, and repeat with new seeds until a round finds no new class. Use when asked to sample, run the wild sampling, find new failures, or measure how a format holds up on documents outside the corpus.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -19,8 +19,10 @@ The corpus only proves the parsers on documents already in it. Wild sampling (`d
 | `epmc` | CC BY open-access articles from random publication days in the three years before last month, a few per day | JATS | nothing |
 | `arxiv` | Papers from random submission days since arXiv began rendering HTML (December 2023), a few per day | LaTeXML | nothing; one request per 3 s, so 30 papers take about four minutes |
 | `openalex` | OpenAlex's own random sample of CC BY works with cached Grobid output | TEI | `OPENALEX_API_KEY` in `.env`; each TEI download costs $0.01 of the key's daily budget |
+| `pdf` | OpenAlex's random sample of CC BY articles with an open-access PDF, fetched from the publisher | PDF | nothing; one publisher request per second, each host given 45 s to answer |
+| `html` | The same draw's landing pages, fetched from the publisher | Publisher HTML | nothing; with one seed, `pdf` and `html` draw the same works |
 
-Publisher HTML and PDF have no source in `sample.ts`.
+A PDF link that serves anything but a PDF, a landing page the publisher blocks, and a host that refuses the connection all count as unavailable: they say nothing about the parser.
 
 ## When to use
 
@@ -30,7 +32,7 @@ Publisher HTML and PDF have no source in `sample.ts`.
 
 ## Inputs
 
-1. **Sources** — `epmc`, `arxiv`, `openalex`, or a mix. Without a key, leave `openalex` out; the script skips it with a note otherwise.
+1. **Sources** — `epmc`, `arxiv`, `openalex`, `pdf`, `html`, or a mix. Without a key, leave `openalex` out; the script skips it with a note otherwise.
 2. **Count** — documents per source (default 20). 25–30 per source is a useful round.
 3. **Seed** — a fresh one for a new round; a previous round's seed to repeat its draws.
 
@@ -46,7 +48,7 @@ Run it in the background: it paces every request (`scripts/corpus/http.ts`) and 
 
 ### 2. Read the report
 
-The table at the top gives, per source: drawn, parsed, unavailable (arXiv could not render the paper, or the full text was missing), and the `structured / partial / flat` split. Below it, the failure classes, most severe first, each with its document count, publishers, and up to three examples. Examples from `epmc` and `arxiv` print as `add.ts` arguments; OpenAlex examples are work IDs.
+The table at the top gives, per source: drawn, parsed, unavailable (arXiv could not render the paper, the full text was missing, or a publisher blocked the request), and the `structured / partial / flat` split. Below it, the failure classes, most severe first, each with its document count, publishers, and up to three examples. Examples from `epmc`, `arxiv`, `pdf`, and `html` print as `add.ts` arguments; OpenAlex TEI examples are work IDs.
 
 | Class | Means | Usually |
 |:---|:---|:---|
@@ -61,7 +63,7 @@ The table at the top gives, per source: drawn, parsed, unavailable (arXiv could 
 
 For each class, take one example and find the cause in the parser, not in the report:
 
-1. Fetch the example's source into the session scratchpad (the Europe PMC `fullTextXML` URL, `https://arxiv.org/html/<id>`).
+1. Fetch the example's source into the session scratchpad (the Europe PMC `fullTextXML` URL, `https://arxiv.org/html/<id>`, the PDF or landing-page URL in a `pdf` or `html` example).
 2. Parse it with a throwaway script in the repo root (`.x.tmp.ts`, deleted afterwards) and locate the block, section, or text that breaks.
 3. Read the source markup there. Decide:
    - **Parser bug** → step 4.

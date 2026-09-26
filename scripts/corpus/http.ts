@@ -43,18 +43,22 @@ export interface HttpResult {
   url: string;
 }
 
-/** GET `url` once its upstream's interval has passed. A network error or timeout throws. */
+/**
+ * GET `url` once its upstream's interval has passed. A network error, or no complete
+ * response within `timeoutMs`, throws.
+ */
 export async function request(
   url: string,
   upstream: Upstream,
   accept: string,
   headers: Record<string, string> = {},
+  timeoutMs = 120_000,
 ): Promise<HttpResult> {
   await paced(upstream);
   const response = await fetch(url, {
     headers: { Accept: accept, 'User-Agent': USER_AGENT, ...headers },
     redirect: 'follow',
-    signal: AbortSignal.timeout(120_000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   return {
     bytes: new Uint8Array(await response.arrayBuffer()),

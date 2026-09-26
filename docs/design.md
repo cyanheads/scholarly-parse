@@ -70,7 +70,7 @@ The parsers are only as good as the documents they have been run against. Qualit
 2. **Per-fixture assertions** in `expect.json`: section titles in order, table shapes, formula TeX, the main abstract's opening, reference counts, and any regression the fixture exists for. Plus `expected.md`, a reviewed Markdown snapshot.
 3. **Invariants** checked on every document: no leaked source tags or entities, no TeX preambles, every table, figure, and reference in the source accounted for, no empty headings, no split surrogate pairs, deterministic output.
 4. **Cross-format agreement.** A rosetta set of works stored in several formats (JATS, PDF, publisher HTML, Grobid TEI generated from the PDF, and LaTeXML when an arXiv version exists). The JATS parse is the reference: `bun run corpus:agreement` measures the other formats against it on section titles, abstract, reference count, and table and figure counts, which gauges PDF and HTML quality without hand labeling.
-5. **Wild sampling.** `bun run corpus:sample` pulls fresh openly licensed documents from Europe PMC, arXiv, and (with a key) OpenAlex, runs the invariants, and groups failures by element and publisher. Each new failure class becomes a fixture.
+5. **Wild sampling.** `bun run corpus:sample` pulls fresh openly licensed documents from Europe PMC, arXiv, and OpenAlex (its sampled CC BY articles as publisher PDFs and pages, and Grobid TEI with a key), runs the invariants, and groups failures by element and publisher. Each new failure class becomes a fixture.
 
 Every parsing bug fixed in a consumer before this package existed becomes a named regression fixture, with the issue recorded in `meta.json`.
 
