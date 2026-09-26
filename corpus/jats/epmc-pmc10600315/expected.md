@@ -212,7 +212,7 @@ This manuscript has no associated data or the data will not be deposited. [Autho
 
 ## Declarations
 
-**Conflict of interest**
+### Conflict of interest
 
 The authors declare that they have no conflict of interest.
 

@@ -442,7 +442,7 @@ The datasets used and/or analyzed during the current study are available from th
 
 ## Declarations
 
-**Competing interests**
+### Competing interests
 
 The authors declare no competing interests.
 

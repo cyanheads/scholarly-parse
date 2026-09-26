@@ -679,6 +679,26 @@ describe('back matter', () => {
     expect(markdown).toContain('## Competing interests\n\n**Ann Roe, Bo Doe:** None declared.');
   });
 
+  it('reads a titled <notes> inside notes as a subsection unless text follows it', () => {
+    const nested = parseArticle({
+      back:
+        '<notes><title>Declarations</title><notes notes-type="COI-statement">' +
+        '<title>Conflict of interest</title><p>None.</p></notes></notes>',
+      body: '<p>Body.</p>',
+    });
+    expect(toMarkdown(nested)).toContain('## Declarations\n\n### Conflict of interest\n\nNone.');
+    // A subsection would move the ethics statement above the conflict-of-interest note.
+    const interleaved = parseArticle({
+      back:
+        '<notes><title>Ethics</title><notes><title>Conflict of interest</title><p>None.</p>' +
+        '</notes><notes><p>Approved by the board.</p></notes></notes>',
+      body: '<p>Body.</p>',
+    });
+    expect(toMarkdown(interleaved)).toContain(
+      '## Ethics\n\n**Conflict of interest**\n\nNone.\n\nApproved by the board.',
+    );
+  });
+
   it('collects an inline footnote and leaves its label as a marker', () => {
     const document = parseBody(
       '<p>Measured twice<fn id="fn2"><label>a</label><p>By two raters.</p></fn> in total.</p>',

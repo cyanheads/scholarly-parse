@@ -510,6 +510,29 @@ export function blocksWithoutTitle(node: XmlNode, ctx: JatsContext): Block[] {
   }
 }
 
+/** A child that reads as a subsection of its parent, not as its content. */
+function isSubsectionTag(node: XmlNode): boolean {
+  const tag = tagNameOf(node);
+  return tag === 'sec' || (tag === 'notes' && text(findOne(node, 'title')) !== '');
+}
+
+/**
+ * True when a titled `<notes>` can be a subsection: nothing but other subsections
+ * follows it. A section's blocks come before its subsections, and unlike `<sec>`,
+ * which JATS places after every paragraph, `<notes>` may be followed by more text,
+ * which would otherwise move above it.
+ */
+function isTrailingNotes(notes: XmlNode, siblings: XmlNodeList): boolean {
+  if (!isSubsectionTag(notes)) return false;
+  return siblings
+    .slice(siblings.indexOf(notes) + 1)
+    .every((sibling) =>
+      isTextNode(sibling)
+        ? textOf(sibling).trim() === ''
+        : isSubsectionTag(sibling) || ['label', 'title'].includes(tagNameOf(sibling) ?? ''),
+    );
+}
+
 /** The one element a `<sec>` holds besides its title and label, if it holds only one. */
 function loneContent(sec: XmlNode): XmlNode | undefined {
   const content = childrenOf(sec).filter((child) =>
@@ -583,8 +606,9 @@ export function noteGroupSection(
 }
 
 /**
- * One `<sec>`: its first `<title>` and `<label>`, subsections, and every other child as
- * blocks at its position. A section with no blocks and no subsections — a `<sec>` that
+ * One `<sec>`: its first `<title>` and `<label>`, subsections (each `<sec>`, and each
+ * titled `<notes>` that {@link isTrailingNotes} allows), and every other child as blocks
+ * at its position. A section with no blocks and no subsections — a `<sec>` that
  * only wraps a `<ref-list>` — is dropped, and so is Europe PMC's generated
  * `sec-type="history"` note, whose received and accepted dates the metadata carries.
  * (#116, #130)
@@ -613,12 +637,13 @@ export function parseSection(
   let label: string | undefined;
   const blocks: Block[] = [];
   const sections: Section[] = [];
+  const children = childrenOf(sec);
   const only = loneContent(sec);
   const notesAreContent =
     only !== undefined &&
     tagNameOf(only) === 'fn-group' &&
     namesNotes(inlineText(findOne(sec, 'title'), ctx));
-  for (const child of childrenOf(sec)) {
+  for (const child of children) {
     const tag = tagNameOf(child);
     if (tag === 'title' && title === undefined) {
       title = inlineText(child, ctx) || undefined;
@@ -628,7 +653,7 @@ export function parseSection(
       label = text(child) || undefined;
       continue;
     }
-    if (tag === 'sec') {
+    if (tag === 'sec' || (tag === 'notes' && isTrailingNotes(child, children))) {
       const section = parseSection(child, ctx, kind, `${id}.${sections.length + 1}`);
       if (section) sections.push(section);
       continue;

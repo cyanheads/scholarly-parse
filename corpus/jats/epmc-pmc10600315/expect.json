@@ -25,6 +25,7 @@
     "A. Zhokin, CMS Collaboration  \n*The European Physical Journal. C, Particles and Fields*, 2023, 83(10), 963",
     "| $m_{\\textrm{t}}^\\text {fit}$ | $P_\\text {gof} > 0.2$ | $\\times$ | $\\times$ | $\\times$ | $\\times$ | $\\times$ |",
     "Observation of top quark production in $\\bar{p}p$ collisions. Phys. Rev. Lett. 74, 2626 (1995). 10.1103/PhysRevLett.74.2626. arXiv:hep-ex/9503002 PMID 10057978",
+    "## Declarations\n\n### Conflict of interest\n\nThe authors declare that they have no conflict of interest.",
     "$$\n\\begin{aligned} \\lambda (m_{\\textrm{t}}, \\vec {\\theta }, \\vec {\\beta }, \\varOmega | \\text {data})"
   ],
   "notContains": ["\\documentclass", "\\end{document}", "$$\\sqrt", "13TeV"]
