@@ -321,6 +321,30 @@ describe('toText', () => {
       'Results\n\nSome bold, italic, code, a link, https://x.org, and a * star.\n\n| H |\n\n| v |\n',
     );
   });
+
+  it('keeps escaped backticks as text and a run with no partner as written', () => {
+    const document = documentOf({
+      body: [
+        section('s1', {
+          blocks: [
+            { text: 'Run \\`ls\\`, then `rm -r`, `` a`b ``, and ```x``.', type: 'paragraph' },
+          ],
+        }),
+      ],
+    });
+    expect(toText(document, { metadata: false })).toBe('Run `ls`, then rm -r, a`b, and ```x``.\n');
+  });
+
+  it('reads a long run of backticks in one pass', () => {
+    const run = '`'.repeat(100_000);
+    const document = documentOf({
+      body: [section('s1', { blocks: [{ text: `a${run}b`, type: 'code' }] })],
+    });
+    const started = performance.now();
+    const text = toText(document, { metadata: false });
+    expect(performance.now() - started).toBeLessThan(1_000);
+    expect(text).toContain(`a${run}b`);
+  });
 });
 
 describe('toSections', () => {

@@ -9,13 +9,60 @@ import { type MarkdownOptions, toMarkdown } from './markdown.js';
 
 /** Inline Markdown this package emits → plain text. */
 export function stripInline(markdown: string): string {
-  return markdown
-    .replace(/(`+)\s?([\s\S]*?)\s?\1/g, '$2')
+  return stripCodeSpans(markdown)
     .replace(/!?\[([^\]]*)\]\(([^)]*)\)/g, '$1')
     .replace(/<((?:https?|ftp|mailto):[^>]+)>/g, '$1')
     .replace(/(\*\*|~~)(?=\S)([\s\S]*?\S)\1/g, '$2')
     .replace(/(?<![\\*])\*(?=\S)([\s\S]*?\S)\*/g, '$1')
     .replace(/\\([!-/:-@[-`{-~])/g, '$1');
+}
+
+/**
+ * Code spans → their content, in one pass over the backtick runs. A run opens a span
+ * unless a backslash escapes it, and the next run of the same length closes it; the
+ * space that pads each side is dropped. A run with no partner is text, as CommonMark
+ * reads it.
+ */
+function stripCodeSpans(markdown: string): string {
+  const runs: BacktickRun[] = Array.from(markdown.matchAll(/`+/g), (m) => ({
+    end: m.index + m[0].length,
+    start: m.index,
+  }));
+  const nextOfLength = new Map<number, BacktickRun>();
+  for (const run of runs.toReversed()) {
+    const close = nextOfLength.get(run.end - run.start);
+    if (close) run.close = close;
+    nextOfLength.set(run.end - run.start, run);
+  }
+  let text = '';
+  let copied = 0;
+  for (const { close, end, start } of runs) {
+    if (!close || start < copied || isEscaped(markdown, start, copied)) continue;
+    text += markdown.slice(copied, start) + unpad(markdown.slice(end, close.start));
+    copied = close.end;
+  }
+  return text + markdown.slice(copied);
+}
+
+/** A run of backticks, and the next run of the same length, which would close a span it opens. */
+interface BacktickRun {
+  close?: BacktickRun;
+  end: number;
+  start: number;
+}
+
+/** True when an odd run of backslashes, none before `from`, ends just before `at`. */
+function isEscaped(markdown: string, at: number, from: number): boolean {
+  let backslashes = 0;
+  for (let i = at - 1; i >= from && markdown[i] === '\\'; i--) backslashes++;
+  return backslashes % 2 === 1;
+}
+
+/** A code span's content without the space padding both of its sides. */
+function unpad(content: string): string {
+  return content.startsWith(' ') && content.endsWith(' ') && content.trim() !== ''
+    ? content.slice(1, -1)
+    : content;
 }
 
 /** Render a document as plain text. Options are the same as for Markdown. */
