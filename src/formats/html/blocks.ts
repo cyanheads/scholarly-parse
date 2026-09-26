@@ -543,8 +543,11 @@ function tableBlock(container: Element, ctx: HtmlContext): TableBlock {
       : imageOf(container)
         ? ('graphic-only' as const)
         : ('no-rows' as const);
-  if (unextractable)
-    ctx.diag.warn('table-unextractable', `Table ${label ?? ''} has no readable rows`.trim(), id);
+  if (unextractable) {
+    // A label usually names the table itself ("Table 2"); a bare number does not.
+    const name = label && /^\p{L}/u.test(label) ? label : `Table ${label ?? ''}`.trim();
+    ctx.diag.warn('table-unextractable', `${name} has no readable rows`, id);
+  }
   const footnotes = pieces.notes;
   return {
     type: 'table',

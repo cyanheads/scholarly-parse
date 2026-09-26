@@ -45,9 +45,11 @@ export function parseTableWrap(
   };
   if (rows.length === 0) {
     block.unextractable = classifyUnextractable(tableWrap, table);
+    // A label usually names the table itself ("Table 2"); a bare number does not.
+    const name = label && /^\p{L}/u.test(label) ? label : `Table ${label ?? id ?? ''}`.trim();
     ctx.diag.warn(
       'table-unextractable',
-      `Table ${label ?? id ?? ''} has no readable rows (${block.unextractable})`.replace('  ', ' '),
+      `${name} has no readable rows (${block.unextractable})`,
       id,
     );
   }

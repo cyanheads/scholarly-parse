@@ -199,7 +199,11 @@ describe('table bodies (#111)', () => {
       },
     ]);
     expect(document.diagnostics.warnings).toContainEqual(
-      expect.objectContaining({ code: 'table-unextractable', where: 'T1' }),
+      expect.objectContaining({
+        code: 'table-unextractable',
+        message: 'Table 1 has no readable rows (graphic-only)',
+        where: 'T1',
+      }),
     );
   });
 
