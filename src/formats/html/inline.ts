@@ -7,6 +7,7 @@
  */
 
 import {
+  COMMENT_NODE,
   childNodes,
   isElement,
   resolveUrl,
@@ -134,9 +135,14 @@ function isCitationSup(sup: Element): boolean {
 function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
   if (node.nodeType === TEXT_NODE) {
     const text = node.textContent ?? '';
-    return inTex || text.includes('\\(') || text.includes('\\[') || text.includes('$$')
-      ? textWithMath(text, inTex)
-      : escapeInline(text);
+    // A citation's source ends where the stylesheet spaces it: `<i class="References__source">J. Mol. Biol.</i>215`.
+    const lead = /^[\p{L}\p{N}]/u.test(text) && followsSource(node) ? ' ' : '';
+    return (
+      lead +
+      (inTex || text.includes('\\(') || text.includes('\\[') || text.includes('$$')
+        ? textWithMath(text, inTex)
+        : escapeInline(text))
+    );
   }
   if (!isElement(node)) return '';
   const tag = tagOf(node);
@@ -158,11 +164,13 @@ function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
     return math ? mathOrText(math) : '';
   }
   // Name parts that rely on stylesheet separators: `<span class="surname">Takeuchi</span><span class="given-names">O</span>`.
-  if (tokens.includes('surname')) return `${inner()} `;
+  // A page that writes its own (`Chesney</span>, <span…`) needs none added.
+  if (tokens.includes('surname') && !separatedFromNext(node)) return `${inner()} `;
+  const nextPart = nameTokens(node.nextElementSibling?.getAttribute('class') ?? null).at(-1);
   if (
     tokens.at(-1) === 'name' &&
-    node.nextElementSibling &&
-    nameTokens(node.nextElementSibling.getAttribute('class')).at(-1) === 'name'
+    (nextPart === 'name' || nextPart === 'etal') &&
+    !separatedFromNext(node)
   ) {
     return `${inner()}, `;
   }
@@ -217,6 +225,29 @@ function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
     default:
       return inner();
   }
+}
+
+/** A node's neighbour, past the comments Vue marks its render slots with (`<!--[-->`). */
+function sibling(node: Node, side: 'nextSibling' | 'previousSibling'): Node | null {
+  let found = node[side];
+  while (found && found.nodeType === COMMENT_NODE) found = found[side];
+  return found;
+}
+
+/** True when text other than whitespace (a page's own `, `) follows an element before the next one. */
+function separatedFromNext(element: Element): boolean {
+  const next = sibling(element, 'nextSibling');
+  return next !== null && next.nodeType === TEXT_NODE && (next.textContent ?? '').trim() !== '';
+}
+
+/** True when a text node directly follows an element whose class names a citation's source. */
+function followsSource(text: Node): boolean {
+  const previous = sibling(text, 'previousSibling');
+  return (
+    previous !== null &&
+    isElement(previous) &&
+    nameTokens(previous.getAttribute('class')).includes('source')
+  );
 }
 
 /** Text a reader sees: screen-reader-only and hidden elements left out, whitespace collapsed. */

@@ -42,7 +42,24 @@ function entries(nodes: Node[]): Element[] {
   let level = elements;
   while (level.length === 1 && level[0] && childElements(level[0]).length > 0)
     level = childElements(level[0]);
-  return level.filter((el) => !isFurniture(el) && !isLinkList(el) && textOfElement(el).length > 20);
+  return sameShape(
+    level.filter((el) => !isFurniture(el) && !isLinkList(el) && textOfElement(el).length > 20),
+  );
+}
+
+/**
+ * Repeated entries share one element shape, tag and class. When most of them do, one
+ * unlike the rest is not an entry: Cambridge follows its reference list with the
+ * Figures tab, a sibling holding a copy of every figure.
+ */
+function sameShape(elements: Element[]): Element[] {
+  const shape = (el: Element) => `${tagOf(el)}.${el.getAttribute('class') ?? ''}`;
+  const counts = new Map<string, number>();
+  for (const el of elements) counts.set(shape(el), (counts.get(shape(el)) ?? 0) + 1);
+  const [common, count = 0] = [...counts].sort((a, b) => b[1] - a[1])[0] ?? [];
+  return count >= 2 && count * 2 >= elements.length
+    ? elements.filter((el) => shape(el) === common)
+    : elements;
 }
 
 /** A leading printed number: `1.`, `[12]`, `12)`. */

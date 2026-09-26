@@ -172,6 +172,26 @@ describe('outline', () => {
     ]);
   });
 
+  it('sets structured-abstract parts directly under the abstract, headed or bold-labelled', async () => {
+    const headed = await parse(
+      page(`<section><h2>Abstract</h2><div class="content"><h3>Background</h3><p>Why.</p>
+        <h3>Conclusion</h3><p>So.</p></div></section><h2>Introduction</h2><p>${PROSE}</p>`),
+    );
+    // Cambridge sets each part as a block led by a bold label, with no heading.
+    const labelled = await parse(
+      page(`<div class="abstract"><h2>Abstract</h2><div class="abstract-content">
+        <div class="sec"><span class="bold">Background</span><p>Why.</p></div>
+        <div class="sec"><span class="bold">Conclusion</span><p>So.</p></div></div></div>
+        <h2>Introduction</h2><p>${PROSE}</p>`),
+    );
+    for (const document of [headed, labelled]) {
+      expect(document.abstracts[0]?.sections.map((s) => [s.title, s.blocks])).toEqual([
+        ['Background', [{ text: 'Why.', type: 'paragraph' }]],
+        ['Conclusion', [{ text: 'So.', type: 'paragraph' }]],
+      ]);
+    }
+  });
+
   it('skips page furniture inside the article region', async () => {
     const document = await parse(
       page(`
@@ -303,6 +323,19 @@ describe('references', () => {
         text: 'Roe R. A cited work. J Tests. 2020;1:2.',
       },
       { id: 'ref2', label: '2', text: 'Doe J. Another work. 2021.' },
+    ]);
+  });
+
+  it('spaces name and source fields the stylesheet separates, never doubling the page’s own', async () => {
+    const document = await parse(
+      page(`<h2>Introduction</h2><p>${PROSE}</p><div class="refs"><h2>References</h2>
+        <div class="ref" id="r1"><span class="string-name"><span class="surname">Chesney</span>, <span class="given-names">E</span></span>, <span class="string-name"><span class="surname">Fazel</span>, <span class="given-names">S</span></span>. A meta-review. World Psychiatry 2014.</div>
+        <div class="ref" id="r2"><span class="References__name"><!--[--><span class="References__surname">Wu</span><span class="References__givenNames">F.</span></span><!--]--><span class="ReferencesList_etal">et al</span>. (2023). A study. <i class="References__source">Mol. Plant</i><!--[-->16<!--]-->, 849–864.</div>
+      </div><div id="figures-tab" class="figures tab-pane"><img src="f1.jpg"><p>Figure 1 A flow diagram of the trial.</p></div>`),
+    );
+    expect(document.references.map((r) => r.text)).toEqual([
+      'Chesney, E, Fazel, S. A meta-review. World Psychiatry 2014.',
+      'Wu F., et al. (2023). A study. *Mol. Plant* 16, 849–864.',
     ]);
   });
 

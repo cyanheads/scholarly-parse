@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: the same BJPsych Open trial is also in the corpus as JATS (epmc-bjo.2024.833) and Grobid TEI (grobid-bjo.2024.833). Pins what this Cambridge page shares with the JATS parse: title, abstract text, the Method and Discussion subsections, three image-only tables reported unextractable, and one figure, with the same captions.",
+  "why": "Rosetta: the same BJPsych Open trial is also in the corpus as JATS (epmc-bjo.2024.833) and Grobid TEI (grobid-bjo.2024.833). Pins what this Cambridge page shares with the JATS parse: title, abstract text, the Method and Discussion subsections, three image-only tables reported unextractable, and one figure, with the same captions. The page sets its structured abstract as bold-labelled blocks, read as titled parts; its reference names carry their own separators; and the Figures tab after the reference list is not a 38th reference.",
   "title": "Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial",
   "quality": "partial",
   "abstractKinds": ["main"],
@@ -25,12 +25,16 @@
   ],
   "tables": 3,
   "figures": 1,
+  "references": 37,
   "warnings": ["table-unextractable", "structure-inferred"],
   "contains": [
     "There is no clear evidence about how to support people with borderline personality disorder (BPD) during the perinatal period.",
     "Perinatal ESGs may represent an effective intervention for perinatal women and birthing people with BPD.",
     "**Figure 1.** CONSORT diagram capturing participant flow. BPD, borderline personality disorder; CONSORT, Consolidated Standards of Reporting Trials",
     "**Table 1.** Baseline characteristics",
-    "**Table 3.** Results from regression analyses of 4-month outcome data"
-  ]
+    "**Table 3.** Results from regression analyses of 4-month outcome data",
+    "## Abstract\n\n### Background\n\nThere is no clear evidence",
+    "- [1] Chesney, E, Goodwin, GM, Fazel, S. Risks of all-cause"
+  ],
+  "notContains": ["Chesney , E", "[Figure 1]"]
 }

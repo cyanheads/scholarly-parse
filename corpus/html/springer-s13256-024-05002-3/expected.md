@@ -6,15 +6,15 @@ DOI: 10.1186/s13256-024-05002-3
 
 ## Abstract
 
-#### Background
+### Background
 
 Evans syndrome is a rare disorder characterized by the simultaneous or sequential combination of autoimmune hemolytic anemia and immunological thrombocytopenia, together with a positive direct antiglobulin test. This syndrome, which can be primary or secondary, is a rare initial manifestation of autoimmune diseases, notably systemic lupus erythematosus, with 1.7–2.7% of patients with systemic lupus erythematosus developing secondary Evans syndrome, sometimes preceding the onset of systemic lupus erythematosus symptoms.
 
-#### Case presentation
+### Case presentation
 
 A 47-year-old Middle Eastern female presented with symptoms including shortness of breath, chest pain, and weakness. Physical examination revealed pallor, pale conjunctiva, icteric sclera, tachycardia, and tachypnea. She was diagnosed with Evans syndrome owing to hemolytic anemia, thrombocytopenia, and a positive Coombs test, where initial resistance to treatment prompted intensive therapy with methylprednisolone, intravenous immunoglobulin, and rituximab. Subsequent identification of systemic lupus erythematosus on the basis of positive anti-nuclear antibodies and anti-double-stranded deoxyribonucleic acid antibodies led to treatment with mycophenolate mofetil and hydroxychloroquine. Further evaluations uncovered Hashimoto’s thyroiditis and pernicious anemia, necessitating thyroxine supplementation and vitamin B12 injections.
 
-#### Conclusion
+### Conclusion
 
 Hematologic abnormalities play a crucial role in the diagnostic framework of systemic lupus erythematosus. This case highlights a patient initially diagnosed with Evans syndrome, revealing an underlying systemic lupus erythematosus. The presentation underscores the significance of hematologic manifestations as integral components of the diagnostic framework for autoimmune diseases, emphasizing the intricate relationship between Evans syndrome and systemic lupus erythematosus.
 

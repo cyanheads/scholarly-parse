@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: the same Frontiers article is in the corpus as Europe PMC JATS (epmc-fmicb.2024.1384204) and Grobid TEI from its PDF (grobid-fmicb.2024.1384204). Pins what this page parse shares with the JATS reference: abstract opening, the full Methods and Results subsection sequence, three tables, five figures with the same captions, and 92 references.",
+  "why": "Rosetta: the same Frontiers article is in the corpus as Europe PMC JATS (epmc-fmicb.2024.1384204) and Grobid TEI from its PDF (grobid-fmicb.2024.1384204). Pins what this page parse shares with the JATS reference: abstract opening, the full Methods and Results subsection sequence, three tables, five figures with the same captions, and 92 references. Its reference fields rely on the stylesheet for spacing: the journal title against the volume and the last name against et al. are spaced.",
   "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
   "quality": "partial",
   "abstractKinds": ["main"],
@@ -31,6 +31,9 @@
   "contains": [
     "**Figure 1.** Carbohydrate content of greenhouse-grown Sweetgrass and other grass species.",
     "**Figure 5.** Bubble plot of different bacterial and archaeal genera",
-    "**Table 3.** Soil physiochemical parameters of baseline, field, and greenhouse soils"
-  ]
+    "**Table 3.** Soil physiochemical parameters of baseline, field, and greenhouse soils",
+    "*J. Mol. Biol.* 215, 403–410",
+    "Wu F., et al. (2023)"
+  ],
+  "notContains": ["*J. Mol. Biol.*215", "Wu F.et al."]
 }

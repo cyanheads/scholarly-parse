@@ -7,7 +7,14 @@
  * @module src/formats/html/parse
  */
 
-import { childNodes, isElement, loadDocument, tagOf, textOfElement } from '../../html/dom.js';
+import {
+  childNodes,
+  isElement,
+  loadDocument,
+  TEXT_NODE,
+  tagOf,
+  textOfElement,
+} from '../../html/dom.js';
 import { interstitialReason } from '../../html/interstitial.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
@@ -24,7 +31,7 @@ import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { floatKind, flowBlocks, isLinkList } from './blocks.js';
-import { type HtmlContext, isFurniture } from './context.js';
+import { type HtmlContext, isFurniture, nameTokens } from './context.js';
 import { inlineText } from './inline.js';
 import { extractMetadata, metaAbstract, metaReferences, readMetaTags } from './metadata.js';
 import { extractReferences } from './references.js';
@@ -331,14 +338,13 @@ function classify(outline: Outline, hasTitleHeading: boolean, ctx: HtmlContext):
       seenAbstract = true;
       const main =
         abstract === 'main' && result.abstracts.some((a) => a.kind === 'main') ? 'other' : abstract;
-      const section = convert(abstractScope(raw), 'body', ctx, true);
-      if (section) {
+      const sections = abstractSections(abstractScope(raw), ctx);
+      if (sections.length > 0) {
         result.abstracts.push({
           kind: main,
-          sections: [section],
-          ...(!/^abstract$/i.test(title) && { title: section.title ?? title }),
+          sections,
+          ...(!/^abstract$/i.test(title) && { title: inlineText(raw.heading, ctx) || title }),
         });
-        delete section.title;
       }
       continue;
     }
@@ -369,6 +375,82 @@ function abstractScope(raw: RawSection): RawSection {
   const container = openedContainer(raw.heading);
   if (!container) return raw;
   return { ...raw, nodes: raw.nodes.filter((node) => container.contains(node)) };
+}
+
+/**
+ * An abstract's sections, its parts at the top level as a JATS abstract's `<sec>`s are:
+ * content ahead of the first part is an untitled section of its own. A page that sets
+ * the parts without headings — sibling blocks each led by a bold label, as Cambridge's
+ * `<div class="sec"><span class="bold">Background</span><p>…` — has them read as parts.
+ */
+function abstractSections(raw: RawSection, ctx: HtmlContext): Section[] {
+  const labelled = raw.sections.length === 0 ? labelledParts(raw.nodes, ctx) : undefined;
+  if (labelled) return labelled;
+  const section = convert(raw, 'body', ctx, true);
+  if (!section) return [];
+  if (section.blocks.length === 0) {
+    ctx.sectionIds.delete(section.id);
+    return section.sections;
+  }
+  return [
+    { blocks: section.blocks, id: section.id, kind: 'body', sections: [] },
+    ...section.sections,
+  ];
+}
+
+/** Nodes that carry content: elements other than furniture, and text that is not only whitespace. */
+function significant(nodes: Node[]): Node[] {
+  return nodes.filter((node) =>
+    isElement(node)
+      ? !isFurniture(node)
+      : node.nodeType === TEXT_NODE && (node.textContent ?? '').trim() !== '',
+  );
+}
+
+/** A part's label: a short bold element opening `element`, with a paragraph after it. */
+function partLabel(element: Element): Element | undefined {
+  const [first, ...rest] = significant(childNodes(element));
+  if (!first || !isElement(first)) return;
+  const bold =
+    tagOf(first) === 'b' ||
+    tagOf(first) === 'strong' ||
+    nameTokens(first.getAttribute('class')).includes('bold');
+  const label = textOfElement(first);
+  if (!bold || !label || label.length > 60) return;
+  return rest.some((node) => isElement(node) && tagOf(node) === 'p') ? first : undefined;
+}
+
+/** The nodes the parts sit among, single wrappers (`div.abstract-content > div.abstract`) looked through. */
+function partSiblings(nodes: Node[]): Node[] {
+  const children = significant(nodes);
+  const [only] = children;
+  return children.length === 1 && only && isElement(only) && !partLabel(only)
+    ? partSiblings(childNodes(only))
+    : children;
+}
+
+/** Sibling blocks each led by a bold label, as titled sections; undefined unless there are two or more and nothing else. */
+function labelledParts(nodes: Node[], ctx: HtmlContext): Section[] | undefined {
+  const parts = partSiblings(nodes).map((node) => {
+    const label = isElement(node) ? partLabel(node) : undefined;
+    return label && isElement(node) ? { element: node, label } : undefined;
+  });
+  if (parts.length < 2) return;
+  const sections: Section[] = [];
+  for (const part of parts) {
+    if (!part) return;
+    const content = childNodes(part.element).filter((node) => node !== part.label);
+    const title = inlineText(part.label, ctx).replace(/[:.]\s*$/, '');
+    const sourceId = part.element.getAttribute('id') ?? undefined;
+    sections.push({
+      blocks: flowBlocks(content, ctx),
+      id: issueId(ctx.sectionIds, sourceId, `s${ctx.sectionIds.size + 1}`),
+      kind: 'body',
+      sections: [],
+      ...(title && { title }),
+    });
+  }
+  return sections;
 }
 
 /** The element a heading opens: its parent, when nothing with text comes before the heading in it. */

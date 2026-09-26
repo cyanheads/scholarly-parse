@@ -6,27 +6,27 @@ DOI: 10.1192/bjo.2024.833
 
 ## Abstract
 
-Background
+### Background
 
 There is no clear evidence about how to support people with borderline personality disorder (BPD) during the perinatal period. Perinatal emotional skills groups (ESGs) may be helpful, but their efficacy has not been tested.
 
-Aims
+### Aims
 
 To test the feasibility of conducting a randomised controlled trial (RCT) of perinatal ESGs for women and birthing people with BPD.
 
-Method
+### Method
 
 Two-arm parallel-group feasibility RCT. We recruited people from two centres, aged over 18 years, meeting DSM-5 diagnostic criteria for BPD, who were pregnant or within 12 months of a live birth. Eligible individuals were randomly allocated on a 1:1 ratio to ESGs + treatment as usual (TAU), or to TAU. Outcomes were assessed at 4 months post randomisation.
 
-Results
+### Results
 
 A total of 100% of the pre-specified sample (*n* = 48) was recruited over 6 months, and we obtained 4-month outcome data on 92% of randomised participants. In all, 54% of participants allocated to perinatal ESGs attended 75% of the full group treatment (median number of sessions: 9 (interquartile range 6–11). At 4 months, levels of BPD symptoms (adjusted coefficient −2.0, 95% CI −6.2 to 2.1) and emotional distress (−2.4, 95% CI −6.2 to 1.5) were lower among those allocated to perinatal ESGs. The directionality of effect on well-being and social functioning also favoured the intervention. The cost of delivering perinatal ESGs was estimated to be £918 per person.
 
-Conclusions
+### Conclusions
 
 Perinatal ESGs may represent an effective intervention for perinatal women and birthing people with BPD. Their efficacy should be tested in a fully powered RCT, and this is a feasible undertaking.
 
-Trial registration
+### Trial registration
 
 ISRCTN80470632.
 
@@ -225,41 +225,40 @@ M.S. receives income from training in dialectical behaviour therapy (DBT) and ro
 
 ## References
 
-- [1] Chesney , E, , Goodwin , GM, , Fazel , S. Risks of all-cause and suicide mortality in mental disorders: a meta-review. World Psychiatry 2014; 13(2): 153–60.
-- [2] Pare-Miron , V, , Czuzoj-Shulman , N, , Oddy , L, , Spence , AR, , Abenhaim , HA. Effect of borderline personality disorder on obstetrical and neonatal outcomes. Womens Health Issues 2016; 26(2): 190–5.
-- [3] Florange , JG, , Herpertz , SC. Parenting in patients with borderline personality disorder, sequelae for the offspring and approaches to treatment and prevention. Curr Psychiatry Rep 2019; 21(2): 9.
-- [4] Eyden , J, , Winsper , C, , Wolke , D, , Broome , MR, , MacCallum , F. A systematic review of the parenting and outcomes experienced by offspring of mothers with borderline personality pathology: potential mechanisms and clinical implications. Clin Psychol Rev 2016; 47: 85–105.
-- [5] Conroy , S, , Pariante , CM, , Marks , MN, , Davies , HA, , Farrelly , S, , Schacht , R, et al. Maternal psychopathology and infant development at 18 months: the impact of maternal personality disorder and depression. J Am Acad Child Adolesc Psychiatry 2012; 51(1): 51–61.
-- [6] Rutter , M, , Quinton , D. Parental psychiatric disorder: effects on children. Psychol Med 1984; 14(4): 853–80.
-- [7] Howard , LM, , Molyneaux , E, , Dennis , C-L, , Rochat , T, , Stein , A, , Milgrom , J. Non-psychotic mental disorders in the perinatal period. Lancet 2014; 384(9956): 1775–88.
+- [1] Chesney, E, Goodwin, GM, Fazel, S. Risks of all-cause and suicide mortality in mental disorders: a meta-review. World Psychiatry 2014; 13(2): 153–60.
+- [2] Pare-Miron, V, Czuzoj-Shulman, N, Oddy, L, Spence, AR, Abenhaim, HA. Effect of borderline personality disorder on obstetrical and neonatal outcomes. Womens Health Issues 2016; 26(2): 190–5.
+- [3] Florange, JG, Herpertz, SC. Parenting in patients with borderline personality disorder, sequelae for the offspring and approaches to treatment and prevention. Curr Psychiatry Rep 2019; 21(2): 9.
+- [4] Eyden, J, Winsper, C, Wolke, D, Broome, MR, MacCallum, F. A systematic review of the parenting and outcomes experienced by offspring of mothers with borderline personality pathology: potential mechanisms and clinical implications. Clin Psychol Rev 2016; 47: 85–105.
+- [5] Conroy, S, Pariante, CM, Marks, MN, Davies, HA, Farrelly, S, Schacht, R, et al. Maternal psychopathology and infant development at 18 months: the impact of maternal personality disorder and depression. J Am Acad Child Adolesc Psychiatry 2012; 51(1): 51–61.
+- [6] Rutter, M, Quinton, D. Parental psychiatric disorder: effects on children. Psychol Med 1984; 14(4): 853–80.
+- [7] Howard, LM, Molyneaux, E, Dennis, C-L, Rochat, T, Stein, A, Milgrom, J. Non-psychotic mental disorders in the perinatal period. Lancet 2014; 384(9956): 1775–88.
 - [8] Royal College of Psychiatrists. Perinatal Specialist Community Mental Health Team Service Specification Template. Royal College of Psychiatrists, 2018 (<https://www.rcpsych.ac.uk/docs/default-source/improving-care/nccmh/perinatal/nccmh-perinatal-specialist-community-mental-health-team-service-spec-template-may2018.pdf?sfvrsn=aa70cd14_4>).
-- [9] Crowley , G, , Molyneaux , E, , Nath , S, , Trevillion , K, , Moran , P, , Howard , LM. Disordered personality traits and psychiatric morbidity in pregnancy: a population-based study. Arch Womens Ment Health 2019; 23: 43–52.
-- [10] Storebø , OJ, , Stoffers-Winterling , JM, , Völlm , BA, , Kongerslev , MT, , Mattivi , JT, , Jørgensen , MS, et al. Psychological therapies for people with borderline personality disorder. Cochrane Database of Syst Rev 2020; 5(5): CD012955.
-- [11] Iliakis , EA, , Sonley , AK, , Ilagan , GS, , Choi-Kain , LW. Treatment of borderline personality disorder: is supply adequate to meet public health needs? Psychiatr Serv 2019; 70(9): 772–81.
-- [12] Stoffers-Winterling , JM, , Storebo , OJ, , Kongerslev , MT, , Faltinsen , E, , Todorovac , A, , Sedoc Jorgensen , M, et al. Psychotherapies for borderline personality disorder: a focused systematic review and meta-analysis. Br J Psychiatry 2022; 221(3): 538–52.
-- [13] Muzik , M, , Rosenblum , KL, , Alfafara , EA, , Schuster , MM, , Miller , NM, , Waddell , RM, et al. Mom power: preliminary outcomes of a group intervention to improve mental health and parenting among high-risk mothers. Arch Womens Ment Health 2015; 18(3): 507–21.
-- [14] Hellberg , SN, , Bruening , AB, , Thompson , KA, , Hopkins , TA. Applications of dialectical behavioural therapy in the perinatal period: a scoping review. Clin Psychol Psychother 2024; 31(1): e2937.
-- [15] Liu , Y, , Pencheon , E, , Hunter , RM, , Moncrieff , J, , Freemantle , N. Recruitment and retention strategies in mental health trials – a systematic review. PLoS One 2018; 13(8): e0203127.
-- [16] Moran , P, , Bick , D, , Biddle , L, , Borries , B, , Kandiyali , R, , Rigby , J, et al. A feasibility randomised controlled trial with an embedded qualitative evaluation of perinatal emotional skills groups for women with borderline personality disorder: protocol for the EASE study. Pilot Feasibility Stud 2022; 8(1): 215.
-- [17] Moran , P, , Leese , M, , Lee , T, , Walters , P, , Thornicroft , G, , Mann , A. Standardised assessment of personality – abbreviated scale (SAPAS): preliminary validation of a brief screen for personality disorder. BrJ Psychiatry 2003; 183: 228–32.
-- [18] McManus , S, , Bebbington , P, , Jenkins , R, , Brugha , T, eds. Mental Health and Wellbeing in England: Adult Psychiatric Morbidity Survey 2014. NHS Digital, 2016.
+- [9] Crowley, G, Molyneaux, E, Nath, S, Trevillion, K, Moran, P, Howard, LM. Disordered personality traits and psychiatric morbidity in pregnancy: a population-based study. Arch Womens Ment Health 2019; 23: 43–52.
+- [10] Storebø, OJ, Stoffers-Winterling, JM, Völlm, BA, Kongerslev, MT, Mattivi, JT, Jørgensen, MS, et al. Psychological therapies for people with borderline personality disorder. Cochrane Database of Syst Rev 2020; 5(5): CD012955.
+- [11] Iliakis, EA, Sonley, AK, Ilagan, GS, Choi-Kain, LW. Treatment of borderline personality disorder: is supply adequate to meet public health needs? Psychiatr Serv 2019; 70(9): 772–81.
+- [12] Stoffers-Winterling, JM, Storebo, OJ, Kongerslev, MT, Faltinsen, E, Todorovac, A, Sedoc Jorgensen, M, et al. Psychotherapies for borderline personality disorder: a focused systematic review and meta-analysis. Br J Psychiatry 2022; 221(3): 538–52.
+- [13] Muzik, M, Rosenblum, KL, Alfafara, EA, Schuster, MM, Miller, NM, Waddell, RM, et al. Mom power: preliminary outcomes of a group intervention to improve mental health and parenting among high-risk mothers. Arch Womens Ment Health 2015; 18(3): 507–21.
+- [14] Hellberg, SN, Bruening, AB, Thompson, KA, Hopkins, TA. Applications of dialectical behavioural therapy in the perinatal period: a scoping review. Clin Psychol Psychother 2024; 31(1): e2937.
+- [15] Liu, Y, Pencheon, E, Hunter, RM, Moncrieff, J, Freemantle, N. Recruitment and retention strategies in mental health trials – a systematic review. PLoS One 2018; 13(8): e0203127.
+- [16] Moran, P, Bick, D, Biddle, L, Borries, B, Kandiyali, R, Rigby, J, et al. A feasibility randomised controlled trial with an embedded qualitative evaluation of perinatal emotional skills groups for women with borderline personality disorder: protocol for the EASE study. Pilot Feasibility Stud 2022; 8(1): 215.
+- [17] Moran, P, Leese, M, Lee, T, Walters, P, Thornicroft, G, Mann, A. Standardised assessment of personality – abbreviated scale (SAPAS): preliminary validation of a brief screen for personality disorder. BrJ Psychiatry 2003; 183: 228–32.
+- [18] McManus, S, Bebbington, P, Jenkins, R, Brugha, T, eds. Mental Health and Wellbeing in England: Adult Psychiatric Morbidity Survey 2014. NHS Digital, 2016.
 - [19] American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders (DSM-5®). American Psychiatric Association, 2013.
-- [20] Wilson , H, , Donachie , AL. Evaluating the effectiveness of a dialectical behaviour therapy (DBT) informed programme in a community perinatal team. Behav Cogn Psychother 2018; 46(5): 541–53.
+- [20] Wilson, H, Donachie, AL. Evaluating the effectiveness of a dialectical behaviour therapy (DBT) informed programme in a community perinatal team. Behav Cogn Psychother 2018; 46(5): 541–53.
 - [21] British Psychological Society and Royal College of Psychiatrists. Antenatal and Postnatal Mental Health: Clinical Management and Service Guidance. British Psychological Society and Royal College of Psychiatrists, 2014.
-- [22] Zanarini , MC, , Weingeroff , JL, , Frankenburg , FR, , Fitzmaurice , GM. Development of the self-report version of the Zanarini rating scale for borderline personality disorder. Personal Ment Health 2015; 9(4): 243–9.
-- [23] Barkham , M, , Bewick , B, , Mullin , T, , Gilbody , S, , Connell , J, , Cahill , J, et al. The CORE-10: a short measure of psychological distress for routine use in the psychological therapies. Couns Psychother Res 2013; 13(1): 3–13.
-- [24] van Asselt , AD, , Dirksen , CD, , Arntz , A, , Giesen-Bloo , JH, , Severens , JL. The EQ-5D: a useful quality of life measure in borderline personality disorder? Eur Psychiatry 2009; 24(2): 79–85.
-- [25] Fat , LN, , Scholes , S, , Boniface , S, , Mindell , J, , Stewart-Brown , S. Evaluating and establishing national norms for mental wellbeing using the Short Warwick-Edinburgh Mental Well-Being Scale (SWEMWBS): findings from the health survey for England. Qual Life Res 2017; 26(5): 1129–44.
-- [26] Mundt , JC, , Marks , IM, , Shear , MK, , Greist , JH. The work and social adjustment scale: a simple measure of impairment in functioning. Br J Psychiatry 2002; 180: 461–4.
-- [27] Berry , J, , Jones , W. The parental stress scale : initial psychometric evidence. J Soc Pers Relat 1995; 12: 463–72.
-- [28] Madge , N, , Hewitt , A, , Hawton , K, , de Wilde , EJ, , Corcoran , P, , Fekete , S, et al. Deliberate self-harm within an international community sample of young people: comparative findings from the Child & Adolescent Self-harm in Europe (CASE) study. J Child Psychol Psychiatry 2008; 49(6): 667–77.
-- [29] Lancaster , GA, , Dodd , S, , Williamson , PR. Design and analysis of pilot studies: recommendations for good practice. J Eval Clin Pract 2004; 10(2): 307–12.
-- [30] Eldridge , SM, , Chan , CL, , Campbell , MJ, , Bond , CM, , Hopewell , S, , Thabane , L, et al. CONSORT 2010 statement: extension to randomised pilot and feasibility trials. Pilot Feasibility Stud 2016; 2: 64.
-- [31] Jones , K, , Weatherly , H, , Birch , S, , Castelli , A, , Chalkley , M, , Dargan , A, et al. *Unit Costs of Health and Social Care 2022 Manual Kent*. Kent Academic Repository, 2022 (<https://kar.kent.ac.uk/100519/1/Unit%20Costs%20of%20health%20and%20Social%20Care%202022%20%28amended%2013%20July%202023%29.pdf>).
-- [32] Juul , S, , Simonsen , S, , Poulsen , S, , Lunn , S, , Sorensen , P, , Bateman , A, et al. Detailed statistical analysis plan for the short-term versus long-term mentalisation-based therapy for outpatients with subthreshold or diagnosed borderline personality disorder randomised clinical trial (MBT-RCT). Trials 2021; 22(1): 497.
-- [33] Crawford , MJ, , Thana , L, , Parker , J, , Turner , O, , Carney , A, , McMurran , M, et al. Structured psychological support for people with personality disorder: feasibility randomised controlled trial of a low-intensity intervention. BJPsych Open 2020; 6(2): e25.
-- [34] Day , C, , Briskman , J, , Crawford , MJ, , Foote , L, , Harris , L, , Boadu , J, et al. Randomised feasibility trial of the helping families programme-modified: an intensive parenting intervention for parents affected by severe personality difficulties. BMJ Open 2020; 10(2): e033637.
+- [22] Zanarini, MC, Weingeroff, JL, Frankenburg, FR, Fitzmaurice, GM. Development of the self-report version of the Zanarini rating scale for borderline personality disorder. Personal Ment Health 2015; 9(4): 243–9.
+- [23] Barkham, M, Bewick, B, Mullin, T, Gilbody, S, Connell, J, Cahill, J, et al. The CORE-10: a short measure of psychological distress for routine use in the psychological therapies. Couns Psychother Res 2013; 13(1): 3–13.
+- [24] van Asselt, AD, Dirksen, CD, Arntz, A, Giesen-Bloo, JH, Severens, JL. The EQ-5D: a useful quality of life measure in borderline personality disorder? Eur Psychiatry 2009; 24(2): 79–85.
+- [25] Fat, LN, Scholes, S, Boniface, S, Mindell, J, Stewart-Brown, S. Evaluating and establishing national norms for mental wellbeing using the Short Warwick-Edinburgh Mental Well-Being Scale (SWEMWBS): findings from the health survey for England. Qual Life Res 2017; 26(5): 1129–44.
+- [26] Mundt, JC, Marks, IM, Shear, MK, Greist, JH. The work and social adjustment scale: a simple measure of impairment in functioning. Br J Psychiatry 2002; 180: 461–4.
+- [27] Berry, J, Jones, W. The parental stress scale : initial psychometric evidence. J Soc Pers Relat 1995; 12: 463–72.
+- [28] Madge, N, Hewitt, A, Hawton, K, de Wilde, EJ, Corcoran, P, Fekete, S, et al. Deliberate self-harm within an international community sample of young people: comparative findings from the Child & Adolescent Self-harm in Europe (CASE) study. J Child Psychol Psychiatry 2008; 49(6): 667–77.
+- [29] Lancaster, GA, Dodd, S, Williamson, PR. Design and analysis of pilot studies: recommendations for good practice. J Eval Clin Pract 2004; 10(2): 307–12.
+- [30] Eldridge, SM, Chan, CL, Campbell, MJ, Bond, CM, Hopewell, S, Thabane, L, et al. CONSORT 2010 statement: extension to randomised pilot and feasibility trials. Pilot Feasibility Stud 2016; 2: 64.
+- [31] Jones, K, Weatherly, H, Birch, S, Castelli, A, Chalkley, M, Dargan, A, et al. *Unit Costs of Health and Social Care 2022 Manual Kent*. Kent Academic Repository, 2022 (<https://kar.kent.ac.uk/100519/1/Unit%20Costs%20of%20health%20and%20Social%20Care%202022%20%28amended%2013%20July%202023%29.pdf>).
+- [32] Juul, S, Simonsen, S, Poulsen, S, Lunn, S, Sorensen, P, Bateman, A, et al. Detailed statistical analysis plan for the short-term versus long-term mentalisation-based therapy for outpatients with subthreshold or diagnosed borderline personality disorder randomised clinical trial (MBT-RCT). Trials 2021; 22(1): 497.
+- [33] Crawford, MJ, Thana, L, Parker, J, Turner, O, Carney, A, McMurran, M, et al. Structured psychological support for people with personality disorder: feasibility randomised controlled trial of a low-intensity intervention. BJPsych Open 2020; 6(2): e25.
+- [34] Day, C, Briskman, J, Crawford, MJ, Foote, L, Harris, L, Boadu, J, et al. Randomised feasibility trial of the helping families programme-modified: an intensive parenting intervention for parents affected by severe personality difficulties. BMJ Open 2020; 10(2): e033637.
 - [35] NICE Clinical Guideline, CG 192. *Antenatal and Postnatal Mental Health: Clinical Management and Service Guidance*. NICE, 2020.
-- [36] Laporte , L, , Paris , J, , Bergevin , T, , Fraser , R, , Cardin , JF. Clinical outcomes of a stepped care program for borderline personality disorder. Personal Ment Health 2018; 12(3): 252–64.
+- [36] Laporte, L, Paris, J, Bergevin, T, Fraser, R, Cardin, JF. Clinical outcomes of a stepped care program for borderline personality disorder. Personal Ment Health 2018; 12(3): 252–64.
 - [37] Department of Health and Social Care. The NHS Long Term Plan. Department of Health and Social Care, 2019.
-- [Figure 1] Figure 1 CONSORT diagram capturing participant flow. BPD, borderline personality disorder; CONSORT, Consolidated Standards of Reporting Trials; ESG, emotional skills group. Table 1 Baseline characteristics Table 2 2- and 4-month outcome findings Table 3 Results from regression analyses of 4-month outcome data
