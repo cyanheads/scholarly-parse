@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/pubmed-mcp-server#69: every reference is a structured <element-citation> with no punctuation between its child elements, and seven carry a Cell-style page such as <lpage>1659.e26</lpage> that numeric coercion turned into 4.002e+29-style scientific notation. Pins author names separated by commas, identifiers labelled, the e-page tokens verbatim, and no scientific notation.",
+  "why": "cyanheads/pubmed-mcp-server#69: every reference is a structured <element-citation> with no punctuation between its child elements, and seven carry a Cell-style page such as <lpage>1659.e26</lpage> that numeric coercion turned into 4.002e+29-style scientific notation. Pins author names separated by commas, the fields in citation order (the source lists the volume before the year), identifiers labelled, the e-page tokens verbatim, and no scientific notation.",
   "title": "Genome-wide chromosome architecture prediction reveals biophysical principles underlying gene structure",
   "quality": "structured",
   "abstractKinds": ["main", "graphical", "other", "teaser"],
@@ -15,7 +15,7 @@
     "1659.e26",
     "797.e11",
     "DOI 10.1016/j.cell.2020.07.032 PMID 32822575 PMCID PMC7851072",
-    "207–226 DOI 10.1038/s41576-019-0195-2"
+    "Nat. Rev. Genet. 2020;21:207–226. DOI 10.1038/s41576-019-0195-2"
   ],
   "notContains": ["1.659e+29", "7.97e+13", "KempferR", "PomboA"]
 }

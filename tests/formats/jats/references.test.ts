@@ -107,8 +107,8 @@ describe('element-citation (#69)', () => {
       pmid: '37657419',
       source: 'Cell',
       text:
-        'Doman J.L., Pandey S. Phage-assisted evolution yields compact prime editors. Cell 186(18) ' +
-        '2023 3983–4002.e26 PMID 37657419 DOI 10.1016/j.cell.2023.07.039 PMCID PMC10482982',
+        'Doman J.L., Pandey S. Phage-assisted evolution yields compact prime editors. Cell. ' +
+        '2023;186(18):3983–4002.e26. PMID 37657419 DOI 10.1016/j.cell.2023.07.039 PMCID PMC10482982',
       title: 'Phage-assisted evolution yields compact prime editors',
       year: '2023',
     });
@@ -122,8 +122,46 @@ describe('element-citation (#69)', () => {
         '<collab>The ENCODE Project Consortium</collab><etal/></person-group>' +
         '<source>Nature</source><year>2012</year></element-citation></ref></ref-list>',
     );
-    expect(reference?.text).toBe('The ENCODE Project Consortium, et al. Nature 2012');
+    expect(reference?.text).toBe('The ENCODE Project Consortium, et al. Nature. 2012.');
     expect(reference?.authors).toEqual(['The ENCODE Project Consortium', 'et al.']);
+  });
+
+  it('lays fields out in citation order and shows each identifier once', () => {
+    // PMC11701261 lists the volume before the year; Europe PMC repeats the PMID as a
+    // `medline` ID and the DOI as a `pii`.
+    const [journal, chapter] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><person-group person-group-type="author">' +
+        '<name><surname>Kempfer</surname><given-names>R.</given-names></name></person-group>' +
+        '<article-title>Methods for mapping 3D chromosome architecture</article-title>' +
+        '<source>Nat. Rev. Genet.</source><volume>21</volume><year>2020</year>' +
+        '<fpage>207</fpage><lpage>226</lpage><pub-id pub-id-type="medline">31848476</pub-id>' +
+        '<pub-id pub-id-type="doi">10.1038/s41576-019-0195-2</pub-id>' +
+        '<pub-id pub-id-type="pii">10.1038/s41576-019-0195-2</pub-id>' +
+        '<pub-id pub-id-type="pmid">31848476</pub-id></element-citation></ref>' +
+        '<ref id="b"><element-citation publication-type="book"><person-group>' +
+        '<name><surname>Roe</surname><given-names>R</given-names></name></person-group>' +
+        '<chapter-title>Methods</chapter-title><person-group person-group-type="editor">' +
+        '<name><surname>Doe</surname><given-names>J</given-names></name></person-group>' +
+        '<source>Handbook</source><edition>2nd ed</edition><publisher-loc>Oxford</publisher-loc>' +
+        '<publisher-name>OUP</publisher-name><year>2019</year><fpage>12</fpage><lpage>30</lpage>' +
+        '</element-citation></ref></ref-list>',
+    );
+    expect(journal?.text).toBe(
+      'Kempfer R. Methods for mapping 3D chromosome architecture. Nat. Rev. Genet. ' +
+        '2020;21:207–226. PMID 31848476 DOI 10.1038/s41576-019-0195-2',
+    );
+    expect(chapter?.text).toBe(
+      'Roe R. Methods. In: Doe J, editors. Handbook. 2nd ed. Oxford: OUP; 2019, 12–30.',
+    );
+  });
+
+  it('reads an element-citation with punctuation of its own as written', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><person-group><name><surname>Roe</surname>' +
+        '<given-names>R</given-names></name></person-group>. Title. <source>Journal</source> ' +
+        '(<year>2019</year>).</element-citation></ref></ref-list>',
+    );
+    expect(reference?.text).toBe('Roe R. Title. Journal (2019).');
   });
 
   it('reads a DOI from a doi.org link and keeps any other link as the URL', () => {
@@ -330,6 +368,6 @@ describe('reference-list placement (#116)', () => {
         '<element-citation><source>Zenodo</source><year>2024</year>' +
         '<pub-id pub-id-type="doi">10.5281/zenodo.1</pub-id></element-citation>.</p></sec>',
     );
-    expect(paragraphTexts(document)).toEqual(['Data are at Zenodo 2024 DOI 10.5281/zenodo.1.']);
+    expect(paragraphTexts(document)).toEqual(['Data are at Zenodo. 2024. DOI 10.5281/zenodo.1.']);
   });
 });

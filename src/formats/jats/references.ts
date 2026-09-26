@@ -21,10 +21,16 @@ import { rawText, text } from './text.js';
 
 /** `pub-id-type` → the label a rendered citation shows before the identifier. */
 const PUB_ID_LABELS: Readonly<Record<string, string>> = {
+  arxiv: 'arXiv',
   doi: 'DOI',
+  isbn: 'ISBN',
+  medline: 'PMID',
   pmcid: 'PMCID',
   pmid: 'PMID',
 };
+
+/** Publisher-internal identifiers: nothing a reader can look up, so a rendered element-citation leaves them out. */
+const INTERNAL_PUB_IDS: ReadonlySet<string> = new Set(['pii', 'publisher-id']);
 
 /**
  * Europe PMC's generated Associated Data section: a digest of the article's data
@@ -160,41 +166,106 @@ function renderName(node: XmlNode): string {
   }
 }
 
-/** Fields that close with a full stop in a rendered citation: the authors and the title. */
-const SENTENCE_FIELDS: ReadonlySet<string> = new Set([
+/** Element-citation fields placed by `renderElementCitation`; any other field follows them in source order. */
+const PLACED_FIELDS: ReadonlySet<string> = new Set([
   'person-group',
+  'name',
+  'string-name',
+  'collab',
+  'etal',
   'article-title',
   'chapter-title',
+  'part-title',
+  'data-title',
+  'source',
+  'edition',
+  'publisher-loc',
+  'publisher-name',
+  'year',
+  'month',
+  'day',
+  'volume',
+  'issue',
+  'fpage',
+  'lpage',
+  'page-range',
+  'elocation-id',
+  'pub-id',
 ]);
 
+/** `text` closed with a full stop unless it already ends a sentence or is a URL. */
+function sentence(text: string): string {
+  return /[.?!]$|:\/\/\S+$/.test(text) ? text : `${text}.`;
+}
+
 /**
- * An `<element-citation>` as delimited text. Its children carry no punctuation between
- * them, so a flat read runs every field together (`DomanJ.L.…Cell18618…`); names join
- * with `, `, the authors and the title close with a full stop, an issue follows its
- * volume in parentheses, a page range takes an en dash, and typed identifiers are
- * labeled. (#69)
+ * An `<element-citation>` as text. Its children carry no punctuation, and a flat read
+ * runs every field together (`DomanJ.L.…Cell18618…`), so the fields are laid out in the
+ * order and punctuation PMC prints citations with, whatever order the source lists them
+ * in: `Authors. Title. In: Editors, editors. Source. Edition. Place: Publisher; 2023;186(18):3983–4002.`
+ * Other fields follow as written, then the identifiers, labeled and each shown once.
+ * A citation with text of its own between the fields is read as written. (#69)
  */
 function renderElementCitation(node: XmlNode): string {
-  const parts: string[] = [];
-  let previous: string | undefined;
-  for (const child of childrenOf(node)) {
-    const tag = tagNameOf(child) ?? '';
-    let value: string;
-    if (tag === 'person-group') {
-      value = childrenOf(child).map(renderName).filter(Boolean).join(', ');
-    } else if (tag === 'pub-id') {
-      const id = text(child);
-      const label = PUB_ID_LABELS[attrOf(child, 'pub-id-type') ?? ''];
-      value = id && label ? `${label} ${id}` : id;
-    } else {
-      value = text(child);
-    }
-    if (!value) continue;
-    if (SENTENCE_FIELDS.has(tag) && !/[.?!]$/.test(value)) value += '.';
-    if (tag === 'issue' && previous === 'volume') parts.push(`${parts.pop() ?? ''}(${value})`);
-    else if (tag === 'lpage' && previous === 'fpage') parts.push(`${parts.pop() ?? ''}–${value}`);
-    else parts.push(value);
-    previous = tag;
+  const children = childrenOf(node);
+  if (children.some((child) => isTextNode(child) && textOf(child).trim()))
+    return renderMixedCitation(node);
+  const fields = children.filter((child) => !isTextNode(child));
+  const field = (tag: string) => text(fields.find((child) => tagNameOf(child) === tag));
+  const isEditors = (group: XmlNode) => attrOf(group, 'person-group-type') === 'editor';
+  // Every name outside an editor group — authors, and translators or compilers — leads.
+  const names = (editors: boolean) =>
+    fields
+      .flatMap((child) =>
+        tagNameOf(child) === 'person-group'
+          ? isEditors(child) === editors
+            ? childrenOf(child)
+            : []
+          : editors
+            ? []
+            : [child],
+      )
+      .map(renderName)
+      .filter(Boolean)
+      .join(', ');
+
+  const editors = names(true);
+  const place = field('publisher-loc');
+  const publisher = field('publisher-name');
+  const date = [field('year'), field('month'), field('day')].filter(Boolean).join(' ');
+  const volume = [field('volume'), field('issue') && `(${field('issue')})`].join('');
+  const fpage = field('fpage');
+  const lpage = field('lpage');
+  const pages =
+    (fpage && lpage ? `${fpage}–${lpage}` : fpage) || field('page-range') || field('elocation-id');
+  let locator = date;
+  if (volume) locator = locator ? `${locator};${volume}` : volume;
+  if (pages) locator = locator ? `${locator}${volume ? ':' : ', '}${pages}` : pages;
+
+  const parts = [
+    names(false),
+    field('article-title') || field('chapter-title') || field('part-title') || field('data-title'),
+    editors && `In: ${editors}, editors`,
+    field('source'),
+    field('edition'),
+    [publisher && (place ? `${place}: ${publisher}` : publisher), locator]
+      .filter(Boolean)
+      .join('; '),
+    ...fields
+      .filter((child) => !PLACED_FIELDS.has(tagNameOf(child) ?? ''))
+      .map((child) => text(child)),
+  ]
+    .filter(Boolean)
+    .map(sentence);
+
+  const shown = new Set<string>();
+  for (const pubId of fields.filter((child) => tagNameOf(child) === 'pub-id')) {
+    const id = text(pubId);
+    const type = attrOf(pubId, 'pub-id-type') ?? '';
+    if (!id || shown.has(id) || INTERNAL_PUB_IDS.has(type)) continue;
+    shown.add(id);
+    const label = PUB_ID_LABELS[type];
+    parts.push(label ? `${label} ${id}` : id);
   }
   return parts.join(' ');
 }
@@ -264,7 +335,7 @@ function renderMixedCitation(node: XmlNode): string {
       if (!value) continue;
       const type = attrOf(child, 'pub-id-type') ?? '';
       const label = PUB_ID_LABELS[type];
-      if (label && !hasLiteralIdPrefix(rendered, type)) {
+      if (label && !hasLiteralIdPrefix(rendered, type) && !hasLiteralIdPrefix(rendered, label)) {
         labeled = true;
         part = `${label} ${value}`;
       } else {

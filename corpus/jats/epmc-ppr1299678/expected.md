@@ -317,82 +317,82 @@ We used publicly available software for the analyses, and all software used is l
 
 ## References
 
-- [1] Packer M, et al. Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure. N Engl J Med 2020 383 1413–1424 PMID 32865377
-- [2] Solomon SD, et al. Angiotensin-Neprilysin Inhibition in Heart Failure with Preserved Ejection Fraction. N Engl J Med 2019 381 1609–1620 PMID 31475794
-- [3] Shah S, et al. Genome-wide association and Mendelian randomisation analysis provide insights into the pathogenesis of heart failure. Nat Commun 2020 11 163 DOI 10.1038/s41467-019-13690-5 PMCID PMC6952380 PMID 31919418
-- [4] Rasooly D, et al. Genome-wide association analysis and Mendelian randomization proteomics identify drug targets for heart failure. Nat Commun 2023 14 3826 DOI 10.1038/s41467-023-39253-3 PMCID PMC10333277 PMID 37429843
-- [5] Joseph J, et al. Genetic architecture of heart failure with preserved versus reduced ejection fraction. Nat Commun 2022 13 7753 DOI 10.1038/s41467-022-35323-0 PMCID PMC9751124 PMID 36517512
-- [6] Henry A, et al. Genome-wide association study meta-analysis provides insights into the etiology of heart failure and its subtypes. Nature Genetics 2025 57 815–828 DOI 10.1038/s41588-024-02064-3 PMCID PMC11985341 PMID 40038546
-- [7] Rasooly D, et al. Large-scale multi-omics identifies drug targets for heart failure with reduced and preserved ejection fraction. Nat Cardiovasc Res 2025 4 293–311 DOI 10.1038/s44161-025-00609-1 PMCID PMC13214498 PMID 39915329
-- [8] Bibbins-Domingo K, et al. Racial differences in incident heart failure among young adults. N Engl J Med 2009 360 1179–1190 DOI 10.1056/NEJMoa0807265 PMCID PMC2829671 PMID 19297571
-- [9] Chang PP, et al. Trends in Hospitalizations and Survival of Acute Decompensated Heart Failure in Four US Communities (2005-2014): ARIC Study Community Surveillance. Circulation 2018 138 12–24 DOI 10.1161/CIRCULATIONAHA.117.027551 PMCID PMC6030442 PMID 29519849
-- [10] ClinicalTrials.gov https://clinicaltrials.gov/study/NCT06677060
-- [11] ClinicalTrials.gov https://clinicaltrials.gov/study/NCT04945460
-- [12] Henry TD, et al. AB-1002 gene therapy expressing active protein phosphatase inhibitor-1 in heart failure: Rationale and study design of the GenePHIT trial. Eur J Heart Fail 2026 PMID 41955610
-- [13] Packer M, et al. Tirzepatide for Heart Failure with Preserved Ejection Fraction and Obesity. N Engl J Med 2025 392 427–437 PMID 39555826
-- [14] Bonnefond A, Bruner WS, Grant SFA, Morandi A, Froguel P. The genetics of obesity: aetiology, prevention and therapy. Nat Metab 2026 8 778–794 PMID 41876875
-- [15] Packer M. The Adipokine Hypothesis of Heart Failure With a Preserved Ejection Fraction: A Novel Framework to Explain Pathogenesis and Guide Treatment. J Am Coll Cardiol 2025 86 1269–1373 DOI 10.1016/j.jacc.2025.06.055 PMCID PMC12766646 PMID 40886173
-- [16] ClinicalTrials.gov https://clinicaltrials.gov/study/NCT06369298
-- [17] ClinicalTrials.gov https://clinicaltrials.gov/study/NCT06677060
-- [18] Heymsfield SB, et al. Bimagrumab plus semaglutide alone or in combination for the treatment of obesity: a randomized phase 2 trial. Nat Med 2026 32 869–882 DOI 10.1038/s41591-026-04204-0 PMCID PMC13004672 PMID 41772149
-- [19] Sanghvi MM, et al. Imaging-Derived Sarcopenic Obesity and Cardiovascular Outcomes: Insights Into Heart Failure Risk and Muscle Biology. J Am Coll Cardiol 2026 PMID 42383941
-- [20] Nguyen M-L, et al. Leptin Attenuates Cardiac Hypertrophy in Patients With Generalized Lipodystrophy. J Clin Endocrinol Metab 2021 106 e4327–e4339 DOI 10.1210/clinem/dgab499 PMCID PMC8530723 PMID 34223895
-- [21] Packer M. Do obesity and visceral adiposity promote heart failure with reduced ejection fraction? Eur Heart J 2026 47 12–21 DOI 10.1093/eurheartj/ehaf645 PMCID PMC12765561 PMID 40891153
-- [22] Wang C, et al. The KLF7/PFKL/ACADL axis modulates cardiac metabolic remodelling during cardiac hypertrophy in male mice. Nat Commun 2023 14 959 DOI 10.1038/s41467-023-36712-9 PMCID PMC9944323 PMID 36810848
-- [23] Shu H, et al. CD36 attenuates pressure overload-induced myocardial insulin resistance via HSF1-dependent HSP90α suppression and competitive disruption of the HSP90α-InsR complex. J Transl Med 2025 23 870 DOI 10.1186/s12967-025-06926-0 PMCID PMC12329972 PMID 40770340
-- [24] Goldenberg JR, et al. Preservation of Acyl Coenzyme A Attenuates Pathological and Metabolic Cardiac Remodeling Through Selective Lipid Trafficking. Circulation 2019 139 2765–2777 DOI 10.1161/CIRCULATIONAHA.119.039610 PMCID PMC6557671 PMID 30909726
-- [25] Carley AN, et al. CPT1a Expression Is a Critical Cardioprotective Response to Pathological Stress That Enables Rescue by Gene Transfer. Circ Res 2026 138 e327403 DOI 10.1161/CIRCRESAHA.125.327403 PMCID PMC12811910 PMID 41342119
-- [26] Yoshii A, et al. Blunted Cardiac Mitophagy in Response to Metabolic Stress Contributes to HFpEF. Circ Res 2024 135 1004–1017 DOI 10.1161/CIRCRESAHA.123.324103 PMCID PMC11502249 PMID 39328167
-- [27] Chen M, et al. Therapeutic Effect of Targeting Branched-Chain Amino Acid Catabolic Flux in Pressure-Overload Induced Heart Failure. J Am Heart Assoc 2019 8 e011625 DOI 10.1161/JAHA.118.011625 PMCID PMC6585363 PMID 31433721
-- [28] Filipski KJ, et al. Discovery of First Branched-Chain Ketoacid Dehydrogenase Kinase (BDK) Inhibitor Clinical Candidate PF-07328948. J Med Chem 2025 68 2466–2482 PMID 39560668
-- [29] Tang WHW, et al. Single Ascending-Dose Study of Selective ErbB4 Agonist JK07 in Heart Failure With Reduced Ejection Fraction. JACC Basic Transl Sci 2025 10 101352 DOI 10.1016/j.jacbts.2025.101352 PMCID PMC12332861 PMID 40737710
-- [30] ClinicalTrials.gov https://clinicaltrials.gov/study/NCT04945460
-- [31] Liu X, et al. Lineage-specific regulatory changes in hypertrophic cardiomyopathy unraveled by single-nucleus RNA-seq and spatial transcriptomics. Cell Discov 2023 9 6 DOI 10.1038/s41421-022-00490-3 PMCID PMC9842679 PMID 36646705
-- [32] Elbassioni AAM, et al. Targeting RUNX1 protects against diastolic dysfunction in a two-hit mouse model of heart failure with preserved ejection fraction. Cardiovasc Res 2026 122 1318–1328 DOI 10.1093/cvr/cvag106 PMCID PMC13355837 PMID 42190056
-- [33] Elbatreek MH, Lefer DJ. RUNX1: a new beat in the heart of diastolic dysfunction. Cardiovasc Res 2026 122 1275–1277 DOI 10.1093/cvr/cvag125 PMCID PMC13355838 PMID 42240049
-- [34] Akins KA, et al. Runx1 in Postn-Expressing Fibroblasts But Not Cardiomyocytes Exacerbates Adverse Cardiac Remodeling Post-Myocardial Infarction. JACC Basic Transl Sci 2026 11 101455 DOI 10.1016/j.jacbts.2025.101455 PMCID PMC12830150 PMID 41534459
-- [35] Tsai C-R, Martin JF. Fibroblast RUNX1 Induces Maladaptive Post-Myocardial Infarction Remodeling. JACC Basic Transl Sci 2026 11 101487 DOI 10.1016/j.jacbts.2026.101487 PMCID PMC12960024 PMID 41733292
-- [36] Hou X, et al. CDK6 inhibits white to beige fat transition by suppressing RUNX1. Nat Commun 2018 9 1023 DOI 10.1038/s41467-018-03451-1 PMCID PMC5845007 PMID 29523786
-- [37] Gaziano JM, et al. Million Veteran Program: A mega-biobank to study genetic influences on health and disease. J Clin Epidemiol 2016 70 214–223 PMID 26441289
-- [38] Enzan N, et al. Genome-wide analysis of heart failure yields insights into disease heterogeneity and enables prognostic prediction in the Japanese population. medRxiv 2024 2024.11.14.24317249 DOI 10.1038/s41467-025-64659-6 PMCID PMC12583478 PMID 41184235
-- [39] Wu K-HH, et al. Polygenic risk score from a multi-ancestry GWAS uncovers susceptibility of heart failure. medRxiv 2021 2021.12.06.21267389 DOI 10.1101/2021.12.06.21267389
-- [40] All of Us Research Program Investigators, et al. The ‘All of Us’ Research Program. N Engl J Med 2019 381 668–676
-- [41] Ziyatdinov A, et al. Genotyping, sequencing and analysis of 140,000 adults from Mexico City. Nature 2023 622 784–793 DOI 10.1038/s41586-023-06595-3 PMCID PMC10600010 PMID 37821707
-- [42] Kurki MI, et al. FinnGen provides genetic insights from a well-phenotyped isolated population. Nature 2023 613 508–518 DOI 10.1038/s41586-022-05473-8 PMCID PMC9849126 PMID 36653562
-- [43] Patterson OV, et al. Unlocking echocardiogram measurements for heart disease research through natural language processing. BMC Cardiovasc Disord 2017 17 151 DOI 10.1186/s12872-017-0580-8 PMCID PMC5469017 PMID 28606104
-- [44] Orkaby AR, et al. Initiation of Statins for Primary Prevention in Heart Failure With Preserved Ejection Fraction. JACC Adv 2024 3 100869 DOI 10.1016/j.jacadv.2024.100869 PMCID PMC11198708 PMID 38939680
-- [45] Patel YR, et al. Development and validation of a heart failure with preserved ejection fraction cohort using electronic medical records. BMC Cardiovasc Disord 2018 18 128 DOI 10.1186/s12872-018-0866-5 PMCID PMC6022342 PMID 29954337
-- [46] Patel YR, et al. Prognostic Significance of Baseline Serum Sodium in Heart Failure With Preserved Ejection Fraction. J Am Heart Assoc 2018 7 DOI 10.1161/JAHA.117.007529 PMCID PMC6220546 PMID 29899018
-- [47] Cappola TP, et al. Common variants in HSPB7 and FRMD4B associated with advanced heart failure. Circ Cardiovasc Genet 2010 3 147–154 DOI 10.1161/CIRCGENETICS.109.898395 PMCID PMC2957840 PMID 20124441
-- [48] Hunter-Zinck H, et al. Genotyping Array Design and Data Quality Control in the Million Veteran Program. Am J Hum Genet 2020 106 535–548 DOI 10.1016/j.ajhg.2020.03.004 PMCID PMC7118558 PMID 32243820
-- [49] Wojcik GL, et al. Genetic analyses of diverse populations improves discovery for complex traits. Nature 2019 570 514–518 DOI 10.1038/s41586-019-1310-4 PMCID PMC6785182 PMID 31217584
-- [50] Willer CJ, Li Y, Abecasis GR. METAL: fast and efficient meta-analysis of genomewide association scans. Bioinformatics 2010 26 2190–2191 DOI 10.1093/bioinformatics/btq340 PMCID PMC2922887 PMID 20616382
-- [51] Watanabe K, Taskesen E, van Bochoven A, Posthuma D. Functional mapping and annotation of genetic associations with FUMA. Nat Commun 2017 8 1826 DOI 10.1038/s41467-017-01261-5 PMCID PMC5705698 PMID 29184056
-- [52] McLaren W, et al. The Ensembl Variant Effect Predictor. Genome Biol 2016 17 122 DOI 10.1186/s13059-016-0974-4 PMCID PMC4893825 PMID 27268795
-- [53] Gazal S, et al. Combining SNP-to-gene linking strategies to identify disease genes and assess disease omnigenicity. Nat Genet 2022 54 827–836 DOI 10.1038/s41588-022-01087-y PMCID PMC9894581 PMID 35668300
-- [54] Ghoussaini M, et al. Open Targets Genetics: systematic identification of trait-associated genes using large-scale genetics and functional genomics. Nucleic Acids Res 2021 49 D1311–D1320 DOI 10.1093/nar/gkaa840 PMCID PMC7778936 PMID 33045747
-- [55] Myers TA, Chanock SJ, Machiela MJ. An R Package for Rapidly Calculating Linkage Disequilibrium Statistics in Diverse Populations. Front Genet 2020 11 157 DOI 10.3389/fgene.2020.00157 PMCID PMC7059597 PMID 32180801
-- [56] Wellcome Trust Case Control Consortium, et al. Bayesian refinement of association signals for 14 loci in 3 common diseases. Nat Genet 2012 44 1294–1301 DOI 10.1038/ng.2435 PMCID PMC3791416 PMID 23104008
-- [57] Pietzner M, et al. Mapping the proteo-genomic convergence of human diseases. Science 2021 374 eabj1541 DOI 10.1126/science.abj1541 PMCID PMC9904207 PMID 34648354
-- [58] Ferkingstad E, et al. Large-scale integration of the plasma proteome with genetics and disease. Nat Genet 2021 53 1712–1721 PMID 34857953
-- [59] Zhang J, et al. Plasma proteome analyses in individuals of European and African ancestry identify cis-pQTLs and models for proteome-wide association studies. Nat Genet 2022 54 593–602 DOI 10.1038/s41588-022-01051-w PMCID PMC9236177 PMID 35501419
-- [60] Sun BB, et al. Plasma proteomic associations with genetics and health in the UK Biobank. Nature 2023 622 329–338 DOI 10.1038/s41586-023-06592-6 PMCID PMC10567551 PMID 37794186
-- [61] Võsa U, et al. Large-scale cis- and trans-eQTL analyses identify thousands of genetic loci and polygenic scores that regulate blood gene expression. Nat Genet 2021 53 1300–1310 DOI 10.1038/s41588-021-00913-z PMCID PMC8432599 PMID 34475573
-- [62] GTEx Consortium The GTEx Consortium atlas of genetic regulatory effects across human tissues. Science 2020 369 1318–1330 DOI 10.1126/science.aaz1776 PMCID PMC7737656 PMID 32913098
-- [63] Rasooly D, Patel CJ. Conducting a Reproducible Mendelian Randomization Analysis Using the R Analytic Statistical Environment. Curr Protoc Hum Genet 2019 101 e82 DOI 10.1002/cphg.82 PMCID PMC6424604 PMID 30645041
-- [64] Henry A, et al. Therapeutic Targets for Heart Failure Identified Using Proteomics and Mendelian Randomization. Circulation 2022 DOI 10.1161/CIRCULATIONAHA.121.056663 PMCID PMC9010023 PMID 35300523
-- [65] Lee DSM, et al. Common-variant and rare-variant genetic architecture of heart failure across the allele-frequency spectrum. Nat Genet 2025 57 829–838 DOI 10.1038/s41588-025-02140-2 PMCID PMC12049093 PMID 40195560
-- [66] Levin MG, et al. Genome-wide association and multi-trait analyses characterize the common genetic architecture of heart failure. Nature Communications 2022 13 6914 DOI 10.1038/s41467-022-34216-6 PMCID PMC9663424 PMID 36376295
-- [67] Schmidt AF, et al. Druggable proteins influencing cardiac structure and function: Implications for heart failure therapies and cancer cardiotoxicity. Sci Adv 2023 9 eadd4984 DOI 10.1126/sciadv.add4984 PMCID PMC10132758 PMID 37126556
+- [1] Packer M, et al. Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure. N Engl J Med. 2020;383:1413–1424. PMID 32865377
+- [2] Solomon SD, et al. Angiotensin-Neprilysin Inhibition in Heart Failure with Preserved Ejection Fraction. N Engl J Med. 2019;381:1609–1620. PMID 31475794
+- [3] Shah S, et al. Genome-wide association and Mendelian randomisation analysis provide insights into the pathogenesis of heart failure. Nat Commun. 2020;11:163. DOI 10.1038/s41467-019-13690-5 PMCID PMC6952380 PMID 31919418
+- [4] Rasooly D, et al. Genome-wide association analysis and Mendelian randomization proteomics identify drug targets for heart failure. Nat Commun. 2023;14:3826. DOI 10.1038/s41467-023-39253-3 PMCID PMC10333277 PMID 37429843
+- [5] Joseph J, et al. Genetic architecture of heart failure with preserved versus reduced ejection fraction. Nat Commun. 2022;13:7753. DOI 10.1038/s41467-022-35323-0 PMCID PMC9751124 PMID 36517512
+- [6] Henry A, et al. Genome-wide association study meta-analysis provides insights into the etiology of heart failure and its subtypes. Nature Genetics. 2025;57:815–828. DOI 10.1038/s41588-024-02064-3 PMCID PMC11985341 PMID 40038546
+- [7] Rasooly D, et al. Large-scale multi-omics identifies drug targets for heart failure with reduced and preserved ejection fraction. Nat Cardiovasc Res. 2025;4:293–311. DOI 10.1038/s44161-025-00609-1 PMCID PMC13214498 PMID 39915329
+- [8] Bibbins-Domingo K, et al. Racial differences in incident heart failure among young adults. N Engl J Med. 2009;360:1179–1190. DOI 10.1056/NEJMoa0807265 PMCID PMC2829671 PMID 19297571
+- [9] Chang PP, et al. Trends in Hospitalizations and Survival of Acute Decompensated Heart Failure in Four US Communities (2005-2014): ARIC Study Community Surveillance. Circulation. 2018;138:12–24. DOI 10.1161/CIRCULATIONAHA.117.027551 PMCID PMC6030442 PMID 29519849
+- [10] ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT06677060
+- [11] ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT04945460
+- [12] Henry TD, et al. AB-1002 gene therapy expressing active protein phosphatase inhibitor-1 in heart failure: Rationale and study design of the GenePHIT trial. Eur J Heart Fail. 2026. PMID 41955610
+- [13] Packer M, et al. Tirzepatide for Heart Failure with Preserved Ejection Fraction and Obesity. N Engl J Med. 2025;392:427–437. PMID 39555826
+- [14] Bonnefond A, Bruner WS, Grant SFA, Morandi A, Froguel P. The genetics of obesity: aetiology, prevention and therapy. Nat Metab. 2026;8:778–794. PMID 41876875
+- [15] Packer M. The Adipokine Hypothesis of Heart Failure With a Preserved Ejection Fraction: A Novel Framework to Explain Pathogenesis and Guide Treatment. J Am Coll Cardiol. 2025;86:1269–1373. DOI 10.1016/j.jacc.2025.06.055 PMCID PMC12766646 PMID 40886173
+- [16] ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT06369298
+- [17] ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT06677060
+- [18] Heymsfield SB, et al. Bimagrumab plus semaglutide alone or in combination for the treatment of obesity: a randomized phase 2 trial. Nat Med. 2026;32:869–882. DOI 10.1038/s41591-026-04204-0 PMCID PMC13004672 PMID 41772149
+- [19] Sanghvi MM, et al. Imaging-Derived Sarcopenic Obesity and Cardiovascular Outcomes: Insights Into Heart Failure Risk and Muscle Biology. J Am Coll Cardiol. 2026. PMID 42383941
+- [20] Nguyen M-L, et al. Leptin Attenuates Cardiac Hypertrophy in Patients With Generalized Lipodystrophy. J Clin Endocrinol Metab. 2021;106:e4327–e4339. DOI 10.1210/clinem/dgab499 PMCID PMC8530723 PMID 34223895
+- [21] Packer M. Do obesity and visceral adiposity promote heart failure with reduced ejection fraction? Eur Heart J. 2026;47:12–21. DOI 10.1093/eurheartj/ehaf645 PMCID PMC12765561 PMID 40891153
+- [22] Wang C, et al. The KLF7/PFKL/ACADL axis modulates cardiac metabolic remodelling during cardiac hypertrophy in male mice. Nat Commun. 2023;14:959. DOI 10.1038/s41467-023-36712-9 PMCID PMC9944323 PMID 36810848
+- [23] Shu H, et al. CD36 attenuates pressure overload-induced myocardial insulin resistance via HSF1-dependent HSP90α suppression and competitive disruption of the HSP90α-InsR complex. J Transl Med. 2025;23:870. DOI 10.1186/s12967-025-06926-0 PMCID PMC12329972 PMID 40770340
+- [24] Goldenberg JR, et al. Preservation of Acyl Coenzyme A Attenuates Pathological and Metabolic Cardiac Remodeling Through Selective Lipid Trafficking. Circulation. 2019;139:2765–2777. DOI 10.1161/CIRCULATIONAHA.119.039610 PMCID PMC6557671 PMID 30909726
+- [25] Carley AN, et al. CPT1a Expression Is a Critical Cardioprotective Response to Pathological Stress That Enables Rescue by Gene Transfer. Circ Res. 2026;138:e327403. DOI 10.1161/CIRCRESAHA.125.327403 PMCID PMC12811910 PMID 41342119
+- [26] Yoshii A, et al. Blunted Cardiac Mitophagy in Response to Metabolic Stress Contributes to HFpEF. Circ Res. 2024;135:1004–1017. DOI 10.1161/CIRCRESAHA.123.324103 PMCID PMC11502249 PMID 39328167
+- [27] Chen M, et al. Therapeutic Effect of Targeting Branched-Chain Amino Acid Catabolic Flux in Pressure-Overload Induced Heart Failure. J Am Heart Assoc. 2019;8:e011625. DOI 10.1161/JAHA.118.011625 PMCID PMC6585363 PMID 31433721
+- [28] Filipski KJ, et al. Discovery of First Branched-Chain Ketoacid Dehydrogenase Kinase (BDK) Inhibitor Clinical Candidate PF-07328948. J Med Chem. 2025;68:2466–2482. PMID 39560668
+- [29] Tang WHW, et al. Single Ascending-Dose Study of Selective ErbB4 Agonist JK07 in Heart Failure With Reduced Ejection Fraction. JACC Basic Transl Sci. 2025;10:101352. DOI 10.1016/j.jacbts.2025.101352 PMCID PMC12332861 PMID 40737710
+- [30] ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT04945460
+- [31] Liu X, et al. Lineage-specific regulatory changes in hypertrophic cardiomyopathy unraveled by single-nucleus RNA-seq and spatial transcriptomics. Cell Discov. 2023;9:6. DOI 10.1038/s41421-022-00490-3 PMCID PMC9842679 PMID 36646705
+- [32] Elbassioni AAM, et al. Targeting RUNX1 protects against diastolic dysfunction in a two-hit mouse model of heart failure with preserved ejection fraction. Cardiovasc Res. 2026;122:1318–1328. DOI 10.1093/cvr/cvag106 PMCID PMC13355837 PMID 42190056
+- [33] Elbatreek MH, Lefer DJ. RUNX1: a new beat in the heart of diastolic dysfunction. Cardiovasc Res. 2026;122:1275–1277. DOI 10.1093/cvr/cvag125 PMCID PMC13355838 PMID 42240049
+- [34] Akins KA, et al. Runx1 in Postn-Expressing Fibroblasts But Not Cardiomyocytes Exacerbates Adverse Cardiac Remodeling Post-Myocardial Infarction. JACC Basic Transl Sci. 2026;11:101455. DOI 10.1016/j.jacbts.2025.101455 PMCID PMC12830150 PMID 41534459
+- [35] Tsai C-R, Martin JF. Fibroblast RUNX1 Induces Maladaptive Post-Myocardial Infarction Remodeling. JACC Basic Transl Sci. 2026;11:101487. DOI 10.1016/j.jacbts.2026.101487 PMCID PMC12960024 PMID 41733292
+- [36] Hou X, et al. CDK6 inhibits white to beige fat transition by suppressing RUNX1. Nat Commun. 2018;9:1023. DOI 10.1038/s41467-018-03451-1 PMCID PMC5845007 PMID 29523786
+- [37] Gaziano JM, et al. Million Veteran Program: A mega-biobank to study genetic influences on health and disease. J Clin Epidemiol. 2016;70:214–223. PMID 26441289
+- [38] Enzan N, et al. Genome-wide analysis of heart failure yields insights into disease heterogeneity and enables prognostic prediction in the Japanese population. medRxiv. 2024, 2024.11.14.24317249. DOI 10.1038/s41467-025-64659-6 PMCID PMC12583478 PMID 41184235
+- [39] Wu K-HH, et al. Polygenic risk score from a multi-ancestry GWAS uncovers susceptibility of heart failure. medRxiv. 2021, 2021.12.06.21267389. DOI 10.1101/2021.12.06.21267389
+- [40] All of Us Research Program Investigators, et al. The ‘All of Us’ Research Program. N Engl J Med. 2019;381:668–676.
+- [41] Ziyatdinov A, et al. Genotyping, sequencing and analysis of 140,000 adults from Mexico City. Nature. 2023;622:784–793. DOI 10.1038/s41586-023-06595-3 PMCID PMC10600010 PMID 37821707
+- [42] Kurki MI, et al. FinnGen provides genetic insights from a well-phenotyped isolated population. Nature. 2023;613:508–518. DOI 10.1038/s41586-022-05473-8 PMCID PMC9849126 PMID 36653562
+- [43] Patterson OV, et al. Unlocking echocardiogram measurements for heart disease research through natural language processing. BMC Cardiovasc Disord. 2017;17:151. DOI 10.1186/s12872-017-0580-8 PMCID PMC5469017 PMID 28606104
+- [44] Orkaby AR, et al. Initiation of Statins for Primary Prevention in Heart Failure With Preserved Ejection Fraction. JACC Adv. 2024;3:100869. DOI 10.1016/j.jacadv.2024.100869 PMCID PMC11198708 PMID 38939680
+- [45] Patel YR, et al. Development and validation of a heart failure with preserved ejection fraction cohort using electronic medical records. BMC Cardiovasc Disord. 2018;18:128. DOI 10.1186/s12872-018-0866-5 PMCID PMC6022342 PMID 29954337
+- [46] Patel YR, et al. Prognostic Significance of Baseline Serum Sodium in Heart Failure With Preserved Ejection Fraction. J Am Heart Assoc. 2018;7. DOI 10.1161/JAHA.117.007529 PMCID PMC6220546 PMID 29899018
+- [47] Cappola TP, et al. Common variants in HSPB7 and FRMD4B associated with advanced heart failure. Circ Cardiovasc Genet. 2010;3:147–154. DOI 10.1161/CIRCGENETICS.109.898395 PMCID PMC2957840 PMID 20124441
+- [48] Hunter-Zinck H, et al. Genotyping Array Design and Data Quality Control in the Million Veteran Program. Am J Hum Genet. 2020;106:535–548. DOI 10.1016/j.ajhg.2020.03.004 PMCID PMC7118558 PMID 32243820
+- [49] Wojcik GL, et al. Genetic analyses of diverse populations improves discovery for complex traits. Nature. 2019;570:514–518. DOI 10.1038/s41586-019-1310-4 PMCID PMC6785182 PMID 31217584
+- [50] Willer CJ, Li Y, Abecasis GR. METAL: fast and efficient meta-analysis of genomewide association scans. Bioinformatics. 2010;26:2190–2191. DOI 10.1093/bioinformatics/btq340 PMCID PMC2922887 PMID 20616382
+- [51] Watanabe K, Taskesen E, van Bochoven A, Posthuma D. Functional mapping and annotation of genetic associations with FUMA. Nat Commun. 2017;8:1826. DOI 10.1038/s41467-017-01261-5 PMCID PMC5705698 PMID 29184056
+- [52] McLaren W, et al. The Ensembl Variant Effect Predictor. Genome Biol. 2016;17:122. DOI 10.1186/s13059-016-0974-4 PMCID PMC4893825 PMID 27268795
+- [53] Gazal S, et al. Combining SNP-to-gene linking strategies to identify disease genes and assess disease omnigenicity. Nat Genet. 2022;54:827–836. DOI 10.1038/s41588-022-01087-y PMCID PMC9894581 PMID 35668300
+- [54] Ghoussaini M, et al. Open Targets Genetics: systematic identification of trait-associated genes using large-scale genetics and functional genomics. Nucleic Acids Res. 2021;49:D1311–D1320. DOI 10.1093/nar/gkaa840 PMCID PMC7778936 PMID 33045747
+- [55] Myers TA, Chanock SJ, Machiela MJ. An R Package for Rapidly Calculating Linkage Disequilibrium Statistics in Diverse Populations. Front Genet. 2020;11:157. DOI 10.3389/fgene.2020.00157 PMCID PMC7059597 PMID 32180801
+- [56] Wellcome Trust Case Control Consortium, et al. Bayesian refinement of association signals for 14 loci in 3 common diseases. Nat Genet. 2012;44:1294–1301. DOI 10.1038/ng.2435 PMCID PMC3791416 PMID 23104008
+- [57] Pietzner M, et al. Mapping the proteo-genomic convergence of human diseases. Science. 2021;374:eabj1541. DOI 10.1126/science.abj1541 PMCID PMC9904207 PMID 34648354
+- [58] Ferkingstad E, et al. Large-scale integration of the plasma proteome with genetics and disease. Nat Genet. 2021;53:1712–1721. PMID 34857953
+- [59] Zhang J, et al. Plasma proteome analyses in individuals of European and African ancestry identify cis-pQTLs and models for proteome-wide association studies. Nat Genet. 2022;54:593–602. DOI 10.1038/s41588-022-01051-w PMCID PMC9236177 PMID 35501419
+- [60] Sun BB, et al. Plasma proteomic associations with genetics and health in the UK Biobank. Nature. 2023;622:329–338. DOI 10.1038/s41586-023-06592-6 PMCID PMC10567551 PMID 37794186
+- [61] Võsa U, et al. Large-scale cis- and trans-eQTL analyses identify thousands of genetic loci and polygenic scores that regulate blood gene expression. Nat Genet. 2021;53:1300–1310. DOI 10.1038/s41588-021-00913-z PMCID PMC8432599 PMID 34475573
+- [62] GTEx Consortium. The GTEx Consortium atlas of genetic regulatory effects across human tissues. Science. 2020;369:1318–1330. DOI 10.1126/science.aaz1776 PMCID PMC7737656 PMID 32913098
+- [63] Rasooly D, Patel CJ. Conducting a Reproducible Mendelian Randomization Analysis Using the R Analytic Statistical Environment. Curr Protoc Hum Genet. 2019;101:e82. DOI 10.1002/cphg.82 PMCID PMC6424604 PMID 30645041
+- [64] Henry A, et al. Therapeutic Targets for Heart Failure Identified Using Proteomics and Mendelian Randomization. Circulation. 2022. DOI 10.1161/CIRCULATIONAHA.121.056663 PMCID PMC9010023 PMID 35300523
+- [65] Lee DSM, et al. Common-variant and rare-variant genetic architecture of heart failure across the allele-frequency spectrum. Nat Genet. 2025;57:829–838. DOI 10.1038/s41588-025-02140-2 PMCID PMC12049093 PMID 40195560
+- [66] Levin MG, et al. Genome-wide association and multi-trait analyses characterize the common genetic architecture of heart failure. Nature Communications. 2022;13:6914. DOI 10.1038/s41467-022-34216-6 PMCID PMC9663424 PMID 36376295
+- [67] Schmidt AF, et al. Druggable proteins influencing cardiac structure and function: Implications for heart failure therapies and cancer cardiotoxicity. Sci Adv. 2023;9:eadd4984. DOI 10.1126/sciadv.add4984 PMCID PMC10132758 PMID 37126556
 - [68] [No title]. https://www.medrxiv.org/content/10.1101/2021.12.06.21267389v1.full.pdf.
-- [69] Global Biobank Meta-analysis Initiative: Powering genetic discovery across human disease. Cell Genomics 2022 2 100192 DOI 10.1016/j.xgen.2022.100192 PMCID PMC9903716 PMID 36777996
-- [70] Tadros R, et al. Large-scale genome-wide association analyses identify novel genetic loci and mechanisms in hypertrophic cardiomyopathy. Nat Genet 2025 57 530–538 DOI 10.1038/s41588-025-02087-4 PMCID PMC11906354 PMID 39966646
-- [71] Zheng SL, et al. Genome-wide association analysis provides insights into the molecular etiology of dilated cardiomyopathy. Nat Genet 2024 56 2646–2658 DOI 10.1038/s41588-024-01952-y PMCID PMC11631752 PMID 39572783
-- [72] Kolberg L, et al. g:Profiler-interoperable web service for functional enrichment analysis and gene identifier mapping (2023 update). Nucleic Acids Res 2023 51 W207–W212 DOI 10.1093/nar/gkad347 PMCID PMC10320099 PMID 37144459
-- [73] MacNamara A, et al. Network and pathway expansion of genetic disease associations identifies successful drug targets. Sci Rep 2020 10 20970 DOI 10.1038/s41598-020-77847-9 PMCID PMC7708424 PMID 33262371
-- [74] Rath S, et al. MitoCarta3.0: an updated mitochondrial proteome now with sub-organelle localization and pathway annotations. Nucleic Acids Res 2021 49 D1541–D1547 DOI 10.1093/nar/gkaa1011 PMCID PMC7778944 PMID 33174596
-- [75] Nicholls HL, et al. Genome-wide analysis of cardiac ventricular phenotypes reveals novel loci and therapeutic targets for heart failure. Nat Commun 2026 17 DOI 10.1038/s41467-026-69982-0 PMCID PMC13066029 PMID 41760662
-- [76] Yengo L, et al. Meta-analysis of genome-wide association studies for height and body mass index in \~700000 individuals of European ancestry. Hum Mol Genet 2018 27 3641–3649 DOI 10.1093/hmg/ddy271 PMCID PMC6488973 PMID 30124842
-- [77] Madrigal P, et al. Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration. Nucleic Acids Res 2026 54 D147–D157 DOI 10.1093/nar/gkaf1238 PMCID PMC12807774 PMID 41370097
-- [78] Ochoa D, et al. Open Targets Platform: supporting systematic drug-target identification and prioritisation. Nucleic Acids Res 2021 49 D1302–D1310 DOI 10.1093/nar/gkaa1027 PMCID PMC7779013 PMID 33196847
-- [79] Zdrazil B, et al. The ChEMBL Database in 2023: a drug discovery platform spanning multiple bioactivity data types and time periods. Nucleic Acids Res 2024 52 D1180–D1192 DOI 10.1093/nar/gkad1004 PMCID PMC10767899 PMID 37933841
+- [69] Global Biobank Meta-analysis Initiative: Powering genetic discovery across human disease. Cell Genomics. 2022;2:100192. DOI 10.1016/j.xgen.2022.100192 PMCID PMC9903716 PMID 36777996
+- [70] Tadros R, et al. Large-scale genome-wide association analyses identify novel genetic loci and mechanisms in hypertrophic cardiomyopathy. Nat Genet. 2025;57:530–538. DOI 10.1038/s41588-025-02087-4 PMCID PMC11906354 PMID 39966646
+- [71] Zheng SL, et al. Genome-wide association analysis provides insights into the molecular etiology of dilated cardiomyopathy. Nat Genet. 2024;56:2646–2658. DOI 10.1038/s41588-024-01952-y PMCID PMC11631752 PMID 39572783
+- [72] Kolberg L, et al. g:Profiler-interoperable web service for functional enrichment analysis and gene identifier mapping (2023 update). Nucleic Acids Res. 2023;51:W207–W212. DOI 10.1093/nar/gkad347 PMCID PMC10320099 PMID 37144459
+- [73] MacNamara A, et al. Network and pathway expansion of genetic disease associations identifies successful drug targets. Sci Rep. 2020;10:20970. DOI 10.1038/s41598-020-77847-9 PMCID PMC7708424 PMID 33262371
+- [74] Rath S, et al. MitoCarta3.0: an updated mitochondrial proteome now with sub-organelle localization and pathway annotations. Nucleic Acids Res. 2021;49:D1541–D1547. DOI 10.1093/nar/gkaa1011 PMCID PMC7778944 PMID 33174596
+- [75] Nicholls HL, et al. Genome-wide analysis of cardiac ventricular phenotypes reveals novel loci and therapeutic targets for heart failure. Nat Commun. 2026;17. DOI 10.1038/s41467-026-69982-0 PMCID PMC13066029 PMID 41760662
+- [76] Yengo L, et al. Meta-analysis of genome-wide association studies for height and body mass index in \~700000 individuals of European ancestry. Hum Mol Genet. 2018;27:3641–3649. DOI 10.1093/hmg/ddy271 PMCID PMC6488973 PMID 30124842
+- [77] Madrigal P, et al. Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration. Nucleic Acids Res. 2026;54:D147–D157. DOI 10.1093/nar/gkaf1238 PMCID PMC12807774 PMID 41370097
+- [78] Ochoa D, et al. Open Targets Platform: supporting systematic drug-target identification and prioritisation. Nucleic Acids Res. 2021;49:D1302–D1310. DOI 10.1093/nar/gkaa1027 PMCID PMC7779013 PMID 33196847
+- [79] Zdrazil B, et al. The ChEMBL Database in 2023: a drug discovery platform spanning multiple bioactivity data types and time periods. Nucleic Acids Res. 2024;52:D1180–D1192. DOI 10.1093/nar/gkad1004 PMCID PMC10767899 PMID 37933841
