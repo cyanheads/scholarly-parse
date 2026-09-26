@@ -1,0 +1,323 @@
+/**
+ * @fileoverview The JATS reference list: every `<ref>` under any `<ref-list>`, its
+ * citation as readable text (element-citation fields delimited, mixed-citation
+ * zero-gap adjacencies spaced, typed identifiers labeled), and its structured fields.
+ * Issue numbers refer to cyanheads/pubmed-mcp-server.
+ * @module tests/formats/jats/references.test
+ */
+import { describe, expect, it } from 'vitest';
+import { toMarkdown } from '../../../src/index.js';
+import { paragraphTexts, parseArticle, parseBody } from './helpers.js';
+
+/** References of an article whose `<back>` is `back`. */
+const referencesOf = (back: string) => parseArticle({ back, body: '<p>Body.</p>' }).references;
+
+/** The citation text of a single `<ref>` whose `<mixed-citation>` holds `content`. */
+const mixedCitation = (content: string, id = 'R1') =>
+  referencesOf(
+    `<ref-list><ref id="${id}"><mixed-citation>${content}</mixed-citation></ref></ref-list>`,
+  )[0]?.text;
+
+describe('reference forms', () => {
+  it('reads a mixed-citation with its id and label', () => {
+    const references = referencesOf(
+      '<ref-list><ref id="ref1"><label>1</label>' +
+        '<mixed-citation>Smith J et al. Nature 2024.</mixed-citation></ref></ref-list>',
+    );
+    expect(references).toEqual([{ id: 'ref1', label: '1', text: 'Smith J et al. Nature 2024.' }]);
+  });
+
+  it('falls back to an element-citation', () => {
+    const references = referencesOf(
+      '<ref-list><ref><element-citation>Citation text here.</element-citation></ref></ref-list>',
+    );
+    expect(references.map((r) => r.text)).toEqual(['Citation text here.']);
+  });
+
+  it('skips a reference with no citation text', () => {
+    const references = referencesOf(
+      '<ref-list><ref><label>1</label></ref>' +
+        '<ref><mixed-citation>   </mixed-citation></ref></ref-list>',
+    );
+    expect(references).toEqual([]);
+  });
+
+  it('reads references wrapped in citation-alternatives, preferring the mixed form (#66)', () => {
+    // The AlphaFold record (PMC8371605) shape that dropped 64 of 84 references.
+    const references = referencesOf(
+      '<ref-list><ref id="CR15"><label>15</label><citation-alternatives>' +
+        '<element-citation>Structured citation form.</element-citation>' +
+        '<mixed-citation>Jumper J, et al. Nature. 2021;596:583-9.</mixed-citation>' +
+        '</citation-alternatives></ref>' +
+        '<ref id="CR16"><mixed-citation>Direct ref. Science. 2020.</mixed-citation></ref>' +
+        '</ref-list>',
+    );
+    expect(references).toEqual([
+      { id: 'CR15', label: '15', text: 'Jumper J, et al. Nature. 2021;596:583-9.' },
+      { id: 'CR16', text: 'Direct ref. Science. 2020.' },
+    ]);
+  });
+
+  it('falls back to an element-citation inside citation-alternatives', () => {
+    const references = referencesOf(
+      '<ref-list><ref id="CR1"><citation-alternatives>' +
+        '<element-citation>Element only.</element-citation></citation-alternatives></ref></ref-list>',
+    );
+    expect(references).toEqual([{ id: 'CR1', text: 'Element only.' }]);
+  });
+
+  it('escapes citation text so it cannot read as Markdown it never was', () => {
+    expect(mixedCitation('Doe J. The *p53* pathway [2020](draft).')).toBe(
+      'Doe J. The \\*p53\\* pathway [2020\\](draft).',
+    );
+  });
+
+  it('renders the reference list with each printed label', () => {
+    const document = parseArticle({
+      back: '<ref-list><ref id="r1"><label>1</label><mixed-citation>Alpha 2020.</mixed-citation></ref></ref-list>',
+      body: '<p>Body.</p>',
+    });
+    expect(toMarkdown(document)).toContain('## References\n\n- [1] Alpha 2020.');
+  });
+});
+
+describe('element-citation (#69)', () => {
+  it('delimits structured fields, keeps page tokens verbatim, and labels identifiers', () => {
+    // PMC12973387 (an Elsevier deposit) ships <element-citation> only. Its children
+    // carry no punctuation, so a flat read ran every field together
+    // (DomanJ.L.…Cell18618…), and `4002.e26` once coerced to 4.002e+29.
+    const [reference] = referencesOf(
+      '<ref-list><ref id="bib2"><label>2</label><element-citation>' +
+        '<person-group person-group-type="author">' +
+        '<name><surname>Doman</surname><given-names>J.L.</given-names></name>' +
+        '<name><surname>Pandey</surname><given-names>S.</given-names></name></person-group>' +
+        '<article-title>Phage-assisted evolution yields compact prime editors</article-title>' +
+        '<source>Cell</source><volume>186</volume><issue>18</issue><year>2023</year>' +
+        '<fpage>3983</fpage><lpage>4002.e26</lpage>' +
+        '<pub-id pub-id-type="pmid">37657419</pub-id>' +
+        '<pub-id pub-id-type="doi">10.1016/j.cell.2023.07.039</pub-id>' +
+        '<pub-id pub-id-type="pmcid">PMC10482982</pub-id></element-citation></ref></ref-list>',
+    );
+    expect(reference).toEqual({
+      authors: ['Doman J.L.', 'Pandey S.'],
+      doi: '10.1016/j.cell.2023.07.039',
+      id: 'bib2',
+      label: '2',
+      pmcid: 'PMC10482982',
+      pmid: '37657419',
+      source: 'Cell',
+      text:
+        'Doman J.L., Pandey S. Phage-assisted evolution yields compact prime editors Cell 186 ' +
+        '18 2023 3983 4002.e26 PMID 37657419 DOI 10.1016/j.cell.2023.07.039 PMCID PMC10482982',
+      title: 'Phage-assisted evolution yields compact prime editors',
+      year: '2023',
+    });
+    expect(reference?.text).not.toMatch(/e\+\d+/);
+    expect(reference?.text).not.toContain('DomanJ.L.');
+  });
+
+  it('renders collab and etal author forms', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="bib9"><element-citation><person-group person-group-type="author">' +
+        '<collab>The ENCODE Project Consortium</collab><etal/></person-group>' +
+        '<source>Nature</source><year>2012</year></element-citation></ref></ref-list>',
+    );
+    expect(reference?.text).toBe('The ENCODE Project Consortium, et al. Nature 2012');
+    expect(reference?.authors).toEqual(['The ENCODE Project Consortium', 'et al.']);
+  });
+
+  it('reads a DOI from a doi.org link and keeps any other link as the URL', () => {
+    const references = referencesOf(
+      '<ref-list><ref id="a"><element-citation><source>Data</source>' +
+        '<ext-link xlink:href="https://doi.org/10.5281/ZENODO.123">link</ext-link>' +
+        '</element-citation></ref><ref id="b"><element-citation><source>Site</source>' +
+        '<ext-link xlink:href="https://example.org/data">link</ext-link>' +
+        '</element-citation></ref></ref-list>',
+    );
+    expect(references[0]).toMatchObject({ doi: '10.5281/zenodo.123' });
+    expect(references[0]).not.toHaveProperty('url');
+    expect(references[1]).toMatchObject({ url: 'https://example.org/data' });
+  });
+});
+
+describe('mixed-citation adjacency (#115, #123, #124)', () => {
+  it('separates and labels two adjacent zero-gap pub-ids (#115)', () => {
+    // PMC11391094 ref C37: the literal `doi:` prefix must not be labeled twice, and the
+    // PMID must not fuse onto the DOI.
+    const text = mixedCitation(
+      '<source>Clin Exp Allergy</source> 2020; 50: 1267–1269. doi:' +
+        '<pub-id pub-id-type="doi">10.1111/cea.13720</pub-id>' +
+        '<pub-id pub-id-type="pmid">32762056</pub-id>\n',
+      'C37',
+    );
+    expect(text).toBe('Clin Exp Allergy 2020; 50: 1267–1269. doi:10.1111/cea.13720 PMID 32762056');
+    expect(text).not.toContain('1372032762056');
+  });
+
+  it('separates and labels three adjacent zero-gap pub-ids (#115)', () => {
+    // PMC8371605 ref CR1: DOI, PMCID, and PMID with zero-length gaps between them.
+    const text = mixedCitation(
+      'Thompson, M. C. Advances in methods. <italic toggle="yes">F1000Res</italic>. ' +
+        '<bold>9</bold>, 667 (2020).' +
+        '<pub-id pub-id-type="doi">10.12688/f1000research.25097.1</pub-id>' +
+        '<pub-id pub-id-type="pmcid">PMC7333361</pub-id>' +
+        '<pub-id pub-id-type="pmid">32676184</pub-id>',
+      'CR1',
+    );
+    expect(text).toBe(
+      'Thompson, M. C. Advances in methods. F1000Res. 9, 667 (2020). ' +
+        'DOI 10.12688/f1000research.25097.1 PMCID PMC7333361 PMID 32676184',
+    );
+    expect(text).not.toContain('25097.1PMC733336132676184');
+  });
+
+  it('separates an inserted label from the bracket before it (#115)', () => {
+    // Cochrane style: the DOI keeps its literal `[DOI: ` prefix; the PMID label this
+    // renderer inserts is spaced from the closing `]`.
+    const text = mixedCitation(
+      '<source>Journal of Pediatrics</source><year>2011</year>:<fpage>119</fpage>. [DOI: ' +
+        '<pub-id pub-id-type="doi">10.1016/j.jpeds.2010.07.021</pub-id>]' +
+        '<pub-id pub-id-type="pmid">20850761</pub-id>',
+    );
+    expect(text).toBe(
+      'Journal of Pediatrics 2011:119. [DOI: 10.1016/j.jpeds.2010.07.021] PMID 20850761',
+    );
+  });
+
+  it('collapses a whitespace-only gap between pub-ids to one space (#115)', () => {
+    const text = mixedCitation(
+      'Ref. <pub-id pub-id-type="pmid">31235882</pub-id>\n' +
+        '<pub-id pub-id-type="doi">10.1038/s41592-019-0437-4</pub-id>',
+    );
+    expect(text).toBe('Ref. PMID 31235882 DOI 10.1038/s41592-019-0437-4');
+  });
+
+  it('spaces a zero-gap italic title against a bold volume (#123)', () => {
+    // PMC8371605 ref CR7: `<italic>Nat. Methods</italic><bold>16</bold>, …`.
+    const text = mixedCitation(
+      'Steinegger, M. Protein-level assembly. <italic toggle="yes">Nat. Methods</italic>' +
+        '<bold>16</bold>, 603–606 (2019).<pub-id pub-id-type="pmid">31235882</pub-id>',
+      'CR7',
+    );
+    expect(text).toBe(
+      'Steinegger, M. Protein-level assembly. Nat. Methods 16, 603–606 (2019). PMID 31235882',
+    );
+    expect(text).not.toContain('Nat. Methods16');
+  });
+
+  it('separates a zero-gap surname and given names inside a bare <name> (#124)', () => {
+    // PMC7250045 ref R1: all 1,150 <name> authors in that record share the shape.
+    const text = mixedCitation(
+      '<name name-style="western"><surname>Nybakken</surname><given-names>JW</given-names>' +
+        '</name>\n<source>Marine Biology: An Ecological Approach</source>, ' +
+        '<edition>4th ed.</edition>; <publisher-name>Addison-Wessley Publishing</publisher-name>' +
+        ': <publisher-loc>Boston, MA</publisher-loc>, <year>2001</year>.',
+    );
+    expect(text).toBe(
+      'Nybakken JW Marine Biology: An Ecological Approach, 4th ed.; Addison-Wessley ' +
+        'Publishing: Boston, MA, 2001.',
+    );
+    expect(text).not.toContain('NybakkenJW');
+  });
+
+  /**
+   * PMC11391094 ref C37's author block. `separator` is the text between `<surname>`
+   * and `<given-names>`: a newline in the live record, nothing in the zero-gap variant.
+   * Both must render the same citation.
+   */
+  const personGroupCitation = (separator: string) => {
+    const name = (surname: string, given: string) =>
+      `<string-name name-style="western"><surname>${surname}</surname>${separator}` +
+      `<given-names>${given}</given-names></string-name>`;
+    return mixedCitation(
+      `<person-group person-group-type="author">${name('Lommatzsch', 'M')}, ` +
+        `${name('Marchewski', 'H')}, ${name('Schwefel', 'G')}, <etal>et al.</etal></person-group>\n` +
+        '<article-title>Benralizumab strongly reduces blood basophils in severe eosinophilic ' +
+        'asthma</article-title>. <source>Clin Exp Allergy</source> 2020; 50: 1267–1269. doi:' +
+        '<pub-id pub-id-type="doi">10.1111/cea.13720</pub-id>' +
+        '<pub-id pub-id-type="pmid">32762056</pub-id>\n',
+      'C37',
+    );
+  };
+
+  const C37_CITATION =
+    'Lommatzsch M, Marchewski H, Schwefel G, et al. Benralizumab strongly reduces blood ' +
+    'basophils in severe eosinophilic asthma. Clin Exp Allergy 2020; 50: 1267–1269. ' +
+    'doi:10.1111/cea.13720 PMID 32762056';
+
+  it('separates a zero-gap <string-name> nested in a <person-group> (#124)', () => {
+    const text = personGroupCitation('');
+    expect(text).toBe(C37_CITATION);
+    expect(text).not.toContain('LommatzschM');
+  });
+
+  it('leaves a <person-group> whose name parts carry source whitespace unchanged (#124)', () => {
+    expect(personGroupCitation('\n')).toBe(C37_CITATION);
+  });
+
+  it('leaves punctuated and text-adjacent transitions unchanged (#115)', () => {
+    // Elements already separated by punctuation render as the source has them, and a
+    // zero-gap text-to-element transition (a footnote-style marker) gains no space.
+    const text = mixedCitation(
+      '<string-name><surname>Lommatzsch</surname> <given-names>M</given-names></string-name>, ' +
+        '<etal>et al.</etal> <article-title>Benralizumab reduces basophils</article-title>. ' +
+        '<source>Clin Exp Allergy</source>; <volume>50</volume>: <fpage>1267</fpage>–' +
+        '<lpage>1269</lpage>.<sup>a</sup>',
+    );
+    expect(text).toBe(
+      'Lommatzsch M, et al. Benralizumab reduces basophils. Clin Exp Allergy; 50: 1267–1269.a',
+    );
+  });
+});
+
+describe('reference-list placement (#116)', () => {
+  it('finds a ref-list nested at any depth in the body', () => {
+    // PMC12973387: no <back> at all; the list sits at body/sec[References]/sec/ref-list.
+    const document = parseBody(
+      '<sec><title>Introduction</title><p>Intro text.</p></sec>' +
+        '<sec><title>Methods</title><p>Methods text.</p></sec>' +
+        '<sec><title>References</title><sec><ref-list>' +
+        '<ref id="bib1"><label>1.</label><element-citation>First reference.</element-citation></ref>' +
+        '<ref id="bib2"><label>2.</label><element-citation>Second reference.</element-citation></ref>' +
+        '</ref-list></sec></sec>',
+    );
+    expect(document.references).toEqual([
+      { id: 'bib1', label: '1.', text: 'First reference.' },
+      { id: 'bib2', label: '2.', text: 'Second reference.' },
+    ]);
+    // The References wrapper holds no prose, so it is not an empty section.
+    expect(document.body.map((s) => s.title)).toEqual(['Introduction', 'Methods']);
+  });
+
+  it('descends through a ref-list into one nested in it', () => {
+    const references = referencesOf(
+      '<ref-list><title>References</title>' +
+        '<ref id="OUT1"><mixed-citation>Outer ref.</mixed-citation></ref>' +
+        '<ref-list><title>Further reading</title>' +
+        '<ref id="IN1"><mixed-citation>Inner ref.</mixed-citation></ref></ref-list></ref-list>',
+    );
+    expect(references.map((r) => r.id)).toEqual(['OUT1', 'IN1']);
+  });
+
+  it('yields each reference once when the body and back both carry a ref-list', () => {
+    // Not observed live, but the JATS DTD permits both containers.
+    const ref = (id: string, citation: string) =>
+      `<ref id="${id}"><mixed-citation>${citation}</mixed-citation></ref>`;
+    const document = parseArticle({
+      back: `<ref-list>${ref('R1', 'Alpha 2020.')}${ref('R3', 'Gamma 2022.')}</ref-list>`,
+      body:
+        '<sec><title>Discussion</title><p>Body text.</p>' +
+        `<sec><ref-list>${ref('R1', 'Alpha 2020.')}${ref('R2', 'Beta 2021.')}</ref-list></sec></sec>`,
+    });
+    expect(document.references.map((r) => r.id)).toEqual(['R1', 'R2', 'R3']);
+  });
+
+  it('reads a citation in running text as text in place', () => {
+    const document = parseBody(
+      '<sec sec-type="data-availability"><title>Data availability</title><p>Data are at ' +
+        '<element-citation><source>Zenodo</source><year>2024</year>' +
+        '<pub-id pub-id-type="doi">10.5281/zenodo.1</pub-id></element-citation>.</p></sec>',
+    );
+    expect(paragraphTexts(document)).toEqual(['Data are at Zenodo 2024 DOI 10.5281/zenodo.1.']);
+  });
+});
