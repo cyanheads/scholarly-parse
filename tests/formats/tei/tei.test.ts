@@ -207,6 +207,47 @@ describe('sections', () => {
     ]);
     expect(document.footnotes).toEqual([{ label: '1', text: 'A footnote.' }]);
   });
+
+  it("prints a footnote reference as its note's mark, not the note ID Grobid may write", () => {
+    const document = parse(
+      tei(
+        '<div><head n="1">Systems</head><p>Google Translate,<ref type="foot" target="#foot_0">foot_0</ref> and more.</p></div>' +
+          '<note place="foot" n="1" xml:id="foot_0">https://translate.google.com</note>',
+      ),
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      { text: 'Google Translate,^1 and more.', type: 'paragraph' },
+    ]);
+  });
+
+  it('keeps a numbered heading with no text of its own for the headings after it', () => {
+    // 3.1's content sits in the divs after it, under unnumbered paragraph headings.
+    const document = parse(
+      tei(
+        div('3', 'Evaluation', 'a') +
+          '<div><head n="3.1">Setup</head></div>' +
+          div(undefined, 'Systems', 'b') +
+          div(undefined, 'Languages', 'c') +
+          div('3.2', 'Results', 'd') +
+          div('4', 'Discussion', 'e') +
+          div(undefined, 'Limitations', 'f'),
+      ),
+    );
+    const outline = (sections: ScholarlyDocument['body']): unknown[] =>
+      sections.map((s) => [s.title, ...(s.sections.length ? [outline(s.sections)] : [])]);
+    expect(outline(document.body)).toEqual([
+      ['Evaluation', [['Setup', [['Systems'], ['Languages']]], ['Results']]],
+      ['Discussion'],
+      ['Limitations'],
+    ]);
+  });
+
+  it('drops a heading nothing follows', () => {
+    const document = parse(
+      tei(div('1', 'Introduction', 'a') + '<div><head n="2">Empty</head></div>'),
+    );
+    expect(document.body.map((s) => s.title)).toEqual(['Introduction']);
+  });
 });
 
 describe('floats', () => {
@@ -255,6 +296,37 @@ describe('back matter and references', () => {
       [undefined, 'Acknowledgements', 'acknowledgments'],
       ['A', 'Proofs', 'appendix'],
     ]);
+  });
+
+  it('gathers untitled parts of one kind under one heading', () => {
+    const document = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        '<div type="contribution"><div><p>AB wrote it.</p></div></div>' +
+          '<div type="contribution"><div><p>CD checked it.</p></div></div>',
+      ),
+    );
+    expect(document.back).toEqual([
+      {
+        blocks: [
+          { text: 'AB wrote it.', type: 'paragraph' },
+          { text: 'CD checked it.', type: 'paragraph' },
+        ],
+        id: 'back1',
+        kind: 'declarations',
+        sections: [],
+      },
+    ]);
+  });
+
+  it('drops the category Grobid appends to an arXiv identifier', () => {
+    const header = HEADER.replace(
+      '<idno type="DOI">10.1234/ABC</idno>',
+      '<idno type="arXiv">arXiv:1906.00591v1[cs.CL]</idno>',
+    );
+    expect(parse(tei(div('1', 'A', 'x'), '', header)).metadata.identifiers).toEqual({
+      arxiv: '1906.00591v1',
+    });
   });
 
   it("prefers Grobid's raw citation and builds one from the fields otherwise", () => {

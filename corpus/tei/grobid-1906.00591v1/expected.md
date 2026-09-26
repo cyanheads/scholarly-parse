@@ -2,7 +2,7 @@
 
 Gabriel Stanovsky, Noah A Smith, Luke Zettlemoyer  
 2019  
-arXiv: 1906.00591v1[cs.CL]
+arXiv: 1906.00591v1
 
 ## Abstract
 
@@ -38,9 +38,11 @@ This process can introduce noise into our evaluation in steps ( 2) and ( 3), via
 
 In this section, we briefly describe the MT systems and the target languages we use, our main results, and their human validation.
 
-## MT systems
+### 3.1 Experimental Setup
 
-We test six widely used MT models, representing the state of the art in both commercial and academic research: (1) Google Translate,foot_0 (2) Microsoft Translator,foot_1 (3) Amazon Translate,foot_2 (4) SYSTRAN,foot_3 (5) the model of Ott et al. (2018), which recently achieved the best performance on English-to-French translation on the WMT'14 test set, and (6) the model of Edunov et al. (2018), the WMT'18 winner on English-to-German translation. We query the online API for the first four commercial MT systems, while for the latter two academic models we use the pretrained models provided by the Fairseq
+#### MT systems
+
+We test six widely used MT models, representing the state of the art in both commercial and academic research: (1) Google Translate,^1 (2) Microsoft Translator,^2 (3) Amazon Translate,^3 (4) SYSTRAN,^4 (5) the model of Ott et al. (2018), which recently achieved the best performance on English-to-French translation on the WMT'14 test set, and (6) the model of Edunov et al. (2018), the WMT'18 winner on English-to-German translation. We query the online API for the first four commercial MT systems, while for the latter two academic models we use the pretrained models provided by the Fairseq
 
 Google Translate Microsoft Translator Amazon Translate \* SYSTRAN Acc ∆ G ∆ S Acc ∆ G ∆ S Acc ∆ G ∆ S Acc ∆ G ∆ S
 
@@ -52,7 +54,7 @@ Acc (Ott et al., 2018) 49.4 2.6 16.1 DE (Edunov et al., 2018) 52.5 7.3 8.4
 
 ∆ G ∆ S FR
 
-## Target languages and morphological analysis
+#### Target languages and morphological analysis
 
 We selected a set of eight languages with grammatical gender which exhibit a wide range of other linguistic properties (e.g., in terms of alphabet, word order, or grammar), while still allowing for highly accurate automatic morphological analysis. These languages belong to four different families: (1) Romance languages: Spanish, French, and Italian, all of which have gendered noundeterminer agreement and spaCy morphological analysis support (Honnibal and Montani, 2017).
 
@@ -60,7 +62,7 @@ We selected a set of eight languages with grammatical gender which exhibit a wid
 
 (3) Semitic languages: Hebrew and Arabic, each with a unique alphabet. For Hebrew, we use the analyzer developed by Adler and Elhadad (2006), while gender inflection in Arabic can be easily 5 <https://github.com/pytorch/fairseq> identified via the ta marbuta character, which uniquely indicates feminine inflection. (4) Germanic languages: German, for which we use the morphological analyzer developed by Altinok (2018).
 
-## 3.2 Results
+### 3.2 Results
 
 Our main findings are presented in Tables 2 and 3. For each tested MT system and target language we compute three metrics with respect to their ability to convey the correct gender in the target language. Ultimately, our analyses indicate that all tested MT systems are indeed gender biased. First, the overall system Accuracy is calculated by the percentage of instances in which the translation preserved the gender of the entity from the original English sentence. We find that most tested systems across eight tested languages perform quite poorly on this metric. The best performing model on each language often does not do much better than a random guess for the correct inflection. An exception to this rule is the translation accuracies on German, where three out of four systems acheive their best performance. This may be explained by German's similarity to the English source language (Hawkins, 2015).
 
@@ -68,11 +70,11 @@ In Table 4: Performance of Google Translate on Spanish, Russian, and Ukranian ge
 
 cantly better on male roles, which may stem from these being more frequent in the training set. Perhaps most tellingly, ∆ S measures the difference in performance (F 1 score) between stereotypical and non-stereotypical gender role assignments, as defined by Zhao et al. (2018) who use statistics provided by the US Department of Labor. 6 This metric shows that all tested systems have a significant and consistently better performance when presented with pro-stereotypical assignments (e.g., a female nurse), while their performance deteriorates when translating antistereotypical roles (e.g., a male receptionist). For instance, Figure 2 depicts Google Translate absolute accuracies on stereotypical and nonstereotypical gender roles across all tested languages. Other tested systems show similar trends.
 
-## 3.3 Fighting Bias with Bias
+### 3.3 Fighting Bias with Bias
 
 Finally, we tested whether we can affect the translations by automatically creating a version of WinoMT with the adjectives "handsome" and "pretty" prepended to male and female entities, respectively. For example, the sentence in Figure 1 will be converted to: "The pretty doctor asked the 6 <https://www.bls.gov/cps/cpsaat11.htm> nurse to help her in the operation". We are interested in evaluating whether this "corrects" the profession bias by mixing signals, e.g., while "doctor" biases towards a male translation, "pretty" tugs the translation towards a female inflection. Our results show that this improved performance in some languages, significantly reducing bias in Spanish, Russian, and Ukrainian (see Table 4). Admittedly, this is impractical as a general debiasing scheme, since it assumes oracle coreference resolution, yet it attests to the relation between coreference resolution and MT, and serves as a further indication of gender bias in MT.
 
-## 3.4 Human Validation
+### 3.4 Human Validation
 
 We estimate the accuracy of our gender bias evaluation method by randomly sampling 100 instances of all translation systems and target languages, annotating each sample by two target-language native speakers (resulting in 9,600 human annotations). Each instance conformed to a format similar to that used by our automatic gender detection algorithm: human annotators were asked to mark the gender of an entity within a given targetlanguage sentence. (e.g., see "el doctor" as highlighted in the Spanish sentence in Figure 1). By annotating at the sentence-level, we can account for both types of possible errors, i.e., alignment and gender extraction.
 

@@ -136,11 +136,9 @@ The data presented in the study are deposited in the NCBI repository, BioProject
 
 The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.
 
-## Notes
+## Declarations
 
 King ML, Bajwa B, Hanna N, Xing X, Low KE, Neuberger P, Hall E, Veltri M, Weighill B, Klassen L, Plain Eagle N, Big Bull W, Lynes LS, Montina T, Thomas PJ, Gorzelak MA and Abbott DW ( ) Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils. Front. Microbiol. : . doi: [. /fmicb.](https://doi.org/10.3389/fmicb.2024.1384204) . COPYRIGHT This work is authored by King, Bajwa, Hanna, Xing, Low, Neuberger, Hall, Veltri, Weighill, Klassen, Plain Eagle, Big Bull, Lynes, Montina, Thomas, Gorzelak and Abbott. © , His Majesty the King in Right of Canada, as represented by the Ministers of Agriculture and Agri-Food Canada and Environment and Climate Change Canada; Piikani First Nation; and Veltri, Lynes and
-
-## Notes
 
 Author contributions MK: Writing -original draft, Visualization, Methodology, Data curation. BB: Writing -review & editing, Methodology. NH: Writing -review & editing, Methodology. XX: Writingreview & editing, Methodology. KL: Writing -review & editing, Methodology. PN: Writing -review & editing, Methodology. EH: Writing -review & editing, Methodology. MV: Writing -review & editing, Methodology. BW: Writing -review & editing, Resources, Methodology, Conceptualization. LK: Writing -review & editing, Visualization, Methodology. NP: Writing -review & editing, Resources, Funding acquisition. WB: Writing -review & editing, Resources, Funding acquisition. LL: Writing -review & editing, Funding acquisition. TM: Writing -review & editing, Supervision, Methodology, Funding acquisition. PT: Writing -review & editing, Funding acquisition. MG: Writing -review & editing, Supervision, Funding acquisition. DA: Writing -review & editing, Supervision, Funding acquisition, Conceptualization.
 

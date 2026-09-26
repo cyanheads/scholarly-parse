@@ -67,9 +67,14 @@ export function parseTei(input: string | Uint8Array, options: ParseOptions = {})
   const tei = findDescendant(tree.nodes, 'tei', 1);
   if (!tei) return failed('wrong-format', 'No <TEI> element: not a TEI document');
 
-  const ctx: TeiContext = { diag: createDiagnostics(), footnotes: [], sectionIds: new Set() };
   const header = findOne(tei, 'teiheader');
   const text = findOne(tei, 'text');
+  const ctx: TeiContext = {
+    diag: createDiagnostics(),
+    footnoteMarks: footnoteMarks(text),
+    footnotes: [],
+    sectionIds: new Set(),
+  };
   const metadata = extractMetadata(header, text, ctx);
   const abstracts = extractAbstracts(header, ctx);
   const bodyNode = findOne(text, 'body') ?? text;
@@ -108,7 +113,23 @@ export function parseTei(input: string | Uint8Array, options: ParseOptions = {})
   return parsed(document);
 }
 
+/** Each footnote's printed mark (`n`) by its `xml:id`, for the `<ref type="foot">`s that point at it. */
+function footnoteMarks(text: XmlNode | undefined): Map<string, string> {
+  const marks = new Map<string, string>();
+  for (const note of findAllDescendants(text, 'note')) {
+    const id = attrOf(note, 'xml:id');
+    const mark = attrOf(note, 'n');
+    if (id && mark) marks.set(id, mark);
+  }
+  return marks;
+}
+
 // ─── Metadata ───────────────────────────────────────────────────────────────
+
+/** An arXiv identifier without the `arXiv:` prefix or the `[cs.CL]` category Grobid keeps. */
+function arxivId(value: string): string {
+  return value.replace(/^arxiv:\s*/i, '').replace(/\s*\[[^\]]*\]$/, '');
+}
 
 function parseDate(when: string | undefined): PartialDate | undefined {
   const match = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/.exec(when ?? '');
@@ -187,7 +208,7 @@ function extractMetadata(
     const value = plainText(idno);
     if (!value) continue;
     if (type === 'doi') identifiers.doi ??= value.toLowerCase();
-    else if (type === 'arxiv') identifiers.arxiv ??= value.replace(/^arxiv:/i, '');
+    else if (type === 'arxiv') identifiers.arxiv ??= arxivId(value);
     else if (type === 'pmid') identifiers.pmid ??= value;
     else if (type === 'pmcid')
       identifiers.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
@@ -313,12 +334,17 @@ function divContent(
   return { blocks, ...(head && { head }), nested };
 }
 
-/** A `<div>` as a section: heading, `n` as label, blocks, nested divs as subsections. */
+/**
+ * A `<div>` as a section: heading, `n` as label, blocks, nested divs as subsections.
+ * With `keepHeading`, a titled div holding nothing is kept, for the divs after it to
+ * nest under.
+ */
 function divSection(
   div: XmlNode,
   ctx: TeiContext,
   kind: SectionKind,
   fallbackId: string,
+  keepHeading = false,
 ): Section | undefined {
   const { blocks, head, nested } = divContent(div, ctx);
   const id = issueId(ctx.sectionIds, attrOf(div, 'xml:id'), fallbackId);
@@ -331,11 +357,21 @@ function divSection(
     const section = divSection(sub, ctx, kind, `${id}.${i + 1}`);
     return section ? [section] : [];
   });
-  if (blocks.length === 0 && sections.length === 0) {
+  if (blocks.length === 0 && sections.length === 0 && !(keepHeading && title)) {
     ctx.sectionIds.delete(id);
     return;
   }
   return { blocks, id, kind, ...(label && { label }), sections, ...(title && { title }) };
+}
+
+/** Sections holding nothing, at any depth, removed. */
+function withoutEmpty(sections: Section[], ctx: TeiContext): Section[] {
+  return sections.flatMap((section) => {
+    const kept = { ...section, sections: withoutEmpty(section.sections, ctx) };
+    if (kept.blocks.length > 0 || kept.sections.length > 0) return [kept];
+    ctx.sectionIds.delete(section.id);
+    return [];
+  });
 }
 
 /** True when `child` numbers a subsection of `parent`: `2.1` under `2`, `A.1` under `A`. */
@@ -352,8 +388,18 @@ function extractBody(
   const sections: Section[] = [];
   const floats: Block[] = [];
   const stack: Section[] = [];
+  /**
+   * The outline comes from heading numbers: `3.2` nests under `3`. An unnumbered heading
+   * is never a numbered section's parent; inside a numbered subsection (`3.1`) it is a
+   * paragraph heading and nests there, and anywhere else it stands at the top.
+   */
   const place = (section: Section) => {
-    while (stack.length > 0 && !isNumberedChild(stack.at(-1)?.label, section.label)) stack.pop();
+    while (stack.length > 0 && !stack.at(-1)?.label) stack.pop();
+    if (section.label) {
+      while (stack.length > 0 && !isNumberedChild(stack.at(-1)?.label, section.label)) stack.pop();
+    } else if (!stack.at(-1)?.label?.includes('.')) {
+      stack.length = 0;
+    }
     const parent = stack.at(-1);
     if (parent) parent.sections.push(section);
     else sections.push(section);
@@ -367,7 +413,13 @@ function extractBody(
     } else if (tag === 'note') {
       footnote(child, ctx);
     } else if (tag === 'div') {
-      const section = divSection(child, ctx, 'body', `s${sections.length + stack.length + 1}`);
+      const section = divSection(
+        child,
+        ctx,
+        'body',
+        `s${sections.length + stack.length + 1}`,
+        true,
+      );
       if (!section) continue;
       const kind = kindFromTitle(section.title);
       const current = stack.at(-1);
@@ -389,7 +441,7 @@ function extractBody(
       if (text) floats.push({ text, type: 'paragraph' });
     }
   }
-  return { floats, sections };
+  return { floats, sections: withoutEmpty(sections, ctx) };
 }
 
 /** A `<figure>`: a table when `@type="table"`, else a figure with its graphic. */
@@ -452,9 +504,16 @@ const BACK_TYPES: Readonly<Record<string, SectionKind>> = {
   acknowledgements: 'acknowledgments',
   annex: 'appendix',
   availability: 'data-availability',
+  conflict: 'declarations',
+  contribution: 'declarations',
   funding: 'declarations',
 };
 
+/**
+ * Back matter by Grobid's typed divs. An untitled part joins the untitled section of the
+ * same kind before it (Grobid writes each author-contribution paragraph as a div of its
+ * own), so one heading covers them.
+ */
 function extractBack(back: XmlNode | undefined, ctx: TeiContext): Section[] {
   const sections: Section[] = [];
   for (const div of findAll(back, 'div')) {
@@ -465,10 +524,18 @@ function extractBack(back: XmlNode | undefined, ctx: TeiContext): Section[] {
     for (const target of targets) {
       const section = divSection(target, ctx, 'notes', `back${sections.length + 1}`);
       if (!section) continue;
-      sections.push({
+      const part = {
         ...section,
         kind: BACK_TYPES[type] ?? kindFromTitle(section.title) ?? 'notes',
-      });
+      };
+      const previous = sections.at(-1);
+      if (!part.title && previous && !previous.title && previous.kind === part.kind) {
+        previous.blocks.push(...part.blocks);
+        previous.sections.push(...part.sections);
+        ctx.sectionIds.delete(part.id);
+      } else {
+        sections.push(part);
+      }
     }
   }
   return sections;
@@ -521,7 +588,8 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   const text = raw ? escapeInline(raw) : built;
   if (!text) return;
   const id = attrOf(bibl, 'xml:id');
-  const arxiv = ids.get('arxiv')?.replace(/^arxiv:/i, '');
+  const arxivValue = ids.get('arxiv');
+  const arxiv = arxivValue && arxivId(arxivValue);
   const pmid = ids.get('pmid');
   return {
     ...(id && { id }),

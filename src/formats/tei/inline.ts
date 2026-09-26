@@ -20,6 +20,8 @@ import {
 
 export interface TeiContext {
   diag: DiagnosticsCollector;
+  /** Each footnote's printed mark by its `xml:id`. */
+  footnoteMarks: ReadonlyMap<string, string>;
   footnotes: Footnote[];
   sectionIds: Set<string>;
 }
@@ -92,6 +94,12 @@ function inlineNode(node: XmlNode, ctx: TeiContext): string {
     case 'ref':
     case 'ptr': {
       const target = attrOf(node, 'target') ?? '';
+      // Grobid may write a footnote reference's text as the note's ID (`foot_0`); the
+      // note carries the printed mark.
+      if (attrOf(node, 'type') === 'foot') {
+        const mark = ctx.footnoteMarks.get(target.replace(/^#/, '')) ?? plainText(children);
+        return superscript(escapeInline(mark), mark, false);
+      }
       const inner = inlineMarkdown(children, ctx);
       return /^(https?|ftp):/i.test(target) ? link(inner, target) : inner;
     }

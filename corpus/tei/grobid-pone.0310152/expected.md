@@ -24,7 +24,9 @@ Compartmental epidemic models, where each compartment is determined by the daily
 
 The article is structured as follows: In Section 2, we formulate the model incorporating time-distributed parameters and the dynamic level of immunity, additionally introducing a model that considers the impact of multiple strains. The calculation of the basic reproduction number is presented in the same section. Section 3 is dedicated to the estimation of relevant time-distributed rate functions, using available clinical and experimental data. The results and findings, including the influence of multiple strains and the observed hysteresis effect resulting from the gap between consecutive vaccine doses, are discussed in Section 4.
 
-## 2.1 Basic model
+## 2 Model formulation
+
+### 2.1 Basic model
 
 We consider a population with four compartments: susceptible individuals (S(t)), infected individuals (I(t)), recovered individuals (R(t)) and dead individuals (D(t)). It is assumed that the sum of these compartments remains constant and equals the total population N, i.e., SðtÞ þ IðtÞ þ RðtÞ þ DðtÞ ¼ N; for all t � 0:
 
@@ -50,7 +52,7 @@ dIðtÞ dt ¼ SðtÞ N Z t 0 bðt À ZÞJðZÞdZ À Z t 0 rðt À ZÞJðZÞdZ À
 
 Completing them by equations ( 2) and (4), we obtain the formulation of an immuno-epidemiological model with distributed infectivity, recovery and death rates.
 
-## 2.2 Vaccination and immunity
+### 2.2 Vaccination and immunity
 
 The level of immunity in the population plays an important role in combating the progression of the epidemic. This level of immunity can vary over time based on several important factors, such as the rate of vaccination, time-post-vaccination-dependent vaccine effectiveness, and time-post-recovery-dependent acquired immunity.
 
@@ -60,7 +62,7 @@ mðtÞ ¼ 1 N Z t 0 �ðt À ZÞV 0 ðZÞdZ; (ð7Þ)
 
 where V(t) is the number of vaccinated individuals at time t, and V 0 (t) is the rate of vaccination, the function ϕ(t) describes how immunity changes with time. It is a positive function with ϕ(0) = 1 (if a vaccine is initially fully efficient), otherwise ϕ(0) > 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 < ϕ(t) < 1.
 
-### 2.2.1 Multiple vaccination doses.
+#### 2.2.1 Multiple vaccination doses.
 
 Now, we incorporate the impact of multiple vaccine doses in the population at various intervals. The expression for the immunity level m(t) is then provided as follows:
 
@@ -72,7 +74,7 @@ V i ðtÞ ¼ 0; t < T 0 þ T 1;2 þ T 2;3 þ � � � þ T iÀ 1;i positive; 
 
 Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.
 
-### 2.2.2 Acquired immunity of recovered.
+#### 2.2.2 Acquired immunity of recovered.
 
 Next, consider the acquired immunity of the recovered individuals. Then the effective immunity at time t coming from both the vaccination of healthy susceptible S and the infection acquired immunity is given by:
 
@@ -84,7 +86,7 @@ m 2 ðtÞ ¼ 1 À a N X K i¼1 Z t 0 � i ðt À ZÞV 0 i ðZÞdZ ! þ b N Z t 
 
 where, 0 < � < 1 is a constant, α is the proportion of healthy susceptible S who are newly vaccinated. The value of � < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter b characterizes the proportion of comorbidity among the newly recovered individuals while the function ψ(t) describes how acquired immunity changes over time. We choose functions ϕ j and ψ j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider ϕ j � ϕ and ψ j � ψ, for j = 1, 2, � � �, K. Moreover, to account for "bounded" infection growth, we impose a constraint on the population immunity level: 0 < m 1 (t) + m 2 (t) < 1.
 
-### 2.2.3 Impact of multiple strains.
+#### 2.2.3 Impact of multiple strains.
 
 Immunity in the population corresponds to the decrease of the number of susceptible individuals. As such, instead of equality (1), we have
 
@@ -116,7 +118,7 @@ Z t 0 rðt À ZÞJðZÞdZ;
 
 which represents the daily sum of completely recovered individuals (with proportion (1 -b)) and comorbid individuals (with proportion b). We obtain complete model ( 10)-(15) with distributed infection, recovery and death rates, and population immunity. The corresponding flowchart is shown in Fig 1.
 
-## 2.3 Basic reproduction number
+### 2.3 Basic reproduction number
 
 In the beginning of epidemic, assume that I = P = D = m 1 = 0. Then, using (2), we can write Eq (5) in the following form:
 
@@ -144,7 +146,7 @@ R 0 ¼ Z t 0 bðxÞdx: (ð19Þ)
 
 Then λ in (18) is positive (epidemic growth) if and only if R 0 > 1.
 
-## Note
+#### Note
 
 The derivation of basic reproduction number remains unaltered even if we assume a reproduction substituting of the form S(t) = N -�a λt , where a > 0. 3 Parameter estimation
 
@@ -242,7 +244,7 @@ In this section, we investigate the effect of the gap between two consecutive do
 
 Scenario-1: Vaccine doses administered with 4 months gap.
 
-## Scenario-3: Vaccine doses administered with 12 months gap.
+### Scenario-3: Vaccine doses administered with 12 months gap.
 
 For simplicity, we assumed that each vaccine dose has the same efficacy. From Fig 8, we observe that Scenario-1 and Scenario-2 depict almost the same epidemic progression whereas Scenario-3 depicts a different type of progression. The result shows that instead of administrating the vaccine with a gap of 4 months, a vaccination spanning a gap of 8 months produces the same type of epidemic progression, though the level of immunity is slightly less. Also, we note that Scenario-1 requires repeated vaccinations compared to Scenario-2 within the period 0 to 2000 days, but both scenarios eventually accord the same level of immunity. This is a key observation that can help us to avoid unnecessary vaccinations. On the other hand, from Fig 8 (e) and 8(f), we observe that if the vaccination gap is larger (i.e., 1 year in this case), then consecutive epidemic peaks can appear in future. Thus a proper gap should be maintained to minimize future epidemic outbreaks. The summary of these observations is the need to exercise optimal control.
 
@@ -286,7 +288,7 @@ The author(s) received no specific funding for this work.
 
 The data sources are mentioned in the paper and the related codes are available in the github link: [https://github.com/ nsamiran/codes_immuno_epidemic_vaccination. git](https://github.com/nsamiran/codes_immuno_epidemic_vaccination.git).
 
-## Notes
+## Declarations
 
 The authors have declared that no competing interests exist.
 

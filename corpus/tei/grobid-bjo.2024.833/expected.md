@@ -159,7 +159,7 @@ Funding This study was funded by the National Institute for Health and Care Rese
 
 The data that support the findings of this study are available from the corresponding author, P.M., upon reasonable request.
 
-## Notes
+## Declarations
 
 Declaration of interest M.S. receives income from training in dialectical behaviour therapy (DBT) and royalties from books in DBT. Her husband is the principal shareholder and managing director of a training company that provides DBT training. Her employer receives payment for her time devoted to DBT training and supervision. All other authors declare that they have no competing interests.
 
