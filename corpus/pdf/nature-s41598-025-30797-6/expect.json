@@ -1,0 +1,20 @@
+{
+  "why": "Scientific Reports PDF: an unlabeled bold abstract followed by a keyword line, then an introduction with no heading of its own, which becomes an untitled first section. The title wraps at a hyphen (sixth-order), kept as a compound.",
+  "title": "Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "In this work, a sixth–order extension of the nonlinear Schrödinger equation (NLSE) within its integrable hierarchy",
+  "sectionTitles": [
+    "Proposed technique",
+    "Results and discussion",
+    "Conclusion",
+    "Data availability",
+    "Competing interests"
+  ],
+  "references": 33,
+  "warnings": [
+    "structure-inferred"
+  ]
+}

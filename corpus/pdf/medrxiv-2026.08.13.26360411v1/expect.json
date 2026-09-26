@@ -1,0 +1,25 @@
+{
+  "why": "medRxiv single-column preprint from a word processor: the title is set barely larger than the text, so it comes from the PDF's metadata; the abstract opens with a run-in \"Abstract.\" label; every heading is the same bold size, with the top level in capitals; reference numbers are glued to the entry text (10.ClinicalTrials.gov).",
+  "title": "Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "Heart failure (HF) is a leading cause of morbidity and mortality.",
+  "sectionTitles": [
+    "Introduction",
+    "RESULTS",
+    "Genomic loci associated with HF, HFrEF, and HFpEF",
+    "Mechanistic pathways underlying genetic associations",
+    "Cardiovascular/Neurohormonal pathways",
+    "DISCUSSION",
+    "METHODS",
+    "Study population",
+    "Data Availability",
+    "Acknowledgements"
+  ],
+  "references": 78,
+  "warnings": [
+    "structure-inferred"
+  ]
+}

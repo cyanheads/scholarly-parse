@@ -1,0 +1,41 @@
+{
+  "why": "Rosetta: the PLOS PDF of the article also in the corpus as JATS (epmc-pone.0310152), publisher HTML, LaTeXML, and Grobid TEI. Pins what the PDF shares with the JATS parse: title, abstract opening, the numbered section outline including the bold run-in 2.2.x subsections, one table, twelve figures, and 45 references. The page-1 sidebar (citation, editor, dates, funding) is margin text and stays out; equations set in the TeX math symbol font read as ( ) = + and minus.",
+  "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break.",
+  "sectionTitles": [
+    "Introduction",
+    "Model formulation",
+    "Basic model",
+    "Vaccination and immunity",
+    "Multiple vaccination doses",
+    "Acquired immunity of recovered",
+    "Impact of multiple strains",
+    "Basic reproduction number",
+    "Parameter estimation",
+    "Statistical toolbox",
+    "Results and findings",
+    "Optimization problem",
+    "Discussion and conclusion"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "references": 45,
+  "warnings": [
+    "structure-inferred"
+  ],
+  "contains": [
+    "**Table 1.** Parameter values.",
+    "S(t) + I(t) + R(t) + D(t) = N"
+  ],
+  "notContains": [
+    "# PLOS ONE",
+    "Citation: Ghosh",
+    "a1111111111",
+    "ðtÞ",
+    "¼"
+  ]
+}

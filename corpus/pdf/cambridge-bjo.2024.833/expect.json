@@ -1,0 +1,42 @@
+{
+  "why": "Rosetta: BJPsych Open PDF of the article also in the corpus as JATS (epmc-bjo.2024.833), publisher HTML, and Grobid TEI. The structured abstract is boxed in two columns above the body on page 1, so the band has to read through the box before the body starts; its part headings are small bold lines. The introduction has no heading and becomes an untitled first section. Pins the abstract parts, the section outline, three tables, one figure, and 37 references (entry 24 begins with a lower-case name).",
+  "title": "Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "There is no clear evidence about how to support people with borderline personality disorder (BPD) during the perinatal period.",
+  "sectionTitles": [
+    "Background",
+    "Aims",
+    "Method",
+    "Results",
+    "Conclusions",
+    "Trial registration",
+    "Supporting people with BPD during the perinatal period",
+    "Method",
+    "Study design",
+    "Setting and participants",
+    "Results",
+    "Discussion",
+    "Main findings",
+    "Data availability",
+    "Acknowledgements",
+    "Author contributions",
+    "Funding",
+    "Declaration of interest"
+  ],
+  "tables": 3,
+  "figures": 1,
+  "references": 37,
+  "warnings": [
+    "structure-inferred"
+  ],
+  "contains": [
+    "van Asselt AD, Dirksen CD, Arntz A"
+  ],
+  "notContains": [
+    "Copyright and usage",
+    "BJPsych Open (2025)"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "why": "Rosetta: Journal of Medical Case Reports PDF of the article also in the corpus as JATS (epmc-s13256-024-05002-3), publisher HTML, and Grobid TEI. Page 1 sets the abstract across the page with bold run-in part labels and the body in two columns below; the correspondence box is a footnote in the left column. Back matter and references are set smaller than the body and keep their text. Pins the structured abstract, the outline, three tables with rows, and 18 references.",
+  "title": "Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto’s thyroiditis and pernicious anemia: a case report",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "Evans syndrome is a rare disorder characterized by the simultaneous or sequential combination of autoimmune hemolytic anemia",
+  "sectionTitles": [
+    "Background",
+    "Case presentation",
+    "Conclusion",
+    "Background",
+    "Case presentation",
+    "Discussion",
+    "Conclusion",
+    "Acknowledgements",
+    "Author contributions",
+    "Funding",
+    "Declarations"
+  ],
+  "tables": 3,
+  "figures": 0,
+  "references": 18,
+  "warnings": [
+    "structure-inferred"
+  ],
+  "contains": [
+    "| HCT | 37.0–51.0 | 11.2 |",
+    "The authors thank all participants who took part in the case."
+  ],
+  "notContains": [
+    "## CASE REPORT",
+    "## Open Access",
+    "Correspondence:"
+  ]
+}

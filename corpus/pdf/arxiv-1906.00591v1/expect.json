@@ -1,0 +1,30 @@
+{
+  "why": "ACL two-column preprint: the abstract heading sits in the left column, table captions sit below their tables, and numeric table columns are closer together than prose columns. Pins the numbered outline, five tables with their rows aligned under the headers, and the 28-entry author-year reference list split by its hanging indent.",
+  "title": "Evaluating Gender Bias in Machine Translation",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "We present the first challenge set and evaluation protocol for the analysis of gender bias in machine translation (MT).",
+  "sectionTitles": [
+    "Introduction",
+    "Challenge Set for Gender Bias in MT",
+    "Evaluation",
+    "Experimental Setup",
+    "Results",
+    "Fighting Bias with Bias",
+    "Human Validation",
+    "Discussion",
+    "Conclusions",
+    "Acknowledgments"
+  ],
+  "tables": 5,
+  "references": 28,
+  "warnings": [
+    "structure-inferred"
+  ],
+  "contains": [
+    "| Male | 240 | 1582 | 1826 |",
+    "| *ES* | 53.1 | 23.4 | 21.3 | 47.3 | 36.8 | 23.2 | 59.4 | 15.4 | 22.3 | 45.6 | 46.3 | 15.0 |"
+  ]
+}

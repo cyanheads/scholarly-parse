@@ -1,0 +1,39 @@
+{
+  "why": "Rosetta: Frontiers PDF of the article also in the corpus as JATS (epmc-fmicb.2024.1384204), publisher HTML, and Grobid TEI. Page 1 carries a sidebar of editors, dates, and licence in the left column; figure labels sit alone on their line in capitals (FIGURE 1) above a caption set at another width; subsection headings wrap over up to three lines; references mark each entry with an indented first line; the back matter shares page 13 with the start of the reference list. Pins the numbered outline, three tables, five figures, and 92 references.",
+  "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
+  "quality": "partial",
+  "abstractKinds": [
+    "main"
+  ],
+  "abstractStartsWith": "Sweetgrass (*Anthoxanthum nitens*) is a culturally and environmentally significant perennial grass",
+  "sectionTitles": [
+    "Introduction",
+    "Materials and methods",
+    "Collection of grass and soil samples",
+    "Identification of grass species through ITS sequencing",
+    "Preparation of alcohol insoluble residue",
+    "GC-MS analysis of PMAAs",
+    "Results",
+    "ITS sequencing",
+    "Glycosidic linkage composition of greenhouse-grown Sweetgrass rhizome, stem, and leaf sections",
+    "Discussion",
+    "Conclusion",
+    "Data availability statement",
+    "Author contributions",
+    "Funding",
+    "Acknowledgments",
+    "Conflict of interest",
+    "Supplementary material"
+  ],
+  "tables": 3,
+  "figures": 5,
+  "references": 92,
+  "warnings": [
+    "structure-inferred"
+  ],
+  "notContains": [
+    "EDITED BY",
+    "REVIEWED BY",
+    "CORRESPONDENCE"
+  ]
+}

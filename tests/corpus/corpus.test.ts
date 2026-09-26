@@ -13,6 +13,7 @@ import { describe, expect, it } from 'vitest';
 import { parseHtml } from '../../src/formats/html/index.js';
 import { parseJats } from '../../src/formats/jats/index.js';
 import { parseLatexml } from '../../src/formats/latexml/index.js';
+import { parsePdf } from '../../src/formats/pdf/index.js';
 import { parseTei } from '../../src/formats/tei/index.js';
 import type { ParseResult } from '../../src/model/result.js';
 import { toMarkdown } from '../../src/render/markdown.js';
@@ -28,6 +29,7 @@ const PARSERS: Partial<Record<CorpusFormat, Parser>> = {
   html: (input, url) => parseHtml(input, { baseUrl: url }),
   jats: (input) => parseJats(input),
   latexml: (input, url) => parseLatexml(input, { baseUrl: url }),
+  pdf: (input) => parsePdf(input),
   tei: (input) => parseTei(input),
 };
 
