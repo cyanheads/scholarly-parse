@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "scholarly-parse"
+abstract: "Parse scholarly papers — JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF — into one document model and Markdown."
+type: software
+authors:
+  - family-names: Hand
+    given-names: Casey
+    orcid: "https://orcid.org/0009-0009-3726-568X"
+repository-code: "https://github.com/cyanheads/scholarly-parse"
+license: Apache-2.0
+keywords:
+  - jats
+  - tei
+  - grobid
+  - latexml
+  - scholarly-documents
+  - pdf
+  - markdown
+  - typescript

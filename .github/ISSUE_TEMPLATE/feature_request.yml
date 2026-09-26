@@ -1,0 +1,35 @@
+name: Feature Request
+description: A new format, flavor, model field, or renderer option
+labels: ["enhancement"]
+assignees: ["cyanheads"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Secondary labels.** `enhancement` is applied automatically — also add any of these in the sidebar if they apply:
+        - `performance` — improves memory, CPU, or latency
+        - `breaking-change` — changes the public API or model
+        - `surplus-token-idea` — worth exploring when time allows
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: One or two sentences — what you're parsing and what's missing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed behavior
+      description: What the parser or renderer should do. Link an example document (DOI, arXiv ID, or URL) when there is one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false

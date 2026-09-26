@@ -1,0 +1,93 @@
+name: Bug Report
+description: A document parses wrong, or a parser fails on valid input
+labels: ["bug"]
+assignees: ["cyanheads"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. The fastest fix starts from the exact document that parsed wrong.
+
+        **Do not include secrets, credentials, API keys, tokens, or other sensitive data.** GitHub issues are public and permanent.
+
+        **Secondary labels.** `bug` is applied automatically — also add any of these in the sidebar if they apply:
+        - `regression` — worked before, broken after an update
+        - `performance` — memory, CPU, or latency
+        - `security` — a crafted input does more than parse wrong
+        - `breaking-change` — the fix changes the public API or model
+
+  - type: input
+    id: version
+    attributes:
+      label: scholarly-parse version
+      placeholder: "0.x.y"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: format
+    attributes:
+      label: Source format
+      options:
+        - JATS XML
+        - Grobid TEI
+        - arXiv / LaTeXML HTML
+        - Publisher HTML
+        - PDF
+        - Format detection
+        - Markdown / text rendering
+    validations:
+      required: true
+
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
+        - Bun
+        - Node.js
+        - Cloudflare Workers
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: document
+    attributes:
+      label: Document
+      description: DOI, PMC ID, arXiv ID, or a public URL to the exact file you parsed.
+      placeholder: "10.1371/journal.pone.0322148 · PMC10635526 · arXiv 2401.04088"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened and what you expected instead — two or three sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      description: The relevant slice of the Markdown or the document field, verbatim.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Only what changes the fix — a workaround, a related issue, the one detail that matters.
+    validations:
+      required: false

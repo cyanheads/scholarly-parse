@@ -1,0 +1,147 @@
+# =============================================================================
+# LINE ENDING NORMALIZATION
+# =============================================================================
+# Ensure consistent line endings across all platforms (Windows/Mac/Linux)
+
+# Auto detect text files and normalize to LF
+* text=auto eol=lf
+
+# Explicitly declare text files
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.svg text eol=lf
+
+# Shell scripts should always use LF
+*.sh text eol=lf
+
+# =============================================================================
+# BINARY FILES
+# =============================================================================
+# Prevent corruption of binary files
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+
+# Fonts
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.tgz binary
+*.7z binary
+*.rar binary
+
+# Executables
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# =============================================================================
+# GITHUB LINGUIST CONFIGURATION
+# =============================================================================
+# Control language detection and repository statistics on GitHub
+# See: https://github.com/github/linguist
+
+# Generated code - won't count toward language statistics
+dist/** linguist-generated
+build/** linguist-generated
+out/** linguist-generated
+coverage/** linguist-generated
+*.d.ts linguist-generated
+
+# Lockfile - Bun's text lockfile, machine-generated
+bun.lock linguist-generated
+
+# Script-generated files (changelog:build, tree) - collapse in PR diffs
+CHANGELOG.md linguist-generated
+docs/tree.md linguist-generated
+
+# Documentation
+*.md linguist-documentation
+docs/** linguist-documentation
+
+# Configuration and data files
+*.json linguist-data
+*.yaml linguist-data
+*.yml linguist-data
+.vscode/** linguist-data
+.github/** linguist-data
+
+# Vendored/third-party code
+node_modules/** linguist-vendored
+vendor/** linguist-vendored
+
+# =============================================================================
+# DIFF HANDLING
+# =============================================================================
+# Improve diff readability for specific file types
+
+# JSON files - use JSON-aware diff
+*.json diff=json
+package.json diff=json
+
+# =============================================================================
+# EXPORT-IGNORE
+# =============================================================================
+# Files excluded from `git archive` (GitHub source tarballs / "Download ZIP").
+# npm package contents are governed by package.json `files`, not this list.
+
+.github/ export-ignore
+.vscode/ export-ignore
+corpus/ export-ignore
+tests/ export-ignore
+coverage/ export-ignore
+docs/ export-ignore
+scripts/ export-ignore
+*.test.ts export-ignore
+*.test.tsx export-ignore
+*.test.js export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+biome.json export-ignore
+tsconfig.json export-ignore
+vitest.config.ts export-ignore
+bunfig.toml export-ignore
+.env.example export-ignore
+AGENTS.md export-ignore
+CLAUDE.md export-ignore
+
+# =============================================================================
+# CORPUS
+# =============================================================================
+# Fixture documents are stored byte-for-byte as the source served them (CRLF,
+# BOMs, and encoding quirks are part of what the parsers are tested against),
+# and they are third-party content, not this project's code.
+
+*.pdf binary
+corpus/** -text linguist-vendored
+corpus/**/meta.json text eol=lf -linguist-vendored
+corpus/**/expect.json text eol=lf -linguist-vendored
+corpus/**/expected.md text eol=lf -linguist-vendored
+corpus/*.md text eol=lf -linguist-vendored

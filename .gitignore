@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.tsbuildinfo
+*.log
+.env
+.DS_Store
+*.tgz
+# Wild-sampling runs download fresh documents; only curated fixtures are committed.
+.corpus-cache/
+reports/
