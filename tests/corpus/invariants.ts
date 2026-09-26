@@ -31,15 +31,16 @@ const TEX_PREAMBLE = /\\documentclass|\\usepackage|\\begin\{document\}/;
 const LONE_SURROGATE = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/;
 
 /**
- * Paths of model strings that are a missing value turned into text (`"undefined"`,
- * `"null"`, `"NaN"`) or an object coerced to a string. The word "undefined" inside prose
- * is legitimate and not flagged.
+ * Paths of model strings that are one of `tokens` — a missing value turned into text
+ * (`"undefined"`, `"null"`, `"NaN"`) — or that contain an object coerced to a string.
+ * The word "undefined" inside prose is legitimate and not flagged.
  */
-function leakedValues(document: ScholarlyDocument): string[] {
+function leakedValues(document: ScholarlyDocument, tokens: string[]): string[] {
   const found: string[] = [];
+  const objectToken = tokens.includes('[object Object]');
   const visit = (value: unknown, path: string): void => {
     if (typeof value === 'string') {
-      if (/^(?:undefined|null|NaN)$/.test(value.trim()) || value.includes('[object Object]'))
+      if (tokens.includes(value.trim()) || (objectToken && value.includes('[object Object]')))
         found.push(path);
     } else if (Array.isArray(value)) {
       for (const [i, item] of value.entries()) visit(item, `${path}[${i}]`);
@@ -67,12 +68,23 @@ export function checkInvariants({ document, format, markdown, source }: Invarian
   if (TEX_PREAMBLE.test(markdown)) problems.push('a LaTeX document preamble reached the output');
   if (LONE_SURROGATE.test(markdown)) problems.push('a split surrogate pair');
   if (/^#{1,6}\s*$/m.test(markdown)) problems.push('an empty heading');
-  const leaked = leakedValues(document);
+  // A token the source itself contains (a `NaN` table cell, a bibliography exported with "[object Object]") is content, not a leak.
+  const tokens = ['undefined', 'null', 'NaN', '[object Object]'].filter(
+    (token) => !source?.includes(token),
+  );
+  const leaked = leakedValues(document, tokens);
   if (leaked.length > 0)
     problems.push(`a stringified missing value or object at ${leaked.slice(0, 3).join(', ')}`);
-  if (/\[object Object\]|^(?:undefined|NaN)$|\| (?:undefined|NaN) \|/m.test(markdown)) {
-    problems.push('"undefined", "NaN", or "[object Object]" rendered as content');
-  }
+  const lines = markdown.split('\n');
+  const rendered = tokens.find((token) =>
+    lines.some(
+      (line) =>
+        line.trim() === token ||
+        line.includes(`| ${token} |`) ||
+        (token === '[object Object]' && line.includes(token)),
+    ),
+  );
+  if (rendered) problems.push(`"${rendered}" rendered as content`);
 
   const ids = allSections(document).map((section) => section.id);
   const duplicate = ids.find((id, i) => ids.indexOf(id) !== i);

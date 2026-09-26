@@ -10,8 +10,10 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { parseHtml } from '../../src/formats/html/index.js';
 import { parseJats } from '../../src/formats/jats/index.js';
 import { parseLatexml } from '../../src/formats/latexml/index.js';
+import { parseTei } from '../../src/formats/tei/index.js';
 import type { ParseResult } from '../../src/model/result.js';
 import { toMarkdown } from '../../src/render/markdown.js';
 import { checkExpect, fixtureExpectSchema } from './expect.js';
@@ -23,8 +25,10 @@ type Parser = (input: Uint8Array, url: string) => ParseResult | Promise<ParseRes
 
 /** The parser for each format. A format without one yet is listed as pending. */
 const PARSERS: Partial<Record<CorpusFormat, Parser>> = {
+  html: (input, url) => parseHtml(input, { baseUrl: url }),
   jats: (input) => parseJats(input),
   latexml: (input, url) => parseLatexml(input, { baseUrl: url }),
+  tei: (input) => parseTei(input),
 };
 
 const UPDATE = process.env.SCHOLARLY_PARSE_UPDATE_SNAPSHOTS === '1';
