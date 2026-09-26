@@ -73,6 +73,16 @@ describe('interstitials', () => {
     });
   });
 
+  it('reports a Radware captcha as blocked', async () => {
+    const result = await parseHtml(
+      '<head><title>Radware Bot Manager Captcha</title><script>(function(){})(window,document,"script","https://cdn.perfdrive.com/aperture/aperture.js")</script></head><body><div id="captcha"></div></body>',
+    );
+    expect(result).toMatchObject({
+      error: { message: expect.stringContaining('Radware'), reason: 'blocked' },
+      ok: false,
+    });
+  });
+
   it('reports a meta-refresh redirect stub with its target', async () => {
     const result = await parseHtml(
       '<html><head><meta http-equiv="refresh" content="2; url=\'/retrieve/article?id=1&amp;key=2\'"><title>Redirecting</title></head><body></body></html>',

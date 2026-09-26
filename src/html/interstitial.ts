@@ -24,6 +24,7 @@ const SIGNATURES: [RegExp, string][] = [
   [/distil_r_captcha/i, 'a Distil Networks challenge page'],
   [/id=["']px-captcha["']/i, 'a HUMAN (PerimeterX) challenge page'],
   [/AwsWafIntegration|awswaf\.com/i, 'an AWS WAF challenge page'],
+  [/<title>\s*Radware Bot Manager|perfdrive\.com\/aperture/i, 'a Radware challenge page'],
   [/errors\.edgesuite\.net|<title>\s*Access Denied\s*<\/title>/i, 'an access-denied page'],
   [/<title>\s*Client Challenge\s*<\/title>/i, 'a bot-protection challenge page'],
   [/Vercel Security Checkpoint/i, 'a Vercel security checkpoint'],
