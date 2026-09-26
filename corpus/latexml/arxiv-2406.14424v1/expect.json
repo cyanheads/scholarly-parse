@@ -1,0 +1,13 @@
+{
+  "why": "The abstract is typeset as \\subsection*{Abstract} rather than the abstract environment, so the page has no ltx_abstract: the unnumbered leading section titled Abstract is the paper's abstract, not its first body section. Its inline enumerations ((i), (ii)) stay in the running text. 5 formulas: two equations and a three-row align.",
+  "title": "CascadeServe: Unlocking Model Cascades for Inference Serving",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Machine learning (ML) models are increasingly deployed to production, calling for efficient inference serving systems.",
+  "sectionTitles": ["Introduction", "Background", "Evaluation", "Conclusion", "Gear planner convergence proof", "Simulator"],
+  "tables": 0,
+  "figures": 17,
+  "formulas": 5,
+  "references": 72,
+  "contains": ["challenges: (i) ML models incur high computational costs, and (ii) the request arrival rates"]
+}

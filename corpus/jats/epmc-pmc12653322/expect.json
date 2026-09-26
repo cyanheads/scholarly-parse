@@ -1,0 +1,22 @@
+{
+  "why": "MDPI sets its Abbreviations glossary as an <array> whose rows sit in a <tbody> with no <table> around them. Read as prose, the terms ran together (\"EDElbow dysplasiaDJD…\") and every row and cell was reported unhandled; the array is a table. 6 tables: 5 <table-wrap> and the glossary array.",
+  "title": "Assessment of Elbow Joint Incongruity as a Primary Cause of Canine Elbow Dysplasia: Comparative Imaging Analysis Using CT and Radiography in 108 Dogs—A Retrospective Study",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Background: Incongruity is a primary cause of elbow dysplasia.",
+  "sectionTitles": [
+    "Introduction",
+    "Materials and Methods",
+    "Results",
+    "Discussion",
+    "Conclusions",
+    "Author Contributions",
+    "Data Availability Statement",
+    "Abbreviations"
+  ],
+  "tables": 6,
+  "figures": 9,
+  "references": 30,
+  "contains": ["| ED | Elbow dysplasia |\n| DJD | Degenerative joint disease |"],
+  "notContains": ["EDElbow dysplasia"]
+}

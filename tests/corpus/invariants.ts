@@ -73,6 +73,18 @@ function sourceFigures(source: string): number {
   }).length;
 }
 
+/**
+ * Tables the model must hold: every `<table-wrap>`, and every `<array>` holding rows (a
+ * `<table>`, or a `<tbody>` with no table around it).
+ */
+function sourceTables(source: string): number {
+  const arrays = [...source.matchAll(/<array[\s>]/g)].filter((match) => {
+    const element = source.slice(match.index, source.indexOf('</array>', match.index));
+    return /<(table|tbody)[\s>]/.test(element);
+  }).length;
+  return count(source, /<table-wrap[\s>]/g) + arrays;
+}
+
 /** Problems with a parsed document; empty when every invariant holds. */
 export function checkInvariants({ document, format, markdown, source }: InvariantInput): string[] {
   const problems: string[] = [];
@@ -108,10 +120,12 @@ export function checkInvariants({ document, format, markdown, source }: Invarian
   if (duplicate) problems.push(`duplicate section id "${duplicate}"`);
 
   if (format === 'jats' && source) {
-    const tables = count(source, /<table-wrap[\s>]/g);
+    const tables = sourceTables(source);
     const modelTables = countBlocks(document, 'table');
     if (modelTables !== tables)
-      problems.push(`${tables} <table-wrap> in the source, ${modelTables} tables parsed`);
+      problems.push(
+        `${tables} <table-wrap> or <array> in the source, ${modelTables} tables parsed`,
+      );
     const figures = sourceFigures(source);
     const modelFigures = countBlocks(document, 'figure');
     if (modelFigures < figures)

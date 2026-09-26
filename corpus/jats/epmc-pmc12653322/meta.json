@@ -1,0 +1,23 @@
+{
+  "id": "epmc-pmc12653322",
+  "format": "jats",
+  "flavor": "europepmc",
+  "title": "Assessment of Elbow Joint Incongruity as a Primary Cause of Canine Elbow Dysplasia: Comparative Imaging Analysis Using CT and Radiography in 108 Dogs—A Retrospective Study",
+  "identifiers": {
+    "pmcid": "PMC12653322",
+    "pmid": "41302098",
+    "doi": "10.3390/life15111673"
+  },
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12653322/fullTextXML",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Kubiak-Nowak D, Kiełbowicz Z, Hebel M, Prządka P, Antończyk A, Jankowski M. Assessment of Elbow Joint Incongruity as a Primary Cause of Canine Elbow Dysplasia: Comparative Imaging Analysis Using CT and Radiography in 108 Dogs—A Retrospective Study. Life. 2025;15(11):1673. doi:10.3390/life15111673",
+  "features": [
+    "tables",
+    "figures",
+    "glossary"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "arxiv-2406.14424v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "CascadeServe: Unlocking Model Cascades for Inference Serving",
+  "identifiers": {
+    "arxiv": "2406.14424v1"
+  },
+  "url": "https://arxiv.org/html/2406.14424v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Kossmann F, Wu Z, Turk A, Tatbul N, Cao L, Madden S. CascadeServe: Unlocking Model Cascades for Inference Serving. arXiv:2406.14424v1. 2024.",
+  "features": [
+    "nested-sections",
+    "appendix",
+    "lists",
+    "footnotes",
+    "figures",
+    "inline-math",
+    "display-math",
+    "equation-numbers"
+  ]
+}

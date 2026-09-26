@@ -143,6 +143,27 @@ describe('table placement (#111)', () => {
     expect(blocksOfType(document, 'table')).toHaveLength(1);
   });
 
+  it('reads an <array> whose rows sit in a bare <tbody> as a table after its paragraph', () => {
+    // MDPI's abbreviation glossary: read as prose, the terms ran together.
+    const document = parseBody(
+      '<sec><title>Abbreviations</title><p>The following abbreviations are used:<array>' +
+        '<tbody><tr><td>ED</td><td>Elbow dysplasia</td></tr><tr><td>UAP</td>' +
+        '<td>Ununited anconeal process</td></tr></tbody></array></p></sec>',
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      { text: 'The following abbreviations are used:', type: 'paragraph' },
+      {
+        headerRows: 0,
+        rows: [
+          ['ED', 'Elbow dysplasia'],
+          ['UAP', 'Ununited anconeal process'],
+        ],
+        type: 'table',
+      },
+    ]);
+    expect(document.diagnostics.unhandled).toEqual([]);
+  });
+
   it('reports no tables for an article that has none', () => {
     const document = parseBody('<sec><title>Results</title><p>No tables here.</p></sec>');
     expect(blocksOfType(document, 'table')).toEqual([]);

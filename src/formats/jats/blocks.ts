@@ -201,7 +201,8 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
       return formula ? [formula] : [];
     }
     case 'array': {
-      const table = findOne(node, 'table');
+      // An array holds a `<table>`, or its rows straight in a `<tbody>` (MDPI's abbreviation lists).
+      const table = findOne(node, 'table') ?? (findOne(node, 'tbody') && node);
       return table ? [parseBareTable(table, ctx)] : flowBlocks(children, ctx);
     }
     case 'ref-list':

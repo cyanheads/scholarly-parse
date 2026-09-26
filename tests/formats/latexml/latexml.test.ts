@@ -1,8 +1,8 @@
 /**
  * @fileoverview `parseLatexml` on synthetic LaTeXML pages: the section outline rebuilt
  * when an unclosed inline element swallows the sections after it, floats LaTeXML writes
- * as spans, subtable panels, a bare tabular used as a spacer, entity-written text, and
- * `\url` links.
+ * as spans, subtable panels, a bare tabular used as a spacer, an abstract set as a
+ * section, entity-written text, and `\url` links.
  * @module tests/formats/latexml/latexml.test
  */
 import { describe, expect, it } from 'vitest';
@@ -10,12 +10,14 @@ import { parseLatexml } from '../../../src/formats/latexml/index.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
 import { toMarkdown } from '../../../src/render/index.js';
 
-function page(content: string): string {
+const ABSTRACT = `<div class="ltx_abstract"><h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+    <p class="ltx_p">The abstract.</p></div>`;
+
+function page(content: string, abstract = ABSTRACT): string {
   return `<!DOCTYPE html><html lang="en"><head><meta name="generator" content="LaTeXML"></head>
     <body><div class="ltx_page_main"><div class="ltx_page_content"><article class="ltx_document">
     <h1 class="ltx_title ltx_title_document">A paper</h1>
-    <div class="ltx_abstract"><h6 class="ltx_title ltx_title_abstract">Abstract</h6>
-    <p class="ltx_p">The abstract.</p></div>${content}</article></div></div></body></html>`;
+    ${abstract}${content}</article></div></div></body></html>`;
 }
 
 const heading = (level: number, tag: string, text: string) =>
@@ -30,6 +32,36 @@ async function parse(html: string): Promise<ScholarlyDocument> {
 function blocks(sections: Section[]): Block[] {
   return sections.flatMap((section) => [...section.blocks, ...blocks(section.sections)]);
 }
+
+describe('abstract', () => {
+  it('reads a leading unnumbered section titled Abstract as the abstract', async () => {
+    // `\subsection*{Abstract}` in place of the abstract environment.
+    const document = await parse(
+      page(
+        `<section id="S0.SSx1" class="ltx_subsection"><h3 class="ltx_title">Abstract</h3>
+        <div class="ltx_para"><p class="ltx_p">What we did.</p></div></section>
+        <section id="S1" class="ltx_section">${heading(2, '1', 'Introduction')}
+        <div class="ltx_para"><p class="ltx_p">Why.</p></div></section>`,
+        '',
+      ),
+    );
+    expect(document.abstracts).toEqual([
+      {
+        kind: 'main',
+        sections: [
+          {
+            blocks: [{ text: 'What we did.', type: 'paragraph' }],
+            id: 'S0.SSx1',
+            kind: 'body',
+            sections: [],
+          },
+        ],
+      },
+    ]);
+    expect(document.body.map((section) => section.title)).toEqual(['Introduction']);
+    expect(document.diagnostics.warnings.map((w) => w.code)).not.toContain('no-abstract');
+  });
+});
 
 describe('sections and floats', () => {
   it('rebuilds the outline an unclosed inline element swallowed, reading span floats', async () => {
