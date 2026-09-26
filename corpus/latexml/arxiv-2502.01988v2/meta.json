@@ -25,5 +25,5 @@
     "appendix",
     "preprint"
   ],
-  "notes": "CC BY-SA. Two algorithm floats (ltx_float_algorithm) rendered as numbered listing lines."
+  "notes": "CC BY-SA. Two algorithm floats (ltx_float_algorithm) rendered as listing lines, unnumbered."
 }
