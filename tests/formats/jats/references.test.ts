@@ -193,6 +193,26 @@ describe('element-citation (#69)', () => {
     expect(references[0]).not.toHaveProperty('url');
     expect(references[1]).toMatchObject({ url: 'https://example.org/data' });
   });
+
+  it('reads identifiers from typed ext-links, never a bare identifier as the URL', () => {
+    // Europe PMC appends empty typed links to a citation string.
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><mixed-citation><named-content content-type="citation-string">' +
+        'Qiu B. Mitochondria. J Transl Med. 2024;22:1126.</named-content>' +
+        '<ext-link ext-link-type="doi" xlink:href="10.1186/s12967-024-05943-9"/>' +
+        '<ext-link ext-link-type="pmcid" xlink:href="PMC11662537"/>' +
+        '<ext-link ext-link-type="pmid" xlink:href="39707402"/>' +
+        '<ext-link ext-link-type="google-scholar" xlink:href="title=Mitochondria"/>' +
+        '</mixed-citation></ref></ref-list>',
+    );
+    expect(reference).toEqual({
+      id: 'a',
+      text: 'Qiu B. Mitochondria. J Transl Med. 2024;22:1126.',
+      doi: '10.1186/s12967-024-05943-9',
+      pmid: '39707402',
+      pmcid: 'PMC11662537',
+    });
+  });
 });
 
 describe('mixed-citation adjacency (#115, #123, #124)', () => {

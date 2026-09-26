@@ -150,6 +150,20 @@ function citationText(node: XmlNode, formulas: string[]): string {
     .join('');
 }
 
+/**
+ * `ext-link-type`s whose target is an identifier rather than a page: Europe PMC adds
+ * empty `<ext-link ext-link-type="pmid" xlink:href="26023781"/>`s to a citation.
+ */
+const ID_LINK_TYPES: Readonly<Record<string, string>> = {
+  doi: 'doi',
+  pmcid: 'pmcid',
+  pmid: 'pmid',
+  pubmed: 'pmid',
+};
+
+/** A link target a reader can open. */
+const WEB_URL = /^(?:https?|ftp):\/\//i;
+
 /** Structured fields from a citation element. */
 function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> {
   if (!citation) return {};
@@ -159,9 +173,18 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     const value = text(pubId);
     if (type && value && !ids[type]) ids[type] = value;
   }
-  const extLink =
-    findAllDescendants(citation, 'ext-link')[0] ?? findAllDescendants(citation, 'uri')[0];
-  const url = extLink ? (attrOf(extLink, 'xlink:href') ?? text(extLink)) : undefined;
+  const links = [
+    ...findAllDescendants(citation, 'ext-link'),
+    ...findAllDescendants(citation, 'uri'),
+  ].map((link) => ({
+    type: ID_LINK_TYPES[attrOf(link, 'ext-link-type')?.toLowerCase() ?? ''],
+    target: attrOf(link, 'xlink:href') ?? text(link),
+  }));
+  for (const { type, target } of links) {
+    if (type && target && !ids[type])
+      ids[type] = type === 'doi' ? (doiFromUrl(target) ?? target) : target;
+  }
+  const url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
   const doi = ids.doi ?? doiFromUrl(url);
   const authors = findAllDescendants(citation, 'person-group')
     .filter((group) => (attrOf(group, 'person-group-type') ?? 'author') === 'author')
