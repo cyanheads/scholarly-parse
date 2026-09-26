@@ -59,10 +59,20 @@
       "import": "./dist/formats/jats/index.js",
       "default": "./dist/formats/jats/index.js"
     },
+    "./tei": {
+      "types": "./dist/formats/tei/index.d.ts",
+      "import": "./dist/formats/tei/index.js",
+      "default": "./dist/formats/tei/index.js"
+    },
     "./latexml": {
       "types": "./dist/formats/latexml/index.d.ts",
       "import": "./dist/formats/latexml/index.js",
       "default": "./dist/formats/latexml/index.js"
+    },
+    "./html": {
+      "types": "./dist/formats/html/index.d.ts",
+      "import": "./dist/formats/html/index.js",
+      "default": "./dist/formats/html/index.js"
     },
     "./package.json": "./package.json"
   },
