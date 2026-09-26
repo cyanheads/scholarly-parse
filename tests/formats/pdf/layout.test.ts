@@ -35,7 +35,10 @@ describe('layout', () => {
       run('echnical Validation', 78, 600, { bold: true }),
       run('Body text set in the ordinary face runs on under the heading.', 72, 580),
     ]);
-    expect(texts).toContain('Technical Validation');
+    expect(texts).toEqual([
+      'Technical Validation',
+      'Body text set in the ordinary face runs on under the heading.',
+    ]);
   });
 
   it('leaves a split lowercase letter alone outside a bold heading', () => {
@@ -44,6 +47,9 @@ describe('layout', () => {
       run('he results held across every run we made.', 78, 600),
       run('Body text set in the ordinary face runs on under the heading.', 72, 580),
     ]);
-    expect(texts).toContain('the results held across every run we made.');
+    expect(texts).toEqual([
+      'the results held across every run we made.',
+      'Body text set in the ordinary face runs on under the heading.',
+    ]);
   });
 });
