@@ -1,8 +1,8 @@
 /**
  * @fileoverview `parseLatexml` on synthetic LaTeXML pages: the section outline rebuilt
  * when an unclosed inline element swallows the sections after it, floats LaTeXML writes
- * as spans, subtable panels, a bare tabular used as a spacer, an abstract set as a
- * section, entity-written text, and `\url` links.
+ * as spans, subfigure and subtable panels, a bare tabular used as a spacer, an abstract
+ * set as a section, entity-written text, and `\url` links.
  * @module tests/formats/latexml/latexml.test
  */
 import { describe, expect, it } from 'vitest';
@@ -177,6 +177,23 @@ describe('sections and floats', () => {
     expect(blocks(document.body)).toMatchObject([
       { caption: 'Question types.', label: 'Figure 2', type: 'figure' },
       { headerRows: 0, rows: [['What?', 'Quoi? (fra)']], type: 'table' },
+    ]);
+  });
+
+  it('keeps the image of every subfigure panel, captioned or not', async () => {
+    const panel = (id: string, image: string, caption = '') =>
+      `<figure id="${id}" class="ltx_figure ltx_figure_panel"><object type="image/svg+xml"
+        data="${image}" class="ltx_graphics"></object>${caption}</figure>`;
+    const document = await parse(
+      page(`<figure id="F3" class="ltx_figure"><div class="ltx_flex_figure">
+        ${panel('F3.sf1', 'a.svg')}${panel('F3.sf2', 'b.svg')}
+        ${panel('F3.sf3', 'c.svg', '<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">(c) </span>Late.</figcaption>')}
+        </div><figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Runs.</figcaption></figure>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      { caption: 'Runs.', href: 'a.svg', id: 'F3', label: 'Figure 3', type: 'figure' },
+      { href: 'b.svg', id: 'F3.sf2', type: 'figure' },
+      { caption: 'Late.', href: 'c.svg', id: 'F3.sf3', label: '(c)', type: 'figure' },
     ]);
   });
 

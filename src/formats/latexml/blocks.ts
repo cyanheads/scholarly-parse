@@ -217,8 +217,9 @@ function captionedPanel(tabular: Element, float: Element): Element | undefined {
 
 /**
  * A LaTeXML float. Its caption's tag and content decide what it is: a table (a tabular
- * and no image), an algorithm (a listing), or a figure. Subfigure panels with captions
- * of their own follow the main figure; a subtable panel's caption labels its table.
+ * and no image), an algorithm (a listing), or a figure. Subfigure panels follow the main
+ * figure, each with its image and any caption of its own; a subtable panel's caption
+ * labels its table.
  */
 function figure(element: Element, ctx: LatexmlContext): Block[] {
   const captionEl = childWhere(element, isCaption);
@@ -275,10 +276,21 @@ function figure(element: Element, ctx: LatexmlContext): Block[] {
   ];
   for (const panel of Array.from(element.querySelectorAll('figure'))) {
     const panelCaption = childWhere(panel, isCaption);
-    if (!panelCaption) continue;
-    const parts = captionParts(panelCaption, ctx);
     const panelImage = panel.querySelector(GRAPHICS);
     const panelId = panel.getAttribute('id') ?? undefined;
+    if (!panelCaption) {
+      // An uncaptioned panel keeps its image; the first image is the figure's own.
+      const panelSrc = panelImage && panelImage !== image && graphicSource(panelImage);
+      if (panelSrc) {
+        blocks.push({
+          type: 'figure',
+          ...(panelId && { id: panelId }),
+          href: resolveUrl(panelSrc, ctx.baseUrl),
+        });
+      }
+      continue;
+    }
+    const parts = captionParts(panelCaption, ctx);
     const [panelTable] = panelImage ? [] : topTabulars(panel);
     if (panelTable) {
       blocks.push(table(panelTable, parts.label, parts.caption, ctx, panelId));
