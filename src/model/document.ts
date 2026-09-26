@@ -317,7 +317,8 @@ export type ParseWarningCode =
   | 'math-without-tex'
   | 'structure-inferred'
   | 'text-layer-missing'
-  | 'truncated-input';
+  | 'truncated-input'
+  | 'unmapped-glyphs';
 
 /** How the parse went. */
 export interface Diagnostics {

@@ -53,6 +53,7 @@ export async function parsePdf(input: Uint8Array, options: PdfOptions = {}): Pro
   if (loaded.pages.length < loaded.pageCount) {
     ctx.diag.warn('truncated-input', `Read ${loaded.pages.length} of ${loaded.pageCount} pages`);
   }
+  warnUnmappedGlyphs(loaded, ctx);
   const parts = structure(layout(loaded.pages), ctx);
   const metadata = extractMetadata(loaded, parts.title, parts.keywords);
   const abstracts: Abstract[] =
@@ -76,6 +77,27 @@ export async function parsePdf(input: Uint8Array, options: PdfOptions = {}): Pro
     references: parts.references,
   };
   return parsed(document);
+}
+
+/**
+ * Reports glyphs the PDF's fonts give no Unicode mapping for, which the text layer reads
+ * as U+FFFD: math set in a font without a ToUnicode table comes out as `\uFFFD` runs.
+ */
+function warnUnmappedGlyphs(pdf: LoadedPdf, ctx: PdfContext): void {
+  let count = 0;
+  const pages: number[] = [];
+  pdf.pages.forEach((page, index) => {
+    const onPage = page.runs.reduce((n, run) => n + (run.text.match(/\uFFFD/g)?.length ?? 0), 0);
+    if (onPage === 0) return;
+    count += onPage;
+    pages.push(index + 1);
+  });
+  if (count === 0) return;
+  ctx.diag.warn(
+    'unmapped-glyphs',
+    `${count} glyphs have no Unicode mapping in the PDF and read as U+FFFD`,
+    `pages ${pages.join(', ')}`,
+  );
 }
 
 /** A metadata title that is a file name or a word processor's placeholder, not the paper's title. */
