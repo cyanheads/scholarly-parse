@@ -226,27 +226,27 @@ The authors declare that they have no conflict of interest.
 
 - [1] CDF Collaboration, Observation of top quark production in \bar{p}p collisions. Phys. Rev. Lett. 74, 2626 (1995). 10.1103/PhysRevLett.74.2626. arXiv:hep-ex/9503002 DOI 10.1103/PhysRevLett.74.2626 PMID 10057978
 - [2] D0 Collaboration, Observation of the top quark. Phys. Rev. Lett. 74, 2632 (1995). 10.1103/PhysRevLett.74.2632. arXiv:hep-ex/9503003 DOI 10.1103/PhysRevLett.74.2632 PMID 10057979
-- [3] Degrassi G, et al. Higgs mass and vacuum stability in the standard model at NNLO JHEP 2012 08 1 DOI 10.1007/JHEP08(2012)098
-- [4] Bezrukov F, Kalmykov MY, Kniehl BA, Shaposhnikov M Higgs boson mass and new physics JHEP 2012 10 140 DOI 10.1007/JHEP10(2012)140
+- [3] Degrassi G, et al. Higgs mass and vacuum stability in the standard model at NNLO. JHEP 2012 08 1 DOI 10.1007/JHEP08(2012)098
+- [4] Bezrukov F, Kalmykov MY, Kniehl BA, Shaposhnikov M. Higgs boson mass and new physics. JHEP 2012 10 140 DOI 10.1007/JHEP10(2012)140
 - [5] The ALEPH, DELPHI, L3, and OPAL Collaborations and the LEP Electroweak Working Group, Electroweak measurements in electron–positron collisions at W-boson-pair energies at LEP. Phys. Rep. 532, 119 (2013). 10.1016/j.physrep.2013.07.004. arXiv:1302.3415
-- [6] Baak M, et al. The electroweak fit of the standard model after the discovery of a new boson at the LHC Eur. Phys. J. C 2012 72 2205 DOI 10.1140/epjc/s10052-012-2205-9
-- [7] Baak M, et al. The global electroweak fit at NNLO and prospects for the LHC and ILC Eur. Phys. J. C 2014 74 3046 DOI 10.1140/epjc/s10052-014-3046-5
+- [6] Baak M, et al. The electroweak fit of the standard model after the discovery of a new boson at the LHC. Eur. Phys. J. C 2012 72 2205 DOI 10.1140/epjc/s10052-012-2205-9
+- [7] Baak M, et al. The global electroweak fit at NNLO and prospects for the LHC and ILC. Eur. Phys. J. C 2014 74 3046 DOI 10.1140/epjc/s10052-014-3046-5
 - [8] Particle Data Group, P.A. Zyla et al., Review of particle physics. Prog. Theor. Exp. Phys. 2020, 083C01 (2020). 10.1093/ptep/ptaa104
 - [9] CDF and D0 Collaborations, Combination of CDF and D0 results on the mass of the top quark using up 9.7\\,{{\rm fb}}^{-1} at the Tevatron. FERMILAB-CONF-16-298-E (2016). arXiv:1608.01881
 - [10] ATLAS Collaboration, Measurement of the top quark mass in the t\bar{t}\rightarrow lepton+jets channel from \sqrt{s}=8 TeV ATLAS data and combination with previous results. Eur. Phys. J. C 79, 290 (2019). 10.1140/epjc/s10052-019-6757-9. arXiv:1810.01772
 - [11] CMS Collaboration, Measurement of the top quark mass using proton–proton data at {\sqrt{s}} = 7 and 8 TeV. Phys. Rev. D 93, 072004 (2016). 10.1103/PhysRevD.93.072004. arXiv:1509.04044
-- [12] Hoang AH What is the top quark mass? Annu. Rev. Nucl. Part. Sci. 2020 70 225 DOI 10.1146/annurev-nucl-101918-023530
-- [13] CMS Collaboration Measurement of the top quark mass with lepton+jets final states using {{\rm pp}} collisions at \sqrt{s}=13\\,\text{TeV} Eur. Phys. J. C 2018 78 891 DOI 10.1140/epjc/s10052-018-6332-9 PMID 30881206 PMCID PMC6394251
+- [12] Hoang AH. What is the top quark mass? Annu. Rev. Nucl. Part. Sci. 2020 70 225 DOI 10.1146/annurev-nucl-101918-023530
+- [13] CMS Collaboration. Measurement of the top quark mass with lepton+jets final states using {{\rm pp}} collisions at \sqrt{s}=13\\,\text{TeV}. Eur. Phys. J. C 2018 78 891 DOI 10.1140/epjc/s10052-018-6332-9 PMID 30881206 PMCID PMC6394251
 - [14] DELPHI Collaboration, Measurement of the mass and width of the W boson in {{\rm e}}^{+}{{\rm e}}^{-} collisions at \sqrt{s} = 161-209 GeV. Eur. Phys. J. C 55, 1 (2008). 10.1140/epjc/s10052-008-0585-7. arXiv:0803.2534
 - [15] CMS Collaboration, Measurement of the top-quark mass in \text{ t }\bar{\text{ t }} events with lepton+jets final states in pp collisions at \sqrt{s}=7 TeV. JHEP 12, 105 (2012). 10.1007/JHEP12(2012)105. arXiv:1209.2319
-- [16] CMS Collaboration Extraction and validation of a new set of CMS pythia tunes from underlying-event measurements Eur. Phys. J. C 2020 80 4 DOI 10.1140/epjc/s10052-019-7499-4 PMID 31976986 PMCID PMC6944267
-- [17] Bols E, et al. Jet flavour classification using DeepJet JINST 2020 15 P12012 DOI 10.1088/1748-0221/15/12/P12012
+- [16] CMS Collaboration. Extraction and validation of a new set of CMS pythia tunes from underlying-event measurements. Eur. Phys. J. C 2020 80 4 DOI 10.1140/epjc/s10052-019-7499-4 PMID 31976986 PMCID PMC6944267
+- [17] Bols E, et al. Jet flavour classification using DeepJet. JINST 2020 15 P12012 DOI 10.1088/1748-0221/15/12/P12012
 - [18] HEPData record for this analysis (2023). 10.17182/hepdata.127993
 - [19] CMS Collaboration, The CMS experiment at the CERN LHC. JINST 3, S08004 (2008). 10.1088/1748-0221/3/08/S08004
 - [20] CMS Collaboration, Technical proposal for the Phase-II upgrade of the Compact Muon Solenoid. CMS Technical Proposal CERN-LHCC-2015-010, CMS-TDR-15-02 (2015). http://cds.cern.ch/record/2020886
 - [21] CMS Collaboration, Particle-flow reconstruction and global event description with the CMS detector. JINST 12, P10003 (2017). 10.1088/1748-0221/12/10/P10003. arXiv:1706.04965
-- [22] Cacciari M, Salam GP, Soyez G The anti-k\_{{\rm T}} jet clustering algorithm JHEP 2008 04 063 DOI 10.1088/1126-6708/2008/04/063
-- [23] Cacciari M, Salam GP, Soyez G FastJet user manual Eur. Phys. J. C 2012 72 1896 DOI 10.1140/epjc/s10052-012-1896-2
+- [22] Cacciari M, Salam GP, Soyez G. The anti-k\_{{\rm T}} jet clustering algorithm. JHEP 2008 04 063 DOI 10.1088/1126-6708/2008/04/063
+- [23] Cacciari M, Salam GP, Soyez G. FastJet user manual. Eur. Phys. J. C 2012 72 1896 DOI 10.1140/epjc/s10052-012-1896-2
 - [24] CMS Collaboration, Jet energy scale and resolution in the CMS experiment in pp collisions at 8 TeV. JINST 12, P02014 (2017). 10.1088/1748-0221/12/02/P02014. arXiv:1607.03663
 - [25] CMS Collaboration, Identification of heavy-flavour jets with the CMS detector in pp collisions at 13 TeV. JINST 13, P05011 (2018). 10.1088/1748-0221/13/05/P05011. arXiv:1712.07158
 - [26] CMS Collaboration, Performance of the DeepJet b tagging algorithm using 41.9/fb of data from proton–proton collisions at 13 TeV with Phase 1 CMS detector. CMS Detector Performance Note CMS-DP-2018-058 (2018). http://cds.cern.ch/record/2646773
@@ -256,23 +256,23 @@ The authors declare that they have no conflict of interest.
 - [30] CMS Collaboration, Performance of the CMS muon detector and muon reconstruction with proton–proton collisions at \sqrt{s}= 13 TeV. JINST 13, P06015 (2018). 10.1088/1748-0221/13/06/P06015. arXiv:1804.04528
 - [31] CMS Collaboration, Precision luminosity measurement in proton–proton collisions at \sqrt{s} = 13 TeV in 2015 and 2016 at CMS. Eur. Phys. J. C 81, 800 (2021). 10.1140/epjc/s10052-021-09538-2. arXiv:2104.01927 DOI 10.1140/epjc/s10052-021-09538-2 PMCID PMC8550658 PMID 34781320
 - [32] CMS Collaboration, The CMS trigger system. JINST 12, P01020 (2017). 10.1088/1748-0221/12/01/P01020. arXiv:1609.02366
-- [33] Nason P A new method for combining NLO QCD with shower Monte Carlo algorithms JHEP 2004 11 040 DOI 10.1088/1126-6708/2004/11/040
-- [34] Frixione S, Nason P, Oleari C Matching NLO QCD computations with parton shower simulations: the POWHEG method JHEP 2007 11 070 DOI 10.1088/1126-6708/2007/11/070
-- [35] Alioli S, Nason P, Oleari C, Re E A general framework for implementing NLO calculations in shower Monte Carlo programs: the POWHEG BOX JHEP 2010 06 043 DOI 10.1007/JHEP06(2010)043
-- [36] Sjöstrand T, et al. An introduction to pythia8.2 Comput. Phys. Commun. 2015 191 159 DOI 10.1016/j.cpc.2015.01.024
-- [37] Butterworth J, et al. PDF4LHC recommendations for LHC Run II J. Phys. G 2016 43 023001 DOI 10.1088/0954-3899/43/2/023001
+- [33] Nason P. A new method for combining NLO QCD with shower Monte Carlo algorithms. JHEP 2004 11 040 DOI 10.1088/1126-6708/2004/11/040
+- [34] Frixione S, Nason P, Oleari C. Matching NLO QCD computations with parton shower simulations: the POWHEG method. JHEP 2007 11 070 DOI 10.1088/1126-6708/2007/11/070
+- [35] Alioli S, Nason P, Oleari C, Re E. A general framework for implementing NLO calculations in shower Monte Carlo programs: the POWHEG BOX. JHEP 2010 06 043 DOI 10.1007/JHEP06(2010)043
+- [36] Sjöstrand T, et al. An introduction to pythia8.2. Comput. Phys. Commun. 2015 191 159 DOI 10.1016/j.cpc.2015.01.024
+- [37] Butterworth J, et al. PDF4LHC recommendations for LHC Run II. J. Phys. G 2016 43 023001 DOI 10.1088/0954-3899/43/2/023001
 - [38] NNPDF Collaboration, Parton distributions from high-precision collider data. Eur. Phys. J. C 77, 663 (2017). 10.1140/epjc/s10052-017-5199-5. arXiv:1706.00428 DOI 10.1140/epjc/s10052-017-5199-5 PMCID PMC6956957 PMID 31997920
 - [39] S. Alioli, P. Nason, C. Oleari, E. Re, NLO single-top production matched with shower in POWHEG: s- and t-channel contributions. JHEP 09, 111 (2009). 10.1088/1126-6708/2009/09/111. arXiv:0907.4076. [Erratum: 10.1007/JHEP02(2010)011]
-- [40] Re E Single-top Wt-channel production matched with parton showers using the POWHEG method Eur. Phys. J. C 2011 71 1547 DOI 10.1140/epjc/s10052-011-1547-z
-- [41] Alwall J, et al. The automated computation of tree-level and next-to-leading order differential cross sections, and their matching to parton shower simulations JHEP 2014 07 079 DOI 10.1007/JHEP07(2014)079
-- [42] Alwall J, et al. Comparative study of various algorithms for the merging of parton showers and matrix elements in hadronic collisions Eur. Phys. J. C 2008 53 473 DOI 10.1140/epjc/s10052-007-0490-5
-- [43] Frederix R, Frixione S Merging meets matching in MC@NLO JHEP 2012 12 061 DOI 10.1007/JHEP12(2012)061
+- [40] Re E. Single-top Wt-channel production matched with parton showers using the POWHEG method. Eur. Phys. J. C 2011 71 1547 DOI 10.1140/epjc/s10052-011-1547-z
+- [41] Alwall J, et al. The automated computation of tree-level and next-to-leading order differential cross sections, and their matching to parton shower simulations. JHEP 2014 07 079 DOI 10.1007/JHEP07(2014)079
+- [42] Alwall J, et al. Comparative study of various algorithms for the merging of parton showers and matrix elements in hadronic collisions. Eur. Phys. J. C 2008 53 473 DOI 10.1140/epjc/s10052-007-0490-5
+- [43] Frederix R, Frixione S. Merging meets matching in MC@NLO. JHEP 2012 12 061 DOI 10.1007/JHEP12(2012)061
 - [44] P. Skands, S. Carrazza, J. Rojo, Tuning pythia8.1: the Monash 2013 tune. Eur. Phys. J. C 74, 3024 (2014). 10.1140/epjc/s10052-014-3024-y. arXiv:1404.5630
 - [45] GEANT4 Collaboration, Geant4—a simulation toolkit. Nucl. Instrum. Methods A 506, 250 (2003). 10.1016/S0168-9002(03)01368-8
-- [46] Czakon M, Mitov A Top++: a program for the calculation of the top-pair cross-section at hadron colliders Comput. Phys. Commun. 2014 185 2930 DOI 10.1016/j.cpc.2014.06.021
-- [47] Li Y, Petriello F Combining QCD and electroweak corrections to dilepton production in FEWZ Phys. Rev. D 2012 86 094034 DOI 10.1103/PhysRevD.86.094034
-- [48] Aliev M, et al. HATHOR: HAdronic Top and Heavy quarks crOss section calculatoR Comput. Phys. Commun. 2011 182 1034 DOI 10.1016/j.cpc.2010.12.040
-- [49] Kant P, et al. HATHOR for single top-quark production: updated predictions and uncertainty estimates for single top-quark production in hadronic collisions Comput. Phys. Commun. 2015 191 74 DOI 10.1016/j.cpc.2015.02.001
+- [46] Czakon M, Mitov A. Top++: a program for the calculation of the top-pair cross-section at hadron colliders. Comput. Phys. Commun. 2014 185 2930 DOI 10.1016/j.cpc.2014.06.021
+- [47] Li Y, Petriello F. Combining QCD and electroweak corrections to dilepton production in FEWZ. Phys. Rev. D 2012 86 094034 DOI 10.1103/PhysRevD.86.094034
+- [48] Aliev M, et al. HATHOR: HAdronic Top and Heavy quarks crOss section calculatoR. Comput. Phys. Commun. 2011 182 1034 DOI 10.1016/j.cpc.2010.12.040
+- [49] Kant P, et al. HATHOR for single top-quark production: updated predictions and uncertainty estimates for single top-quark production in hadronic collisions. Comput. Phys. Commun. 2015 191 74 DOI 10.1016/j.cpc.2015.02.001
 - [50] D0 Collaboration, Direct measurement of the top quark mass at D0. Phys. Rev. D 58, 052001 (1998). 10.1103/PhysRevD.58.052001. arXiv:hep-ex/9801025
 - [51] ATLAS Collaboration, Measurement of the top quark mass in the {t}\bar{{t}}\rightarrow dilepton channel from \sqrt{s}=8 TeV ATLAS data. Phys. Lett. B 761, 350 (2016). 10.1016/j.physletb.2016.08.042. arXiv:1606.02179
 - [52] CMS Collaboration, Measurement of the {{\rm t}}\bar{{\rm t}} production cross section, the top quark mass, and the strong coupling constant using dilepton events in pp collisions at \sqrt{s} = 13 TeV. Eur. Phys. J. C 79, 368 (2019). 10.1140/epjc/s10052-019-6863-8. arXiv:1812.10505 DOI 10.1140/epjc/s10052-019-6863-8 PMCID PMC6507419 PMID 31148943
@@ -287,23 +287,23 @@ The authors declare that they have no conflict of interest.
 - [61] CMS Collaboration, Measurement of the WZ production cross section in pp collisions at {\sqrt{s}} = 13 TeV. Phys. Lett. B 766, 268 (2017). 10.1016/j.physletb.2017.01.011. arXiv:1607.06943
 - [62] CMS Collaboration, Measurements of the {{\rm pp}}\rightarrow {{\rm ZZ}} production cross section and the {{\rm Z}}\rightarrow 4\ell branching fraction, and constraints on anomalous triple gauge couplings at \sqrt{s} = 13\\,\text{ TeV }. Eur. Phys. J. C 78, 165 (2018). 10.1140/epjc/s10052-018-5567-9. arXiv:1709.08601 DOI 10.1140/epjc/s10052-018-5567-9 PMCID PMC6435208 PMID 30996656
 - [63] T. Sjöstrand, S. Mrenna, P.Z. Skands, pythia 6.4 physics and manual. JHEP 05, 026 (2006). 10.1088/1126-6708/2006/05/026. arXiv:hep-ph/0603175
-- [64] Bähr M, et al. Herwig++ physics and manual Eur. Phys. J. C 2008 58 639 DOI 10.1140/epjc/s10052-008-0798-9
+- [64] Bähr M, et al. Herwig++ physics and manual. Eur. Phys. J. C 2008 58 639 DOI 10.1140/epjc/s10052-008-0798-9
 - [65] DELPHI Collaboration, A study of the b-quark fragmentation function with the DELPHI detector at LEP I and an averaged distribution obtained at the Z pole. Eur. Phys. J. C 71, 1557 (2011). 10.1140/epjc/s10052-011-1557-x. arXiv:1102.4748
 - [66] ALEPH Collaboration, Study of the fragmentation of b quarks into B mesons at the Z peak. Phys. Lett. B 512, 30 (2001). 10.1016/S0370-2693(01)00690-6. arXiv:hep-ex/0106051
-- [67] Dulat S, et al. New parton distribution functions from a global analysis of quantum chromodynamics Phys. Rev. D 2016 93 033006 DOI 10.1103/PhysRevD.93.033006
-- [68] Harland-Lang LA, Martin AD, Motylinski P, Thorne RS Parton distributions in the LHC era: MMHT 2014 PDFs Eur. Phys. J. C 2015 75 204 DOI 10.1140/epjc/s10052-015-3397-6 PMID 26120278 PMCID PMC4477726
+- [67] Dulat S, et al. New parton distribution functions from a global analysis of quantum chromodynamics. Phys. Rev. D 2016 93 033006 DOI 10.1103/PhysRevD.93.033006
+- [68] Harland-Lang LA, Martin AD, Motylinski P, Thorne RS. Parton distributions in the LHC era: MMHT 2014 PDFs. Eur. Phys. J. C 2015 75 204 DOI 10.1140/epjc/s10052-015-3397-6 PMID 26120278 PMCID PMC4477726
 - [69] CMS Collaboration, Investigations of the impact of the parton shower tuning in pythia8 in the modelling of {{\rm t}}{\bar{{\rm t}}} at \sqrt{s}=8 and 13 TeV. CMS Physics Analysis Summary CMS-PAS-TOP-16-021 (2016). https://cds.cern.ch/record/2235192
-- [70] Mrenna S, Skands P Automated parton-shower variations in pythia8 Phys. Rev. D 2016 94 074005 DOI 10.1103/PhysRevD.94.074005
-- [71] Czakon M, Heymes D, Mitov A High-precision differential predictions for top-quark pairs at the LHC Phys. Rev. Lett. 2016 116 082003 DOI 10.1103/PhysRevLett.116.082003 PMID 26967413
-- [72] Czakon M, et al. Top-pair production at the LHC through NNLO QCD and NLO EW JHEP 2017 10 186 DOI 10.1007/JHEP10(2017)186
-- [73] Catani S, et al. Top-quark pair production at the LHC: fully differential QCD predictions at NNLO JHEP 2019 07 100 DOI 10.1007/JHEP07(2019)100
+- [70] Mrenna S, Skands P. Automated parton-shower variations in pythia8. Phys. Rev. D 2016 94 074005 DOI 10.1103/PhysRevD.94.074005
+- [71] Czakon M, Heymes D, Mitov A. High-precision differential predictions for top-quark pairs at the LHC. Phys. Rev. Lett. 2016 116 082003 DOI 10.1103/PhysRevLett.116.082003 PMID 26967413
+- [72] Czakon M, et al. Top-pair production at the LHC through NNLO QCD and NLO EW. JHEP 2017 10 186 DOI 10.1007/JHEP10(2017)186
+- [73] Catani S, et al. Top-quark pair production at the LHC: fully differential QCD predictions at NNLO. JHEP 2019 07 100 DOI 10.1007/JHEP07(2019)100
 - [74] CMS Collaboration, Measurement of differential cross sections for top quark pair production using the lepton+jets final state in proton–proton collisions at 13 TeV. Phys. Rev. D 95, 092001 (2017). 10.1103/PhysRevD.95.092001. arXiv:1610.04191
 - [75] CMS Collaboration, Measurement of normalized differential {{\rm t}}{\bar{\rm t}} cross sections in the dilepton channel from pp collisions at \sqrt{s}=13 TeV. JHEP 04, 060 (2018). 10.1007/JHEP04(2018)060. arXiv:1708.07638
-- [76] Christiansen JR, Skands PZ String formation beyond leading colour JHEP 2015 08 003 DOI 10.1007/JHEP08(2015)003
-- [77] Argyropoulos S, Sjöstrand T Effects of color reconnection on \text{ t }\bar{\text{ t }} final states at the LHC JHEP 2014 11 043 DOI 10.1007/JHEP11(2014)043
+- [76] Christiansen JR, Skands PZ. String formation beyond leading colour. JHEP 2015 08 003 DOI 10.1007/JHEP08(2015)003
+- [77] Argyropoulos S, Sjöstrand T. Effects of color reconnection on \text{ t }\bar{\text{ t }} final states at the LHC. JHEP 2014 11 043 DOI 10.1007/JHEP11(2014)043
 - [78] CMS Collaboration, CMS pythia8 colour reconnection tunes based on underlying-event data. Eur. Phys. J. C 83, 587 (2023). 10.1140/epjc/s10052-023-11630-8. arXiv:2205.02905 DOI 10.1140/epjc/s10052-023-11630-8 PMCID PMC10333420 PMID 37440247
 - [79] W. Verkerke, D.P. Kirkby, The RooFit toolkit for data modeling, in Proceedings of the 13th International Conference for Computing in High-Energy and Nuclear Physics (CHEP03) (2003). arXiv:physics/0306116. [eConf C0303241, MOLT007]
-- [80] James F, Roos M Minuit: a system for function minimization and analysis of the parameter errors and correlations Comput. Phys. Commun. 1975 10 343 DOI 10.1016/0010-4655(75)90039-9
-- [81] Barlow RJ, Beeston C Fitting using finite Monte Carlo samples Comput. Phys. Commun. 1993 77 219 DOI 10.1016/0010-4655(93)90005-W
+- [80] James F, Roos M. Minuit: a system for function minimization and analysis of the parameter errors and correlations. Comput. Phys. Commun. 1975 10 343 DOI 10.1016/0010-4655(75)90039-9
+- [81] Barlow RJ, Beeston C. Fitting using finite Monte Carlo samples. Comput. Phys. Commun. 1993 77 219 DOI 10.1016/0010-4655(93)90005-W
 - [82] J.S. Conway, Incorporating nuisance parameters in likelihoods for multisource spectra, in PHYSTAT 2011 (2011), p. 115. 10.5170/CERN-2011-006.115. arXiv:1103.0354
 - [83] ATLAS and CMS Collaborations, Jet energy scale uncertainty correlations between ATLAS and CMS at 8 TeV. ATL-PHYS-PUB-2015-049, CMS-PAS-JME-15-001 (2015). http://cds.cern.ch/record/2104039

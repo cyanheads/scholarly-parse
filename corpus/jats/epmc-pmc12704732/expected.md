@@ -210,27 +210,27 @@ All data are included in the manuscript and/or [supporting information](http://w
 - [1] Karhu J. A., Holland H. D., Carbon isotopes and the rise of atmospheric oxygen. Geology 24, 867–870 (1996).
 - [2] Hayes J. M., Waldbauer J. R., The carbon cycle and associated redox processes through time. Philos. Trans. R. Soc. Lond. B Biol. Sci. 361, 931–950 (2006).
 - [3] Sumner D. Y., Oxygenation of earth’s atmosphere induced metabolic and ecologic transformations recorded in the Lomagundi-Jatuli carbon isotopic excursion. Appl. Environ. Microbiol. 90, e0009324 (2024).
-- [4] Prave A., et al. , The grandest of them all: The Lomagundi-Jatuli event and Earth’s oxygenation. J. Geol. Soc. 179, jgs2021-2036 (2022).
+- [4] Prave A., et al., The grandest of them all: The Lomagundi-Jatuli event and Earth’s oxygenation. J. Geol. Soc. 179, jgs2021-2036 (2022).
 - [5] Hodgskiss M. S., Crockford P. W., Turchyn A. V., Deconstructing the Lomagundi-Jatuli carbon isotope excursion. Annu. Rev. Earth Planet. Sci. 51, 301–330 (2023).
-- [6] Gumsley A. P., et al. , Timing and tempo of the Great Oxidation Event. Proc. Natl. Acad. Sci. U.S.A. 114, 1811–1816 (2017).
-- [7] Poulton S. W., et al. , A 200-million-year delay in permanent atmospheric oxygenation. Nature 592, 232–236 (2021).
+- [6] Gumsley A. P., et al., Timing and tempo of the Great Oxidation Event. Proc. Natl. Acad. Sci. U.S.A. 114, 1811–1816 (2017).
+- [7] Poulton S. W., et al., A 200-million-year delay in permanent atmospheric oxygenation. Nature 592, 232–236 (2021).
 - [8] Martin A. P., Condon D. J., Prave A. R., Lepland A., A review of temporal constraints for the Palaeoproterozoic large, positive carbonate carbon isotope excursion (the Lomagundi-Jatuli event). Earth Sci. Rev. 127, 242–261 (2013).
 - [9] Noble S. R., Lightfoot P. C., U-Pb baddeleyite ages of the Kerns and Triangle Mountain intrusions, Nipissing diabase, Ontario. Can. J. Earth Sci. 29, 1424–1429 (1992).
 - [10] Weber F., “Une série précambrienne du Gabon: le Francevillien–sédimentologie, géochimie, relations avec les gites minéraux associés” (Strasbourg University, Strasbourg, 1968).
-- [11] Canfield D. E., et al. , Oxygen dynamics in the aftermath of the Great Oxidation of Earth’s atmosphere. Proc. Natl. Acad. Sci. U.S.A. 110, 16736–16741 (2013).
+- [11] Canfield D. E., et al., Oxygen dynamics in the aftermath of the Great Oxidation of Earth’s atmosphere. Proc. Natl. Acad. Sci. U.S.A. 110, 16736–16741 (2013).
 - [12] Gauthier-Lafaye F., Weber F., The Francevillian (lower proterozoic) uranium ore deposits of Gabon. Econ. Geol. 84, 2267–2285 (1989).
 - [13] Mossman D. J., Hydrocarbon habitat of the Paleoproterozoic Franceville series, Republic of Gabon. Energy Sources 23, 45–53 (2001).
-- [14] Albani A., et al. , A search for life in Palaeoproterozoic marine sediments using Zn isotopes and geochemistry. Earth Planet. Sci. Lett. 612, 118169 (2023).
+- [14] Albani A., et al., A search for life in Palaeoproterozoic marine sediments using Zn isotopes and geochemistry. Earth Planet. Sci. Lett. 612, 118169 (2023).
 - [15] Knoll A. H., The multiple origins of complex multicellularity. Annu. Rev. Earth Planet. Sci. 39, 217–239 (2011).
-- [16] Fakhraee M., et al. , Earth’s surface oxygenation and the rise of eukaryotic life: Relationships to the Lomagundi positive carbon isotope excursion revisited. Earth Sci. Rev. 240, 104398 (2023).
-- [17] Sawaki Y., et al. , Chronological constraints on the Paleoproterozoic Francevillian Group in Gabon. Geosci. Front. 8, 397–407 (2017).
+- [16] Fakhraee M., et al., Earth’s surface oxygenation and the rise of eukaryotic life: Relationships to the Lomagundi positive carbon isotope excursion revisited. Earth Sci. Rev. 240, 104398 (2023).
+- [17] Sawaki Y., et al., Chronological constraints on the Paleoproterozoic Francevillian Group in Gabon. Geosci. Front. 8, 397–407 (2017).
 - [18] Gauthier-Lafaye F., Bros R., Stille P., Pb isotope systematics on diagenetic clays: An example from proterozoic black shales of the Franceville basin (Gabon). Chem. Geol. 133, 243–250 (1996).
 - [19] Ludwig K., Isoplot/Ex, v. 3.75, Berkeley Geochronol. Center. Spec. Publ 5, 75 (2012).
 - [20] Fujii T., Moynier F., Agranier A., Ponzevera E., Abe M., Nuclear field shift effect of lead in ligand exchange reaction using a crown ether. Proc. Radiochem. A Suppl. Radiochim. Acta 1, 387–392 (2011).
-- [21] Amelin Y., et al. , Fractionation of radiogenic Pb isotopes in meteorites and their components induced by acid leaching. Geochim. Cosmochim. Acta 392, 52–69 (2025).
+- [21] Amelin Y., et al., Fractionation of radiogenic Pb isotopes in meteorites and their components induced by acid leaching. Geochim. Cosmochim. Acta 392, 52–69 (2025).
 - [22] Abouchami W., Boher M., Michard A., Albarede F., A major 2.1 Ga event of mafic magmatism in West Africa: An early stage of crustal accretion. J. Geophys. Res. Solid Earth 95, 17605–17629 (1990).
 - [23] Grenholm M., Jessell M., Thébaud N., A geodynamic model for the Paleoproterozoic (ca. 2.27–1.96 Ga) Birimian Orogen of the southern West African Craton-Insights into an evolving accretionary-collisional orogenic system. Earth Sci. Rev. 192, 138–193 (2019).
-- [24] Ernst R. E., et al. , Large igneous province record through time and implications for secular environmental changes and geological time-scale boundaries. Large igneous provinces: A driver of global environmental and biotic changes (2021).
+- [24] Ernst R. E., et al., Large igneous province record through time and implications for secular environmental changes and geological time-scale boundaries. Large igneous provinces: A driver of global environmental and biotic changes (2021).
 - [25] Baratoux L., Jessell M. W., Kouamelan A. N., “The West African Craton” in The Geology of North Africa (Springer, 2024), pp. 47–68.
 - [26] Boher M., Abouchami W., Michard A., Albarede F., Arndt N. T., Crustal growth in west Africa at 2.1 Ga. J. Geophys. Res. Solid Earth 97, 345–369 (1992).
 - [27] Lompo M., Geodynamic evolution of the 2.25-2.0 Ga Palaeoproterozoic magmatic rocks in the Man-Leo Shield of the West African Craton. A model of subsidence of an oceanic plateau. Geolog. Soc. Lond. Spl. Publ. 323, 231–254 (2009).
@@ -241,7 +241,7 @@ All data are included in the manuscript and/or [supporting information](http://w
 - [32] Boher M., Abouchami W., Michard A., Albarède F., Arndt N. T., Crustal growth in West-Africa at 2.1 ga. J. Geophys. Res. 97, 345–369 (1992).
 - [33] Albarède F., How deep do common basaltic magmas form and differentiate? J. Geophys. Res. 97, 10997–11009 (1992).
 - [34] Norcross C., Davis D. W., Spooner E. T., Rust A., U-Pb and Pb-Pb age constraints on Paleoproterozoic magmatism, deformation and gold mineralization in the Omai area, Guyana Shield. Precambr. Res. 102, 69–86 (2000).
-- [35] Kroonenberg S., et al. , Paleoproterozoic evolution of the Guiana Shield in Suriname: A revised model. Neth. J. Geosci. 95, 491–522 (2016).
+- [35] Kroonenberg S., et al., Paleoproterozoic evolution of the Guiana Shield in Suriname: A revised model. Neth. J. Geosci. 95, 491–522 (2016).
 - [36] Derry L. A., A burial diagenesis origin for the Ediacaran Shuram-Wonoka carbon isotope anomaly. Earth Planet. Sci. Lett. 294, 152–162 (2010).
 - [37] Zachos J., Pagani M., Sloan L., Thomas E., Billups K., Trends, rhythms, and aberrations in global climate 65 ma to present. Science 292, 686–693 (2001).
 - [38] Rasmussen B., Bekker A., Fletcher I. R., Correlation of Paleoproterozoic glaciations based on U-Pb zircon ages for tuff beds in the Transvaal and Huronian Supergroups. Earth Planet. Sci. Lett. 382, 173–180 (2013).
@@ -261,11 +261,11 @@ All data are included in the manuscript and/or [supporting information](http://w
 - [52] Bender M., Sowers T., Labeyrie L., The dole effect and its variations during the last 130, 000 years as measured in the Vostok ice core. Glob. Biogeochem. Cycles 8, 363–376 (1994).
 - [53] Severinghaus J. P., Beaudette R., Headly M. A., Taylor K., Brook E. J., Oxygen-18 of O2 records the impact of abrupt climate change on the terrestrial biosphere. Science 324, 1431–1434 (2009).
 - [54] Retallack G. J., Bindeman I. N., Stable isotopic evidence for increased terrestrial productivity through geological time. Sci. Rep. 14, 27438 (2024).
-- [55] Landais A., et al. , What drives the millennial and orbital variations of δ18Oatm? Quat. Sci. Rev. 29, 235–246 (2010).
-- [56] Cheng H., et al. , The Asian monsoon over the past 640,000 years and ice age terminations. Nature 534, 640–646 (2016).
+- [55] Landais A., et al., What drives the millennial and orbital variations of δ18Oatm? Quat. Sci. Rev. 29, 235–246 (2010).
+- [56] Cheng H., et al., The Asian monsoon over the past 640,000 years and ice age terminations. Nature 534, 640–646 (2016).
 - [57] Lalonde S. V., Konhauser K. O., Benthic perspective on earth’s oldest evidence for oxygenic photosynthesis. Proc. Natl. Acad. Sci. U.S.A. 112, 995–1000 (2015).
-- [58] Konhauser K. O., et al. , Aerobic bacterial pyrite oxidation and acid rock drainage during the Great Oxidation Event. Nature 478, 369–373 (2011).
-- [59] Mänd K., et al. , Chromium evidence for protracted oxygenation during the Paleoproterozoic. Earth Planet. Sci. Lett. 584, 117501 (2022).
-- [60] El Albani A., et al. , Organism motility in an oxygenated shallow-marine environment 2.1 billion years ago. Proc. Natl. Acad. Sci. U.S.A. 116, 3431–3436 (2019).
-- [61] Hao W., et al. , The kaolinite shuttle links the Great Oxidation and Lomagundi events. Nat. Commun. 12, 2944 (2021).
+- [58] Konhauser K. O., et al., Aerobic bacterial pyrite oxidation and acid rock drainage during the Great Oxidation Event. Nature 478, 369–373 (2011).
+- [59] Mänd K., et al., Chromium evidence for protracted oxygenation during the Paleoproterozoic. Earth Planet. Sci. Lett. 584, 117501 (2022).
+- [60] El Albani A., et al., Organism motility in an oxygenated shallow-marine environment 2.1 billion years ago. Proc. Natl. Acad. Sci. U.S.A. 116, 3431–3436 (2019).
+- [61] Hao W., et al., The kaolinite shuttle links the Great Oxidation and Lomagundi events. Nat. Commun. 12, 2944 (2021).
 - [62] White W. M., Albarède F., Télouk P., High-precision analysis of Pb isotope ratios by multi-collector ICP-MS. Chem. Geol. 167, 257–270 (2000).

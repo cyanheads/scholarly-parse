@@ -20,9 +20,12 @@ const ESCAPABLE_AFTER_BACKSLASH = /\\(?=[!-/:-@[-`{-~])/g;
  * - `](` — the sequence that would turn bracketed text into a link.
  * - `<` — only before a letter, `/`, `!`, or `?`, where it could open an HTML tag.
  * - `&` — only where it would read as an entity reference.
+ *
+ * Soft hyphens are dropped: they only mark where a word may break.
  */
 export function escapeInline(text: string): string {
   return text
+    .replace(/\u00AD/g, '')
     .replace(ESCAPABLE_AFTER_BACKSLASH, '\\\\')
     .replace(/[*`$~]/g, '\\$&')
     .replace(/(^|[^\p{L}\p{N}])_|_(?=$|[^\p{L}\p{N}])/gu, (match) => match.replace('_', '\\_'))

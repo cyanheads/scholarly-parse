@@ -257,8 +257,8 @@ The datasets generated and analysed during the current study are available from 
 
 ## References
 
-- [1] World Obesity Federation , World Obesity Atlas 2023 [Internet], World Obesity Federation, 2023, https://www.worldobesity.org/resources/resource‐library/world‐obesity‐atlas‐2023.
-- [2] World Health Organization , Obesity and Overweight [Internet], World Health Organization, https://www.who.int/news‐room/fact‐sheets/detail/obesity‐and‐overweight.
+- [1] World Obesity Federation, World Obesity Atlas 2023 [Internet], World Obesity Federation, 2023, https://www.worldobesity.org/resources/resource‐library/world‐obesity‐atlas‐2023.
+- [2] World Health Organization, Obesity and Overweight [Internet], World Health Organization, https://www.who.int/news‐room/fact‐sheets/detail/obesity‐and‐overweight.
 - [3] Powell‐Wiley T. M., Poirier P., Burke L. E., et al., “Obesity and Cardiovascular Disease: A Scientific Statement From the American Heart Association,” Circulation 143, no. 21 (2021): e984–e1010.
 - [4] Poirier P., Giles T. D., Bray G. A., et al., “Obesity and Cardiovascular Disease: Pathophysiology, Evaluation, and Effect of Weight Loss: An Update of the 1997 American Heart Association Scientific Statement on Obesity and Heart Disease From the Obesity Committee of the Council on Nutrition, Physical Activity, and Metabolism,” Circulation 113, no. 6 (2006): 898–918.
 - [5] Bosco E., Hsueh L., McConeghy K. W., Gravenstein S., and Saade E., “Major Adverse Cardiovascular Event Definitions Used in Observational Analysis of Administrative Databases: A Systematic Review,” BMC Medical Research Methodology 21, no. 1 (2021): 241.

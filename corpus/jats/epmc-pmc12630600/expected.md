@@ -227,53 +227,53 @@ The simulation codes used in this study are available from the corresponding aut
 
 ## References
 
-- [1] Strauss, W. & Vazquezf, L. Numerical solution of a nonlinear Klein–Gordon equation. J. Comput. Phys.28, 271–278 (1978).
-- [2] Gibbon, J. D., Freeman, N. C. & Davey, A. Three-dimensional multiple soliton-like solutions of non-linear Klein–Gordon equations. J. Phys. A: Math. Gen.11(5), 93–96 (1978).
-- [3] Christiansen, P. L. & Lomdahl, P. S. Numerical study of a 2 + 1dimensional sine-Gordon solitons. Physica D2(3), 482–494 (1981).
-- [4] Jimenez, S. & Vazquez, L. Analysis of four numerical schemes for a nonlinear Klein–Gordon equation. Appl. Math. Comput.35, 61–94 (1990).
-- [5] Djidjeli, K., Price, W. G. & Twizell, E. H. Numerical solutions of a damped Sine-Gordon equation in two space variables. J. Eng. Math.29, 347–369 (1995).
-- [6] Lynch, M. A. M. Large amplitude instability in finite difference approximations to the Klein-Gordon equation. Appl. Numer. Math.31, 173–182 (1999).
-- [7] Sheng, Q., Khaliq, A. Q. M. & Voss, D. A. Numerical simulation of two-dimensional sine-Gordon solitons via a split cosine scheme. Math. Comput. Simul.68, 355–373 (2005).
-- [8] Bratsos, A. G. A modified predictor–corrector scheme for the two-dimensional sine-Gordon equation. Numer. Algor.43, 295–308 (2006).
-- [9] Bratsos, A. G. The solution of the two-dimensional sine-Gordon equation using the method of lines. J. Comput. Appl. Math.206, 251–277 (2007).
-- [10] Dehghan, M. & Shokri, A. A numerical method for one-dimensional nonlinear sine-Gordon equation using collocation and radial basis functions. Numer. Methods Partial Diff. Equ.24(2), 687–698 (2008).
-- [11] Dehghan, M. & Shokri, A. A numerical method for solution of the two-dimensional sine-Gordon equation using the radial basis functions. Math. Comput. Simul.79, 700–715 (2008).
-- [12] Shakeri, F. & Dehghan, M. Numerical solution of the Klein–Gordon equation via He’s variational iteration method. Nonlinear Dyn.51, 89–97 (2008).
-- [13] Bratsos, A. G. On the numerical solution of the Klein–Gordon equation. Numer. Methods Partial Diff. Equ.25(4), 939–951 (2009).
-- [14] Dehghan, M., Mohebbi, A. & Asgari, Z. Fourth-order compact solution of the nonlinear Klein–Gordon equation. Numer. Algor.52, 523–540 (2009).
-- [15] Dehghan, M. & Shokri, A. Numerical solution of the nonlinear Klein–Gordon equation using radial basis functions. J. Comput. Appl. Math.230, 400–410 (2009).
-- [16] Zhang, F. & Han, B. The finite difference method for dissipative Klein–Gordon–Schrodinger equation in three space dimensions. J. Comput. Math.28(6), 879–900 (2010).
-- [17] Bao, W. & Dong, X. Analysis and comparison of numerical methods for the Klein–Gordon equation in the nonrelativistic limit regime. Numer. Math.120, 189–229 (2012).
-- [18] Verma, A., Jiwari, R. & Kumar, S. A numerical scheme based on differential quadrature method for numerical simulation of nonlinear Klein–Gordon equation. Int. J. Numer. Meth. Heat Fluid Flow24(7), 1390–1404 (2014).
-- [19] Kumar, D., Singh, J. & Kumar, S. Numerical computation of Klein–Gordon equations arising in quantum field theory by using homotopy analysis transform method. Alex. Eng. J.53, 469–474 (2014).
-- [20] Encinas, A. H. H., Martín-Vaquero, J., Queiruga-Dios, A. & Gayoso-Martínez, V. Efficient high-order finite difference methods for nonlinear Klein–Gordon equations. Nonlinear Anal.: Model. Control20(2), 274–290 (2015).
-- [21] Iqbal, J. & Abass, R. Numerical solution of Klein/sine-Gordon equations by spectral method coupled with Chebyshev wavelets. Appl. Math.7, 2097–2109 (2016).
-- [22] Ba, W. & Zhao, X. Comparison of numerical methods for the nonlinear Klein-Gordon equation in the nonrelativistic limit regime. J. Comput. Phys.398, 108886 (2019).
-- [23] Bao, W., Feng, Y. & Yi, W. Long time error analysis of finite difference time domain methods for the nonlinear Klein–Gordon equation with weak nonlinearity. Commun. Comput. Phys.26(5), 1307–1334 (2019).
-- [24] Ji, B. & Zhang, L. A dissipative finite difference Fourier pseudo-spectral method for the Klein-Gordon-Schrödinger equations with damping mechanism. Appl. Math. Comput.376, 125148 (2020).
-- [25] Zhang, T. & Wang, T. Optimal error estimates of fourth-order compact finite difference methods for the nonlinear Klein–Gordon equation in the nonrelativistic regime. Numer. Methods Partial Diff. Equ.37(3), 2089–2108 (2021).
-- [26] Yan, J., Zhang, H., Qian, X. & Song, S. Regularized finite difference methods for the logarithmic Klein–Gordon equation. East Asian J. Appl. Math.11(1), 119–142 (2021).
-- [27] Irk, D., Kirli, E. & Gorgulu, M. Z. A high order accurate numerical solution of the Klein-Gordon equation. Appl. Math. Inf. Sci.16(2), 331–339 (2022).
-- [28] Alzaleq, L. & Manoranjan, V. An energy conserving numerical scheme for the Klein–Gordon equation with cubic nonlinearity. Fractal Fract6(8), 460–478 (2022).
-- [29] Li, M., Ming, J., Qi, T. & Zhou, B. Convergence of an energy-preserving finite difference method for the nonlinear coupled space-fractional Klein–Gordon equations. Netw. Heterog. Med.18(3), 957–981 (2023).
-- [30] Mesgarani, H., Esmaeelzade Aghdam, Y. & Darabi, E. A new numerical method for discretization of the nonlinear Klein-Gordon model arising in light waves. J. Math. Model.12(1), 71–84 (2024).
-- [31] Cui, M. & Li, Y. Energy-conservative finite difference method for the coupled nonlinear Klein-Gordon equation in the nonrelativistic regime. Int. J. Numer. Anal. Model.22(2), 246–267 (2025).
+- [1] Strauss, W. & Vazquezf, L. Numerical solution of a nonlinear Klein–Gordon equation. J. Comput. Phys. 28, 271–278 (1978).
+- [2] Gibbon, J. D., Freeman, N. C. & Davey, A. Three-dimensional multiple soliton-like solutions of non-linear Klein–Gordon equations. J. Phys. A: Math. Gen. 11(5), 93–96 (1978).
+- [3] Christiansen, P. L. & Lomdahl, P. S. Numerical study of a 2 + 1dimensional sine-Gordon solitons. Physica D 2(3), 482–494 (1981).
+- [4] Jimenez, S. & Vazquez, L. Analysis of four numerical schemes for a nonlinear Klein–Gordon equation. Appl. Math. Comput. 35, 61–94 (1990).
+- [5] Djidjeli, K., Price, W. G. & Twizell, E. H. Numerical solutions of a damped Sine-Gordon equation in two space variables. J. Eng. Math. 29, 347–369 (1995).
+- [6] Lynch, M. A. M. Large amplitude instability in finite difference approximations to the Klein-Gordon equation. Appl. Numer. Math. 31, 173–182 (1999).
+- [7] Sheng, Q., Khaliq, A. Q. M. & Voss, D. A. Numerical simulation of two-dimensional sine-Gordon solitons via a split cosine scheme. Math. Comput. Simul. 68, 355–373 (2005).
+- [8] Bratsos, A. G. A modified predictor–corrector scheme for the two-dimensional sine-Gordon equation. Numer. Algor. 43, 295–308 (2006).
+- [9] Bratsos, A. G. The solution of the two-dimensional sine-Gordon equation using the method of lines. J. Comput. Appl. Math. 206, 251–277 (2007).
+- [10] Dehghan, M. & Shokri, A. A numerical method for one-dimensional nonlinear sine-Gordon equation using collocation and radial basis functions. Numer. Methods Partial Diff. Equ. 24(2), 687–698 (2008).
+- [11] Dehghan, M. & Shokri, A. A numerical method for solution of the two-dimensional sine-Gordon equation using the radial basis functions. Math. Comput. Simul. 79, 700–715 (2008).
+- [12] Shakeri, F. & Dehghan, M. Numerical solution of the Klein–Gordon equation via He’s variational iteration method. Nonlinear Dyn. 51, 89–97 (2008).
+- [13] Bratsos, A. G. On the numerical solution of the Klein–Gordon equation. Numer. Methods Partial Diff. Equ. 25(4), 939–951 (2009).
+- [14] Dehghan, M., Mohebbi, A. & Asgari, Z. Fourth-order compact solution of the nonlinear Klein–Gordon equation. Numer. Algor. 52, 523–540 (2009).
+- [15] Dehghan, M. & Shokri, A. Numerical solution of the nonlinear Klein–Gordon equation using radial basis functions. J. Comput. Appl. Math. 230, 400–410 (2009).
+- [16] Zhang, F. & Han, B. The finite difference method for dissipative Klein–Gordon–Schrodinger equation in three space dimensions. J. Comput. Math. 28(6), 879–900 (2010).
+- [17] Bao, W. & Dong, X. Analysis and comparison of numerical methods for the Klein–Gordon equation in the nonrelativistic limit regime. Numer. Math. 120, 189–229 (2012).
+- [18] Verma, A., Jiwari, R. & Kumar, S. A numerical scheme based on differential quadrature method for numerical simulation of nonlinear Klein–Gordon equation. Int. J. Numer. Meth. Heat Fluid Flow 24(7), 1390–1404 (2014).
+- [19] Kumar, D., Singh, J. & Kumar, S. Numerical computation of Klein–Gordon equations arising in quantum field theory by using homotopy analysis transform method. Alex. Eng. J. 53, 469–474 (2014).
+- [20] Encinas, A. H. H., Martín-Vaquero, J., Queiruga-Dios, A. & Gayoso-Martínez, V. Efficient high-order finite difference methods for nonlinear Klein–Gordon equations. Nonlinear Anal.: Model. Control 20(2), 274–290 (2015).
+- [21] Iqbal, J. & Abass, R. Numerical solution of Klein/sine-Gordon equations by spectral method coupled with Chebyshev wavelets. Appl. Math. 7, 2097–2109 (2016).
+- [22] Ba, W. & Zhao, X. Comparison of numerical methods for the nonlinear Klein-Gordon equation in the nonrelativistic limit regime. J. Comput. Phys. 398, 108886 (2019).
+- [23] Bao, W., Feng, Y. & Yi, W. Long time error analysis of finite difference time domain methods for the nonlinear Klein–Gordon equation with weak nonlinearity. Commun. Comput. Phys. 26(5), 1307–1334 (2019).
+- [24] Ji, B. & Zhang, L. A dissipative finite difference Fourier pseudo-spectral method for the Klein-Gordon-Schrödinger equations with damping mechanism. Appl. Math. Comput. 376, 125148 (2020).
+- [25] Zhang, T. & Wang, T. Optimal error estimates of fourth-order compact finite difference methods for the nonlinear Klein–Gordon equation in the nonrelativistic regime. Numer. Methods Partial Diff. Equ. 37(3), 2089–2108 (2021).
+- [26] Yan, J., Zhang, H., Qian, X. & Song, S. Regularized finite difference methods for the logarithmic Klein–Gordon equation. East Asian J. Appl. Math. 11(1), 119–142 (2021).
+- [27] Irk, D., Kirli, E. & Gorgulu, M. Z. A high order accurate numerical solution of the Klein-Gordon equation. Appl. Math. Inf. Sci. 16(2), 331–339 (2022).
+- [28] Alzaleq, L. & Manoranjan, V. An energy conserving numerical scheme for the Klein–Gordon equation with cubic nonlinearity. Fractal Fract 6(8), 460–478 (2022).
+- [29] Li, M., Ming, J., Qi, T. & Zhou, B. Convergence of an energy-preserving finite difference method for the nonlinear coupled space-fractional Klein–Gordon equations. Netw. Heterog. Med. 18(3), 957–981 (2023).
+- [30] Mesgarani, H., Esmaeelzade Aghdam, Y. & Darabi, E. A new numerical method for discretization of the nonlinear Klein-Gordon model arising in light waves. J. Math. Model. 12(1), 71–84 (2024).
+- [31] Cui, M. & Li, Y. Energy-conservative finite difference method for the coupled nonlinear Klein-Gordon equation in the nonrelativistic regime. Int. J. Numer. Anal. Model. 22(2), 246–267 (2025).
 - [32] Klauber, R. Student Friendly Quantum Field Theory (Sandtrove Press, 2014).
-- [33] Caudrey, P. J., Eilbeck, J. C. & Gibbon, J. D. The sine-Gordon equation as a model classical field theory. Nuovo Cimento B25, 497–512 (1975).
+- [33] Caudrey, P. J., Eilbeck, J. C. & Gibbon, J. D. The sine-Gordon equation as a model classical field theory. Nuovo Cimento B 25, 497–512 (1975).
 - [34] Morton, K. W. & Mayers, D. F. Numerical Solution of Partial Differential Equations (Cambridge University Press, 2005).
 - [35] Harrington, R. F. Time-Harmonic Electromagnetic Fields (Wiley-IEEE Press, 2001).
-- [36] Yee, K. Numerical solution of initial boundary value problems involving maxwell’s equations in isotropic media. IEEE Trans. Antennas Propag.14(3), 302–307 (1966).
+- [36] Yee, K. Numerical solution of initial boundary value problems involving maxwell’s equations in isotropic media. IEEE Trans. Antennas Propag. 14(3), 302–307 (1966).
 - [37] Taflove, A. & Hagness, S. C. Computational Electrodynamics: The Finite-Difference Time-Domain Method (Artech House Inc, 2005).
-- [38] Proca, Al. Sur la théorie ondulatoire des électrons positifs et négatifs. J. Phys. Radium7(8), 347–353 (1936).
+- [38] Proca, Al. Sur la théorie ondulatoire des électrons positifs et négatifs. J. Phys. Radium 7(8), 347–353 (1936).
 - [39] Pozar, D. M. Microwave Engineering 4th edn. (Wiley, 2011).
-- [40] El-Sayed, S. M. The decomposition method for studying the Klein-Gordon equation. Chaos Solitons Fractals18, 1025–1030 (2003).
-- [41] Belayeh, W. G., Mussa, Y. O. & Gizaw, A. K. Approximate analytic solutions of two-dimensional nonlinear Klein–Gordon equation by using the reduced differential transform method. Math. Probl. Eng.2020, 5753974 (2020).
-- [42] Ibrahim, W. & Tamiru, M. Solutions of three-dimensional nonlinear Klein-Gordon equations by using quadruple Laplace transform. Int. J. Diff. Equ.19, 2544576 (2022).
+- [40] El-Sayed, S. M. The decomposition method for studying the Klein-Gordon equation. Chaos Solitons Fractals 18, 1025–1030 (2003).
+- [41] Belayeh, W. G., Mussa, Y. O. & Gizaw, A. K. Approximate analytic solutions of two-dimensional nonlinear Klein–Gordon equation by using the reduced differential transform method. Math. Probl. Eng. 2020, 5753974 (2020).
+- [42] Ibrahim, W. & Tamiru, M. Solutions of three-dimensional nonlinear Klein-Gordon equations by using quadruple Laplace transform. Int. J. Diff. Equ. 19, 2544576 (2022).
 - [43] Greiner, W. Relativistic Quantum Mechanics (Springer, 2000).
 - [44] Griffiths, D. J. Introduction to Quantum Mechanics 2nd edn. (Pearson Prentice Hall, 2004).
 - [45] Hegel, G. W. F. Science of Logic, trans. A. V. Miller, Humanity Books, 1812–1816, (1999).
 - [46] Engels, F. Dialectics of Nature 1873–1886 (Progress Publishers, 1976).
 - [47] Wilczek, F. A Beautiful Question: Finding Nature’s Deep Design (Penguin Press, 2015).
-- [48] Gross, D. The role of symmetry in fundamental physics. Proc. Natl. Acad. Sci. USA93(25), 14256–14259 (1996).
+- [48] Gross, D. The role of symmetry in fundamental physics. Proc. Natl. Acad. Sci. USA 93(25), 14256–14259 (1996).
 - [49] Srednicki, M. Quantum Field Theory (Cambridge University Press, 2007).
 - [50] Dirac, P. A. M. The Principles of Quantum Mechanics 4th edn. (Oxford University Press, 1958).

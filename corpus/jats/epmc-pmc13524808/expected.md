@@ -251,34 +251,34 @@ The datasets analyzed during the current study are available from the correspond
 ## References
 
 - [1] Gomella, T. L. Gomella’s Neonatology: Management, Procedures, On-Call Problems, Diseases, and Drugs (Mcgraw-hill, 2020).
-- [2] Hamrick, S. E. G. et al. Patent ductus arteriosus of the preterm infant. Pediatrics146, e20201209 (2020).
-- [3] Koch, J. et al. Prevalence of spontaneous closure of the ductus arteriosus in neonates at a birth weight of 1000 grams or less. Pediatrics117, 1113–1121 (2006).
-- [4] Gonzalez, A. et al. Influence of infection on patent ductus arteriosus and chronic lung disease in premature infants weighing 1000 grams or less. J. Pediatr.128, 470–478 (1996).
-- [5] Dani, C. et al. The fate of ductus arteriosus in infants at 23-27 weeks of gestation: from spontaneous closure to ibuprofen resistance. Acta Paediatr.97, 1176–1180 (2008).
-- [6] Herrman, K., Bose, C., Lewis, K. & Laughon, M. Spontaneous closure of the patent ductus arteriosus in very low birth weight infants following discharge from the neonatal unit. Arch. Dis. Child Fetal Neonatal Ed.94, F48–F50 (2009).
-- [7] El-Mashad, A. E.-R., El-Mahdy, H., El Amrousy, D. & Elgendy, M. Comparative study of the efficacy and safety of paracetamol, ibuprofen, and indomethacin in closure of patent ductus arteriosus in preterm neonates. Eur. J. Pediatr.176, 233–240 (2017).
-- [8] Weisz, D. E. & Giesinger, R. E. Surgical management of a patent ductus arteriosus: is this still an option? Semin. Fetal Neonatal Med.23, 255–266 (2018).
-- [9] Backes, C. H. et al. Percutaneous Patent Ductus Arteriosus (PDA) closure during infancy: a meta-analysis. Pediatrics139, e20162927 (2017).
-- [10] Hundscheid, T. et al. Expectant management or early ibuprofen for patent ductus arteriosus. N. Engl. J. Med.388, 980–990 (2023).
-- [11] Gupta, S. et al. Trial of selective early treatment of patent ductus arteriosus with ibuprofen. N. Engl. J. Med.390, 314–325 (2024).
-- [12] Giesinger, R. E., Hobson, A. A., Bischoff, A. R., Klein, J. M. & McNamara, P. J. Impact of early screening echocardiography and targeted PDA treatment on neonatal outcomes in ‘22-23’ week and ‘24-26’ infants. Semin. Perinatol.47, 151721 (2023).
-- [13] Lang, T. A. & Altman, D. G. Basic statistical reporting for articles published in biomedical journals: the ‘Statistical Analyses and Methods in the Published Literature’ or the SAMPL Guidelines. Int. J. Nurs. Stud.52, 5–9 (2015).
-- [14] Hernandez-Boussard, T., Bozkurt, S., Ioannidis, J. P. A. & Shah, N. H. MINIMAR (MINimum Information for Medical AI Reporting): developing reporting standards for artificial intelligence in health care. J. Am. Med. Inf. Assoc.27, 2011–2015 (2020).
+- [2] Hamrick, S. E. G. et al. Patent ductus arteriosus of the preterm infant. Pediatrics 146, e20201209 (2020).
+- [3] Koch, J. et al. Prevalence of spontaneous closure of the ductus arteriosus in neonates at a birth weight of 1000 grams or less. Pediatrics 117, 1113–1121 (2006).
+- [4] Gonzalez, A. et al. Influence of infection on patent ductus arteriosus and chronic lung disease in premature infants weighing 1000 grams or less. J. Pediatr. 128, 470–478 (1996).
+- [5] Dani, C. et al. The fate of ductus arteriosus in infants at 23-27 weeks of gestation: from spontaneous closure to ibuprofen resistance. Acta Paediatr. 97, 1176–1180 (2008).
+- [6] Herrman, K., Bose, C., Lewis, K. & Laughon, M. Spontaneous closure of the patent ductus arteriosus in very low birth weight infants following discharge from the neonatal unit. Arch. Dis. Child Fetal Neonatal Ed. 94, F48–F50 (2009).
+- [7] El-Mashad, A. E.-R., El-Mahdy, H., El Amrousy, D. & Elgendy, M. Comparative study of the efficacy and safety of paracetamol, ibuprofen, and indomethacin in closure of patent ductus arteriosus in preterm neonates. Eur. J. Pediatr. 176, 233–240 (2017).
+- [8] Weisz, D. E. & Giesinger, R. E. Surgical management of a patent ductus arteriosus: is this still an option? Semin. Fetal Neonatal Med. 23, 255–266 (2018).
+- [9] Backes, C. H. et al. Percutaneous Patent Ductus Arteriosus (PDA) closure during infancy: a meta-analysis. Pediatrics 139, e20162927 (2017).
+- [10] Hundscheid, T. et al. Expectant management or early ibuprofen for patent ductus arteriosus. N. Engl. J. Med. 388, 980–990 (2023).
+- [11] Gupta, S. et al. Trial of selective early treatment of patent ductus arteriosus with ibuprofen. N. Engl. J. Med. 390, 314–325 (2024).
+- [12] Giesinger, R. E., Hobson, A. A., Bischoff, A. R., Klein, J. M. & McNamara, P. J. Impact of early screening echocardiography and targeted PDA treatment on neonatal outcomes in ‘22-23’ week and ‘24-26’ infants. Semin. Perinatol. 47, 151721 (2023).
+- [13] Lang, T. A. & Altman, D. G. Basic statistical reporting for articles published in biomedical journals: the ‘Statistical Analyses and Methods in the Published Literature’ or the SAMPL Guidelines. Int. J. Nurs. Stud. 52, 5–9 (2015).
+- [14] Hernandez-Boussard, T., Bozkurt, S., Ioannidis, J. P. A. & Shah, N. H. MINIMAR (MINimum Information for Medical AI Reporting): developing reporting standards for artificial intelligence in health care. J. Am. Med. Inf. Assoc. 27, 2011–2015 (2020).
 - [15] Ian, N. Netlab (https://de.mathworks.com/matlabcentral/fileexchange/2654-netlab), MATLAB Central File Exchange (2025).
 - [16] Harrell Jr, F.E. rms: Regression Modeling Strategies. R package version 8.1-0 (2025).
 - [17] R Core Team. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria (2024).
-- [18] Furzan, J. A., Reisch, J., Tyson, J. E., Laird, P. & Rosenfeld, C. R. Incidence and risk factors for symptomatic patent ductus arteriosus among inborn very-low-birth-weight infants. Early Hum. Dev.12, 39–48 (1985).
-- [19] Richards, J., Johnson, A., Fox, G. & Campbell, M. A second course of ibuprofen is effective in the closure of a clinically significant PDA in ELBW infants. Pediatrics124, e287–e293 (2009).
-- [20] Steiner, M. et al. Preterm infants who later require duct ligation show different vital signs and pH in early postnatal life. Acta Paediatr.104, e7–e13 (2015).
-- [21] Yang, C.-Z. & Lee, J. Factors affecting successful closure of hemodynamically significant patent ductus arteriosus with indomethacin in extremely low birth weight infants. World J. Pediatr.4, 91–96 (2008).
-- [22] Bell, E. F., Warburton, D., Stonestreet, B. S. & Oh, W. Effect of fluid administration on the development of symptomatic patent ductus arteriosus and congestive heart failure in premature infants. N. Engl. J. Med.302, 598–604 (1980).
-- [23] Hamrick, S. E. G. & Hansmann, G. Patent ductus arteriosus of the preterm infant. Pediatrics125, 1020–1030 (2010).
-- [24] Hammerman, C., Eidelman, A. I. & Gartner, L. M. Hypocalcemia and the patent ductus arteriosus. J. Pediatr.94, 961–963 (1979).
-- [25] Eronen, M., Kari, A., Pesonen, E. & Hallman, M. The effect of antenatal dexamethasone administration on the fetal and neonatal ductus arteriosus. A randomized double-blind study. Am. J. Dis. Child147, 187–192 (1993).
-- [26] Morales, P. et al. Effect of dexamethasone therapy on the neonatal ductus arteriosus. Pediatr. Cardiol.19, 225–229 (1998).
-- [27] Doyle, L. W., Ehrenkranz, R. A. & Halliday, H. L. Postnatal hydrocortisone for preventing or treating bronchopulmonary dysplasia in preterm infants: a systematic review. Neonatology98, 111–117 (2010).
-- [28] Dice, J. E. & Bhatia, J. Patent ductus arteriosus: an overview. J. Pediatr. Pharm. Ther.12, 138–146 (2007).
-- [29] Hermes-DeSantis, E. R. & Clyman, R. I. Patent ductus arteriosus: pathophysiology and management. J. Perinatol.26, S22–S23 (2006).
-- [30] Borges-Lujan, M., Gonzalez-Luis, G. E., Roosen, T., Huizing, M. J. & Villamor, E. Sex differences in patent ductus arteriosus incidence and response to pharmacological treatment in preterm infants: a systematic review, meta-analysis and meta-regression. J. Pers. Med.12, 1143 (2022).
+- [18] Furzan, J. A., Reisch, J., Tyson, J. E., Laird, P. & Rosenfeld, C. R. Incidence and risk factors for symptomatic patent ductus arteriosus among inborn very-low-birth-weight infants. Early Hum. Dev. 12, 39–48 (1985).
+- [19] Richards, J., Johnson, A., Fox, G. & Campbell, M. A second course of ibuprofen is effective in the closure of a clinically significant PDA in ELBW infants. Pediatrics 124, e287–e293 (2009).
+- [20] Steiner, M. et al. Preterm infants who later require duct ligation show different vital signs and pH in early postnatal life. Acta Paediatr. 104, e7–e13 (2015).
+- [21] Yang, C.-Z. & Lee, J. Factors affecting successful closure of hemodynamically significant patent ductus arteriosus with indomethacin in extremely low birth weight infants. World J. Pediatr. 4, 91–96 (2008).
+- [22] Bell, E. F., Warburton, D., Stonestreet, B. S. & Oh, W. Effect of fluid administration on the development of symptomatic patent ductus arteriosus and congestive heart failure in premature infants. N. Engl. J. Med. 302, 598–604 (1980).
+- [23] Hamrick, S. E. G. & Hansmann, G. Patent ductus arteriosus of the preterm infant. Pediatrics 125, 1020–1030 (2010).
+- [24] Hammerman, C., Eidelman, A. I. & Gartner, L. M. Hypocalcemia and the patent ductus arteriosus. J. Pediatr. 94, 961–963 (1979).
+- [25] Eronen, M., Kari, A., Pesonen, E. & Hallman, M. The effect of antenatal dexamethasone administration on the fetal and neonatal ductus arteriosus. A randomized double-blind study. Am. J. Dis. Child 147, 187–192 (1993).
+- [26] Morales, P. et al. Effect of dexamethasone therapy on the neonatal ductus arteriosus. Pediatr. Cardiol. 19, 225–229 (1998).
+- [27] Doyle, L. W., Ehrenkranz, R. A. & Halliday, H. L. Postnatal hydrocortisone for preventing or treating bronchopulmonary dysplasia in preterm infants: a systematic review. Neonatology 98, 111–117 (2010).
+- [28] Dice, J. E. & Bhatia, J. Patent ductus arteriosus: an overview. J. Pediatr. Pharm. Ther. 12, 138–146 (2007).
+- [29] Hermes-DeSantis, E. R. & Clyman, R. I. Patent ductus arteriosus: pathophysiology and management. J. Perinatol. 26, S22–S23 (2006).
+- [30] Borges-Lujan, M., Gonzalez-Luis, G. E., Roosen, T., Huizing, M. J. & Villamor, E. Sex differences in patent ductus arteriosus incidence and response to pharmacological treatment in preterm infants: a systematic review, meta-analysis and meta-regression. J. Pers. Med. 12, 1143 (2022).
 - [31] Küng, E., Unterasinger, L., Waldhör, T., Berger, A. & Wisgrill, L. Cut-off values of serum interleukin-6 for culture-confirmed sepsis in neonates. Pediatr. Res. 10.1038/s41390-022-02329-9 (2022).
-- [32] Bischoff, A. R., Hobson, A. A., McNamara, P. J. & Rios, D. R. Impact of a patent ductus arteriosus on non-invasive pre- and post-ductal blood pressures in extremely preterm infants during the first two postnatal weeks. J. Perinatol.45, 326–333 (2025).
+- [32] Bischoff, A. R., Hobson, A. A., McNamara, P. J. & Rios, D. R. Impact of a patent ductus arteriosus on non-invasive pre- and post-ductal blood pressures in extremely preterm infants during the first two postnatal weeks. J. Perinatol. 45, 326–333 (2025).

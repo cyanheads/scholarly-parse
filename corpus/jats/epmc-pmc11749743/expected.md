@@ -344,7 +344,7 @@ Giovanni E Ferreira, Christopher G Maher, Chung-Wei Christine Lin, Laurent Billo
 - [43] De Donatis D, Porcelli S, Saria A, et al. Duloxetine plasma level and antidepressant response. Prog Neuro-Psychopharmacol Biol Psychiatry. 2019;92:127–32. doi: 10.1016/j.pnpbp.2019.01.001.
 - [44] Waldschmitt C, Vogel F, Pfuhlmann B, et al. Duloxetine serum concentrations and clinical effects. Data from a therapeutic drug monitoring (TDM) survey. Pharmacopsychiatry. 2009;42:189–93. doi: 10.1055/s-0029-1220890.
 - [45] Shalimova A, Babasieva V, Chubarev VN, et al. Therapy response prediction in major depressive disorder: current and novel genomic markers influencing pharmacokinetics and pharmacodynamics. Pharmacogenomics. 2021;22:485–503. doi: 10.2217/pgs-2020-0157.
-- [46] Zastrozhin ­, Petukhov ­, Pankratenko ­, et al. Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57. doi: 10.64719/pb.4613.
+- [46] Zastrozhin, Petukhov, Pankratenko, et al. Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57. doi: 10.64719/pb.4613.
 - [47] Zeier Z, Carpenter LL, Kalin NH, et al. Clinical Implementation of Pharmacogenetic Decision Support Tools for Antidepressant Drug Prescribing. Am J Psychiatry. 2018;175:873–86. doi: 10.1176/appi.ajp.2018.17111282.
 - [48] Jungen MJ, Ter Meulen BC, van Osch T, et al. Inflammatory biomarkers in patients with sciatica: a systematic review. BMC Musculoskelet Disord. 2019;20:156. doi: 10.1186/s12891-019-2541-0.
 - [49] O’Brien PC, Fleming TR. A multiple testing procedure for clinical trials. Biometrics. 1979;35:549–56.

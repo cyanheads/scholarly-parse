@@ -142,29 +142,47 @@ function renderName(node: XmlNode): string {
   }
 }
 
+/** Fields that close with a full stop in a rendered citation: the authors and the title. */
+const SENTENCE_FIELDS: ReadonlySet<string> = new Set([
+  'person-group',
+  'article-title',
+  'chapter-title',
+]);
+
 /**
  * An `<element-citation>` as delimited text. Its children carry no punctuation between
  * them, so a flat read runs every field together (`DomanJ.L.…Cell18618…`); names join
- * with `, ` and typed identifiers are labeled. (#69)
+ * with `, `, the authors and the title close with a full stop, an issue follows its
+ * volume in parentheses, a page range takes an en dash, and typed identifiers are
+ * labeled. (#69)
  */
 function renderElementCitation(node: XmlNode): string {
   const parts: string[] = [];
+  let previous: string | undefined;
   for (const child of childrenOf(node)) {
-    const tag = tagNameOf(child);
+    const tag = tagNameOf(child) ?? '';
+    let value: string;
     if (tag === 'person-group') {
-      const names = childrenOf(child).map(renderName).filter(Boolean);
-      if (names.length > 0) parts.push(names.join(', '));
+      value = childrenOf(child).map(renderName).filter(Boolean).join(', ');
     } else if (tag === 'pub-id') {
-      const value = text(child);
+      const id = text(child);
       const label = PUB_ID_LABELS[attrOf(child, 'pub-id-type') ?? ''];
-      if (value) parts.push(label ? `${label} ${value}` : value);
+      value = id && label ? `${label} ${id}` : id;
     } else {
-      const value = text(child);
-      if (value) parts.push(value);
+      value = text(child);
     }
+    if (!value) continue;
+    if (SENTENCE_FIELDS.has(tag) && !/[.?!]$/.test(value)) value += '.';
+    if (tag === 'issue' && previous === 'volume') parts.push(`${parts.pop() ?? ''}(${value})`);
+    else if (tag === 'lpage' && previous === 'fpage') parts.push(`${parts.pop() ?? ''}–${value}`);
+    else parts.push(value);
+    previous = tag;
   }
   return parts.join(' ');
 }
+
+/** Wrappers publishers put around a whole citation (Europe PMC's `citation-string`), read with the same spacing rules. */
+const CITATION_WRAPPER_TAGS: ReadonlySet<string> = new Set(['named-content', 'styled-content']);
 
 /** Name wrappers whose parts often sit adjacent with nothing between them. (#124) */
 const NAME_WRAPPER_TAGS: ReadonlySet<string> = new Set(['name', 'string-name', 'person-group']);
@@ -236,6 +254,8 @@ function renderMixedCitation(node: XmlNode): string {
       }
     } else if (NAME_WRAPPER_TAGS.has(tag)) {
       part = renderNameWrapper(child);
+    } else if (CITATION_WRAPPER_TAGS.has(tag)) {
+      part = renderMixedCitation(child);
     } else {
       part = rawText(child);
     }
@@ -243,5 +263,7 @@ function renderMixedCitation(node: XmlNode): string {
     rendered += part;
     prevWasElement = true;
   }
-  return collapseWhitespace(rendered);
+  // A name part that renders empty (a given name holding only a soft hyphen) or markup
+  // whitespace before a comma leaves "Colaneri A. , Staffa N."; the comma closes up.
+  return collapseWhitespace(rendered).replace(/\s+(?=[,;])/g, '');
 }

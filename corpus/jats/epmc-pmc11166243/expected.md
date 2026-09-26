@@ -239,26 +239,26 @@ Surface abnormalities of the small intestinal mucosa shown by scanning electron 
 
 ## References
 
-- [1] Yoder S, Hornik RC Perceptions of severity of diarrhoea and treatment choice: a comparative study of Health Com sites J Trop Med Hyg 1994 97 1 12 PMID 8107166
-- [2] Snyder JD, Merson MH The magnitude of the global problem of acute diarrhoeal disease: a review of active surveillance data Bull WHO 1982 60 605 613 PMID 6982783 PMCID PMC2536091
-- [3] Bern C, Martins J, Zoysa I, Glass RI The magnitude of the global problem of diarrhoeal disease: a ten-year update Bull WHO 1992 70 705 714 PMID 1486666 PMCID PMC2393403
-- [4] Griffin PM, Ryan CA, Nyaphisi M, Hargrett-Bean N, Waldman RJ, Blake PA Risk factors for fatal diarrhea: a case-control study of Ethiopian children Scand J Infect Dis 1988 23 207 211 DOI 10.1093/oxfordjournals.aje.a115085 PMID 3195570
-- [5] Andrade JAB, Gomes TAT, Fagundes Neto U Letalidade em lactentes hospitalizados com diarréia persistente: fatores de risco associados ao óbito Arq de Gastroenterol 1998 35 62 68 PMID 9711316
-- [6] Gomes TAT, Rassi V, MacDonald KL, Blake P, Toledo MR, Trabulsi LR Enteropathogens associated with acute diarrheal disease in urban infants in São Paulo, Brazil J Infect Dis 1991 164 331 337 PMID 1856482 DOI 10.1093/infdis/164.2.331
-- [7] Trabulsi LR, Manissadjan A, Peixoto ES Diarréias infantis por colibacilos enteropatogênicos Rev Inst Med Trop S. Paulo 1961 3 267 270 PMID 13922231
-- [8] Fagundes U, Schmitz LG, Scaletsky I Acute diarrhea due to enteropathogenic Escherichia coli: epidemiological and clinical features in Brasilia, Brazil Int J Infect Dis 1996 1 65 69
-- [9] Scaletsky ICA, Silva MLM, Trabulsi LR Distinctive patterns of adherence of enteropathogenic Escherichia coli to HeLa cells Infect Immun 1984 45 534 536 PMID 6146569 DOI 10.1128/iai.45.2.534-536.1984 PMCID PMC263286
-- [10] Girón JA, Ho ASY, Schoolnik GK An inducible bundle-forming pilus of enteropathogenic Escherichia coli Science 1991 254 710 713 PMID 1683004 DOI 10.1126/science.1683004
-- [11] Jerse AE, Yu J, Tall BD, Kaper JB A genetic locus of enteropathogenic Escherichia coli necessary for the production of attaching and effacing lesions on tissue culture cells Proc Natl Acad Sci USA 1987 78 39 43 DOI 10.1073/pnas.87.20.7839 PMCID PMC54845 PMID 2172966
-- [12] Fagundes U, Freymuller E, Schmitz LG, Scaletsky I Nutritional impact and ultrastructural alterations due to enteropathogenic Escherichia coli strains in infants J Am Coll Nutr 1996 15 180 185 PMID 8778150 DOI 10.1080/07315724.1996.10718586
-- [13] Fagundes U, Ferreira VC, Patrício FRS, Mostaço VL, Trabulsi LR Protracted diarrhea: the importance of the enteropathogenic E. coli (EPEC) strains and Salmonella in its genesis J Pediatr Gastroenterol Nutr 1989 8 207 211 PMID 2651634
-- [14] WHO Persistent diarrhea in children in developing countries: memorandum from a WHO meeting Bull WHO 1988 66 709 717 PMID 3266111 PMCID PMC2491148
-- [15] Hill SM, Phillips AD, Walker-Smith JA Enteropathogenic Escherichia coli and life threatening chronic diarrhoea Gut 1991 32 154 158 PMID 1864533 DOI 10.1136/gut.32.2.154 PMCID PMC1378798
-- [16] Fang GD, Lima AA, Martins CV, Nataro JP, Guerrant RL Etiology and epidemiology of persistent diarrhea in northeastern Brazil: a hospital-based, prospective, case-control study J Pediatr Gastroenterol Nutr 1995 21 137 144 PMID 7472898 DOI 10.1097/00005176-199508000-00003
-- [17] Bhan MK, Raj P, Levine MM Enteroaggregative Escherichia coli associated with persistent diarrhea in a cohort of rural children in India J Infect Dis 1989 159 1061 1064 PMID 2656875 DOI 10.1093/infdis/159.6.1061
-- [18] Sullivan PB, Marsh MN Small intestinal mucosa histology in the syndrome of persistent diarrhea and malnutrition: a review Acta Paediatr 1992 381 72 77 DOI 10.1111/j.1651-2227.1992.tb12375.x PMID 1421945
-- [19] Fagundes U, Wehba J, Viaro T, Machado NL, Patrício FR Protracted diarrhea in infancy: clinical aspects and ultrastructural analysis of the small intestine J Pediatr Gastroenterol Nutr 1985 4 714 722 PMID 4045629
-- [20] Costa SM, Gomes TAT, Haapalainen E, Fagundes U Microscopia eletrônica de varredura no intestino delgado na diarréia persistente Arq de Gastroenterol 1997 34 89 94 PMID 9496427
-- [21] Bhatnagar S, Bhan MK, George C Is a small bowel bacterial overgrowth of pathogenic significance in persistent diarrhea? Acta Paediatr 1992 81 108 113 DOI 10.1111/j.1651-2227.1992.tb12382.x PMID 1421924
-- [22] Bhan MK, Raj P, Khoshoo V Quantification and properties of fecal and upper small intestinal aerobic microflora in infants and young children with persistent diarrhea J Pediatr Gastroenterol Nutr 1989 9 40 45 PMID 2674383
-- [23] Walker-Smith JA Food allergy and bowel disease in childhood Midwife Health Visit Community Nurse 1984 20 308 316 PMID 6565965
+- [1] Yoder S, Hornik RC. Perceptions of severity of diarrhoea and treatment choice: a comparative study of Health Com sites. J Trop Med Hyg 1994 97 1–12 PMID 8107166
+- [2] Snyder JD, Merson MH. The magnitude of the global problem of acute diarrhoeal disease: a review of active surveillance data. Bull WHO 1982 60 605–613 PMID 6982783 PMCID PMC2536091
+- [3] Bern C, Martins J, Zoysa I, Glass RI. The magnitude of the global problem of diarrhoeal disease: a ten-year update. Bull WHO 1992 70 705–714 PMID 1486666 PMCID PMC2393403
+- [4] Griffin PM, Ryan CA, Nyaphisi M, Hargrett-Bean N, Waldman RJ, Blake PA. Risk factors for fatal diarrhea: a case-control study of Ethiopian children. Scand J Infect Dis 1988 23 207–211 DOI 10.1093/oxfordjournals.aje.a115085 PMID 3195570
+- [5] Andrade JAB, Gomes TAT, Fagundes Neto U. Letalidade em lactentes hospitalizados com diarréia persistente: fatores de risco associados ao óbito. Arq de Gastroenterol 1998 35 62–68 PMID 9711316
+- [6] Gomes TAT, Rassi V, MacDonald KL, Blake P, Toledo MR, Trabulsi LR. Enteropathogens associated with acute diarrheal disease in urban infants in São Paulo, Brazil. J Infect Dis 1991 164 331–337 PMID 1856482 DOI 10.1093/infdis/164.2.331
+- [7] Trabulsi LR, Manissadjan A, Peixoto ES. Diarréias infantis por colibacilos enteropatogênicos. Rev Inst Med Trop S. Paulo 1961 3 267–270 PMID 13922231
+- [8] Fagundes U, Schmitz LG, Scaletsky I. Acute diarrhea due to enteropathogenic Escherichia coli: epidemiological and clinical features in Brasilia, Brazil. Int J Infect Dis 1996 1 65–69
+- [9] Scaletsky ICA, Silva MLM, Trabulsi LR. Distinctive patterns of adherence of enteropathogenic Escherichia coli to HeLa cells. Infect Immun 1984 45 534–536 PMID 6146569 DOI 10.1128/iai.45.2.534-536.1984 PMCID PMC263286
+- [10] Girón JA, Ho ASY, Schoolnik GK. An inducible bundle-forming pilus of enteropathogenic Escherichia coli. Science 1991 254 710–713 PMID 1683004 DOI 10.1126/science.1683004
+- [11] Jerse AE, Yu J, Tall BD, Kaper JB. A genetic locus of enteropathogenic Escherichia coli necessary for the production of attaching and effacing lesions on tissue culture cells. Proc Natl Acad Sci USA 1987 78 39–43 DOI 10.1073/pnas.87.20.7839 PMCID PMC54845 PMID 2172966
+- [12] Fagundes U, Freymuller E, Schmitz LG, Scaletsky I. Nutritional impact and ultrastructural alterations due to enteropathogenic Escherichia coli strains in infants. J Am Coll Nutr 1996 15 180–185 PMID 8778150 DOI 10.1080/07315724.1996.10718586
+- [13] Fagundes U, Ferreira VC, Patrício FRS, Mostaço VL, Trabulsi LR. Protracted diarrhea: the importance of the enteropathogenic E. coli (EPEC) strains and Salmonella in its genesis. J Pediatr Gastroenterol Nutr 1989 8 207–211 PMID 2651634
+- [14] WHO. Persistent diarrhea in children in developing countries: memorandum from a WHO meeting. Bull WHO 1988 66 709–717 PMID 3266111 PMCID PMC2491148
+- [15] Hill SM, Phillips AD, Walker-Smith JA. Enteropathogenic Escherichia coli and life threatening chronic diarrhoea. Gut 1991 32 154–158 PMID 1864533 DOI 10.1136/gut.32.2.154 PMCID PMC1378798
+- [16] Fang GD, Lima AA, Martins CV, Nataro JP, Guerrant RL. Etiology and epidemiology of persistent diarrhea in northeastern Brazil: a hospital-based, prospective, case-control study. J Pediatr Gastroenterol Nutr 1995 21 137–144 PMID 7472898 DOI 10.1097/00005176-199508000-00003
+- [17] Bhan MK, Raj P, Levine MM. Enteroaggregative Escherichia coli associated with persistent diarrhea in a cohort of rural children in India. J Infect Dis 1989 159 1061–1064 PMID 2656875 DOI 10.1093/infdis/159.6.1061
+- [18] Sullivan PB, Marsh MN. Small intestinal mucosa histology in the syndrome of persistent diarrhea and malnutrition: a review. Acta Paediatr 1992 381 72–77 DOI 10.1111/j.1651-2227.1992.tb12375.x PMID 1421945
+- [19] Fagundes U, Wehba J, Viaro T, Machado NL, Patrício FR. Protracted diarrhea in infancy: clinical aspects and ultrastructural analysis of the small intestine. J Pediatr Gastroenterol Nutr 1985 4 714–722 PMID 4045629
+- [20] Costa SM, Gomes TAT, Haapalainen E, Fagundes U. Microscopia eletrônica de varredura no intestino delgado na diarréia persistente. Arq de Gastroenterol 1997 34 89–94 PMID 9496427
+- [21] Bhatnagar S, Bhan MK, George C. Is a small bowel bacterial overgrowth of pathogenic significance in persistent diarrhea? Acta Paediatr 1992 81 108–113 DOI 10.1111/j.1651-2227.1992.tb12382.x PMID 1421924
+- [22] Bhan MK, Raj P, Khoshoo V. Quantification and properties of fecal and upper small intestinal aerobic microflora in infants and young children with persistent diarrhea. J Pediatr Gastroenterol Nutr 1989 9 40–45 PMID 2674383
+- [23] Walker-Smith JA. Food allergy and bowel disease in childhood. Midwife Health Visit Community Nurse 1984 20 308–316 PMID 6565965

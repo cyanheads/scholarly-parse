@@ -113,10 +113,10 @@ export function isTextNode(node: XmlNode): boolean {
   return TEXT_KEY in node;
 }
 
-/** The string value of a text node. */
+/** The string value of a text node, without soft hyphens (they only mark where a word may break). */
 export function textOf(node: XmlNode): string {
   const value = node[TEXT_KEY];
-  return value == null ? '' : String(value);
+  return value == null ? '' : String(value).replace(/\u00AD/g, '');
 }
 
 /** First direct child with the given tag. */

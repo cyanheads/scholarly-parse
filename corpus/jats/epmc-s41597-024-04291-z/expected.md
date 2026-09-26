@@ -199,63 +199,63 @@ WGS data analyses from 96 Bangladeshi indigenous chickens were performed using s
 
 ## References
 
-- [1] Das, S. C. et al. Poultry production profile and expected future projection in Bangladesh. Worlds Poult Sci J64, 99–118 (2019).
-- [2] Bhuiyan, A. K. F. H., Bhuiyan, M. S. A. & Deb, G. K. Indigenous chicken genetic resources in Bangladesh: current status and future outlook. Animal Genetic Resources Information36, 73–84 (2005).
-- [3] Bett, H. K., Peters, K. J., Nwankwo, U. M. & Bokelmann, W. Estimating consumer preferences and willingness to pay for the underutilised indigenous chicken products. Food Policy41, 218–225 (2013).
+- [1] Das, S. C. et al. Poultry production profile and expected future projection in Bangladesh. Worlds Poult Sci J 64, 99–118 (2019).
+- [2] Bhuiyan, A. K. F. H., Bhuiyan, M. S. A. & Deb, G. K. Indigenous chicken genetic resources in Bangladesh: current status and future outlook. Animal Genetic Resources Information 36, 73–84 (2005).
+- [3] Bett, H. K., Peters, K. J., Nwankwo, U. M. & Bokelmann, W. Estimating consumer preferences and willingness to pay for the underutilised indigenous chicken products. Food Policy 41, 218–225 (2013).
 - [4] Fakhrul Islam, S. M. & Jabbar, M. A. Scavenging Poultry for Poverty Alleviation: A Review of Experiences with a Focus on Bangladesh. (2003).
-- [5] Faruque, S., Islam, M. N. & Bhuiyan, A. K. F. H. Ex situ improvement of indigenous chicken in Bangladesh. Tropical Agricultural Research26, 13 (2015).
-- [6] Faruque, S., Islam, M., Afroz, M. A. & Rahman, M. M. Evaluation of the performance of native chicken and estimation of heritability for body weight. Journal of Bangladesh Academy of Sciences37, 93–101 (2013).
-- [7] Faruque, S., Bhuiyan, A., Ali, M. Y. & Joy, Z. F. Breeding for the improvement of indigenous chickens of Bangladesh: performance of foundation stock. Asian Journal of Medical and Biological Research3, 80–87 (2017).
-- [8] Sultana, S., Faruque, S., Bhuiyan, A. & Bhuiyan, A. K. F. H. Progress in the Performance of Indigenous Chickens Selected for Economic Traits in Bangladesh. Journal of Agriculture, Food and Environment2, (2021).
-- [9] Mollah, M. B. R., Islam, F. B., Islam, M. S., Ali, M. A. & Alam, M. S. Analysis of genetic diversity in bangladeshi chicken using RAPD markers. Biotechnology8, 462–467 (2009).
-- [10] Rashid, M. A. et al. Genetic diversity and population structure of indigenous chicken of Bangladesh using microsatellite markers. Asian-Australas J Anim Sci33, 1732–1740 (2020).
-- [11] Bhuiyan, M. S. A., Chen, S., Faruque, S., Bhuiyan, A. K. F. H. & Beja-Pereira, A. Genetic diversity and maternal origin of Bangladeshi chicken. Mol Biol Rep40, 4123–4128 (2013).
-- [12] Islam, M. A., Osman, S. A. M. & Nishibori, M. Genetic diversity of Bangladeshi native chickens based on complete sequence of mitochondrial DNA D-loop region. Br Poult Sci60, 628–637 (2019).
-- [13] Okpeku, M., Ogah, D. M. & Adeleke, M. A. A review of challenges to genetic improvement of indigenous livestock for improved food production in Nigeria. African Journal of Food, Agriculture, Nutrition and Development19, 13959–13978 (2019).
-- [14] Perini, F. et al. Emerging Genetic Tools to Investigate Molecular Pathways Related to Heat Stress in Chickens: A Review. Animals (Basel)11, 1–19 (2021).
-- [15] McCarthy, M. I. et al. Genome-wide association studies for complex traits: consensus, uncertainty and challenges. Nature Reviews Genetics 2008 9:59, 356–369 (2008).
-- [16] Cho, Y. S. et al. A large-scale genome-wide association study of Asian populations uncovers genetic factors influencing eight quantitative traits. Nature Genetics 2009 41:541, 527–534 (2009).
-- [17] Dalloul, R. A. et al. Multi-Platform Next-Generation Sequencing of the Domestic Turkey (Meleagris gallopavo): Genome Assembly and Analysis. PLoS Biol8, e1000475 (2010).
-- [18] Uffelmann, E. et al. Genome-wide association studies. Nature Reviews Methods Primers 2021 1:11, 1–21 (2021).
-- [19] Gheyas, A. A. et al. Integrated Environmental and Genomic Analysis Reveals the Drivers of Local Adaptation in African Indigenous Chickens. Mol Biol Evol38, 4268–4285 (2021).
-- [20] Gheyas, almas et al. Whole genome sequences of 234 indigenous african chickens from Ethiopia. Sci Data9, (2022).
-- [21] Vallejo-Trujillo, A. et al. Ecological niche modelling for delineating livestock ecotypes and exploring environmental genomic adaptation: The example of Ethiopian village chicken. Front Ecol Evol10, 755 (2022).
-- [22] Lozano-Jaramillo, M., Bastiaansen, J. W. M., Dessie, T. & Komen, H. Use of geographic information system tools to predict animal breed suitability for different agro-ecological zones. Animal13, 1536–1543 (2019).
-- [23] Jueterbock, A., Smolina, I., Coyer, J. A. & Hoarau, G. The fate of the Arctic seaweed Fucus distichus under climate change: an ecological niche modeling approach. Ecol Evol6, 1712–1724 (2016).
-- [24] Muscarella, R. et al. ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models. Methods Ecol Evol5, 1198–1205 (2014).
-- [25] Phillips, S. B., Aneja, V. P., Kang, D. & Arya, S. P. Maximum entropy modeling of species geographic distributions. Ecol Modell190, 231–259 (2006).
-- [26] Kranis, A. et al. Development of a high density 600K SNP genotyping array for chicken. BMC Genomics14, 1–13 (2013).
-- [27] Herry, F. et al. Design of low density SNP chips for genotype imputation in layer chicken. BMC Genet19, 108 (2018).
-- [28] Marchini, J., Howie, B., Myers, S., McVean, G. & Donnelly, P. A new multipoint method for genome-wide association studies by imputation of genotypes. Nature Genetics 2007 39:739, 906–913 (2007).
-- [29] Browning, B. L. & Browning, S. R. Genotype Imputation with Millions of Reference Samples. The American Journal of Human Genetics98, 116–126 (2016).
-- [30] Van Leeuwen, E. M. et al. Population-specific genotype imputations using minimac or IMPUTE2. Nature Protocols 2015 10:910, 1285–1296 (2015).
-- [31] Smith, J. et al. Fourth Report on Chicken Genes and Chromosomes 2022. Cytogenet Genome Res162, 405–527 (2022).
-- [32] Kelly, L. M. & Alworth, L. C. Techniques for collecting blood from the domestic chicken. Lab Animal 2013 42:1042, 359–361 (2013).
+- [5] Faruque, S., Islam, M. N. & Bhuiyan, A. K. F. H. Ex situ improvement of indigenous chicken in Bangladesh. Tropical Agricultural Research 26, 13 (2015).
+- [6] Faruque, S., Islam, M., Afroz, M. A. & Rahman, M. M. Evaluation of the performance of native chicken and estimation of heritability for body weight. Journal of Bangladesh Academy of Sciences 37, 93–101 (2013).
+- [7] Faruque, S., Bhuiyan, A., Ali, M. Y. & Joy, Z. F. Breeding for the improvement of indigenous chickens of Bangladesh: performance of foundation stock. Asian Journal of Medical and Biological Research 3, 80–87 (2017).
+- [8] Sultana, S., Faruque, S., Bhuiyan, A. & Bhuiyan, A. K. F. H. Progress in the Performance of Indigenous Chickens Selected for Economic Traits in Bangladesh. Journal of Agriculture, Food and Environment 2, (2021).
+- [9] Mollah, M. B. R., Islam, F. B., Islam, M. S., Ali, M. A. & Alam, M. S. Analysis of genetic diversity in bangladeshi chicken using RAPD markers. Biotechnology 8, 462–467 (2009).
+- [10] Rashid, M. A. et al. Genetic diversity and population structure of indigenous chicken of Bangladesh using microsatellite markers. Asian-Australas J Anim Sci 33, 1732–1740 (2020).
+- [11] Bhuiyan, M. S. A., Chen, S., Faruque, S., Bhuiyan, A. K. F. H. & Beja-Pereira, A. Genetic diversity and maternal origin of Bangladeshi chicken. Mol Biol Rep 40, 4123–4128 (2013).
+- [12] Islam, M. A., Osman, S. A. M. & Nishibori, M. Genetic diversity of Bangladeshi native chickens based on complete sequence of mitochondrial DNA D-loop region. Br Poult Sci 60, 628–637 (2019).
+- [13] Okpeku, M., Ogah, D. M. & Adeleke, M. A. A review of challenges to genetic improvement of indigenous livestock for improved food production in Nigeria. African Journal of Food, Agriculture, Nutrition and Development 19, 13959–13978 (2019).
+- [14] Perini, F. et al. Emerging Genetic Tools to Investigate Molecular Pathways Related to Heat Stress in Chickens: A Review. Animals (Basel) 11, 1–19 (2021).
+- [15] McCarthy, M. I. et al. Genome-wide association studies for complex traits: consensus, uncertainty and challenges. Nature Reviews Genetics 2008 9:5 9, 356–369 (2008).
+- [16] Cho, Y. S. et al. A large-scale genome-wide association study of Asian populations uncovers genetic factors influencing eight quantitative traits. Nature Genetics 2009 41:5 41, 527–534 (2009).
+- [17] Dalloul, R. A. et al. Multi-Platform Next-Generation Sequencing of the Domestic Turkey (Meleagris gallopavo): Genome Assembly and Analysis. PLoS Biol 8, e1000475 (2010).
+- [18] Uffelmann, E. et al. Genome-wide association studies. Nature Reviews Methods Primers 2021 1:1 1, 1–21 (2021).
+- [19] Gheyas, A. A. et al. Integrated Environmental and Genomic Analysis Reveals the Drivers of Local Adaptation in African Indigenous Chickens. Mol Biol Evol 38, 4268–4285 (2021).
+- [20] Gheyas, almas et al. Whole genome sequences of 234 indigenous african chickens from Ethiopia. Sci Data 9, (2022).
+- [21] Vallejo-Trujillo, A. et al. Ecological niche modelling for delineating livestock ecotypes and exploring environmental genomic adaptation: The example of Ethiopian village chicken. Front Ecol Evol 10, 755 (2022).
+- [22] Lozano-Jaramillo, M., Bastiaansen, J. W. M., Dessie, T. & Komen, H. Use of geographic information system tools to predict animal breed suitability for different agro-ecological zones. Animal 13, 1536–1543 (2019).
+- [23] Jueterbock, A., Smolina, I., Coyer, J. A. & Hoarau, G. The fate of the Arctic seaweed Fucus distichus under climate change: an ecological niche modeling approach. Ecol Evol 6, 1712–1724 (2016).
+- [24] Muscarella, R. et al. ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models. Methods Ecol Evol 5, 1198–1205 (2014).
+- [25] Phillips, S. B., Aneja, V. P., Kang, D. & Arya, S. P. Maximum entropy modeling of species geographic distributions. Ecol Modell 190, 231–259 (2006).
+- [26] Kranis, A. et al. Development of a high density 600K SNP genotyping array for chicken. BMC Genomics 14, 1–13 (2013).
+- [27] Herry, F. et al. Design of low density SNP chips for genotype imputation in layer chicken. BMC Genet 19, 108 (2018).
+- [28] Marchini, J., Howie, B., Myers, S., McVean, G. & Donnelly, P. A new multipoint method for genome-wide association studies by imputation of genotypes. Nature Genetics 2007 39:7 39, 906–913 (2007).
+- [29] Browning, B. L. & Browning, S. R. Genotype Imputation with Millions of Reference Samples. The American Journal of Human Genetics 98, 116–126 (2016).
+- [30] Van Leeuwen, E. M. et al. Population-specific genotype imputations using minimac or IMPUTE2. Nature Protocols 2015 10:9 10, 1285–1296 (2015).
+- [31] Smith, J. et al. Fourth Report on Chicken Genes and Chromosomes 2022. Cytogenet Genome Res 162, 405–527 (2022).
+- [32] Kelly, L. M. & Alworth, L. C. Techniques for collecting blood from the domestic chicken. Lab Animal 2013 42:10 42, 359–361 (2013).
 - [33] Chen, Y. et al. SOAPnuke: a MapReduce acceleration-supported software for integrated quality control and preprocessing of high-throughput sequencing data. 7, 1–6 (2018).
-- [34] Simon, A. FastQC A Quality Control tool for High Throughput Sequence Data. Babraham Bioinformaticshttps://www.bioinformatics.babraham.ac.uk/projects/fastqc/.
-- [35] Ewels, P., Ns Magnusson, M., Lundin, S. & Aller, M. K. Data and text mining MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics32, 3047–3048 (2016).
-- [36] Li, H. & Durbin, R. Fast and accurate short read alignment with Burrows–Wheeler transform. Bioinformatics25, 1754–1760 (2009).
+- [34] Simon, A. FastQC A Quality Control tool for High Throughput Sequence Data. Babraham Bioinformatics https://www.bioinformatics.babraham.ac.uk/projects/fastqc/.
+- [35] Ewels, P., Ns Magnusson, M., Lundin, S. & Aller, M. K. Data and text mining MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics 32, 3047–3048 (2016).
+- [36] Li, H. & Durbin, R. Fast and accurate short read alignment with Burrows–Wheeler transform. Bioinformatics 25, 1754–1760 (2009).
 - [37] Li, H. Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM. Preprint 10.6084/M9.FIGSHARE.963153.V1 (2013).
-- [38] Li, H. et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics25, 2078–2079 (2009).
+- [38] Li, H. et al. The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078–2079 (2009).
 - [39] Broad Institute. Picard Tools - By Broad Institute. https://broadinstitute.github.io/picard/.
 - [40] Van der Auwera, G. A. & O’Connor, B. D. Genomics in the Cloud: Using Docker, GATK, and WDL in Terra. (O’Reilly Media, Sebastopol, CA, 2020).
-- [41] Broad Institute. Best Practices for Variant Calling with the GATK. Broad Institutehttps://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1.
+- [41] Broad Institute. Best Practices for Variant Calling with the GATK. Broad Institute https://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1.
 - [42] Caetano-Anolles, D. Variant Quality Score Recalibration (VQSR) – GATK. https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR (2023).
-- [43] Harrison, P. W. et al. Ensembl. Nucleic Acids Res52, 891–899 (2024).
-- [44] Danecek, P. et al. The variant call format and VCFtools. Bioinformatics27, 2156–2158 (2011).
-- [45] NCBI Sequence Read Archivehttps://identifiers.org/ncbi/insdc.sra:SRP467265 (2024).
-- [46] ENA European Nucleotide Archivehttps://identifiers.org/ena.embl:PRJEB78357 (2024).
-- [47] EVA European Variant Archivehttps://www.ebi.ac.uk/eva/?eva-study=PRJEB78357 (2024).
-- [48] McLaren, W. et al. The Ensembl Variant Effect Predictor. Genome Biol17, 1–14 (2016).
-- [49] Wang, G. T., Peng, B. & Leal, S. M. Variant Association Tools for Quality Control and Analysis of Large-Scale Sequence and Genotyping Array Data. The American Journal of Human Genetics94, 770–783 (2014).
-- [50] Oh, D. et al. Whole Genome Re-Sequencing of Three Domesticated Chicken Breeds. Zoolog Sci33, 73–77 (2016).
-- [51] Boschiero, C. et al. Genome-wide characterization of genetic variants and putative regions under selection in meat and egg-type chicken lines. BMC Genomics19, 1–18 (2018).
-- [52] Derks, M. F. L. et al. A survey of functional genomic variation in domesticated chickens. Genet Sel Evol50, 17 (2018).
-- [53] Xu, D. et al. Whole-genome sequencing revealed genetic diversity, structure and patterns of selection in Guizhou indigenous chickens. BMC Genomics24, 1–23 (2023).
-- [54] Wang, J., Raskin, L., Samuels, D. C., Shyr, Y. & Guo, Y. Genome measures used for quality control are dependent on gene function and ancestry. Bioinformatics31, 318–323 (2015).
+- [43] Harrison, P. W. et al. Ensembl. Nucleic Acids Res 52, 891–899 (2024).
+- [44] Danecek, P. et al. The variant call format and VCFtools. Bioinformatics 27, 2156–2158 (2011).
+- [45] NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRP467265 (2024).
+- [46] ENA European Nucleotide Archive https://identifiers.org/ena.embl:PRJEB78357 (2024).
+- [47] EVA European Variant Archive https://www.ebi.ac.uk/eva/?eva-study=PRJEB78357 (2024).
+- [48] McLaren, W. et al. The Ensembl Variant Effect Predictor. Genome Biol 17, 1–14 (2016).
+- [49] Wang, G. T., Peng, B. & Leal, S. M. Variant Association Tools for Quality Control and Analysis of Large-Scale Sequence and Genotyping Array Data. The American Journal of Human Genetics 94, 770–783 (2014).
+- [50] Oh, D. et al. Whole Genome Re-Sequencing of Three Domesticated Chicken Breeds. Zoolog Sci 33, 73–77 (2016).
+- [51] Boschiero, C. et al. Genome-wide characterization of genetic variants and putative regions under selection in meat and egg-type chicken lines. BMC Genomics 19, 1–18 (2018).
+- [52] Derks, M. F. L. et al. A survey of functional genomic variation in domesticated chickens. Genet Sel Evol 50, 17 (2018).
+- [53] Xu, D. et al. Whole-genome sequencing revealed genetic diversity, structure and patterns of selection in Guizhou indigenous chickens. BMC Genomics 24, 1–23 (2023).
+- [54] Wang, J., Raskin, L., Samuels, D. C., Shyr, Y. & Guo, Y. Genome measures used for quality control are dependent on gene function and ancestry. Bioinformatics 31, 318–323 (2015).
 - [55] Vallejo-Trujillo, A. Genetic diversity and adaptation to environmental challenges of Ethiopian indigenous chicken. (University of Nottingham, 2021).
-- [56] Qanbari, S. et al. Genetics of adaptation in modern chicken. PLoS Genet15, e1007989 (2019).
-- [57] Wu, S. et al. Artificial selection footprints in indigenous and commercial chicken genomes. BMC Genomics25, 1–20 (2024).
-- NCBI Sequence Read Archivehttps://identifiers.org/ncbi/insdc.sra:SRP467265 (2024).
-- ENA European Nucleotide Archivehttps://identifiers.org/ena.embl:PRJEB78357 (2024).
-- EVA European Variant Archivehttps://www.ebi.ac.uk/eva/?eva-study=PRJEB78357 (2024).
+- [56] Qanbari, S. et al. Genetics of adaptation in modern chicken. PLoS Genet 15, e1007989 (2019).
+- [57] Wu, S. et al. Artificial selection footprints in indigenous and commercial chicken genomes. BMC Genomics 25, 1–20 (2024).
+- NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRP467265 (2024).
+- ENA European Nucleotide Archive https://identifiers.org/ena.embl:PRJEB78357 (2024).
+- EVA European Variant Archive https://www.ebi.ac.uk/eva/?eva-study=PRJEB78357 (2024).

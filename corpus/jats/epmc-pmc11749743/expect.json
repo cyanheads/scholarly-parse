@@ -17,6 +17,8 @@
   "references": 51,
   "contains": [
     "## STRENGTHS AND LIMITATIONS OF THIS STUDY\n\n> - DREAM is a two arm, triple-blinded (participant, clinician and assessor) randomised controlled trial",
-    "Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57."
-  ]
+    "Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57.",
+    "- [46] Zastrozhin, Petukhov, Pankratenko, et al. Impact of Polymorphism"
+  ],
+  "notContains": ["\u00ad"]
 }

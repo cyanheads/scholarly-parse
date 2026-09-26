@@ -701,27 +701,27 @@ The authors declare no conflict of interest.
 
 ## References
 
-- [1] Carlet C., Ding C., Yuan J. Linear codes from highly nonlinear functions and their secret sharing schemes IEEE Trans. Inf. Theory 2005 51 2089 2102 DOI 10.1109/TIT.2005.847722
-- [2] Chabanne H., Cohen G., Patey A. Towards secure two-party computation from the wire-tap channel Proceedings of the ICISC 2013 Washington, DC, USA 16–18 September 2013 Lecture Notes in Computer Science Lee H.-S., Han D.-G. Springer Berlin/Heidelberg, Germany 2014 Volume 8565 34 46
-- [3] Ding C., Yuan J. Covering and secret sharing with linear codes Discrete Mathematics and Theoretical Computer Science Lecture Notes in Computer Science Springer Berlin/Heidelberg, Germany 2003 Volume 2731 11 25
-- [4] Massey J.L. Minimal codewords and secret sharing Proceedings of the 6th Joint Swedish-Russian Workshop on Information Theory Mölle, Sweden 22–27 August 1993 246 249
-- [5] Yuan J., Ding C. Secret sharing schemes from three classes of linear codes IEEE Trans. Inf. Theory 2006 52 206 212 DOI 10.1109/TIT.2005.860412
-- [6] Ashikhmin A., Barg A., Cohen G., Huguet L. Variations on minimal codewords in linear codes Applied Algebra, Algebraic Algorithms and Error-Correcting Codes, (AAECC-11) Lecture Notes in Computer Science Cohen G., Giusti M., Mora T. Springer Berlin/Heidelberg, Germany 1995 Volume 948 96 105
-- [7] Cohen G.D., Mesnager S., Patey A. On minimal and quasi-minimal linear codes Proceedings of IMACC Lecture Notes in Computer Science Stam M. Springer Berlin/Heidelberg, Germany 2003 Volume 8308 85 98
-- [8] Ashikhmin A., Barg A. Minimal vectors in linear codes IEEE Trans. Inf. Theory 1998 44 2010 2017 DOI 10.1109/18.705584
-- [9] Ding C., Fan C., Zhou Z. The dimension and minimum distance of two classes of primitive BCH codes Finite Fields Appl. 2017 45 237 263 DOI 10.1016/j.ffa.2016.12.009
-- [10] Zhou Z., Ding C. Seven Classes of Three-Weight Cyclic Codes IEEE Trans. Commun. 2013 61 4120 4126 DOI 10.1109/TCOMM.2013.072213.130107
-- [11] Ding C., Heng Z., Zhou Z. Minimal binary linear codes IEEE Trans. Inf. Theory 2018 64 6536 6545 DOI 10.1109/TIT.2018.2819196
-- [12] Heng Z., Ding C., Zhou Z. Minimal linear codes over finite fields Finite Fields Appl. 2018 54 176 196 DOI 10.1016/j.ffa.2018.08.010
-- [13] Alfarano G.N., Borello M., Neri A. A geometric characterization of minimal codes and their asymptotic performance Adv. Math. Commun. 2022 16 115 133 DOI 10.3934/amc.2020104
-- [14] Lu W., Wu X. The parameters of minimal linear codes Finite Fields Appl. 2021 71 176 196 DOI 10.1016/j.ffa.2020.101799
-- [15] Tang C., Qiu Y., Liao Q., Zhou Z. Full Characterization of Minimal Linear Codes as Cutting Blocking Sets IEEE Trans. Inf. Theory 2021 67 3690 3700 DOI 10.1109/TIT.2021.3070377
-- [16] Alfarano G.N., Borello M., Neri A., Ravagnani A. Three Combinatorial Perspectives on Minimal Codes Siam J. Discret. Math. 2022 36 461 489 DOI 10.1137/21M1391493
-- [17] Bartoli D., Bonini M. Minimal linear codes in odd characteristic IEEE Trans. Inf. Theory 2019 65 4152 4155 DOI 10.1109/TIT.2019.2891992
-- [18] Bartoli D., Bonini M., Gunes B. An inductive construction of minimal codes Cryptogr. Commun. 2021 13 439 449 DOI 10.1007/s12095-021-00474-2
-- [19] Bartoli D., Cossidente A., Marino G., Pavese F. On cutting blocking sets and their codes Forum Math. 2022 34 347 368 DOI 10.1515/forum-2020-0338
-- [20] Bonini M., Borello M. Minimal linear codes arising from blocking sets J. Algebr. Comb. 2021 53 327 341 DOI 10.1007/s10801-019-00930-6
-- [21] Héger T., Nagy Z.L. Short minimal codes and covering codes via strong blocking sets in projective spaces IEEE Trans. Inf. Theory 2022 68 881 890 DOI 10.1109/TIT.2021.3123730
-- [22] Gorla E., Ravagnani A. Equidistant subspace codes Linear Algebra Its Appl. 2016 490 48 65 DOI 10.1016/j.laa.2015.10.029
-- [23] Li X., Yue Q., Tang D. A family of linear codes from constant dimension subspace codes Des. Codes Cryptogr. 2022 90 1 15 DOI 10.1007/s10623-021-00960-x
-- [24] Lu W., Wu X., Cao X., Luo G., Qin X. Minimal linear codes constructed from partial spreads arXiv 2023 2305.05320 DOI 10.3390/e25121669 PMCID PMC10742731 PMID 38136549
+- [1] Carlet C., Ding C., Yuan J. Linear codes from highly nonlinear functions and their secret sharing schemes. IEEE Trans. Inf. Theory 2005 51 2089–2102 DOI 10.1109/TIT.2005.847722
+- [2] Chabanne H., Cohen G., Patey A. Towards secure two-party computation from the wire-tap channel. Proceedings of the ICISC 2013 Washington, DC, USA 16–18 September 2013 Lecture Notes in Computer Science Lee H.-S., Han D.-G. Springer Berlin/Heidelberg, Germany 2014 Volume 8565 34–46
+- [3] Ding C., Yuan J. Covering and secret sharing with linear codes. Discrete Mathematics and Theoretical Computer Science Lecture Notes in Computer Science Springer Berlin/Heidelberg, Germany 2003 Volume 2731 11–25
+- [4] Massey J.L. Minimal codewords and secret sharing. Proceedings of the 6th Joint Swedish-Russian Workshop on Information Theory Mölle, Sweden 22–27 August 1993 246–249
+- [5] Yuan J., Ding C. Secret sharing schemes from three classes of linear codes. IEEE Trans. Inf. Theory 2006 52 206–212 DOI 10.1109/TIT.2005.860412
+- [6] Ashikhmin A., Barg A., Cohen G., Huguet L. Variations on minimal codewords in linear codes. Applied Algebra, Algebraic Algorithms and Error-Correcting Codes, (AAECC-11) Lecture Notes in Computer Science Cohen G., Giusti M., Mora T. Springer Berlin/Heidelberg, Germany 1995 Volume 948 96–105
+- [7] Cohen G.D., Mesnager S., Patey A. On minimal and quasi-minimal linear codes. Proceedings of IMACC Lecture Notes in Computer Science Stam M. Springer Berlin/Heidelberg, Germany 2003 Volume 8308 85–98
+- [8] Ashikhmin A., Barg A. Minimal vectors in linear codes. IEEE Trans. Inf. Theory 1998 44 2010–2017 DOI 10.1109/18.705584
+- [9] Ding C., Fan C., Zhou Z. The dimension and minimum distance of two classes of primitive BCH codes. Finite Fields Appl. 2017 45 237–263 DOI 10.1016/j.ffa.2016.12.009
+- [10] Zhou Z., Ding C. Seven Classes of Three-Weight Cyclic Codes. IEEE Trans. Commun. 2013 61 4120–4126 DOI 10.1109/TCOMM.2013.072213.130107
+- [11] Ding C., Heng Z., Zhou Z. Minimal binary linear codes. IEEE Trans. Inf. Theory 2018 64 6536–6545 DOI 10.1109/TIT.2018.2819196
+- [12] Heng Z., Ding C., Zhou Z. Minimal linear codes over finite fields. Finite Fields Appl. 2018 54 176–196 DOI 10.1016/j.ffa.2018.08.010
+- [13] Alfarano G.N., Borello M., Neri A. A geometric characterization of minimal codes and their asymptotic performance. Adv. Math. Commun. 2022 16 115–133 DOI 10.3934/amc.2020104
+- [14] Lu W., Wu X. The parameters of minimal linear codes. Finite Fields Appl. 2021 71 176–196 DOI 10.1016/j.ffa.2020.101799
+- [15] Tang C., Qiu Y., Liao Q., Zhou Z. Full Characterization of Minimal Linear Codes as Cutting Blocking Sets. IEEE Trans. Inf. Theory 2021 67 3690–3700 DOI 10.1109/TIT.2021.3070377
+- [16] Alfarano G.N., Borello M., Neri A., Ravagnani A. Three Combinatorial Perspectives on Minimal Codes. Siam J. Discret. Math. 2022 36 461–489 DOI 10.1137/21M1391493
+- [17] Bartoli D., Bonini M. Minimal linear codes in odd characteristic. IEEE Trans. Inf. Theory 2019 65 4152–4155 DOI 10.1109/TIT.2019.2891992
+- [18] Bartoli D., Bonini M., Gunes B. An inductive construction of minimal codes. Cryptogr. Commun. 2021 13 439–449 DOI 10.1007/s12095-021-00474-2
+- [19] Bartoli D., Cossidente A., Marino G., Pavese F. On cutting blocking sets and their codes. Forum Math. 2022 34 347–368 DOI 10.1515/forum-2020-0338
+- [20] Bonini M., Borello M. Minimal linear codes arising from blocking sets. J. Algebr. Comb. 2021 53 327–341 DOI 10.1007/s10801-019-00930-6
+- [21] Héger T., Nagy Z.L. Short minimal codes and covering codes via strong blocking sets in projective spaces. IEEE Trans. Inf. Theory 2022 68 881–890 DOI 10.1109/TIT.2021.3123730
+- [22] Gorla E., Ravagnani A. Equidistant subspace codes. Linear Algebra Its Appl. 2016 490 48–65 DOI 10.1016/j.laa.2015.10.029
+- [23] Li X., Yue Q., Tang D. A family of linear codes from constant dimension subspace codes. Des. Codes Cryptogr. 2022 90 1–15 DOI 10.1007/s10623-021-00960-x
+- [24] Lu W., Wu X., Cao X., Luo G., Qin X. Minimal linear codes constructed from partial spreads. arXiv 2023 2305.05320 DOI 10.3390/e25121669 PMCID PMC10742731 PMID 38136549

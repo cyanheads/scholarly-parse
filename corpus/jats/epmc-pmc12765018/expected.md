@@ -468,48 +468,48 @@ The uniform- and logarithmic-mesh solvers developed for the numerical implementa
 - [2] Wilczek, F. & Yu, Z. Probability of presence versus (2024), arXiv:2405.04493 [quant-ph] https://arxiv.org/abs/2405.04493
 - [3] Grave de Peralta, L. Exact quasi-relativistic wavefunctions of hydrogen-like atoms, Scientific Reports 10, (2020) 10.1038/s41598-020-71505-w
 - [4] Poveda, L. A., Grave de Peralta, L., Pittman, J. & Poirier, B. A non-relativistic approach to relativistic quantum mechanics: The case of the harmonic oscillator, Foundations of Physics 52, (2022) 10.1007/s10701-022-00541-5
-- [5] Puchalski, M., Komasa, J. & Pachucki, K. Relativistic corrections for the ground electronic state of molecular hydrogen. Phys. Rev. A95, 052506. 10.1103/PhysRevA.95.052506 (2017).
+- [5] Puchalski, M., Komasa, J. & Pachucki, K. Relativistic corrections for the ground electronic state of molecular hydrogen. Phys. Rev. A 95, 052506. 10.1103/PhysRevA.95.052506 (2017).
 - [6] Dyall, K. & Faegri, K. Introduction to Relativistic Quantum Chemistry (Oxford University Press, 2007)
 - [7] Reiher M. & Wolf, A. Relativistic Quantum Chemistry: The Fundamental Theory of Molecular Science (Wiley, 2009)
-- [8] Pachucki, K., Cencek, W. & Komasa, J. On the acceleration of the convergence of singular operators in gaussian basis sets. The Journal of Chemical Physics122, 184101. 10.1063/1.1888572 (2005).
-- [9] Jeszenszki, P., Ireland, R. T., Ferenc, D. & Mátyus, E. On the inclusion of cusp effects in expectation values with explicitly correlated gaussians. International Journal of Quantum Chemistry122, e26819. 10.1002/qua.26819 (2022).
+- [8] Pachucki, K., Cencek, W. & Komasa, J. On the acceleration of the convergence of singular operators in gaussian basis sets. The Journal of Chemical Physics 122, 184101. 10.1063/1.1888572 (2005).
+- [9] Jeszenszki, P., Ireland, R. T., Ferenc, D. & Mátyus, E. On the inclusion of cusp effects in expectation values with explicitly correlated gaussians. International Journal of Quantum Chemistry 122, e26819. 10.1002/qua.26819 (2022).
 - [10] Cioslowski, J. Drachmanization revisited, The Journal of Chemical Physics 163, (2025) 10.1063/5.0273068
-- [11] Foldy, L. L. & Wouthuysen, S. A. On the dirac theory of spin 1/2 particles and its non-relativistic limit. Physical Review78, 29. 10.1103/PhysRev.78.29 (1950).
+- [11] Foldy, L. L. & Wouthuysen, S. A. On the dirac theory of spin 1/2 particles and its non-relativistic limit. Physical Review 78, 29. 10.1103/PhysRev.78.29 (1950).
 - [12] Sakurai, J. J. Advanced Quantum Mechanics (Addison-Wesley, 1967).
-- [13] Müther, H., Sammarruca, F. & Ma, Z. Relativistic effects and three-nucleon forces in nuclear matter and nuclei. International Journal of Modern Physics E26, 1730001. 10.1142/S0218301317300016 (2017).
+- [13] Müther, H., Sammarruca, F. & Ma, Z. Relativistic effects and three-nucleon forces in nuclear matter and nuclei. International Journal of Modern Physics E 26, 1730001. 10.1142/S0218301317300016 (2017).
 - [14] Zeng, Z., Chen, B. & Zhao, J. Relativistic corrections to hadron-hadron correlation function (2025), arXiv:2506.19240 [hep-ph]
-- [15] Jwailes, M., Barghouthi, I. & Atawnah, Q. Higher-order corrections of the hydrogen-like atoms: the effect of darwin term. Arab Journal of Basic and Applied Sciences32, 175–187. 10.1080/25765299.2025.2521943 (2025).
-- [16] Ginocchio, J. N. Pseudospin as a relativistic symmetry. Phys. Rev. Lett.78, 436. 10.1103/PhysRevLett.78.436 (1997).
-- [17] Heitz, L., Ebran, J.-P. & Khan, E. Patterns of spin and pseudospin symmetries in nuclear relativistic mean-field approaches. Phys. Rev. C111, 064306. 10.1103/PhysRevC.111.064306 (2025).
-- [18] Turbiner, A. Quasi-exactly-solvable problems and algebra. Communications in Mathematical Physics118, 467. 10.1007/BF01466727 (1988).
-- [19] Turbiner, A. V. One-dimensional quasi-exactly solvable schrödinger equations. Physics Reports642, 1–71. 10.1016/j.physrep.2016.06.002 (2016).
+- [15] Jwailes, M., Barghouthi, I. & Atawnah, Q. Higher-order corrections of the hydrogen-like atoms: the effect of darwin term. Arab Journal of Basic and Applied Sciences 32, 175–187. 10.1080/25765299.2025.2521943 (2025).
+- [16] Ginocchio, J. N. Pseudospin as a relativistic symmetry. Phys. Rev. Lett. 78, 436. 10.1103/PhysRevLett.78.436 (1997).
+- [17] Heitz, L., Ebran, J.-P. & Khan, E. Patterns of spin and pseudospin symmetries in nuclear relativistic mean-field approaches. Phys. Rev. C 111, 064306. 10.1103/PhysRevC.111.064306 (2025).
+- [18] Turbiner, A. Quasi-exactly-solvable problems and algebra. Communications in Mathematical Physics 118, 467. 10.1007/BF01466727 (1988).
+- [19] Turbiner, A. V. One-dimensional quasi-exactly solvable schrödinger equations. Physics Reports 642, 1–71. 10.1016/j.physrep.2016.06.002 (2016).
 - [20] González-López, A., Kamran, N. & Olver, P. J. Quasi-exact solvability, in Algebraic Aspects of Integrable Systems: In Memory of Irene Dorfman, Contemporary Mathematics, Vol. 160, edited by A. S. Fokas and I. M. Gel’fand. 113–140 (American Mathematical Society, Providence, RI, 1994).
-- [21] Zhang, Y.-Z. Exact polynomial solutions of second order differential equations and their applications. Journal of Physics A: Mathematical and Theoretical45, 065206. 10.1088/1751-8113/45/6/065206 (2012) arXiv:1107.5090.
-- [22] Ishkhanyan, A. M. Schrödinger potentials solvable in terms of the confluent heun functions. Theoretical and Mathematical Physics188, 980. 10.1134/S0040577916070023 (2016).
-- [23] Baradaran, M., Nieto, L. M., de Oliveira, L. P. & Zarrinkamar, S. The spin-one duffin-kemmer-petiau equation revisited: analytical study of its structure and a careful choice of interaction. Physica Scripta100, 075310. 10.1088/1402-4896/ade2a2 (2025).
-- [24] Baradaran, M., Nieto, L. M. & Zarrinkamar, S. Dirac equation with space contributions embedded in a quantum-corrected gravitational field. Annals of Physics478, 170033. 10.1016/j.aop.2024.170033 (2025) arXiv:2408.10598.
+- [21] Zhang, Y.-Z. Exact polynomial solutions of second order differential equations and their applications. Journal of Physics A: Mathematical and Theoretical 45, 065206. 10.1088/1751-8113/45/6/065206 (2012) arXiv:1107.5090.
+- [22] Ishkhanyan, A. M. Schrödinger potentials solvable in terms of the confluent heun functions. Theoretical and Mathematical Physics 188, 980. 10.1134/S0040577916070023 (2016).
+- [23] Baradaran, M., Nieto, L. M., de Oliveira, L. P. & Zarrinkamar, S. The spin-one duffin-kemmer-petiau equation revisited: analytical study of its structure and a careful choice of interaction. Physica Scripta 100, 075310. 10.1088/1402-4896/ade2a2 (2025).
+- [24] Baradaran, M., Nieto, L. M. & Zarrinkamar, S. Dirac equation with space contributions embedded in a quantum-corrected gravitational field. Annals of Physics 478, 170033. 10.1016/j.aop.2024.170033 (2025) arXiv:2408.10598.
 - [25] Grossmann, C., Roos, H.-G. & Stynes, M. Numerical Treatment of Partial Differential Equations (Springer. Berlin Heidelberg10.1007/978-3-540-71584-9 (2007).
-- [26] Perrone, N. & Kao, R. A general finite difference method for arbitrary meshes. Computers & Structures5, 45–57. 10.1016/0045-7949(75)90018-8 (1975).
-- [27] Kadalbajoo, M. K. & Kumar, D. Variable mesh finite difference method for self-adjoint singularly perturbed two-point boundary value problems, Journal of Computational Mathematics , 711 (2010) 10.4208/jcm.1003-m2809
+- [26] Perrone, N. & Kao, R. A general finite difference method for arbitrary meshes. Computers & Structures 5, 45–57. 10.1016/0045-7949(75)90018-8 (1975).
+- [27] Kadalbajoo, M. K. & Kumar, D. Variable mesh finite difference method for self-adjoint singularly perturbed two-point boundary value problems, Journal of Computational Mathematics, 711 (2010) 10.4208/jcm.1003-m2809
 - [28] Amaro, M. B. A practical recipe for variable-step finite differences via equidistribution (2024) 10.48550/ARXIV.2412.05598
 - [29] Fang, J.-Y., Chen, S.-W. & Heng, T.-H. Solution to the dirac equation using the finite difference method, Nuclear Science and Techniques 31, 10.1007/s41365-020-0728-6 (2020)
 - [30] Zhang, Y., Bao, Y., Shen, H. & Hu, J. Resolving the spurious-state problem in the dirac equation with the finite-difference method, Physical Review C 106, (2022) 10.1103/physrevc.106.l051303
-- [31] Tupitsyn, I. I. & Shabaev, V. M. Spurious states of the dirac equation in a finite basis set. Optics and Spectroscopy105, 183–188. 10.1134/s0030400x08080043 (2008).
-- [32] Simos, T. & Williams, P. A finite-difference method for the numerical solution of the schrödinger equation. Journal of Computational and Applied Mathematics79, 189–205. 10.1016/s0377-0427(96)00156-2 (1997).
-- [33] Sudiarta, I. W. & Geldart, D. J. W. Solving the schrödinger equation using the finite difference time domain method. Journal of Physics A: Mathematical and Theoretical40, 1885–1896. 10.1088/1751-8113/40/8/013 (2007).
-- [34] Graen, T. & Grubmüller, H. Nusol - numerical solver for the 3d stationary nuclear schrödinger equation. Computer Physics Communications198, 169–178. 10.1016/j.cpc.2015.08.023 (2016).
-- [35] Becker, U., Grun, N. & Scheid, W. Solution of the time-dependent dirac equation by the finite difference method and application for ca20++u91+. Journal of Physics B: Atomic and Molecular Physics16, 1967–1981. 10.1088/0022-3700/16/11/017 (1983).
-- [36] Meng, J. Relativistic continuum hartree-bogoliubov theory with both zero range and finite range gogny force and their application. Nuclear Physics A635, 3–42. 10.1016/s0375-9474(98)00178-x (1998).
+- [31] Tupitsyn, I. I. & Shabaev, V. M. Spurious states of the dirac equation in a finite basis set. Optics and Spectroscopy 105, 183–188. 10.1134/s0030400x08080043 (2008).
+- [32] Simos, T. & Williams, P. A finite-difference method for the numerical solution of the schrödinger equation. Journal of Computational and Applied Mathematics 79, 189–205. 10.1016/s0377-0427(96)00156-2 (1997).
+- [33] Sudiarta, I. W. & Geldart, D. J. W. Solving the schrödinger equation using the finite difference time domain method. Journal of Physics A: Mathematical and Theoretical 40, 1885–1896. 10.1088/1751-8113/40/8/013 (2007).
+- [34] Graen, T. & Grubmüller, H. Nusol - numerical solver for the 3d stationary nuclear schrödinger equation. Computer Physics Communications 198, 169–178. 10.1016/j.cpc.2015.08.023 (2016).
+- [35] Becker, U., Grun, N. & Scheid, W. Solution of the time-dependent dirac equation by the finite difference method and application for ca20++u91+. Journal of Physics B: Atomic and Molecular Physics 16, 1967–1981. 10.1088/0022-3700/16/11/017 (1983).
+- [36] Meng, J. Relativistic continuum hartree-bogoliubov theory with both zero range and finite range gogny force and their application. Nuclear Physics A 635, 3–42. 10.1016/s0375-9474(98)00178-x (1998).
 - [37] Kiessling, A. W., Karlsson, D., Zhao, Y., Amaro, M. B. & Qi, C. Numerical solution of the dirac equation with scalar, vector, and tensor potentials, Nuclear Science and Techniques 36, (2025) 10.1007/s41365-025-01810-4
-- [38] Ackad, E. & Horbatsch, M. Numerical solution of the dirac equation by a mapped fourier grid method. Journal of Physics A: Mathematical and General38, 3157 (2005).
+- [38] Ackad, E. & Horbatsch, M. Numerical solution of the dirac equation by a mapped fourier grid method. Journal of Physics A: Mathematical and General 38, 3157 (2005).
 - [39] Sun, T. T., Zhang, S. Q., Zhang, Y., Hu, J. N. & Meng, J. Green’s function method for single-particle resonant states in relativistic mean field theory, Physical Review C 90, (2014) 10.1103/physrevc.90.054321
 - [40] Sun, T.-T., Qian, L., Chen, C., Ring, P. & Li, Z. P. Green’s function method for the single-particle resonances in a deformed dirac equation, Physical Review C 101, (2020) 10.1103/physrevc.101.014321
-- [41] Sturniolo, S. & Hillier, A. Mudirac: A dirac equation solver for elemental analysis with muonic x-rays. X-Ray Spectrometry50, 180 (2021).
-- [42] Salvat, F. & Fernández-Varea, J. M. radial: A fortran subroutine package for the solution of the radial schrödinger and dirac wave equations. Computer Physics Communications240, 165. 10.1016/j.cpc.2019.02.011 (2019).
-- [43] Tisseur, F. & Meerbergen, K. The quadratic eigenvalue problem. SIAM Review43, 235–286. 10.1137/s0036144500381988 (2001).
-- [44] Harris, C. R. et al. Array programming with numpy. Nature585, 357–362. 10.1038/s41586-020-2649-2 (2020).
-- [45] Virtanen, P. et al. Scipy 1.0: fundamental algorithms for scientific computing in python. Nature Methods17, 261–272. 10.1038/s41592-019-0686-2 (2020).
-- [46] Talman, J. D. & Shadwick, W. F. Optimized effective atomic central potential. Phys. Rev. A14, 36. 10.1103/PhysRevA.14.36 (1976).
+- [41] Sturniolo, S. & Hillier, A. Mudirac: A dirac equation solver for elemental analysis with muonic x-rays. X-Ray Spectrometry 50, 180 (2021).
+- [42] Salvat, F. & Fernández-Varea, J. M. radial: A fortran subroutine package for the solution of the radial schrödinger and dirac wave equations. Computer Physics Communications 240, 165. 10.1016/j.cpc.2019.02.011 (2019).
+- [43] Tisseur, F. & Meerbergen, K. The quadratic eigenvalue problem. SIAM Review 43, 235–286. 10.1137/s0036144500381988 (2001).
+- [44] Harris, C. R. et al. Array programming with numpy. Nature 585, 357–362. 10.1038/s41586-020-2649-2 (2020).
+- [45] Virtanen, P. et al. Scipy 1.0: fundamental algorithms for scientific computing in python. Nature Methods 17, 261–272. 10.1038/s41592-019-0686-2 (2020).
+- [46] Talman, J. D. & Shadwick, W. F. Optimized effective atomic central potential. Phys. Rev. A 14, 36. 10.1103/PhysRevA.14.36 (1976).
 - [47] NuPECC, Nupecc long range plan 2024 for european nuclear physics (2025) 10.48550/ARXIV.2503.15575
 - [48] Guo, Y., Pašteka, L. F., Eliav, E. & Borschevsky, A. Ionization potentials and electron affinity of oganesson with relativistic coupled cluster method, in New Electron Correlation Methods and their Applications, and Use of Atomic Orbitals with Exponential Asymptotes. 107–123 (Elsevier, 2021). 10.1016/bs.aiq.2021.05.007
 - [49] Jerabek, P., Schuetrumpf, B., Schwerdtfeger, P. & Nazarewicz, W. Electron and nucleon localization functions of oganesson: Approaching the thomas-fermi limit, Physical Review Letters 120, (2018) 10.1103/physrevlett.120.053001

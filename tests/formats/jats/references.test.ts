@@ -107,8 +107,8 @@ describe('element-citation (#69)', () => {
       pmid: '37657419',
       source: 'Cell',
       text:
-        'Doman J.L., Pandey S. Phage-assisted evolution yields compact prime editors Cell 186 ' +
-        '18 2023 3983 4002.e26 PMID 37657419 DOI 10.1016/j.cell.2023.07.039 PMCID PMC10482982',
+        'Doman J.L., Pandey S. Phage-assisted evolution yields compact prime editors. Cell 186(18) ' +
+        '2023 3983–4002.e26 PMID 37657419 DOI 10.1016/j.cell.2023.07.039 PMCID PMC10482982',
       title: 'Phage-assisted evolution yields compact prime editors',
       year: '2023',
     });
@@ -203,6 +203,18 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       'Steinegger, M. Protein-level assembly. Nat. Methods 16, 603–606 (2019). PMID 31235882',
     );
     expect(text).not.toContain('Nat. Methods16');
+  });
+  it('applies the same spacing inside a citation-string wrapper (#123)', () => {
+    // Europe PMC wraps the whole citation in `<named-content content-type="citation-string">`.
+    const text = mixedCitation(
+      '<named-content content-type="citation-string">Das, S. C. <italic>et al</italic>. ' +
+        'Poultry production. <italic>Worlds Poult Sci J</italic><bold>64</bold>, 99–118 (2019).' +
+        '</named-content><ext-link ext-link-type="google-scholar" xlink:href="x"/>',
+      'CR1',
+    );
+    expect(text).toBe(
+      'Das, S. C. et al. Poultry production. Worlds Poult Sci J 64, 99–118 (2019).',
+    );
   });
 
   it('separates a zero-gap surname and given names inside a bare <name> (#124)', () => {
