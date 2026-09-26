@@ -15,8 +15,8 @@ Parse the formats scholarly papers are published in into one document model, and
 ## Public API
 
 ```ts
-// Package root: the model, detection, renderers.
-import { detect, toMarkdown, toText, toSections, type ScholarlyDocument } from 'scholarly-parse';
+// Package root: the model, detection, any-format parsing, renderers.
+import { detect, parse, toMarkdown, toText, toSections, type ScholarlyDocument } from 'scholarly-parse';
 
 // One subpath per format, so an application loads only what it parses.
 import { parseJats, jatsInlineToMarkdown } from 'scholarly-parse/jats';
@@ -28,7 +28,8 @@ import { parsePdf } from 'scholarly-parse/pdf';
 
 - Every parser returns a `ParseResult`: `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`. Expected failures are values — `malformed`, `wrong-format`, `empty`, `blocked`, `too-large`. A missing optional peer dependency is a setup error and throws with the install command.
 - XML parsers are synchronous. HTML and PDF parsers are async because their engines load on first use.
-- `detect(input, { contentType?, url? })` names the format and flavor, or reports `blocked` when the payload is a captcha or bot check, including HTML served where a PDF was promised.
+- `detect(input)` names the format from the payload's opening bytes: a PDF header, a JATS or TEI root, LaTeXML's markers, or HTML markup. A captcha or bot check served where a paper was promised is HTML, and the HTML parser reports it as `blocked`.
+- `parse(input, { format?, baseUrl?, maxInputBytes?, maxPages? })` detects the format (or takes the caller's) and runs that parser, loading it on first use.
 - `jatsInlineToMarkdown(fragment)` converts a JATS fragment (a Crossref or Europe PMC abstract) without a full article around it.
 
 ## The model
@@ -55,7 +56,7 @@ Inline text is CommonMark with GFM: emphasis, links, `$…$` math where the sour
 | `/tei` | Grobid TEI: the standard `<TEI>` document (`text/body/div`) and the lowercase `<tei>` wrapped in HTML (`text/div`) that OpenAlex serves | New | `structured` |
 | `/latexml` | arXiv's `arxiv.org/html` and ar5iv renders | The boilerplate stripping in `arxiv-mcp-server`, replaced by a real conversion | `structured` |
 | `/html` | Article pages from publishers and preprint servers | A walker over a `linkedom` DOM: `citation_*` and Dublin Core metadata, the article container, headings as the section tree, and page furniture skipped | `partial` |
-| `/pdf` | PDF with a text layer | `unpdf` text plus heading, reference, and hyphenation heuristics | `partial` or `flat` |
+| `/pdf` | PDF with a text layer | `unpdf` text runs with their fonts, laid out into columns and reading order, then structure from typography: title and abstract from the first page, headings by size, weight, numbering, and name, captions by label, references by numbering or indentation | `partial` or `flat` |
 
 Elsevier full-text XML (its own `xocs`/`ce:` schema, not JATS) is a later format.
 
@@ -92,4 +93,6 @@ Every parsing bug fixed in a consumer before this package existed becomes a name
 - **Publisher HTML walked directly, not through a readability extractor.** Defuddle, run on a PLOS article, turned the reference list into footnotes holding only "View Article" links, dropped every figure caption, and stripped the class attributes publisher pages mark abstracts, figures, and references with.
 - **A well-formedness check before every XML parse.** fast-xml-parser accepts markup that is not well-formed and silently drops what follows the fault (an unescaped `<` in `p < 0.05` loses the rest of the section), and its own validator is deprecated in favor of a package that brings a second XML parser. A single-pass scan in `src/xml/well-formed.ts` turns that silent loss into a `malformed` result.
 - **Unscoped on npm.** The package is meant for any TypeScript project that reads papers; the cyanheads name travels with the repository, the npm maintainer, and the README.
+- **Detection reads the payload, not the transport.** A `Content-Type` or URL says what a server meant to send; the bytes say what arrived, and a challenge page served for a PDF URL is the case that matters. Detection sniffs the opening bytes only, and challenge pages are left to the HTML parser, which reports them as `blocked`.
+- **PDF structure from typography, without a model.** A PDF records where text is drawn, not what it is. The parser reads text runs with their fonts from pdf.js (through `unpdf`), finds each page's column gutter, and infers structure from size, weight, numbering, and the names sections usually carry. It runs anywhere with no service to call; Grobid remains the better reader, and its TEI is a format of its own.
 - **Legal formats in a sibling package.** Akoma Ntoso is the legal counterpart of JATS, with its own model (acts, divisions, provisions), so a shared package would only blur both.

@@ -36,7 +36,8 @@ Bytes or text in → a format parser → `ScholarlyDocument` → a renderer. Not
 | `src/model/document.ts` | The model. The single contract between parsers and renderers |
 | `src/model/result.ts` | `ParseResult` — every parser's return type |
 | `src/formats/<format>/` | One parser per format; each `index.ts` is that subpath's public surface (`scholarly-parse/jats`, …) |
-| `src/detect/` | Format detection and challenge-page detection |
+| `src/detect.ts`, `src/parse.ts` | Format detection from a payload's opening bytes; `parse`, which runs the detected format's parser |
+| `src/html/` | Shared HTML helpers: the `linkedom` DOM, table grids, challenge-page detection |
 | `src/render/` | Markdown, plain text, flat section list |
 | `src/xml/` | Shared `fast-xml-parser` configuration and ordered-tree helpers |
 | `corpus/<format>/<id>/` | Fixture documents with `meta.json`, `expect.json`, `expected.md` |

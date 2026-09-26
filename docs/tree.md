@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 15:44:50
+Generated on: 2026-09-26 16:42:45
 
 ```text
 scholarly-parse/
@@ -88,6 +88,16 @@ scholarly-parse/
 │   │   │   ├── index.ts
 │   │   │   ├── inline.ts
 │   │   │   └── parse.ts
+│   │   ├── pdf/
+│   │   │   ├── blocks.ts
+│   │   │   ├── index.ts
+│   │   │   ├── inline.ts
+│   │   │   ├── layout.ts
+│   │   │   ├── lines.ts
+│   │   │   ├── load.ts
+│   │   │   ├── parse.ts
+│   │   │   ├── references.ts
+│   │   │   └── structure.ts
 │   │   └── tei/
 │   │       ├── index.ts
 │   │       ├── inline.ts
@@ -116,7 +126,9 @@ scholarly-parse/
 │   │   ├── mathml.ts
 │   │   ├── ordered.ts
 │   │   └── well-formed.ts
-│   └── index.ts
+│   ├── detect.ts
+│   ├── index.ts
+│   └── parse.ts
 ├── tests/
 │   ├── corpus/
 │   │   ├── corpus.test.ts
@@ -129,17 +141,22 @@ scholarly-parse/
 │   ├── formats/
 │   │   ├── html/
 │   │   │   └── html.test.ts
-│   │   └── jats/
-│   │       ├── figures.test.ts
-│   │       ├── formulas.test.ts
-│   │       ├── fragment.test.ts
-│   │       ├── front.test.ts
-│   │       ├── helpers.ts
-│   │       ├── references.test.ts
-│   │       ├── sections.test.ts
-│   │       └── tables.test.ts
-│   └── xml/
-│       └── well-formed.test.ts
+│   │   ├── jats/
+│   │   │   ├── figures.test.ts
+│   │   │   ├── formulas.test.ts
+│   │   │   ├── fragment.test.ts
+│   │   │   ├── front.test.ts
+│   │   │   ├── helpers.ts
+│   │   │   ├── references.test.ts
+│   │   │   ├── sections.test.ts
+│   │   │   └── tables.test.ts
+│   │   └── pdf/
+│   │       ├── build-pdf.ts
+│   │       └── pdf.test.ts
+│   ├── xml/
+│   │   └── well-formed.test.ts
+│   ├── detect.test.ts
+│   └── parse.test.ts
 ├── .env.example
 ├── .gitattributes
 ├── .gitignore
