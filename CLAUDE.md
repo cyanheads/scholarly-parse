@@ -48,7 +48,7 @@ Bytes or text in → a format parser → `ScholarlyDocument` → a renderer. Not
 - **Parse only.** No network, no filesystem, no `node:` imports under `src/` (Biome's `noNodejsModules` enforces it). The package must run on Workers.
 - **The model is the contract.** A field added to `src/model/document.ts` is public API. Rename or remove one only as a breaking change, recorded in the changelog with `breaking: true`.
 - **Expected failures are results.** A parser never throws on bad input; it returns `{ ok: false, error }`. It throws only for a missing optional peer dependency, with the install command in the message.
-- **Optional peers load lazily.** `linkedom`, `defuddle`, and `unpdf` are imported on first use inside their format; nothing at module top level pulls them in.
+- **Optional peers load lazily.** `linkedom` and `unpdf` are imported on first use inside their format; nothing at module top level pulls them in.
 - **Untrusted input has bounds.** Every parser checks `maxInputBytes`, entity expansion stays capped in the shared XML config, and recursion over source trees is depth-limited. A crafted document must produce a result, not a hang or a stack overflow.
 - **Corpus sources are byte-for-byte and openly licensed.** Never reformat a `source.*` file. Never add a document without confirming its license from its own metadata (`corpus/README.md`), and regenerate `corpus/ATTRIBUTION.md` when fixtures change.
 - **A bug fix starts as a fixture.** Reproduce it in `corpus/` (or a unit test when no openly licensed document shows it), watch it fail, then fix it.

@@ -60,7 +60,7 @@ Per package, record what changed, the impact here, and any action item. A packag
 Read these closer than the rest:
 
 - **`fast-xml-parser`** — the one required dependency, and it parses untrusted XML. Look for changes to entity handling, option names, and defaults: a renamed option or flipped default can silently remove the entity caps in the shared config under `src/xml/`. After updating, re-run the entity probes from `skills/security-pass/SKILL.md` Axis 1.
-- **Optional peers** (`linkedom`, `defuddle`, `unpdf`) — third-party engines on the untrusted-input path. When `package.json` declares them as peers, a major bump of the development copy means deciding whether the `peerDependencies` range moves too; a range change is consumer-facing and gets its own changelog line, and dropping a major a consumer may have installed is `breaking: true`. For `unpdf`, check which pdf.js build it bundles (security-pass Axis 7).
+- **Optional peers** (`linkedom`, `unpdf`) — third-party engines on the untrusted-input path. When `package.json` declares them as peers, a major bump of the development copy means deciding whether the `peerDependencies` range moves too; a range change is consumer-facing and gets its own changelog line, and dropping a major a consumer may have installed is `breaking: true`. For `unpdf`, check which pdf.js build it bundles (security-pass Axis 7).
 - **Toolchain** — `typescript`, `@biomejs/biome`, `vitest`, `publint`, `@arethetypeswrong/cli`. A Biome bump may need `bunx biome migrate --write`, which also moves the `$schema` version in `biome.json`. A TypeScript bump moves the TypeScript badge in `README.md`, which pins the range. A Bun upgrade moves `packageManager` and `@types/bun` together.
 
 ### 4. Adopt the changes

@@ -49,7 +49,7 @@ The title scope names it:
 | The model has no place for what the source carries | `model` (usually a feature) |
 | A fixture, the corpus runner, invariants, or sampling misbehaves | `corpus` |
 | The source document itself is malformed or lacks the markup | not a parser bug — check that the result says so (a warning, `partial` quality) and file only if it doesn't |
-| The fault is in a dependency (`fast-xml-parser`, `linkedom`, `defuddle`, `unpdf`) | file upstream, then file here only for the workaround, linking the upstream issue |
+| The fault is in a dependency (`fast-xml-parser`, `linkedom`, `unpdf`) | file upstream, then file here only for the workaround, linking the upstream issue |
 
 When genuinely ambiguous, pick the format the failing document is in and say what's uncertain.
 

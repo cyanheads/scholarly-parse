@@ -39,7 +39,7 @@ Gather before starting; ask if unclear:
 ls src/formats/                                          # formats that exist
 rg -n "XMLParser" src/                                   # every XML engine construction
 rg -n "await import\(" src/                              # lazy peer loads
-rg -n "from '(linkedom|defuddle|unpdf)'" src/            # static peer imports — should print nothing
+rg -n "from '(linkedom|unpdf)'" src/            # static peer imports — should print nothing
 rg -n "maxInputBytes" src/                               # size checks
 rg -n "new RegExp\(|\.(match|matchAll|replace|replaceAll|split|test|exec|search)\(" src/   # regex sites
 ```
@@ -172,11 +172,11 @@ Consumers hand the Markdown to renderers that execute HTML and follow links.
 
 Peers are third-party engines running on untrusted input; loading them eagerly widens every consumer's attack surface and breaks consumers who don't install them.
 
-**Look in:** every import of `linkedom`, `defuddle`, and `unpdf`; `src/index.ts`; each subpath `index.ts`; the built `dist/`.
+**Look in:** every import of `linkedom` and `unpdf`; `src/index.ts`; each subpath `index.ts`; the built `dist/`.
 
 **Check:**
 
-- Peers are imported only with `await import('<literal>')` inside their format, on first use. `rg -n "from '(linkedom|defuddle|unpdf)'" src/ dist/` prints nothing, and neither the root nor another format's subpath reaches a peer's import.
+- Peers are imported only with `await import('<literal>')` inside their format, on first use. `rg -n "from '(linkedom|unpdf)'" src/ dist/` prints nothing, and neither the root nor another format's subpath reaches a peer's import.
 - The import specifier is a string literal — never built from input or options.
 - A missing peer throws once, with the install command, and the message carries nothing from the input.
 - In the Axis 8 scratch project, `import 'scholarly-parse'` and each XML subpath load with no peer installed.

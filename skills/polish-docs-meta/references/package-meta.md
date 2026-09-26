@@ -34,7 +34,7 @@ What each field should hold for `scholarly-parse`. Check each one; fix what's mi
 | Field | Should be |
 |:------|:----------|
 | `dependencies` | `fast-xml-parser` only — the one required dependency |
-| `peerDependencies` | Each optional engine a format loads on first use (`linkedom`, `defuddle`, `unpdf`), declared once the format that imports it exists |
+| `peerDependencies` | Each optional engine a format loads on first use (`linkedom`, `unpdf`), declared once the format that imports it exists |
 | `peerDependenciesMeta` | Every peer marked `{ "optional": true }` — a consumer that parses only XML installs none of them |
 | `devDependencies` | Tooling, plus a copy of each peer so the tests can load it |
 

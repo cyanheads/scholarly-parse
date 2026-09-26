@@ -54,12 +54,12 @@ Inline text is CommonMark with GFM: emphasis, links, `$…$` math where the sour
 | `/jats` | JATS 1.x in the Archiving and Publishing tag sets, as served by PMC, Europe PMC, bioRxiv, and publisher TDM feeds | The parser hardened in `pubmed-mcp-server` (`src/services/ncbi/parsing/`), moved here unchanged and then reshaped to the model | `structured` |
 | `/tei` | Grobid TEI: the standard `<TEI>` document (`text/body/div`) and the lowercase `<tei>` wrapped in HTML (`text/div`) that OpenAlex serves | New | `structured` |
 | `/latexml` | arXiv's `arxiv.org/html` and ar5iv renders | The boilerplate stripping in `arxiv-mcp-server`, replaced by a real conversion | `structured` |
-| `/html` | Article pages from publishers and preprint servers | `defuddle` with a DOM from `linkedom`, plus cleanup for known page furniture | `partial` |
+| `/html` | Article pages from publishers and preprint servers | A walker over a `linkedom` DOM: `citation_*` and Dublin Core metadata, the article container, headings as the section tree, and page furniture skipped | `partial` |
 | `/pdf` | PDF with a text layer | `unpdf` text plus heading, reference, and hyphenation heuristics | `partial` or `flat` |
 
 Elsevier full-text XML (its own `xocs`/`ce:` schema, not JATS) is a later format.
 
-**Dependencies.** `fast-xml-parser` is the one required dependency. `linkedom`, `defuddle`, and `unpdf` are optional peers, loaded on first use.
+**Dependencies.** `fast-xml-parser` is the one required dependency. `linkedom` and `unpdf` are optional peers, loaded on first use.
 
 ## Quality engine
 
@@ -89,5 +89,7 @@ Every parsing bug fixed in a consumer before this package existed becomes a name
 - **Results, not exceptions, for bad input.** Malformed and blocked documents are normal in the wild; a caller branches on `ok` instead of wrapping every call in `try`.
 - **Inline Markdown, typed blocks.** Consumers render Markdown almost always; typing the blocks keeps tables, formulas, and figures addressable without a second parser.
 - **Optional peers for HTML and PDF engines.** A consumer that parses only JATS installs one dependency.
+- **Publisher HTML walked directly, not through a readability extractor.** Defuddle, run on a PLOS article, turned the reference list into footnotes holding only "View Article" links, dropped every figure caption, and stripped the class attributes publisher pages mark abstracts, figures, and references with.
+- **A well-formedness check before every XML parse.** fast-xml-parser accepts markup that is not well-formed and silently drops what follows the fault (an unescaped `<` in `p < 0.05` loses the rest of the section), and its own validator is deprecated in favor of a package that brings a second XML parser. A single-pass scan in `src/xml/well-formed.ts` turns that silent loss into a `malformed` result.
 - **Unscoped on npm.** The package is meant for any TypeScript project that reads papers; the cyanheads name travels with the repository, the npm maintainer, and the README.
 - **Legal formats in a sibling package.** Akoma Ntoso is the legal counterpart of JATS, with its own model (acts, divisions, provisions), so a shared package would only blur both.
