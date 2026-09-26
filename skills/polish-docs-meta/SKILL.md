@@ -99,6 +99,8 @@ Description: step 3.
 - Missing from GitHub → `gh repo edit cyanheads/scholarly-parse --add-topic <topic>`
 - Missing from `package.json` → add to `keywords`
 
+GitHub allows at most 20 topics. When the union is larger, cut the weakest terms from both sides (a term another one already covers goes first) so the two sets stay identical.
+
 ### 8. CITATION.cff and LICENSE
 
 - `CITATION.cff` — `title` is `scholarly-parse`, `abstract` is the description (step 3), `repository-code` is `https://github.com/cyanheads/scholarly-parse`, `license` matches `package.json`, `keywords` stay current with the formats

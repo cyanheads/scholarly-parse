@@ -31,7 +31,7 @@
     "arxiv",
     "pubmed-central",
     "europe-pmc",
-    "scholarly",
+    "scholarly-communication",
     "scientific-papers",
     "full-text",
     "pdf",
@@ -41,7 +41,9 @@
     "parser",
     "llm",
     "rag",
-    "typescript"
+    "typescript",
+    "bun",
+    "cyanheads"
   ],
   "engines": {
     "node": ">=22.0.0"

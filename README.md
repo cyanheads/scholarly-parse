@@ -11,13 +11,87 @@
 
 ---
 
-> **In development — not yet published to npm.** The document model is in place; the format parsers land ahead of 0.1.0. [`docs/design.md`](./docs/design.md) describes the API and model being built.
+> **Not yet on npm.** 0.1.0 is being prepared for release; [`docs/design.md`](./docs/design.md) describes the API and model.
 
 ## What it does
 
-Papers reach code in five shapes: JATS XML from PubMed Central, Europe PMC, and publisher feeds; TEI from Grobid; LaTeXML HTML from arXiv; article pages from publisher sites; and PDF. `scholarly-parse` reads each into the same `ScholarlyDocument` — metadata, abstracts, a section tree of typed blocks (paragraphs, tables, figures, formulas, lists), references, and diagnostics saying how much structure it recovered — and renders that as Markdown.
+`scholarly-parse` reads a paper in any of five formats — JATS XML from PubMed Central, Europe PMC, and publisher feeds; TEI from Grobid; LaTeXML HTML from arXiv; publisher article pages; and PDF — into one `ScholarlyDocument`, and renders it as Markdown. It parses only: fetching, rate limiting, and licensing decisions stay with the caller.
 
-It parses only. Fetching, rate limiting, and licensing decisions stay with the caller.
+## Install
+
+```sh
+bun add scholarly-parse
+# or
+npm install scholarly-parse
+```
+
+The JATS and TEI parsers need nothing more. The others load an optional peer on first use, and throw with the install command when it is missing:
+
+| Format | Also install |
+|:---|:---|
+| `scholarly-parse/latexml`, `scholarly-parse/html` | `linkedom` |
+| `scholarly-parse/pdf` | `unpdf` |
+
+Runs on Bun, Node ≥22, and Cloudflare Workers. ESM only.
+
+## Usage
+
+```ts
+import { toMarkdown } from 'scholarly-parse';
+import { parseJats } from 'scholarly-parse/jats';
+
+const result = parseJats(xml);
+if (result.ok) console.log(toMarkdown(result.document));
+else console.error(result.error.reason, result.error.message);
+```
+
+When the format isn't known, `parse` detects it from the payload and loads that parser. It is async, since the HTML and PDF parsers are:
+
+```ts
+import { parse } from 'scholarly-parse';
+
+const result = await parse(bytes, { baseUrl: url });
+if (!result.ok && result.error.reason === 'blocked') {
+  // a captcha or access-denied page arrived instead of the paper
+}
+```
+
+`toSections` flattens the document into sections with their heading paths and sizes, for serving a long paper a piece at a time:
+
+```ts
+import { toSections } from 'scholarly-parse';
+
+for (const { path, chars, markdown } of toSections(document)) {
+  console.log(path.join(' › '), chars);
+}
+```
+
+## API
+
+| Import | Exports |
+|:---|:---|
+| `scholarly-parse` | `detect`, `parse`, `toMarkdown`, `toText`, `toSections`, and the model types |
+| `scholarly-parse/jats` | `parseJats`, `jatsInlineToMarkdown` |
+| `scholarly-parse/tei` | `parseTei` |
+| `scholarly-parse/latexml` | `parseLatexml` |
+| `scholarly-parse/html` | `parseHtml` |
+| `scholarly-parse/pdf` | `parsePdf` |
+
+Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links, and `parsePdf` a `maxPages` limit (default 300). `parseJats` and `parseTei` are synchronous; the rest are async.
+
+## Formats
+
+| Subpath | Reads | Quality |
+|:---|:---|:---|
+| `/jats` | JATS 1.x as PubMed Central, Europe PMC, bioRxiv, and publisher feeds serve it | `structured` |
+| `/tei` | Grobid TEI, including the HTML-wrapped form OpenAlex serves | `structured` |
+| `/latexml` | arXiv HTML and ar5iv renders | `structured` |
+| `/html` | Publisher and preprint-server article pages | `partial` |
+| `/pdf` | PDFs with a text layer, structure read from typography | `partial`, or `flat` when no headings are found |
+
+## Document model
+
+A `ScholarlyDocument` holds `metadata`, `abstracts` by kind, `body` and `back` section trees of typed blocks (paragraph, list, table, figure, formula, code, quote, box, supplement), `floats`, `references`, `footnotes`, and `diagnostics`: the `quality` level, coded warnings, and source elements no handler covered. [`docs/design.md`](./docs/design.md) outlines it and records the decisions behind it; [`src/model/document.ts`](./src/model/document.ts) is the source of truth.
 
 ## Project structure
 
@@ -25,7 +99,9 @@ It parses only. Fetching, rate limiting, and licensing decisions stay with the c
 |:---|:---|
 | `src/model/` | The document model and the `ParseResult` type |
 | `src/formats/` | One parser per format |
+| `src/detect.ts`, `src/parse.ts` | Format detection, and `parse` for any format |
 | `src/render/` | Markdown, plain text, section list |
+| `src/html/`, `src/xml/` | The shared DOM and XML readers, HTML tables, MathML to TeX |
 | `corpus/` | Openly licensed real documents the parsers are tested against |
 | `tests/` | Unit tests and the corpus suite |
 | `docs/design.md` | Scope, API, model, and decisions |
