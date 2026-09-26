@@ -107,4 +107,4 @@ Release mode: `gated`. `git-wrapup` on a `release/<version>` branch, then the `r
 
 ## Commit stance
 
-Until 0.1.0 ships, commit and push to `main` freely once `bun run devcheck` is green — terse Conventional Commits, one logical concern per commit, no attribution trailers. From 0.1.0 on, work lands through the release flow above. Never force-push, never `git stash`, never use worktrees.
+Work lands through the release flow above — terse Conventional Commits, one logical concern per commit, no attribution trailers. Never force-push, never `git stash`, never use worktrees.

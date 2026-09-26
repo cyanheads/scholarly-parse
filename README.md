@@ -11,8 +11,6 @@
 
 ---
 
-> **Not yet on npm.** 0.1.0 is being prepared for release; [`docs/design.md`](./docs/design.md) describes the API and model.
-
 ## What it does
 
 `scholarly-parse` reads a paper in any of five formats — JATS XML from PubMed Central, Europe PMC, and publisher feeds; TEI from Grobid; LaTeXML HTML from arXiv; publisher article pages; and PDF — into one `ScholarlyDocument`, and renders it as Markdown. It parses only: fetching, rate limiting, and licensing decisions stay with the caller.
@@ -91,7 +89,7 @@ Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, 
 
 ## Document model
 
-A `ScholarlyDocument` holds `metadata`, `abstracts` by kind, `body` and `back` section trees of typed blocks (paragraph, list, table, figure, formula, code, quote, box, supplement), `floats`, `references`, `footnotes`, and `diagnostics`: the `quality` level, coded warnings, and source elements no handler covered. [`docs/design.md`](./docs/design.md) outlines it and records the decisions behind it; [`src/model/document.ts`](./src/model/document.ts) is the source of truth.
+A `ScholarlyDocument` holds `metadata` (title, authors, venue, identifiers, license, and related works such as the article a correction corrects or the notice retracting it), `abstracts` by kind, `body` and `back` section trees of typed blocks (paragraph, list, table, figure, formula, code, quote, box, supplement), `floats`, `references`, `footnotes`, and `diagnostics`: the `quality` level, coded warnings, and source elements no handler covered. [`docs/design.md`](./docs/design.md) outlines it and records the decisions behind it; [`src/model/document.ts`](./src/model/document.ts) is the source of truth.
 
 ## Project structure
 
