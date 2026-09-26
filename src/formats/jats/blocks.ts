@@ -19,6 +19,7 @@ import type {
   SectionKind,
   SupplementBlock,
 } from '../../model/document.js';
+import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis } from '../../render/inline.js';
 import {
@@ -543,5 +544,13 @@ export function parseSection(
     ctx.sectionIds.delete(id);
     return;
   }
-  return { blocks, id, kind, ...(label && { label }), sections, ...(title && { title }) };
+  const heading = splitSectionNumber(title, label);
+  return {
+    blocks,
+    id,
+    kind,
+    ...(heading.label && { label: heading.label }),
+    sections,
+    ...(heading.title && { title: heading.title }),
+  };
 }

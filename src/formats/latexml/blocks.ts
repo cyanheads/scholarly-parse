@@ -27,6 +27,7 @@ import type {
   TableBlock,
 } from '../../model/document.js';
 import { issueId } from '../../model/section-ids.js';
+import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis } from '../../render/inline.js';
 import { type LatexmlContext, SKIP_TAGS } from './context.js';
@@ -428,5 +429,13 @@ export function parseSection(
     ctx.sectionIds.delete(id);
     return;
   }
-  return { blocks, id, kind, ...(label && { label }), sections, ...(title && { title }) };
+  const printed = splitSectionNumber(title, label);
+  return {
+    blocks,
+    id,
+    kind,
+    ...(printed.label && { label: printed.label }),
+    sections,
+    ...(printed.title && { title: printed.title }),
+  };
 }
