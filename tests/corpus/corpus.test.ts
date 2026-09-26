@@ -10,28 +10,11 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { parseHtml } from '../../src/formats/html/index.js';
-import { parseJats } from '../../src/formats/jats/index.js';
-import { parseLatexml } from '../../src/formats/latexml/index.js';
-import { parsePdf } from '../../src/formats/pdf/index.js';
-import { parseTei } from '../../src/formats/tei/index.js';
-import type { ParseResult } from '../../src/model/result.js';
 import { toMarkdown } from '../../src/render/markdown.js';
 import { checkExpect, fixtureExpectSchema } from './expect.js';
 import { type CorpusFormat, fixtureMetaSchema, listFixtures } from './fixtures.js';
 import { checkInvariants } from './invariants.js';
-
-/** A format's parser; `url` is where the fixture was retrieved, for formats that resolve links against it. */
-type Parser = (input: Uint8Array, url: string) => ParseResult | Promise<ParseResult>;
-
-/** The parser for each format. A format without one yet is listed as pending. */
-const PARSERS: Partial<Record<CorpusFormat, Parser>> = {
-  html: (input, url) => parseHtml(input, { baseUrl: url }),
-  jats: (input) => parseJats(input),
-  latexml: (input, url) => parseLatexml(input, { baseUrl: url }),
-  pdf: (input) => parsePdf(input),
-  tei: (input) => parseTei(input),
-};
+import { PARSERS } from './parsers.js';
 
 const UPDATE = process.env.SCHOLARLY_PARSE_UPDATE_SNAPSHOTS === '1';
 const TEXT_FORMATS: ReadonlySet<CorpusFormat> = new Set(['jats', 'tei', 'latexml', 'html']);

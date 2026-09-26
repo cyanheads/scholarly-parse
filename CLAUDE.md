@@ -23,6 +23,7 @@ bun run devcheck   # the gate — green before declaring any work complete, and 
 | `bun run test:corpus` | Only the corpus suite: every fixture through its parser, assertions, invariants, snapshots |
 | `bun run corpus:snapshot` | Rewrite `expected.md` snapshots — review every diff before committing |
 | `bun run corpus:sample` | Wild sampling: fetch fresh openly licensed documents, run invariants, report failure classes (network; see `.env.example`) |
+| `bun run corpus:agreement` | Cross-format agreement: each rosetta work's formats measured against its JATS parse |
 | `bun run changelog:build` | Regenerate `CHANGELOG.md` from `changelog/` |
 | `bun run tree` | Regenerate `docs/tree.md` |
 | `bun run list-skills` | Index of `skills/` |

@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 18:00:03
+Generated on: 2026-09-26 18:32:36
 
 ```text
 scholarly-parse/
@@ -35,6 +35,7 @@ scholarly-parse/
 ├── scripts/
 │   ├── corpus/
 │   │   ├── add.ts
+│   │   ├── agreement.ts
 │   │   ├── attribution.ts
 │   │   ├── http.ts
 │   │   └── sample.ts
@@ -145,6 +146,7 @@ scholarly-parse/
 │   │   ├── fixtures.ts
 │   │   ├── invariants.ts
 │   │   ├── meta.test.ts
+│   │   ├── parsers.ts
 │   │   └── walk.ts
 │   ├── formats/
 │   │   ├── html/
@@ -160,10 +162,17 @@ scholarly-parse/
 │   │   │   └── tables.test.ts
 │   │   ├── latexml/
 │   │   │   └── latexml.test.ts
-│   │   └── pdf/
-│   │       ├── build-pdf.ts
-│   │       └── pdf.test.ts
+│   │   ├── pdf/
+│   │   │   ├── build-pdf.ts
+│   │   │   └── pdf.test.ts
+│   │   └── tei/
+│   │       └── tei.test.ts
+│   ├── render/
+│   │   ├── escape.test.ts
+│   │   ├── inline.test.ts
+│   │   └── markdown.test.ts
 │   ├── xml/
+│   │   ├── mathml.test.ts
 │   │   └── well-formed.test.ts
 │   ├── detect.test.ts
 │   └── parse.test.ts

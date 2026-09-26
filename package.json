@@ -107,6 +107,7 @@
     "test:corpus": "vitest run tests/corpus",
     "corpus:snapshot": "SCHOLARLY_PARSE_UPDATE_SNAPSHOTS=1 vitest run tests/corpus",
     "corpus:sample": "bun run scripts/corpus/sample.ts",
+    "corpus:agreement": "bun run scripts/corpus/agreement.ts",
     "corpus:attribution": "bun run scripts/corpus/attribution.ts",
     "changelog:build": "bun run scripts/build-changelog.ts",
     "changelog:check": "bun run scripts/build-changelog.ts --check",
