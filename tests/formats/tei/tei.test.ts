@@ -244,7 +244,7 @@ describe('sections', () => {
 
   it('drops a heading nothing follows', () => {
     const document = parse(
-      tei(div('1', 'Introduction', 'a') + '<div><head n="2">Empty</head></div>'),
+      tei(`${div('1', 'Introduction', 'a')}<div><head n="2">Empty</head></div>`),
     );
     expect(document.body.map((s) => s.title)).toEqual(['Introduction']);
   });
