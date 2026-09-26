@@ -40,11 +40,6 @@ export function inlineText(element: Element | null | undefined, ctx: HtmlContext
   return element ? collapse(inlineMarkdown(childNodes(element), ctx)) : '';
 }
 
-/** Inline Markdown of several nodes, whitespace collapsed. */
-export function inlineNodesText(nodes: Node[], ctx: HtmlContext): string {
-  return collapse(inlineMarkdown(nodes, ctx));
-}
-
 function collapse(text: string): string {
   return joinAdjacentMath(text.replace(/\s+/g, ' ').trim());
 }
@@ -115,7 +110,8 @@ function isInPageLink(link: Element): boolean {
   return hash === 0 || (target !== '' && link.ownerDocument.getElementById(target) !== null);
 }
 
-function safeDecode(value: string): string {
+/** A percent-encoded URL or URL part decoded; unchanged when its encoding is malformed. */
+export function safeDecode(value: string): string {
   try {
     return decodeURIComponent(value);
   } catch {

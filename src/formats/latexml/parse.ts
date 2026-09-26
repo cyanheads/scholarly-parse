@@ -140,10 +140,10 @@ const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', '
 function parseWatermark(document: Document, baseUrl: string | undefined): Watermark {
   const text =
     textOfElement(document.querySelector('#watermark-tr')) ||
-    textOfElement(document.querySelector('.ltx_page_main'))?.slice(0, 400);
+    textOfElement(document.querySelector('.ltx_page_main')).slice(0, 400);
   const match =
     /arXiv:(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+(?:\.[A-Z]{2})?\/\d{7}(?:v\d+)?)\s*\[[^\]]+\]\s*(\d{1,2}) (\w{3}) (\d{4})/.exec(
-      text ?? '',
+      text,
     );
   const fromUrl = /\/(?:html|abs)\/(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+\/\d{7}(?:v\d+)?)/.exec(
     baseUrl ?? '',
@@ -418,11 +418,10 @@ function extractContent(
       continue;
     }
     if (FRONT_CLASSES.some((c) => hasClass(child, c))) continue;
+    const acknowledgments =
+      hasClass(child, 'ltx_acknowledgement') || hasClass(child, 'ltx_acknowledgements');
     const isSection =
-      tagOf(child) === 'section' ||
-      hasClass(child, 'ltx_appendix') ||
-      hasClass(child, 'ltx_acknowledgement') ||
-      hasClass(child, 'ltx_acknowledgements');
+      tagOf(child) === 'section' || hasClass(child, 'ltx_appendix') || acknowledgments;
     if (!isSection) {
       pending.push(...flowBlocks([child], ctx));
       continue;
@@ -431,7 +430,7 @@ function extractContent(
     if (hasClass(child, 'ltx_appendix')) {
       const section = parseSection(child, ctx, 'appendix', `appendix${back.length + 1}`);
       if (section) back.push(section);
-    } else if (hasClass(child, 'ltx_acknowledgement') || hasClass(child, 'ltx_acknowledgements')) {
+    } else if (acknowledgments) {
       const section = parseSection(child, ctx, 'acknowledgments', 'acknowledgments');
       if (section) back.push(section);
     } else if (!hasClass(child, 'ltx_index')) {

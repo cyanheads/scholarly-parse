@@ -210,7 +210,9 @@ export function noteOwners(articleMeta: XmlNode | undefined): Map<string, string
       for (const xref of findAll(contrib, 'xref')) {
         if (attrOf(xref, 'ref-type') !== 'fn') continue;
         for (const rid of (attrOf(xref, 'rid') ?? '').split(/\s+/).filter(Boolean)) {
-          owners.set(rid, [...(owners.get(rid) ?? []), name]);
+          const names = owners.get(rid);
+          if (names) names.push(name);
+          else owners.set(rid, [name]);
         }
       }
     }

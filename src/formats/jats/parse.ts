@@ -217,8 +217,7 @@ function parseBack(nodes: XmlNodeList, ctx: JatsContext, where: 'back' | 'front'
         break;
       case 'app-group':
         for (const app of childrenOf(child)) {
-          if (tagNameOf(app) === 'app') add(app, 'appendix');
-          else if (['sec', 'p'].includes(tagNameOf(app) ?? '')) add(app, 'appendix');
+          if (['app', 'sec', 'p'].includes(tagNameOf(app) ?? '')) add(app, 'appendix');
         }
         break;
       case 'app':

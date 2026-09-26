@@ -22,7 +22,7 @@ import {
 } from '../../model/result.js';
 import { escapeInline } from '../../render/escape.js';
 import { layout } from './layout.js';
-import { type LoadedPdf, loadPdf, type PdfMetadata } from './load.js';
+import { type LoadedPdf, loadPdf } from './load.js';
 import { type PdfContext, structure } from './structure.js';
 
 /** Options for {@link parsePdf}. */
@@ -125,7 +125,7 @@ function extractMetadata(
   visibleTitle: string | undefined,
   keywords: string[],
 ): DocumentMetadata {
-  const { info, xmp }: PdfMetadata = pdf.metadata;
+  const { info, xmp } = pdf.metadata;
   const infoTitle = stringOf(xmp['dc:title']) ?? stringOf(info.title);
   const title =
     visibleTitle ??

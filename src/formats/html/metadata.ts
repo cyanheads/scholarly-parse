@@ -217,7 +217,10 @@ export function metaReferences(tags: MetaTag[]): Reference[] {
         .slice(eq + 1)
         .trim()
         .replace(/;$/, '');
-      if (field) fields.set(key, [...(fields.get(key) ?? []), field]);
+      if (!field) continue;
+      const values = fields.get(key);
+      if (values) values.push(field);
+      else fields.set(key, [field]);
     }
     const get = (key: string) => fields.get(key)?.[0];
     const authors = fields.get('citation_author') ?? [];

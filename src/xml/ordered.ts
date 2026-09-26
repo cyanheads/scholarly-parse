@@ -119,19 +119,22 @@ export function textOf(node: XmlNode): string {
   return value == null ? '' : String(value).replace(/\u00AD/g, '');
 }
 
+/** A sibling list as given, or an element's children. */
+function listOf(input: XmlNode | XmlNodeList | undefined): XmlNodeList {
+  return Array.isArray(input) ? input : childrenOf(input);
+}
+
 /** First direct child with the given tag. */
 export function findOne(
   input: XmlNode | XmlNodeList | undefined,
   tag: string,
 ): XmlNode | undefined {
-  if (!input) return;
-  return (Array.isArray(input) ? input : childrenOf(input)).find((c) => tagNameOf(c) === tag);
+  return listOf(input).find((c) => tagNameOf(c) === tag);
 }
 
 /** Every direct child with the given tag. */
 export function findAll(input: XmlNode | XmlNodeList | undefined, tag: string): XmlNode[] {
-  if (!input) return [];
-  return (Array.isArray(input) ? input : childrenOf(input)).filter((c) => tagNameOf(c) === tag);
+  return listOf(input).filter((c) => tagNameOf(c) === tag);
 }
 
 /**
@@ -142,7 +145,6 @@ export function findAllDescendants(
   input: XmlNode | XmlNodeList | undefined,
   tag: string,
 ): XmlNode[] {
-  if (!input) return [];
   const found: XmlNode[] = [];
   const visit = (nodes: XmlNodeList): void => {
     for (const node of nodes) {
@@ -150,7 +152,7 @@ export function findAllDescendants(
       visit(childrenOf(node));
     }
   };
-  visit(Array.isArray(input) ? input : childrenOf(input));
+  visit(listOf(input));
   return found;
 }
 

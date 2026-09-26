@@ -231,11 +231,13 @@ function extractMetadata(
   );
   const publicationStmt = findOne(fileDesc, 'publicationstmt');
   const publisher = plainText(findOne(publicationStmt, 'publisher'));
+  const volume = plainText(scope('volume'));
+  const issue = plainText(scope('issue'));
   const venue: Venue = {
     ...(journal && { title: journal }),
     ...(publisher && { publisher }),
-    ...(plainText(scope('volume')) && { volume: plainText(scope('volume')) }),
-    ...(plainText(scope('issue')) && { issue: plainText(scope('issue')) }),
+    ...(volume && { volume }),
+    ...(issue && { issue }),
     ...(pages && { pages }),
   };
   const dateNode =
@@ -433,8 +435,6 @@ function extractBody(
         current.blocks.push(...section.blocks);
         current.sections.push(...section.sections);
         ctx.sectionIds.delete(section.id);
-      } else if (!section.title) {
-        place(section);
       } else if (kind) {
         stack.length = 0;
         sections.push({ ...section, kind });

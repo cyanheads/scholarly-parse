@@ -410,8 +410,7 @@ function box(node: XmlNode, ctx: JatsContext, withTitle: boolean): BoxBlock {
   const title = withTitle ? inlineText(findOne(caption, 'title'), ctx) : '';
   const label = text(findOne(node, 'label')) || undefined;
   const id = attrOf(node, 'id');
-  const captionBlocks = flowBlocks(withoutTags(childrenOf(caption), 'title'), ctx);
-  const blocks: Block[] = [...captionBlocks];
+  const blocks = flowBlocks(withoutTags(childrenOf(caption), 'title'), ctx);
   const sections: Section[] = [];
   for (const child of childrenOf(node)) {
     const tag = tagNameOf(child);

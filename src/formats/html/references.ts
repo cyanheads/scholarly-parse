@@ -17,7 +17,7 @@ import {
 import type { Reference } from '../../model/document.js';
 import { isLinkList, LINK_LABEL } from './blocks.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
-import { inlineMarkdown } from './inline.js';
+import { inlineMarkdown, safeDecode } from './inline.js';
 import { normalizeDoi } from './metadata.js';
 
 /** Class tokens of an element holding an entry's printed number. */
@@ -96,14 +96,6 @@ function citationText(entry: Element, labelEl: Element | undefined, ctx: HtmlCon
     .replace(/\s+/g, ' ')
     .trim()
     .replace(/[\s|,;]+$/, '');
-}
-
-function safeDecode(url: string): string {
-  try {
-    return decodeURIComponent(url);
-  } catch {
-    return url;
-  }
 }
 
 const DOI_IN_TEXT = /\b(10\.\d{4,9}\/[^\s"<>]+?)(?=[.,;)\]]?(?:\s|$))/i;

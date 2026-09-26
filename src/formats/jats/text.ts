@@ -106,11 +106,6 @@ export function text(
   return input ? collapseWhitespace(concatText(input, excluded)) : '';
 }
 
-/** {@link text}, or undefined when empty. */
-export function optionalText(input: XmlNode | XmlNodeList | undefined): string | undefined {
-  return text(input) || undefined;
-}
-
 /**
  * A formula's TeX, from the children of its `<inline-formula>` or `<disp-formula>`: its
  * `<tex-math>` (directly or under `<alternatives>`), else its MathML converted. Undefined

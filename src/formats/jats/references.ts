@@ -131,6 +131,13 @@ function formulaMark(index: number): string {
   return `\u0001${index}\u0001`;
 }
 
+/** True when a formula sits anywhere below `node`. */
+function holdsFormula(node: XmlNode): boolean {
+  return childrenOf(node).some(
+    (child) => FORMULA_TAGS.has(tagNameOf(child) ?? '') || holdsFormula(child),
+  );
+}
+
 /**
  * Text of a node inside a citation, as {@link rawText} reads it, except that each
  * formula with TeX stands as a {@link formulaMark} and its TeX is added to `formulas`.
@@ -143,10 +150,7 @@ function citationText(node: XmlNode, formulas: string[]): string {
     formulas.push(tex);
     return formulaMark(formulas.length - 1);
   }
-  const holdsFormula = [...FORMULA_TAGS].some(
-    (formula) => findAllDescendants(node, formula).length > 0,
-  );
-  if (!holdsFormula) return rawText(node);
+  if (!holdsFormula(node)) return rawText(node);
   return childrenOf(node)
     .map((child) => citationText(child, formulas))
     .join('');
