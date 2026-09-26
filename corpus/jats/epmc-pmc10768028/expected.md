@@ -1,4 +1,4 @@
-# Two new genera (*Vittiblatta* gen. nov. and *Planiblatta* gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in *Vittiblattapunctata* sp. nov.
+# Two new genera (*Vittiblatta* gen. nov. and *Planiblatta* gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in *Vittiblatta punctata* sp. nov.
 
 Xin-Xing Luo, Wen-Bo Deng, Yan-Li Che, Zong-Qing Wang  
 *ZooKeys*, 2023, 1187, 401-421  
@@ -7,13 +7,13 @@ License: <https://creativecommons.org/licenses/by/4.0/>
 
 ## Abstract
 
-This study examines Blattinae samples from Southwest China collected in recent years. Based on morphological characters, we establish two genera, *Vittiblatta***gen. nov.** and *Planiblatta***gen. nov.**, and describe four new species, *Vittiblattapunctata* Luo & Wang, **sp. nov.**, *Vittiblattaferruginea* Luo & Wang, **sp. nov.**, *Vittiblattaundulata* Luo & Wang, **sp. nov.**, and *Planiblattacrassispina* Luo & Wang, **sp. nov.** These two new genera resemble *Periplaneta* s.s., but are easily distinguished from it and other genera of Blattinae by morphological characters (genital sclerite L4C). Our results indicate that sclerites L4C and R1G of male genitalia might be important in species delimitation of Blattinae. In addition, chiral dimorphism is found in male genitalia of *Vittiblattapunctata* sp. nov.
+This study examines Blattinae samples from Southwest China collected in recent years. Based on morphological characters, we establish two genera, *Vittiblatta***gen. nov.** and *Planiblatta***gen. nov.**, and describe four new species, *Vittiblatta punctata* Luo & Wang, **sp. nov.**, *Vittiblatta ferruginea* Luo & Wang, **sp. nov.**, *Vittiblatta undulata* Luo & Wang, **sp. nov.**, and *Planiblatta crassispina* Luo & Wang, **sp. nov.** These two new genera resemble *Periplaneta* s.s., but are easily distinguished from it and other genera of Blattinae by morphological characters (genital sclerite L4C). Our results indicate that sclerites L4C and R1G of male genitalia might be important in species delimitation of Blattinae. In addition, chiral dimorphism is found in male genitalia of *Vittiblatta punctata* sp. nov.
 
 ## Introduction
 
 Blattinae Latreille, 1810, the nominotypical subfamily of Blattidae Latreille, 1810, presently includes 25 genera and about 262 species worldwide (Beccaloni 2023). They are mainly distributed in the Oriental, Australian, and Afrotropical realms. In recent years, molecular studies have revealed that Blattinae is non-monophyletic and the subfamily has been revised accordingly (Wang et al. 2017; Evangelista et al. 2018; Liao et al. 2021; Djernæs and Murienne 2022; Deng et al. 2023), resulting in the rediagnosis of Blattinae (Deng et al. 2023).
 
-*Periplaneta* Burmeister, 1838 (*sensu lato*) is the most species-rich genus of Blattinae in China. This genus has been shown to be largely polyphyletic in recent studies (Legendre et al. 2015; Bourguignon et al. 2018; Liao et al. 2021; Djernæs and Murienne 2022; Li et al. 2022; Deng et al. 2023; Malem et al. 2023), and it should be divided into at least four separate taxa (Deng et al. 2023). This genus and most related genera were distinguished by a few external morphological characters (e.g. Asahina 1980; Bohn 1985), but with the increasing number of species, genital features should be given more consideration. Lucañas (2023) started to revise *Periplaneta* and established two genera, *Hobbitoblatta* and *Nazgultaure*, based on male genitalia. Luo et al. (2023) then proposed synapomorphies of *Periplaneta* s.s. by comparative morphology, based on the type species, *P.americana* (Linnaeus, 1758), and two species that were previously placed under *Shelfordella* Adelung, 1910.
+*Periplaneta* Burmeister, 1838 (*sensu lato*) is the most species-rich genus of Blattinae in China. This genus has been shown to be largely polyphyletic in recent studies (Legendre et al. 2015; Bourguignon et al. 2018; Liao et al. 2021; Djernæs and Murienne 2022; Li et al. 2022; Deng et al. 2023; Malem et al. 2023), and it should be divided into at least four separate taxa (Deng et al. 2023). This genus and most related genera were distinguished by a few external morphological characters (e.g. Asahina 1980; Bohn 1985), but with the increasing number of species, genital features should be given more consideration. Lucañas (2023) started to revise *Periplaneta* and established two genera, *Hobbitoblatta* and *Nazgultaure*, based on male genitalia. Luo et al. (2023) then proposed synapomorphies of *Periplaneta* s.s. by comparative morphology, based on the type species, *P. americana* (Linnaeus, 1758), and two species that were previously placed under *Shelfordella* Adelung, 1910.
 
 In this study, we examine Blattinae samples from Southwest China and find four new species by morpholo-anatomic characters. The external morphology of these four species is similar to *Periplaneta* s.s., but they can be clearly distinguished by male genitalia. We also compare their morphology with that of other genera of Blattinae and conclude that these four species should be grouped into two new genera, which we establish here. In addition, we found chirally dimorphic male genitalia in one of the new species.
 
@@ -31,7 +31,7 @@ In this paper, the terminology mainly follows Roth (2003), Li et al. (2018) (vei
 
 ### Vittiblatta
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang gen. nov.
 
@@ -41,7 +41,7 @@ https://zoobank.org/89FF89FE-72B0-4D24-A2E4-A63B67CB2AFD
 
 #### Type species.
 
-*Vittiblattapunctata* Luo & Wang, sp. nov.
+*Vittiblatta punctata* Luo & Wang, sp. nov.
 
 #### Diagnosis.
 
@@ -69,14 +69,14 @@ China (Sichuan, Yunnan).
 
 |  |  |  |
 | --- | --- | --- |
-| 1 | Pronotum with punctures | ***V.punctata* Luo & Wang, sp. nov.** |
+| 1 | Pronotum with punctures | ***V. punctata* Luo & Wang, sp. nov.** |
 | – | Pronotum smooth, without punctures | **2** |
-| 2 | The hind margin of subgenital plate convex | ***V.ferruginea* Luo & Wang, sp. nov.** |
-| – | The hind margin of subgenital plate wave-like | ***V.undulata* Luo & Wang, sp. nov.** |
+| 2 | The hind margin of subgenital plate convex | ***V. ferruginea* Luo & Wang, sp. nov.** |
+| – | The hind margin of subgenital plate wave-like | ***V. undulata* Luo & Wang, sp. nov.** |
 
 ### Vittiblatta punctata
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang sp. nov.
 
@@ -98,7 +98,7 @@ Combining the following characteristics, this species is easily distinguished fr
 
 Sexual dimorphism present. ***Coloration*.** Male body brown to dark brown and female body black; ocelli white; cerci and styli yellowish brown (Fig. 1A–D).
 
-**Figure 1.** *Vittiblattapunctata* Luo & Wang, sp. nov. **A, B, E–M** male holotype **C, D, N** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** front femur **H** hind margin of metanotum and tergal gland **I** tegmen **J** hind wing **K** supra-anal plate, ventral view **L** subgenital plate, dorsal view **M** male genitalia, dorsal (left) and ventral view (right) **N** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, I, J**); 2.0 mm (**E–H, K, L, N**); 1.0 mm (**M**).
+**Figure 1.** *Vittiblatta punctata* Luo & Wang, sp. nov. **A, B, E–M** male holotype **C, D, N** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** front femur **H** hind margin of metanotum and tergal gland **I** tegmen **J** hind wing **K** supra-anal plate, ventral view **L** subgenital plate, dorsal view **M** male genitalia, dorsal (left) and ventral view (right) **N** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, I, J**); 2.0 mm (**E–H, K, L, N**); 1.0 mm (**M**).
 
 **Male** (Fig. 1A, B). Body length including tegmen: 30.6–39.5 mm; body length: 20.7–29.8 mm; pronotum length × width: 4.3–6.8 mm × 6.6–9.2 mm; tegmina length × width: 26.0–32.9 mm × 7.4–10.2 mm. ***Head and thorax*.** Vertex slightly exposed. Interocular space slightly wider than the interocellar space, shorter than the distance between antennal sockets (Fig. 1E). Antennae longer than the body. Pronotum subelliptical, with the lateral edges not curved downward; anterior margin nearly concave, the median of hind margin convex; the widest point after the midpoint, the surface thin with dense punctures (Fig. 1F). The posterior-lateral angles of metanotum without projections (Fig. 1H). Tegmina and wings well developed, surpassing the tip of abdomen (Fig. 1A, B, I, J). Tegmina with ScP strong, posterior branch of R not reaching the end of tegmina (Fig. 1I). Legs slender. Front femur of type A_2 (Fig. 1G). Mid- and hind legs with sparsely spines on ventral margin. Hind metatarsus approximately equal to the remaining segments combined. Pulvilli present on 1–4 tarsal segments, claws symmetrical and unspecialized, arolium small (Fig. 7A). ***Abdomen*.** First tergite of male abdomen with visible gland, setose gland sparse and not obscured by metanotum (Fig. 1H). Supra-anal plate short, lateral margin shrunken inward; the middle part of hind margin concave at an obtuse angle. Paraprocts (pp.) long, strip-shaped. Cerci robust (Fig. 1K). Subgenital plate nearly square; the hind margin arcuate, and the middle slightly concave. Styli symmetrical and apically rounded (Fig. 1L). ***Genitalia*** (Fig. 1M). L1 composed of one elongate sclerite and membrane bearing pubescence. L4C thin ribbon-like, with a densely spiny process near basal inner margin. L2 irregular, the end with one long spine inward. L3 unciform and well sclerotized, the basal part bifurcated. The distal part of R1H broad, the inner margin bifurcated with two small spines. The distal part of R1G with a slightly curved and thick spine inward.
 
@@ -108,7 +108,7 @@ Sexual dimorphism present. ***Coloration*.** Male body brown to dark brown and f
 
 11.4 mm long, 5.6 mm wide, reddish brown. Overall long, ridge slightly broad with serrations (Fig. 2A, B).
 
-**Figure 2.** *Vittiblattapunctata* Luo & Wang, sp. nov. **A** ootheca-carrying female **B** ootheca **C** male on rocks **D** female in the grass. Scale bars: 2.0 mm (**B**). **A, C, D** photographed by Xinran Li.
+**Figure 2.** *Vittiblatta punctata* Luo & Wang, sp. nov. **A** ootheca-carrying female **B** ootheca **C** male on rocks **D** female in the grass. Scale bars: 2.0 mm (**B**). **A, C, D** photographed by Xinran Li.
 
 #### Etymology.
 
@@ -126,11 +126,11 @@ China (Sichuan, Yunnan).
 
 Stochastic chiral dimorphism was found in male genitalia of this species. The genitalia of some male samples are left–right mirrored in comparison with common arrangement of Blattinae (Fig. 3A–C). We carefully examined all male specimens, and this phenotype was found in samples from three localities: Mt Ailaoshan (normal genitalia in two samples and mirrored genitalia in three samples), Baihualing (normal genitalia in one sample and mirrored genitalia in one sample) and Mt Daheishan (normal genitalia in one sample and reversed genitalia in one sample). In addition, there are no significant differences between the two kinds of genitalia, so they should be the same species. This is the first discovery of intraspecific genital chirality in Blattodea.
 
-**Figure 3.** Chiral dimorphism in male genitalia of *Vittiblattapunctata* Luo & Wang, sp. nov. **A–C** male paratypes, the samples from Mt Ailaoshan **A** mirrored genitalia, dorsal and ventral views **B** normal genitalia, ventro-caudal view (L3 on the left) **C** mirrored genitalia, ventro-caudal view (L3 on the right). Scale bars: 1.0 mm.
+**Figure 3.** Chiral dimorphism in male genitalia of *Vittiblatta punctata* Luo & Wang, sp. nov. **A–C** male paratypes, the samples from Mt Ailaoshan **A** mirrored genitalia, dorsal and ventral views **B** normal genitalia, ventro-caudal view (L3 on the left) **C** mirrored genitalia, ventro-caudal view (L3 on the right). Scale bars: 1.0 mm.
 
 ### Vittiblatta ferruginea
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang sp. nov.
 
@@ -152,7 +152,7 @@ Combining the following characteristics, this species is easily distinguished fr
 
 Sexual dimorphism present. ***Coloration*.** Body reddish brown to dark reddish brown; ocelli white; cerci and styli brown to black (Fig. 4A–D).
 
-**Figure 4.** *Vittiblattaferruginea* Luo & Wang, sp. nov. **A, B, E–M** male holotype **C, D, N** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** tegmen **H** hind wing **I** front femur **J** hind margin of metanotum and tergal gland **K** subgenital plate, dorsal view **L** supra-anal plate, ventral view **M** male genitalia, dorsal (left) and ventral (right) view **N** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, G, H**); 2.0 mm (**E, F, K, L, N**); 1.0 mm (**I, J, M**).
+**Figure 4.** *Vittiblatta ferruginea* Luo & Wang, sp. nov. **A, B, E–M** male holotype **C, D, N** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** tegmen **H** hind wing **I** front femur **J** hind margin of metanotum and tergal gland **K** subgenital plate, dorsal view **L** supra-anal plate, ventral view **M** male genitalia, dorsal (left) and ventral (right) view **N** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, G, H**); 2.0 mm (**E, F, K, L, N**); 1.0 mm (**I, J, M**).
 
 **Male** (Fig. 4A, B). Body length including tegmen: 25.4–30.9 mm; body length: 18.2–21.9 mm; pronotum length × width: 4.6–5.9 mm × 5.8–7.0 mm; tegmina length × width: 22.5–26.9 mm × 6.3–8.2 mm. ***Head and thorax*.** Vertex slightly exposed. Interocular space slightly wider than the interocellar space, shorter than the distance between antennal sockets. Antennae longer than the body (Fig. 4E). Pronotum subelliptical; anterior margin slightly concave, hind margin slightly convex; the widest point near the midpoint (Fig. 4F). The posterior-lateral angles of metanotum with symmetrical and small projections (Fig. 4J). Tegmina and wings well developed, surpassing the tip of abdomen (Fig. 4A, B, G, H). Tegmina with ScP strong, posterior branch of R not reaching the end of tegmina (Fig. 4G). Front femur of type A_2 (Fig. 4I). Mid- and hind legs with strong spines. Hind metatarsus longer than the remaining segments combined. Pulvilli present on 2–4 tarsal segments, claws symmetrical and unspecialized, arolium small (Fig. 7B). ***Abdomen*.** First tergite of male abdomen with visible gland, setose gland curved and downward (Fig. 4J). Supra-anal plate rectangular, lateral margin not shrunken inward; middle part of hind margin slightly concave. Paraprocts (pp.) long, strip-shaped. Cerci robust (Fig. 4L). Subgenital plate nearly square; the hind margin arcuate. Styli symmetrical and apically rounded (Fig. 4K). ***Genitalia*** (Fig. 4M). L1 composed of a elongate sclerite and membrane bearing pubescence. L4C thin, ribbon-like, the inner margin with serrate auriculate projection. L2 irregular, near distal part with two small spines and the end with one long spine inward. L3 unciform and well sclerotized, the basal part bifurcated. The distal part of R1H broad, the inner margin bifurcated with two small spines. The distal part of R1G with a curved, long spine inward.
 
@@ -168,7 +168,7 @@ China (Yunnan).
 
 ### Vittiblatta undulata
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang sp. nov.
 
@@ -192,7 +192,7 @@ Combining the following characteristics, this species is easily distinguished fr
 
 **Male** (Fig. 5A, B). Body length including tegmen: 30.5–32.7 mm; body length: 27.1 mm; pronotum length × width: 6.2–6.6 mm × 7.7–8.2 mm; tegmina length × width: 24.9–25.4 mm × 8.0–8.2 mm. ***Head and thorax*.** Vertex unexposed. Interocular space slightly wider than the interocellar space, shorter than the distance between antennal sockets (Fig. 5C). Antennae longer than the body. Pronotum subelliptical; anterior margin straight, hind margin slightly convex; the widest point near the midpoint (Fig. 5D). The posterior-lateral angles of metanotum with symmetrical and small projections (Fig. 5E). Tegmina and wings well developed, surpassing the tip of abdomen (Fig. 5A, B, G, H). Tegmina with ScP strong, posterior branch of R not reaching the end of tegmina (Fig. 5G). Front femur of type A_2 (Fig. 5F). Mid- and hind legs with strong spines. Hind metatarsus longer than the remaining segments combined. Pulvilli present on 1–4 tarsal segments, claws symmetrical and unspecialized, arolium small (Fig. 7C). ***Abdomen*.** First tergite of male abdomen with visible gland, setose gland curved, and directed toward left, right, and down (Fig. 5E). Supra-anal plate rectangular, lateral margin slightly shrunken inward; middle part of hind margin concave. Paraprocts (pp.) long, strip-shaped. Cerci robust (Fig. 5I). Subgenital plate nearly square; the hind margin wavy. Styli symmetrical and apically rounded (Fig. 5K). ***Genitalia*** (Fig. 5J). L1 membranous with pubescence. L4C thin and ribbon-like, the inner margin with a long projection of densely microtrichia. L2 irregular, the distal part with a small projection. L3 unciform and well sclerotized, the basal part bifurcated. The distal part of R1H broad, slightly sclerotized and hyaline, the end with an elongate and curved spine inward. The distal part of R1G with a curved, strong spine inward.
 
-**Figure 5.** *Vittiblattaundulata* Luo & Wang, sp. nov. **A–K** male holotype **A** habitus, dorsal view **B** habitus, ventral view **C** head **D** pronotum **E** hind margin of metanotum and tergal gland **F** front femur **G** tegmen **H** hind wing **I** supra-anal plate, ventral view **J** male genitalia, dorsal (left) and ventral view (right) **K** subgenital plate, dorsal view. Scale bars: 10.0 mm (**A, B, G, H**); 2.0 mm (**C, D**); 1.0 mm (**E, F, I–K**).
+**Figure 5.** *Vittiblatta undulata* Luo & Wang, sp. nov. **A–K** male holotype **A** habitus, dorsal view **B** habitus, ventral view **C** head **D** pronotum **E** hind margin of metanotum and tergal gland **F** front femur **G** tegmen **H** hind wing **I** supra-anal plate, ventral view **J** male genitalia, dorsal (left) and ventral view (right) **K** subgenital plate, dorsal view. Scale bars: 10.0 mm (**A, B, G, H**); 2.0 mm (**C, D**); 1.0 mm (**E, F, I–K**).
 
 **Female.** Unknown, possibly brachypterous.
 
@@ -206,7 +206,7 @@ China (Yunnan).
 
 ### Planiblatta
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang gen. nov.
 
@@ -216,7 +216,7 @@ https://zoobank.org/35B1FFC2-904E-4A07-831B-637D0D94C776
 
 #### Type species.
 
-*Planiblattacrassispina* Luo & Wang, sp. nov.
+*Planiblatta crassispina* Luo & Wang, sp. nov.
 
 #### Diagnosis.
 
@@ -236,7 +236,7 @@ China (Yunnan).
 
 ### Planiblatta crassispina
 
-Taxon classificationAnimaliaBlattodeaBlattidae
+**Taxon classification:** Animalia, Blattodea, Blattidae
 
 Luo & Wang sp. nov.
 
@@ -260,11 +260,11 @@ Sexual dimorphism present. ***Coloration*.** Body dark brown to black; vertex bl
 
 **Male** (Fig. 6A, B). Body length including tegmen: 28.5–30.1 mm; body length: 19.6–21.4 mm; pronotum length × width: 4.2–4.7 mm × 5.7–6.7 mm; tegmina length × width: 24–26.6 mm × 6.4–7.8 mm. ***Head and thorax*.** Vertex slightly exposed. Interocular space slightly wider than the interocellar space, slightly shorter than the distance between antennal sockets (Fig. 6E). Antennae longer than the body. Pronotum subelliptical; anterior margin straight, hind margin slightly convex; the widest point near the midpoint (Fig. 6F). The posterior-lateral angles of metanotum without finger-like projections (Fig. 6K). Tegmina and wings well developed, surpassing the tip of abdomen (Fig. 6 A, B, G, H). Tegmina with ScP strong, posterior branch of R not reaching the end of tegmina (Fig. 6G). Front femur of type A_2 (Fig. 6I). Hind metatarsus equal to the remaining segments combined (Fig. 7D). Pulvilli present, pulvilli of front metatarsus developed, pulvilli of front metatarsus occupy nearly 1/3 of ventral surface (Fig. 6J). Claws symmetrical and unspecialized, arolium moderate (Fig. 7D). ***Abdomen*.** First tergite of male abdomen with visible gland, setose gland not obscured by metanotum and grown upward and downward (Fig. 6K). Posterolateral corners of abdominal tergite V–VII produced. Supra-anal plate short, lateral margin slightly shrunken inward; middle part of hind margin concave at an obtuse angle. Paraprocts (pp.) long, strip-shaped, the end curved downward. Cerci long and robust (Fig. 6L). Subgenital plate nearly square; the hind margin straight. Styli symmetrical and apically rounded (Fig. 6M). ***Genitalia*** (Fig. 6N). L1 membranous and irregular, margin thick. L4C curved and subhyaline, the base irregular. L2 irregular and folded, the dorsal sclerite broad, the distal part with a long spine. L3 unciform and well sclerotized, the basal part bifurcated. L4G strip-like. R1H slightly broad, inner margin of the distal part with two strong spines. The distal part of R1G with two curved, strong spines inward.
 
-**Figure 6.** *Planiblattacrassispina* Luo & Wang, sp. nov. **A, B, E–K** male holotype **C, D, O** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** tegmen **H** hind wing **I** front femur **J** front tarsi **K** hind margin of metanotum and tergal gland **L** supra-anal plate, ventral view **M** subgenital plate, dorsal view **N** male genitalia, dorsal (left) and ventral (right) view **O** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, G, H**); 2.0 mm (**E, F, I–L, O**); 1.0 mm (**M, N**).
+**Figure 6.** *Planiblatta crassispina* Luo & Wang, sp. nov. **A, B, E–K** male holotype **C, D, O** female paratypes **A, C** habitus, dorsal view **B, D** habitus, ventral view **E** head **F** pronotum **G** tegmen **H** hind wing **I** front femur **J** front tarsi **K** hind margin of metanotum and tergal gland **L** supra-anal plate, ventral view **M** subgenital plate, dorsal view **N** male genitalia, dorsal (left) and ventral (right) view **O** female genitalia, dorsal view. Scale bars: 10.0 mm (**A–D, G, H**); 2.0 mm (**E, F, I–L, O**); 1.0 mm (**M, N**).
 
 **Female** (Fig. 5C, D). Body length: 17.9; pronotum length × width: 5.4–5.6 mm × 7.9–8.0 mm; tegmina length × width: 3.5–3.7 mm × 2.3 mm. ***Head and thorax*.** Pronotum subelliptical, the widest point near hind margin; anterior margin curved, hind margin nearly straight (Fig. 6C). Tegmina and wings reduced. Tegmina small, lobe-like (Fig. 6C). Pulvilli present, pulvilli of front metatarsus developed, pulvilli of front metatarsus occupy nearly 1/3 of ventral surface (Fig. 6J). Claws symmetrical and unspecialized, arolium moderate (Fig. 7D). ***Abdomen*.** Hind margin of tergum X (TX) with median invagination, and with a membranous line inside (Fig. 6O). ***Genitalia*** (Fig. 6O). The surface of first valve (v.I.) with small punctures. First valvifer (vlf.I) slightly sclerotized and hyaline. Posterior lobes of valvifer II (p.l.) irregular, the outer margin unclear. Laterosternite IX (ltst.IX) slightly sclerotized and hyaline. Anterior arch (a.a.) with microtrichia near basal surface. Spermathecal plate (sp.pl.) nearly triangle. Spermathecal opening (sp.o.) located at the base of basivalvulae (bsv.). Spermatheca branched, the leading duct longer than the branching duct, and the branching duct also branched, the end capsule oval (Fig. 7E). Basivalvulae broad, surface with microtrichia; the left and right basivalvulae connected. Laterosternal shelf (ltst.sh.) symmetrical.
 
-**Figure 7.** **A–D** hind tarsi **A***Vittiblattapunctata* Luo & Wang, sp. nov. **B***V.ferruginea* Luo & Wang, sp. nov. **C***V.undulata* Luo & Wang, sp. nov. **D***Planiblattacrassispina* Luo & Wang, sp. nov. **E** spermatheca, in order from left to right: *V.punctata* Luo & Wang, sp. nov., *V.ferruginea* Luo & Wang, sp. nov., *P.crassispina* Luo & Wang, sp. nov. Scale bars: 2.0 mm **(A–D)**; 0.5 mm **(E**).
+**Figure 7.** **A–D** hind tarsi **A***Vittiblatta punctata* Luo & Wang, sp. nov. **B***V. ferruginea* Luo & Wang, sp. nov. **C***V. undulata* Luo & Wang, sp. nov. **D***Planiblatta crassispina* Luo & Wang, sp. nov. **E** spermatheca, in order from left to right: *V. punctata* Luo & Wang, sp. nov., *V. ferruginea* Luo & Wang, sp. nov., *P. crassispina* Luo & Wang, sp. nov. Scale bars: 2.0 mm **(A–D)**; 0.5 mm **(E**).
 
 #### Etymology.
 
@@ -278,7 +278,7 @@ China (Yunnan).
 
 Deng et al. (2023) suggested that sclerite L4C has a high diversity in Blattinae, but we find this character, along with R1G, conservative in two new genera, and so in *Periplaneta* s.s. (Luo et al. 2023). We find that these two sclerites together can clearly distinguish *Vittiblatta* gen. nov. and *Planiblatta* gen. nov. from morphologically similar relatives, at least those examined in this study. Combined with external morphological characters, these two new genera are well supported. However, it needs to be confirmed whether L4C and R1G can be used to identify the genera not examined in this study, *Afrostylopyga*, *Apterisca*, *Cartoblatta*, *Brinckella*, *Deropeltis*, *Dorylaea*, *Eroblatta*, *Eumethana*, *Henicotyle*, *Macrostylopyga*, *Miostylopyga*, *Pseudoderopeltis*, *Scabinopsis*, and *Thyrsocera*.
 
-Genital reversal within species is common in Blattodea, such as Blaberidae, most Pseudophyllodromiidae, and some Ectobiidae species (Brown 1975; Nieves and Bohn 1987; Klass 1997). However, our study is the first report of chiral dimorphism of male genitalia within a single species. Chiral dimorphism of male genitalia occurs rarely within an insect species, e.g. Coleoptera: Ahrens and Lago 2008, Hemiptera: Guglielmino et al. 2016, Lepidoptera: Nupponen 2009, Mantodea: Holwell and Herberstein 2010, Phasmatodea: Heleodoro 2022, Trichoptera: Botosaneanu and Hyslop 1998. Schilthuizen (2007, 2013) suggested that this phenomenon might be related to sexual selection. In *Drosophilamelanogaster*, this phenomenon is a result from mutations in the allele of Myo31DF (Hozumi et al. 2006; Spéder et al. 2006; Inaki et al. 2018), but whether it is the same in Blattodea needs to be investigated.
+Genital reversal within species is common in Blattodea, such as Blaberidae, most Pseudophyllodromiidae, and some Ectobiidae species (Brown 1975; Nieves and Bohn 1987; Klass 1997). However, our study is the first report of chiral dimorphism of male genitalia within a single species. Chiral dimorphism of male genitalia occurs rarely within an insect species, e.g. Coleoptera: Ahrens and Lago 2008, Hemiptera: Guglielmino et al. 2016, Lepidoptera: Nupponen 2009, Mantodea: Holwell and Herberstein 2010, Phasmatodea: Heleodoro 2022, Trichoptera: Botosaneanu and Hyslop 1998. Schilthuizen (2007, 2013) suggested that this phenomenon might be related to sexual selection. In *Drosophila melanogaster*, this phenomenon is a result from mutations in the allele of Myo31DF (Hozumi et al. 2006; Spéder et al. 2006; Inaki et al. 2018), but whether it is the same in Blattodea needs to be investigated.
 
 ## Supplementary Material
 
@@ -296,7 +296,7 @@ Genital reversal within species is common in Blattodea, such as Blaberidae, most
 
 ## Acknowledgements
 
-We extend our sincere thanks to the specimen collectors involved in this paper. We are also grateful to Dr. Xinran Li for providing us with ecological photographs of *V.punctata*. We sincerely thank him for his comments on our manuscript. We also sincerely thank two anonymous reviewers for their valuable suggestions on our manuscript.
+We extend our sincere thanks to the specimen collectors involved in this paper. We are also grateful to Dr. Xinran Li for providing us with ecological photographs of *V. punctata*. We sincerely thank him for his comments on our manuscript. We also sincerely thank two anonymous reviewers for their valuable suggestions on our manuscript.
 
 ## Additional information
 

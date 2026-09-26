@@ -70,6 +70,7 @@ const BLOCK_TAGS: ReadonlySet<string> = new Set([
   'related-article',
   'related-object',
   'sec',
+  'sec-meta',
   'speech',
   'statement',
   'supplementary-material',
@@ -152,6 +153,18 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
       const title = inlineText(node, ctx);
       return title ? [{ text: emphasis(title, '**'), type: 'paragraph' }] : [];
     }
+    case 'sec-meta':
+      // A section's own metadata: each keyword group reads as a labeled line (Pensoft's
+      // taxon classification). Section contributors and permissions are left out.
+      return findAll(node, 'kwd-group').flatMap((group): Block[] => {
+        const label = inlineText(findOne(group, 'label') ?? findOne(group, 'title'), ctx);
+        const words = findAll(group, 'kwd')
+          .map((kwd) => inlineText(kwd, ctx))
+          .filter(Boolean);
+        if (words.length === 0) return [];
+        const head = label ? `${emphasis(`${label}:`, '**')} ` : '';
+        return [{ text: `${head}${words.join(', ')}`, type: 'paragraph' }];
+      });
     case 'table-wrap':
       return [parseTableWrap(node, captionText(findOne(node, 'caption'), ctx), ctx)];
     case 'table-wrap-group':

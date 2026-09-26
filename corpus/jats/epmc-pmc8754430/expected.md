@@ -215,8 +215,8 @@ Rotation of individual nanodisc F_OF_1 molecules were observed by single-molecul
 
 This paper was supported by the following grants:
 
-- http://dx.doi.org/10.13039/100000057National Institute of General Medical Sciences R01GM097510 to Wayne D Frasch.
-- http://dx.doi.org/10.13039/501100008982National Science Foundation 2119963 to Wayne D Frasch.
+- National Institute of General Medical Sciences R01GM097510 to Wayne D Frasch.
+- National Science Foundation 2119963 to Wayne D Frasch.
 
 ## Acknowledgements
 

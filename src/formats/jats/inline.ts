@@ -44,7 +44,6 @@ const TRANSPARENT_TAGS: ReadonlySet<string> = new Set([
   'award-id',
   'funding-source',
   'funding-statement',
-  'institution-id',
   'principal-award-recipient',
   'principal-investigator',
   'city',
@@ -96,10 +95,49 @@ const TRANSPARENT_TAGS: ReadonlySet<string> = new Set([
   'verse-line',
 ]);
 
-/** Inline Markdown for a node list, spacing intact (the caller collapses whitespace). */
+/** Ranks a taxonomic name's parts are tagged with (`<named-content content-type="genus">`). */
+const TAXON_RANKS: ReadonlySet<string> = new Set([
+  'kingdom',
+  'phylum',
+  'class',
+  'superorder',
+  'order',
+  'suborder',
+  'superfamily',
+  'family',
+  'subfamily',
+  'tribe',
+  'genus',
+  'subgenus',
+  'species',
+  'subspecies',
+  'variety',
+  'form',
+  'taxon-authority',
+  'taxon-status',
+]);
+
+function isTaxonPart(node: XmlNode | undefined): boolean {
+  return (
+    node !== undefined &&
+    tagNameOf(node) === 'named-content' &&
+    TAXON_RANKS.has(attrOf(node, 'content-type') ?? '')
+  );
+}
+
+/**
+ * Inline Markdown for a node list, spacing intact (the caller collapses whitespace).
+ * Parts of a taxonomic name set with nothing between them (`Vittiblatta` then
+ * `punctata`) are separate words.
+ */
 export function inlineMarkdown(nodes: XmlNodeList, ctx: JatsContext): string {
   let out = '';
-  for (const node of nodes) out += inlineNode(node, ctx);
+  let previous: XmlNode | undefined;
+  for (const node of nodes) {
+    if (isTaxonPart(previous) && isTaxonPart(node)) out += ' ';
+    out += inlineNode(node, ctx);
+    previous = node;
+  }
   return out;
 }
 

@@ -27,10 +27,14 @@ const POINTER_TAGS: ReadonlySet<string> = new Set([
   'inline-media',
 ]);
 
-/** Elements whose text is never content: index entries, alternative-text anchors. */
+/**
+ * Elements whose text is never content: index entries, alternative-text anchors, and
+ * an institution's registry ID beside the name it identifies.
+ */
 export const SILENT_TAGS: ReadonlySet<string> = new Set([
   'index-term',
   'index-term-range-end',
+  'institution-id',
   'target',
 ]);
 

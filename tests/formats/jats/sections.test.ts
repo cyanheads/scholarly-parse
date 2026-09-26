@@ -651,6 +651,20 @@ describe('back matter', () => {
     expect(paragraphTexts(document)).toEqual(['Measured twice^a in total.']);
   });
 
+  it("reads a section's keyword groups as labeled lines, not run-together text", () => {
+    const document = parseBody(
+      '<sec><sec-meta><kwd-group><label>Taxon classification</label><kwd>' +
+        '<named-content content-type="kingdom">Animalia</named-content></kwd><kwd>' +
+        '<named-content content-type="order">Blattodea</named-content></kwd></kwd-group></sec-meta>' +
+        '<title>Vittiblatta</title><p>A genus.</p></sec>',
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      p('**Taxon classification:** Animalia, Blattodea'),
+      p('A genus.'),
+    ]);
+    expect(document.diagnostics.unhandled).toEqual([]);
+  });
+
   it('reads each sub-article as a back section holding its own body', () => {
     const document = parseArticle({
       body: '<p>Main text.</p>',

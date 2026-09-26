@@ -19,6 +19,26 @@ describe('jatsInlineToMarkdown', () => {
     ).toBe('**Abstract**\n\nCandidates include *NF1* and *MED12* & CO_2.\n\nSecond paragraph.');
   });
 
+  it('keeps the parts of a taxonomic name separate words', () => {
+    // Pensoft sets genus and species with nothing between them.
+    expect(
+      jatsInlineToMarkdown(
+        '<p><italic><named-content content-type="taxon-name"><named-content content-type="genus">V.</named-content>' +
+          '<named-content content-type="species">punctata</named-content></named-content></italic> sp. nov.</p>',
+      ),
+    ).toBe('*V. punctata* sp. nov.');
+  });
+
+  it('leaves out an institution registry ID beside the name it identifies', () => {
+    expect(
+      jatsInlineToMarkdown(
+        '<p>Funded by <institution-wrap><institution-id institution-id-type="FundRef">' +
+          'http://dx.doi.org/10.13039/100000057</institution-id><institution>NIGMS</institution>' +
+          '</institution-wrap>.</p>',
+      ),
+    ).toBe('Funded by NIGMS.');
+  });
+
   it('keeps structured-abstract headings apart from their text', () => {
     expect(
       jatsInlineToMarkdown(
