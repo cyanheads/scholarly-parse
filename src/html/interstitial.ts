@@ -15,12 +15,13 @@ const MAX_INTERSTITIAL_TEXT = 3000;
 /** Signatures of challenge and block pages, each with the name it is reported as. */
 const SIGNATURES: [RegExp, string][] = [
   [
-    /<title>\s*Just a moment\.\.\.\s*<\/title>|challenges\.cloudflare\.com|_cf_chl_opt/i,
+    /<title>\s*Just a moment\.\.\.\s*<\/title>|challenges\.cloudflare\.com|_cf_chl_opt|cf-browser-verification|Enable JavaScript and cookies to continue|Checking if the site connection is secure/i,
     'a Cloudflare challenge page',
   ],
   [/<title>\s*Attention Required! \| Cloudflare/i, 'a Cloudflare block page'],
   [/captcha-delivery\.com/i, 'a DataDome challenge page'],
   [/_Incapsula_Resource|Incapsula incident ID/i, 'an Imperva challenge page'],
+  [/distil_r_captcha/i, 'a Distil Networks challenge page'],
   [/id=["']px-captcha["']/i, 'a HUMAN (PerimeterX) challenge page'],
   [/AwsWafIntegration|awswaf\.com/i, 'an AWS WAF challenge page'],
   [/errors\.edgesuite\.net|<title>\s*Access Denied\s*<\/title>/i, 'an access-denied page'],

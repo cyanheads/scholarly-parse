@@ -53,6 +53,16 @@ describe('interstitials', () => {
     expect(result).toMatchObject({ error: { reason: 'blocked' }, ok: false });
   });
 
+  it('reports a Cloudflare challenge known only by its text as blocked', async () => {
+    const result = await parseHtml(
+      '<html><head><title>example.org</title></head><body><h1>example.org</h1><p>Checking if the site connection is secure</p><noscript>Enable JavaScript and cookies to continue</noscript></body></html>',
+    );
+    expect(result).toMatchObject({
+      error: { message: expect.stringContaining('Cloudflare challenge'), reason: 'blocked' },
+      ok: false,
+    });
+  });
+
   it('reports a CDN access-denied page as blocked', async () => {
     const result = await parseHtml(
       '<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD><BODY><H1>Access Denied</H1>Reference #18.1 https://errors.edgesuite.net/18.1</BODY></HTML>',

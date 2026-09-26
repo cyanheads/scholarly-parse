@@ -38,6 +38,7 @@ import { join } from 'node:path';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
 import { XMLParser } from 'fast-xml-parser';
+import { interstitialReason } from '../../src/html/interstitial.js';
 import { FEATURES } from '../../tests/corpus/features.js';
 import {
   CORPUS_DIR,
@@ -664,24 +665,13 @@ async function publisherWork(doi: string): Promise<WorkMeta & { license: License
   return { ...(work ? crossrefWorkMeta(work, doi) : jats), license };
 }
 
-/** Markers of a bot check or challenge page served in place of the document. */
-const CHALLENGE_MARKERS = [
-  /<title>\s*just a moment/i,
-  /challenge-platform|cf_chl_opt|cf-browser-verification/i,
-  /checking (?:if the site connection is secure|your browser)/i,
-  /verify (?:that )?you are (?:a )?human/i,
-  /px-captcha|perimeterx|_incapsula_resource|distil_r_captcha/i,
-  /<title>\s*(?:access denied|client challenge)/i,
-  /enable javascript and cookies to continue/i,
-];
-
+/** A bot check or block page served in place of the document ends the run. */
 function assertNotChallenge(result: HttpResult): void {
   if ([401, 403, 429, 503].includes(result.status)) {
     fail(`${result.url} answered HTTP ${result.status} — blocked; skip this source`);
   }
-  const head = decode(result.bytes.slice(0, 200_000));
-  const marker = CHALLENGE_MARKERS.find((pattern) => pattern.test(head));
-  if (marker) fail(`${result.url} served a bot check (${marker}) — skip this source`);
+  const reason = interstitialReason(decode(result.bytes));
+  if (reason) fail(`${result.url}: ${reason} — skip this source`);
 }
 
 /**
