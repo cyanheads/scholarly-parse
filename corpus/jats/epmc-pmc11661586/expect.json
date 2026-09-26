@@ -8,6 +8,7 @@
   "references": 1,
   "warnings": ["no-abstract"],
   "contains": [
+    "Related (corrected-article): This corrects the article \"Seasonal Effects on Gene Expression\" in volume 10, e0126995. · PMCID: PMC4449160",
     "The accession number appearing in the Data Availability statement is incorrect.",
     "(accession number: [GSE53195](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53195)).",
     "## References\n\n- [1] Goldinger A, Shakhbazov K, Henders AK, McRae AF, Montgomery GW, Powell JE (2015) Seasonal Effects on Gene Expression. PLoS ONE 10(5): e0126995."

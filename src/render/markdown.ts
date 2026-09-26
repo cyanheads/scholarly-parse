@@ -6,13 +6,14 @@ import type {
   Abstract,
   AbstractKind,
   Block,
+  Identifiers,
   ScholarlyDocument,
   Section,
   SectionKind,
   TableBlock,
 } from '../model/document.js';
 import { codeFence, escapeBlockStart, escapeInline, escapeTableCell } from './escape.js';
-import { FORMULA_IMAGE } from './inline.js';
+import { FORMULA_IMAGE, link } from './inline.js';
 
 /** What to include when rendering. Everything is included by default. */
 export interface MarkdownOptions {
@@ -122,19 +123,27 @@ function renderMetadata(document: ScholarlyDocument): string[] {
       escapeInline(metadata.venue?.pages ?? metadata.venue?.elocationId ?? ''),
   ].filter(Boolean);
   if (venue.length > 0) details.push(venue.join(', '));
-  const ids = metadata.identifiers;
-  const idParts = [
-    ids?.doi && `DOI: ${escapeInline(ids.doi)}`,
-    ids?.pmid && `PMID: ${ids.pmid}`,
-    ids?.pmcid && `PMCID: ${ids.pmcid}`,
-    ids?.arxiv && `arXiv: ${escapeInline(ids.arxiv)}`,
-  ].filter(Boolean);
+  const idParts = identifierParts(metadata.identifiers ?? {});
   if (idParts.length > 0) details.push(idParts.join(' · '));
   if (metadata.license?.url) details.push(`License: <${metadata.license.url}>`);
   else if (metadata.license?.text)
     details.push(`License: ${escapeInline(truncate(metadata.license.text, 240))}`);
+  for (const work of metadata.related ?? []) {
+    const parts = [work.text, ...identifierParts(work), work.url && link('', work.url)];
+    details.push(`Related (${escapeInline(work.relation)}): ${parts.filter(Boolean).join(' · ')}`);
+  }
   if (details.length > 0) lines.push(details.join('  \n'));
   return lines;
+}
+
+/** A work's identifiers as `DOI: …`, `PMID: …`, `PMCID: …`, `arXiv: …`. */
+function identifierParts(ids: Pick<Identifiers, 'arxiv' | 'doi' | 'pmcid' | 'pmid'>): string[] {
+  return [
+    ids.doi && `DOI: ${escapeInline(ids.doi)}`,
+    ids.pmid && `PMID: ${ids.pmid}`,
+    ids.pmcid && `PMCID: ${ids.pmcid}`,
+    ids.arxiv && `arXiv: ${escapeInline(ids.arxiv)}`,
+  ].filter((part): part is string => Boolean(part));
 }
 
 /** Text cut at a word boundary to at most `max` characters, with an ellipsis when cut. */

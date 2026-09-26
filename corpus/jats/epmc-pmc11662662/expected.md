@@ -3,7 +3,8 @@
 Rochelle L Tiedemann, Joel Hrit, Qian Du, Ashley K Wiseman, Hope E Eden, Bradley M Dickson, Xiangqian Kong, Alison A Chomiak, Robert M Vaughan, Bailey M Tibben, Jakob M Hebert, Yael David, Wanding Zhou, Stephen B Baylin, Peter A Jones, Susan J Clark, Scott B Rothbart  
 *Nucleic Acids Research*, 2024, 52(22), 13733-13756  
 DOI: 10.1093/nar/gkae1105 · PMID: 39607687 · PMCID: PMC11662662  
-License: <https://creativecommons.org/licenses/by/4.0/>
+License: <https://creativecommons.org/licenses/by/4.0/>  
+Related (preprint): UHRF1 ubiquitin ligase activity supports the maintenance of low-density CpG methylation · DOI: 10.1101/2024.02.13.580169 · PMID: 38405904 · PMCID: PMC10888769
 
 ## Abstract
 

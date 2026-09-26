@@ -3,7 +3,8 @@
 John Jumper, Richard Evans, Alexander Pritzel, Tim Green, Michael Figurnov, Olaf Ronneberger, Kathryn Tunyasuvunakool, Russ Bates, Augustin Žídek, Anna Potapenko, Alex Bridgland, Clemens Meyer, Simon A. A. Kohl, Andrew J. Ballard, Andrew Cowie, Bernardino Romera-Paredes, Stanislav Nikolov, Rishub Jain, Jonas Adler, Trevor Back, Stig Petersen, David Reiman, Ellen Clancy, Michal Zielinski, Martin Steinegger, Michalina Pacholska, Tamas Berghammer, Sebastian Bodenstein, David Silver, Oriol Vinyals, Andrew W. Senior, Koray Kavukcuoglu, Pushmeet Kohli, Demis Hassabis  
 *Nature*, 2021, 596(7873), 583-589  
 DOI: 10.1038/s41586-021-03819-2 · PMID: 34265844 · PMCID: PMC8371605  
-License: <https://creativecommons.org/licenses/by/4.0/>
+License: <https://creativecommons.org/licenses/by/4.0/>  
+Related (commentary): Solution of the protein structure prediction problem at last: crucial innovations and next frontiers · PMID: 36644294 · PMCID: PMC9815721
 
 ## Abstract
 

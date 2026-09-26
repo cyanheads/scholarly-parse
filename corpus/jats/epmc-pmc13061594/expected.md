@@ -3,7 +3,8 @@
 D Krones, U Koehl, H Negre, Q Rafiq, S Goldrick, M Hudecek  
 *Frontiers in Immunology*, 2026, 15, 1504906  
 DOI: 10.3389/fimmu.2024.1504906 · PMID: 41970506 · PMCID: PMC13061594  
-License: <https://creativecommons.org/licenses/by/4.0/>
+License: <https://creativecommons.org/licenses/by/4.0/>  
+Related (commentary-article): <https://www.frontiersin.org/researchtopic/51702>
 
 The surging development of cellular immunotherapies sparked the creation of this Research Topic dedicated to Innovations in Development, Translational Research and Manufacturing of CAR T cells. This Research Topic addresses the current benefits observed with CAR T-cell immunotherapy, which raises the question of scalability of CAR T-cell products to provide access to a wide range of patients. Current improvements include both automation combined with artificial intelligence (AI) as well as non-viral gene transfer to improve safety, lower complexity and costs. In addition, data-driven knowledge about various diseases is changing the field, moving from hematological to oncology patients as well as to autoimmune diseases.
 

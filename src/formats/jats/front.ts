@@ -12,6 +12,7 @@ import type {
   Identifiers,
   License,
   PartialDate,
+  RelatedWork,
   Section,
   Venue,
 } from '../../model/document.js';
@@ -24,6 +25,7 @@ import {
   findOne,
   isTextNode,
   tagNameOf,
+  textOf,
   type XmlNode,
 } from '../../xml/ordered.js';
 import { flowBlocks, parseSection } from './blocks.js';
@@ -49,6 +51,7 @@ export function extractMetadata(
     .flatMap((group) => findAll(group, 'kwd').map((kwd) => text(kwd)))
     .filter(Boolean);
   const license = extractLicense(findOne(articleMeta, 'permissions'));
+  const related = extractRelated(articleMeta, ctx);
   const articleType = attrOf(article, 'article-type');
   const language = attrOf(article, 'xml:lang');
 
@@ -60,6 +63,7 @@ export function extractMetadata(
     ...(Object.keys(identifiers).length > 0 && { identifiers }),
     ...(venue && { venue }),
     ...(published && { published }),
+    ...(related.length > 0 && { related }),
     ...(keywords.length > 0 && { keywords }),
     ...(license && { license }),
     ...(articleType && { articleType }),
@@ -212,6 +216,58 @@ export function noteOwners(articleMeta: XmlNode | undefined): Map<string, string
     }
   }
   return owners;
+}
+
+// ─── Related works ──────────────────────────────────────────────────────────
+
+/** `ext-link-type` and `pub-id-type` values naming an identifier, and the field each fills. */
+const RELATED_ID_TYPES: Readonly<Record<string, 'doi' | 'pmcid' | 'pmid'>> = {
+  doi: 'doi',
+  pmc: 'pmcid',
+  pmcid: 'pmcid',
+  pmid: 'pmid',
+  pubmed: 'pmid',
+};
+
+/**
+ * Works the article declares a relation to: each `<related-article>` in `<article-meta>`,
+ * with its sentence (PLOS: `This corrects the article "…" in volume 10.`) or else its
+ * title, and its identifiers from the element, an `<ext-link>` inside it, or the
+ * `<pub-id>`s of Europe PMC's structured entries. Europe PMC adds a `retraction-forward`
+ * entry to an article that has been retracted.
+ */
+function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): RelatedWork[] {
+  return findAll(articleMeta, 'related-article').flatMap((node) => {
+    const ids: Partial<Record<'doi' | 'pmcid' | 'pmid' | 'url', string>> = {};
+    for (const link of [node, ...findAllDescendants(node, 'ext-link')]) {
+      const target = attrOf(link, 'xlink:href')?.trim();
+      if (!target) continue;
+      const type = attrOf(link, 'ext-link-type')?.toLowerCase() ?? '';
+      const field = RELATED_ID_TYPES[type] ?? (/^https?:\/\//i.test(target) ? 'url' : undefined);
+      if (field) ids[field] ??= target;
+    }
+    for (const pubId of findAll(node, 'pub-id')) {
+      const field = RELATED_ID_TYPES[attrOf(pubId, 'pub-id-type')?.toLowerCase() ?? ''];
+      const value = text(pubId);
+      if (field && value) ids[field] ??= value;
+    }
+    const isSentence = childrenOf(node).some((child) => isTextNode(child) && textOf(child).trim());
+    const description = inlineText(isSentence ? node : findOne(node, 'article-title'), ctx);
+    const doi = ids.doi?.replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, '').toLowerCase();
+    const pmcid =
+      ids.pmcid && (/^PMC/i.test(ids.pmcid) ? ids.pmcid.toUpperCase() : `PMC${ids.pmcid}`);
+    if (!description && !doi && !pmcid && !ids.pmid && !ids.url) return [];
+    return [
+      {
+        relation: attrOf(node, 'related-article-type') ?? 'related',
+        ...(description && { text: description }),
+        ...(doi && { doi }),
+        ...(pmcid && { pmcid }),
+        ...(ids.pmid && { pmid: ids.pmid }),
+        ...(ids.url && { url: ids.url }),
+      },
+    ];
+  });
 }
 
 // ─── Identifiers, venue, date, license ──────────────────────────────────────

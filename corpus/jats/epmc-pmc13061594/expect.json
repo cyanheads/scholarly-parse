@@ -14,7 +14,7 @@
   "references": 0,
   "warnings": ["no-abstract"],
   "contains": [
-    "License: <https://creativecommons.org/licenses/by/4.0/>\n\nThe surging development of cellular immunotherapies",
+    "License: <https://creativecommons.org/licenses/by/4.0/>  \nRelated (commentary-article): <https://www.frontiersin.org/researchtopic/51702>\n\nThe surging development of cellular immunotherapies",
     "A key contribution in this area comes from the work of [García-Calderón et al.](https://doi.org/10.3389/fimmu.2023.1152498), who performed",
     "In closing, we extend our sincere appreciation to the authors",
     "- Edited and Reviewed by: Francesca Granucci, University of Milano-Bicocca, Italy"

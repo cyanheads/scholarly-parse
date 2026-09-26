@@ -149,6 +149,36 @@ describe('article metadata', () => {
     );
   });
 
+  it('reads related works: a sentence, a structured entry, and a bare link', () => {
+    const { related } = metadataOf(
+      TITLE +
+        '<related-article related-article-type="corrected-article">This corrects the article ' +
+        '"<ext-link ext-link-type="pmcid" xlink:href="PMC4449160">Seasonal Effects</ext-link>" ' +
+        'in volume 10.</related-article>' +
+        '<related-article related-article-type="retraction-forward" ext-link-type="pmc" ' +
+        'xlink:href="PMC10513824"><article-title>Retracted: A Study</article-title><volume>2023' +
+        '</volume><pub-id pub-id-type="doi">10.1155/2023/9862810</pub-id>' +
+        '<pub-id pub-id-type="pmid">37744561</pub-id></related-article>' +
+        '<related-article related-article-type="commentary-article" ext-link-type="uri" ' +
+        'xlink:href="https://example.org/topic/1"/>',
+    );
+    expect(related).toEqual([
+      {
+        pmcid: 'PMC4449160',
+        relation: 'corrected-article',
+        text: 'This corrects the article "Seasonal Effects" in volume 10.',
+      },
+      {
+        doi: '10.1155/2023/9862810',
+        pmcid: 'PMC10513824',
+        pmid: '37744561',
+        relation: 'retraction-forward',
+        text: 'Retracted: A Study',
+      },
+      { relation: 'commentary-article', url: 'https://example.org/topic/1' },
+    ]);
+  });
+
   it('fails an article with no title, abstract, or body as empty', () => {
     const result = parseJats(article({ meta: '<article-id pub-id-type="pmid">1</article-id>' }));
     expect(result).toMatchObject({ error: { reason: 'empty' }, ok: false });

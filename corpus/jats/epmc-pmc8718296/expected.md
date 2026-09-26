@@ -3,7 +3,8 @@
 Sixiang Jia, Yiteng Wu, Wei Wang, Wenting Lin, Yiwen Chen, Huanyu Zhang, Shudong Xia, Hong Zhou  
 *Journal of Healthcare Engineering*, 2021, 2021, 1251199  
 DOI: 10.1155/2021/1251199 · PMID: 34976321 · PMCID: PMC8718296  
-License: <https://creativecommons.org/licenses/by/4.0/>
+License: <https://creativecommons.org/licenses/by/4.0/>  
+Related (retraction-forward): Retracted: An Exploratory Study on the Relationship between Brachial Arterial Blood Flow and Cardiac Output · DOI: 10.1155/2023/9862810 · PMID: 37744561 · PMCID: PMC10513824
 
 ## Abstract
 

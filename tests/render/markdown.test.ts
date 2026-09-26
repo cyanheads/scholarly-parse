@@ -64,6 +64,7 @@ const PAPER = documentOf({
     identifiers: { doi: '10.1234/abc', pmid: '123' },
     license: { url: 'https://creativecommons.org/licenses/by/4.0/' },
     published: { year: 2024 },
+    related: [{ doi: '10.1234/r', relation: 'retraction-forward', text: 'Retracted: A study' }],
     title: 'A study',
     venue: { issue: '2', pages: '10–20', title: 'Journal', volume: '7' },
   },
@@ -74,7 +75,7 @@ describe('toMarkdown', () => {
   it('renders front matter, abstracts, the outline, back matter, notes, and references', () => {
     const parts = [
       '# A study',
-      'Jane Doe, Richard Roe  \n*Journal*, 2024, 7(2), 10–20  \nDOI: 10.1234/abc · PMID: 123  \nLicense: <https://creativecommons.org/licenses/by/4.0/>',
+      'Jane Doe, Richard Roe  \n*Journal*, 2024, 7(2), 10–20  \nDOI: 10.1234/abc · PMID: 123  \nLicense: <https://creativecommons.org/licenses/by/4.0/>  \nRelated (retraction-forward): Retracted: A study · DOI: 10.1234/r',
       '## Abstract\n\nWe did this.',
       '## Graphical abstract\n\n**Figure.** Overview',
       '## 1 Introduction\n\nWhy.\n\n### Scope\n\nDetail.',

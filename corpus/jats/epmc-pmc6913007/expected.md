@@ -3,7 +3,8 @@
 Shujun Ou, Weija Su, Yi Liao, Kapeel Chougule, Jireh R. A. Agda, Adam J. Hellinga, Carlos Santiago Blanco Lugo, Tyler A. Elliott, Doreen Ware, Thomas Peterson, Ning Jiang, Candice N. Hirsch, Matthew B. Hufford  
 *Genome Biology*, 2019, 20, 275  
 DOI: 10.1186/s13059-019-1905-y · PMID: 31843001 · PMCID: PMC6913007  
-License: <https://creativecommons.org/licenses/by/4.0/>
+License: <https://creativecommons.org/licenses/by/4.0/>  
+Related (commentary): Accounting for diverse transposable element landscapes is key to developing and evaluating accurate de novo annotation strategies · DOI: 10.1186/s13059-023-03118-1 · PMID: 38166955 · PMCID: PMC10763064
 
 ## Abstract
 

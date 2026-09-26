@@ -38,7 +38,7 @@ import { parsePdf } from 'scholarly-parse/pdf';
 
 | Part | Holds |
 |:---|:---|
-| `metadata` | Title, subtitle, authors (ORCID, affiliations, corresponding), identifiers (DOI, PMID, PMCID, arXiv), venue, date as precise as the source states it, keywords, article type, language, license passed through verbatim |
+| `metadata` | Title, subtitle, authors (ORCID, affiliations, corresponding), identifiers (DOI, PMID, PMCID, arXiv), venue, date as precise as the source states it, keywords, article type, language, license passed through verbatim, related works (what a correction corrects, the notice retracting the article) |
 | `abstracts[]` | Every abstract with its `kind` (`main`, `graphical`, `plain-language`, `teaser`, `other`); structured abstracts keep their titled sections |
 | `body[]`, `back[]` | Section trees. A section has an ID stable within the document, a `kind`, an optional label and title, typed blocks, and subsections |
 | Blocks | `paragraph`, `list`, `table` (rectangular rows, spans expanded, or an `unextractable` reason), `figure`, `formula` (TeX when the source has it, else linear text), `code`, `quote`, `box`, `supplement` |

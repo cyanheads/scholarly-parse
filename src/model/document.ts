@@ -77,6 +77,26 @@ export interface License {
   url?: string;
 }
 
+/**
+ * A work the source declares this one related to: the article a correction corrects,
+ * the notice retracting it, a commentary on it, its preprint.
+ */
+export interface RelatedWork {
+  /** Lowercased DOI without a resolver prefix. */
+  doi?: string;
+  /** PMC ID with the `PMC` prefix. */
+  pmcid?: string;
+  pmid?: string;
+  /**
+   * The relation as the source names it, e.g. JATS `@related-article-type`
+   * (`corrected-article`, `retraction-forward`, `commentary`, `preprint`).
+   */
+  relation: string;
+  /** The source's sentence about the work, else its title, as inline Markdown. */
+  text?: string;
+  url?: string;
+}
+
 /** Bibliographic front matter. Every field is optional because sources vary. */
 export interface DocumentMetadata {
   affiliations?: string[];
@@ -89,6 +109,7 @@ export interface DocumentMetadata {
   language?: string;
   license?: License;
   published?: PartialDate;
+  related?: RelatedWork[];
   subtitle?: string;
   title?: string;
   venue?: Venue;
