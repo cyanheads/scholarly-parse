@@ -138,10 +138,19 @@ function parseContributor(
     ...(orcid && { orcid }),
   };
 
+  const named = contributorName(contrib);
+  if (!named) return;
+  return { ...named, ...extras };
+}
+
+/** A contributor's name: a collective's, else its personal name and parts. */
+function contributorName(
+  contrib: XmlNode,
+): Pick<Author, 'collective' | 'family' | 'given' | 'name'> | undefined {
   const collab = findOne(contrib, 'collab');
   if (collab) {
     const name = text(childrenOf(collab).filter((c) => tagNameOf(c) !== 'contrib-group'));
-    return name ? { collective: name, name, ...extras } : undefined;
+    return name ? { collective: name, name } : undefined;
   }
   const nameNode =
     findOne(contrib, 'name') ??
@@ -152,7 +161,30 @@ function parseContributor(
   const given = text(findOne(nameNode, 'given-names')) || undefined;
   const name = [given, family].filter(Boolean).join(' ') || text(nameNode);
   if (!name) return;
-  return { name, ...(family && { family }), ...(given && { given }), ...extras };
+  return { name, ...(family && { family }), ...(given && { given }) };
+}
+
+/**
+ * Note ID → names of the authors who point at the note with `<xref ref-type="fn">`:
+ * eLife lists each author's contribution and competing interests as notes that do not
+ * name the author themselves.
+ */
+export function noteOwners(articleMeta: XmlNode | undefined): Map<string, string[]> {
+  const owners = new Map<string, string[]>();
+  for (const group of findAll(articleMeta, 'contrib-group')) {
+    for (const contrib of findAll(group, 'contrib')) {
+      const type = attrOf(contrib, 'contrib-type');
+      const name = (!type || type === 'author') && contributorName(contrib)?.name;
+      if (!name) continue;
+      for (const xref of findAll(contrib, 'xref')) {
+        if (attrOf(xref, 'ref-type') !== 'fn') continue;
+        for (const rid of (attrOf(xref, 'rid') ?? '').split(/\s+/).filter(Boolean)) {
+          owners.set(rid, [...(owners.get(rid) ?? []), name]);
+        }
+      }
+    }
+  }
+  return owners;
 }
 
 // ─── Identifiers, venue, date, license ──────────────────────────────────────

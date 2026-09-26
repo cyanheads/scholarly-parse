@@ -10,6 +10,8 @@ export interface JatsContext {
   diag: DiagnosticsCollector;
   /** Footnotes collected from inline `<fn>` elements, in document order. */
   footnotes: Footnote[];
+  /** Note ID → names of the authors whose `<xref ref-type="fn">` points at the note. */
+  noteOwners: ReadonlyMap<string, readonly string[]>;
   /** Section IDs issued so far (`issueId`), so a duplicate source ID is disambiguated. */
   sectionIds: Set<string>;
 }

@@ -1,5 +1,5 @@
 {
-  "why": "eLife article with three <sub-article>s: the editor's evaluation, the decision letter, and the author response. Pins each as a back section under its own title after the article's back matter, the decision letter's <boxed-text> preamble as a quoted box, and the author response's 17 <disp-quote>s of reviewer text as quotes between the replies. 12 figures: six labelled figures and six figure supplements, each its own <fig>.",
+  "why": "eLife article with three <sub-article>s: the editor's evaluation, the decision letter, and the author response. Pins each as a back section under its own title after the article's back matter, the decision letter's <boxed-text> preamble as a quoted box, and the author response's 17 <disp-quote>s of reviewer text as quotes between the replies, and each titled <fn-group> under Additional information as a subsection whose notes lead with the names of the authors pointing at them. 12 figures: six labelled figures and six figure supplements, each its own <fig>.",
   "title": "pH-dependent 11° F_1F_O ATP synthase sub-steps reveal insight into the F_O torque generating mechanism",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -11,6 +11,9 @@
     "Materials and methods",
     "Funding Information",
     "Acknowledgements",
+    "Additional information",
+    "Competing interests",
+    "Author contributions",
     "Additional files",
     "Data availability",
     "Editor's evaluation",
@@ -26,7 +29,8 @@
     "## Author response\n\n> Essential revisions:\n>\n> 1\\) The Discussion should be restructured",
     "rotation?\n\nAll completed as requested.\n\n> Reviewer ",
     "**Figure 2—figure supplement 1.** **Examples each of the first 90° of ATP hydrolysis-driven power strokes",
-    "- National Institute of General Medical Sciences R01GM097510 to Wayne D Frasch."
+    "- National Institute of General Medical Sciences R01GM097510 to Wayne D Frasch.",
+    "### Author contributions\n\n**Seiga Yanagisawa:** Data curation, Formal analysis"
   ],
   "notContains": ["10.13039/100000057National"]
 }

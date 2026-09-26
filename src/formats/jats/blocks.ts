@@ -510,6 +510,17 @@ export function blocksWithoutTitle(node: XmlNode, ctx: JatsContext): Block[] {
   }
 }
 
+/** The one element a `<sec>` holds besides its title and label, if it holds only one. */
+function loneContent(sec: XmlNode): XmlNode | undefined {
+  const content = childrenOf(sec).filter((child) =>
+    isTextNode(child)
+      ? textOf(child).trim() !== ''
+      : !['title', 'label'].includes(tagNameOf(child) ?? ''),
+  );
+  const [node] = content;
+  return content.length === 1 && node && !isTextNode(node) ? node : undefined;
+}
+
 /**
  * The titled `<list>`, `<def-list>`, or `<boxed-text>` an untitled `<sec>` carries as
  * its only content. A `<sec>` holding nothing but an abbreviations list is that list,
@@ -520,21 +531,66 @@ function loneTitledBlock(
   ctx: JatsContext,
 ): { node: XmlNode; title: string } | undefined {
   if (text(findOne(sec, 'title'))) return;
-  const content = childrenOf(sec).filter((child) =>
-    isTextNode(child)
-      ? textOf(child).trim() !== ''
-      : !['title', 'label'].includes(tagNameOf(child) ?? ''),
-  );
-  const [node] = content;
-  if (content.length !== 1 || !node || isTextNode(node)) return;
-  const title = ownBlockTitle(node, ctx);
-  return title ? { node, title } : undefined;
+  const node = loneContent(sec);
+  const title = node && ownBlockTitle(node, ctx);
+  return node && title ? { node, title } : undefined;
+}
+
+/** A title that says only that notes follow. */
+const NOTES_TITLE = /^(?:foot)?notes?$/i;
+
+/**
+ * True when a title names what a group of notes holds (`Competing interests`), which
+ * makes the notes that section's content, rather than saying only that notes follow.
+ */
+function namesNotes(title: string | undefined): title is string {
+  return title !== undefined && title !== '' && !NOTES_TITLE.test(title);
+}
+
+/**
+ * The notes of an `<fn-group>` read as content: each `<fn>`'s blocks, its label dropped.
+ * A note authors point at leads with their names, since eLife's contribution and
+ * competing-interest notes do not name the author themselves.
+ */
+function noteBlocks(group: XmlNode, ctx: JatsContext): Block[] {
+  return findAll(group, 'fn').flatMap((fn) => {
+    const blocks = flowBlocks(withoutTags(childrenOf(fn), 'label'), ctx);
+    const owners = ctx.noteOwners.get(attrOf(fn, 'id') ?? '');
+    const [first, ...rest] = blocks;
+    if (!owners || first?.type !== 'paragraph') return blocks;
+    const lead = emphasis(`${escapeInline(owners.join(', '))}:`, '**');
+    return [{ ...first, text: `${lead} ${first.text}` }, ...rest];
+  });
+}
+
+/**
+ * An `<fn-group>` whose title names what its notes hold (eLife's `Author contributions`)
+ * as a section of those notes. Undefined for a group of footnotes: untitled, or titled
+ * only `Footnotes`.
+ */
+export function noteGroupSection(
+  group: XmlNode,
+  ctx: JatsContext,
+  kind: SectionKind,
+  fallbackId: string,
+): Section | undefined {
+  const title = inlineText(findOne(group, 'title'), ctx);
+  if (!namesNotes(title)) return;
+  const blocks = noteBlocks(group, ctx);
+  if (blocks.length === 0) return;
+  const id = issueId(ctx.sectionIds, attrOf(group, 'id'), fallbackId);
+  return { blocks, id, kind, sections: [], title };
 }
 
 /**
  * One `<sec>`: its first `<title>` and `<label>`, subsections, and every other child as
  * blocks at its position. A section with no blocks and no subsections — a `<sec>` that
  * only wraps a `<ref-list>` — is dropped. (#116, #130)
+ *
+ * An `<fn-group>` with a title naming its notes is a subsection of them, and an untitled
+ * one that is all a `<sec>` holds is that section's content when the section's title
+ * names its notes: Europe PMC wraps each back `<fn-group>` in a `<sec>` carrying the
+ * group's title, `Footnotes` when it had none. Any other group holds footnotes.
  */
 export function parseSection(
   sec: XmlNode,
@@ -554,6 +610,11 @@ export function parseSection(
   let label: string | undefined;
   const blocks: Block[] = [];
   const sections: Section[] = [];
+  const only = loneContent(sec);
+  const notesAreContent =
+    only !== undefined &&
+    tagNameOf(only) === 'fn-group' &&
+    namesNotes(inlineText(findOne(sec, 'title'), ctx));
   for (const child of childrenOf(sec)) {
     const tag = tagNameOf(child);
     if (tag === 'title' && title === undefined) {
@@ -568,6 +629,17 @@ export function parseSection(
       const section = parseSection(child, ctx, kind, `${id}.${sections.length + 1}`);
       if (section) sections.push(section);
       continue;
+    }
+    if (tag === 'fn-group') {
+      const group = noteGroupSection(child, ctx, kind, `${id}.${sections.length + 1}`);
+      if (group) {
+        sections.push(group);
+        continue;
+      }
+      if (notesAreContent) {
+        blocks.push(...noteBlocks(child, ctx));
+        continue;
+      }
     }
     blocks.push(...flowBlocks([child], ctx));
   }

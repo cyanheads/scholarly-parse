@@ -24,11 +24,12 @@ import {
   blocksWithoutTitle,
   collectFootnotes,
   flowBlocks,
+  noteGroupSection,
   ownBlockTitle,
   parseSection,
 } from './blocks.js';
 import type { JatsContext } from './context.js';
-import { extractAbstracts, extractMetadata } from './front.js';
+import { extractAbstracts, extractMetadata, noteOwners } from './front.js';
 import { inlineText } from './inline.js';
 import { extractReferences, isAssociatedData } from './references.js';
 import { text } from './text.js';
@@ -53,9 +54,14 @@ export function parseJats(input: string | Uint8Array, options: ParseOptions = {}
   if (!article) return failed('wrong-format', 'No <article> element: not a JATS document');
   const flavor = findDescendant(tree.nodes, 'pmc-articleset', 2) ? 'pmc' : undefined;
 
-  const ctx: JatsContext = { diag: createDiagnostics(), footnotes: [], sectionIds: new Set() };
   const front = findOne(article, 'front');
   const articleMeta = findOne(front, 'article-meta');
+  const ctx: JatsContext = {
+    diag: createDiagnostics(),
+    footnotes: [],
+    noteOwners: noteOwners(articleMeta),
+    sectionIds: new Set(),
+  };
   const metadata = extractMetadata(article, articleMeta, findOne(front, 'journal-meta'), ctx);
   const abstracts = extractAbstracts(articleMeta, ctx);
   const authorNotes = findOne(articleMeta, 'author-notes');
@@ -208,9 +214,13 @@ function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
       case 'bio':
         add(child, 'notes');
         break;
-      case 'fn-group':
-        collectFootnotes(child, ctx);
+      case 'fn-group': {
+        const kind = backMatterKind(child) ?? 'notes';
+        const section = noteGroupSection(child, ctx, kind, `back${sections.length + 1}`);
+        if (section) sections.push(section);
+        else collectFootnotes(child, ctx);
         break;
+      }
       case 'ref-list':
       case 'label':
       case 'title':

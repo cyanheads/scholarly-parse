@@ -1,5 +1,5 @@
 {
-  "why": "Six algorithm listings are <preformat> blocks placed between paragraphs, each bordered with runs of underscores and laid out with no-break spaces (PMC's own rendering nests the same blocks inside <p>). Pins each listing as a fenced code block with its underscores and spacing verbatim rather than escaped into prose, the labelled Example 1 <disp-quote> as a quote, and the table footnotes under their tables. Europe PMC's appended Associated Data section repeats both <supplementary-material>s and the data availability note; it is skipped, so each supplement appears once.",
+  "why": "Six algorithm listings are <preformat> blocks placed between paragraphs, each bordered with runs of underscores and laid out with no-break spaces (PMC's own rendering nests the same blocks inside <p>). Pins each listing as a fenced code block with its underscores and spacing verbatim rather than escaped into prose, the labelled Example 1 <disp-quote> as a quote, the table footnotes under their tables, and each Europe PMC <sec sec-type=\"fn-group\"> wrapping an untitled <fn-group> as a section of its notes under the group's title. Europe PMC's appended Associated Data section repeats both <supplementary-material>s and the data availability note; it is skipped, so each supplement appears once.",
   "title": "A secure solution based on load-balancing algorithms between regions in the cloud environment",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -16,7 +16,11 @@
     "Comparison to existing algorithms",
     "Conclusion",
     "Supplemental Information",
-    "Funding Statement"
+    "Funding Statement",
+    "Additional Information and Declarations",
+    "Competing Interests",
+    "Author Contributions",
+    "Data Availability"
   ],
   "tables": 13,
   "figures": 5,
@@ -27,7 +31,8 @@
     "Algorithm\u00a03\u00a0Third-Grouped\u00a0Excluding-Files\u00a0with\u00a0Minimum-Load\u00a0Algorithm \n(TEM)_____",
     "> Example 1\n>\n> In this example, we give a scenario that can be realized in a real circumstance.",
     "**Notes.** Bold indicates the best results and the underline indicates the second-best results.",
-    "**Supplemental Information 1.** **The total instances of 1360 used in the experimental results** (file: peerj-cs-09-1513-s001.txt)"
+    "**Supplemental Information 1.** **The total instances of 1360 used in the experimental results** (file: peerj-cs-09-1513-s001.txt)",
+    "### Competing Interests\n\nThe authors declare there are no competing interests.\n\n### Author Contributions\n\nSarah Eljack conceived"
   ],
-  "notContains": ["\\_\\_\\_", "## Associated Data"]
+  "notContains": ["\\_\\_\\_", "## Associated Data", "- The authors declare there are no competing interests."]
 }

@@ -543,18 +543,37 @@ In this article, a developed optimized algorithms scheduling based on load balan
 
 This work was supported by the Deputyship for Research & Innovation, Ministry of Education in Saudi Arabia through the project number (IFP-2022-34). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 
+## Additional Information and Declarations
+
+### Competing Interests
+
+The authors declare there are no competing interests.
+
+### Author Contributions
+
+Sarah Eljack conceived and designed the experiments, analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the article, and approved the final draft.
+
+Mahdi Jemmali conceived and designed the experiments, performed the experiments, performed the computation work, authored or reviewed drafts of the article, and approved the final draft.
+
+Mohsen Denden analyzed the data, performed the computation work, prepared figures and/or tables, and approved the final draft.
+
+Sadok Turki conceived and designed the experiments, prepared figures and/or tables, and approved the final draft.
+
+Wael M. Khedr performed the experiments, prepared figures and/or tables, and approved the final draft.
+
+Abdullah M. Algashami analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the article, and approved the final draft.
+
+Mutasim ALsadig analyzed the data, prepared figures and/or tables, and approved the final draft.
+
+### Data Availability
+
+The following information was supplied regarding data availability:
+
+The class of instances used in the experimental results and code are available in the Supplemental Files.
+
 ## Footnotes
 
 - **✉** Corresponding author.
-- The authors declare there are no competing interests.
-- Sarah Eljack conceived and designed the experiments, analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the article, and approved the final draft.
-- Mahdi Jemmali conceived and designed the experiments, performed the experiments, performed the computation work, authored or reviewed drafts of the article, and approved the final draft.
-- Mohsen Denden analyzed the data, performed the computation work, prepared figures and/or tables, and approved the final draft.
-- Sadok Turki conceived and designed the experiments, prepared figures and/or tables, and approved the final draft.
-- Wael M. Khedr performed the experiments, prepared figures and/or tables, and approved the final draft.
-- Abdullah M. Algashami analyzed the data, prepared figures and/or tables, authored or reviewed drafts of the article, and approved the final draft.
-- Mutasim ALsadig analyzed the data, prepared figures and/or tables, and approved the final draft.
-- The following information was supplied regarding data availability: The class of instances used in the experimental results and code are available in the Supplemental Files.
 
 ## References
 

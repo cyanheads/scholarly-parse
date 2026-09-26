@@ -222,6 +222,18 @@ This paper was supported by the following grants:
 
 This work was funded by NSF-BII 2119963, and from NIH R01GM097510 to WDF.
 
+## Additional information
+
+### Competing interests
+
+**Seiga Yanagisawa, Wayne D Frasch:** No competing interests declared.
+
+### Author contributions
+
+**Seiga Yanagisawa:** Data curation, Formal analysis, Investigation, Visualization, Writing - original draft, Writing - review and editing.
+
+**Wayne D Frasch:** Conceptualization, Formal analysis, Funding acquisition, Methodology, Project administration, Supervision, Writing - original draft, Writing - review and editing.
+
 ## Additional files
 
 **Transparent reporting form.** (file: elife-70016-transrepform1.pdf)
@@ -395,12 +407,6 @@ The reviewer does pose a very interesting question that additional analyses to s
 > vi) Modify the text: The introduction is quite confusing to the non-specialist reader. The discussion is longer than the results and the methods are very brief.
 
 We added a substantial amount of background information to the Introduction to address the reviewer’s concern. We also added information to the Results to help the non-specialist readers understand the purpose of the experiments and the reasons that the evidence supports the conclusions, and we added additional details to the Methods.
-
-## Footnotes
-
-- No competing interests declared.
-- Data curation, Formal analysis, Investigation, Visualization, Writing - original draft, Writing - review and editing.
-- Conceptualization, Formal analysis, Funding acquisition, Methodology, Project administration, Supervision, Writing - original draft, Writing - review and editing.
 
 ## References
 

@@ -643,6 +643,35 @@ describe('back matter', () => {
     ]);
   });
 
+  it('reads a note group whose title names its notes as a section of them', () => {
+    const document = parseArticle({
+      back:
+        '<sec sec-type="additional-information"><title>Additional information</title>' +
+        '<fn-group content-type="author-contribution"><title>Author contributions</title>' +
+        '<fn id="con1"><p>Formal analysis.</p></fn><fn id="con2"><p>Supervision.</p></fn>' +
+        '</fn-group></sec>' +
+        '<fn-group><title>Competing interests</title><fn id="conf1"><p>None declared.</p></fn></fn-group>',
+      body:
+        '<sec><title>Introduction</title><p>Intro.</p></sec>' +
+        '<sec sec-type="fn-group"><title>Data Availability</title><fn-group>' +
+        '<fn id="addinfo-1"><p>Code is online.</p></fn></fn-group></sec>',
+      meta:
+        '<title-group><article-title>T</article-title></title-group><contrib-group>' +
+        '<contrib contrib-type="author"><name><surname>Roe</surname><given-names>Ann</given-names></name>' +
+        '<xref ref-type="fn" rid="con1"/><xref ref-type="fn" rid="conf1"/></contrib>' +
+        '<contrib contrib-type="author"><name><surname>Doe</surname><given-names>Bo</given-names></name>' +
+        '<xref ref-type="fn" rid="con2"/><xref ref-type="fn" rid="conf1"/></contrib></contrib-group>',
+    });
+    expect(document.footnotes).toEqual([]);
+    const markdown = toMarkdown(document);
+    expect(markdown).toContain('## Data Availability\n\nCode is online.');
+    expect(markdown).toContain(
+      '## Additional information\n\n### Author contributions\n\n' +
+        '**Ann Roe:** Formal analysis.\n\n**Bo Doe:** Supervision.',
+    );
+    expect(markdown).toContain('## Competing interests\n\n**Ann Roe, Bo Doe:** None declared.');
+  });
+
   it('collects an inline footnote and leaves its label as a marker', () => {
     const document = parseBody(
       '<p>Measured twice<fn id="fn2"><label>a</label><p>By two raters.</p></fn> in total.</p>',

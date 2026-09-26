@@ -26,6 +26,11 @@ export function jatsInlineToMarkdown(fragment: string): string {
   if (source.length > MAX_FRAGMENT_CHARS) return plain();
   const tree = parseOrderedXml(`<fragment>${source}</fragment>`);
   if ('error' in tree) return plain();
-  const ctx: JatsContext = { diag: createDiagnostics(), footnotes: [], sectionIds: new Set() };
+  const ctx: JatsContext = {
+    diag: createDiagnostics(),
+    footnotes: [],
+    noteOwners: new Map(),
+    sectionIds: new Set(),
+  };
   return renderBlocks(flowBlocks(childrenOf(tree.nodes[0]), ctx));
 }
