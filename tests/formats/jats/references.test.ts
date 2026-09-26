@@ -282,8 +282,8 @@ describe('reference-list placement (#116)', () => {
         '</ref-list></sec></sec>',
     );
     expect(document.references).toEqual([
-      { id: 'bib1', label: '1.', text: 'First reference.' },
-      { id: 'bib2', label: '2.', text: 'Second reference.' },
+      { id: 'bib1', label: '1', text: 'First reference.' },
+      { id: 'bib2', label: '2', text: 'Second reference.' },
     ]);
     // The References wrapper holds no prose, so it is not an empty section.
     expect(document.body.map((s) => s.title)).toEqual(['Introduction', 'Methods']);

@@ -256,7 +256,7 @@ export interface Reference {
   authors?: string[];
   doi?: string;
   id?: string;
-  /** Printed label, e.g. `12`. */
+  /** Printed label without brackets or a trailing period: `12` for `[12]` or `12.`. */
   label?: string;
   pmcid?: string;
   pmid?: string;

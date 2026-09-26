@@ -65,7 +65,11 @@ function parseReference(ref: XmlNode): Reference | undefined {
 
   const fields = citationFields(element ?? mixed);
   const id = attrOf(ref, 'id');
-  const label = text(findOne(ref, 'label')) || undefined;
+  // `[12]` and `12.` are both printed forms of the label `12`.
+  const label =
+    text(findOne(ref, 'label'))
+      .replace(/^\[|\]$/g, '')
+      .replace(/\.$/, '') || undefined;
   return {
     ...(id && { id }),
     ...(label && { label }),
