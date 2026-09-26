@@ -6,8 +6,8 @@
  * @module tests/formats/jats/tables.test
  */
 import { describe, expect, it } from 'vitest';
-import { MAX_TABLE_COLUMNS } from '../../../src/formats/jats/tables.js';
 import type { TableBlock } from '../../../src/index.js';
+import { MAX_TABLE_COLUMNS } from '../../../src/model/table-grid.js';
 import { blocksOfType, paragraphTexts, parseArticle, parseBody } from './helpers.js';
 
 /** PMC11391094's shape: an XHTML body with a `<thead>` and a full-width group-label row. */

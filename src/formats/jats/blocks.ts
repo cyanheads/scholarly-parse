@@ -19,6 +19,7 @@ import type {
   SectionKind,
   SupplementBlock,
 } from '../../model/document.js';
+import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis } from '../../render/inline.js';
@@ -34,7 +35,7 @@ import {
   type XmlNode,
   type XmlNodeList,
 } from '../../xml/ordered.js';
-import { issueSectionId, type JatsContext } from './context.js';
+import type { JatsContext } from './context.js';
 import { formulaParts, inlineMarkdown, inlineText } from './inline.js';
 import { parseBareTable, parseTableWrap } from './tables.js';
 import { rawText, selectAlternative, text } from './text.js';
@@ -528,7 +529,7 @@ export function parseSection(
   kind: SectionKind,
   fallbackId: string,
 ): Section | undefined {
-  const id = issueSectionId(ctx, attrOf(sec, 'id'), fallbackId);
+  const id = issueId(ctx.sectionIds, attrOf(sec, 'id'), fallbackId);
   const lone = loneTitledBlock(sec, ctx);
   if (lone) {
     const label = text(findOne(sec, 'label')) || undefined;

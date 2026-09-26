@@ -9,6 +9,7 @@
  * @module src/formats/jats/tables
  */
 import type { TableBlock, TableUnextractableReason } from '../../model/document.js';
+import { buildGrid, type SourceRow, spanValue } from '../../model/table-grid.js';
 import {
   attrOf,
   childrenOf,
@@ -20,13 +21,6 @@ import {
 import type { JatsContext } from './context.js';
 import { inlineText } from './inline.js';
 import { text } from './text.js';
-
-/**
- * Widest grid a table row may occupy, and the ceiling every declared span is clamped
- * to. The widest real row observed is 15 columns; the cap turns `colspan="99999999"`
- * into a bounded row instead of an unbounded allocation.
- */
-export const MAX_TABLE_COLUMNS = 512;
 
 /** Parse one `<table-wrap>`. `caption` is rendered by the caller's caption rule. */
 export function parseTableWrap(
@@ -106,88 +100,34 @@ function classifyUnextractable(
   return 'no-rows';
 }
 
-/** A `colspan`/`rowspan` value clamped to the grid; anything unparseable is 1. */
-function spanOf(cell: XmlNode, name: 'colspan' | 'rowspan'): number {
-  const declared = Number.parseInt(attrOf(cell, name) ?? '', 10);
-  if (!Number.isFinite(declared) || declared < 1) return 1;
-  return Math.min(declared, MAX_TABLE_COLUMNS);
-}
-
-/** A cell still owed to the rows below it by a `rowspan`. */
-interface RowspanCarry {
-  remaining: number;
-  value: string;
-}
-
 /**
- * Read an XHTML `<table>` into rows. A cell covering N columns fills N entries and one
- * covering M rows fills its column in the M−1 rows below, repeating its text: the value
- * belongs to each position it covers, and keeping the source cell count would put
- * values under the wrong headers. Header rows are those in `<thead>`, plus any leading
- * row of only `<th>` cells in a table without a `<thead>`.
+ * Read an XHTML `<table>` into the shared grid, spans expanded and short rows padded.
+ * Header rows are those in `<thead>`, plus any leading row of only `<th>` cells in a
+ * table without a `<thead>`.
  */
 function readTable(table: XmlNode, ctx: JatsContext): { headerRows: number; rows: string[][] } {
-  const parsed: { cells: string[]; header: boolean }[] = [];
-  const carried: (RowspanCarry | undefined)[] = [];
-
-  const drainCarried = (row: string[], col: number): number => {
-    let at = col;
-    while (at < MAX_TABLE_COLUMNS) {
-      const carry = carried[at];
-      if (!carry) return at;
-      row[at] = carry.value;
-      carry.remaining -= 1;
-      if (carry.remaining <= 0) carried[at] = undefined;
-      at += 1;
-    }
-    return at;
-  };
-
-  const pushRow = (tr: XmlNode, inHead: boolean) => {
-    const row: string[] = [];
-    let col = 0;
-    let sourceCells = 0;
-    let allHeaderCells = true;
-
-    for (const cell of childrenOf(tr)) {
+  const sourceRow = (tr: XmlNode, inHead: boolean): SourceRow => ({
+    cells: childrenOf(tr).flatMap((cell) => {
       const tag = tagNameOf(cell);
-      if (tag !== 'td' && tag !== 'th') continue;
-      if (tag === 'td') allHeaderCells = false;
-      sourceCells += 1;
-      col = drainCarried(row, col);
-      const value = inlineText(cell, ctx);
-      const rowspan = spanOf(cell, 'rowspan');
-      const width = Math.min(spanOf(cell, 'colspan'), MAX_TABLE_COLUMNS - col);
-      for (let i = 0; i < width; i++) {
-        row[col] = value;
-        if (rowspan > 1) carried[col] = { remaining: rowspan - 1, value };
-        col += 1;
-      }
-    }
-
-    // Carried cells past the last source cell still hold their columns.
-    const rightmost = carried.reduce((last, carry, i) => (carry ? i : last), -1);
-    while (col <= rightmost) col = carried[col] ? drainCarried(row, col) : col + 1;
-
-    if (sourceCells === 0) return;
-    for (let i = 0; i < row.length; i++) row[i] ??= '';
-    parsed.push({ cells: row, header: inHead || allHeaderCells });
-  };
-
+      if (tag !== 'td' && tag !== 'th') return [];
+      return [
+        {
+          colspan: spanValue(attrOf(cell, 'colspan')),
+          header: tag === 'th',
+          rowspan: spanValue(attrOf(cell, 'rowspan')),
+          text: inlineText(cell, ctx),
+        },
+      ];
+    }),
+    inHead,
+  });
+  const rows: SourceRow[] = [];
   for (const child of childrenOf(table)) {
     const tag = tagNameOf(child);
-    if (tag === 'tr') pushRow(child, false);
+    if (tag === 'tr') rows.push(sourceRow(child, false));
     else if (tag === 'thead' || tag === 'tbody' || tag === 'tfoot') {
-      for (const tr of findAll(child, 'tr')) pushRow(tr, tag === 'thead');
+      for (const tr of findAll(child, 'tr')) rows.push(sourceRow(tr, tag === 'thead'));
     }
   }
-
-  // A row the source left short still needs every column, or cells shift left under the
-  // wrong headers when rendered.
-  const width = Math.max(0, ...parsed.map((row) => row.cells.length));
-  for (const row of parsed) while (row.cells.length < width) row.cells.push('');
-
-  let headerRows = 0;
-  while (parsed[headerRows]?.header) headerRows++;
-  return { headerRows, rows: parsed.map((row) => row.cells) };
+  return buildGrid(rows);
 }

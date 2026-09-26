@@ -8,6 +8,7 @@ import { createDiagnostics } from '../../model/diagnostics.js';
 import type { Block, ScholarlyDocument, Section, SectionKind } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import {
   attrOf,
@@ -26,7 +27,7 @@ import {
   ownBlockTitle,
   parseSection,
 } from './blocks.js';
-import { issueSectionId, type JatsContext } from './context.js';
+import type { JatsContext } from './context.js';
 import { extractAbstracts, extractMetadata } from './front.js';
 import { inlineText } from './inline.js';
 import { extractReferences, isAssociatedData } from './references.js';
@@ -121,7 +122,7 @@ function parseBody(
     if (pending.length === 0) return;
     sections.push({
       blocks: pending,
-      id: issueSectionId(ctx, undefined, nextId()),
+      id: issueId(ctx.sectionIds, undefined, nextId()),
       kind,
       sections: [],
     });
@@ -143,7 +144,7 @@ function parseBody(
     const title = ownBlockTitle(child, ctx);
     if (title) {
       flushPending();
-      const id = issueSectionId(ctx, attrOf(child, 'id'), nextId());
+      const id = issueId(ctx.sectionIds, attrOf(child, 'id'), nextId());
       sections.push({ blocks: blocksWithoutTitle(child, ctx), id, kind, sections: [], title });
       continue;
     }
@@ -232,7 +233,7 @@ function parseSubArticles(article: XmlNode, ctx: JatsContext): Section[] {
   return subs.flatMap((sub, index) => {
     const meta = findOne(findOne(sub, 'front'), 'article-meta') ?? findOne(sub, 'front-stub');
     const title = inlineText(findOne(findOne(meta, 'title-group'), 'article-title'), ctx);
-    const id = issueSectionId(ctx, attrOf(sub, 'id'), `sub${index + 1}`);
+    const id = issueId(ctx.sectionIds, attrOf(sub, 'id'), `sub${index + 1}`);
     const sections = parseBody(findOne(sub, 'body'), ctx, 'sub-article', `${id}-s`);
     if (sections.length === 0) return [];
     return [{ blocks: [], id, kind: 'sub-article' as const, sections, ...(title && { title }) }];
