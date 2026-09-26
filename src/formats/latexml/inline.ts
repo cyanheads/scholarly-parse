@@ -86,7 +86,11 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
     case 'sub':
       return subscript(escapeInline(textOfElement(node)), textOfElement(node));
     case 'a': {
-      const href = node.getAttribute('href') ?? '';
+      // A BibTeX `doi` field holding a whole URL comes out as `https://dx.doi.org/https://doi.org/10.…`.
+      const href = (node.getAttribute('href') ?? '').replace(
+        /^https?:\/\/(?:dx\.)?doi\.org\/(?=https?:\/\/)/i,
+        '',
+      );
       // Cross-references and citations point inside the page; they read as printed.
       if (!href || href.startsWith('#')) return inner();
       // `\url{example.org}` with no scheme is an address as written, not a path on the page.

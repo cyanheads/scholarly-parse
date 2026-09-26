@@ -73,7 +73,13 @@ export function isSafeUrl(url: string): boolean {
   return SAFE_URL.test(url.trim());
 }
 
-/** Escape a URL for use as a Markdown link destination. */
+/** Parentheses, which `encodeURIComponent` leaves as they are. */
+const PARENTHESES: Readonly<Record<string, string>> = { '(': '%28', ')': '%29' };
+
+/**
+ * Escape a URL for use as a Markdown link destination: whitespace, angle brackets, and
+ * parentheses (an unbalanced one ends the destination) are percent-encoded.
+ */
 export function escapeUrl(url: string): string {
-  return url.trim().replace(/[\s()<>]/g, (c) => encodeURIComponent(c));
+  return url.trim().replace(/[\s()<>]/g, (c) => PARENTHESES[c] ?? encodeURIComponent(c));
 }

@@ -166,4 +166,15 @@ describe('inline text', () => {
       },
     ]);
   });
+
+  it('unwraps a DOI link LaTeXML prefixed twice', async () => {
+    // A BibTeX `doi` field that already held a URL.
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">See
+        <a href="https://dx.doi.org/https://doi.org/10.1201/9781439894552" class="ltx_ref">the book</a>.</p></div>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      { text: 'See [the book](https://doi.org/10.1201/9781439894552).', type: 'paragraph' },
+    ]);
+  });
 });
