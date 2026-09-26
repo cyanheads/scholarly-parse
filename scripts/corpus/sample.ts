@@ -315,7 +315,9 @@ async function drawOpenAccess(
         ? `HTTP ${result.status}`
         : source === 'pdf' && !isPdf(result.bytes)
           ? `served ${result.contentType || 'no content type'}, not a PDF`
-          : undefined;
+          : source === 'html' && isPdf(result.bytes)
+            ? 'the landing page link serves a PDF'
+            : undefined;
     draws.push(
       unavailable ? { ...base, unavailable } : { ...base, bytes: result.bytes, url: result.url },
     );
