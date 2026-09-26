@@ -9,3 +9,4 @@ coverage/
 # Wild-sampling runs download fresh documents; only curated fixtures are committed.
 .corpus-cache/
 reports/
+.vitest/
