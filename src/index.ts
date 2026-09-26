@@ -5,3 +5,4 @@
  * @module src/index
  */
 export * from './model/index.js';
+export * from './render/index.js';

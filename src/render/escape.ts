@@ -1,0 +1,76 @@
+/**
+ * @fileoverview Escaping for text that came from a source document and is about to
+ * become inline Markdown. The goal is text that reads naturally and cannot turn into
+ * markup it never was: emphasis, links, math, strikethrough, or live HTML.
+ *
+ * Escaping is minimal on purpose. A backslash before every punctuation mark is valid
+ * Markdown but unreadable to a person or a model, so each rule escapes only where the
+ * character could start a construct.
+ * @module src/render/escape
+ */
+
+/** ASCII punctuation CommonMark allows a backslash to escape. */
+const ESCAPABLE_AFTER_BACKSLASH = /\\(?=[!-/:-@[-`{-~])/g;
+
+/**
+ * Escape source text for use inside inline Markdown.
+ *
+ * - `\` before punctuation, `*`, `` ` ``, `$` (math delimiter), `~` (GFM strikethrough) — always.
+ * - `_` — only where it could delimit emphasis, so `snake_case` and `H_2` stay readable.
+ * - `](` — the sequence that would turn bracketed text into a link.
+ * - `<` — only before a letter, `/`, `!`, or `?`, where it could open an HTML tag.
+ * - `&` — only where it would read as an entity reference.
+ */
+export function escapeInline(text: string): string {
+  return text
+    .replace(ESCAPABLE_AFTER_BACKSLASH, '\\\\')
+    .replace(/[*`$~]/g, '\\$&')
+    .replace(/(^|[^\p{L}\p{N}])_|_(?=$|[^\p{L}\p{N}])/gu, (match) => match.replace('_', '\\_'))
+    .replace(/\]\(/g, '\\](')
+    .replace(/<(?=[A-Za-z/!?])/g, '\\<')
+    .replace(/&(?=#?[A-Za-z0-9]+;)/g, '\\&');
+}
+
+/**
+ * Escape a character sequence that would change meaning at the start of a block:
+ * an ATX heading, a quote, a list marker, a thematic break, or a table row.
+ */
+export function escapeBlockStart(text: string): string {
+  return text
+    .replace(/^(#{1,6})(?=\s|$)/, '\\$1')
+    .replace(/^([>|])/, '\\$1')
+    .replace(/^([-+])(?=\s)/, '\\$1')
+    .replace(/^(\d{1,9})([.)])(?=\s)/, '$1\\$2')
+    .replace(/^(=+|-{3,})\s*$/, '\\$1');
+}
+
+/** Escape a value for a GFM table cell: pipes and line breaks would break the row. */
+export function escapeTableCell(text: string): string {
+  return text.replace(/\|/g, '\\|').replace(/\s*\n\s*/g, ' ');
+}
+
+/** The shortest backtick fence that no run of backticks inside `text` can close. */
+export function codeFence(text: string, minimum = 3): string {
+  const longest = Math.max(0, ...[...text.matchAll(/`+/g)].map((m) => m[0].length));
+  return '`'.repeat(Math.max(minimum, longest + 1));
+}
+
+/** Wrap text as an inline code span that no backtick inside it can close. */
+export function codeSpan(text: string): string {
+  const fence = codeFence(text, 1);
+  const pad = text.startsWith('`') || text.endsWith('`') ? ' ' : '';
+  return `${fence}${pad}${text}${pad}${fence}`;
+}
+
+/** URL schemes a rendered link may carry. Anything else stays plain text. */
+const SAFE_URL = /^(?:https?|ftp|mailto):/i;
+
+/** True when `url` is safe to emit as a Markdown link target. */
+export function isSafeUrl(url: string): boolean {
+  return SAFE_URL.test(url.trim());
+}
+
+/** Escape a URL for use as a Markdown link destination. */
+export function escapeUrl(url: string): string {
+  return url.trim().replace(/[\s()<>]/g, (c) => encodeURIComponent(c));
+}

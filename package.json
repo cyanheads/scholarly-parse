@@ -54,7 +54,29 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./jats": {
+      "types": "./dist/formats/jats/index.d.ts",
+      "import": "./dist/formats/jats/index.js",
+      "default": "./dist/formats/jats/index.js"
+    },
+    "./latexml": {
+      "types": "./dist/formats/latexml/index.d.ts",
+      "import": "./dist/formats/latexml/index.js",
+      "default": "./dist/formats/latexml/index.js"
+    },
     "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "linkedom": ">=0.18.0",
+    "unpdf": ">=1.8.0"
+  },
+  "peerDependenciesMeta": {
+    "linkedom": {
+      "optional": true
+    },
+    "unpdf": {
+      "optional": true
+    }
   },
   "files": ["dist/", "changelog/", "CHANGELOG.md"],
   "scripts": {
@@ -84,8 +106,10 @@
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.2",
     "ignore": "^7.0.10",
+    "linkedom": "^0.18.13",
     "publint": "^0.3.24",
     "typescript": "^7.0.2",
+    "unpdf": "^1.8.1",
     "vitest": "^5.0.1",
     "zod": "^4.6.5"
   },

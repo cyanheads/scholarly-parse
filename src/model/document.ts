@@ -98,11 +98,19 @@ export interface DocumentMetadata {
  * What an abstract is for. A graphical or plain-language abstract never stands in
  * for the main one; renderers pick `main` first.
  */
-export type AbstractKind = 'main' | 'graphical' | 'plain-language' | 'teaser' | 'other';
+export type AbstractKind =
+  | 'main'
+  | 'graphical'
+  | 'plain-language'
+  | 'teaser'
+  | 'translated'
+  | 'other';
 
 /** One abstract. Structured abstracts (Background / Methods / …) carry titled sections. */
 export interface Abstract {
   kind: AbstractKind;
+  /** BCP 47 language tag when the abstract declares one (usual for `translated`). */
+  language?: string;
   sections: Section[];
   /** Heading the source gives the abstract, when it differs from "Abstract". */
   title?: string;
@@ -115,7 +123,9 @@ export type SectionKind =
   | 'acknowledgments'
   | 'declarations'
   | 'data-availability'
-  | 'notes';
+  | 'notes'
+  /** A document embedded in the article, such as a peer-review report or author response. */
+  | 'sub-article';
 
 /** A section and its subsections, in reading order. */
 export interface Section {
@@ -135,10 +145,14 @@ export interface ParagraphBlock {
   type: 'paragraph';
 }
 
-/** A list. Each item holds its own blocks, so lists nest. */
+/**
+ * A list. Each item holds its own blocks, so lists nest. A definition list is an
+ * unordered list whose items open with the term in bold.
+ */
 export interface ListBlock {
   items: Block[][];
   ordered: boolean;
+  title?: string;
   type: 'list';
 }
 
@@ -178,9 +192,12 @@ export interface FigureBlock {
 export interface FormulaBlock {
   id?: string;
   label?: string;
-  /** TeX source when the document carries it. */
+  /**
+   * The formula in TeX notation, without math delimiters: the document's own TeX when
+   * it carries some, else converted from MathML.
+   */
   tex?: string;
-  /** Linear text rendering when no TeX is available (for example, from MathML). */
+  /** Plain text of the formula, set only when no TeX could be produced. */
   text?: string;
   type: 'formula';
 }
@@ -198,11 +215,15 @@ export interface QuoteBlock {
   type: 'quote';
 }
 
-/** A boxed or sidebar element with its own content (JATS `<boxed-text>`). */
+/**
+ * A boxed or sidebar element with its own content (JATS `<boxed-text>`), or a
+ * labeled statement such as a theorem or proof. Boxes can hold sections of their own.
+ */
 export interface BoxBlock {
   blocks: Block[];
   id?: string;
   label?: string;
+  sections: Section[];
   title?: string;
   type: 'box';
 }
