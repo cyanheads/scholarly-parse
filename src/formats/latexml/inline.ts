@@ -60,11 +60,11 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
     ctx.diag.unhandled('latexml:ltx_ERROR');
     return '';
   }
-  if (
-    hasClass(node, 'ltx_note') &&
-    (hasClass(node, 'ltx_role_footnote') || hasClass(node, 'ltx_role_endnote'))
-  ) {
-    return footnote(node, ctx);
+  if (hasClass(node, 'ltx_note')) {
+    // Other note roles (thanks, affiliation and license notices, venue lines) are front matter.
+    return hasClass(node, 'ltx_role_footnote') || hasClass(node, 'ltx_role_endnote')
+      ? footnote(node, ctx)
+      : '';
   }
   if (hasClass(node, 'ltx_font_bold') || tag === 'b' || tag === 'strong')
     return emphasis(inner(), '**');

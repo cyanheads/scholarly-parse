@@ -268,6 +268,7 @@ const FRONT_CLASSES = [
   'ltx_classification',
   'ltx_dates',
   'ltx_date',
+  'ltx_pubnotes',
   'ltx_role_thanks',
 ];
 
@@ -277,7 +278,10 @@ function extractContent(
 ): { back: Section[]; body: Section[]; references: Reference[] } {
   const body: Section[] = [];
   const back: Section[] = [];
-  let references: Reference[] = [];
+  // A bibliography placed inside the last section is still the paper's reference list, not section content.
+  const bibliography = article.querySelector('.ltx_bibliography');
+  const references: Reference[] = bibliography ? extractReferences(bibliography, ctx) : [];
+  bibliography?.remove();
   let pending: Block[] = [];
   const flushPending = () => {
     if (pending.length === 0) return;
@@ -296,10 +300,6 @@ function extractContent(
       continue;
     }
     if (FRONT_CLASSES.some((c) => hasClass(child, c))) continue;
-    if (hasClass(child, 'ltx_bibliography')) {
-      references = extractReferences(child, ctx);
-      continue;
-    }
     const isSection =
       tagOf(child) === 'section' ||
       hasClass(child, 'ltx_appendix') ||
