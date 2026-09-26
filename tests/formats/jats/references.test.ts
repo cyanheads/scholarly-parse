@@ -342,6 +342,16 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
     expect(personGroupCitation('\n')).toBe(C37_CITATION);
   });
 
+  it('leaves out an identifier the citation text already prints', () => {
+    expect(
+      mixedCitation(
+        'Phys. Rev. Lett. 74, 2626 (1995). 10.1103/PhysRevLett.74.2626. ' +
+          '<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.74.2626</pub-id>' +
+          '<pub-id pub-id-type="pmid">2626</pub-id>',
+      ),
+    ).toBe('Phys. Rev. Lett. 74, 2626 (1995). 10.1103/PhysRevLett.74.2626. PMID 2626');
+  });
+
   it('leaves punctuated and text-adjacent transitions unchanged (#115)', () => {
     // Elements already separated by punctuation render as the source has them, and a
     // zero-gap text-to-element transition (a footnote-style marker) gains no space.

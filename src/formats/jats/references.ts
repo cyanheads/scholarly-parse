@@ -368,6 +368,19 @@ function renderNameWrapper(node: XmlNode): string {
   return rendered;
 }
 
+const PUB_ID_TAGS: ReadonlySet<string> = new Set(['pub-id']);
+
+/**
+ * True when `text` prints the identifier `value` as a whole token, not as part of a
+ * longer one. A value of digits alone never counts: it could as well be a page, a
+ * volume, or a year.
+ */
+function printsIdentifier(text: string, value: string): boolean {
+  if (/^\d+$/.test(value)) return false;
+  const pattern = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?<![\\w.-])${pattern}(?![\\w/-]|\\.\\w)`, 'i').test(text);
+}
+
 /** True when the text so far already ends with a prefix naming this ID type (`doi:`). (#115) */
 function hasLiteralIdPrefix(rendered: string, pubIdType: string): boolean {
   const tail = rendered.trimEnd().replace(/[:.]$/, '').trimEnd();
@@ -379,9 +392,12 @@ function hasLiteralIdPrefix(rendered: string, pubIdType: string): boolean {
  * the source reads correctly almost everywhere; three zero-gap adjacencies do not —
  * consecutive `<pub-id>`s (#115), an inline title against the volume after it (#123),
  * and surname against given names (#124). Adjacent elements with nothing between them
- * get one space, and typed identifiers get a label unless the text already names it.
+ * get one space. A typed identifier gets a label unless the text already names it, and
+ * is left out when the text already prints it (PMC adds a `<pub-id>` for a DOI the
+ * citation spells out).
  */
 function renderMixedCitation(node: XmlNode, formulas: string[]): string {
+  const printed = rawText(node, PUB_ID_TAGS);
   let rendered = '';
   let prevWasElement = false;
   for (const child of childrenOf(node)) {
@@ -398,7 +414,7 @@ function renderMixedCitation(node: XmlNode, formulas: string[]): string {
     let labeled = false;
     if (tag === 'pub-id') {
       const value = text(child);
-      if (!value) continue;
+      if (!value || printsIdentifier(printed, value)) continue;
       const type = attrOf(child, 'pub-id-type') ?? '';
       const label = PUB_ID_LABELS[type];
       if (label && !hasLiteralIdPrefix(rendered, type) && !hasLiteralIdPrefix(rendered, label)) {
