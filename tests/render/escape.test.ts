@@ -55,6 +55,7 @@ describe('escapeBlockStart', () => {
     expect(escapeBlockStart('1. not an item')).toBe('1\\. not an item');
     expect(escapeBlockStart('| not a row')).toBe('\\| not a row');
     expect(escapeBlockStart('---')).toBe('\\---');
+    expect(escapeBlockStart('[a]: https://example.org')).toBe('\\[a]: https://example.org');
   });
 
   it('leaves ordinary text alone', () => {

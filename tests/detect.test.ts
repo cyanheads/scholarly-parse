@@ -22,6 +22,13 @@ describe('detect', () => {
     expect(detect('<pmc-articleset><article>')).toBe('jats');
   });
 
+  it('reads past a long run of comments in one pass', () => {
+    const comments = '<!-- a -->\n'.repeat(40);
+    expect(detect(`<?xml version="1.0"?>${comments}<x>`)).toBeUndefined();
+    expect(detect(`${comments}<article>`)).toBe('jats');
+    expect(detect('<!-- unclosed <article>')).toBeUndefined();
+  });
+
   it('reads Grobid TEI, bare or inside an HTML page', () => {
     expect(
       detect('<?xml version="1.0"?>\n<TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader>'),

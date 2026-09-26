@@ -4,7 +4,7 @@
  * TEI, or HTML.
  * @module src/render/inline
  */
-import { codeSpan, escapeUrl, isSafeUrl } from './escape.js';
+import { codeSpan, escapeInline, escapeTex, escapeUrl, isSafeUrl } from './escape.js';
 
 /**
  * Wrap already-rendered Markdown in an emphasis marker (`*`, `**`, `~~`). Whitespace at
@@ -48,12 +48,13 @@ export function subscript(markdown: string, plain: string): string {
 }
 
 /**
- * A link. An unsafe scheme (`javascript:`, `data:`) renders as its text only; a link
- * whose text is its own URL renders as an autolink.
+ * A link. An unsafe scheme (`javascript:`, `data:`) renders as its text only, or as the
+ * target as escaped text when there is none; a link whose text is its own URL renders as
+ * an autolink.
  */
 export function link(markdown: string, url: string | undefined): string {
   const target = url?.trim();
-  if (!target || !isSafeUrl(target)) return markdown || (target ?? '');
+  if (!target || !isSafeUrl(target)) return markdown || escapeInline(target ?? '');
   const text = markdown.trim();
   if (!text || text === target || text === escapeUrlText(target)) return `<${escapeUrl(target)}>`;
   return `[${text}](${escapeUrl(target)})`;
@@ -73,7 +74,7 @@ export const FORMULA_IMAGE = '[formula]';
 /** Inline math: `$tex$`. Empty TeX renders nothing. */
 export function inlineMath(tex: string): string {
   const expression = tex.replace(/\s+/g, ' ').trim();
-  return expression ? `$${expression}$` : '';
+  return expression ? `$${escapeTex(expression)}$` : '';
 }
 
 /**

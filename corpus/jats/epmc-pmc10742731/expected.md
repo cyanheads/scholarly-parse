@@ -7,7 +7,7 @@ License: <https://creativecommons.org/licenses/by/4.0/>
 
 ## Abstract
 
-Sunflower in coding theory is a class of important subspace codes and can be used to construct linear codes. In this paper, we study the minimality of linear codes over $\mathbb{F}_q$ constructed from sunflowers of size *s* in all cases. For any sunflower, the corresponding linear code is minimal if $s≥q+1$, and not minimal if $2≤s≤3≤q$. In the case where $3<s≤q$, for some sunflowers, the corresponding linear codes are minimal, whereas for some other sunflowers, the corresponding linear codes are not minimal.
+Sunflower in coding theory is a class of important subspace codes and can be used to construct linear codes. In this paper, we study the minimality of linear codes over $\mathbb{F}_q$ constructed from sunflowers of size *s* in all cases. For any sunflower, the corresponding linear code is minimal if $s≥q+1$, and not minimal if $2≤s≤3≤q$. In the case where $3< s≤q$, for some sunflowers, the corresponding linear codes are minimal, whereas for some other sunflowers, the corresponding linear codes are not minimal.
 
 ## 1 **Introduction**
 
@@ -21,7 +21,7 @@ When using the algebraic method to prove the minimality of a given linear code, 
 
 Sunflower in coding theory is a class of important subspace codes and can be used to construct linear codes, see [22]. Let *s* be the number of the elements in a sunflower. In [23], (Theorem 10), the authors proved that if $s≥p+1$, then the corresponding linear code over $\mathbb{F}_p$ is minimal, where *p* is a prime number.
 
-In this paper, we will use the approach used in [14] to consider the minimality of linear codes over $\mathbb{F}_q$ constructed from sunflowers for all *s*. We obtain the following three results: (1) when $s≥q+1$, for any sunflower, the corresponding linear code is minimal; (2) when $2≤s≤3≤q$, for any sunflower, the corresponding linear code is not minimal; (3) when $3<s≤q$, for some sunflowers, the corresponding linear codes are minimal, wherea for some other sunflowers, the corresponding linear codes are not minimal.
+In this paper, we will use the approach used in [14] to consider the minimality of linear codes over $\mathbb{F}_q$ constructed from sunflowers for all *s*. We obtain the following three results: (1) when $s≥q+1$, for any sunflower, the corresponding linear code is minimal; (2) when $2≤s≤3≤q$, for any sunflower, the corresponding linear code is not minimal; (3) when $3< s≤q$, for some sunflowers, the corresponding linear codes are minimal, wherea for some other sunflowers, the corresponding linear codes are not minimal.
 
 This paper is organized as follows. In Section 2, we introduce some basic knowledge about sunflowers, Euclidean inner product, and minimal linear codes. In Section 3, we consider the linear codes constructed from sunflowers and discuss the minimality of these linear codes in three cases. In Section 4, we conclude this paper.
 
@@ -663,7 +663,7 @@ Combining Theorem 4 and Corollary 1, we have
 
 > **Corollary 4.**
 >
-> *Let $3<s≤q$ and $S⊆\mathbb{F}_q$ where $#S=s$. Let $\mathrm{Φ}=\{E_b| b∈S\}$. Then, $\mathcal{C}(D)$ is not minimal.*
+> *Let $3< s≤q$ and $S⊆\mathbb{F}_q$ where $#S=s$. Let $\mathrm{Φ}=\{E_b| b∈S\}$. Then, $\mathcal{C}(D)$ is not minimal.*
 
 > **Remark 2.**
 >
@@ -681,7 +681,7 @@ Combining Theorem 4 and Corollary 1, we have
 
 ## 4 Concluding Remarks
 
-In this paper, we use the approach used in [14] to study the minimality of linear codes constructed from sunflowers in all cases. In [23], the authors proved that if the number *s* of the elements in a sunflower satisfying $s≥p+1$, then the corresponding linear code over $\mathbb{F}_p$ is minimal, where *p* is a prime number. Our results in this paper generalize [23] (Theorem 10). We discuss the minimality of linear codes constructed from sunflowers for all *s*. We obtain the following three results: (1) when $s≥q+1$, for any sunflower, the corresponding linear code is minimal; (2) when $2≤s≤3≤q$, for any sunflower, the corresponding linear code is not minimal; (3) when $3<s≤q$, for some sunflowers, the corresponding linear codes are minimal, whereas for some other sunflowers, the corresponding linear codes are not minimal.
+In this paper, we use the approach used in [14] to study the minimality of linear codes constructed from sunflowers in all cases. In [23], the authors proved that if the number *s* of the elements in a sunflower satisfying $s≥p+1$, then the corresponding linear code over $\mathbb{F}_p$ is minimal, where *p* is a prime number. Our results in this paper generalize [23] (Theorem 10). We discuss the minimality of linear codes constructed from sunflowers for all *s*. We obtain the following three results: (1) when $s≥q+1$, for any sunflower, the corresponding linear code is minimal; (2) when $2≤s≤3≤q$, for any sunflower, the corresponding linear code is not minimal; (3) when $3< s≤q$, for some sunflowers, the corresponding linear codes are minimal, whereas for some other sunflowers, the corresponding linear codes are not minimal.
 
 ## Author Contributions
 

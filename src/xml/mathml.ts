@@ -14,43 +14,53 @@ import { attrOf, childrenOf, isTextNode, localNameOf, textOf, type XmlNode } fro
 /** Annotation encodings that carry TeX. */
 const TEX_ENCODINGS = new Set(['application/x-tex', 'tex', 'latex', 'application/x-latex']);
 
-/** Accent characters `<mover accent="true">` uses, and the TeX command for each. */
-const ACCENTS: Record<string, string> = {
-  '^': '\\hat',
-  ˆ: '\\hat',
-  '¯': '\\bar',
-  '‾': '\\bar',
-  '~': '\\tilde',
-  '˜': '\\tilde',
-  '˙': '\\dot',
-  '¨': '\\ddot',
-  '→': '\\vec',
-  '⃗': '\\vec',
-};
+/**
+ * Accent characters `<mover accent="true">` uses, and the TeX command for each. The
+ * tables here are maps because their keys come from the document: an `<mo>constructor`
+ * must not find `Object.prototype.constructor`.
+ */
+const ACCENTS: ReadonlyMap<string, string> = new Map(
+  Object.entries({
+    '^': '\\hat',
+    ˆ: '\\hat',
+    '¯': '\\bar',
+    '‾': '\\bar',
+    '~': '\\tilde',
+    '˜': '\\tilde',
+    '˙': '\\dot',
+    '¨': '\\ddot',
+    '→': '\\vec',
+    '⃗': '\\vec',
+  }),
+);
 
 /** Operator characters that need a TeX spelling to survive as math. */
-const OPERATORS: Record<string, string> = {
-  '⁡': '',
-  '⁢': '',
-  '⁣': '',
-  '⁤': '',
-  '{': '\\{',
-  '}': '\\}',
-};
+const OPERATORS: ReadonlyMap<string, string> = new Map(
+  Object.entries({
+    '⁡': '',
+    '⁢': '',
+    '⁣': '',
+    '⁤': '',
+    '{': '\\{',
+    '}': '\\}',
+  }),
+);
 
 /** `mathvariant` values on a token (`<mi mathvariant="double-struck">F</mi>`), and the TeX command for each. */
-const VARIANTS: Record<string, string> = {
-  bold: '\\mathbf',
-  'bold-fraktur': '\\mathfrak',
-  'bold-italic': '\\boldsymbol',
-  'bold-script': '\\mathcal',
-  'double-struck': '\\mathbb',
-  fraktur: '\\mathfrak',
-  monospace: '\\mathtt',
-  normal: '\\mathrm',
-  'sans-serif': '\\mathsf',
-  script: '\\mathcal',
-};
+const VARIANTS: ReadonlyMap<string, string> = new Map(
+  Object.entries({
+    bold: '\\mathbf',
+    'bold-fraktur': '\\mathfrak',
+    'bold-italic': '\\boldsymbol',
+    'bold-script': '\\mathcal',
+    'double-struck': '\\mathbb',
+    fraktur: '\\mathfrak',
+    monospace: '\\mathtt',
+    normal: '\\mathrm',
+    'sans-serif': '\\mathsf',
+    script: '\\mathcal',
+  }),
+);
 
 /** True when `s` looks like TeX rather than a plain-text alternative. */
 function looksLikeTex(s: string): boolean {
@@ -106,18 +116,18 @@ function linearizeNode(node: XmlNode): string {
   switch (localNameOf(node)) {
     case 'mi': {
       const text = linearize(kids);
-      const variant = VARIANTS[attrOf(node, 'mathvariant') ?? ''];
+      const variant = VARIANTS.get(attrOf(node, 'mathvariant') ?? '');
       if (variant && text) return `${variant}{${text}}`;
       return [...text].length > 1 && /^[A-Za-z]+$/.test(text) ? `\\mathrm{${text}}` : text;
     }
     case 'mn': {
       const text = linearize(kids);
-      const variant = VARIANTS[attrOf(node, 'mathvariant') ?? ''];
+      const variant = VARIANTS.get(attrOf(node, 'mathvariant') ?? '');
       return variant && variant !== '\\mathrm' && text ? `${variant}{${text}}` : text;
     }
     case 'mo': {
       const text = linearize(kids);
-      return OPERATORS[text] ?? text;
+      return OPERATORS.get(text) ?? text;
     }
     case 'mtext': {
       const text = linearize(kids);
@@ -141,7 +151,7 @@ function linearizeNode(node: XmlNode): string {
       return `\\sqrt[${arg(1)}]{${arg(0)}}`;
     case 'mover': {
       const over = arg(1);
-      const accent = ACCENTS[over];
+      const accent = ACCENTS.get(over);
       return accent ? `${accent}{${arg(0)}}` : `\\overset{${over}}{${arg(0)}}`;
     }
     case 'munder':

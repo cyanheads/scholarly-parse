@@ -27,8 +27,8 @@ export function detect(input: string | Uint8Array): SourceFormat | undefined {
   )
     return 'tei';
   if (
-    /^(?:<\?xml[^>]*>\s*)?(?:<!--[\s\S]*?-->\s*)*(?:<!DOCTYPE\s+(?:article|pmc-articleset)\b|<article[\s>]|<pmc-articleset[\s>])/i.test(
-      text,
+    /^(?:<!DOCTYPE\s+(?:article|pmc-articleset)\b|<article[\s>]|<pmc-articleset[\s>])/i.test(
+      afterProlog(text),
     )
   ) {
     return 'jats';
@@ -36,6 +36,22 @@ export function detect(input: string | Uint8Array): SourceFormat | undefined {
   if (/\bltx_document\b|<meta[^>]+content=["']LaTeXML/i.test(text)) return 'latexml';
   if (/<(?:!DOCTYPE\s+html|html|head|body)[\s>]/i.test(text)) return 'html';
   return;
+}
+
+/**
+ * The text from the root element on, past an XML declaration and the comments and
+ * whitespace before the root. Scanned forward once: a regex over a run of comments
+ * backtracks exponentially when the root after them does not match.
+ */
+function afterProlog(text: string): string {
+  let at = /^<\?xml[^>]*>/i.exec(text)?.[0].length ?? 0;
+  for (;;) {
+    while (/\s/.test(text.charAt(at))) at++;
+    if (!text.startsWith('<!--', at)) return text.slice(at);
+    const end = text.indexOf('-->', at + 4);
+    if (end === -1) return '';
+    at = end + 3;
+  }
 }
 
 /** Bytes as Latin-1 text: enough to sniff ASCII markup whatever the real encoding. */

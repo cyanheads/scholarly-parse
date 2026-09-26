@@ -7,7 +7,7 @@
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type { Block, ScholarlyDocument, Section, SectionKind } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
-import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import {
@@ -40,6 +40,10 @@ const DEFAULT_MAX_INPUT_BYTES = 32 * 1024 * 1024;
 
 /** Parse a JATS XML article. */
 export function parseJats(input: string | Uint8Array, options: ParseOptions = {}): ParseResult {
+  return guard(() => readJats(input, options));
+}
+
+function readJats(input: string | Uint8Array, options: ParseOptions): ParseResult {
   const maxBytes = options.maxInputBytes ?? DEFAULT_MAX_INPUT_BYTES;
   if (exceedsBudget(input, maxBytes)) {
     return failed('too-large', `Input exceeds the ${maxBytes}-byte budget`);
@@ -163,28 +167,32 @@ function parseBody(
 }
 
 /** `@sec-type` / `@notes-type` values and the section kind each is reported as. */
-const TYPED_KINDS: Readonly<Record<string, SectionKind>> = {
-  ack: 'acknowledgments',
-  app: 'appendix',
-  'author-contributions': 'declarations',
-  'coi-statement': 'declarations',
-  'competing-interests': 'declarations',
-  conflict: 'declarations',
-  'contrib-info': 'notes',
-  'data-availability': 'data-availability',
-  data_availability: 'data-availability',
-  'ethics-statement': 'declarations',
-  'funding-information': 'declarations',
-  'funding-statement': 'declarations',
-  glossary: 'notes',
-  'supplementary-material': 'appendix',
-};
+const TYPED_KINDS: ReadonlyMap<string, SectionKind> = new Map(
+  Object.entries<SectionKind>({
+    ack: 'acknowledgments',
+    app: 'appendix',
+    'author-contributions': 'declarations',
+    'coi-statement': 'declarations',
+    'competing-interests': 'declarations',
+    conflict: 'declarations',
+    'contrib-info': 'notes',
+    'data-availability': 'data-availability',
+    data_availability: 'data-availability',
+    'ethics-statement': 'declarations',
+    'funding-information': 'declarations',
+    'funding-statement': 'declarations',
+    glossary: 'notes',
+    'supplementary-material': 'appendix',
+  }),
+);
 
 /** The back-matter kind a `<sec>` or `<notes>` declares, else the one its title names. */
 function backMatterKind(node: XmlNode): SectionKind | undefined {
   const declared = (attrOf(node, 'sec-type') ?? attrOf(node, 'notes-type'))?.toLowerCase();
-  if (declared && TYPED_KINDS[declared]) return TYPED_KINDS[declared];
-  return kindFromTitle(splitSectionNumber(text(findOne(node, 'title')), undefined).title);
+  return (
+    TYPED_KINDS.get(declared ?? '') ??
+    kindFromTitle(splitSectionNumber(text(findOne(node, 'title')), undefined).title)
+  );
 }
 
 /**

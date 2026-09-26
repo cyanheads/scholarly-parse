@@ -156,11 +156,7 @@ $$
 where
 
 $$
-\textbf{{g}}=(g_{1},\ldots,g_{N})^{\top}\in\mathbb{R}^{N},\hskip 18.49988pt\textbf{A}=\begin{bmatrix}0&a_{1}&&\\
-a_{1}&0&\ddots&\\
-&\ddots&\ddots&\\
-&&&a_{N-1}\\
-&&a_{N-1}&0\end{bmatrix}\in\mathbb{R}^{N\times N}\text{ and }\hskip 9.24994pt\textbf{{b}}=(\gamma_{1},0,\ldots,0)^{\top}\in\mathbb{R}^{N}.
+\textbf{{g}}=(g_{1},\ldots,g_{N})^{\top}\in\mathbb{R}^{N},\hskip 18.49988pt\textbf{A}=\begin{bmatrix}0&a_{1}&&\\ a_{1}&0&\ddots&\\ &\ddots&\ddots&\\ &&&a_{N-1}\\ &&a_{N-1}&0\end{bmatrix}\in\mathbb{R}^{N\times N}\text{ and }\hskip 9.24994pt\textbf{{b}}=(\gamma_{1},0,\ldots,0)^{\top}\in\mathbb{R}^{N}.
 $$
 
 ### 2.2 Dynamical low-rank approximation
@@ -604,9 +600,7 @@ and $\textbf{{K}}_{i+1/2}(t)=\textbf{{X}}_{i+1/2}(t)^{\top}\textbf{S}(t)\in\math
 Next, we investigate the stability of the fixed-rank modal macro-micro BUG scheme in energy norm for the linearized problem (3.3). For the following decomposition of the micro variable
 
 $$
-\textbf{g}^{n}=\begin{bmatrix}\textbf{{g}}^{n}_{1/2}\\
-\vdots\\
-\textbf{{g}}^{n}_{N_{x}+1/2}\end{bmatrix}=\textbf{X}^{n}\textbf{S}^{n}\textbf{{V}}^{n,\top},
+\textbf{g}^{n}=\begin{bmatrix}\textbf{{g}}^{n}_{1/2}\\ \vdots\\ \textbf{{g}}^{n}_{N_{x}+1/2}\end{bmatrix}=\textbf{X}^{n}\textbf{S}^{n}\textbf{{V}}^{n,\top},
 $$
 
 the norm is defined as
@@ -874,8 +868,7 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
    Finally we set the updated coefficient matrix $\textbf{S}^{n+1}\in\mathbb{R}^{r_{1}\times r_{1}}$ to be
 
    $$
-   \textbf{S}^{n+1}=\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-   \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix} \tag{4.19}
+   \textbf{S}^{n+1}=\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix} \tag{4.19}
    $$
 
    and the approximation at the next time step is set as $\textbf{g}^{n+1}=\textbf{X}^{n+1}\textbf{S}^{n+1}\textbf{{V}}^{n+1,\top}$.
@@ -894,9 +887,7 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
 > *For the proposed modal macro-micro BUG scheme, we have*
 >
 > $$
-> \textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\ \end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}=\textbf{S}^{n+1},
+> \textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\ \end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}=\textbf{S}^{n+1},
 > $$
 >
 > *where the matrices are as defined above and $\textbf{I}_{m}$ is the $m\times m$ identity matrix.*
@@ -932,20 +923,17 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\widehat{\textbf{K}}^{\text{ap}}&\widehat{\textbf{K}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-1}&\textbf{0}\\
-> \textbf{0}&(\widehat{\textbf{S}}^{\text{rem}})^{-1}\widehat{\textbf{U}}\end{bmatrix}\textbf{R}_{2}^{-1}
+> \displaystyle=\begin{bmatrix}\widehat{\textbf{K}}^{\text{ap}}&\widehat{\textbf{K}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-1}&\textbf{0}\\ \textbf{0}&(\widehat{\textbf{S}}^{\text{rem}})^{-1}\widehat{\textbf{U}}\end{bmatrix}\textbf{R}_{2}^{-1}
 > $$
 >
 > $$
-> \displaystyle=\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-1}&\textbf{0}\\
-> \textbf{0}&(\widehat{\textbf{S}}^{\text{rem}})^{-1}\widehat{\textbf{U}}\end{bmatrix}\textbf{R}_{2}^{-1}.
+> \displaystyle=\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-1}&\textbf{0}\\ \textbf{0}&(\widehat{\textbf{S}}^{\text{rem}})^{-1}\widehat{\textbf{U}}\end{bmatrix}\textbf{R}_{2}^{-1}.
 > $$
 >
 > Thus we get
 >
 > $$
-> \textbf{X}^{n+1,\top}=\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{X}}^{n+1,\top}
+> \textbf{X}^{n+1,\top}=\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{X}}^{n+1,\top}
 > $$
 >
 > and similarly, we get the following relation for the updated angular basis
@@ -955,15 +943,13 @@ Then, one step of the modal macro-micro BUG scheme updates $\textbf{X}^{n},\text
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\widehat{\textbf{{V}}}^{\text{ap}}&\widehat{\textbf{{V}}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}.
+> \displaystyle=\begin{bmatrix}\widehat{\textbf{{V}}}^{\text{ap}}&\widehat{\textbf{{V}}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}.
 > $$
 >
 > This yields the relation
 >
 > $$
-> \textbf{{V}}^{n+1}=\widehat{\textbf{{V}}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix},
+> \textbf{{V}}^{n+1}=\widehat{\textbf{{V}}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix},
 > $$
 >
 > where $\textbf{I}_{m}$ is the $m\times m$ identity matrix. Now we multiply (4.22) by $\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}$ from the left and by $\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}$ from the right and using Lemma 1 for the right-hand side gives
@@ -1071,8 +1057,7 @@ For $\varepsilon=10^{-5}$, we use a coarser spatial grid with $N_{x}=201$ cells.
 To study the behavior of the methods in an inhomogeneous medium, we place an absorber in the middle of the domain. That is, we set the absorption coefficient to
 
 $$
-\sigma^{a}(x)=\begin{cases}5,&\mathrm{if}-0.25\leq x\leq 0.25,\\
-0.5&\mathrm{else}\end{cases}.
+\sigma^{a}(x)=\begin{cases}5,&\mathrm{if}-0.25\leq x\leq 0.25,\\ 0.5&\mathrm{else}\end{cases}.
 $$
 
 The remaining parameters, along with the end time, are the same as in the rectangular pulse test case. The temperature and scalar flux, along with other parameters, are depicted in Figure 4 for $\varepsilon=1$ and in Figure 5 for $\varepsilon=10^{-5}$.
@@ -1466,88 +1451,61 @@ With these lemma we now present the proof of theorem 2:
 > Consider
 >
 > $$
-> \displaystyle\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix} \displaystyle=\widehat{\textbf{K}}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix} \displaystyle=\widehat{\textbf{K}}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}\textbf{S}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\widehat{\textbf{S}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}\textbf{S}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\widehat{\textbf{S}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{S}}^{\text{rem}}\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{S}}^{\text{rem}}\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{U}}\end{bmatrix}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
+> \displaystyle=\begin{bmatrix}\textbf{X}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\end{bmatrix}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{U}}\end{bmatrix}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
 > $$
 >
 > where we use that $\widehat{\textbf{S}}^{\text{rem}}\widehat{\textbf{W}}=\widehat{\textbf{U}}\textbf{S}^{\text{rem}}$. We have from (4.18) that the updated spatial basis matrix has the form $\textbf{X}^{n+1}\textbf{R}_{2}=\begin{bmatrix}\textbf{X}^{\text{ap}}&\textbf{X}^{\text{rem}}\end{bmatrix}=\begin{bmatrix}\textbf{X}^{\text{ap}}&\widehat{\textbf{X}}^{\text{rem}}\widehat{\textbf{U}}\end{bmatrix}$ and thus
 >
 > $$
-> \widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}=\textbf{X}^{n+1}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}.
+> \widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}=\textbf{X}^{n+1}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}.
 > $$
 >
 > Hence we get the following relation
 >
 > $$
-> \displaystyle\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix} \displaystyle=\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{X}}^{n+1,\top}\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix} \displaystyle=\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{X}}^{n+1,\top}\widehat{\textbf{X}}^{n+1}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{X}^{n+1,\top}\textbf{X}^{n+1}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
+> \displaystyle=\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{X}^{n+1,\top}\textbf{X}^{n+1}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}.
+> \displaystyle=\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}.
 > $$
 >
 > Putting it all together we have
 >
 > $$
-> \displaystyle\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\end{bmatrix} \displaystyle\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{U}}^{\top}(\widehat{\textbf{S}}^{\text{rem}})^{-\top}\end{bmatrix} \displaystyle\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\
-> \textbf{0}&(\textbf{S}^{\text{rem}})^{-\top}\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}(\textbf{S}^{\text{ap}})^{-\top}&\textbf{0}\\ \textbf{0}&(\textbf{S}^{\text{rem}})^{-\top}\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}^{-\top}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\
-> \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
+> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}^{-\top}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}^{\top}\end{bmatrix}\widehat{\textbf{S}}^{n+1,\top}\widehat{\textbf{S}}^{n+1}\begin{bmatrix}\textbf{I}_{m}&\textbf{0}\\ \textbf{0}&\widehat{\textbf{W}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
+> \displaystyle=\textbf{R}_{2}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}^{-\top}\begin{bmatrix}\textbf{S}^{\text{ap},\top}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem},\top}\end{bmatrix}\textbf{R}_{2}^{\top}\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
 > $$
 >
 > $$
-> \displaystyle=\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\
-> \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
+> \displaystyle=\textbf{R}_{2}\begin{bmatrix}\textbf{S}^{\text{ap}}&\textbf{0}\\ \textbf{0}&\textbf{S}^{\text{rem}}\end{bmatrix}
 > $$
 >
 > $$

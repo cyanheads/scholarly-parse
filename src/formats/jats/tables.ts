@@ -10,6 +10,7 @@
  */
 import type { TableBlock, TableUnextractableReason } from '../../model/document.js';
 import { buildGrid, type SourceRow, spanValue } from '../../model/table-grid.js';
+import { escapeInline } from '../../render/escape.js';
 import {
   attrOf,
   childrenOf,
@@ -75,7 +76,7 @@ function tableFootnotes(foot: XmlNode | undefined, ctx: JatsContext): string[] {
     for (const child of childrenOf(node)) {
       const tag = tagNameOf(child);
       if (tag === 'fn' || tag === 'p') {
-        const label = text(findOne(child, 'label'));
+        const label = escapeInline(text(findOne(child, 'label')));
         const body = inlineText(
           childrenOf(child).filter((c) => tagNameOf(c) !== 'label'),
           ctx,

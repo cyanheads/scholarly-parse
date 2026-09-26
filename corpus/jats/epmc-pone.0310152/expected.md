@@ -92,7 +92,7 @@ $$
 Here *V*_i(*t*) and *ϕ*_i(*t*) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from *i* = 1. *K* is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses *i* and *i* + 1 are administrated with a time gap *T*_{i,i+1}, and the first dose was started from *t* = *T*_0. Then for any *i* ∈ {1, 2, ⋯, *K*}, we have
 
 $$
-\begin{matrix}V_i(t)=\{\begin{matrix}0, & t<T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i} \\ & \\ \text{positive}, & t≥T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i}\end{matrix}.\end{matrix} \tag{9}
+\begin{matrix}V_i(t)=\{\begin{matrix}0, & t< T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i} \\ & \\ \text{positive}, & t≥T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i}\end{matrix}.\end{matrix} \tag{9}
 $$
 
 Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.
@@ -236,7 +236,7 @@ The function *fitdist(:,gamma)* estimates the shape and scale parameters with 95
 We assume that the vaccination function *V*(*t*) that is started at time *t* = *t*_0, follows the function
 
 $$
-\begin{matrix}V(t)=\{\begin{matrix}0, & t<t_0 \\ L[N-(N-V_0)e^{-k(t-t_0)}], & t≥t_0\end{matrix}.\end{matrix} \tag{20}
+\begin{matrix}V(t)=\{\begin{matrix}0, & t< t_0 \\ L[N-(N-V_0)e^{-k(t-t_0)}], & t≥t_0\end{matrix}.\end{matrix} \tag{20}
 $$
 
 where, *N* is the total population size, *L* is the proportion of the population expected to be vaccinated, *k* is the rate of vaccination, *V*_0 is the number of vaccination at time *t* = *t*_0, and the associated parameter values are listed in Table 1.

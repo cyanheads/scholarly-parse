@@ -45,3 +45,34 @@ export function parsed(document: ScholarlyDocument): ParseResult {
 export function failed(reason: ParseFailureReason, message: string): ParseResult {
   return { error: { message, reason }, ok: false };
 }
+
+/** A missing optional peer dependency: a setup error, so it throws rather than failing a parse. */
+export class MissingPeerError extends Error {}
+
+/**
+ * Run a parse so that a throw it did not anticipate — a stack overflow on deep nesting,
+ * an engine's internal error — returns as `malformed` instead of escaping the
+ * {@link ParseResult} contract. A {@link MissingPeerError} still throws.
+ */
+export function guard(parse: () => ParseResult): ParseResult {
+  try {
+    return parse();
+  } catch (error) {
+    return unexpected(error);
+  }
+}
+
+/** {@link guard} for a parser that reads asynchronously. */
+export async function guardAsync(parse: () => Promise<ParseResult>): Promise<ParseResult> {
+  try {
+    return await parse();
+  } catch (error) {
+    return unexpected(error);
+  }
+}
+
+function unexpected(error: unknown): ParseResult {
+  if (error instanceof MissingPeerError) throw error;
+  const detail = error instanceof Error ? error.message : String(error);
+  return failed('malformed', `The document could not be read: ${detail}`);
+}

@@ -218,6 +218,72 @@ describe('blocks', () => {
   });
 });
 
+describe('source text that would become markup', () => {
+  it('writes plain-text metadata fields and an unsafe license URL as text', () => {
+    const markdown = toMarkdown(
+      documentOf({
+        metadata: {
+          identifiers: { pmcid: 'PMC1<b>', pmid: '<img src=x onerror=alert(1)>' },
+          license: { url: 'javascript:alert(2)' },
+          related: [{ pmid: '<img src=y>', relation: 'commentary' }],
+        },
+      }),
+    );
+    expect(markdown).toBe(
+      'PMID: \\<img src=x onerror=alert(1)> · PMCID: PMC1\\<b>  \nLicense: javascript:alert(2)  \nRelated (commentary): PMID: \\<img src=y>\n',
+    );
+    const angled = toMarkdown(
+      documentOf({ metadata: { license: { url: 'https://x.org/a><img src=z>' } } }),
+    );
+    expect(angled).toBe('License: <https://x.org/a%3E%3Cimg%20src=z%3E>\n');
+  });
+
+  it('escapes figure alt text and drops a code language that is not a name', () => {
+    expect(
+      blocksMarkdown([
+        { alt: '<img src=x onerror=alert(1)> *a*', type: 'figure' },
+        { language: 'x`\n<b>', text: 'code', type: 'code' },
+        { language: 'c++', text: 'code', type: 'code' },
+      ]),
+    ).toBe(
+      '**Figure.** \\<img src=x onerror=alert(1)> \\*a\\*\n\n```\ncode\n```\n\n```c++\ncode\n```\n',
+    );
+  });
+
+  it('keeps display TeX on its lines and its tag label out of the TeX', () => {
+    expect(
+      blocksMarkdown([
+        { label: '1}\n$$\n<script>', tex: 'a<b\n\n$$\n[x](javascript:y)', type: 'formula' },
+      ]),
+    ).toBe('$$\na< b $$ [x] (javascript:y) \\tag{1 script}\n$$\n');
+  });
+
+  it('keeps text that reads as a link reference definition from defining one', () => {
+    const markdown = toMarkdown(
+      documentOf({
+        body: [
+          section('s1', {
+            blocks: [
+              { text: '[a]: javascript:alert(1)', type: 'paragraph' },
+              {
+                footnotes: ['[d]: javascript:alert(4)'],
+                headerRows: 0,
+                rows: [['x']],
+                type: 'table',
+              },
+            ],
+          }),
+        ],
+        footnotes: [{ text: '[b]: javascript:alert(2)' }],
+        references: [{ text: '[c]: javascript:alert(3)' }],
+      }),
+    );
+    expect(markdown).toBe(
+      '\\[a]: javascript:alert(1)\n\n|  |\n| --- |\n| x |\n\n\\[d]: javascript:alert(4)\n\n## Footnotes\n\n- \\[b]: javascript:alert(2)\n\n## References\n\n- \\[c]: javascript:alert(3)\n',
+    );
+  });
+});
+
 describe('toText', () => {
   it('removes the markup this package writes', () => {
     const document = documentOf({

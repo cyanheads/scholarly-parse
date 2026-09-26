@@ -85,8 +85,7 @@ We formalize our method for *interpretable activation-level steering* of VLAs (F
 Let $x\in\mathbb{R}^{n}$ be the residual input to a transformer FFN. As shown in Equation (2), the FFN output is a sum of fixed value vectors $w_{\theta}^{(i)}\in\mathbb{R}^{n}$ weighted by input-dependent activations $f_{\theta}(x)\in\mathbb{R}^{m}$. Motivated by evidence that individual FFN neurons encode semantic features [16, 5], we override a subset $\mathcal{S}\subseteq\{1,\dots,m\}$ of activations using a fixed scalar $\alpha\in\mathbb{R}$. Each $\mathcal{S}$ corresponds to an interpretable neuron cluster aligned with a control concept - e.g., *fast*, *up*, *careful* - identified by grouping neurons with similar token projections (Figure 1, steps 1–3), either manually or via kNN over semantic embeddings.
 
 $$
-\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\alpha&\text{if }i\in\mathcal{S}\\
-[f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{3}
+\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\alpha&\text{if }i\in\mathcal{S}\\ [f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{3}
 $$
 
 $$
@@ -170,8 +169,7 @@ Bear Häon was additionally supported by the Schmidt Futures Quad Fellowship, NS
 Let $x\in\mathbb{R}^{n}$ be the residual input to a transformer FFN. As shown in Equation (2), the FFN output is a sum of fixed value vectors $w_{\theta}^{(i)}\in\mathbb{R}^{n}$ weighted by input-dependent activations $f_{\theta}(x)\in\mathbb{R}^{m}$. Motivated by evidence that individual FFN neurons encode semantic features [16, 5], we override a subset $\mathcal{S}\subseteq\{1,\dots,m\}$ of activations using a fixed scalar $\alpha\in\mathbb{R}$. Each $\mathcal{S}$ corresponds to an interpretable neuron cluster aligned with a control concept - e.g., *fast*, *up*, *careful* - identified by grouping neurons with similar token projections (Figure 1, steps 1–3), either manually or via kNN over semantic embeddings.
 
 $$
-\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\alpha&\text{if }i\in\mathcal{S}\\
-[f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{5}
+\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\alpha&\text{if }i\in\mathcal{S}\\ [f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{5}
 $$
 
 $$
@@ -185,8 +183,7 @@ This induces a residual shift $\Delta x=\text{FFN}_{\text{steered}}(x)-\text{FFN
 We also experimented with a modified intervention to OpenVLA which instead applies the forward hook to the FFN’s `gate_proj`. This is equivalent to the following:
 
 $$
-\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\text{GELU}(\alpha)\cdot[W_{2}x]_{i}&\text{if }i\in\mathcal{S}\\
-[f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{7}
+\tilde{f}_{\theta}^{(i)}(x)=\begin{cases}\text{GELU}(\alpha)\cdot[W_{2}x]_{i}&\text{if }i\in\mathcal{S}\\ [f_{\theta}(x)]_{i}&\text{otherwise}\end{cases} \tag{7}
 $$
 
 We found that this intervention performed similarly to the intervention defined in Equation (5) during our exploratory experiments.

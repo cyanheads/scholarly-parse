@@ -61,6 +61,13 @@ describe('the result contract', () => {
     });
   });
 
+  it('finds the last closing tag in one pass over a run of them', () => {
+    const started = performance.now();
+    const result = parseTei(`<TEI>${'</tei >'.repeat(20_000)}${'x'.repeat(500_000)}`);
+    expect(result).toMatchObject({ error: { reason: 'malformed' }, ok: false });
+    expect(performance.now() - started).toBeLessThan(1_000);
+  });
+
   it('reads the lowercase TEI OpenAlex serves inside an HTML page, divs directly under <text>', () => {
     const document = parse(
       `<html><body><tei><teiheader><filedesc><titlestmt><title>Wrapped</title></titlestmt></filedesc></teiheader>
@@ -298,6 +305,20 @@ describe('back matter and references', () => {
     ]);
   });
 
+  it('kinds a div whose type is named like an object property by its heading', () => {
+    const document = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        '<div type="constructor"><head>Funding</head><p>A grant.</p></div>' +
+          '<div type="__proto__"><head>Notes</head><p>More.</p></div>',
+      ),
+    );
+    expect(document.back.map((s) => [s.title, s.kind])).toEqual([
+      ['Funding', 'declarations'],
+      ['Notes', 'notes'],
+    ]);
+  });
+
   it('gathers untitled parts of one kind under one heading', () => {
     const document = parse(
       tei(
@@ -358,5 +379,22 @@ describe('back matter and references', () => {
         year: '2020',
       },
     ]);
+  });
+
+  it('escapes the fields a built citation is made from', () => {
+    const document = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl><biblStruct><analytic><title>T</title>
+          <author><persName><surname>&lt;img src=a&gt;</surname></persName></author></analytic>
+          <monogr><title level="j">J</title><imprint><date when="2020"/>
+            <biblScope unit="volume">&lt;b&gt;</biblScope><biblScope unit="issue">*2*</biblScope>
+            <biblScope unit="page">&lt;i&gt;</biblScope></imprint></monogr>
+          <idno type="DOI">10.1/&lt;s&gt;</idno></biblStruct></listBibl></div>`,
+      ),
+    );
+    expect(document.references[0]?.text).toBe(
+      '\\<img src=a>. (2020). T. *J* \\<b>(\\*2\\*):\\<i>. DOI 10.1/\\<s>',
+    );
   });
 });

@@ -108,9 +108,7 @@ $$
 Here $V_{i}(t)$ and $\phi_{i}(t)$ denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from $i=1$. $K$ is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses $i$ and $i+1$ are administrated with a time gap $T_{i,i+1}$, and the first dose was started from $t=T_{0}$. Then for any $i\in\{1,2,\cdots,K\}$, we have
 
 $$
-V_{i}(t)=\left\{\begin{array}[]{cc}0,&t<T_{0}+T_{1,2}+T_{2,3}+\cdots+T_{i-1,i}\\
-&\\
-\text{positive},&t\geq T_{0}+T_{1,2}+T_{2,3}+\cdots+T_{i-1,i}\end{array}\right.. \tag{9}
+V_{i}(t)=\left\{\begin{array}[]{cc}0,&t< T_{0}+T_{1,2}+T_{2,3}+\cdots+T_{i-1,i}\\ &\\ \text{positive},&t\geq T_{0}+T_{1,2}+T_{2,3}+\cdots+T_{i-1,i}\end{array}\right.. \tag{9}
 $$
 
 Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.
@@ -129,7 +127,7 @@ $$
 \displaystyle m_{2}(t) \displaystyle= \displaystyle\frac{1-\alpha}{N}\left(\sum_{i=1}^{K}\int_{0}^{t}\phi_{i}(t-\eta)V_{i}^{\prime}(\eta)d\eta\right)+\frac{b}{N}{\int_{0}^{t}\epsilon\psi(t-\eta)R_{n}(\eta)d\eta},
 $$
 
-where, $0<\epsilon<1$ is a constant, $\alpha$ is the proportion of healthy susceptible $S$ who are newly vaccinated. The value of $\epsilon<1$ signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter $b$ characterizes the proportion of comorbidity among the newly recovered individuals while the function $\psi(t)$ describes how acquired immunity changes over time. We choose functions $\phi_{j}$ and $\psi_{j}$ focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider $\phi_{j}\equiv\phi$ and $\psi_{j}\equiv\psi$, for $j=1,2,\cdots,K$. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: $0<m_{1}(t)+m_{2}(t)<1$.
+where, $0<\epsilon<1$ is a constant, $\alpha$ is the proportion of healthy susceptible $S$ who are newly vaccinated. The value of $\epsilon<1$ signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter $b$ characterizes the proportion of comorbidity among the newly recovered individuals while the function $\psi(t)$ describes how acquired immunity changes over time. We choose functions $\phi_{j}$ and $\psi_{j}$ focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider $\phi_{j}\equiv\phi$ and $\psi_{j}\equiv\psi$, for $j=1,2,\cdots,K$. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: $0< m_{1}(t)+m_{2}(t)<1$.
 
 #### 2.2.3 Impact of Multiple Strains
 
@@ -260,8 +258,7 @@ The function *fitdist(:,gamma)* estimates the shape and scale parameters with $9
 We assume that the vaccination function $V(t)$ that is started at time $t=t_{0}$, follows the function
 
 $$
-V(t)=\left\{\begin{array}[]{cc}0,&t<t_{0}\\
-L\left[N-(N-V_{0})e^{-k(t-t_{0})}\right],&t\geq t_{0}\end{array}\right.. \tag{20}
+V(t)=\left\{\begin{array}[]{cc}0,&t< t_{0}\\ L\left[N-(N-V_{0})e^{-k(t-t_{0})}\right],&t\geq t_{0}\end{array}\right.. \tag{20}
 $$
 
 where, $N$ is the total population size, $L$ is the proportion of the population expected to be vaccinated, $k$ is the rate of vaccination, $V_{0}$ is the number of vaccination at time $t=t_{0}$, and the associated parameter values are listed in Table. 1.

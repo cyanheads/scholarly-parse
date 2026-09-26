@@ -26,7 +26,13 @@ import type {
   SectionKind,
 } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
-import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import {
+  failed,
+  guardAsync,
+  type ParseOptions,
+  type ParseResult,
+  parsed,
+} from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
@@ -45,10 +51,14 @@ export interface HtmlOptions extends ParseOptions {
 const DEFAULT_MAX_INPUT_BYTES = 32 * 1024 * 1024;
 
 /** Parse a publisher article page. Requires the optional `linkedom` peer. */
-export async function parseHtml(
+export function parseHtml(
   input: string | Uint8Array,
   options: HtmlOptions = {},
 ): Promise<ParseResult> {
+  return guardAsync(() => readHtml(input, options));
+}
+
+async function readHtml(input: string | Uint8Array, options: HtmlOptions): Promise<ParseResult> {
   const maxBytes = options.maxInputBytes ?? DEFAULT_MAX_INPUT_BYTES;
   if (exceedsBudget(input, maxBytes))
     return failed('too-large', `Input exceeds the ${maxBytes}-byte budget`);

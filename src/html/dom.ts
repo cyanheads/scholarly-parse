@@ -5,6 +5,8 @@
  * @module src/html/dom
  */
 
+import { MissingPeerError } from '../model/result.js';
+
 type LinkedomModule = { parseHTML: (html: string) => { document: Document } };
 
 let linkedom: Promise<LinkedomModule> | undefined;
@@ -20,7 +22,9 @@ let linkedom: Promise<LinkedomModule> | undefined;
 export async function loadDocument(html: string): Promise<Document> {
   linkedom ??= (import('linkedom') as Promise<LinkedomModule>).catch((error: unknown) => {
     linkedom = undefined;
-    throw new Error('Install "linkedom" to parse HTML: bun add linkedom', { cause: error });
+    throw new MissingPeerError('Install "linkedom" to parse HTML: bun add linkedom', {
+      cause: error,
+    });
   });
   const { document } = (await linkedom).parseHTML(html);
   document.documentElement?.normalize();

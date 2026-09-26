@@ -221,13 +221,15 @@ export function noteOwners(articleMeta: XmlNode | undefined): Map<string, string
 // ─── Related works ──────────────────────────────────────────────────────────
 
 /** `ext-link-type` and `pub-id-type` values naming an identifier, and the field each fills. */
-const RELATED_ID_TYPES: Readonly<Record<string, 'doi' | 'pmcid' | 'pmid'>> = {
-  doi: 'doi',
-  pmc: 'pmcid',
-  pmcid: 'pmcid',
-  pmid: 'pmid',
-  pubmed: 'pmid',
-};
+const RELATED_ID_TYPES: ReadonlyMap<string, 'doi' | 'pmcid' | 'pmid'> = new Map(
+  Object.entries({
+    doi: 'doi',
+    pmc: 'pmcid',
+    pmcid: 'pmcid',
+    pmid: 'pmid',
+    pubmed: 'pmid',
+  } as const),
+);
 
 /**
  * Works the article declares a relation to: each `<related-article>` in `<article-meta>`,
@@ -243,11 +245,12 @@ function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): Rel
       const target = attrOf(link, 'xlink:href')?.trim();
       if (!target) continue;
       const type = attrOf(link, 'ext-link-type')?.toLowerCase() ?? '';
-      const field = RELATED_ID_TYPES[type] ?? (/^https?:\/\//i.test(target) ? 'url' : undefined);
+      const field =
+        RELATED_ID_TYPES.get(type) ?? (/^https?:\/\//i.test(target) ? 'url' : undefined);
       if (field) ids[field] ??= target;
     }
     for (const pubId of findAll(node, 'pub-id')) {
-      const field = RELATED_ID_TYPES[attrOf(pubId, 'pub-id-type')?.toLowerCase() ?? ''];
+      const field = RELATED_ID_TYPES.get(attrOf(pubId, 'pub-id-type')?.toLowerCase() ?? '');
       const value = text(pubId);
       if (field && value) ids[field] ??= value;
     }
@@ -274,7 +277,7 @@ function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): Rel
 
 function extractIdentifiers(articleMeta: XmlNode | undefined): Identifiers {
   const ids: Identifiers = {};
-  const other: Record<string, string> = {};
+  const other = new Map<string, string>();
   for (const node of findAll(articleMeta, 'article-id')) {
     const type = attrOf(node, 'pub-id-type') ?? '';
     const value = text(node);
@@ -284,9 +287,10 @@ function extractIdentifiers(articleMeta: XmlNode | undefined): Identifiers {
     else if (type === 'pmcid' || type === 'pmc' || type === 'pmc-uid' || type === 'pmcaid') {
       if (/^(PMC)?\d+$/.test(value)) ids.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
     } else if (type === 'arxiv') ids.arxiv ??= value.replace(/^arxiv:/i, '');
-    else if (type) other[type] ??= value;
+    else if (type && !other.has(type)) other.set(type, value);
   }
-  return { ...ids, ...(Object.keys(other).length > 0 && { other }) };
+  // `fromEntries` defines each key as its own property, so `__proto__` stays a key.
+  return { ...ids, ...(other.size > 0 && { other: Object.fromEntries(other) }) };
 }
 
 function extractVenue(
@@ -366,20 +370,22 @@ function extractLicense(permissions: XmlNode | undefined): License | undefined {
  * highlights before it — 21 of 68 records in one draw carried more than one — so the
  * kind decides, never the order. (pubmed-mcp-server#134)
  */
-const ABSTRACT_KINDS: Readonly<Record<string, AbstractKind>> = {
-  'author-summary': 'plain-language',
-  'executive-summary': 'plain-language',
-  graphical: 'graphical',
-  'key-points': 'other',
-  'lay-summary': 'plain-language',
-  'plain-language-summary': 'plain-language',
-  short: 'teaser',
-  summary: 'plain-language',
-  // PLOS's early lay summaries, before it named them author summaries.
-  synopsis: 'plain-language',
-  teaser: 'teaser',
-  toc: 'teaser',
-};
+const ABSTRACT_KINDS: ReadonlyMap<string, AbstractKind> = new Map(
+  Object.entries<AbstractKind>({
+    'author-summary': 'plain-language',
+    'executive-summary': 'plain-language',
+    graphical: 'graphical',
+    'key-points': 'other',
+    'lay-summary': 'plain-language',
+    'plain-language-summary': 'plain-language',
+    short: 'teaser',
+    summary: 'plain-language',
+    // PLOS's early lay summaries, before it named them author summaries.
+    synopsis: 'plain-language',
+    teaser: 'teaser',
+    toc: 'teaser',
+  }),
+);
 
 /** Every abstract under `<article-meta>`, main first. */
 export function extractAbstracts(articleMeta: XmlNode | undefined, ctx: JatsContext): Abstract[] {
@@ -389,7 +395,11 @@ export function extractAbstracts(articleMeta: XmlNode | undefined, ctx: JatsCont
     if (tag !== 'abstract' && tag !== 'trans-abstract') continue;
     const type = attrOf(node, 'abstract-type')?.toLowerCase();
     const kind: AbstractKind =
-      tag === 'trans-abstract' ? 'translated' : type ? (ABSTRACT_KINDS[type] ?? 'other') : 'main';
+      tag === 'trans-abstract'
+        ? 'translated'
+        : type
+          ? (ABSTRACT_KINDS.get(type) ?? 'other')
+          : 'main';
     const parsed = parseAbstract(node, kind, abstracts.length, ctx);
     if (parsed) abstracts.push(parsed);
   }

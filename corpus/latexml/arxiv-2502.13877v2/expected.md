@@ -58,10 +58,10 @@ Our proof is simple, combining the Zyablov–Pinsker [ZP81] argument with recent
 
 #### 1.1.0.0.2 List recovery for Random Reed-Solomon Codes.
 
-Reed–Solomon codes [RS60] are the most fundamental evaluation codes. A Reed–Solomon code is given by $n$ evaluation points $\alpha_{1},\alpha_{2},\ldots,\alpha_{n}$ in a finite field $\mathbb{F}_{q}$, and a degree $k<n$, and is defined as
+Reed–Solomon codes [RS60] are the most fundamental evaluation codes. A Reed–Solomon code is given by $n$ evaluation points $\alpha_{1},\alpha_{2},\ldots,\alpha_{n}$ in a finite field $\mathbb{F}_{q}$, and a degree $k< n$, and is defined as
 
 $$
-\text{RS}_{n,k}(\alpha_{1},\ldots,\alpha_{n}):=\left\{\left(f(\alpha_{1}),\ldots,f(\alpha_{n})\right)\mid f\in\mathbb{F}_{q}[x],\text{ }\deg f<k\right\}.
+\text{RS}_{n,k}(\alpha_{1},\ldots,\alpha_{n}):=\left\{\left(f(\alpha_{1}),\ldots,f(\alpha_{n})\right)\mid f\in\mathbb{F}_{q}[x],\text{ }\deg f< k\right\}.
 $$
 
 List-decoding and list-recovery of Reed–Solomon codes are well-studied questions. The seminal Guruswami–Sudan [GS99] algorithm showed that Reed–Solomon codes are list-decodable and list-recoverable up to the *Johnson radius* $1-\sqrt{R\ell}$ [Joh62, GS01]. Since then, there has been much interest in determining whether Reed–Solomon codes are list-decodable and list-recoverable beyond the Johnson bound, and perhaps even up to capacity $\rho=1-R$ (the capacity is $1-R$ for both list-decoding and list-recovery). Initially, there was evidence against this possibility [GR06, CW07, BKR10], suggesting that Reed–Solomon codes could not be list-decoded or list-recovered much beyond the Johnson bound. Since then, an exciting line of work has shown, to contrary, that Reed–Solomon codes can beat the Johnson bound for list-decoding [RW14, ST20, FKS22, GST22, GLSTW22, BGM23, GZ23, AGL24], and, in fact, can be list-decoded up to capacity [BGM23, GZ23, AGL24]. All of these works studied *randomly punctured* Reed–Solomon codes, where $\alpha_{1},\dots,\alpha_{n}$ are chosen at random from a larger field $q$.
@@ -116,7 +116,7 @@ $$
 
 We can alternatively define $(\rho,\ell,L)$-list-recovery using the above definition: a code $\mathcal{C}\subseteq\mathbb{F}_{q}^{n}$ is $(\rho,\ell,L)$-list-recoverable if every $\rho$-radius $\ell$-list-recovery ball $B$ contains at most $L$ codewords.
 
-For $0<R<1$, a *random linear code* (RLC) of rate $R$ is a linear code whose generator matrix $\mathbf{G}\in\mathbb{F}_{q}^{n\times Rn}$ is a matrix whose entries are chosen uniformly at random from $\mathbb{F}_{q}$, independently of one another. For $\alpha_{1},\ldots,\alpha_{n}\in\mathbb{F}_{q}$, we use $\mathsf{RS}\left(\alpha_{1},\ldots,\alpha_{n};Rn\right)$ to denote the Reed–Solomon (RS) code of rate $R$ obtained by evaluating polynomials of degree $<Rn$ on evaluation points $\alpha_{1},\ldots,\alpha_{n}\in\mathbb{F}_{q}$. We say this is a *random RS code* if the evaluation points have been chosen uniformly at random and independently of one another^1.
+For $0< R<1$, a *random linear code* (RLC) of rate $R$ is a linear code whose generator matrix $\mathbf{G}\in\mathbb{F}_{q}^{n\times Rn}$ is a matrix whose entries are chosen uniformly at random from $\mathbb{F}_{q}$, independently of one another. For $\alpha_{1},\ldots,\alpha_{n}\in\mathbb{F}_{q}$, we use $\mathsf{RS}\left(\alpha_{1},\ldots,\alpha_{n};Rn\right)$ to denote the Reed–Solomon (RS) code of rate $R$ obtained by evaluating polynomials of degree $< Rn$ on evaluation points $\alpha_{1},\ldots,\alpha_{n}\in\mathbb{F}_{q}$. We say this is a *random RS code* if the evaluation points have been chosen uniformly at random and independently of one another^1.
 
 ### 2.1 Local Coordinate-Wise Linear (LCL) Properties
 
@@ -160,7 +160,7 @@ The concept of LCL properties allows for “transfer type” theorems between ra
 
 > **Theorem 2.2 ([LMS24], Theorem 3.10 (part 1) (Threshold theorem for RS codes))**
 >
-> *Let $\mathcal{P}$ be a $b$-LCL property of codes in $\mathbb{F}_{q}^{n}$, with associated local profile family $\mathcal{F}_{\mathcal{P}}\subseteq\mathcal{L}\left(\mathbb{F}_{q}^{b}\right)^{n}$ and (random linear code) threshold rate $R_{\mathcal{P}}$. Let $0<R^{\prime}<1$ and let $\mathcal{C}=\mathsf{RS}_{\mathbb{F}_{q}}\left(\alpha_{1},\dots,\alpha_{n};R^{\prime}n\right)$, and $\alpha_{1},\dots,\alpha_{n}$ are sampled independently and uniformly from $\mathbb{F}_{q}$. Assume that $q>R^{\prime}nb$. Fix $\varepsilon^{\prime}n\geq 2b(b+1)$. If $R^{\prime}\leq R_{\mathcal{P}}-\varepsilon^{\prime}$, then*
+> *Let $\mathcal{P}$ be a $b$-LCL property of codes in $\mathbb{F}_{q}^{n}$, with associated local profile family $\mathcal{F}_{\mathcal{P}}\subseteq\mathcal{L}\left(\mathbb{F}_{q}^{b}\right)^{n}$ and (random linear code) threshold rate $R_{\mathcal{P}}$. Let $0< R^{\prime}<1$ and let $\mathcal{C}=\mathsf{RS}_{\mathbb{F}_{q}}\left(\alpha_{1},\dots,\alpha_{n};R^{\prime}n\right)$, and $\alpha_{1},\dots,\alpha_{n}$ are sampled independently and uniformly from $\mathbb{F}_{q}$. Assume that $q>R^{\prime}nb$. Fix $\varepsilon^{\prime}n\geq 2b(b+1)$. If $R^{\prime}\leq R_{\mathcal{P}}-\varepsilon^{\prime}$, then*
 >
 > $$
 > \mathop{\bf Pr\/}[\mathcal{C}\textrm{ satisfies }\mathcal{P}]\leq(2^{b}-1)\cdot\left(\frac{(4b)^{4b}R^{\prime}n}{\varepsilon^{\prime}q}\right)^{\frac{\varepsilon^{\prime}n}{2b}}\cdot|\mathcal{F}_{\mathcal{P}}|. \tag{3}
@@ -172,7 +172,7 @@ In this section, we prove Theorem 1.1, that random linear codes achieve list-rec
 
 > **Theorem 3.1**
 >
-> *Fix $0<R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$, and let $q$ be a prime power such that $q\geq\max\left(\ell^{\frac{8R}{\varepsilon}+6},\ell\cdot 2^{4/\varepsilon}\right)$. Let $\mathcal{C}\subseteq\mathbb{F}_{q}^{n}$ be an RLC of rate $R$. Then with probability at least $1-2q^{-\frac{\varepsilon n}{8}}$, $\mathcal{C}$ is $\left((1-R-\varepsilon),\ell,L\right)$-list-recoverable with $L$ satisfying $L\leq\left(\frac{2\ell}{\varepsilon}\right)^{2\ell/\varepsilon}$.*
+> *Fix $0< R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$, and let $q$ be a prime power such that $q\geq\max\left(\ell^{\frac{8R}{\varepsilon}+6},\ell\cdot 2^{4/\varepsilon}\right)$. Let $\mathcal{C}\subseteq\mathbb{F}_{q}^{n}$ be an RLC of rate $R$. Then with probability at least $1-2q^{-\frac{\varepsilon n}{8}}$, $\mathcal{C}$ is $\left((1-R-\varepsilon),\ell,L\right)$-list-recoverable with $L$ satisfying $L\leq\left(\frac{2\ell}{\varepsilon}\right)^{2\ell/\varepsilon}$.*
 
 The theorem follows as a consequence of two lemmas. We first state both lemmas, and then give the proof of Theorem 3.1 using them. The first lemma essentially states that any low dimensional subspace with good distance has few points in a list-recovery ball. This lemma appears in [KRSW18, Tam23]; we state the version from [Tam23, Lemma 3.1].
 
@@ -184,7 +184,7 @@ The second lemma uses the Zyablov–Pinsker argument [ZP81], showing that a rand
 
 > **Lemma 3.3**
 >
-> *Fix $0<R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$, and let $q$ be a prime power such that $q\geq\max\left(\ell^{\frac{8R}{\varepsilon}+6},\ell\cdot 2^{4/\varepsilon}\right)$. Let $\mathcal{C}\subseteq\mathbb{F}_{q}^{n}$ be an RLC of rate $R$. Then with probability at least $1-q^{-\frac{\varepsilon nL}{8}}$, for every input lists $\mathcal{S}_{1},\ldots,\mathcal{S}_{n}$ of size $\ell$, the maximal linearly independent subset of $\mathcal{C}$ within the $(1-R-\varepsilon)$ radius $\ell$-list-recovery ball $B\left((1-R-\varepsilon),S_{1}\times\cdots\times S_{n}\right)$ has size less than $2\ell/\varepsilon$.*
+> *Fix $0< R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$, and let $q$ be a prime power such that $q\geq\max\left(\ell^{\frac{8R}{\varepsilon}+6},\ell\cdot 2^{4/\varepsilon}\right)$. Let $\mathcal{C}\subseteq\mathbb{F}_{q}^{n}$ be an RLC of rate $R$. Then with probability at least $1-q^{-\frac{\varepsilon nL}{8}}$, for every input lists $\mathcal{S}_{1},\ldots,\mathcal{S}_{n}$ of size $\ell$, the maximal linearly independent subset of $\mathcal{C}$ within the $(1-R-\varepsilon)$ radius $\ell$-list-recovery ball $B\left((1-R-\varepsilon),S_{1}\times\cdots\times S_{n}\right)$ has size less than $2\ell/\varepsilon$.*
 
 > **Proof of Lemma 3.3**
 >
@@ -250,17 +250,17 @@ In this section, we will prove the following result, which says that random Reed
 
 > **Corollary 4.1**
 >
-> *Fix $0<R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$. Fix a constant $\varepsilon^{\prime}>0$ such that $\varepsilon^{\prime}<R$, and denote $L\coloneqq\lfloor{\left(\frac{2\ell}{\varepsilon}\right)^{2\ell/\varepsilon}}\rfloor$. Let $\eta>0$ be a constant, and let $q$ be a prime power satisfying $q>\frac{(4(L+1))^{4(L+1)}Rn}{\varepsilon^{\prime}}\cdot 2^{\frac{((\log\ell+2)(L+1)+\eta)\cdot 2(L+1)}{\varepsilon^{\prime}}}$. Then, a random RS code of rate $R-\varepsilon^{\prime}$ over $\mathbb{F}_{q}^{n}$ is $(1-R-\varepsilon,\ell,L)$-list-recoverable with probability at least $1-2^{-\eta n}$.*
+> *Fix $0< R<1$, $\varepsilon>0$ so that $(1-R-\varepsilon)>0$, $\ell\in\mathbb{N}$. Fix a constant $\varepsilon^{\prime}>0$ such that $\varepsilon^{\prime}< R$, and denote $L\coloneqq\lfloor{\left(\frac{2\ell}{\varepsilon}\right)^{2\ell/\varepsilon}}\rfloor$. Let $\eta>0$ be a constant, and let $q$ be a prime power satisfying $q>\frac{(4(L+1))^{4(L+1)}Rn}{\varepsilon^{\prime}}\cdot 2^{\frac{((\log\ell+2)(L+1)+\eta)\cdot 2(L+1)}{\varepsilon^{\prime}}}$. Then, a random RS code of rate $R-\varepsilon^{\prime}$ over $\mathbb{F}_{q}^{n}$ is $(1-R-\varepsilon,\ell,L)$-list-recoverable with probability at least $1-2^{-\eta n}$.*
 
 > **Proof of Corollary 4.1**
 >
 > Denote $L\coloneqq\lfloor{\left(\frac{2\ell}{\varepsilon}\right)^{2\ell/\varepsilon}}\rfloor$ and $b\coloneqq L+1$. Let $\mathcal{P}$ be the $b$-LCL property of **not** being $(1-R-\varepsilon,\ell,L)$-list-recoverable, and let $R_{\mathcal{P}}$ be the corresponding (random linear code) threshold rate. By Theorem 2.1, part 1 [LMS24], we know that if $\mathcal{C}$ is an RLC of rate $R$, then the following holds for every constant $\varepsilon^{*}>0$:
 >
 > $$
-> \mathop{\bf Pr\/}[\mathcal{C}\textrm{ satisfies }\mathcal{P}]<1-q^{\varepsilon^{*}n+b^{2}}\implies R<R_{\mathcal{P}}+\varepsilon^{*}
+> \mathop{\bf Pr\/}[\mathcal{C}\textrm{ satisfies }\mathcal{P}]<1-q^{\varepsilon^{*}n+b^{2}}\implies R< R_{\mathcal{P}}+\varepsilon^{*}
 > $$
 >
-> According to Theorem 3.1, a rate $R$ RLC (having a sufficiently large alphabet size) satisfies $\mathcal{P}$ only with probability at most $2q^{-\frac{\varepsilon n}{8}}<1-q^{\varepsilon^{*}n+b^{2}}$. Therefore, $R<R_{\mathcal{P}}+\varepsilon^{*}$ for every $\varepsilon^{*}>0$, and so $R\leq R_{\mathcal{P}}$.
+> According to Theorem 3.1, a rate $R$ RLC (having a sufficiently large alphabet size) satisfies $\mathcal{P}$ only with probability at most $2q^{-\frac{\varepsilon n}{8}}<1-q^{\varepsilon^{*}n+b^{2}}$. Therefore, $R< R_{\mathcal{P}}+\varepsilon^{*}$ for every $\varepsilon^{*}>0$, and so $R\leq R_{\mathcal{P}}$.
 >
 > We will now work with random RS codes having rate slightly less than $R$. Define $R^{\prime}\coloneqq R-\varepsilon^{\prime}\leq R_{\mathcal{P}}-\varepsilon^{\prime}$, take $n$ to be large enough so that $\varepsilon^{\prime}n\geq 2b(b+1)$. Note that $q>Rnb>R^{\prime}nb$. Define $\mathcal{C}=\mathsf{RS}_{\mathbb{F}_{q}}\left(\alpha_{1},\dots,\alpha_{n};R^{\prime}n\right)$, where $\alpha_{1},\dots,\alpha_{n}$ are sampled independently and uniformly from $\mathbb{F}_{q}$. Upon denoting $\mathcal{F}_{\mathcal{P}}$ to be the local profile family associated with property $\mathcal{P}$, we see that the hypothesis of Theorem 2.2 [LMS24] is satisfied, and therefore, Equation 3 is satisfied.
 >
@@ -293,13 +293,7 @@ We now prove our lower bounds for list-recovery, that any linear code list-recov
 > Let $k\coloneqq Rn$ be the dimension of the code. Let $k^{\prime}=\left\lceil{\frac{\varepsilon}{R}\cdot k}\right\rceil$. Let $m=\left\lfloor{\frac{k-1}{k^{\prime}+1}}\right\rfloor$. By Gaussian elimination and permuting rows and columns, we may, without loss of generality write the generator matrix of $\mathcal{C}$ as
 >
 > $$
-> \displaystyle\mathbf{G}=\begin{bmatrix}1&&&&\\
-> &1&&&\\
-> &&\ddots&&\\
-> &&&\ddots&\\
-> &&&&1\\
-> \hline\cr*&*&\cdots&\cdots&*\\
-> \end{bmatrix} \tag{5}
+> \displaystyle\mathbf{G}=\begin{bmatrix}1&&&&\\ &1&&&\\ &&\ddots&&\\ &&&\ddots&\\ &&&&1\\ \hline\cr*&*&\cdots&\cdots&*\\ \end{bmatrix} \tag{5}
 > $$
 >
 > where each $*$ is a length $n-k$ vector. For $i\in[k]$, let $v_{i}\in\mathbb{F}^{n}$ denote the columns. By rank-nullity, there exist vectors $w_{0},\dots,w_{m-1}\in\mathbb{F}^{n}$ such that $w_{i}$ is a linear combination of $v_{i\cdot(k^{\prime}+1)+1},\dots,v_{(i+1)\cdot(k^{\prime}+1)}$ such that $w_{i}$ is not supported on indices $k+1,\dots,k+k^{\prime}$ (there are $k^{\prime}+1$ vectors and $k^{\prime}$ indices). Now let $w_{m}=v_{k}$. Restricted to indices in $[k+k^{\prime}]$, vectors $w_{0},\dots,w_{m}$ have pairwise disjoint supports: within indices $[k+k^{\prime}]$, for $i=0,\dots,m-1$, vector $w_{i}$ is supported on $i\cdot(k^{\prime}+1)+1,\dots,(i+1)\cdot(k^{\prime}+1)\leq k-1$, and vector $w_{m}$ is supported on $k,\dots,k+k^{\prime}$.

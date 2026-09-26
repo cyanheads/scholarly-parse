@@ -12,7 +12,7 @@ import type {
   SectionKind,
   TableBlock,
 } from '../model/document.js';
-import { codeFence, escapeBlockStart, escapeInline, escapeTableCell } from './escape.js';
+import { codeFence, escapeBlockStart, escapeInline, escapeTableCell, escapeTex } from './escape.js';
 import { FORMULA_IMAGE, link } from './inline.js';
 
 /** What to include when rendering. Everything is included by default. */
@@ -69,13 +69,15 @@ export function toMarkdown(document: ScholarlyDocument, options: MarkdownOptions
     parts.push(`## Figures and tables\n\n${renderBlocks(document.floats)}`);
   if (options.footnotes !== false && document.footnotes.length > 0) {
     const lines = document.footnotes.map(
-      (fn) => `- ${fn.label ? `**${escapeInline(fn.label)}** ` : ''}${fn.text}`,
+      (fn) =>
+        `- ${fn.label ? `**${escapeInline(fn.label)}** ${fn.text}` : escapeBlockStart(fn.text)}`,
     );
     parts.push(`## Footnotes\n\n${lines.join('\n')}`);
   }
   if (options.references !== false && document.references.length > 0) {
     const lines = document.references.map(
-      (ref) => `- ${ref.label ? `[${escapeInline(ref.label)}] ` : ''}${ref.text}`,
+      (ref) =>
+        `- ${ref.label ? `[${escapeInline(ref.label)}] ${ref.text}` : escapeBlockStart(ref.text)}`,
     );
     parts.push(`## References\n\n${lines.join('\n')}`);
   }
@@ -125,7 +127,7 @@ function renderMetadata(document: ScholarlyDocument): string[] {
   if (venue.length > 0) details.push(venue.join(', '));
   const idParts = identifierParts(metadata.identifiers ?? {});
   if (idParts.length > 0) details.push(idParts.join(' · '));
-  if (metadata.license?.url) details.push(`License: <${metadata.license.url}>`);
+  if (metadata.license?.url) details.push(`License: ${link('', metadata.license.url)}`);
   else if (metadata.license?.text)
     details.push(`License: ${escapeInline(truncate(metadata.license.text, 240))}`);
   for (const work of metadata.related ?? []) {
@@ -140,8 +142,8 @@ function renderMetadata(document: ScholarlyDocument): string[] {
 function identifierParts(ids: Pick<Identifiers, 'arxiv' | 'doi' | 'pmcid' | 'pmid'>): string[] {
   return [
     ids.doi && `DOI: ${escapeInline(ids.doi)}`,
-    ids.pmid && `PMID: ${ids.pmid}`,
-    ids.pmcid && `PMCID: ${ids.pmcid}`,
+    ids.pmid && `PMID: ${escapeInline(ids.pmid)}`,
+    ids.pmcid && `PMCID: ${escapeInline(ids.pmcid)}`,
     ids.arxiv && `arXiv: ${escapeInline(ids.arxiv)}`,
   ].filter((part): part is string => Boolean(part));
 }
@@ -214,7 +216,7 @@ function renderBlock(block: Block): string {
       return renderTable(block);
     case 'figure':
       return block.label || block.caption || block.alt
-        ? labeled(block.label ?? 'Figure', block.caption ?? block.alt)
+        ? labeled(block.label ?? 'Figure', block.caption ?? escapeInline(block.alt ?? ''))
         : '';
     case 'supplement': {
       const text = labeled(block.label ?? 'Supplementary material', block.caption);
@@ -222,13 +224,14 @@ function renderBlock(block: Block): string {
     }
     case 'formula': {
       const label = block.label?.replace(/^\((.*)\)$/, '$1').trim();
-      if (block.tex) return `$$\n${block.tex}${label ? ` \\tag{${label}}` : ''}\n$$`;
+      if (block.tex) return displayMath(block.tex, label);
       const body = block.text === undefined ? FORMULA_IMAGE : escapeInline(block.text);
       return `${escapeBlockStart(body)}${label ? ` (${escapeInline(label)})` : ''}`;
     }
     case 'code': {
       const fence = codeFence(block.text);
-      return `${fence}${block.language ?? ''}\n${block.text}\n${fence}`;
+      const language = block.language && CODE_LANGUAGE.test(block.language) ? block.language : '';
+      return `${fence}${language}\n${block.text}\n${fence}`;
     }
     case 'quote':
       return quoteLines(renderBlocks(block.blocks));
@@ -244,6 +247,22 @@ function renderBlock(block: Block): string {
       return inner.length > 0 ? quoteLines(inner.join('\n\n')) : '';
     }
   }
+}
+
+/** A code block's language as a fence info string: a name, nothing that could end the line. */
+const CODE_LANGUAGE = /^[\w+#.-]{1,32}$/;
+
+/** What a `\tag{}` label keeps: text that can neither end the group nor start TeX markup. */
+const TAG_UNSAFE = /[^\p{L}\p{N}\s.,:;'’′*+\-–—()[\]]/gu;
+
+/**
+ * A display formula on one line between `$$` fences, so no line of the source TeX can
+ * close the block early. TeX reads a line break as a space, so the formula is unchanged.
+ */
+function displayMath(tex: string, label: string | undefined): string {
+  const tag = label?.replace(TAG_UNSAFE, '').replace(/\s+/g, ' ').trim();
+  const line = `${tex.replace(/\s*\n\s*/g, ' ').trim()}${tag ? ` \\tag{${tag}}` : ''}`;
+  return `$$\n${escapeTex(line)}\n$$`;
 }
 
 function quoteLines(markdown: string): string {
@@ -296,6 +315,6 @@ function renderTable(table: TableBlock): string {
       ].join('\n'),
     );
   }
-  if (table.footnotes?.length) parts.push(table.footnotes.join('  \n'));
+  if (table.footnotes?.length) parts.push(table.footnotes.map(escapeBlockStart).join('  \n'));
   return parts.join('\n\n');
 }

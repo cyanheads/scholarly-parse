@@ -397,4 +397,18 @@ describe('abstracts', () => {
     for (const text of paragraphTexts(document)) expect(text).not.toContain('STK11 facilitates');
     expect(allBlocks(document).filter((b) => b.type === 'figure')).toHaveLength(1);
   });
+
+  it('reads an abstract or identifier type named like an object property as data', () => {
+    const types = ['__proto__', 'constructor', 'toString'];
+    const document = parseArticle({
+      meta:
+        types.map((type) => `<article-id pub-id-type="${type}">${type}-id</article-id>`).join('') +
+        '<title-group><article-title>T</article-title></title-group>' +
+        '<abstract abstract-type="constructor"><p>Abs.</p></abstract>',
+    });
+    expect(document.abstracts[0]?.kind).toBe('other');
+    const other = document.metadata.identifiers?.other ?? {};
+    expect(Object.entries(other)).toEqual(types.map((type) => [type, `${type}-id`]));
+    expect(Object.getPrototypeOf(other)).toBe(Object.prototype);
+  });
 });

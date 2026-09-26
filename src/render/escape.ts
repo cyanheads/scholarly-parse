@@ -36,7 +36,8 @@ export function escapeInline(text: string): string {
 
 /**
  * Escape a character sequence that would change meaning at the start of a block:
- * an ATX heading, a quote, a list marker, a thematic break, or a table row.
+ * an ATX heading, a quote, a list marker, a thematic break, a table row, or a link
+ * reference definition.
  */
 export function escapeBlockStart(text: string): string {
   return text
@@ -44,7 +45,17 @@ export function escapeBlockStart(text: string): string {
     .replace(/^([>|])/, '\\$1')
     .replace(/^([-+])(?=\s)/, '\\$1')
     .replace(/^(\d{1,9})([.)])(?=\s)/, '$1\\$2')
-    .replace(/^(=+|-{3,})\s*$/, '\\$1');
+    .replace(/^(=+|-{3,})\s*$/, '\\$1')
+    .replace(/^\[(?=[^\]]*\]:)/, '\\[');
+}
+
+/**
+ * Keep TeX from reading as markup where a Markdown renderer without math support treats
+ * `$…$` as ordinary text: a `<` that could open an HTML tag and a `](` that could open a
+ * link get a space between them, which math mode ignores.
+ */
+export function escapeTex(tex: string): string {
+  return tex.replace(/<(?=[A-Za-z/!?])/g, '< ').replace(/\]\(/g, '] (');
 }
 
 /** Escape a value for a GFM table cell: pipes and line breaks would break the row. */

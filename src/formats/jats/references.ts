@@ -21,14 +21,16 @@ import {
 import { formulaTex, rawText, text } from './text.js';
 
 /** `pub-id-type` → the label a rendered citation shows before the identifier. */
-const PUB_ID_LABELS: Readonly<Record<string, string>> = {
-  arxiv: 'arXiv',
-  doi: 'DOI',
-  isbn: 'ISBN',
-  medline: 'PMID',
-  pmcid: 'PMCID',
-  pmid: 'PMID',
-};
+const PUB_ID_LABELS: ReadonlyMap<string, string> = new Map(
+  Object.entries({
+    arxiv: 'arXiv',
+    doi: 'DOI',
+    isbn: 'ISBN',
+    medline: 'PMID',
+    pmcid: 'PMCID',
+    pmid: 'PMID',
+  }),
+);
 
 /** Publisher-internal identifiers: nothing a reader can look up, so a rendered element-citation leaves them out. */
 const INTERNAL_PUB_IDS: ReadonlySet<string> = new Set(['pii', 'publisher-id']);
@@ -154,12 +156,9 @@ function citationText(node: XmlNode, formulas: string[]): string {
  * `ext-link-type`s whose target is an identifier rather than a page: Europe PMC adds
  * empty `<ext-link ext-link-type="pmid" xlink:href="26023781"/>`s to a citation.
  */
-const ID_LINK_TYPES: Readonly<Record<string, string>> = {
-  doi: 'doi',
-  pmcid: 'pmcid',
-  pmid: 'pmid',
-  pubmed: 'pmid',
-};
+const ID_LINK_TYPES: ReadonlyMap<string, string> = new Map(
+  Object.entries({ doi: 'doi', pmcid: 'pmcid', pmid: 'pmid', pubmed: 'pmid' }),
+);
 
 /** A link target a reader can open. */
 const WEB_URL = /^(?:https?|ftp):\/\//i;
@@ -167,25 +166,25 @@ const WEB_URL = /^(?:https?|ftp):\/\//i;
 /** Structured fields from a citation element. */
 function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> {
   if (!citation) return {};
-  const ids: Record<string, string> = {};
+  const ids = new Map<string, string>();
   for (const pubId of findAllDescendants(citation, 'pub-id')) {
     const type = attrOf(pubId, 'pub-id-type')?.toLowerCase();
     const value = text(pubId);
-    if (type && value && !ids[type]) ids[type] = value;
+    if (type && value && !ids.has(type)) ids.set(type, value);
   }
   const links = [
     ...findAllDescendants(citation, 'ext-link'),
     ...findAllDescendants(citation, 'uri'),
   ].map((link) => ({
-    type: ID_LINK_TYPES[attrOf(link, 'ext-link-type')?.toLowerCase() ?? ''],
+    type: ID_LINK_TYPES.get(attrOf(link, 'ext-link-type')?.toLowerCase() ?? ''),
     target: attrOf(link, 'xlink:href') ?? text(link),
   }));
   for (const { type, target } of links) {
-    if (type && target && !ids[type])
-      ids[type] = type === 'doi' ? (doiFromUrl(target) ?? target) : target;
+    if (type && target && !ids.has(type))
+      ids.set(type, type === 'doi' ? (doiFromUrl(target) ?? target) : target);
   }
   const url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
-  const doi = ids.doi ?? doiFromUrl(url);
+  const doi = ids.get('doi') ?? doiFromUrl(url);
   const authors = findAllDescendants(citation, 'person-group')
     .filter((group) => (attrOf(group, 'person-group-type') ?? 'author') === 'author')
     .flatMap((group) => childrenOf(group).map(renderName).filter(Boolean));
@@ -193,16 +192,18 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     text(findOne(citation, 'article-title')) || text(findOne(citation, 'chapter-title'));
   const source = text(findOne(citation, 'source'));
   const year = text(findOne(citation, 'year'));
-  const pmcid = ids.pmcid ?? ids.pmc;
+  const pmcid = ids.get('pmcid') ?? ids.get('pmc');
+  const pmid = ids.get('pmid');
+  const arxiv = ids.get('arxiv');
   return {
     ...(authors.length > 0 && { authors }),
     ...(title && { title }),
     ...(source && { source }),
     ...(year && { year }),
     ...(doi && { doi: doi.toLowerCase() }),
-    ...(ids.pmid && { pmid: ids.pmid }),
+    ...(pmid && { pmid }),
     ...(pmcid && { pmcid: pmcid.startsWith('PMC') ? pmcid : `PMC${pmcid}` }),
-    ...(ids.arxiv && { arxiv: ids.arxiv.replace(/^arxiv:/i, '') }),
+    ...(arxiv && { arxiv: arxiv.replace(/^arxiv:/i, '') }),
     ...(url && !doi && { url }),
   };
 }
@@ -330,7 +331,7 @@ function renderElementCitation(node: XmlNode, formulas: string[]): string {
     const type = attrOf(pubId, 'pub-id-type') ?? '';
     if (!id || shown.has(id) || INTERNAL_PUB_IDS.has(type)) continue;
     shown.add(id);
-    const label = PUB_ID_LABELS[type];
+    const label = PUB_ID_LABELS.get(type);
     parts.push(label ? `${label} ${id}` : id);
   }
   return parts.join(' ');
@@ -416,7 +417,7 @@ function renderMixedCitation(node: XmlNode, formulas: string[]): string {
       const value = text(child);
       if (!value || printsIdentifier(printed, value)) continue;
       const type = attrOf(child, 'pub-id-type') ?? '';
-      const label = PUB_ID_LABELS[type];
+      const label = PUB_ID_LABELS.get(type);
       if (label && !hasLiteralIdPrefix(rendered, type) && !hasLiteralIdPrefix(rendered, label)) {
         labeled = true;
         part = `${label} ${value}`;

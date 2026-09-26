@@ -306,9 +306,9 @@ We used publicly available software for the analyses, and all software used is l
 | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** | **Other Mechanisms** |
 | *PPP1CB* | HF | MR | Novel | AAV | AB-1002 | HF | No |
 
-* We identified rs1800437/*GIPR* as associated with HF at FDR of 5% (p= 2E-6). This is one of the targets of tirzepatide that showed beneficial effects in individuals with obese HFpEF[13].  
+\* We identified rs1800437/*GIPR* as associated with HF at FDR of 5% (p= 2E-6). This is one of the targets of tirzepatide that showed beneficial effects in individuals with obese HFpEF[13].  
 † We identified *AGT* as associated with HF at an FDR of 5% in MR analyses. *AGT* is a target of zilebesiran.  
-** Serelaxin is an agonist of the *RXFP1* receptor and a weak agonist of the *RXFP2* receptor. The natural ligand for *RXFP2* with the highest affinity is *INSL3*.
+\*\* Serelaxin is an agonist of the *RXFP1* receptor and a weak agonist of the *RXFP2* receptor. The natural ligand for *RXFP2* with the highest affinity is *INSL3*.
 
 ## Footnotes
 

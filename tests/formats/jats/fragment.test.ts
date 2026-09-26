@@ -79,6 +79,15 @@ describe('jatsInlineToMarkdown', () => {
     );
   });
 
+  it('reads an identifier whose type is named like an object property', () => {
+    for (const type of ['constructor', 'toString', '__proto__'])
+      expect(
+        jatsInlineToMarkdown(
+          `<mixed-citation>A. <pub-id pub-id-type="${type}">10.1/x</pub-id></mixed-citation>`,
+        ),
+      ).toBe('A. 10.1/x');
+  });
+
   it('returns an empty string for an empty fragment', () => {
     expect(jatsInlineToMarkdown('')).toBe('');
   });

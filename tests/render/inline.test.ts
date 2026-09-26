@@ -58,6 +58,11 @@ describe('link', () => {
     expect(link('click', 'javascript:alert(1)')).toBe('click');
     expect(link('text', undefined)).toBe('text');
   });
+
+  it('writes an unsafe target with no text as escaped text', () => {
+    expect(link('', '<img src=x onerror=alert(1)>')).toBe('\\<img src=x onerror=alert(1)>');
+    expect(link('', 'javascript:alert(1)')).toBe('javascript:alert(1)');
+  });
 });
 
 describe('math and code', () => {
@@ -71,6 +76,11 @@ describe('math and code', () => {
   it('wraps TeX in dollars with whitespace collapsed, and renders empty TeX as nothing', () => {
     expect(inlineMath(' x^2 +\n y ')).toBe('$x^2 + y$');
     expect(inlineMath('  ')).toBe('');
+  });
+
+  it('spaces TeX apart where it would open an HTML tag or a link', () => {
+    expect(inlineMath('<img src=x onerror=alert(1)>')).toBe('$< img src=x onerror=alert(1)>$');
+    expect(inlineMath('[a](b) < c')).toBe('$[a] (b) < c$');
   });
 
   it('writes code in a span no backtick inside can close', () => {

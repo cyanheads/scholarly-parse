@@ -412,7 +412,7 @@ Mina M. Fahim: Formal analysis, Software, Methodology; Hamdy M. Ahmed: Validatio
 ## Footnotes
 
 - Scientific Reports | (2025) 15:43949
-- | https://doi.org/10.1038/s41598-025-30797-6
+- \| https://doi.org/10.1038/s41598-025-30797-6
 - **2** 4d 4 }, we obtain the following results.Scientific Reports | (2025) 15:43949
 
 ## References

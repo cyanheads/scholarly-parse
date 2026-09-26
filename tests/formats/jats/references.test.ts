@@ -365,6 +365,17 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       'Lommatzsch M, et al. Benralizumab reduces basophils. Clin Exp Allergy; 50: 1267–1269.a',
     );
   });
+
+  it('prints an identifier whose type is named like an object property without a label', () => {
+    for (const type of ['constructor', 'toString', '__proto__']) {
+      const id = `<pub-id pub-id-type="${type}">10.1/x</pub-id>`;
+      expect(mixedCitation(`Smith. ${id}`)).toBe('Smith. 10.1/x');
+      const [element] = referencesOf(
+        `<ref-list><ref id="R1"><element-citation><source>Src</source>${id}</element-citation></ref></ref-list>`,
+      );
+      expect(element?.text).toBe('Src. 10.1/x');
+    }
+  });
 });
 
 describe('reference-list placement (#116)', () => {

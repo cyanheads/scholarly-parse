@@ -26,7 +26,7 @@ import type {
   Venue,
 } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
-import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { buildGrid, spanValue } from '../../model/table-grid.js';
@@ -52,12 +52,17 @@ const DEFAULT_MAX_INPUT_BYTES = 32 * 1024 * 1024;
 
 /** Parse Grobid TEI. */
 export function parseTei(input: string | Uint8Array, options: ParseOptions = {}): ParseResult {
+  return guard(() => readTei(input, options));
+}
+
+function readTei(input: string | Uint8Array, options: ParseOptions): ParseResult {
   const maxBytes = options.maxInputBytes ?? DEFAULT_MAX_INPUT_BYTES;
   if (exceedsBudget(input, maxBytes))
     return failed('too-large', `Input exceeds the ${maxBytes}-byte budget`);
   const source = decodeText(input);
   const start = source.search(/<tei[\s>]/i);
-  const end = source.search(/<\/tei\s*>(?![\s\S]*<\/tei\s*>)/i);
+  let end = -1;
+  for (const match of source.matchAll(/<\/tei\s*>/gi)) end = match.index;
   if (start === -1 || end === -1)
     return failed('wrong-format', 'No <TEI> element: not a TEI document');
   const tree = parseOrderedXml(source.slice(start, source.indexOf('>', end) + 1), {
@@ -499,15 +504,17 @@ function readTeiTable(table: XmlNode, ctx: TeiContext): { headerRows: number; ro
 // ─── Back matter and references ─────────────────────────────────────────────
 
 /** `@type` values Grobid uses on back-matter divs, and the kind each is. */
-const BACK_TYPES: Readonly<Record<string, SectionKind>> = {
-  acknowledgement: 'acknowledgments',
-  acknowledgements: 'acknowledgments',
-  annex: 'appendix',
-  availability: 'data-availability',
-  conflict: 'declarations',
-  contribution: 'declarations',
-  funding: 'declarations',
-};
+const BACK_TYPES: ReadonlyMap<string, SectionKind> = new Map(
+  Object.entries<SectionKind>({
+    acknowledgement: 'acknowledgments',
+    acknowledgements: 'acknowledgments',
+    annex: 'appendix',
+    availability: 'data-availability',
+    conflict: 'declarations',
+    contribution: 'declarations',
+    funding: 'declarations',
+  }),
+);
 
 /**
  * Back matter by Grobid's typed divs. An untitled part joins the untitled section of the
@@ -526,7 +533,7 @@ function extractBack(back: XmlNode | undefined, ctx: TeiContext): Section[] {
       if (!section) continue;
       const part = {
         ...section,
-        kind: BACK_TYPES[type] ?? kindFromTitle(section.title) ?? 'notes',
+        kind: BACK_TYPES.get(type) ?? kindFromTitle(section.title) ?? 'notes',
       };
       const previous = sections.at(-1);
       if (!part.title && previous && !previous.title && previous.kind === part.kind) {
@@ -572,16 +579,16 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   const url = attrOf(findAllDescendants(bibl, 'ptr')[0], 'target');
   const raw = plainText(findAll(bibl, 'note').find((n) => attrOf(n, 'type') === 'raw_reference'));
 
-  const volume = scope('volume');
-  const issue = scope('issue');
-  const pages = scope('page');
+  const volume = escapeInline(scope('volume'));
+  const issue = escapeInline(scope('issue'));
+  const pages = escapeInline(scope('page'));
   const built = [
-    authors.length > 0 && `${authors.join(', ')}.`,
+    authors.length > 0 && `${escapeInline(authors.join(', '))}.`,
     year && `(${year}).`,
     title && `${escapeInline(title)}.`,
     source &&
       `${emphasis(escapeInline(source), '*')}${volume ? ` ${volume}${issue ? `(${issue})` : ''}` : ''}${pages ? `:${pages}` : ''}.`,
-    doi && `DOI ${doi}`,
+    doi && `DOI ${escapeInline(doi)}`,
   ]
     .filter(Boolean)
     .join(' ');

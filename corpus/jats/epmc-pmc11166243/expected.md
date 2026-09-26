@@ -131,7 +131,7 @@ Table 5 shows a comparison between the clinical characteristics of case children
 | Persistent diarrhea | 21‡ (28.4%) | 7§ (6.9%) | < 0.01 | 5.38 (2.00 to 15.00) |
 
 ORT = oral rehydration therapy;  
-* Number of patients in the EPEC group that received ORT = 80; + Number of patients in the EPEC group available for calculation = 76;  
+\* Number of patients in the EPEC group that received ORT = 80; + Number of patients in the EPEC group available for calculation = 76;  
 ‡ Number of patients in the EPEC group who completed the follow-up evaluation = 74;  
 § Number of patients in the other diarrhea group who completed the follow-up evaluation = 102
 
@@ -149,7 +149,7 @@ We were indeed able to confirm this hypothesis in vivo by studying the nutrition
 | 2 | 3 | 5200 | 5 | 10 – watery | 2 | 15 | EPEC O119 |
 | 3 | 1 | 5500 | 4 | 6 – watery | 2 | 12 | EPEC O18 |
 
-* Weight after fluid replacement;  
+\* Weight after fluid replacement;  
 § Before hospitalization
 
 After dehydration was reversed, patients were fed full strength cow's milk formula *ad libitum*. During the first 3 days of formula feedings diarrhea persisted and was associated with weight loss. Stools contained reducing substances and fecal pH was below 6.0. A casein based, lactose-free formula was therefore introduced. As there was persistence of symptoms, a protein hydrolyzate, lactose-free formula was fed on the sixth day of hospitalization. After this dietary modification, diarrhea ceased and patients started gaining weight. The z-score values obtained on admission, when initiating the protein-hydrolyzate formula, and on day 30 of the follow-up are shown in Table 7. At the end of day 30 of the follow-up, the patients showed an average daily weight gain of 26.4 grams from the time that feeding with the protein-hydrolyzate formula was started.
@@ -162,7 +162,7 @@ After dehydration was reversed, patients were fed full strength cow's milk formu
 | 2 | ¾ 0.82 | ¾ 1.40 | ¾ 1.35 |
 | 3 | ¾ 1.19 | ¾ 1.75 | ¾ 1.72 |
 
-* Time 0 – 1^{st} day of hospitalization; Time 1 – Introduction of proteinhydrolyzate, lactose-free formula (6^{th} day of hospitalization); Time 2 – After 30 days of follow-up
+\* Time 0 – 1^{st} day of hospitalization; Time 1 – Introduction of proteinhydrolyzate, lactose-free formula (6^{th} day of hospitalization); Time 2 – After 30 days of follow-up
 
 On the sixth day of hospitalization, due to persistence of diarrhea, a small bowel biopsy was performed. Optical microscopy analysis revealed an intense villous atrophy and the presence of numerous Gram-negative bacteria adhered to the apical portion of the enterocytes. Electron microscopy study showed severe ultrastructural derangements of the small bowel epithelium. Bacteria could be seen attached to long disordered microvilli, occasionally settled on the apical surface on pedestals and even within cytoplasmic phagocytic vacuoles. Effacement of microvilli and pedestal formation at sites of attachment were also observed. Bacteria were also seen in the interior of the enterocyte as well as several multivesicular bodies. Ultrastructural lesions are usually associated with the presence of clusters of bacteria adhering to the microvilli, but such an association is not always found, and some focal dissolution of the microvilli can be seen even in the absence of bacteria. These ultrastructural derangements have been described along with other serogroups, namely O125 and O114, in infants with chronic diarrhea and malnutrition. In the current study we were able to demonstrate that the ultrastructural lesions may already occur in an early phase of infection, triggering persistence of diarrhea and nutritional aggravation.
 
@@ -197,7 +197,7 @@ Sixteen infants with persistent diarrhea consecutively admitted to our Metabolic
 | 15 | EPEC 0119:H6 | EPEC 0119:H6 |
 | 16 | Sterile | \* |
 
-* Failure to isolate an enteropathogenic agent
+\* Failure to isolate an enteropathogenic agent
 
 Enteropathogenic agents were identified in the stools of 8 (50.0%) patients and bacterial proliferation in the intestinal lumen was present in 67.8% of the patients, most of which were considered to be of the colonic type of microflora (Table 9). Bacterial over-growth in the small bowel lumen may induce deconjugation and 7-alpha dehydroxylation of the primary bile salts, leading to morphological damage of the jejunal mucosa, secretion of sodium and water, malabsorption of nutrients, and rupture of the intestinal permeability barrier.[21,22] The latter favors the penetration of intact macromolecules, thus potentially leading to food allergy.[23]
 

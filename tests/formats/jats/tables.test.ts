@@ -252,9 +252,10 @@ describe('table bodies (#111)', () => {
     const table = onlyTable(
       '<table><tbody><tr><td>x</td></tr></tbody></table><table-wrap-foot>' +
         '<fn id="tf1"><label>a</label><p>Adjusted for age.</p></fn>' +
-        '<fn-group><fn><p>Unadjusted.</p></fn></fn-group></table-wrap-foot>',
+        '<fn-group><fn><p>Unadjusted.</p></fn></fn-group>' +
+        '<fn><label>&lt;b&gt;*</label><p>Starred.</p></fn></table-wrap-foot>',
     );
-    expect(table.footnotes).toEqual(['a Adjusted for age.', 'Unadjusted.']);
+    expect(table.footnotes).toEqual(['a Adjusted for age.', 'Unadjusted.', '\\<b>\\* Starred.']);
   });
 });
 

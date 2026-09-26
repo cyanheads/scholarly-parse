@@ -175,7 +175,7 @@ where *i* and *j* are neighboring beads, while $θ_{ij}$ denotes the angle betwe
 Multivalent TFs were modeled as spheres, again with size $σ$ for simplicity. The interaction between a chromatin bead, *a*, and a multivalent TF, *b*, was modeled via a truncated and shifted Lennard-Jones potential, given by
 
 $$
-U_{\text{LJ}/\text{cut}}(d_{ab})=\{\begin{matrix}\frac{4ϵ_{ab}}{\mathcal{N}}[(\frac{σ}{d_{ab}})^{12}−(\frac{σ}{d_{ab}})^6−(\frac{σ}{r_c})^{12}+(\frac{σ}{r_c})^6] \text{if} d_{ab}<r_c \\ 0 \text{otherwise},\end{matrix} \tag{Equation 4}
+U_{\text{LJ}/\text{cut}}(d_{ab})=\{\begin{matrix}\frac{4ϵ_{ab}}{\mathcal{N}}[(\frac{σ}{d_{ab}})^{12}−(\frac{σ}{d_{ab}})^6−(\frac{σ}{r_c})^{12}+(\frac{σ}{r_c})^6] \text{if} d_{ab}< r_c \\ 0 \text{otherwise},\end{matrix} \tag{Equation 4}
 $$
 
 where $d_{ab}$ denotes the distance between the centers of the chromatin and protein beads, $r_c=1.8σ$ is a cut-off parameter, and $\mathcal{N}$ is a normalization constant that ensures the depth of the potential reaches $−ϵ_{ab}$ at the minimum point.

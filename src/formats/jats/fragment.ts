@@ -32,5 +32,10 @@ export function jatsInlineToMarkdown(fragment: string): string {
     noteOwners: new Map(),
     sectionIds: new Set(),
   };
-  return renderBlocks(flowBlocks(childrenOf(tree.nodes[0]), ctx));
+  try {
+    return renderBlocks(flowBlocks(childrenOf(tree.nodes[0]), ctx));
+  } catch {
+    // Whatever in the fragment breaks the reader, its text still reads.
+    return plain();
+  }
 }

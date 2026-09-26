@@ -87,7 +87,7 @@ Every parsing bug fixed in a consumer before this package existed becomes a name
 
 - **Reuse pubmed's JATS parser rather than wrap MyST's.** On ten Europe PMC articles, the pubmed parser kept all 24 tables and every display formula; `jats-to-myst` → `myst-to-md` rendered no tables, dropped display math, wrote MyST dialect, and pulled 199 packages.
 - **Parse only; never fetch.** Fetching carries policy (rate limits, licenses, challenge handling) that belongs to the consumer, and a pure parser runs anywhere.
-- **Results, not exceptions, for bad input.** Malformed and blocked documents are normal in the wild; a caller branches on `ok` instead of wrapping every call in `try`.
+- **Results, not exceptions, for bad input.** Malformed and blocked documents are normal in the wild; a caller branches on `ok` instead of wrapping every call in `try`. Each parser's entry also catches what it did not anticipate (a stack overflow on deep nesting, an engine's internal error) and returns `malformed`, so a document that finds a bug still keeps the contract.
 - **Inline Markdown, typed blocks.** Consumers render Markdown almost always; typing the blocks keeps tables, formulas, and figures addressable without a second parser.
 - **Optional peers for HTML and PDF engines.** A consumer that parses only JATS installs one dependency.
 - **Publisher HTML walked directly, not through a readability extractor.** Defuddle, run on a PLOS article, turned the reference list into footnotes holding only "View Article" links, dropped every figure caption, and stripped the class attributes publisher pages mark abstracts, figures, and references with.

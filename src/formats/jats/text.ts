@@ -48,12 +48,24 @@ export function selectAlternative(
   node: XmlNode,
   excluded?: ReadonlySet<string>,
 ): XmlNode | undefined {
-  const children = childrenOf(node);
-  const carriesText = (child: XmlNode) => concatText(child, excluded).trim() !== '';
+  return pickAlternative(node, excluded)?.node;
+}
+
+/**
+ * {@link selectAlternative} with the chosen child's text. Each child's text is read once,
+ * so nested `<alternatives>` cost one pass rather than one per level above them.
+ */
+function pickAlternative(
+  node: XmlNode,
+  excluded: ReadonlySet<string> | undefined,
+): { node: XmlNode; text: string } | undefined {
+  const withText = childrenOf(node)
+    .map((child) => ({ node: child, text: concatText(child, excluded) }))
+    .filter((child) => child.text.trim() !== '');
   return (
-    children.find((child) => tagNameOf(child) === 'tex-math' && carriesText(child)) ??
-    children.find((child) => !POINTER_TAGS.has(tagNameOf(child) ?? '') && carriesText(child)) ??
-    children.find(carriesText)
+    withText.find((child) => tagNameOf(child.node) === 'tex-math') ??
+    withText.find((child) => !POINTER_TAGS.has(tagNameOf(child.node) ?? '')) ??
+    withText[0]
   );
 }
 
@@ -70,8 +82,7 @@ function concatText(input: XmlNode | XmlNodeList, excluded?: ReadonlySet<string>
     if (tag === 'tex-math') {
       out += cleanTex(concatText(childrenOf(node)));
     } else if (tag === 'alternatives') {
-      const chosen = selectAlternative(node, excluded);
-      if (chosen) out += concatText(chosen, excluded);
+      out += pickAlternative(node, excluded)?.text ?? '';
     } else {
       out += concatText(childrenOf(node), excluded);
     }

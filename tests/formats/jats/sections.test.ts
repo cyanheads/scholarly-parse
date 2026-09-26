@@ -780,4 +780,19 @@ describe('back matter', () => {
     ]);
     expect(toMarkdown(document)).not.toContain('Received');
   });
+
+  it('reads a section type named like an object property as no type at all', () => {
+    const document = parse(
+      article({
+        body:
+          '<sec sec-type="constructor"><title>Introduction</title><p>a</p></sec>' +
+          '<sec sec-type="__proto__"><title>Methods</title><p>b</p></sec>',
+      }),
+    );
+    expect(document.body.map((s) => [s.title, s.kind])).toEqual([
+      ['Introduction', 'body'],
+      ['Methods', 'body'],
+    ]);
+    expect(document.back).toEqual([]);
+  });
 });

@@ -249,6 +249,16 @@ describe('tex-math preambles and <alternatives> (#135)', () => {
       'Our candidates include *NF1*.',
     );
   });
+
+  it('reads <alternatives> nested deep in one pass, not once per level above', () => {
+    const nested = (inner: string) =>
+      `${'<alternatives>'.repeat(40)}${inner}${'</alternatives>'.repeat(40)}`;
+    expect(paragraphOf(`a ${nested('b')} c`)).toBe('a b c');
+    const title = parseArticle({
+      meta: `<title-group><article-title>${nested('')}Title</article-title></title-group>`,
+    }).metadata.title;
+    expect(title).toBe('Title');
+  });
 });
 
 describe('display formulas (#130)', () => {

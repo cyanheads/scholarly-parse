@@ -29,7 +29,13 @@ import type {
   SectionKind,
 } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
-import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import {
+  failed,
+  guardAsync,
+  type ParseOptions,
+  type ParseResult,
+  parsed,
+} from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle } from '../../model/section-kinds.js';
 import { flowBlocks, parseSection } from './blocks.js';
@@ -48,10 +54,17 @@ const DEFAULT_MAX_INPUT_BYTES = 32 * 1024 * 1024;
 const CONVERSION_FAILED =
   /No HTML for|HTML is not available|Conversion to HTML had a Fatal error|conversion failed/i;
 
-/** Parse a LaTeXML HTML page. */
-export async function parseLatexml(
+/** Parse a LaTeXML HTML page. Requires the optional `linkedom` peer. */
+export function parseLatexml(
   input: string | Uint8Array,
   options: LatexmlOptions = {},
+): Promise<ParseResult> {
+  return guardAsync(() => readLatexml(input, options));
+}
+
+async function readLatexml(
+  input: string | Uint8Array,
+  options: LatexmlOptions,
 ): Promise<ParseResult> {
   const maxBytes = options.maxInputBytes ?? DEFAULT_MAX_INPUT_BYTES;
   if (exceedsBudget(input, maxBytes))

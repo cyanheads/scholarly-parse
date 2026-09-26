@@ -94,6 +94,15 @@ describe('mathmlToTex', () => {
     expect(tex('<mml:mphantom><mml:mi>x</mml:mi></mml:mphantom><mml:mi>y</mml:mi>')).toBe('y');
     expect(tex('')).toBe('');
   });
+
+  it('reads a variant, operator, or accent named like an object property as plain text', () => {
+    expect(
+      tex(
+        '<mml:mi mathvariant="constructor">x</mml:mi><mml:mo>toString</mml:mo>' +
+          '<mml:mover><mml:mi>y</mml:mi><mml:mo>__proto__</mml:mo></mml:mover>',
+      ),
+    ).toBe('xtoString\\overset{__proto__}{y}');
+  });
 });
 
 describe('cleanTex', () => {

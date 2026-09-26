@@ -6,6 +6,8 @@
  * @module src/formats/pdf/load
  */
 
+import { MissingPeerError } from '../../model/result.js';
+
 /** A run of text in one font at one position, in PDF points with the origin at the page's bottom left. */
 export interface Run {
   bold: boolean;
@@ -54,7 +56,7 @@ let unpdf: Promise<UnpdfModule> | undefined;
 function loadUnpdf(): Promise<UnpdfModule> {
   unpdf ??= import('unpdf').catch((error: unknown) => {
     unpdf = undefined;
-    throw new Error('Install "unpdf" to parse PDF: bun add unpdf', { cause: error });
+    throw new MissingPeerError('Install "unpdf" to parse PDF: bun add unpdf', { cause: error });
   });
   return unpdf;
 }

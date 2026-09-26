@@ -13,7 +13,13 @@ import type {
   ScholarlyDocument,
 } from '../../model/document.js';
 import { exceedsBudget } from '../../model/input.js';
-import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import {
+  failed,
+  guardAsync,
+  type ParseOptions,
+  type ParseResult,
+  parsed,
+} from '../../model/result.js';
 import { escapeInline } from '../../render/escape.js';
 import { layout } from './layout.js';
 import { type LoadedPdf, loadPdf, type PdfMetadata } from './load.js';
@@ -32,7 +38,11 @@ const DEFAULT_MAX_PAGES = 300;
 const MIN_TEXT_CHARS = 200;
 
 /** Parse a PDF. Requires the optional `unpdf` peer. */
-export async function parsePdf(input: Uint8Array, options: PdfOptions = {}): Promise<ParseResult> {
+export function parsePdf(input: Uint8Array, options: PdfOptions = {}): Promise<ParseResult> {
+  return guardAsync(() => readPdf(input, options));
+}
+
+async function readPdf(input: Uint8Array, options: PdfOptions): Promise<ParseResult> {
   const maxBytes = options.maxInputBytes ?? DEFAULT_MAX_INPUT_BYTES;
   if (exceedsBudget(input, maxBytes))
     return failed('too-large', `Input exceeds the ${maxBytes}-byte budget`);

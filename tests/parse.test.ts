@@ -50,4 +50,20 @@ describe('parse', () => {
       expect(result.ok ? 'ok' : result.error.reason).toBe('wrong-format');
     }
   });
+
+  it('fails as malformed where a document breaks a parser, rather than throwing', async () => {
+    const reason = async (input: string | Uint8Array) => {
+      const result = await parse(input);
+      return result.ok ? 'ok' : result.error.reason;
+    };
+    const page = buildPdf({
+      pages: [paragraph(Array(6).fill('Body text of a page.'), { y: 700 })],
+    });
+    const looped = new TextDecoder('latin1').decode(page).replace('/Kids [6 0 R]', '/Kids [2 0 R]');
+    expect(await reason(Uint8Array.from(looped, (char) => char.charCodeAt(0)))).toBe('malformed');
+    const nested = `${'<b>'.repeat(100_000)}x${'</b>'.repeat(100_000)}`;
+    expect(await reason(`<html><body><article><p>${nested}</p></article></body></html>`)).toBe(
+      'malformed',
+    );
+  });
 });
