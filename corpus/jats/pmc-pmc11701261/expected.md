@@ -110,18 +110,6 @@ This study did not generate new unique reagents.
 
 The datasets generated in the current study and the Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) scripts for running e-HiP-HoP are on Edinburgh DataShare (<https://doi.org/10.7488/ds/7821>).
 
-## Acknowledgments
-
-We thank Ewan McDowall for developing the 3DGene database, Craig Nicol for designing the web page, and the Edinburgh Compute and Data Facility (ECDF; <http://www.ecdf.ed.ac.uk/>). Thanks also to our group members and colleagues, in particular Javier Caceres and Martin Taylor, who provided advice during the project, and Jim Allan and James Ding for comments on the manuscript. This work was funded by the 10.13039/501100000781European Research Council (ERC CoG 648050 THREEDCELLPHYSICS), 10.13039/501100000265UK Medical Research Council (MR/J00913X/1 and MC_UU_00007/13), and the 10.13039/100010269Wellcome Trust (223097/Z/21/Z).
-
-## Author contributions
-
-M.C., C.A.B., D.M., and N.G. designed research. M.C., C.A.B., and C.B. performed simulations. C.N. and R.-S.N. performed lab-based research. M.C., C.A.B., D.M., and N.G. wrote the manuscript with input from all authors.
-
-## Declaration of interests
-
-The authors declare no competing interests.
-
 ## STAR★Methods
 
 ### Key resources table
@@ -297,6 +285,18 @@ where $q$ is the number of partners, $n_i$ is the fraction of structures in netw
 ### Quantification and statistical analysis
 
 All statistical details are indicated in the STAR Methods, results, or figure legends.
+
+## Acknowledgments
+
+We thank Ewan McDowall for developing the 3DGene database, Craig Nicol for designing the web page, and the Edinburgh Compute and Data Facility (ECDF; <http://www.ecdf.ed.ac.uk/>). Thanks also to our group members and colleagues, in particular Javier Caceres and Martin Taylor, who provided advice during the project, and Jim Allan and James Ding for comments on the manuscript. This work was funded by the 10.13039/501100000781European Research Council (ERC CoG 648050 THREEDCELLPHYSICS), 10.13039/501100000265UK Medical Research Council (MR/J00913X/1 and MC_UU_00007/13), and the 10.13039/100010269Wellcome Trust (223097/Z/21/Z).
+
+## Author contributions
+
+M.C., C.A.B., D.M., and N.G. designed research. M.C., C.A.B., and C.B. performed simulations. C.N. and R.-S.N. performed lab-based research. M.C., C.A.B., D.M., and N.G. wrote the manuscript with input from all authors.
+
+## Declaration of interests
+
+The authors declare no competing interests.
 
 ## Supplemental Information
 

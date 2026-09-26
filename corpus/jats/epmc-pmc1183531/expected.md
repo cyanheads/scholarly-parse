@@ -224,20 +224,6 @@ We thank all Kenyon lab members for discussions and help, Kaveh Ashrafi for comm
 - **RNAi** — RNA interference
 - **TPR** — tetratrico-peptide-repeat
 
-## Associated Data
-
-### Supplementary Materials
-
-**Figure S1.** **Summary of RNAi Longevity Screen** (45 KB PPT) (file: pgen.0010017.sg001.ppt)
-
-**Figure S2.** **Comparison of *daf-2* RNAi Clones** (72 KB PPT) (file: pgen.0010017.sg002.ppt)
-
-**Table S1.** **Complete Lifespan Analysis Data of RNAi Clones That Extend Lifespan** (839 KB DOC) (file: pgen.0010017.st001.doc)
-
-**Table S2.** **Lifespan Analysis of Library Clones Encoding Known (Non-Neuronal) Longevity Genes** (48 KB DOC) (file: pgen.0010017.st002.doc)
-
-**Table S3.** **Pumping Rate and Body Length of N2 Animals Grown on Mitochondrial RNAi Clones** Found at DOI: 10.1371/journal.pgen.0010017.st003 (49 KB DOC) (file: pgen.0010017.st003.doc)
-
 ## Footnotes
 
 - **✉** \*To whom correspondence should be addressed. E-mail: ckenyon@biochem.ucsf.edu

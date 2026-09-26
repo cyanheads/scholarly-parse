@@ -27,6 +27,24 @@ const PUB_ID_LABELS: Readonly<Record<string, string>> = {
 };
 
 /**
+ * Europe PMC's generated Associated Data section: a digest of the article's data
+ * citations, supplementary files, and data availability statement, each already present
+ * where the article puts it.
+ */
+export function isAssociatedData(node: XmlNode): boolean {
+  return tagNameOf(node) === 'sec' && attrOf(node, 'sec-type') === 'associated-data';
+}
+
+/** Every `<ref-list>` under `node`, outside an Associated Data digest. */
+function refLists(node: XmlNode): XmlNode[] {
+  return childrenOf(node).flatMap((child) => {
+    if (isAssociatedData(child)) return [];
+    const nested = refLists(child);
+    return tagNameOf(child) === 'ref-list' ? [child, ...nested] : nested;
+  });
+}
+
+/**
  * Every reference under `root`, in document order. `<ref-list>` placement varies —
  * roughly 60% of Europe PMC deposits nest it under `body/sec/sec` — so every one is
  * collected, and a `<ref>` ID already seen is skipped. (pubmed-mcp-server#116)
@@ -34,7 +52,7 @@ const PUB_ID_LABELS: Readonly<Record<string, string>> = {
 export function extractReferences(root: XmlNode): Reference[] {
   const results: Reference[] = [];
   const seen = new Set<string>();
-  for (const refList of findAllDescendants(root, 'ref-list')) {
+  for (const refList of refLists(root)) {
     for (const ref of findAll(refList, 'ref')) {
       const id = attrOf(ref, 'id');
       if (id && seen.has(id)) continue;

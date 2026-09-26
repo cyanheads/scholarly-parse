@@ -203,16 +203,6 @@ Eli M. Carrami, Rebecca McIntyre, Casey Benjamin Swerner, Edith M. Hessel, Chant
 
 **Supplementary material.** **Table S3. Summary of industry-maintained software/pipelines for commercial single-cell and spatial omics technology, related to Figure 2** (file: mmc3.xlsx)
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** **Table S1. Detailed review of commercial single-cell technology specifications, related to Figure 2** (file: mmc1.xlsx)
-
-**Supplementary material.** **Table S2. Detailed review of commercial spatial omic technology specifications, related to Figure 2** (file: mmc2.xlsx)
-
-**Supplementary material.** **Table S3. Summary of industry-maintained software/pipelines for commercial single-cell and spatial omics technology, related to Figure 2** (file: mmc3.xlsx)
-
 ## Footnotes
 
 - **∗** Corresponding author adam.cribbs@ndorms.ox.ac.uk

@@ -91,27 +91,28 @@ describe('body sections', () => {
 
   it('keeps a section whose only paragraph wrapped a table (#111)', () => {
     // PMC13088883 "Appendix A": the section's one <p> holds nothing but the
-    // <table-wrap>, so lifting the table must not empty the section away.
-    const { body } = parseBody(
+    // <table-wrap>, so lifting the table must not empty the section away. Its title
+    // makes it an appendix, so it is reported in back matter.
+    const { back, body } = parseBody(
       '<sec><title>Appendix A – Good Agricultural Practice</title><p><table-wrap>' +
         '<label>Table A.1</label><table><tbody><tr><td>Coffee beans</td></tr></tbody></table>' +
         '</table-wrap></p></sec>' +
         '<sec><title>Populated</title><p>Text.</p></sec>',
     );
-    expect(body.map((s) => s.title)).toEqual([
-      'Appendix A – Good Agricultural Practice',
-      'Populated',
+    expect(body.map((s) => s.title)).toEqual(['Populated']);
+    expect(back.map((s) => [s.kind, s.title])).toEqual([
+      ['appendix', 'Appendix A – Good Agricultural Practice'],
     ]);
-    expect(body[0]?.blocks.map((b) => b.type)).toEqual(['table']);
+    expect(back[0]?.blocks.map((b) => b.type)).toEqual(['table']);
   });
 
   it('keeps a section whose only child is a table-wrap (#111)', () => {
-    const { body } = parseBody(
+    const { back } = parseBody(
       '<sec><title>Appendix B – Used compound codes</title><table-wrap>' +
         '<table><tbody><tr><td>code</td></tr></tbody></table></table-wrap></sec>',
     );
-    expect(body).toHaveLength(1);
-    expect(body[0]?.blocks).toMatchObject([{ rows: [['code']], type: 'table' }]);
+    expect(back).toHaveLength(1);
+    expect(back[0]?.blocks).toMatchObject([{ rows: [['code']], type: 'table' }]);
   });
 
   it('keeps sections whose only child is a figure or a supplement (#130)', () => {
@@ -585,6 +586,37 @@ describe('back matter', () => {
     expect(back[1]?.id).toBe('app1');
   });
 
+  it('moves back matter a body carries into the back, by declared type or title', () => {
+    // Europe PMC's layout: <back> flattened into <body>, then its generated digest.
+    const document = parseArticle({
+      body:
+        '<sec><title>Introduction</title><p>Intro.</p></sec>' +
+        '<sec><title>Ethics and dissemination</title><p>Approved.</p></sec>' +
+        '<sec sec-type="ack"><title>Acknowledgements</title><p>Thanks.</p></sec>' +
+        '<sec sec-type="app"><sec><title>Appendix A: tables</title><p>Extra.</p></sec></sec>' +
+        '<sec id="notes1"><title>Author contributions</title><p>All wrote it.</p></sec>' +
+        '<sec><title>Data, Materials, and Software Availability</title><p>Online.</p></sec>' +
+        '<sec sec-type="fn-group"><title>Footnotes</title><fn-group><fn><p>Note.</p></fn></fn-group></sec>' +
+        '<sec sec-type="ref-list"><title>References</title><ref-list>' +
+        '<ref id="CR1"><mixed-citation>Main ref.</mixed-citation></ref></ref-list></sec>' +
+        '<sec sec-type="associated-data"><title>Associated Data</title>' +
+        '<sec sec-type="data-citations"><title>Data Citations</title><ref-list>' +
+        '<ref id="_dbx_ref_1"><mixed-citation>Main ref.</mixed-citation></ref></ref-list></sec>' +
+        '<sec sec-type="data-availability-statement"><title>Data Availability Statement</title>' +
+        '<p>Online.</p></sec></sec>',
+    });
+    expect(document.body.map((s) => s.title)).toEqual(['Introduction', 'Ethics and dissemination']);
+    expect(document.back.map((s) => [s.kind, s.title])).toEqual([
+      ['acknowledgments', 'Acknowledgements'],
+      ['appendix', 'Appendix A: tables'],
+      ['declarations', 'Author contributions'],
+      ['data-availability', 'Data, Materials, and Software Availability'],
+    ]);
+    expect(document.references.map((r) => r.id)).toEqual(['CR1']);
+    expect(document.footnotes).toEqual([{ text: 'Note.' }]);
+    expect(toMarkdown(document)).not.toContain('Associated Data');
+  });
+
   it('collects back-matter and author-note footnotes', () => {
     const { footnotes } = parseArticle({
       back: '<fn-group><fn id="fn1"><label>1</label><p>Deposited at Zenodo.</p></fn></fn-group>',
@@ -631,5 +663,7 @@ describe('back matter', () => {
       },
     ]);
     expect(blocksOfType(document, 'paragraph').map((b) => b.text)).toContain('One.');
+    // The untitled opening of a titled sub-article is not headed as another one.
+    expect(toMarkdown(document)).toContain('## Decision letter\n\nThe reviewers agree.');
   });
 });

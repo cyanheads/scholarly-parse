@@ -160,20 +160,6 @@ The following are the Supplementary data to this article:
 
 All data supporting the findings of this study are available within the paper and its Supplementary Information files.
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** **Supplementary Data 1** (file: mmc1.docx)
-
-**Supplementary material.** **Supplementary Data 2** (file: mmc2.xlsx)
-
-**Supplementary material.** **Supplementary video 3** A video of the liquid flow on the microfluidics chip (file: mmc3.mp4)
-
-### Data Availability Statement
-
-All data supporting the findings of this study are available within the paper and its Supplementary Information files.
-
 ## Footnotes
 
 - **⁎** Corresponding author. 13907@gsau.edu.cn

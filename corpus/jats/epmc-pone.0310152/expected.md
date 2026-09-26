@@ -414,12 +414,6 @@ The data sources are mentioned in the paper and the related codes are available 
 
 The author(s) received no specific funding for this work.
 
-## Associated Data
-
-### Data Availability Statement
-
-The data sources are mentioned in the paper and the related codes are available in the github link: <https://github.com/nsamiran/codes_immuno_epidemic_vaccination.git>.
-
 ## Footnotes
 
 - **Competing Interests:** The authors have declared that no competing interests exist.

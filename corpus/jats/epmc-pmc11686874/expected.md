@@ -49,12 +49,6 @@ Not applicable.
 
 The authors declare that they have no competing interests.
 
-## Associated Data
-
-### Data Availability Statement
-
-Not applicable.
-
 ## Footnotes
 
 - **✉** Corresponding author.

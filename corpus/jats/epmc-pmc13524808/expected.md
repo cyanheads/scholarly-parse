@@ -235,12 +235,6 @@ Georg Dorffner, Email: georg.dorffner@meduniwien.ac.at.
 
 The online version contains supplementary material available at https://doi.org/10.1038/s41390-025-04489-w.
 
-## Associated Data
-
-### Data Availability Statement
-
-The datasets analyzed during the current study are available from the corresponding author on reasonable request.
-
 ## Footnotes
 
 - **✉** Corresponding author.

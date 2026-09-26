@@ -543,20 +543,6 @@ In this article, a developed optimized algorithms scheduling based on load balan
 
 This work was supported by the Deputyship for Research & Innovation, Ministry of Education in Saudi Arabia through the project number (IFP-2022-34). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplemental Information 1.** **The total instances of 1360 used in the experimental results** (file: peerj-cs-09-1513-s001.txt)
-
-**Supplemental Information 2.** **Code used for the first proposed algorithm** (file: peerj-cs-09-1513-s002.dsp)
-
-### Data Availability Statement
-
-The following information was supplied regarding data availability:
-
-The class of instances used in the experimental results and code are available in the Supplemental Files.
-
 ## Footnotes
 
 - **✉** Corresponding author.

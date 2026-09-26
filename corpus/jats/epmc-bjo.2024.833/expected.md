@@ -126,10 +126,6 @@ The cost of delivering perinatal ESGs was calculated as the product of applicabl
 
 The authors assert that all procedures contributing to this work comply with the ethical standards of the relevant national and institutional committees on human experimentation and with the Helsinki Declaration of 1975, as revised in 2013. All procedures involving patients were approved by Camden & Kings Cross Research Ethics Committee (Reference 21/LO/0833).
 
-## Transparency declaration
-
-P.M. is the manuscript guarantor and affirms that the manuscript is an honest, accurate and transparent account of the study being reported and that no important aspects of the study have been omitted.
-
 ## Results
 
 Between 15 September 2022 and 29 March 2023, 64 people were referred into the study, of whom 48 people were deemed eligible and consented to participate, equating to a consent rate of 75%. Of the 48 who met eligibility criteria and were randomised, 24 were allocated to perinatal ESGs + TAU, and 24 to TAU alone. Four months post randomisation, 92% of participants in both arms completed the 4-month follow-up assessment. A CONSORT diagram displaying participant flow is displayed in Fig. 1.
@@ -279,6 +275,10 @@ In terms of limitations, to meet the feasibility study objectives, the length of
 Our study has shown that it is feasible and acceptable to conduct a clinical trial of perinatal ESGs for women and birthing people with BPD. Furthermore the quantitative and qualitative findings suggest that perinatal ESGs may have promising effects on mental health and social functioning, and that the efficacy of perinatal ESGs should be tested in a fully powered trial.
 
 Ensuring that all birthing parents and their babies receive timely, more effective and accessible perinatal mental health interventions is critical because untreated perinatal mental health issues have serious long-term adverse consequences for both the parent and the child.[35] Although ESGs constitute a brief intervention for people with complex needs associated with BPD, observational data indicate that brief treatment for BPD may be effective.[36] Furthermore, trials of brief interventions for people with BPD are scarce, and there is a pressing need to enhance the evidence base in this field.[33] Ultimately, if people with BPD could be effectively helped during the perinatal period, they might be able to practise more effective ways of managing their emotions and relationships before their babies are exposed to the full range of environmental risks. In light of this, the NHS is now committed to ‘increasing access to evidence-based care for women with moderate to severe perinatal mental health difficulties and a personality disorder diagnosis, to benefit an additional 24 000 women per year by 2023/24’.[37] Yet, there is a conspicuous lack evidence to inform the roll-out of plans such as those proposed for the NHS. In this respect, determining the efficacy of perinatal ESGs for women and birthing people with BPD should be a research priority, as it could provide crucial insights for improving mental health services across the world for this previously neglected population.
+
+## Transparency declaration
+
+P.M. is the manuscript guarantor and affirms that the manuscript is an honest, accurate and transparent account of the study being reported and that no important aspects of the study have been omitted.
 
 ## Acknowledgements
 

@@ -236,13 +236,9 @@ Yanagisawa S, Frasch WD. 2021 Data from: pH-dependent 11° F1FO ATP synthase sub
 
 ## Editor's evaluation
 
-### Sub-article
-
 This manuscript describes single molecule spectroscopic work to probe the mechanisms by which protonation/deprotonation steps produce torque between the a-subunit and the C10 ring, which is subsequently conveyed to F1 to couple to ATP synthesis. This is an important bioenergetics question and the approach yields some tantalizing clues as to which protonation steps are involved. In principle, this knowledge could lead to direct experimental or computational tests to resolve the overall mechanism. The previous issues in the manuscript were well addressed by the authors in the new revision. The reviewers found a few small additional issues, which the authors can address in the final revisions.
 
 ## Decision letter
-
-### Sub-article
 
 > Our editorial process produces two outputs: i) [public reviews](https://sciety.org/articles/activity/10.1101/2021.05.16.444358) designed to be posted alongside [the preprint](https://www.biorxiv.org/content/10.1101/2021.05.16.444358v1) for the benefit of readers; ii) feedback on the manuscript for the authors, including requests for revisions, shown below. We also include an acceptance summary that explains what the editors found interesting or important about the work.
 
@@ -309,8 +305,6 @@ v) Overlay successive transient dwell power strokes from the same molecule at th
 vi) Modify the text: The introduction is quite confusing to the non-specialist reader. The discussion is longer than the results and the methods are very brief.
 
 ## Author response
-
-### Sub-article
 
 > Essential revisions:
 >

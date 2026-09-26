@@ -227,12 +227,6 @@ The authors declare no conflicts of interest.
 
 This research received no external funding.
 
-## Associated Data
-
-### Data Availability Statement
-
-The de-identified data supporting the findings of this study are available from the corresponding author upon reasonable request, subject to applicable ethical and institutional requirements.
-
 ## Footnotes
 
 - **\*** Correspondence: lina.depaola@uniroma1.it

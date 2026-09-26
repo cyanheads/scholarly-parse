@@ -182,16 +182,6 @@ The authors declare no competing interests.
 
 The online version contains supplementary material available at 10.1038/s41597-024-04291-z.
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** Supplementary Information (file: 41597_2024_4291_MOESM1_ESM.pdf)
-
-### Data Availability Statement
-
-WGS data analyses from 96 Bangladeshi indigenous chickens were performed using standard bioinformatic tools in the Scientific Linux 7-based High Performance Computing (HPC) system (Eddie) of the University of Edinburgh. The codes used along with versions and parameters of the primary software/tools are available on GitHub (<https://github.com/MAGRabbani/WGS_of_BDchicken_data_analysis_codes>) and also included in the supplementary materials.
-
 ## Footnotes
 
 - **✉** Corresponding author.
@@ -256,6 +246,3 @@ WGS data analyses from 96 Bangladeshi indigenous chickens were performed using s
 - [55] Vallejo-Trujillo, A. Genetic diversity and adaptation to environmental challenges of Ethiopian indigenous chicken. (University of Nottingham, 2021).
 - [56] Qanbari, S. et al. Genetics of adaptation in modern chicken. PLoS Genet 15, e1007989 (2019).
 - [57] Wu, S. et al. Artificial selection footprints in indigenous and commercial chicken genomes. BMC Genomics 25, 1–20 (2024).
-- NCBI Sequence Read Archive https://identifiers.org/ncbi/insdc.sra:SRP467265 (2024).
-- ENA European Nucleotide Archive https://identifiers.org/ena.embl:PRJEB78357 (2024).
-- EVA European Variant Archive https://www.ebi.ac.uk/eva/?eva-study=PRJEB78357 (2024).

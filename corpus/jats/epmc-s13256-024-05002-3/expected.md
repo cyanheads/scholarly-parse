@@ -174,12 +174,6 @@ Written informed consent was obtained from the patient for publication of this c
 
 Authors declare no competing interests.
 
-## Associated Data
-
-### Data Availability Statement
-
-Information related to the case is available from the corresponding author upon reasonable request.
-
 ## Footnotes
 
 - **✉** Corresponding author.

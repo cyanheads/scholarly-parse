@@ -149,9 +149,13 @@ function renderAbstract(abstract: Abstract): string {
   return [`## ${abstract.title ?? ABSTRACT_HEADINGS[abstract.kind]}`, ...body].join('\n\n');
 }
 
-/** A section heading's text: label, then title, else the kind's default. */
-function headingText(section: Section): string | undefined {
-  const title = section.title ?? KIND_HEADINGS[section.kind];
+/**
+ * A section heading's text: label, then title, else the kind's default where the
+ * section opens that kind (an untitled part of a titled appendix is not a new one).
+ */
+function headingText(section: Section, parentKind: SectionKind | undefined): string | undefined {
+  const title =
+    section.title ?? (section.kind === parentKind ? undefined : KIND_HEADINGS[section.kind]);
   if (!title) return section.label ? escapeInline(section.label) : undefined;
   return section.label && !title.startsWith(section.label)
     ? `${escapeInline(section.label)} ${title}`
@@ -159,14 +163,14 @@ function headingText(section: Section): string | undefined {
 }
 
 /** Render a section and its subsections, its heading at `level` (capped at 6). */
-export function renderSection(section: Section, level: number): string {
+export function renderSection(section: Section, level: number, parentKind?: SectionKind): string {
   const parts: string[] = [];
-  const heading = headingText(section);
+  const heading = headingText(section, parentKind);
   if (heading) parts.push(`${'#'.repeat(Math.min(level, 6))} ${heading}`);
   const blocks = renderBlocks(section.blocks);
   if (blocks) parts.push(blocks);
   for (const sub of section.sections) {
-    const rendered = renderSection(sub, level + 1);
+    const rendered = renderSection(sub, level + 1, section.kind);
     if (rendered) parts.push(rendered);
   }
   return parts.join('\n\n');

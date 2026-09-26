@@ -205,16 +205,6 @@ The Supplementary Material for this article can be found online at: <https://www
 
 **Supplementary material.** (file: Data_Sheet_1.pdf)
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** (file: Data_Sheet_1.pdf)
-
-### Data Availability Statement
-
-The data presented in the study are deposited in the NCBI repository, BioProject Accession No: PRJNA1110276.
-
 ## Footnotes
 
 - Edited by: Jianling Fan, Nanjing University of Information Science and Technology, China

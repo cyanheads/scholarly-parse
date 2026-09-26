@@ -358,7 +358,7 @@ The practical value of the present formulation is three-fold. First, it offers a
 
 CQ acknowledges the computational resources provided by the National Academic Infrastructure for Supercomputing in Sweden (NAISS) at PDC, KTH. We also thank Tao Chen for his effort doing the Dirac Hartree-Fock calculations, Yinu Zhang for noticing the error in the original version of Fig. 2 and Frank Wilczek for a helpful discussion about the work, its relevance and applicability.
 
-### Appendix A: energy level tables
+## Appendix A: energy level tables
 
 See Tables 1, 2, 3, and 4.
 
@@ -446,16 +446,6 @@ The authors declare no competing interests.
 ## Supplementary Information
 
 The online version contains supplementary material available at 10.1038/s41598-025-29243-4.
-
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** Supplementary Information. (file: 41598_2025_29243_MOESM1_ESM.pdf)
-
-### Data Availability Statement
-
-The uniform- and logarithmic-mesh solvers developed for the numerical implementation section of this work are openly available as a pack on Zenodo, which can be found on <https://doi.org/10.5281/zenodo.17023934.>
 
 ## Footnotes
 

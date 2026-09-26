@@ -118,14 +118,14 @@ describe('figures (#130)', () => {
   it('keeps an unlabelled or pointerless asset rather than dropping it', () => {
     // PMC13155148's supplements carry a caption and a <media> but no <label>; 14 of 84
     // in the draw carry no pointer at all.
-    const { body } = parseBody(
+    const { back } = parseBody(
       '<sec><title>Data availability</title>' +
         '<supplementary-material id="mol270153-supitem-0001"><caption><p>Fig. S1. Vector ' +
         'map.</p></caption><media xlink:href="MOL2-20-1253-s002.pdf"/></supplementary-material>' +
         '<supplementary-material id="bare"/>' +
         '<fig><caption><p>Caption but no label.</p></caption></fig></sec>',
     );
-    expect(body[0]?.blocks).toEqual([
+    expect(back[0]?.blocks).toEqual([
       {
         caption: 'Fig. S1. Vector map.',
         href: 'MOL2-20-1253-s002.pdf',
@@ -146,7 +146,7 @@ describe('figures (#130)', () => {
         '</label><caption><p>Supplementary Note, Figs. 1–24 and Tables 1–3.</p></caption>' +
         '</media></supplementary-material></sec>',
     );
-    expect(document.body[0]?.blocks).toEqual([
+    expect(document.back[0]?.blocks).toEqual([
       {
         caption: 'Supplementary Note, Figs. 1–24 and Tables 1–3.',
         href: '41551_2025_1498_MOESM1_ESM.pdf',

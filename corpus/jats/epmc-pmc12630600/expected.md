@@ -212,14 +212,6 @@ The simulation codes used in this study are available from the corresponding aut
 
 The authors declare no competing interests.
 
-## Associated Data
-
-### Data Availability Statement
-
-Data sets generated during the current study are available from the corresponding author on reasonable request.
-
-The simulation codes used in this study are available from the corresponding author upon request.
-
 ## Footnotes
 
 - **✉** Corresponding author.

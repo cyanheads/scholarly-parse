@@ -240,16 +240,6 @@ The authors have nothing to report. The authors used AI‐based tools only for l
 
 The datasets generated and analysed during the current study are available from the corresponding author on reasonable request.
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** **Table S1:** Characteristics of included studies patient populations. (file: EDM2-9-e70311-s001.docx)
-
-### Data Availability Statement
-
-The datasets generated and analysed during the current study are available from the corresponding author on reasonable request.
-
 ## Footnotes
 
 - **\*** **Correspondence:** Erfan Shirmohammadi (shirmohamadi.erf@gmail.com)

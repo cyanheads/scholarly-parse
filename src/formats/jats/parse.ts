@@ -8,6 +8,7 @@ import { createDiagnostics } from '../../model/diagnostics.js';
 import type { Block, ScholarlyDocument, Section, SectionKind } from '../../model/document.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
+import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import {
   attrOf,
   childrenOf,
@@ -28,7 +29,7 @@ import {
 import { issueSectionId, type JatsContext } from './context.js';
 import { extractAbstracts, extractMetadata } from './front.js';
 import { inlineText } from './inline.js';
-import { extractReferences } from './references.js';
+import { extractReferences, isAssociatedData } from './references.js';
 import { text } from './text.js';
 
 /** Default input budget: the largest real JATS articles run to a few megabytes. */
@@ -58,8 +59,13 @@ export function parseJats(input: string | Uint8Array, options: ParseOptions = {}
   const abstracts = extractAbstracts(articleMeta, ctx);
   const authorNotes = findOne(articleMeta, 'author-notes');
   if (authorNotes) collectFootnotes(authorNotes, ctx);
-  const body = parseBody(findOne(article, 'body'), ctx, 'body', 's');
-  const back = [...parseBack(findOne(article, 'back'), ctx), ...parseSubArticles(article, ctx)];
+  const bodySections = parseBody(findOne(article, 'body'), ctx, 'body', 's');
+  const body = bodySections.filter((section) => section.kind === 'body');
+  const back = [
+    ...bodySections.filter((section) => section.kind !== 'body'),
+    ...parseBack(findOne(article, 'back'), ctx),
+    ...parseSubArticles(article, ctx),
+  ];
   const floats = flowBlocks(childrenOf(findOne(article, 'floats-group')), ctx);
   const references = extractReferences(article);
 
@@ -93,6 +99,13 @@ export function parseJats(input: string | Uint8Array, options: ParseOptions = {}
  * whole body is one `<preformat>` still yields it. A titled loose block (an
  * abbreviations `<def-list>`, a captioned `<boxed-text>`) forms a section of its own
  * under that title. (pubmed-mcp-server#130, #148)
+ *
+ * In an article's own body, a top-level `<sec>` that declares or is titled as back
+ * matter takes that kind: Europe PMC moves the whole `<back>` into `<body>` as typed and
+ * titled sections, and Cell-style articles keep their declarations there. An untitled
+ * wrapper with no content of its own (Europe PMC's `sec-type="app"`) gives way to its
+ * subsections, and Europe PMC's generated Associated Data digest, which repeats the
+ * data citations, supplementary files, and data availability statement, is skipped.
  */
 function parseBody(
   body: XmlNode | undefined,
@@ -118,8 +131,13 @@ function parseBody(
   for (const child of childrenOf(body)) {
     if (tagNameOf(child) === 'sec') {
       flushPending();
-      const section = parseSection(child, ctx, kind, nextId());
-      if (section) sections.push(section);
+      if (isAssociatedData(child)) continue;
+      const own = (kind === 'body' && backMatterKind(child)) || kind;
+      const section = parseSection(child, ctx, own, nextId());
+      if (!section) continue;
+      if (section.title === undefined && section.blocks.length === 0)
+        sections.push(...section.sections);
+      else sections.push(section);
       continue;
     }
     const title = ownBlockTitle(child, ctx);
@@ -137,33 +155,27 @@ function parseBody(
 
 /** `@sec-type` / `@notes-type` values and the section kind each is reported as. */
 const TYPED_KINDS: Readonly<Record<string, SectionKind>> = {
+  ack: 'acknowledgments',
+  app: 'appendix',
   'author-contributions': 'declarations',
   'coi-statement': 'declarations',
   'competing-interests': 'declarations',
   conflict: 'declarations',
+  'contrib-info': 'notes',
   'data-availability': 'data-availability',
   data_availability: 'data-availability',
   'ethics-statement': 'declarations',
   'funding-information': 'declarations',
   'funding-statement': 'declarations',
+  glossary: 'notes',
+  'supplementary-material': 'appendix',
 };
 
-/** The kind of a back-matter section, from its declared type, else its title. */
-function backKind(node: XmlNode): SectionKind {
+/** The back-matter kind a `<sec>` or `<notes>` declares, else the one its title names. */
+function backMatterKind(node: XmlNode): SectionKind | undefined {
   const declared = (attrOf(node, 'sec-type') ?? attrOf(node, 'notes-type'))?.toLowerCase();
   if (declared && TYPED_KINDS[declared]) return TYPED_KINDS[declared];
-  const title = text(findOne(node, 'title')).toLowerCase();
-  if (/data (and code )?availability|availability of data/.test(title)) return 'data-availability';
-  if (/acknowledg/.test(title)) return 'acknowledgments';
-  if (/appendix/.test(title)) return 'appendix';
-  if (
-    /(competing|conflicts? of) interests?|funding|author contributions|ethic|declaration/.test(
-      title,
-    )
-  ) {
-    return 'declarations';
-  }
-  return 'notes';
+  return kindFromTitle(splitSectionNumber(text(findOne(node, 'title')), undefined).title);
 }
 
 /** Back matter: acknowledgments, appendices, declarations, notes; footnotes collected. */
@@ -189,7 +201,7 @@ function parseBack(back: XmlNode | undefined, ctx: JatsContext): Section[] {
         break;
       case 'sec':
       case 'notes':
-        add(child, backKind(child));
+        add(child, backMatterKind(child) ?? 'notes');
         break;
       case 'glossary':
       case 'bio':

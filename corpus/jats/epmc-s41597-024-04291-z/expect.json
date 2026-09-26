@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: the same data paper is also in the corpus as Nature HTML (nature-s41597-024-04291-z) and Grobid TEI (grobid-s41597-024-04291-z); pins what the JATS and HTML parses agree on: title, abstract opening, the Methods and Technical Validation subsections, both tables and all four figures with the same captions. Also the fixture for cyanheads/pubmed-mcp-server#123 (an <italic> journal title directly against a <bold> volume in 45 citations), with reference 1 pinned as present.",
+  "why": "Rosetta: the same data paper is also in the corpus as Nature HTML (nature-s41597-024-04291-z) and Grobid TEI (grobid-s41597-024-04291-z); pins what the JATS and HTML parses agree on: title, abstract opening, the Methods and Technical Validation subsections, both tables and all four figures with the same captions. Also the fixture for cyanheads/pubmed-mcp-server#123 (an <italic> journal title directly against a <bold> volume in 45 citations), with reference 1 pinned as present. Europe PMC flattens <back> into <body> here and appends its generated Associated Data digest, whose three data citations repeat references 45–47: back matter leaves the body and the digest is dropped, so 57 references, not 60.",
   "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -21,6 +21,7 @@
   ],
   "tables": 2,
   "figures": 4,
+  "references": 57,
   "contains": [
     "**Fig. 1.** Sample collection sites from across Bangladesh.",
     "**Table 1.** Selected samples (total = 96) for WGS from BLRI improved native chicken",
@@ -28,5 +29,5 @@
     "Das, S. C. et al. Poultry production profile and expected future projection in Bangladesh.",
     "Worlds Poult Sci J 64, 99–118 (2019)."
   ],
-  "notContains": ["Sci J64"]
+  "notContains": ["Sci J64", "## Associated Data"]
 }

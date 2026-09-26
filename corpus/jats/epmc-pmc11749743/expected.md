@@ -284,8 +284,6 @@ Giovanni E Ferreira, Christopher G Maher, Chung-Wei Christine Lin, Laurent Billo
 
 ## Review Process File
 
-### Sub-article
-
 ## Footnotes
 
 - **✉** HananMcLachlan; hanan.mclachlan@sydney.edu.au

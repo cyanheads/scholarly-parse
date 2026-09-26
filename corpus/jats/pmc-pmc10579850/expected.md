@@ -318,8 +318,6 @@ License: [Apache 2.0](https://creativecommons.org/licenses/by/2.0/)
 
 ## Reviewer response for version 2
 
-### Sub-article
-
 I have read the author's revised manuscript and since the authors addressed the given comments the revised manuscript can be indexed.
 
 Are the conclusions about the tool and its performance adequately supported by the findings presented in the article?
@@ -349,8 +347,6 @@ Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiolog
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.
 
 ## Reviewer response for version 2
-
-### Sub-article
 
 The article has been revised in requested manner.
 
@@ -383,8 +379,6 @@ Mathematical modeling
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard.
 
 ## Reviewer response for version 1
-
-### Sub-article
 
 Comments to the Authors
 
@@ -423,8 +417,6 @@ Numerical Analysis, Mathematical Modelling, Mathematical Biology and Epidemiolog
 I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard, however I have significant reservations, as outlined above.
 
 ## Reviewer response for version 1
-
-### Sub-article
 
 First and for most I would like to acknowledge the editor for giving me this chance for reviewing the article. Depend up on my back ground knowledge I have reviewed the article as follow.
 

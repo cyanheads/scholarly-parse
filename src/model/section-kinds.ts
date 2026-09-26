@@ -8,10 +8,17 @@ import type { SectionKind } from './document.js';
 
 const TITLE_KINDS: [RegExp, SectionKind][] = [
   [/^acknowledg/i, 'acknowledgments'],
-  [/^(data|code|data and code|software) availability|^availability of data/i, 'data-availability'],
-  [/^appendix|^appendices|^supplementary (material|information)$/i, 'appendix'],
   [
-    /^(competing|conflicts? of) interests?|^declaration|declarations?$|^fund(ing|er)|^author contributions|^ethic|^disclosure|^statements$/i,
+    /^(data|code|software)\b[^.]{0,40}\bavailability|^availability of data|^data sharing/i,
+    'data-availability',
+  ],
+  [
+    /^appendix|^appendices|^(supplementary|supplemental|supporting) (materials?|information)$/i,
+    'appendix',
+  ],
+  // An ethics heading is a declaration only as a statement or approval: a trial protocol's "Ethics and dissemination" is main text.
+  [
+    /^(competing|conflicts? of) interests?|^declaration|declarations?$|^fund(ing|er)|^author contributions|authorship contribution|^ethic(s|al) (statement|approval|declaration)|^ethics$|^compliance with ethic|^(informed )?consent (statement|for publication)|^institutional review board|^disclosure|^statements$/i,
     'declarations',
   ],
   [/^(foot|end)notes$|^notes$|^publisher[’']?s note/i, 'notes'],

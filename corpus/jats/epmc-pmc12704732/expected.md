@@ -186,18 +186,6 @@ Francis Albarède, Email: albarede@ens-lyon.fr.
 
 All data are included in the manuscript and/or [supporting information](http://www.pnas.org/lookup/doi/10.1073/pnas.2519431122#supplementary-materials).
 
-## Associated Data
-
-### Supplementary Materials
-
-**Supplementary material.** Appendix 01 (PDF) (file: pnas.2519431122.sapp.pdf)
-
-**Supplementary material.** Dataset S01 (XLSX) (file: pnas.2519431122.sd01.xlsx)
-
-### Data Availability Statement
-
-All data are included in the manuscript and/or [supporting information](http://www.pnas.org/lookup/doi/10.1073/pnas.2519431122#supplementary-materials).
-
 ## Footnotes
 
 - **1** To whom correspondence may be addressed. Email: jblicher@ens-lyon.fr or albarede@ens-lyon.fr.
