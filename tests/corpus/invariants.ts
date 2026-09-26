@@ -14,9 +14,13 @@ export interface InvariantInput {
   source: string | undefined;
 }
 
-/** Markdown with fenced code, inline code, and math removed: what prose checks inspect. */
+/**
+ * Markdown with fenced code, inline code, and math removed: what prose checks inspect.
+ * Blockquote markers go first, so math and code inside a quoted box are found too.
+ */
 function prose(markdown: string): string {
   return markdown
+    .replace(/^(?:> ?)+/gm, '')
     .replace(/^(`{3,})[^\n]*\n[\s\S]*?^\1\s*$/gm, '')
     .replace(/^\$\$\n[\s\S]*?\n\$\$$/gm, '')
     .replace(/(`+)[^`]*?\1/g, '')

@@ -46,6 +46,7 @@ import {
   fixtureMetaSchema,
   OPEN_LICENSES,
 } from '../../tests/corpus/fixtures.js';
+import { CONTACT, decode, type HttpResult, request, type Upstream } from './http.js';
 
 type OpenLicenseId = (typeof OPEN_LICENSES)[number];
 type Kind = 'epmc' | 'pmc' | 'arxiv' | 'ar5iv' | 'pdf' | 'html' | 'grobid';
@@ -95,53 +96,12 @@ function fail(message: string): never {
 
 // ── HTTP ────────────────────────────────────────────────────────────────────
 
-const contact = process.env.CORPUS_CONTACT_EMAIL?.trim();
-const USER_AGENT = `scholarly-parse corpus (https://github.com/cyanheads/scholarly-parse)${contact ? ` mailto:${contact}` : ''}`;
-
-/** Minimum spacing between requests to one upstream, in milliseconds. */
-const PACE_MS = { arxiv: 3000, crossref: 250, epmc: 250, grobid: 0, ncbi: 350, publisher: 1000 };
-type Upstream = keyof typeof PACE_MS;
-
-/**
- * The first request to an upstream also waits a full interval, so back-to-back runs of
- * this script keep the pacing without shared state.
- */
-const lastRequest = new Map<Upstream, number>();
-const scriptStart = Date.now();
-
-async function paced(upstream: Upstream): Promise<void> {
-  const last = lastRequest.get(upstream) ?? scriptStart;
-  const wait = last + PACE_MS[upstream] - Date.now();
-  if (wait > 0) await Bun.sleep(wait);
-  lastRequest.set(upstream, Date.now());
-}
-
-interface HttpResult {
-  bytes: Uint8Array;
-  contentType: string;
-  status: number;
-  url: string;
-}
-
 async function get(url: string, upstream: Upstream, accept: string): Promise<HttpResult> {
-  await paced(upstream);
-  let response: Response;
   try {
-    response = await fetch(url, {
-      headers: { Accept: accept, 'User-Agent': USER_AGENT },
-      redirect: 'follow',
-      signal: AbortSignal.timeout(120_000),
-    });
+    return await request(url, upstream, accept);
   } catch (error) {
     fail(`GET ${url} failed: ${error instanceof Error ? error.message : String(error)}`);
   }
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  return {
-    bytes,
-    contentType: response.headers.get('content-type') ?? '',
-    status: response.status,
-    url: response.url || url,
-  };
 }
 
 async function getOk(url: string, upstream: Upstream, accept: string): Promise<HttpResult> {
@@ -149,8 +109,6 @@ async function getOk(url: string, upstream: Upstream, accept: string): Promise<H
   if (result.status !== 200) fail(`GET ${url} returned HTTP ${result.status}`);
   return result;
 }
-
-const decode = (bytes: Uint8Array) => new TextDecoder().decode(bytes);
 
 // ── XML ─────────────────────────────────────────────────────────────────────
 
@@ -519,7 +477,7 @@ async function fetchPmc(id: string): Promise<Fetched> {
   const numeric = id.toUpperCase().replace(/^PMC/, '');
   if (!/^\d+$/.test(numeric)) fail(`pmc takes a PMCID, got "${id}"`);
   const params = new URLSearchParams({ db: 'pmc', id: numeric });
-  if (contact) params.set('email', contact);
+  if (CONTACT) params.set('email', CONTACT);
   params.set('tool', 'scholarly-parse');
   const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?${params}`;
   const result = await getOk(url, 'ncbi', 'application/xml');

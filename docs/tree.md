@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 16:42:45
+Generated on: 2026-09-26 17:49:41
 
 ```text
 scholarly-parse/
@@ -35,7 +35,9 @@ scholarly-parse/
 ├── scripts/
 │   ├── corpus/
 │   │   ├── add.ts
-│   │   └── attribution.ts
+│   │   ├── attribution.ts
+│   │   ├── http.ts
+│   │   └── sample.ts
 │   ├── build-changelog.ts
 │   ├── devcheck.ts
 │   ├── list-skills.ts
