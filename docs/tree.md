@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 18:32:36
+Generated on: 2026-09-26 22:15:11
 
 ```text
 scholarly-parse/
@@ -118,6 +118,7 @@ scholarly-parse/
 │   ├── model/
 │   │   ├── diagnostics.ts
 │   │   ├── document.ts
+│   │   ├── extremes.ts
 │   │   ├── index.ts
 │   │   ├── input.ts
 │   │   ├── result.ts
@@ -164,9 +165,14 @@ scholarly-parse/
 │   │   │   └── latexml.test.ts
 │   │   ├── pdf/
 │   │   │   ├── build-pdf.ts
+│   │   │   ├── layout.test.ts
 │   │   │   └── pdf.test.ts
 │   │   └── tei/
 │   │       └── tei.test.ts
+│   ├── model/
+│   │   ├── result.test.ts
+│   │   ├── section-ids.test.ts
+│   │   └── table-grid.test.ts
 │   ├── render/
 │   │   ├── escape.test.ts
 │   │   ├── inline.test.ts
