@@ -139,7 +139,32 @@ export function cellText(cell: Run[]): string {
   return text.replace(/\s+/g, ' ').trim();
 }
 
-function makeLine(cells: Run[][], page: number, column: number): Line {
+/**
+ * A bold initial drawn as a glyph of its own that the font maps to a lowercase letter:
+ * Nature's Scientific Data sets `Technical Validation` as `t` then `echnical Validation`.
+ * A short line whose first run is one lowercase bold letter, abutting a bold run that
+ * carries on the word, gets its capital back.
+ */
+function restoreInitial(cells: Run[][]): Run[][] {
+  const [first, ...rest] = cells;
+  const [initial, next] = first ?? [];
+  if (!first || !initial || !next) return cells;
+  const abutting = Math.abs(next.x - (initial.x + initial.width)) <= 0.15 * initial.size;
+  const short = cells.map(cellText).join(' ').split(' ').length <= 12;
+  if (
+    !/^\p{Ll}$/u.test(initial.text) ||
+    !/^\p{Ll}/u.test(next.text) ||
+    !initial.bold ||
+    !next.bold ||
+    !abutting ||
+    !short
+  )
+    return cells;
+  return [[{ ...initial, text: initial.text.toUpperCase() }, ...first.slice(1)], ...rest];
+}
+
+function makeLine(lineCells: Run[][], page: number, column: number): Line {
+  const cells = restoreInitial(lineCells);
   const runs = cells.flat();
   const chars = runs.reduce((n, run) => n + run.text.replace(/\s/g, '').length, 0) || 1;
   const size = dominantSize(runs);

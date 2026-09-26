@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: Scientific Data PDF of the article also in the corpus as JATS (epmc-s41597-024-04291-z), publisher HTML, and Grobid TEI. The abstract is an unlabeled bold paragraph; OPEN and DATA DESCRIPTOR labels sit beside the title in another size; Methods subsections are bold run-in labels (Sampling locations.); affiliations are footnotes at the foot of page 1. JATS counts 60 references because Europe PMC repeats three data citations; the PDF lists 57.",
+  "why": "Rosetta: Scientific Data PDF of the article also in the corpus as JATS (epmc-s41597-024-04291-z), publisher HTML, and Grobid TEI. The abstract is an unlabeled bold paragraph; OPEN and DATA DESCRIPTOR labels sit beside the title in another size; Methods subsections are bold run-in labels (Sampling locations.); affiliations are footnotes at the foot of page 1. JATS counts 60 references because Europe PMC repeats three data citations; the PDF lists 57. Four headings open with a bold initial the font maps to a lowercase letter (t, then echnical Validation); each gets its capital back.",
   "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
   "quality": "partial",
   "abstractKinds": [
@@ -17,9 +17,13 @@
     "Library preparation and sequencing",
     "Data processing",
     "Data Records",
+    "Technical Validation",
     "Quality control of sequencing data",
     "Code availability",
-    "Competing interests"
+    "Acknowledgements",
+    "Author contributions",
+    "Competing interests",
+    "Additional information"
   ],
   "tables": 2,
   "figures": 4,
@@ -29,6 +33,7 @@
   ],
   "notContains": [
     "oPeN",
+    "technical Validation",
     "www.nature.com/scientificdata",
     "Roslin institute and Royal"
   ]

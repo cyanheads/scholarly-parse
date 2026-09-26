@@ -81,7 +81,7 @@ All codes used for the mapping and variant calling steps are included in the Sup
 
 All full-length raw sequencing data in FASTQ format can be accessed from the Sequence Read Archive (SRA) of the NCBI database under BioProject accession number PRJNA1027325^{45}. The filtered VCF file containing more than 22 million high-quality autosomal biallelic SNPs can also be accessed from the European Necleotide Archive (ENA) and the European Variation Archive (EVA) repositories under the Project accession number PRJEB78357[46,47] and Analysis accession number ERZ24818048.
 
-## technical Validation
+## Technical Validation
 
 ### Quality control of sequencing data
 
@@ -111,11 +111,11 @@ WGS data analyses from 96 Bangladeshi indigenous chickens were performed using s
 
 Received: 28 August 2024; Accepted: 4 December 2024; Published: xx xx xxxx
 
-## acknowledgements
+## Acknowledgements
 
 The authors would like to thank the BGI Genomics sequencing facility in Poland for carrying out the whole genome sequencing of the chicken samples. MAGR was funded through the Prime Minister’s Fellowship Programme under the Prime Minister’s Office of the Government of Bangladesh [Grant no 03.03.2690.094.18.04.22- 94] and the project carried out as part of the Biotechnology and Biological Sciences Research Council (BBSRC) award number BBS/E/RL/230001 A. The authors also thankful to the authority concerned of Bangladesh Livestock Research Institute (BLRI) and The Roslin Institute, and owners of the sampled chickens.
 
-## author contributions
+## Author contributions
 
 J.S. and M.A.G.R. conceived the research project; M.A.G.R. obtained funding; M.A.G.R. and S.F. led sample collection; M.A.G.R. and K.M. prepared samples for sequencing; M.A.G.R. carried out all bioinformatic analyses, A.V.T. and Z.W. supervised the bioinformatics analysis; K.W. and J.S. supervised the project; M.A.G.R. drafted the original manuscript. All authors contributed to and approved the final manuscript.
 
@@ -123,7 +123,9 @@ J.S. and M.A.G.R. conceived the research project; M.A.G.R. obtained funding; M.A
 
 The authors declare no competing interests.
 
-additional information Supplementary information The online version contains supplementary material available at https://doi. org/10.1038/s41597-024-04291-z. Correspondence and requests for materials should be addressed to M.A.G.R. Reprints and permissions information is available at www.nature.com/reprints. Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+## Additional information
+
+Supplementary information The online version contains supplementary material available at https://doi. org/10.1038/s41597-024-04291-z. Correspondence and requests for materials should be addressed to M.A.G.R. Reprints and permissions information is available at www.nature.com/reprints. Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
 
 Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
 
