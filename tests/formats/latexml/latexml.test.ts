@@ -233,6 +233,22 @@ describe('inline text', () => {
     expect(table?.type === 'table' && table.rows).toEqual([['\\<bos>, safe']]);
   });
 
+  it('collects a note set outside any paragraph without leaving its mark behind', async () => {
+    const note = (text: string) =>
+      `<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer">
+        <span class="ltx_note_content"><sup class="ltx_note_mark">†</sup>${text}</span></span></span>`;
+    const document = await parse(
+      page(`${note('Corresponding author.')}
+        <section id="S1" class="ltx_section">${heading(2, '1', 'Introduction')}
+        <div class="ltx_para"><p class="ltx_p">Text.${note('A note in the text.')}</p></div></section>`),
+    );
+    expect(blocks(document.body)).toEqual([{ text: 'Text.^†', type: 'paragraph' }]);
+    expect(document.footnotes.map((fn) => fn.text)).toEqual([
+      'Corresponding author.',
+      'A note in the text.',
+    ]);
+  });
+
   it('links a \\url and keeps one with no scheme as written', async () => {
     const url = (href: string) =>
       `<a href="${href}" class="ltx_ref ltx_url ltx_font_typewriter">${href}</a>`;

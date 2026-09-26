@@ -107,7 +107,11 @@ function walk(nodes: Node[], flow: Flow, ctx: LatexmlContext): void {
       continue;
     }
     if (!isElement(node) || SKIP_TAGS.has(tagOf(node))) continue;
-    if (!isNote(node) && isBlock(node)) {
+    if (isNote(node) && !flow.run.trim()) {
+      // A note outside any paragraph (author notes set between the front matter and §1)
+      // has no text for its mark to follow: its content is still collected.
+      inlineMarkdown([node], ctx);
+    } else if (!isNote(node) && isBlock(node)) {
       flushRun(flow);
       flow.blocks.push(...renderBlock(node, ctx));
     } else if (!isNote(node) && tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {

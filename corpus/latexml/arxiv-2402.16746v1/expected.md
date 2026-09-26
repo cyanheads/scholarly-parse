@@ -10,14 +10,6 @@ The thermal radiative transfer equations model temperature evolution through a b
 
 *Keywords: thermal radiative transfer equations, energy stability, asymptotic-preserving scheme, dynamical low-rank approximation, macro-micro decomposition*
 
-^†
-
-^†
-
-^†
-
-^†
-
 ## 1 Introduction
 
 The radiation of particles from a hot source into a cold medium and the corresponding formation of a thermal heat front, known as a Marshak wave, is well modeled by the thermal radiative transfer equations. They consist of a coupled system of partial differential equations governing the transport of particles (represented by the particle density $f$) and the temperature evolution of the medium ($T$) [1] given by
