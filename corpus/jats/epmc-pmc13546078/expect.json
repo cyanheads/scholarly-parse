@@ -1,0 +1,25 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#148: the body opens with a titled <def-list> (Abbreviations) outside any <sec>, which surfaced as an untitled section whose text began with 'Abbreviations'; pins it as the first body section, titled Abbreviations, one bold term and definition per line. Also pins this record's reference list at body/sec/sec/ref-list (#116, all 68) and its trailing-period labels (#127) normalized to [1] … [68].",
+  "title": "Comparative Cardiovascular Outcomes of GLP‐1 Receptor Agonists Versus Bariatric Surgery: A Systematic Review and Network Meta‐Analysis",
+  "quality": "structured",
+  "abstractKinds": ["main", "graphical"],
+  "abstractStartsWith": "Obesity, a major global health issue, heightens the risk of cardiovascular diseases",
+  "sectionTitles": [
+    "Abbreviations",
+    "Introduction",
+    "Methods",
+    "Results",
+    "Discussion",
+    "Conclusion"
+  ],
+  "tables": 1,
+  "figures": 6,
+  "references": 68,
+  "contains": [
+    "## Abbreviations\n\n- **BS** — bariatric surgery\n- **CV** — cardiovascular",
+    "- **RRs** — risk ratios\n\n## 1. Introduction",
+    "**FIGURE 1.** The PRISMA flow diagram of the literature search.",
+    "- [1] World Obesity Federation",
+    "- [68] Watt J. and Del Giovane C."
+  ]
+}

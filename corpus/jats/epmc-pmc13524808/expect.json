@@ -1,0 +1,26 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#134: the structured abstract's Impact section is a bullet <list> of three items, which fused at their boundaries ('…significant PDA.Several characteristics…') when the abstract was flattened. Pins the three items as separate list lines under the Impact heading, with no fused boundary.",
+  "title": "Machine learning-based tool to assess risk of hemodynamically significant PDA in extremely premature infants",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "A patent ductus arteriosus (PDA) is associated with complications in extremely preterm infants",
+  "sectionTitles": [
+    "Background",
+    "Methods",
+    "Results",
+    "Conclusions",
+    "Impact",
+    "Introduction",
+    "Methods",
+    "Results",
+    "Discussion"
+  ],
+  "tables": 3,
+  "figures": 3,
+  "references": 32,
+  "contains": [
+    "### Impact\n\n- We report the first machine learning-based risk assessment tool for the prediction of a hemodynamically significant PDA.\n- Several characteristics differ significantly between patients with spontaneous closure of the arterial duct and those with PDA",
+    "is missing.\n- The simple pen-and-paper score enables us to allocate risk for hsPDA"
+  ],
+  "notContains": ["significant PDA.Several", "is missing.The simple"]
+}

@@ -1,0 +1,36 @@
+{
+  "why": "cyanheads/arxiv-mcp-server#43: after </article> the arXiv page carries about 7.9 KB of site footer (build-log link, the LaTeXML logo as a base64 PNG, error-reporting instructions, funder credits) that leaked into the body. Pins that none of it reaches the Markdown while the paper's own sections, appendices, 26 figures and 61 references do (the relative figure URLs are outside what expect.json can check).",
+  "title": "*ColPali*: Efficient Document Retrieval with Vision Language Models",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Documents are visually rich structures that convey information through text, but also figures, page layouts",
+  "sectionTitles": [
+    "Introduction",
+    "Problem Formulation & Related Work",
+    "The *ViDoRe* Benchmark",
+    "Late interaction based Vision Retrieval",
+    "Results",
+    "Ablation study",
+    "Conclusions",
+    "Reproducibility Statement",
+    "Acknowledgements",
+    "Benchmark Datasets",
+    "Implementation details",
+    "Additional results",
+    "More similarity maps",
+    "Model glossary",
+    "Examples from the *ViDoRe* benchmark"
+  ],
+  "figures": 26,
+  "references": 61,
+  "contains": [
+    "**Figure 1.** *ColPali* simplifies document retrieval w.r.t. standard retrieval methods",
+    "**Table 1.** *ViDoRe* comprehensively evaluates multimodal retrieval methods."
+  ],
+  "notContains": [
+    "view the build logs",
+    "Instructions for reporting errors",
+    "We gratefully acknowledge support from our major funders",
+    "data:image/"
+  ]
+}

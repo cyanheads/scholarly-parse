@@ -1,0 +1,16 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#111: all three <table-wrap>s are graphic-only deposits (label, caption, footnotes, no <table>), which were dropped without notice. Pins each one reported as a labelled, captioned table with no rows and a table-unextractable warning, so a reader knows the cells exist but were not retrieved.",
+  "title": "New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a *Caenorhabditis elegans* Genomic RNAi Screen",
+  "quality": "structured",
+  "abstractStartsWith": "Most of our knowledge about the regulation of aging comes from mutants originally isolated for other phenotypes.",
+  "sectionTitles": ["Introduction", "Results/Discussion", "Materials and Methods"],
+  "tables": 3,
+  "figures": 3,
+  "references": 56,
+  "warnings": ["table-unextractable"],
+  "contains": [
+    "**Table 1.** Mean Lifespan Extensions Observed in First Retests of *fer-15(b26); fem-1(hc17)* and of N2 Worms Grown on Long-Lived Candidate RNAi Clones\n\n*Table content not available (graphic-only).*",
+    "**Table 2.** Genetic Epistasis Analysis of RNAi Clones Whose Effects Require DAF-16\n\n*Table content not available (graphic-only).*",
+    "**Table 3.** Genetic Epistasis Analysis of RNAi Clones Whose Effects Do Not Require DAF-16\n\n*Table content not available (graphic-only).*"
+  ]
+}

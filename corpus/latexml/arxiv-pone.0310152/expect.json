@@ -1,0 +1,20 @@
+{
+  "why": "Rosetta: the arXiv preprint of the PLOS ONE article also in the corpus as JATS (epmc-pone.0310152), publisher HTML (plos-pone.0310152), and Grobid TEI (grobid-pone.0310152); its authors typeset the title and abstract by hand, so both reach the body as text rather than LaTeXML title or abstract markup. Pins what it shares with the JATS parse: that title and abstract text, the top-level section sequence, one table, twelve figures, and 45 references.",
+  "quality": "structured",
+  "sectionTitles": [
+    "Introduction",
+    "Model formulation",
+    "Parameter Estimation",
+    "Results and findings",
+    "Discussion and Conclusion"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "references": 45,
+  "contains": [
+    "Effect of Vaccine Dose Intervals: Considering Immunity",
+    "In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break.",
+    "Schematic diagram for the system",
+    "**Table 1.** Parameter values"
+  ]
+}

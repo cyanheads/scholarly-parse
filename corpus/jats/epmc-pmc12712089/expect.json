@@ -1,0 +1,24 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#135: every formula is a bare <tex-math> wrapping a whole LaTeX document (\\documentclass…\\begin{document}), and the preamble leaked into prose once per formula. Pins the expression alone ($…$ inline, $$…$$ with \\tag for display), no preamble text, all 54 display formulas, and formula 1, which sits inside a <p> (#130), as its own block after the sentence introducing it.",
+  "title": "Advanced soliton structures and elliptic wave patterns in a sixth-order nonlinear Schrödinger equation using improved modified extended tanh function method",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "In this work, a sixth–order extension of the nonlinear Schrödinger equation (NLSE)",
+  "sectionTitles": [
+    "Introduction",
+    "Proposed technique",
+    "Methodology and findings",
+    "Results and discussion",
+    "Conclusion"
+  ],
+  "tables": 0,
+  "figures": 6,
+  "formulas": 54,
+  "references": 33,
+  "contains": [
+    "we focus on the sixth–order member of this hierarchy, given by\n\n$$\n\\begin{aligned} \\begin{aligned}&i\\psi _x+\\frac{1}{2}\\psi _{tt}",
+    "\\end{aligned} \\end{aligned} \\tag{1}\n$$",
+    "Specifically, setting $\\alpha _5=\\alpha _6=0$ yields the LPD equation [3]"
+  ],
+  "notContains": ["\\documentclass", "\\usepackage", "\\begin{document}", "\\end{document}"]
+}

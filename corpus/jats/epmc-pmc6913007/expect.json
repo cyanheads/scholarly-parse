@@ -1,0 +1,26 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#111: Table 1 sits inside a <p>, and flattening the paragraph fused its cells into prose (14.44, 9.11, 23.54 → 14.449.1123.54). Pins the table lifted out with every cell in its own column (trailing zeros intact, '1.10'), and the six <fig>s that also sit inside <p> (#130) rendered as captioned figures rather than caption text inside a sentence.",
+  "title": "Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Sequencing technology and assembly algorithms have matured to the point that",
+  "sectionTitles": [
+    "Background",
+    "Results",
+    "Setting up a reference annotation for benchmarking",
+    "Comparison of general repeat annotators",
+    "Discussion",
+    "Conclusions",
+    "Methods"
+  ],
+  "tables": 1,
+  "figures": 6,
+  "references": 74,
+  "contains": [
+    "**Table 1.** TE content in the rice (*Oryza sativa ssp. japonica* cv. “Nipponbare” v. MSU7) genome",
+    "| LTR | Class I | 88.1 Mb | 14.44 | 9.11 | 23.54 |",
+    "| *Helitron* | Class II | 13.4 Mb | 1.10 | 2.47 | 3.57 |",
+    "**Fig. 1.** Schematic representation of benchmarking metrics."
+  ],
+  "notContains": ["14.449.1123.54", "14.449.11", "genomeClassStd"]
+}

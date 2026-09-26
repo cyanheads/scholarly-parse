@@ -1,0 +1,25 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#142: every <fig> holds its image pointers only inside <alternatives> (a JPEG and a thumbnail GIF), with no direct <graphic>. expect.json cannot check a figure's href, so this pins what it can: all ten labelled figures come through with their label and caption, plus the three standalone pseudocode graphics, thirteen figures in all.",
+  "title": "Exploring potential hidden aspects of quantum field theory through numerical solution of the Klein–Gordon equation using the Yee algorithm",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "This study presents a novel reformulation of the Klein–Gordon (KG) equation",
+  "sectionTitles": [
+    "Introduction",
+    "Representing generalized Klein–Gordon equation by Maxwellian fields",
+    "Validation though numerical implementation",
+    "Representing the Klein–Gordon equation by symmetric Maxwellian fields",
+    "Plane-wave solution of the Maxwellian Klein–Gordon equation",
+    "Discussion",
+    "Conclusion"
+  ],
+  "tables": 1,
+  "figures": 13,
+  "references": 50,
+  "contains": [
+    "**Table 1.** Test problems for validating the proposed FDTD scheme for the Klein–Gordon equation.",
+    "**Fig. 1.** Convergence test for TP1.",
+    "**Fig. 4.** Convergence test for TP4.",
+    "**Fig. 10.** Solution of TP10"
+  ]
+}

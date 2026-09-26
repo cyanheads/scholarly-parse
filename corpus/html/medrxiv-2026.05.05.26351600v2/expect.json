@@ -1,0 +1,28 @@
+{
+  "why": "cyanheads/biorxiv-mcp-server#51: an extractor reported 113 words for this ~13,600-word full-text page. Pins that the whole article comes through, from the first Introduction sentence and every Results subsection to the last Methods subsection, with five figures, 68 references, and Table 1 (a caption linking to a separate page) reported unextractable.",
+  "title": "Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele (*cis*) or opposing alleles",
+  "sectionTitles": [
+    "Introduction",
+    "Results",
+    "Systematic Identification of Cases with Cryptic Genomic Instability",
+    "Compound *Cis* Variants in Mesenchymal Tumors",
+    "Discussion",
+    "Methods",
+    "Study Design and Patient Cohorts",
+    "Germline-somatic co-occurrence analysis",
+    "Data Visualization"
+  ],
+  "figures": 5,
+  "tables": 1,
+  "references": 68,
+  "warnings": ["table-unextractable", "structure-inferred"],
+  "contains": [
+    "The molecular characterization of cancer has undergone significant advancement due to the implementation of second-generation sequencing technologies",
+    "**Table 1.** Patient Characteristics in the PROBLEM Cohort.",
+    "**Figure 5.** **Compound *cis* oncogenic alleles across cancer types revealed by long-read haplotype phasing.**",
+    "Genomic data inspection and visualization were performed using IGV (v2.19.1, RRID:SCR_011793)[63]"
+  ]
+}

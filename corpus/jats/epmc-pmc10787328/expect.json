@@ -1,0 +1,34 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#112: body sections nest four levels deep (Methods › Phase 2 › β Workshops › Recruitment), and a consumer that capped depth at two silently dropped the deepest ones. Pins every depth-4 heading in order, rendered at #####, with its text under it.",
+  "title": "Bio-Experiential Technology to Support Persons With Dementia and Care Partners at Home (TEND): Protocol for an Intervention Development Study",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Alzheimer disease and related dementias are debilitating and incurable diseases.",
+  "sectionTitles": [
+    "Introduction",
+    "Methods",
+    "Phase 1: Understand User Needs, Goals, and Strengths",
+    "Key Stakeholder Focus Groups",
+    "Design",
+    "Recruitment",
+    "Procedures",
+    "Analysis",
+    "Phase 2: Developing and Refining the Prototype",
+    "β Workshops",
+    "Design",
+    "Recruitment",
+    "Procedures",
+    "Data Collection",
+    "Data Analysis",
+    "Results",
+    "Discussion"
+  ],
+  "tables": 0,
+  "figures": 2,
+  "references": 55,
+  "contains": [
+    "#### β Workshops\n\n##### Design\n\nWe are implementing up to 20 iterations of platform β testing workshops",
+    "##### Recruitment\n\nWe are recruiting dyads for platform β testing.",
+    "##### Data Analysis"
+  ]
+}

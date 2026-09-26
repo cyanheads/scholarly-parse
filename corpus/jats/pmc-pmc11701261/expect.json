@@ -1,0 +1,20 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#69: every reference is a structured <element-citation> with no punctuation between its child elements, and seven carry a Cell-style page such as <lpage>1659.e26</lpage> that numeric coercion turned into 4.002e+29-style scientific notation. Pins author names separated by commas, identifiers labelled, the e-page tokens verbatim, and no scientific notation.",
+  "title": "Genome-wide chromosome architecture prediction reveals biophysical principles underlying gene structure",
+  "quality": "structured",
+  "abstractKinds": ["main", "graphical", "other", "teaser"],
+  "abstractStartsWith": "Classical observations suggest a connection between 3D gene structure and function",
+  "sectionTitles": ["Introduction", "Results", "Discussion", "STAR★Methods", "Key resources table"],
+  "tables": 1,
+  "figures": 6,
+  "formulas": 9,
+  "references": 61,
+  "contains": [
+    "- [1] Kempfer R., Pombo A. Methods for mapping 3D chromosome architecture",
+    "Su J.-H., Zheng P., Kinrot S.S., Bintu B., Zhuang X. Genome-Scale Imaging of the 3D Organization and Transcriptional Activity of Chromatin",
+    "1659.e26",
+    "797.e11",
+    "DOI 10.1016/j.cell.2020.07.032 PMID 32822575 PMCID PMC7851072"
+  ],
+  "notContains": ["1.659e+29", "7.97e+13", "KempferR", "PomboA"]
+}

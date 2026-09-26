@@ -1,0 +1,36 @@
+{
+  "why": "Rosetta: the same Frontiers article is in the corpus as Europe PMC JATS (epmc-fmicb.2024.1384204) and Grobid TEI from its PDF (grobid-fmicb.2024.1384204). Pins what this page parse shares with the JATS reference: abstract opening, the full Methods and Results subsection sequence, three tables, five figures with the same captions, and 92 references.",
+  "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Sweetgrass (*Anthoxanthum nitens*) is a culturally and environmentally significant perennial grass",
+  "sectionTitles": [
+    "Introduction",
+    "Materials and methods",
+    "Collection of grass and soil samples",
+    "Identification of grass species through ITS sequencing",
+    "Preparation of alcohol insoluble residue",
+    "Preparation of partially methylated alditol acetates from plant cell walls",
+    "GC-MS analysis of PMAAs",
+    "Analysis of total carbohydrate content and monosaccharide composition of soil samples",
+    "16S rRNA gene sequencing of soil microbial communities",
+    "Soil chemistry",
+    "Results",
+    "ITS sequencing",
+    "Glycosidic linkage composition of greenhouse-grown Sweetgrass rhizome, stem, and leaf sections",
+    "Comparison of glycosidic linkage compositions across plant sections and between different grass species",
+    "16S microbial community analysis of greenhouse, field, and baseline soil samples",
+    "Soil chemistry",
+    "Discussion",
+    "Conclusion"
+  ],
+  "tables": 3,
+  "figures": 5,
+  "references": 92,
+  "warnings": ["structure-inferred"],
+  "contains": [
+    "**Figure 1.** Carbohydrate content of greenhouse-grown Sweetgrass and other grass species.",
+    "**Figure 5.** Bubble plot of different bacterial and archaeal genera",
+    "**Table 3.** Soil physiochemical parameters of baseline, field, and greenhouse soils"
+  ]
+}

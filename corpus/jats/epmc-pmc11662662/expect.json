@@ -1,0 +1,16 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#115: mixed citations end in runs of adjacent <pub-id>s with no text between them (PMID, DOI, PMCID), which flattened into one corrupt token. Pins each identifier labelled and separated in reference 1, plus the untyped abstract ahead of the graphical one and the six preamble-wrapped <tex-math> display formulas.",
+  "title": "UHRF1 ubiquitin ligase activity supports the maintenance of low-density CpG methylation",
+  "quality": "structured",
+  "abstractKinds": ["main", "graphical"],
+  "abstractStartsWith": "The RING E3 ubiquitin ligase UHRF1 is an established cofactor for DNA methylation",
+  "sectionTitles": ["Introduction", "Material and methods", "Results", "Discussion"],
+  "tables": 3,
+  "figures": 7,
+  "formulas": 6,
+  "references": 95,
+  "contains": [
+    "- [1] Bird A.P. DNA methylation and the frequency of CpG in animal DNA. Nucleic Acids Res. 1980; 8:1499–1504. PMID 6253938 DOI 10.1093/nar/8.7.1499 PMCID PMC324012"
+  ],
+  "notContains": ["625393810.1093", "8.7.1499PMC324012", "\\documentclass"]
+}

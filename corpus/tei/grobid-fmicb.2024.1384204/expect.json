@@ -1,0 +1,27 @@
+{
+  "why": "Rosetta: Grobid TEI from the PDF of the Frontiers article also in the corpus as JATS (epmc-fmicb.2024.1384204) and publisher HTML (frontiers-fmicb.2024.1384204). Pins what it shares with the JATS parse (title, abstract opening, the Methods and Results headings Grobid recovered, five figure captions) and the counts Grobid emitted: 88 references and no tables, since Grobid recovers none of the PDF's three.",
+  "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Sweetgrass (Anthoxanthum nitens) is a culturally and environmentally significant perennial grass",
+  "sectionTitles": [
+    "Introduction",
+    "Identification of grass species through ITS sequencing",
+    "Preparation of alcohol insoluble residue",
+    "GC-MS analysis of PMAAs",
+    "Analysis of total carbohydrate content and monosaccharide composition of soil samples",
+    "Soil chemistry",
+    "Results",
+    "Soil chemistry",
+    "Discussion",
+    "Conclusion"
+  ],
+  "tables": 0,
+  "figures": 5,
+  "references": 88,
+  "contains": [
+    "Carbohydrate content of greenhouse-grown Sweetgrass and other grass species.",
+    "Bubble plot of different bacterial and archaeal genera",
+    "Soil physiochemical parameters of baseline, field, and greenhouse soils"
+  ]
+}

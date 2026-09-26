@@ -1,0 +1,26 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#134: <article-meta> carries three abstracts in the order graphical, author-highlights, untyped, and a first-wins read returned the graphical abstract's title ('Graphical abstract', 18 characters) as the abstract. Pins the third, untyped abstract as main with its five structured sections, and the other two kept under their own headings.",
+  "title": "Field-parallel six-sample microfluidic detection of plant viruses via raffinose-assisted one-pot LAMP-CRISPR/Cas12b",
+  "quality": "structured",
+  "abstractKinds": ["main", "graphical", "other"],
+  "abstractStartsWith": "Plant viral diseases threaten food security globally. Rapid, accurate and early detection of viral pathogens is critical",
+  "sectionTitles": [
+    "Introduction",
+    "Objectives",
+    "Methods",
+    "Results",
+    "Conclusions",
+    "Introduction",
+    "Materials and methods",
+    "Results",
+    "Discussion"
+  ],
+  "tables": 0,
+  "figures": 5,
+  "references": 33,
+  "contains": [
+    "## Abstract\n\n### Introduction\n\nPlant viral diseases threaten food security globally.",
+    "## Highlights\n\n",
+    "ALERT integrates LAMP and CRISPR/Cas12b in a microfluidic chip for simultaneous detection of six plant-virus samples."
+  ]
+}

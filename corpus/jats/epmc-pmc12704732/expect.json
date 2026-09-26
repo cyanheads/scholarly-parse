@@ -1,0 +1,21 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#134: the first <abstract> is abstract-type=\"executive-summary\" (the PNAS Significance statement), serialized before the untyped one, and a first-wins read returned it as the abstract. Pins the untyped abstract as main, with the Significance statement kept as a separate plain-language abstract under its own heading.",
+  "title": "Volcanic forcing of the Lomagundi–Jatuli carbon isotope excursion",
+  "quality": "structured",
+  "abstractKinds": ["main", "plain-language"],
+  "abstractStartsWith": "The Lomagundi–Jatuli Event (LJE), Earth’s most pronounced and prolonged positive carbon isotope excursion",
+  "sectionTitles": [
+    "Geological Context and Study Site.",
+    "Results",
+    "Discussion",
+    "Materials and Methods"
+  ],
+  "tables": 1,
+  "figures": 6,
+  "formulas": 3,
+  "references": 62,
+  "contains": [
+    "## Abstract\n\nThe Lomagundi–Jatuli Event (LJE), Earth’s most pronounced",
+    "## Significance\n\nThe Lomagundi–Jatuli Event (LJE), more than 2 billion years ago, marks a major shift in Earth’s carbon cycle"
+  ]
+}

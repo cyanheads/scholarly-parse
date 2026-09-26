@@ -1,0 +1,22 @@
+{
+  "why": "The fixture for cyanheads/pubmed-mcp-server#74 (U+00AD soft hyphens reaching display text): reference 46's citation string uses three of them as author-name placeholders. These assertions pin the structure around that case: reference 46 is present, the <boxed-text> before the first <sec> becomes its own 'STRENGTHS AND LIMITATIONS OF THIS STUDY' section, and the peer-review <sub-article> lands in back matter.",
+  "title": "DREAM: an adaptive, randomised, placebo-controlled trial of duloxetine for reducing leg pain in people with chronic sciatica—trial protocol",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Sciatica is a debilitating condition that often becomes chronic",
+  "sectionTitles": [
+    "STRENGTHS AND LIMITATIONS OF THIS STUDY",
+    "Introduction",
+    "Methods and analysis",
+    "Ethics and dissemination",
+    "Discussion",
+    "Review Process File"
+  ],
+  "tables": 0,
+  "figures": 4,
+  "references": 51,
+  "contains": [
+    "## STRENGTHS AND LIMITATIONS OF THIS STUDY\n\n> - DREAM is a two arm, triple-blinded (participant, clinician and assessor) randomised controlled trial",
+    "Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57."
+  ]
+}

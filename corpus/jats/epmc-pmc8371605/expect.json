@@ -1,0 +1,28 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#66: 64 of the 84 <ref>s wrap their citation in <citation-alternatives> and were dropped, so this pins all 84. It also pins the same citations' zero-gap <italic> journal → <bold> volume transitions (#123, 'Nat. Methods 16') and the three adjacent <pub-id>s in reference 1 (#115) as separated tokens.",
+  "title": "Highly accurate protein structure prediction with AlphaFold",
+  "quality": "structured",
+  "abstractKinds": ["main", "other"],
+  "abstractStartsWith": "Proteins are essential to life, and understanding their structure can facilitate",
+  "sectionTitles": [
+    "Main",
+    "The AlphaFold network",
+    "Evoformer",
+    "End-to-end structure prediction",
+    "Training with labelled and unlabelled data",
+    "Interpreting the neural network",
+    "MSA depth and cross-chain contacts",
+    "Related work",
+    "Discussion",
+    "Methods"
+  ],
+  "tables": 0,
+  "figures": 5,
+  "references": 84,
+  "contains": [
+    "- [1] Thompson, M. C., Yeates, T. O. & Rodriguez, J. A. Advances in methods for atomic resolution macromolecular structure determination. F1000Res. 9, 667 (2020). DOI 10.12688/f1000research.25097.1 PMCID PMC7333361 PMID 32676184",
+    "Nat. Methods 16, 603–606 (2019)",
+    "- [84] Flower, T. G. et al. Structure of SARS-CoV-2 ORF8, a rapidly evolving immune evasion protein."
+  ],
+  "notContains": ["Nat. Methods16", "25097.1PMC7333361", "PMC733336132676184"]
+}

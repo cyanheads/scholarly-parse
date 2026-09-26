@@ -1,0 +1,17 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#111: nine <table-wrap>s sit directly in <body>, beside paragraphs and with no <sec>, and were dropped or had their cells fused into prose. Pins all nine as tables with captions and cells intact in rows, no fused run of cell values, and the Portuguese abstract kept as a translated abstract.",
+  "title": "The gut at war: the consequences of enteropathogenic *Escherichia coli* infection as a factor of diarrhea and malnutrition",
+  "quality": "structured",
+  "abstractKinds": ["main", "translated"],
+  "abstractStartsWith": "Diarrheal disease is still the most prevalent and important public health problem in developing countries",
+  "tables": 9,
+  "figures": 5,
+  "references": 23,
+  "contains": [
+    "**Table 1.** **Variables that showed a significant association with death in infants hospitalized due to severe acute diarrhea**",
+    "| Age<6 months | 15 | 320 | 2.9 | 88.2 | 4.5 | 3.9 |",
+    "| EPEC | 9 (7.1) | 118 | 127 |",
+    "**Table 8.** **Persistent diarrhea: bacterial culture of the jejunal secretion and stools**"
+  ],
+  "notContains": ["153202.9", "91181.852.9"]
+}

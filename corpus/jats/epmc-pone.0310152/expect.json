@@ -1,0 +1,35 @@
+{
+  "why": "Rosetta: the same PLOS ONE article is in the corpus as the publisher page (plos-pone.0310152), the arXiv preprint in LaTeXML (arxiv-pone.0310152), and Grobid TEI from its PDF (grobid-pone.0310152). As the reference parse, pins the facts the other formats are compared on: title, abstract opening, the section and subsection sequence, one table, twelve figures, and 45 references, plus the 38 MathML-only display formulas converted to TeX.",
+  "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break.",
+  "sectionTitles": [
+    "Introduction",
+    "Model formulation",
+    "Basic model",
+    "Vaccination and immunity",
+    "Basic reproduction number",
+    "Parameter estimation",
+    "Statistical toolbox",
+    "Choice of vaccination function *V*(*t*)",
+    "Estimation of *ϕ*(*t*) and *ψ*(*t*)",
+    "Estimation of transmission rate *β*(*τ*)",
+    "Estimation of *r*(*t*) and *d*(*t*)",
+    "Results and findings",
+    "Impact of multiple strains",
+    "Effect of interval between successive vaccine doses: Hysteresis effect",
+    "Optimization problem",
+    "Effect of vaccine efficacy and vaccination rate",
+    "Effect of co-existing strains",
+    "Discussion and conclusion"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "formulas": 38,
+  "references": 45,
+  "contains": [
+    "**Fig 1.** **Schematic diagram.** Schematic diagram for the system (10)–(15).",
+    "**Table 1.** **Parameter values.**"
+  ]
+}

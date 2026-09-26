@@ -1,0 +1,19 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#135: an <inline-formula><alternatives> in a Table 2 cell carries a preamble-wrapped <tex-math> beside <mml:math>, and both renderings, preamble included, landed in the cell. Pins exactly one rendering in the REF-S2 row (the TeX expression, no preamble, no 'ηcrit' MathML text), plus the three tables and two figures that sit inside <p> (#111, #130) coming out as captioned blocks.",
+  "title": "Challenges in global climate models to represent cloud response to aerosols: insights from volcanic eruptions",
+  "quality": "structured",
+  "abstractKinds": ["main", "other"],
+  "abstractStartsWith": "Aerosol-cloud interactions (ACI) remain a major source of climate uncertainty",
+  "sectionTitles": ["Introduction", "Results", "Discussion", "Methods"],
+  "tables": 3,
+  "figures": 2,
+  "references": 83,
+  "contains": [
+    "| REF-S2 | Reducing threshold RH $",
+    "\\boldsymbol{\\eta }",
+    "$ by applying a scaling factor of 0.8, only over the ocean → more marine clouds |",
+    "**Table 2.** Perturbed parameters in sensitivity studies in ECHAM6.3-HAM2.3",
+    "**Fig. 1.** **Intercomparison of liquid cloud properties response to aerosol perturbations"
+  ],
+  "notContains": ["\\documentclass", "\\usepackage", "\\begin{document}", "ηcrit"]
+}

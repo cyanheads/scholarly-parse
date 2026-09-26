@@ -1,0 +1,10 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#86: a PDF-only deposit carries front matter and an abstract but no <body>, and was reported as a successful full-text hit with zero sections. Pins the no-body warning, so a caller can tell a front-matter-only record from full text, alongside the title and abstract that are still there.",
+  "title": "Multi‐country foodborne event caused by cereulide in infant formula products 19 February 2026",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "From 19 December 2025 to 13 February 2026, six EU countries (Austria, Belgium, Denmark, France, Luxembourg and Spain) and the United Kingdom",
+  "tables": 0,
+  "figures": 0,
+  "references": 0,
+  "warnings": ["no-body"]
+}

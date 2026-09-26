@@ -1,0 +1,18 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#130: every <fig> of this medRxiv preprint sits in <floats-group> outside <body>, so a body-only walk found none. Pins all eight <fig>s (Figures 1–3 are <fig-group>s of two panels each, Figures 4–5 single figures) and Table 1 in the floats, rendered under 'Figures and tables' with their captions.",
+  "title": "Global genomics in over 4 million individuals prioritizes therapeutic targets for heart failure and its subtypes",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Heart failure (HF) is a leading cause of morbidity and mortality.",
+  "sectionTitles": ["Introduction", "Results", "Discussion", "Methods"],
+  "tables": 1,
+  "figures": 8,
+  "references": 79,
+  "contains": [
+    "## Figures and tables",
+    "**Study overview and GWAS results of the multi-ancestry analysis of HF, HFrEF, and HFpEF.** (A) We performed a multi-ancestry genome-wide association study",
+    "**Figure 4.** **Lipoprotein-mediated and adipocyte-mediated lipolysis and long-chain fatty acid oxidation roles in HF.**",
+    "**Figure 5.** **NRG1-ERBB and Activin Signaling Pathways Implicated in HF.**",
+    "**Table 1.** **Genetically supported heart failure (HF) and HF subtypes drug targets with approved and investigational therapies.**"
+  ]
+}

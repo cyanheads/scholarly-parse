@@ -1,0 +1,24 @@
+{
+  "why": "Rosetta: the same case report is in the corpus as the Springer page (springer-s13256-024-05002-3) and Grobid TEI from its PDF (grobid-s13256-024-05002-3). As the reference parse, pins the facts the other formats are compared on: title, the structured abstract's headings and opening, the body section sequence, three tables, and 18 references.",
+  "title": "Evans syndrome as a presentation in systemic lupus erythematous, coexisting with Hashimoto’s thyroiditis and pernicious anemia: a case report",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Evans syndrome is a rare disorder characterized by the simultaneous or sequential combination of autoimmune hemolytic anemia",
+  "sectionTitles": [
+    "Background",
+    "Case presentation",
+    "Conclusion",
+    "Background",
+    "Case presentation",
+    "Discussion",
+    "Conclusion"
+  ],
+  "tables": 3,
+  "figures": 0,
+  "references": 18,
+  "contains": [
+    "**Table 1.** Complete Hematological and Metabolic profile",
+    "**Table 2.** Labratory results for Hemolytic workup",
+    "**Table 3.** Viral and Serological testing results"
+  ]
+}

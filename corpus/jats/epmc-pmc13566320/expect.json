@@ -1,0 +1,27 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#93: Table 3's cells hold emoji (U+1F600 and neighbours), astral-plane characters that a code-unit cut can split into lone surrogates. Pins every emoji row of Table 3 whole, each emoji beside its code point, so a split or dropped pair shows up here as well as in the corpus-wide surrogate check.",
+  "title": "Pain Without Words: Emoji-Based Assessment of Acute Pain in the Emergency Department—Clinical and Medico-Legal Impact",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "**Background:** Pain is among the most frequent reasons for seeking medical care",
+  "sectionTitles": [
+    "Introduction",
+    "Materials and Methods",
+    "Results",
+    "Discussion",
+    "Conclusions",
+    "Limitations"
+  ],
+  "tables": 3,
+  "figures": 4,
+  "references": 35,
+  "contains": [
+    "**Table 3.** Prespecified mapping of Emoji-Based Pain Scale categories to NRS score bands.",
+    "| 😀 | U+1F600 | No pain | 0 | 0 |",
+    "| 😐 | U+1F610 | Mild pain | 2 | 1–2 |",
+    "| 🙁 | U+1F641 | Moderate pain | 4 | 3–4 |",
+    "| 😟 | U+1F61F | Severe pain | 6 | 5–6 |",
+    "| 😣 | U+1F623 | Very severe pain | 8 | 7–8 |",
+    "| 😩 | U+1F629 | Worst possible pain | 10 | 9–10 |"
+  ]
+}

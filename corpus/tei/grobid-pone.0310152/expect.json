@@ -1,0 +1,28 @@
+{
+  "why": "Rosetta: Grobid TEI from the PDF of the PLOS ONE article also in the corpus as JATS (epmc-pone.0310152), publisher HTML (plos-pone.0310152), and arXiv LaTeXML (arxiv-pone.0310152). Pins what it shares with the JATS parse (title, abstract opening, the subsection headings Grobid recovered, one table, twelve figures) and the counts Grobid emitted: 39 formulas and 41 references.",
+  "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break.",
+  "sectionTitles": [
+    "Introduction",
+    "Basic model",
+    "Vaccination and immunity",
+    "Basic reproduction number",
+    "Statistical toolbox",
+    "Impact of multiple strains",
+    "Effect of interval between successive vaccine doses: Hysteresis effect",
+    "Optimization problem",
+    "Effect of vaccine efficacy and vaccination rate",
+    "Effect of co-existing strains",
+    "Discussion and conclusion"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "formulas": 39,
+  "references": 41,
+  "contains": [
+    "Schematic diagram for the system (10)-(15).",
+    "Parameter values."
+  ]
+}

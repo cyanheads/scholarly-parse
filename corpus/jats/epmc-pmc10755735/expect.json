@@ -1,0 +1,17 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#124: ACS mixed citations put <name><surname>…</surname><given-names>…</given-names></name> directly in <mixed-citation> with no text between the parts, which flattened to 'LevyS. B.' in the output. Pins one space between surname and given names for both the bare-<name> shape (reference 1) and the <person-group>-wrapped shape (reference 2), and the untyped abstract ahead of the short one.",
+  "title": "An Ion-Pair Induced Intermediate Complex Captured in Class D Carbapenemase Reveals Chloride Ion as a Janus Effector Modulating Activity",
+  "quality": "structured",
+  "abstractKinds": ["main", "teaser"],
+  "sectionTitles": ["Introduction", "Results and Discussion", "Conclusions"],
+  "tables": 1,
+  "figures": 6,
+  "references": 46,
+  "contains": [
+    "Antibiotic-resistant *Enterobacterales* that produce oxacillinase (OXA)-48-like Class D β-lactamases",
+    "- Levy S. B.; Marshall B. Antibacterial resistance worldwide: causes, challenges and responses.",
+    "- O’Neill J. Antimicrobial Resistance: Tackling a Crisis for the Health and Wealth of Nations",
+    "Papp-Wallace K. M.; Endimiani A.; Taracila M. A.; Bonomo R. A. Carbapenems: past, present, and future."
+  ],
+  "notContains": ["LevyS.", "MarshallB.", "O’NeillJ.", "Papp-WallaceK."]
+}

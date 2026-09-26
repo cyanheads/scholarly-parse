@@ -1,0 +1,32 @@
+{
+  "why": "Rosetta: the same data paper is also in the corpus as Europe PMC JATS (epmc-s41597-024-04291-z) and Grobid TEI (grobid-s41597-024-04291-z). Pins what this Nature page shares with the JATS parse (title, abstract opening, the Methods and Technical Validation subsections, two caption-only tables reported unextractable, four figures with the same captions) plus the page's 57 references, journal and bold volume kept apart.",
+  "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Bangladeshi indigenous chicken varieties - Common Deshi, Hilly and Naked Neck are notable for their egg production",
+  "sectionTitles": [
+    "Background & Summary",
+    "Methods",
+    "Sampling locations",
+    "Ethical approval",
+    "Blood collection",
+    "Sample selection for WGS",
+    "Sample preparation for WGS",
+    "Library preparation and sequencing",
+    "Data processing",
+    "Data Records",
+    "Technical Validation",
+    "Quality control of sequencing data",
+    "Quality control of SNP data"
+  ],
+  "tables": 2,
+  "figures": 4,
+  "references": 57,
+  "warnings": ["table-unextractable", "structure-inferred"],
+  "contains": [
+    "**Fig. 1.** Sample collection sites from across Bangladesh.",
+    "**Table 1.** Selected samples (total = 96) for WGS from BLRI improved native chicken",
+    "**Fig. 4.** Chromosome-wise SNP distribution heat map across the Bangladeshi native chicken genome",
+    "*Worlds Poult Sci J* **64**, 99–118 (2019)."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "why": "cyanheads/arxiv-mcp-server#10: a versioned ID was silently served as the latest version. This fixture is version 1 of a paper now at v4, fetched by its versioned ID; the assertions pin that the parse keeps the version suffix (2404.03664v1) and reads v1's own title, abstract, opening sections, code listing, and 50-entry bibliography.",
+  "title": "LLMs in the Heart of Differential Testing: A Case Study on a Medical Rule Engine",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "The Cancer Registry of Norway (CRN) uses an automated cancer registration support system (CaReSS)",
+  "sectionTitles": ["Introduction", "Real-World Application Context", "Approach"],
+  "tables": 4,
+  "figures": 2,
+  "references": 50,
+  "contains": [
+    "arXiv: 2404.03664v1",
+    "**Listing 1.** LLM Prompt"
+  ]
+}

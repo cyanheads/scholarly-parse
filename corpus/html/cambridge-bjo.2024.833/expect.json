@@ -1,0 +1,36 @@
+{
+  "why": "Rosetta: the same BJPsych Open trial is also in the corpus as JATS (epmc-bjo.2024.833) and Grobid TEI (grobid-bjo.2024.833). Pins what this Cambridge page shares with the JATS parse: title, abstract text, the Method and Discussion subsections, three image-only tables reported unextractable, and one figure, with the same captions.",
+  "title": "Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "sectionTitles": [
+    "Supporting people with BPD during the perinatal period",
+    "Method",
+    "Study design",
+    "Setting and participants",
+    "Screening assessment of potential participants",
+    "Interventions",
+    "Randomisation",
+    "Measures",
+    "Qualitative evaluation",
+    "Adverse events",
+    "Data management",
+    "Data analysis",
+    "Ethics",
+    "Results",
+    "Discussion",
+    "Main findings",
+    "Methodological considerations",
+    "Implications"
+  ],
+  "tables": 3,
+  "figures": 1,
+  "warnings": ["table-unextractable", "structure-inferred"],
+  "contains": [
+    "There is no clear evidence about how to support people with borderline personality disorder (BPD) during the perinatal period.",
+    "Perinatal ESGs may represent an effective intervention for perinatal women and birthing people with BPD.",
+    "**Figure 1.** CONSORT diagram capturing participant flow. BPD, borderline personality disorder; CONSORT, Consolidated Standards of Reporting Trials",
+    "**Table 1.** Baseline characteristics",
+    "**Table 3.** Results from regression analyses of 4-month outcome data"
+  ]
+}

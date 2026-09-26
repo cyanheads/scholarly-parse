@@ -1,0 +1,29 @@
+{
+  "why": "cyanheads/arxiv-mcp-server#4: about 200 inline <math> elements are full MathML trees whose <annotation encoding=\"application/x-tex\"> is the only compact form, and the raw MathML swamped the text. Pins each formula collapsed to its TeX ($70\\%$ inline, $$…$$ with \\tag for display) and no MathML markup left in the Markdown.",
+  "title": "Tool Attention Is All You Need: Dynamic Tool Gating and Lazy Schema Loading for Eliminating the MCP/Tools Tax in Scalable Agentic Workflows",
+  "quality": "structured",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "The Model Context Protocol (MCP) has become a common interface for connecting large language model (LLM) agents to external tools",
+  "sectionTitles": [
+    "Introduction",
+    "Related Work",
+    "Background: The Tools Tax Problem",
+    "The Tool Attention Mechanism",
+    "Implementation and Practical Considerations",
+    "Experiments",
+    "Results and Analysis",
+    "Discussion and Future Work",
+    "Conclusion",
+    "Reference Implementation"
+  ],
+  "tables": 5,
+  "figures": 1,
+  "formulas": 8,
+  "references": 31,
+  "contains": [
+    "fracture points around $70\\%$, and turns token budgets into a recurring operational cost.",
+    "per-turn tool tokens by $95.0\\%$ ($47.3\\text{k}\\!\\to\\!2.4\\text{k}$)",
+    "$$\n\\tau_{i}\\;=\\;\\tau_{i}^{\\text{name}}+\\tau_{i}^{\\text{desc}}+\\tau_{i}^{\\text{schema}}+\\tau_{i}^{\\text{output}}. \\tag{1}\n$$"
+  ],
+  "notContains": ["<math", "<mrow", "<mi>", "<annotation", "application/x-tex"]
+}

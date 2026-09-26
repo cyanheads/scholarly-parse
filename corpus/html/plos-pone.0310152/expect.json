@@ -1,0 +1,35 @@
+{
+  "why": "Rosetta: the same PLOS ONE article is also in the corpus as JATS (epmc-pone.0310152), arXiv LaTeXML (arxiv-pone.0310152), and Grobid TEI (grobid-pone.0310152). Pins what this page shares with the JATS parse: title, abstract opening, the section and subsection sequence, one image-only table reported unextractable, twelve figures, and 45 references.",
+  "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break.",
+  "sectionTitles": [
+    "Introduction",
+    "Model formulation",
+    "Basic model",
+    "Vaccination and immunity",
+    "Basic reproduction number",
+    "Parameter estimation",
+    "Statistical toolbox",
+    "Choice of vaccination function *V*(*t*)",
+    "Estimation of *ϕ*(*t*) and *ψ*(*t*)",
+    "Estimation of transmission rate *β*(*τ*)",
+    "Estimation of *r*(*t*) and *d*(*t*)",
+    "Results and findings",
+    "Impact of multiple strains",
+    "Effect of interval between successive vaccine doses: Hysteresis effect",
+    "Optimization problem",
+    "Effect of vaccine efficacy and vaccination rate",
+    "Effect of co-existing strains",
+    "Discussion and conclusion"
+  ],
+  "tables": 1,
+  "figures": 12,
+  "references": 45,
+  "warnings": ["table-unextractable", "structure-inferred"],
+  "contains": [
+    "**Fig 1.** **Schematic diagram.** Schematic diagram for the system (10)–(15).",
+    "**Table 1.** Parameter values."
+  ]
+}

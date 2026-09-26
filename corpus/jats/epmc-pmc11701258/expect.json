@@ -1,0 +1,23 @@
+{
+  "why": "cyanheads/pubmed-mcp-server#116: all 147 references sit at body/sec/sec/ref-list with no <back> list, and a back-only search found none. Pins all 147 (the last one intact), no empty 'References' section left by the prose-free wrapper, and the scTrends Consortium <collab> author in the author line.",
+  "title": "scTrends: A living review of commercial single-cell and spatial 'omic technologies",
+  "quality": "structured",
+  "abstractKinds": ["main", "graphical", "teaser"],
+  "abstractStartsWith": "Understanding the rapidly evolving landscape of single-cell and spatial omic technologies is crucial",
+  "sectionTitles": [
+    "Introduction",
+    "Commercial single-cell omic technologies",
+    "Commercial spatial omic technologies",
+    "Trends",
+    "Closing remarks"
+  ],
+  "tables": 0,
+  "figures": 3,
+  "references": 147,
+  "contains": [
+    "scTrends Consortium",
+    "- [1] Marx V. Method of the Year: spatially resolved transcriptomics. Nat. Methods. 2021;18:9–14.",
+    "- [147] Taylor-King J.P., Bronstein M., Roblin D. The Future of Machine Learning Within Target Identification: Causality, Reversibility, and Druggability."
+  ],
+  "notContains": ["## References\n\n#"]
+}
