@@ -79,7 +79,9 @@ export async function parseLatexml(
   const content = extractContent(article, ctx);
   const { back, references } = content;
   const { abstracts, body } =
-    marked.length > 0 ? { abstracts: marked, body: content.body } : abstractFromBody(content.body);
+    marked.length > 0
+      ? { abstracts: marked, body: content.body }
+      : abstractFromBody(content.body, ctx);
 
   if (!metadata.title && abstracts.length === 0 && body.length === 0) {
     return failed('empty', 'The page carries no title, abstract, or body');
@@ -261,23 +263,52 @@ function extractAbstracts(article: Element, ctx: LatexmlContext): Abstract[] {
   });
 }
 
+/** A paragraph opening with "Abstract" set as a bold run-in heading (`**Abstract.** We…`). */
+const RUN_IN_ABSTRACT = /^\*\*Abstract[.:]?\*\*[.:]?\s*/i;
+
 /**
- * A paper that sets its abstract as an unnumbered section (`\section*{Abstract}`) rather
- * than the abstract environment: its first titled body section, when that section is
- * titled "Abstract", is the abstract.
+ * A paper that sets its abstract by hand rather than with the abstract environment: its
+ * first titled body section when that section is an unnumbered "Abstract"
+ * (`\section*{Abstract}`), else a paragraph before that section with a bold "Abstract"
+ * run-in heading.
  */
-function abstractFromBody(body: Section[]): { abstracts: Abstract[]; body: Section[] } {
+function abstractFromBody(
+  body: Section[],
+  ctx: LatexmlContext,
+): { abstracts: Abstract[]; body: Section[] } {
   const index = body.findIndex((section) => section.title);
   const section = body[index];
-  if (!section || section.label || !/^abstract$/i.test(section.title ?? ''))
-    return { abstracts: [], body };
-  const part: Section = {
-    blocks: section.blocks,
-    id: section.id,
-    kind: 'body',
-    sections: section.sections,
-  };
-  return { abstracts: [{ kind: 'main', sections: [part] }], body: body.toSpliced(index, 1) };
+  if (section && !section.label && /^abstract$/i.test(section.title ?? '')) {
+    const part: Section = {
+      blocks: section.blocks,
+      id: section.id,
+      kind: 'body',
+      sections: section.sections,
+    };
+    return { abstracts: [{ kind: 'main', sections: [part] }], body: body.toSpliced(index, 1) };
+  }
+  // Front matter set by hand sits in the untitled sections before the first titled one.
+  const leading = index === -1 ? body : body.slice(0, index);
+  for (const [at, untitled] of leading.entries()) {
+    const found = untitled.blocks.findIndex(
+      (block) => block.type === 'paragraph' && RUN_IN_ABSTRACT.test(block.text),
+    );
+    const paragraph = untitled.blocks[found];
+    if (paragraph?.type !== 'paragraph') continue;
+    const part: Section = {
+      blocks: [{ text: paragraph.text.replace(RUN_IN_ABSTRACT, ''), type: 'paragraph' }],
+      id: issueId(ctx.sectionIds, undefined, 'abstract-1'),
+      kind: 'body',
+      sections: [],
+    };
+    const blocks = untitled.blocks.toSpliced(found, 1);
+    const rest =
+      blocks.length > 0 || untitled.sections.length > 0
+        ? body.toSpliced(at, 1, { ...untitled, blocks })
+        : body.toSpliced(at, 1);
+    return { abstracts: [{ kind: 'main', sections: [part] }], body: rest };
+  }
+  return { abstracts: [], body };
 }
 
 /** Direct children of the article that are front matter, not content. */

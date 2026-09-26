@@ -1,6 +1,10 @@
 2025  
 arXiv: 2505.21132v1
 
+## Abstract
+
+In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break. The model incorporates comorbidity and multiple-vaccine doses through a system of coupled integro-differential equations to analyze the epidemic rate and intensity from a knowledge of the basic reproduction number and time-distributed rate functions. Our modeling results show that the interval between vaccine doses is a key control parameter that can be tuned to significantly influence disease spread. We show that multiple doses induce a hysteresis effect in immunity levels that offers a better mitigation alternative compared to frequent vaccination which is less cost-effective while being more intrusive. Optimal dosing intervals, emphasizing the cost-effectiveness of each vaccination effort, and determined by various factors such as the level of immunity and efficacy of vaccines against different strains, appear to be crucial in disease management. The model is sufficiently generic that can be extended to accommodate specific disease forms.
+
 **Effect of Vaccine Dose Intervals: Considering Immunity**
 
 **Levels, Vaccine Efficacy, and Strain Variants for**
@@ -18,8 +22,6 @@ Aston Centre for Artificial Intelligence Research and Applications (ACAIRA),
 Aston Triangle, Birmingham B4 7ET, UK
 
 ^∗ Corresponding author: Amit K Chattopadhyay
-
-**Abstract.** In this study, we present an immuno-epidemic model to understand mitigation options during an epidemic break. The model incorporates comorbidity and multiple-vaccine doses through a system of coupled integro-differential equations to analyze the epidemic rate and intensity from a knowledge of the basic reproduction number and time-distributed rate functions. Our modeling results show that the interval between vaccine doses is a key control parameter that can be tuned to significantly influence disease spread. We show that multiple doses induce a hysteresis effect in immunity levels that offers a better mitigation alternative compared to frequent vaccination which is less cost-effective while being more intrusive. Optimal dosing intervals, emphasizing the cost-effectiveness of each vaccination effort, and determined by various factors such as the level of immunity and efficacy of vaccines against different strains, appear to be crucial in disease management. The model is sufficiently generic that can be extended to accommodate specific disease forms.
 
 **Keywords:** epidemic model; variable recovery rate; SIR model; comorbidity; vaccine efficacy; immunity waning; vaccine dose
 

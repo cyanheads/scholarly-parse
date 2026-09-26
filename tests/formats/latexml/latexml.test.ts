@@ -61,6 +61,35 @@ describe('abstract', () => {
     expect(document.body.map((section) => section.title)).toEqual(['Introduction']);
     expect(document.diagnostics.warnings.map((w) => w.code)).not.toContain('no-abstract');
   });
+
+  it('reads a front-matter paragraph with a bold Abstract run-in heading as the abstract', async () => {
+    const document = await parse(
+      page(
+        `<div class="ltx_para"><p class="ltx_p"><span class="ltx_text ltx_font_bold">A title set by hand</span></p></div>
+        <div class="ltx_para"><p class="ltx_p"><span class="ltx_text ltx_font_bold">Abstract.</span> What we did.</p></div>
+        <section id="S1" class="ltx_section">${heading(2, '1', 'Introduction')}
+        <div class="ltx_para"><p class="ltx_p">Why.</p></div></section>`,
+        '',
+      ),
+    );
+    expect(document.abstracts).toEqual([
+      {
+        kind: 'main',
+        sections: [
+          {
+            blocks: [{ text: 'What we did.', type: 'paragraph' }],
+            id: 'abstract-1',
+            kind: 'body',
+            sections: [],
+          },
+        ],
+      },
+    ]);
+    expect(document.body.map((section) => [section.title, section.blocks])).toEqual([
+      [undefined, [{ text: '**A title set by hand**', type: 'paragraph' }]],
+      ['Introduction', [{ text: 'Why.', type: 'paragraph' }]],
+    ]);
+  });
 });
 
 describe('sections and floats', () => {
