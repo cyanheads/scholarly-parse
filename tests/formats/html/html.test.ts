@@ -208,6 +208,30 @@ describe('inline text', () => {
     });
     expect(found[1]).toEqual({ label: '1', tex: 'E = mc^2', type: 'formula' });
   });
+
+  it('keeps an image-only formula as its image, marked in the sentence and reported', async () => {
+    // PLOS sets every formula as an image: display ones in <span class="equation"> with
+    // the number in <span class="note">, inline ones in <span class="inline-formula">.
+    const document = await parse(
+      page(
+        `<h2>Methods</h2><p>${PROSE}The total is <span class="equation">` +
+          '<img src="file?id=e001" class="inline-graphic"><span class="note">(1)</span></span>' +
+          ' where <span class="inline-formula"><img src="file?id=e002" class="inline-graphic">' +
+          '</span> is the rate.</p>',
+      ),
+    );
+    expect(blocks(document.body).slice(1)).toEqual([
+      {
+        href: 'https://example.org/articles/file?id=e001',
+        label: '1',
+        type: 'formula',
+      },
+      { text: 'where [formula] is the rate.', type: 'paragraph' },
+    ]);
+    expect(document.diagnostics.warnings.filter((w) => w.code === 'math-without-tex')).toHaveLength(
+      2,
+    );
+  });
 });
 
 describe('figures and tables', () => {

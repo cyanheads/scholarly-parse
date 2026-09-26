@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: the same PLOS ONE article is also in the corpus as JATS (epmc-pone.0310152), arXiv LaTeXML (arxiv-pone.0310152), and Grobid TEI (grobid-pone.0310152). Pins what this page shares with the JATS parse: title, abstract opening, the section and subsection sequence, one image-only table reported unextractable, twelve figures, and 45 references.",
+  "why": "Rosetta: the same PLOS ONE article is also in the corpus as JATS (epmc-pone.0310152), arXiv LaTeXML (arxiv-pone.0310152), and Grobid TEI (grobid-pone.0310152). Pins what this page shares with the JATS parse: title, abstract opening, the section and subsection sequence, one image-only table reported unextractable, twelve figures, and 45 references. PLOS serves every formula as an image: the 38 display equations are kept with their numbers and the inline ones leave a [formula] marker, all reported as math-without-tex.",
   "title": "Effect of vaccine dose intervals: Considering immunity levels, vaccine efficacy, and strain variants for disease control strategy",
   "quality": "partial",
   "abstractKinds": ["main"],
@@ -26,10 +26,13 @@
   ],
   "tables": 1,
   "figures": 12,
+  "formulas": 38,
   "references": 45,
-  "warnings": ["table-unextractable", "structure-inferred"],
+  "warnings": ["table-unextractable", "structure-inferred", "math-without-tex"],
   "contains": [
     "**Fig 1.** **Schematic diagram.** Schematic diagram for the system (10)–(15).",
-    "**Table 1.** Parameter values."
+    "**Table 1.** Parameter values.",
+    "total population *N*, i.e.,\n\n[formula] (1)\n\nLet *J*(*t*) denote",
+    "**Plot of cost function [formula].**"
   ]
 }

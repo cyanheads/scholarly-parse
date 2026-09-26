@@ -27,7 +27,14 @@ import type {
 import { escapeInline } from '../../render/escape.js';
 import { emphasis } from '../../render/inline.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
-import { inlineMarkdown, inlineText, isMathScript, mathmlTex, scriptTex } from './inline.js';
+import {
+  inlineMarkdown,
+  inlineText,
+  isMathScript,
+  mathmlTex,
+  scriptTex,
+  warnImageFormula,
+} from './inline.js';
 
 const BLOCK_TAGS: ReadonlySet<string> = new Set([
   'address',
@@ -180,6 +187,11 @@ export function flowBlocks(nodes: Node[], ctx: HtmlContext): Block[] {
 
 function renderBlock(element: Element, ctx: HtmlContext): Block[] {
   const formula = displayFormula(element);
+  if (formula?.href) {
+    const href = resolveUrl(formula.href, ctx.baseUrl);
+    warnImageFormula(ctx, href, formula.id);
+    return [{ ...formula, href }];
+  }
   if (formula) return [formula];
   const kind = floatKind(element);
   if (kind === 'table') return [tableBlock(element, ctx)];
@@ -214,23 +226,37 @@ const EQUATION_NUMBER = /^\(?\s*([A-Z]?\d+(?:\.\d+)*[a-z]?)\s*\)?$/;
 /**
  * A display equation, or undefined. Equation containers (`c-article-equation`,
  * `disp-formula`) hold one formula — MathML, a MathJax script, or raw `$$…$$` — and
- * often its number in a separate cell.
+ * often its number in a separate cell. One holding only an image of the formula (PLOS
+ * sets each as a `<span class="equation">` around it) yields that image's address.
  */
 function displayFormula(element: Element): FormulaBlock | undefined {
   const tag = tagOf(element);
   if (tag === 'math' && element.getAttribute('display') === 'block')
     return formulaFrom(element, undefined);
   const tokens = nameTokens(element.getAttribute('class'));
-  if (!CONTAINER_TAGS.has(tag) || tokens.includes('inline')) return;
-  if (!tokens.some((t) => t === 'equation' || t === 'formula')) return;
-  if (element.querySelector('table, img:not([class*="math"]), figure')) return;
+  if (tokens.includes('inline') || !tokens.some((t) => t === 'equation' || t === 'formula')) return;
   const numberEl = Array.from(element.querySelectorAll('*')).find((child) =>
     nameTokens(child.getAttribute('class')).some(
-      (t) => t === 'number' || t === 'label' || t === 'eqno',
+      (t) => t === 'number' || t === 'label' || t === 'eqno' || t === 'note',
     ),
   );
   const label = EQUATION_NUMBER.exec(textOfElement(numberEl))?.[1];
+  const image = equationImage(element, numberEl);
+  if (image) {
+    const id = element.getAttribute('id') ?? undefined;
+    return { type: 'formula', href: image, ...(id && { id }), ...(label && { label }) };
+  }
+  if (!CONTAINER_TAGS.has(tag)) return;
+  if (element.querySelector('table, img:not([class*="math"]), figure')) return;
   return formulaFrom(element, label, numberEl);
+}
+
+/** The one image an equation container holds when it has no math, source, or text besides its number. */
+function equationImage(element: Element, numberEl: Element | undefined): string | undefined {
+  if (element.querySelector('math, script, table, figure')) return;
+  const images = element.querySelectorAll('img');
+  if (images.length !== 1 || ownText(element, numberEl).trim()) return;
+  return images[0]?.getAttribute('src') ?? undefined;
 }
 
 function formulaFrom(

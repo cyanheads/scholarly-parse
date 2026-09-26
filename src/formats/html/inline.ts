@@ -17,6 +17,7 @@ import {
 import { escapeInline } from '../../render/escape.js';
 import {
   emphasis,
+  FORMULA_IMAGE,
   inlineCode,
   inlineMath,
   link,
@@ -200,6 +201,7 @@ function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
     case 'br':
       return ' ';
     case 'img':
+      return formulaImage(node, ctx) ? FORMULA_IMAGE : '';
     case 'picture':
       return '';
     // Block-shaped elements met inline: keep their words apart.
@@ -224,6 +226,34 @@ function visibleText(element: Element): string {
     return isFurniture(node) ? '' : Array.from(node.childNodes).map(collect).join('');
   };
   return collect(element).replace(/\s+/g, ' ').trim();
+}
+
+/** Report a formula whose content is not in the page, only an image of it. */
+export function warnImageFormula(ctx: HtmlContext, href: string, id: string | undefined): void {
+  ctx.diag.warn('math-without-tex', `A formula is published only as an image (${href})`, id);
+}
+
+/**
+ * True for an image that is a formula's only form: it sits in an element whose class
+ * names a formula or equation (PLOS's `<span class="inline-formula">`), and that element
+ * carries no MathML, math source, or TeX. Such an image is reported once, here.
+ */
+function formulaImage(img: Element, ctx: HtmlContext): boolean {
+  const container = formulaContainer(img);
+  const src = img.getAttribute('src');
+  if (!container || !src || container.querySelector('math, script[type^="math/"]')) return false;
+  warnImageFormula(ctx, resolveUrl(src, ctx.baseUrl), container.getAttribute('id') ?? undefined);
+  return true;
+}
+
+/** The nearest of an image's three closest ancestors whose class names a formula or equation. */
+function formulaContainer(img: Element): Element | undefined {
+  let element = img.parentElement;
+  for (let depth = 0; element && depth < 3; depth++, element = element.parentElement) {
+    const tokens = nameTokens(element.getAttribute('class'));
+    if (tokens.some((t) => t === 'formula' || t === 'equation')) return element;
+  }
+  return;
 }
 
 function mathOrText(math: Element): string {

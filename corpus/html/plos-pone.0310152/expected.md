@@ -28,39 +28,133 @@ The article is structured as follows: In Section 2, we formulate the model incor
 
 ### 2.1 Basic model
 
-We consider a population with four compartments: susceptible individuals (*S*(*t*)), infected individuals (*I*(*t*)), recovered individuals (*R*(*t*)) and dead individuals (*D*(*t*)). It is assumed that the sum of these compartments remains constant and equals the total population *N*, i.e., (1) Let *J*(*t*) denote the number of newly infected individuals at time *t*, which is governed by the following equation (2) The classical SIR-type epidemic models assume that the number of newly infected individuals is proportional to the product of the number of infected *I*(*t*) and the number of susceptible *S*(*t*) at time *t*. However, in more realistic scenarios, this assumption is not true, and the disease transmission rate depends upon time-since-infection for the infected individuals [33]. Since the viral load dynamics within an infected individual varies with time-since-infection, the infectivity of the infected individuals also varies with time-since-infection [35]. Here, we consider the number of new infections determined by time-since-infection dependent transmission rate, given by the following equation: (3) We assume here that the infection transmission rate at time *t* from the individuals *J*(*η*) infected at time *η* depends on the time difference *t* − *η*. In the case of respiratory viral infections, it depends on the viral load in the upper respiratory tract. We will specify the function *β*(*t*) below.
+We consider a population with four compartments: susceptible individuals (*S*(*t*)), infected individuals (*I*(*t*)), recovered individuals (*R*(*t*)) and dead individuals (*D*(*t*)). It is assumed that the sum of these compartments remains constant and equals the total population *N*, i.e.,
 
-Similarly, the number of newly recovered *R*_n(*t*) and dead individuals *D*_n(*t*) can be described by the following equations: (4) Distributed recovery and death rates *r*(*η*) and *d*(*η*) assume the probability of recovery and death as functions of time-since-infection *η*. They are determined from the immunological (clinical) data (see Section 3).
+[formula] (1)
 
-Finally, differentiating equality (1) and taking into account (2)–(4), we obtain the equations for *S*(*t*) and *I*(*t*) as follows: (5) (6) Completing them by equations (2) and (4), we obtain the formulation of an immuno-epidemiological model with distributed infectivity, recovery and death rates.
+Let *J*(*t*) denote the number of newly infected individuals at time *t*, which is governed by the following equation
+
+[formula] (2)
+
+The classical SIR-type epidemic models assume that the number of newly infected individuals is proportional to the product of the number of infected *I*(*t*) and the number of susceptible *S*(*t*) at time *t*. However, in more realistic scenarios, this assumption is not true, and the disease transmission rate depends upon time-since-infection for the infected individuals [33]. Since the viral load dynamics within an infected individual varies with time-since-infection, the infectivity of the infected individuals also varies with time-since-infection [35]. Here, we consider the number of new infections determined by time-since-infection dependent transmission rate, given by the following equation:
+
+[formula] (3)
+
+We assume here that the infection transmission rate at time *t* from the individuals *J*(*η*) infected at time *η* depends on the time difference *t* − *η*. In the case of respiratory viral infections, it depends on the viral load in the upper respiratory tract. We will specify the function *β*(*t*) below.
+
+Similarly, the number of newly recovered *R*_n(*t*) and dead individuals *D*_n(*t*) can be described by the following equations:
+
+[formula] (4)
+
+Distributed recovery and death rates *r*(*η*) and *d*(*η*) assume the probability of recovery and death as functions of time-since-infection *η*. They are determined from the immunological (clinical) data (see Section 3).
+
+Finally, differentiating equality (1) and taking into account (2)–(4), we obtain the equations for *S*(*t*) and *I*(*t*) as follows:
+
+[formula] (5)
+
+[formula] (6)
+
+Completing them by equations (2) and (4), we obtain the formulation of an immuno-epidemiological model with distributed infectivity, recovery and death rates.
 
 ### 2.2 Vaccination and immunity
 
 The level of immunity in the population plays an important role in combating the progression of the epidemic. This level of immunity can vary over time based on several important factors, such as the rate of vaccination, time-post-vaccination-dependent vaccine effectiveness, and time-post-recovery-dependent acquired immunity.
 
-To account for the influence of vaccination on epidemic progression, we introduce a new variable *m*(*t*) corresponding to the immunity level in the population. First, we analyze the relationship of the immunity level with vaccination. This is hypothesized through the constitutive relation (7) where *V*(*t*) is the number of vaccinated individuals at time *t*, and *V*′(*t*) is the rate of vaccination, the function *ϕ*(*t*) describes how immunity changes with time. It is a positive function with *ϕ*(0) = 1 (if a vaccine is initially fully efficient), otherwise *ϕ*(0) > 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 < *ϕ*(*t*) < 1.
+To account for the influence of vaccination on epidemic progression, we introduce a new variable *m*(*t*) corresponding to the immunity level in the population. First, we analyze the relationship of the immunity level with vaccination. This is hypothesized through the constitutive relation
+
+[formula] (7)
+
+where *V*(*t*) is the number of vaccinated individuals at time *t*, and *V*′(*t*) is the rate of vaccination, the function *ϕ*(*t*) describes how immunity changes with time. It is a positive function with *ϕ*(0) = 1 (if a vaccine is initially fully efficient), otherwise *ϕ*(0) > 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 < *ϕ*(*t*) < 1.
 
 #### 2.2.1 Multiple vaccination doses.
 
-Now, we incorporate the impact of multiple vaccine doses in the population at various intervals. The expression for the immunity level *m*(*t*) is then provided as follows: (8) Here *V*_i(*t*) and *ϕ*_i(*t*) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from *i* = 1. *K* is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses *i* and *i* + 1 are administrated with a time gap *T*_{i,i+1}, and the first dose was started from *t* = *T*_0. Then for any *i* ∈ {1, 2, ⋯, *K*}, we have (9) Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.
+Now, we incorporate the impact of multiple vaccine doses in the population at various intervals. The expression for the immunity level *m*(*t*) is then provided as follows:
+
+[formula] (8)
+
+Here *V*_i(*t*) and *ϕ*_i(*t*) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from *i* = 1. *K* is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses *i* and *i* + 1 are administrated with a time gap *T*_{i,i+1}, and the first dose was started from *t* = *T*_0. Then for any *i* ∈ {1, 2, ⋯, *K*}, we have
+
+[formula] (9)
+
+Although the effectiveness of the initial vaccine dose and subsequent booster doses may differ, for the sake of simplicity, we assume uniform efficacy for all vaccine doses in this study. Our interest in this part of the analysis is to understand whether multiple booster doses compound the effects of the previous rounds of vaccination or reach a plateau beyond which they are ineffective.
 
 #### 2.2.2 Acquired immunity of recovered.
 
-Next, consider the acquired immunity of the recovered individuals. Then the effective immunity at time *t* coming from both the vaccination of healthy susceptible *S* and the infection acquired immunity is given by: (10) and the effective immunity at time *t* coming from vaccination of comorbid class *P*(*t*) is given by: (11) where, 0 < *ϵ* < 1 is a constant, *α* is the proportion of healthy susceptible *S* who are newly vaccinated. The value of *ϵ* < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕ*_j and *ψ*_j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 < *m*_1(*t*) + *m*_2(*t*) < 1.
+Next, consider the acquired immunity of the recovered individuals. Then the effective immunity at time *t* coming from both the vaccination of healthy susceptible *S* and the infection acquired immunity is given by:
+
+[formula] (10)
+
+and the effective immunity at time *t* coming from vaccination of comorbid class *P*(*t*) is given by:
+
+[formula] (11)
+
+where, 0 < *ϵ* < 1 is a constant, *α* is the proportion of healthy susceptible *S* who are newly vaccinated. The value of *ϵ* < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕ*_j and *ψ*_j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 < *m*_1(*t*) + *m*_2(*t*) < 1.
 
 #### 2.2.3 Impact of multiple strains.
 
-Immunity in the population corresponds to the decrease of the number of susceptible individuals. As such, instead of equality (1), we have (12) Note that *m*_2(*t*) does not appear in the Eq (12) because *m*_2(*t*) is the level of immunity in the comorbid class; it is only considered later in the equation for *P*(*t*), where *P*(*t*) is the predisposed comorbid population. Let, *J*_1(*t*) represents the number of daily new infection in the healthy susceptible class *S*(*t*) and *J*_2(*t*) represents the number of daily new cases in the comorbid class *P*(*t*). Then the total number of daily new cases is given by where, *κ* > 1 is a constant, which signifies that the comorbid individuals are more prone to the infection as compared to the non-comorbid individuals.
+Immunity in the population corresponds to the decrease of the number of susceptible individuals. As such, instead of equality (1), we have
 
-The governing equation for the comorbid class *P*(*t*) is given by (13) The equation for the infected compartment is given by (14) Finally the equations for the recovered and death compartments are (15) where, which represents the daily sum of completely recovered individuals (with proportion (1 − *b*)) and comorbid individuals (with proportion *b*). We obtain complete model (10)–(15) with distributed infection, recovery and death rates, and population immunity. The corresponding flowchart is shown in Fig 1.
+[formula] (12)
+
+Note that *m*_2(*t*) does not appear in the Eq (12) because *m*_2(*t*) is the level of immunity in the comorbid class; it is only considered later in the equation for *P*(*t*), where *P*(*t*) is the predisposed comorbid population. Let, *J*_1(*t*) represents the number of daily new infection in the healthy susceptible class *S*(*t*) and *J*_2(*t*) represents the number of daily new cases in the comorbid class *P*(*t*). Then the total number of daily new cases is given by
+
+[formula]
+
+where,
+
+[formula]
+
+[formula]
+
+*κ* > 1 is a constant, which signifies that the comorbid individuals are more prone to the infection as compared to the non-comorbid individuals.
+
+The governing equation for the comorbid class *P*(*t*) is given by
+
+[formula] (13)
+
+The equation for the infected compartment is given by
+
+[formula] (14)
+
+Finally the equations for the recovered and death compartments are
+
+[formula] (15)
+
+where,
+
+[formula]
+
+which represents the daily sum of completely recovered individuals (with proportion (1 − *b*)) and comorbid individuals (with proportion *b*). We obtain complete model (10)–(15) with distributed infection, recovery and death rates, and population immunity. The corresponding flowchart is shown in Fig 1.
 
 **Fig 1.** **Schematic diagram.** Schematic diagram for the system (10)–(15).
 
 ### 2.3 Basic reproduction number
 
-In the beginning of epidemic, assume that *I* = *P* = *D* = *m*_1 = 0. Then, using (2), we can write Eq (5) in the following form: (16)
+In the beginning of epidemic, assume that *I* = *P* = *D* = *m*_1 = 0. Then, using (2), we can write Eq (5) in the following form:
 
-Suppose, *S*(*t*) = *N* − *ϵe*^{λt}. Then from the above equation we get, (17) Now equating the terms with the first power of *ϵ* in both sides we get: (18) The dispersion relation (the relation involving the parameters that determine the stability) can be obtained by setting λ = 0 and the dispersion relation is given by: which can be written as If we assume that *β*(*x*) > 0 for 0 ≤ *x* ≤ *τ* and *β*(*x*) = 0 for *x* > *τ*, where, *τ* is assumed to be the average disease duration. Then we can define the basic reproduction number as (19) Then λ in (18) is positive (epidemic growth) if and only if .
+[formula] (16)
+
+Suppose, *S*(*t*) = *N* − *ϵe*^{λt}. Then from the above equation we get,
+
+[formula] (17)
+
+Now equating the terms with the first power of *ϵ* in both sides we get:
+
+[formula] (18)
+
+The dispersion relation (the relation involving the parameters that determine the stability) can be obtained by setting λ = 0 and the dispersion relation is given by:
+
+[formula]
+
+which can be written as
+
+[formula]
+
+If we assume that *β*(*x*) > 0 for 0 ≤ *x* ≤ *τ* and *β*(*x*) = 0 for *x* > *τ*, where, *τ* is assumed to be the average disease duration. Then we can define the basic reproduction number as
+
+[formula] (19)
+
+Then λ in (18) is positive (epidemic growth) if and only if [formula].
 
 **Note** The derivation of basic reproduction number remains unaltered even if we assume a reproduction substituting of the form *S*(*t*) = *N* − *ϵa*^{λt}, where *a* > 0.
 
@@ -68,11 +162,25 @@ Suppose, *S*(*t*) = *N* − *ϵe*^{λt}. Then from the above equation we get, (1
 
 ### 3.1 Statistical toolbox
 
-The estimations and curve fittings are done by minimizing the Sum of Squared Errors (SSE). For the curve fitting to data we mainly use the ‘Curve Fitting Toolbox’, which is a collection of graphical user interfaces (GUIs) and M-file functions built on the MATLAB technical computing environment [36]. The toolbox provides the fitted curve along with the goodness of fit. Gamma distributions are estimated using the inbuilt function *fitdist(:,gamma)* in MATLAB. This function is used to fit a vector of data *X* = (*x*_1, *x*_2, ⋯, *x*_n) by a gamma distribution of the form , where *a* and *b* are the shape and scale parameters. This function gives the maximum likelihood estimators of *a* and *b* for the gamma distribution which are the solutions of the simultaneous equations where is the sample mean of the data *X* and Ψ is the digamma function given by The function *fitdist(:,gamma)* estimates the shape and scale parameters with 95% confidence interval.
+The estimations and curve fittings are done by minimizing the Sum of Squared Errors (SSE). For the curve fitting to data we mainly use the ‘Curve Fitting Toolbox’, which is a collection of graphical user interfaces (GUIs) and M-file functions built on the MATLAB technical computing environment [36]. The toolbox provides the fitted curve along with the goodness of fit. Gamma distributions are estimated using the inbuilt function *fitdist(:,gamma)* in MATLAB. This function is used to fit a vector of data *X* = (*x*_1, *x*_2, ⋯, *x*_n) by a gamma distribution of the form [formula], where *a* and *b* are the shape and scale parameters. This function gives the maximum likelihood estimators of *a* and *b* for the gamma distribution which are the solutions of the simultaneous equations
+
+[formula]
+
+[formula]
+
+where [formula] is the sample mean of the data *X* and Ψ is the digamma function given by
+
+[formula]
+
+The function *fitdist(:,gamma)* estimates the shape and scale parameters with 95% confidence interval.
 
 ### 3.2 Choice of vaccination function *V*(*t*)
 
-We assume that the vaccination function *V*(*t*) that is started at time *t* = *t*_0, follows the function (20) where, *N* is the total population size, *L* is the proportion of the population expected to be vaccinated, *k* is the rate of vaccination, *V*_0 is the number of vaccination at time *t* = *t*_0, and the associated parameter values are listed in Table 1.
+We assume that the vaccination function *V*(*t*) that is started at time *t* = *t*_0, follows the function
+
+[formula] (20)
+
+where, *N* is the total population size, *L* is the proportion of the population expected to be vaccinated, *k* is the rate of vaccination, *V*_0 is the number of vaccination at time *t* = *t*_0, and the associated parameter values are listed in Table 1.
 
 **Table 1.** Parameter values.
 
@@ -80,27 +188,55 @@ We assume that the vaccination function *V*(*t*) that is started at time *t* = *
 
 ### 3.3 Estimation of *ϕ*(*t*) and *ψ*(*t*)
 
-Due to the lack of availability of sector data, that is separate data incorporating the impacts of comorbidity and the ones without, we take an initial simplifying step by assuming that *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *N*. We use the data of vaccine-induced immunity from [35] and fit (least square fitting) the function *ϕ*(*t*) as follows (see Fig 2a and 2b) (21) where, *a*_1 = 0.9411 with 95% CI (0.8886, 0.9937), *b*_1 = 117.8 with 95% CI (113.5, 122), and *c*_1 = 92.44 with 95% CI (86.06, 98.82) (Fig 2a). The goodness of fit is as follows: SSE = 0.2807, R-square = 0.9308, Adjusted R-square = 0.9273 and RMSE = 0.08483.
+Due to the lack of availability of sector data, that is separate data incorporating the impacts of comorbidity and the ones without, we take an initial simplifying step by assuming that *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *N*. We use the data of vaccine-induced immunity from [35] and fit (least square fitting) the function *ϕ*(*t*) as follows (see Fig 2a and 2b)
+
+[formula] (21)
+
+where, *a*_1 = 0.9411 with 95% CI (0.8886, 0.9937), *b*_1 = 117.8 with 95% CI (113.5, 122), and *c*_1 = 92.44 with 95% CI (86.06, 98.82) (Fig 2a). The goodness of fit is as follows: SSE = 0.2807, R-square = 0.9308, Adjusted R-square = 0.9273 and RMSE = 0.08483.
 
 **Fig 2.** **Effectiveness of vaccine-induced immunity.** The effectiveness of vaccine-induced immunity *ϕ*(*t*) as a function of the days post-vaccination (data source- [35, 37]). The shaded regions represent the 95% confidence interval of the fitted function in the epidemiologically feasible region. (a) corresponds to the formula (21); (b) corresponds to the formula (22).
 
-Now we fit the same data of vaccine-induced immunity with a stretched power-law function given by (22) where, *a*_2 = 0.01152 with 95% CI (−.001766, 0.02481), *b*_2 = 1.023 with 95% CI (0.719, 1.328), *c*_2 = 5.01 × 10^{−6} with 95% CI (−1.398 × 10^{−5}, 2.4 × 10^{−5}), *d*_2 = 2.412 with 95% CI (1.747, 3.077) (Fig 2b). The goodness of fit is as follows: SSE = 0.2218, R-square = 0.9453, Adjusted R-square = 0.941 and RMSE = 0.0764. It must be noted that death due to natural causes versus death due to infection have two different timescales of operation; the former is way more protracted than the latter, an aspect that plays a major role in ascribing average values to death rates in comorbidity models.
+Now we fit the same data of vaccine-induced immunity with a stretched power-law function given by
+
+[formula] (22)
+
+where, *a*_2 = 0.01152 with 95% CI (−.001766, 0.02481), *b*_2 = 1.023 with 95% CI (0.719, 1.328), *c*_2 = 5.01 × 10^{−6} with 95% CI (−1.398 × 10^{−5}, 2.4 × 10^{−5}), *d*_2 = 2.412 with 95% CI (1.747, 3.077) (Fig 2b). The goodness of fit is as follows: SSE = 0.2218, R-square = 0.9453, Adjusted R-square = 0.941 and RMSE = 0.0764. It must be noted that death due to natural causes versus death due to infection have two different timescales of operation; the former is way more protracted than the latter, an aspect that plays a major role in ascribing average values to death rates in comorbidity models.
 
 We observe that the stretched power law function (22) gives better fitting to the data as compared to the Gaussian function (21). To check the robustness of the choice of the stretched power law function (22) we compared the goodness of fit with other possible candidates such as the Gaussian function and, acquisition-fading function.
 
-The function for the effectiveness of acquired immunity *ψ*(*t*) is fitted to the data available in [38], by the following function (Fig 3): (23) where, *a*_3 = 1.035 with 95% CI (0.8742, 1.195), *b*_3 = −206.6 with 95% CI (−704.3, 291) and *c*_3 = 1133 with 95% CI (500.3, 1765).
+The function for the effectiveness of acquired immunity *ψ*(*t*) is fitted to the data available in [38], by the following function (Fig 3):
+
+[formula] (23)
+
+where, *a*_3 = 1.035 with 95% CI (0.8742, 1.195), *b*_3 = −206.6 with 95% CI (−704.3, 291) and *c*_3 = 1133 with 95% CI (500.3, 1765).
 
 **Fig 3.** **Effectiveness of infection-acquired immunity.** The effectiveness of infection-acquired immunity *ψ*(*t*) as a function of the days post recovery (data source- [35, 38]). The blue dots are the real data and the red curves are the functions fitted to the data. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text.
 
 ### 3.4 Estimation of transmission rate *β*(*τ*)
 
-We assume that the transmission rate *β*(*τ*) is proportional to the viral load *P*(*τ*), i.e., *β*(*τ*) = *cP*(*τ*), where, *c* is a proportionality constant and it depends upon the transmission rate (which mainly depends on the behavioral aspects and not on the virus variants) between infected and susceptible individuals. We fit the function *P*(*τ*) with the experimental data of viral load depending on the number of hours post-infection as available in [39]. In [39], the authors experimented to understand the viral replication kinetics of SARS-CoV-2 variants in ex vivo cultures of the human respiratory tract and the experiment was performed up to 71 hours-post-infection. Also, we assume that after 10 days of the days-post-infection, the viral load becomes negligible [40]. Using all these information, we fit *P*(*τ*) by the following function (Fig 4): (24) where, *a*_4 = 1.829 × 10^5 with 95% CI (1.805 × 10^5, 1.852 × 10^5), *b*_4 = 3.136 with 95% CI (3.073, 3.2) and *c*_4 = 1.294 with 95% CI (1.234, 1.353).
+We assume that the transmission rate *β*(*τ*) is proportional to the viral load *P*(*τ*), i.e., *β*(*τ*) = *cP*(*τ*), where, *c* is a proportionality constant and it depends upon the transmission rate (which mainly depends on the behavioral aspects and not on the virus variants) between infected and susceptible individuals. We fit the function *P*(*τ*) with the experimental data of viral load depending on the number of hours post-infection as available in [39]. In [39], the authors experimented to understand the viral replication kinetics of SARS-CoV-2 variants in ex vivo cultures of the human respiratory tract and the experiment was performed up to 71 hours-post-infection. Also, we assume that after 10 days of the days-post-infection, the viral load becomes negligible [40]. Using all these information, we fit *P*(*τ*) by the following function (Fig 4):
+
+[formula] (24)
+
+where, *a*_4 = 1.829 × 10^5 with 95% CI (1.805 × 10^5, 1.852 × 10^5), *b*_4 = 3.136 with 95% CI (3.073, 3.2) and *c*_4 = 1.294 with 95% CI (1.234, 1.353).
 
 **Fig 4.** **Viral load.** Viral load as a function of the days post infection. The blue dots are the real experimental data for Omicron variant taken from [39]. The red curve is the gamma function fitted to the blue dots. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text.
 
 ### 3.5 Estimation of *r*(*t*) and *d*(*t*)
 
-In the literature on epidemic modelling, the choice of gamma distributions to model distributed recovery period is well known [41–43]. However, the use of bimodal gamma distributions in epidemic modeling can indeed provide a more accurate representation of the recovery or death rate functions when there are distinct groups with different time intervals. From a linear combination of two different gamma distributions, we can capture the variability in the recovery or death times more effectively. The recovery and death distributions used in [35] and are given by: (25) where, with estimated parameter values *a*_1 = 32.17136, *b*_1 = 0.2206, *c*_1 = 65.40545, *d*_1 = 0.210 (Fig 5a) and with estimated parameter values *a*_2 = 36.02855, *b*_2 = 0.57511, *c*_2 = 140.11379, *d*_2 = 0.27636 (Fig 5b). *p*_0 is the survival probability which is assumed to be *p*_0 = 0.9975.
+In the literature on epidemic modelling, the choice of gamma distributions to model distributed recovery period is well known [41–43]. However, the use of bimodal gamma distributions in epidemic modeling can indeed provide a more accurate representation of the recovery or death rate functions when there are distinct groups with different time intervals. From a linear combination of two different gamma distributions, we can capture the variability in the recovery or death times more effectively. The recovery and death distributions used in [35] and are given by:
+
+[formula] (25)
+
+where,
+
+[formula]
+
+with estimated parameter values *a*_1 = 32.17136, *b*_1 = 0.2206, *c*_1 = 65.40545, *d*_1 = 0.210 (Fig 5a) and
+
+[formula]
+
+with estimated parameter values *a*_2 = 36.02855, *b*_2 = 0.57511, *c*_2 = 140.11379, *d*_2 = 0.27636 (Fig 5b). *p*_0 is the survival probability which is assumed to be *p*_0 = 0.9975.
 
 **Fig 5.** **Time-distributed recovery and death rates.** Time-distributed rate functions of (a) recovery and (b) death as functions of days post the onset of infection. The red curves show the best fitted bimodal gamma distributions (Ref. [35]).
 
@@ -132,25 +268,33 @@ For simplicity, we assumed that each vaccine dose has the same efficacy. From Fi
 
 ### 4.3 Optimization problem
 
-Based on the previous numerical results, we can consider the following optimization problem: (26) where *T* > 0 is the maximum time we consider. *n* is the number of vaccination campaigns administrated in the population during the time interval [0, *T*]. We assume that *T* = *an*, for some *a* > 0, i.e., two vaccination campaigns are considered with a gap of *a* time units. *d* is a positive constant that accounts for the cumulative cost per vaccination campaign. *m*(*t*; *n*) and *I*(*t*; *n*) denote the level of immunity and number of infected at time *t* for a given *n*, respectively. *I*(*t*; *n*) is the solution of our model for a particular choice of *n*. *c* is a positive constant that accounts for the cost due to infection for an infected individual. The above cost function can equivalently be written as a function of *a* as follows: (27) where, *I*(*t*; *a*) denotes the number of infected at time *t* for a given *a*. The Fig 9 shows the plot of the cost function defined in relation (27). Fig 9 provides valuable insights into the behavior of the cost function concerning the gap between two consecutive vaccinations. Fig 9 shows that the cost function more or less remains at the minimum when the gap between two successive vaccinations falls within the range of 3 to 8 months. However, the plot takes an interesting turn when the gap between consecutive vaccinations exceeds 9 months. Beyond this point, the cost function begins to rise abruptly.
+Based on the previous numerical results, we can consider the following optimization problem:
 
-**Fig 9.** **Plot of cost function .** Plot of cost function for *c* = 0.01, *d* = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+[formula] (26)
+
+where *T* > 0 is the maximum time we consider. *n* is the number of vaccination campaigns administrated in the population during the time interval [0, *T*]. We assume that *T* = *an*, for some *a* > 0, i.e., two vaccination campaigns are considered with a gap of *a* time units. *d* is a positive constant that accounts for the cumulative cost per vaccination campaign. *m*(*t*; *n*) and *I*(*t*; *n*) denote the level of immunity and number of infected at time *t* for a given *n*, respectively. *I*(*t*; *n*) is the solution of our model for a particular choice of *n*. *c* is a positive constant that accounts for the cost due to infection for an infected individual. The above cost function [formula] can equivalently be written as a function of *a* as follows:
+
+[formula] (27)
+
+where, *I*(*t*; *a*) denotes the number of infected at time *t* for a given *a*. The Fig 9 shows the plot of the cost function defined in relation (27). Fig 9 provides valuable insights into the behavior of the cost function concerning the gap between two consecutive vaccinations. Fig 9 shows that the cost function more or less remains at the minimum when the gap between two successive vaccinations falls within the range of 3 to 8 months. However, the plot takes an interesting turn when the gap between consecutive vaccinations exceeds 9 months. Beyond this point, the cost function begins to rise abruptly.
+
+**Fig 9.** **Plot of cost function [formula].** Plot of cost function [formula] for *c* = 0.01, *d* = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 This critical observation suggests that excessively long intervals between vaccinations can be counterproductive, potentially leading to a surge in disease transmission and associated costs. This result shows that frequent vaccinations may not always be necessary and could potentially lead to diminishing returns, a phenomenon often referred to as hysteresis, whereas, an admissible larger gap between two consecutive vaccinations can effectively control the epidemic along with the minimal cost of vaccination campaign. This finding explains the significance of carefully determining the appropriate gap between two consecutive vaccination campaigns for effective epidemic control while minimizing economic burdens on a country or province.
 
 ### 4.4 Effect of vaccine efficacy and vaccination rate
 
-A vaccination campaign focuses on two major aspects, the effectiveness of the vaccines and the rate of vaccination. These two factors can depend on the decision-makers. Thus it is important to understand the effect of vaccine efficacy and the rate of vaccination on the cost function. In Fig 10, we plot the cost function for two different vaccine efficacies. We notice that if the vaccine efficacy is less (red curve in Fig 10) then the cost function remain at the minimum if the gap between the successive vaccination varies between 3 to 6 months. In contrast, if the vaccine efficacy is larger (blue curve in Fig 10) then the cost function stays at a minimum if the gap between the successive vaccinations varies between 3 to 9 months. This observation suggests that highly effective vaccines may allow for more extended gaps between vaccinations, potentially reducing the frequency and cost of vaccination while still achieving effective epidemic control. Fig 11 shows the plot of the cost function for two different vaccination rates. This figure shows that a higher vaccination rate provides more flexibility in increasing the gap between campaigns while still controlling the epidemic effectively and minimizing costs. The results are reminiscent of the recent experiences concerning COVID-19 vaccines [9]. This insight suggests that decision-makers should carefully consider both vaccine efficacy and vaccination rate when designing vaccination strategies to achieve cost-effective epidemic control.
+A vaccination campaign focuses on two major aspects, the effectiveness of the vaccines and the rate of vaccination. These two factors can depend on the decision-makers. Thus it is important to understand the effect of vaccine efficacy and the rate of vaccination on the cost function. In Fig 10, we plot the cost function [formula] for two different vaccine efficacies. We notice that if the vaccine efficacy is less (red curve in Fig 10) then the cost function remain at the minimum if the gap between the successive vaccination varies between 3 to 6 months. In contrast, if the vaccine efficacy is larger (blue curve in Fig 10) then the cost function stays at a minimum if the gap between the successive vaccinations varies between 3 to 9 months. This observation suggests that highly effective vaccines may allow for more extended gaps between vaccinations, potentially reducing the frequency and cost of vaccination while still achieving effective epidemic control. Fig 11 shows the plot of the cost function [formula] for two different vaccination rates. This figure shows that a higher vaccination rate provides more flexibility in increasing the gap between campaigns while still controlling the epidemic effectively and minimizing costs. The results are reminiscent of the recent experiences concerning COVID-19 vaccines [9]. This insight suggests that decision-makers should carefully consider both vaccine efficacy and vaccination rate when designing vaccination strategies to achieve cost-effective epidemic control.
 
-**Fig 10.** **Plot of cost function for different vaccine efficacy functions.** Green: corresponds to formula (21) and Red: corresponds to formula (21) multiplied by 0.7. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 10.** **Plot of cost function [formula] for different vaccine efficacy functions.** Green: corresponds to formula (21) and Red: corresponds to formula (21) multiplied by 0.7. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
-**Fig 11.** **Plot of cost function for different vaccination rates.** The left panel corresponds to formula (20) with the rate of vaccination *k* = 0.001 (green) and *k* = 0.003 (red). The right panel corresponds to the plot of the cost function with corresponding colors. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 11.** **Plot of cost function [formula] for different vaccination rates.** The left panel corresponds to formula (20) with the rate of vaccination *k* = 0.001 (green) and *k* = 0.003 (red). The right panel corresponds to the plot of the cost function with corresponding colors. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 ### 4.5 Effect of co-existing strains
 
 The parameter *κ* accounts for the existence of multiple strains. A higher value of *κ* implies the co-existence of prominent strains with very different transmission rates. Fig 12 shows that a higher value of *κ* provides less flexibility in increasing the gap between campaigns.
 
-**Fig 12.** **Plot of cost function for different values of *κ*.** The green and red curves correspond to *κ* = 2 and *κ* = 1 respectively. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
+**Fig 12.** **Plot of cost function [formula] for different values of *κ*.** The green and red curves correspond to *κ* = 2 and *κ* = 1 respectively. The parameter values: c = 0.01, d = 5, and all other parameter values are chosen as estimated before and as in Table 1.
 
 ## 5 Discussion and conclusion
 
