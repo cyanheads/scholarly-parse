@@ -167,6 +167,9 @@ function footnoteLines(lines: Line[], bodySize: number): Set<Line> {
       !headingOf(column[start - 1] as Line, bodySize)
     )
       start--;
+    // A column set entirely in small type (IEEE's abstract beside the opening section) has
+    // footnotes only below its last gap; a figure caption's column has none.
+    if (start === 0 && !column.some(isCaptionStart)) start = belowLastGap(column);
     const zone = column.slice(start);
     const [first] = column;
     const [top] = zone;
@@ -183,6 +186,16 @@ function footnoteLines(lines: Line[], bodySize: number): Set<Line> {
     if (zone.every((line) => line.y < floor)) for (const line of zone) found.add(line);
   }
   return found;
+}
+
+/** Where the lines below a column's lowest paragraph-sized gap begin, or its length when there is none. */
+function belowLastGap(column: Line[]): number {
+  for (let i = column.length - 1; i > 0; i--) {
+    const above = column[i - 1] as Line;
+    const line = column[i] as Line;
+    if (above.y - line.y > 1.6 * Math.max(above.size, line.size)) return i;
+  }
+  return column.length;
 }
 
 /** An abstract set without a heading: the longest run of same-style lines in the front matter. */
@@ -283,9 +296,11 @@ function collect(
     if (partTitle) partTitles.add(partTitle.toLowerCase());
   };
   const addAbstract = (line: Line) => {
-    // A short bold line of its own inside the abstract titles its next part.
+    // A short bold line of its own inside the abstract titles its next part, unless the
+    // abstract itself is set in bold.
     if (
       line.bold &&
+      !out.abstract.at(-1)?.lines.at(-1)?.bold &&
       words(line.text) <= 5 &&
       !/[.,;]$/.test(line.text) &&
       out.abstract.at(-1)?.lines.length !== 0
@@ -472,6 +487,8 @@ function collect(
       const runIn = ABSTRACT_RUN_IN.exec(line.text);
       if (runIn && out.abstract.length === 0) {
         state = 'abstract';
+        // The rest of the line runs on from its label, so it never titles a part of its own.
+        addPart();
         addAbstract({
           ...line,
           cells: trimCells(line, runIn[0]),

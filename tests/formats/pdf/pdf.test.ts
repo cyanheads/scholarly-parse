@@ -183,6 +183,39 @@ describe('parsePdf', () => {
     expect(outline(document.back)).toEqual(['FUNDING']);
   });
 
+  it('reads an abstract set in small type as the whole of the first column', async () => {
+    const body = Array.from({ length: 14 }, (_, i) => `Body line ${i + 1} of the introduction`);
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            { font: 'bold', size: 20, text: 'A study of layout inference', x: 72, y: 740 },
+            ...paragraph(
+              [
+                'Abstract. Layout carries structure',
+                'when a file records none of it, and',
+                'sizes, weights and spacing recover',
+                'the title, abstract and sections.',
+              ],
+              { leading: 11, size: 9, y: 690 },
+            ).map((spec) => ({ ...spec, font: 'bold' as const })),
+            ...paragraph(['Index Terms: layout, parsing, reading order.'], { size: 9, y: 640 }),
+            ...paragraph(['Manuscript received 16 November 2022.'], { size: 8, y: 120 }),
+            { size: 10, text: 'I. INTRODUCTION', x: 320, y: 690 },
+            ...paragraph(body, { x: 320, y: 675 }),
+          ],
+          [...paragraph(body, { y: 700 }), ...paragraph(body, { x: 320, y: 700 })],
+        ],
+      }),
+    );
+    expect(document.abstracts[0]?.sections).toMatchObject([
+      { blocks: [{ text: expect.stringMatching(/^Layout carries structure when a file/) }] },
+    ]);
+    expect(document.abstracts[0]?.sections[0]?.title).toBeUndefined();
+    expect(document.metadata.keywords).toEqual(['layout', 'parsing', 'reading order']);
+    expect(outline(document.body)).toEqual(['I. INTRODUCTION']);
+  });
+
   it('reads a two-column page left column first', async () => {
     const left = Array.from(
       { length: 8 },
