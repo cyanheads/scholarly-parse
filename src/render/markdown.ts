@@ -258,8 +258,7 @@ function renderList(items: Block[][], ordered: boolean, title: string | undefine
  */
 function renderTable(table: TableBlock): string {
   const parts: string[] = [];
-  const caption = labeled(table.label ?? 'Table', table.caption);
-  if (caption) parts.push(caption);
+  if (table.label || table.caption) parts.push(labeled(table.label ?? 'Table', table.caption));
   if (table.rows.length === 0) {
     parts.push(`*Table content not available (${table.unextractable ?? 'no-rows'}).*`);
   } else {

@@ -479,20 +479,20 @@ All data generated and analyzed during this study will be curated in the Aston U
 - [26] Ziyu Zhang, Xuehui Mei, Haijun Jiang, Xupeng Luo, and Yang Xia. Dynamical analysis of hyper-sir rumor spreading model. *Applied Mathematics and Computation*, 446:127887, 2023.
 - [27] Fred Brauer, Carlos Castillo-Chavez, and Zhilan Feng. *Mathematical models in epidemiology*, volume 32. Springer, 2019.
 - [28] Vincenzo Capasso. *Mathematical structures of epidemic systems*, volume 97. Springer Science & Business Media, 2008.
-- [29] `https://www.who.int/teams/immunization-vaccines-and-biologicals/diseases`.
+- [29] <https://www.who.int/teams/immunization-vaccines-and-biologicals/diseases>.
 - [30] Y. et al Liu. Dosing interval strategies for two-dose covid-19 vaccination in 13 middle-income countries of europe: Health impact modelling and benefit-risk analysis. *The Lancet Reg Health*, 17:100381, 2022.
 - [31] P. et al Dogra. A modeling-based approach to optimize covid-19 vaccine dosing schedules for improved protection. *JCI Insight*, 8(13):e169860, 2023.
 - [32] F. et al Menegale. Evaluation of waning of sars-cov-2 vaccine–induced immunity: A systematic review and meta-analysis. *JAMA Netw Open*, 6(5):e2310650, 2023.
 - [33] Samiran Ghosh, Vitaly Volpert, and Malay Banerjee. An epidemic model with time-distributed recovery and death rates. *Bulletin of Mathematical Biology*, 84(8):78, 2022.
 - [34] Samiran Ghosh, Vitaly Volpert, and Malay Banerjee. An age-dependent immuno-epidemiological model with distributed recovery and death rates. *Journal of Mathematical Biology*, 86(2):21, 2023.
 - [35] Samiran Ghosh, Malay Banerjee, and Vitaly Volpert. Immuno-epidemiological model-based prediction of further covid-19 epidemic outbreaks due to immunity waning. *Mathematical Modelling of Natural Phenomena*, 17:9, 2022.
-- [36] `https://in.mathworks.com/products/curvefitting.html`.
-- [37] Fawzi Ebrahim, Salah Tabal, Yosra Lamami, Inas M Alhudiri, Salah Edin El Meshri, Samira M Al Dwigen, Ramadan Arfa, Asma Alboeshi, Hafsa A Alemam, Fauzia Abuhtna, et al. Anti-sars-cov-2 igg antibodies after recovery from covid-19 or vaccination in libyan population: comparison of four vaccines. `https://doi.org/10.1101/2022.02.18.22271130`, 2022.
-- [38] Ludek Berec, Martin Smid, Lenka Pribylova, Ondrej Majek, Tomas Pavlik, Jiri Jarkovsky, Milan Zajicek, Jakub Weiner, Tamara Barusova, and Jan Trnka. Real-life protection provided by vaccination, booster doses and previous infection against covid-19 infection, hospitalisation or death over time in the czech republic: a whole country retrospective view. `https://doi.org/10.1101/2021.12.10.21267590`, 2021.
-- [39] Michael CW Chan, Kenrie PY Hui, John Ho, Man-chun Cheung, Ka-chun Ng, Rachel Ching, Ka-ling Lai, Tonia Kam, Haogao Gu, Ko-Yung Sit, et al. Sars-cov-2 omicron variant replication in human respiratory tract ex vivo. `https://doi.org/10.21203/rs.3.rs-1189219/v1`, 2021.
+- [36] <https://in.mathworks.com/products/curvefitting.html>.
+- [37] Fawzi Ebrahim, Salah Tabal, Yosra Lamami, Inas M Alhudiri, Salah Edin El Meshri, Samira M Al Dwigen, Ramadan Arfa, Asma Alboeshi, Hafsa A Alemam, Fauzia Abuhtna, et al. Anti-sars-cov-2 igg antibodies after recovery from covid-19 or vaccination in libyan population: comparison of four vaccines. <https://doi.org/10.1101/2022.02.18.22271130>, 2022.
+- [38] Ludek Berec, Martin Smid, Lenka Pribylova, Ondrej Majek, Tomas Pavlik, Jiri Jarkovsky, Milan Zajicek, Jakub Weiner, Tamara Barusova, and Jan Trnka. Real-life protection provided by vaccination, booster doses and previous infection against covid-19 infection, hospitalisation or death over time in the czech republic: a whole country retrospective view. <https://doi.org/10.1101/2021.12.10.21267590>, 2021.
+- [39] Michael CW Chan, Kenrie PY Hui, John Ho, Man-chun Cheung, Ka-chun Ng, Rachel Ching, Ka-ling Lai, Tonia Kam, Haogao Gu, Ko-Yung Sit, et al. Sars-cov-2 omicron variant replication in human respiratory tract ex vivo. <https://doi.org/10.21203/rs.3.rs-1189219/v1>, 2021.
 - [40] Billy J Quilty, Juliet RC Pulliam, and Carl AB Pearson. Test to release from isolation after testing positive for sars-cov-2. *medRxiv*, pages 2022–01, 2022.
 - [41] Norman TJ Bailey. A statistical method of estimating the periods of incubation and infection of an infectious disease. *Nature*, 174:139–140, 1954.
 - [42] Gerardo Chowell, James M Hyman, Luís MA Bettencourt, Carlos Castillo-Chavez, and H Nishiura. *Mathematical and statistical estimation approaches in epidemiology*. Springer, 2009.
 - [43] Alun L Lloyd. Realistic distributions of infectious periods in epidemic models: changing patterns of persistence and dynamics. *Theoretical population biology*, 60(1):59–71, 2001.
-- [44] `https://www.who.int/teams/immunization-vaccines-and-biologicals/essential-programme-on-immunization/implementation/immunization-campaigns`.
-- [45] `https://measlesrubellapartnership.org/`.
+- [44] <https://www.who.int/teams/immunization-vaccines-and-biologicals/essential-programme-on-immunization/implementation/immunization-campaigns>.
+- [45] <https://measlesrubellapartnership.org/>.

@@ -67,8 +67,6 @@ China (Sichuan, Yunnan).
 
 ### Key to species of *Vittiblatta* Luo & Wang, gen. nov. (males)
 
-**Table.**
-
 |  |  |  |
 | --- | --- | --- |
 | 1 | Pronotum with punctures | ***V.punctata* Luo & Wang, sp. nov.** |

@@ -1,0 +1,27 @@
+{
+  "id": "arxiv-2509.00328v1",
+  "format": "latexml",
+  "flavor": "arxiv",
+  "title": "Mechanistic interpretability for steering vision-language-action models",
+  "identifiers": {
+    "arxiv": "2509.00328v1"
+  },
+  "url": "https://arxiv.org/html/2509.00328v1",
+  "retrieved": "2026-09-26",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Häon B, Stocking K, Chuang I, Tomlin C. Mechanistic interpretability for steering vision-language-action models. arXiv:2509.00328v1. 2025.",
+  "features": [
+    "nested-sections",
+    "appendix",
+    "acknowledgments",
+    "footnotes",
+    "tables",
+    "figures",
+    "inline-math",
+    "display-math",
+    "equation-numbers"
+  ]
+}

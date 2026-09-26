@@ -1,12 +1,14 @@
 /**
  * @fileoverview `parseLatexml` on synthetic LaTeXML pages: the section outline rebuilt
  * when an unclosed inline element swallows the sections after it, floats LaTeXML writes
- * as spans, and a bare tabular used as a spacer.
+ * as spans, subtable panels, a bare tabular used as a spacer, entity-written text, and
+ * `\url` links.
  * @module tests/formats/latexml/latexml.test
  */
 import { describe, expect, it } from 'vitest';
 import { parseLatexml } from '../../../src/formats/latexml/index.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
+import { toMarkdown } from '../../../src/render/index.js';
 
 function page(content: string): string {
   return `<!DOCTYPE html><html lang="en"><head><meta name="generator" content="LaTeXML"></head>
@@ -62,6 +64,37 @@ describe('sections and floats', () => {
     ]);
   });
 
+  it('labels each subtable with its panel caption, the float caption heading them', async () => {
+    const panel = (id: string, tag: string, cell: string) =>
+      `<figure id="${id}" class="ltx_table ltx_figure_panel"><table class="ltx_tabular"><tbody>
+        <tr class="ltx_tr"><td class="ltx_td">${cell}</td></tr></tbody></table>
+        <figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">${tag} </span>Panel ${cell}</figcaption></figure>`;
+    const float = (caption: string) =>
+      `<figure id="T1" class="ltx_table"><div class="ltx_flex_figure">
+        ${panel('T1.sf1', '(a)', 'A')}${panel('T1.sf2', '(b)', 'B')}</div>${caption}</figure>`;
+
+    const uncaptioned = await parse(page(`<div class="ltx_para">${float('')}</div>`));
+    expect(
+      blocks(uncaptioned.body).map((b) => b.type === 'table' && [b.id, b.label, b.caption]),
+    ).toEqual([
+      ['T1.sf1', '(a)', 'Panel A'],
+      ['T1.sf2', '(b)', 'Panel B'],
+    ]);
+    const markdown = toMarkdown(uncaptioned);
+    expect(markdown).toContain('**(b).** Panel B');
+    expect(markdown).not.toContain('**Table.**');
+
+    const captioned = await parse(
+      page(
+        `<div class="ltx_para">${float(
+          '<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Both</figcaption>',
+        )}</div>`,
+      ),
+    );
+    expect(blocks(captioned.body).map((b) => b.type)).toEqual(['paragraph', 'table', 'table']);
+    expect(toMarkdown(captioned)).toContain('**Table 1.** Both\n\n**(a).** Panel A');
+  });
+
   it('leaves out a bare tabular holding only a rule', async () => {
     const document = await parse(
       page(`<div class="ltx_para"><table class="ltx_tabular"><tbody><tr class="ltx_tr">
@@ -71,5 +104,34 @@ describe('sections and floats', () => {
         <div class="ltx_para"><p class="ltx_p">Text.</p></div></section>`),
     );
     expect(blocks(document.body).map((b) => b.type)).toEqual(['paragraph']);
+  });
+});
+
+describe('inline text', () => {
+  it('escapes a tag-like token the source wrote as entities', async () => {
+    // The DOM splits text at each entity: `<`, `bos`, `>` arrive as separate nodes.
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">Tokens &lt;bos&gt; and a&lt;b.</p>
+        <table class="ltx_tabular"><tbody><tr class="ltx_tr"><td class="ltx_td">
+        <span class="ltx_p">&lt;bos&gt;, safe</span></td></tr></tbody></table></div>`),
+    );
+    const [paragraph, table] = blocks(document.body);
+    expect(paragraph).toEqual({ text: 'Tokens \\<bos> and a\\<b.', type: 'paragraph' });
+    expect(table?.type === 'table' && table.rows).toEqual([['\\<bos>, safe']]);
+  });
+
+  it('links a \\url and keeps one with no scheme as written', async () => {
+    const url = (href: string) =>
+      `<a href="${href}" class="ltx_ref ltx_url ltx_font_typewriter">${href}</a>`;
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">See ${url('https://example.org/a_b')} or
+        ${url('example.org/c')}; run <span class="ltx_text ltx_font_typewriter">make</span>.</p></div>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      {
+        text: 'See <https://example.org/a_b> or `example.org/c`; run `make`.',
+        type: 'paragraph',
+      },
+    ]);
   });
 });

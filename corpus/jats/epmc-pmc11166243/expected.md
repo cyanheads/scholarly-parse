@@ -23,8 +23,6 @@ Current knowledge concerning fluid and electrolyte losses and their replacement 
 
 Taking into account the importance of the problem, especially in hospitalized patients, a project was designed to determine the epidemiological and clinical factors potentially associated with lethality in infants due to severe acute diarrhea.[5] Five hundred and eleven children under 5 years of age, hospitalized due to severe diarrhea in our Metabolic Unit, were prospectively studied. All patients had been suffering from diarrhea lasting for less than 14 days at the time of admission. The patients’ mean age was 5.5 months; 87.5% were under 1 year of age and 75.0% were under 6 months of age. Patients were divided into two groups according to the clinical evolution during hospitalization:
 
-**Table.**
-
 |  |  |
 | --- | --- |
 | Group I - | 17 (3.3%) infants who died; mean age was 3.8 months. |

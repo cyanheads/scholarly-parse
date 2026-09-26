@@ -12,13 +12,19 @@ let linkedom: Promise<LinkedomModule> | undefined;
 /**
  * Parse HTML into a document. Throws when `linkedom` is not installed — a setup error,
  * not a property of the input.
+ *
+ * `linkedom` splits text at every entity (`&lt;bos&gt;` arrives as `<`, `bos`, `>`), and
+ * a lone `<` escapes as plain text that the next node then turns into a tag. Merging
+ * adjacent text nodes lets escaping see each run whole.
  */
 export async function loadDocument(html: string): Promise<Document> {
   linkedom ??= (import('linkedom') as Promise<LinkedomModule>).catch((error: unknown) => {
     linkedom = undefined;
     throw new Error('Install "linkedom" to parse HTML: bun add linkedom', { cause: error });
   });
-  return (await linkedom).parseHTML(html).document;
+  const { document } = (await linkedom).parseHTML(html);
+  document.documentElement?.normalize();
+  return document;
 }
 
 export const ELEMENT_NODE = 1;

@@ -198,10 +198,23 @@ function topTabulars(figure: Element): Element[] {
   );
 }
 
+/** A float's caption as a paragraph of its own, heading content that is not a figure. */
+function captionHead(label: string | undefined, caption: string | undefined): Block[] {
+  if (!label && !caption) return [];
+  const text = [label && `**${escapeInline(label)}.**`, caption].filter(Boolean).join(' ');
+  return [{ text, type: 'paragraph' }];
+}
+
+/** The subtable panel a tabular sits in, when that panel has a caption of its own. */
+function captionedPanel(tabular: Element, float: Element): Element | undefined {
+  const panel = tabular.parentElement?.closest('figure');
+  return panel && panel !== float && childWhere(panel, isCaption) ? panel : undefined;
+}
+
 /**
  * A LaTeXML float. Its caption's tag and content decide what it is: a table (a tabular
  * and no image), an algorithm (a listing), or a figure. Subfigure panels with captions
- * of their own follow the main figure.
+ * of their own follow the main figure; a subtable panel's caption labels its table.
  */
 function figure(element: Element, ctx: LatexmlContext): Block[] {
   const captionEl = childWhere(element, isCaption);
@@ -216,30 +229,31 @@ function figure(element: Element, ctx: LatexmlContext): Block[] {
     (/ltx_tag_float/.test(tagClass) && element.querySelector('.ltx_listing'))
   ) {
     const code = listing(element.querySelector('.ltx_listing') ?? element);
-    const head: Block[] =
-      label || caption
-        ? [
-            {
-              text: [label && `**${escapeInline(label)}.**`, caption].filter(Boolean).join(' '),
-              type: 'paragraph',
-            },
-          ]
-        : [];
-    return [...head, ...(code ? [code] : [])];
+    return [...captionHead(label, caption), ...(code ? [code] : [])];
   }
   if (
     tabulars.length > 0 &&
     (hasClass(element, 'ltx_table') || /ltx_tag_table/.test(tagClass) || images.length === 0)
   ) {
-    return tabulars.map((tabular, i) =>
-      table(
-        tabular,
-        i === 0 ? label : undefined,
-        i === 0 ? caption : undefined,
-        ctx,
-        i === 0 ? id : undefined,
-      ),
-    );
+    const panels = tabulars.map((tabular) => captionedPanel(tabular, element));
+    if (panels.every((panel) => panel === undefined)) {
+      return tabulars.map((tabular, i) =>
+        table(
+          tabular,
+          i === 0 ? label : undefined,
+          i === 0 ? caption : undefined,
+          ctx,
+          i === 0 ? id : undefined,
+        ),
+      );
+    }
+    const tables = tabulars.map((tabular, i) => {
+      const panel = panels[i];
+      if (!panel) return table(tabular, undefined, undefined, ctx);
+      const parts = captionParts(childWhere(panel, isCaption), ctx);
+      return table(tabular, parts.label, parts.caption, ctx, panel.getAttribute('id') ?? undefined);
+    });
+    return [...captionHead(label, caption), ...tables];
   }
 
   const [image] = images;

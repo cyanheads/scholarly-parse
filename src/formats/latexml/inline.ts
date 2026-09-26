@@ -56,10 +56,9 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
   const inner = () => inlineMarkdown(childNodes(node), ctx);
 
   if (tag === 'math') return inlineMath(mathTex(node));
-  if (hasClass(node, 'ltx_ERROR')) {
-    ctx.diag.unhandled('latexml:ltx_ERROR');
-    return '';
-  }
+  // LaTeXML's marker for a macro it could not expand holds only the macro's name
+  // (`\argmax`, `{inparablank}`); the content around it is converted as usual.
+  if (hasClass(node, 'ltx_ERROR')) return '';
   if (hasClass(node, 'ltx_note')) {
     // Other note roles (thanks, affiliation and license notices, venue lines) are front matter.
     return hasClass(node, 'ltx_role_footnote') || hasClass(node, 'ltx_role_endnote')
@@ -76,8 +75,8 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
   ) {
     return emphasis(inner(), '*');
   }
-  if (hasClass(node, 'ltx_font_typewriter') || tag === 'code' || tag === 'tt') {
-    // A typewriter link keeps its link; typewriter text is code.
+  if ((hasClass(node, 'ltx_font_typewriter') && tag !== 'a') || tag === 'code' || tag === 'tt') {
+    // A typewriter link (`\url` sets its anchor in typewriter) keeps its link; typewriter text is code.
     return node.querySelector('a[href]') ? inner() : inlineCode(textOfElement(node));
   }
 
@@ -90,6 +89,9 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
       const href = node.getAttribute('href') ?? '';
       // Cross-references and citations point inside the page; they read as printed.
       if (!href || href.startsWith('#')) return inner();
+      // `\url{example.org}` with no scheme is an address as written, not a path on the page.
+      if (hasClass(node, 'ltx_url') && !/^[a-z][a-z\d+.-]*:/i.test(href))
+        return inlineCode(textOfElement(node));
       return link(inner(), resolveUrl(href, ctx.baseUrl));
     }
     case 'br':

@@ -141,12 +141,12 @@ We would like to thank Mark Yatskar, Iz Beltagy, Tim Dettmers, Ronan Le Bras, Ky
 
 ## Footnotes
 
-- **1** `https://translate.google.com`
-- **2** `https://www.bing.com/translator`
-- **3** `https://aws.amazon.com/translate`
-- **4** `http://www.systransoft.com`
-- **5** `https://github.com/pytorch/fairseq`
-- **6** `https://www.bls.gov/cps/cpsaat11.htm`
+- **1** [https://translate.google.com](https://translate.google.com/)
+- **2** <https://www.bing.com/translator>
+- **3** <https://aws.amazon.com/translate>
+- **4** [http://www.systransoft.com](http://www.systransoft.com/)
+- **5** <https://github.com/pytorch/fairseq>
+- **6** <https://www.bls.gov/cps/cpsaat11.htm>
 
 ## References
 

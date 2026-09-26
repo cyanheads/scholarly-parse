@@ -114,8 +114,6 @@ The datasets generated in the current study and the Large-scale Atomic/Molecular
 
 ### Key resources table
 
-**Table.**
-
 | REAGENT or RESOURCE | SOURCE | IDENTIFIER |
 | --- | --- | --- |
 | **Deposited data** | **Deposited data** | **Deposited data** |
