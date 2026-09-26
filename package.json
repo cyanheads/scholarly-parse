@@ -74,6 +74,11 @@
       "import": "./dist/formats/html/index.js",
       "default": "./dist/formats/html/index.js"
     },
+    "./pdf": {
+      "types": "./dist/formats/pdf/index.d.ts",
+      "import": "./dist/formats/pdf/index.js",
+      "default": "./dist/formats/pdf/index.js"
+    },
     "./package.json": "./package.json"
   },
   "peerDependencies": {

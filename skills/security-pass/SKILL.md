@@ -162,7 +162,7 @@ Consumers hand the Markdown to renderers that execute HTML and follow links.
 
 - A compressed stream can inflate by orders of magnitude. Cap the pages processed, the text items read, and the total characters extracted; stop early with a warning when a cap is hit.
 - Only text is extracted — no page rendering, no image decoding.
-- The pdf.js build `unpdf` bundles is past the fix for CVE-2024-4367 (arbitrary JavaScript through a crafted font), and documents are opened with pdf.js's `isEvalSupported: false`.
+- The pdf.js build `unpdf` bundles is past the fix for CVE-2024-4367 (arbitrary JavaScript through a crafted font). pdf.js 5 and later removed the eval-based glyph compiler and its `isEvalSupported` option, so `rg -c 'new Function|isEvalSupported' node_modules/unpdf/dist/pdfjs.mjs` prints nothing.
 - Broken cross-reference tables and object cycles end in `{ ok: false, error: { reason: 'malformed' } }` in bounded time — pdf.js reconstructs broken files, which can be slow on crafted input.
 - An encrypted PDF returns a result, never a password prompt or a hang. A PDF with no text layer returns cleanly, as `empty` or with `flat` quality.
 
@@ -255,7 +255,7 @@ End with:
 - [ ] Axis 4 — every regex over document text timed against hostile input
 - [ ] Axis 5 — input-keyed tables are `Map`s; `Object.prototype` untouched after the probes
 - [ ] Axis 6 — raw HTML escaped; link schemes normalized and allowlisted; text can't forge structure
-- [ ] Axis 7 — PDF page, item, and character caps; pdf.js past CVE-2024-4367 with eval off; broken files end in bounded time
+- [ ] Axis 7 — PDF page, item, and character caps; pdf.js past CVE-2024-4367 with no eval path; broken files end in bounded time
 - [ ] Axis 8 — peers lazy, literal, and absent from the root and XML subpaths
 - [ ] Quick sanity pass: audit, bunfig guard, new-dependency scripts and provenance, tarball contents, no env/fetch/Buffer in `src/`
 - [ ] Report: summary → grouped findings → numbered options
