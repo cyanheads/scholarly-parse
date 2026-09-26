@@ -260,6 +260,8 @@ const ABSTRACT_KINDS: Readonly<Record<string, AbstractKind>> = {
   'plain-language-summary': 'plain-language',
   short: 'teaser',
   summary: 'plain-language',
+  // PLOS's early lay summaries, before it named them author summaries.
+  synopsis: 'plain-language',
   teaser: 'teaser',
   toc: 'teaser',
 };

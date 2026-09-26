@@ -2,6 +2,7 @@
   "why": "cyanheads/pubmed-mcp-server#111: all three <table-wrap>s are graphic-only deposits (label, caption, footnotes, no <table>), which were dropped without notice. Pins each one reported as a labelled, captioned table with no rows and a table-unextractable warning, so a reader knows the cells exist but were not retrieved.",
   "title": "New Genes Tied to Endocrine, Metabolic, and Dietary Regulation of Lifespan from a *Caenorhabditis elegans* Genomic RNAi Screen",
   "quality": "structured",
+  "abstractKinds": ["main", "plain-language"],
   "abstractStartsWith": "Most of our knowledge about the regulation of aging comes from mutants originally isolated for other phenotypes.",
   "sectionTitles": ["Introduction", "Results/Discussion", "Materials and Methods"],
   "tables": 3,

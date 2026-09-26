@@ -316,9 +316,14 @@ describe('abstracts', () => {
       meta:
         TITLE +
         '<abstract abstract-type="executive-summary"><p>Executive summary prose.</p></abstract>' +
-        '<abstract abstract-type="short"><p>Short form.</p></abstract>',
+        '<abstract abstract-type="short"><p>Short form.</p></abstract>' +
+        '<abstract abstract-type="synopsis"><title>Synopsis</title><p>Lay prose.</p></abstract>',
     });
-    expect(document.abstracts.map((a) => a.kind)).toEqual(['plain-language', 'teaser']);
+    expect(document.abstracts.map((a) => a.kind)).toEqual([
+      'plain-language',
+      'teaser',
+      'plain-language',
+    ]);
     expect(document.diagnostics.warnings.map((w) => w.code)).not.toContain('no-abstract');
     expect(toMarkdown(document)).toContain('Executive summary prose.');
     const main = toMarkdown(document, { abstracts: 'main' });
