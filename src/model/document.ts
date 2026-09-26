@@ -190,6 +190,8 @@ export interface FigureBlock {
 
 /** A display formula. */
 export interface FormulaBlock {
+  /** The image a formula is published as when the source has no TeX, MathML, or text for it. */
+  href?: string;
   id?: string;
   label?: string;
   /**

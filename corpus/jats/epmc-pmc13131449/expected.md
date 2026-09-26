@@ -33,10 +33,10 @@ This platform exhibits outstanding performance with high sensitivity and portabi
 
 ## Highlights
 
-- • ALERT integrates LAMP and CRISPR/Cas12b in a microfluidic chip for simultaneous detection of six plant-virus samples.
-- • Raffinose-assisted one-pot design separates LAMP and Cas12b reactions, lowering contamination risk.
-- • Integrated nucleic acid extraction, microfluidic chip, and lateral flow enable field detection in resource-limited settings.
-- • ALERT achieves 10^2 fg/µL detection within 1 h, with sensitivity comparable to lab-based RT-PCR.
+- ALERT integrates LAMP and CRISPR/Cas12b in a microfluidic chip for simultaneous detection of six plant-virus samples.
+- Raffinose-assisted one-pot design separates LAMP and Cas12b reactions, lowering contamination risk.
+- Integrated nucleic acid extraction, microfluidic chip, and lateral flow enable field detection in resource-limited settings.
+- ALERT achieves 10^2 fg/µL detection within 1 h, with sensitivity comparable to lab-based RT-PCR.
 
 ## Introduction
 

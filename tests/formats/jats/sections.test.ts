@@ -224,6 +224,18 @@ describe('lists, quotes, and boxes (#130)', () => {
     ]);
   });
 
+  it('drops a bullet glyph label, which the list marker already draws', () => {
+    // Elsevier highlights: <list list-type="label"><list-item><label>•</label>…
+    const document = parseBody(
+      '<list list-type="label"><list-item><label>•</label><p>First.</p></list-item>' +
+        '<list-item><label>•</label><p>Second.</p></list-item></list>',
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      { items: [[p('First.')], [p('Second.')]], ordered: false, type: 'list' },
+    ]);
+    expect(toMarkdown(document)).toContain('- First.\n- Second.');
+  });
+
   it('keeps a list title on the list and drops an empty list (#130)', () => {
     const { body } = parseBody(
       '<sec><title>Findings</title><p>Prose.</p>' +

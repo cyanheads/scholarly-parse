@@ -64,6 +64,12 @@ function escapeUrlText(url: string): string {
   return url.replace(/[*`$~]/g, '\\$&').replace(/_/g, '\\_');
 }
 
+/**
+ * Where a formula stands that the source publishes only as an image: its content is not
+ * in the text, and the marker keeps the sentence around it from reading as complete.
+ */
+export const FORMULA_IMAGE = '[formula]';
+
 /** Inline math: `$tex$`. Empty TeX renders nothing. */
 export function inlineMath(tex: string): string {
   const expression = tex.replace(/\s+/g, ' ').trim();

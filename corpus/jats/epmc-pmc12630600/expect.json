@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/pubmed-mcp-server#142: every <fig> holds its image pointers only inside <alternatives> (a JPEG and a thumbnail GIF), with no direct <graphic>. expect.json cannot check a figure's href, so this pins what it can: all ten labelled figures come through with their label and caption, plus the three standalone pseudocode graphics, thirteen figures in all.",
+  "why": "cyanheads/pubmed-mcp-server#142: every <fig> holds its image pointers only inside <alternatives> (a JPEG and a thumbnail GIF), with no direct <graphic>. expect.json cannot check a figure's href, so this pins what it can: all ten labelled figures come through with their label and caption, plus the three standalone pseudocode graphics, thirteen figures in all. Europe PMC serves every formula here as a GIF with no TeX or MathML: each inline one leaves a [formula] marker in its sentence and each display one keeps its number, reported as math-without-tex.",
   "title": "Exploring potential hidden aspects of quantum field theory through numerical solution of the Klein–Gordon equation using the Yee algorithm",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -15,11 +15,14 @@
   ],
   "tables": 1,
   "figures": 13,
+  "formulas": 33,
   "references": 50,
   "contains": [
     "**Table 1.** Test problems for validating the proposed FDTD scheme for the Klein–Gordon equation.",
     "**Fig. 1.** Convergence test for TP1.",
     "**Fig. 4.** Convergence test for TP4.",
-    "**Fig. 10.** Solution of TP10"
-  ]
+    "**Fig. 10.** Solution of TP10",
+    "where [formula] is the speed of light in the medium, [formula] is a damping (or dissipation) coefficient"
+  ],
+  "warnings": ["math-without-tex"]
 }

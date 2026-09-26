@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/pubmed-mcp-server#127: reference labels are numeric-looking text with a trailing period (<label>1.</label>), which a value-coercing XML parser turns into the number 1. Pins all 50 references with their labels normalized to the model's bare form ([1] … [50]), and the appendix energy-level tables with their cells verbatim.",
+  "why": "cyanheads/pubmed-mcp-server#127: reference labels are numeric-looking text with a trailing period (<label>1.</label>), which a value-coercing XML parser turns into the number 1. Pins all 50 references with their labels normalized to the model's bare form ([1] … [50]), and the appendix energy-level tables with their cells verbatim. All 115 display formulas are GIFs with no TeX or MathML; each is kept with its number and reported as math-without-tex.",
   "title": "Closed-form spin-relativistic corrections from the Dirac equation enabling a modified Schrödinger solver",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -14,11 +14,14 @@
   ],
   "tables": 4,
   "figures": 2,
+  "formulas": 115,
   "references": 50,
   "contains": [
     "- [1] Greiner, W. Relativistic Quantum Mechanics.",
     "- [50] Ravlic, A., Schwerdtfeger, P. & Nazarewicz, W. Electron capture of superheavy nuclei",
-    "| 1 | 0 | 1/2 | 164461 | 182315 | 229897 |"
+    "| 1 | 0 | 1/2 | 164461 | 182315 | 229897 |",
+    "[formula] (1)"
   ],
-  "notContains": ["[1.]", "[50.]"]
+  "notContains": ["[1.]", "[50.]"],
+  "warnings": ["math-without-tex"]
 }

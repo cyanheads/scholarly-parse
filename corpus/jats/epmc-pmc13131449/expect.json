@@ -22,5 +22,6 @@
     "## Abstract\n\n### Introduction\n\nPlant viral diseases threaten food security globally.",
     "## Highlights\n\n",
     "ALERT integrates LAMP and CRISPR/Cas12b in a microfluidic chip for simultaneous detection of six plant-virus samples."
-  ]
+  ],
+  "notContains": ["- • "]
 }

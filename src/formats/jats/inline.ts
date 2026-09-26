@@ -10,6 +10,7 @@
 import { escapeInline } from '../../render/escape.js';
 import {
   emphasis,
+  FORMULA_IMAGE,
   inlineCode,
   inlineMath,
   link,
@@ -144,9 +145,10 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
       return link(inlineMarkdown(children, ctx), attrOf(node, 'xlink:href') ?? text(children));
     case 'inline-formula':
     case 'disp-formula': {
-      const parts = formulaParts(children.filter((c) => tagNameOf(c) !== 'label'));
+      const parts = formulaParts(node, ctx);
       if (!parts) return '';
-      return 'tex' in parts ? inlineMath(parts.tex) : escapeInline(parts.text);
+      if ('tex' in parts) return inlineMath(parts.tex);
+      return 'text' in parts ? escapeInline(parts.text) : FORMULA_IMAGE;
     }
     case 'tex-math':
       return inlineMath(cleanTex(rawText(children)));
@@ -208,20 +210,42 @@ function isCitationGroup(children: XmlNodeList): boolean {
   return links > 0;
 }
 
+/** Elements a formula can be published as an image through. */
+const FORMULA_IMAGE_TAGS: ReadonlySet<string> = new Set(['graphic', 'inline-graphic', 'media']);
+
 /**
  * A formula's content: TeX from its `<tex-math>` (directly or under `<alternatives>`),
- * else its MathML converted to TeX, else its plain text. Undefined for a graphic-only
- * formula.
+ * else its MathML converted to TeX, else its plain text. A formula published only as an
+ * image (Europe PMC serves many that way) yields the image's file, reported as
+ * `math-without-tex`: its content is not in the text. Undefined for an empty formula.
  */
 export function formulaParts(
-  children: XmlNodeList,
-): { tex: string } | { text: string } | undefined {
+  formula: XmlNode,
+  ctx: JatsContext,
+): { tex: string } | { text: string } | { href: string } | undefined {
+  const children = childrenOf(formula).filter((c) => tagNameOf(c) !== 'label');
   const tex = texOf(children) ?? mathOf(children);
   if (tex) return { tex };
-  const plain = text(
-    children.filter((c) => !['graphic', 'media', 'inline-graphic'].includes(tagNameOf(c) ?? '')),
-  );
-  return plain ? { text: plain } : undefined;
+  const plain = text(children.filter((c) => !FORMULA_IMAGE_TAGS.has(tagNameOf(c) ?? '')));
+  if (plain) return { text: plain };
+  const href = imageOf(children);
+  if (!href) return;
+  const id = attrOf(formula, 'id');
+  ctx.diag.warn('math-without-tex', `A formula is published only as an image (${href})`, id);
+  return { href };
+}
+
+function imageOf(children: XmlNodeList): string | undefined {
+  for (const child of children) {
+    const tag = tagNameOf(child) ?? '';
+    const href = FORMULA_IMAGE_TAGS.has(tag)
+      ? attrOf(child, 'xlink:href')
+      : tag === 'alternatives'
+        ? imageOf(childrenOf(child))
+        : undefined;
+    if (href) return href;
+  }
+  return;
 }
 
 function texOf(children: XmlNodeList): string | undefined {

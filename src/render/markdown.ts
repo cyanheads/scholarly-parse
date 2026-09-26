@@ -12,6 +12,7 @@ import type {
   TableBlock,
 } from '../model/document.js';
 import { codeFence, escapeBlockStart, escapeInline, escapeTableCell } from './escape.js';
+import { FORMULA_IMAGE } from './inline.js';
 
 /** What to include when rendering. Everything is included by default. */
 export interface MarkdownOptions {
@@ -205,7 +206,8 @@ function renderBlock(block: Block): string {
     case 'formula': {
       const label = block.label?.replace(/^\((.*)\)$/, '$1').trim();
       if (block.tex) return `$$\n${block.tex}${label ? ` \\tag{${label}}` : ''}\n$$`;
-      return `${escapeBlockStart(escapeInline(block.text ?? ''))}${label ? ` (${escapeInline(label)})` : ''}`;
+      const body = block.text === undefined ? FORMULA_IMAGE : escapeInline(block.text);
+      return `${escapeBlockStart(body)}${label ? ` (${escapeInline(label)})` : ''}`;
     }
     case 'code': {
       const fence = codeFence(block.text);
@@ -222,7 +224,7 @@ function renderBlock(block: Block): string {
         renderBlocks(block.blocks),
         ...block.sections.map((s) => renderSection(s, 4)),
       ].filter(Boolean);
-      return quoteLines(inner.join('\n\n'));
+      return inner.length > 0 ? quoteLines(inner.join('\n\n')) : '';
     }
   }
 }

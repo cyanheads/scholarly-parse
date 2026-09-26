@@ -21,5 +21,6 @@
     "**FIGURE 1.** The PRISMA flow diagram of the literature search.",
     "- [1] World Obesity Federation",
     "- [68] Watt J. and Del Giovane C."
-  ]
+  ],
+  "notContains": ["\n\n>\n\n"]
 }

@@ -68,9 +68,9 @@ The proposed algorithms can be applied to the problem described in Boulila et al
 
 These existing works have several limitations that can be presented as follows:
 
-- • Scalability: some algorithms cannot give a solution in an acceptable time for big-scale instances;
-- • Overhead: Different developed heuristics for load balancing can generate overhead;
-- • Limitation of implementation: Some heuristics can only be suitable to particular kinds of files and virtual machines with specific characteristics.
+- Scalability: some algorithms cannot give a solution in an acceptable time for big-scale instances;
+- Overhead: Different developed heuristics for load balancing can generate overhead;
+- Limitation of implementation: Some heuristics can only be suitable to particular kinds of files and virtual machines with specific characteristics.
 
 In this article, a novel method based on the grouping procedure is proposed. This method is applied to different scheduling routines and generates a set of algorithms that solve the studied problem. In Alquhayz, Jemmali & Otoom (2020), the developed algorithms are based on the dispatching rules method. The proposed algorithms classify the files into different groups. The choice of files that contains different groups makes the schedule more dispersed and gives differentiated results. Changing the way that we select files into groups and between groups is the core of the difference between the proposed algorithms.
 
@@ -80,10 +80,10 @@ In the cloud environment, most of the proposed models aim to minimize delay and 
 
 The components of the model are as follows:
 
-- • Users are the workflow generators. Data can be files, databases, videos, *etc*.
-- • Scheduler represents the developed heuristics: The developed heuristics should provide suitable scheduling solutions which guarantee a minimum of makespan and the appropriate destination region. Heuristics consider incoming workflow, the queued data, and the resource allocation state.
-- • Cloud service provider: allocate adequate resources to the appropriate services, calculate costs, and guarantee the availability of the resources.
-- • Region 1 and 2: These are the cloud resources. It contains all available *VMs* that are capable of receiving storage data. Each region has its own characteristics like geographical position, cost, and availability parameters.
+- Users are the workflow generators. Data can be files, databases, videos, *etc*.
+- Scheduler represents the developed heuristics: The developed heuristics should provide suitable scheduling solutions which guarantee a minimum of makespan and the appropriate destination region. Heuristics consider incoming workflow, the queued data, and the resource allocation state.
+- Cloud service provider: allocate adequate resources to the appropriate services, calculate costs, and guarantee the availability of the resources.
+- Region 1 and 2: These are the cloud resources. It contains all available *VMs* that are capable of receiving storage data. Each region has its own characteristics like geographical position, cost, and availability parameters.
 
 The main idea of this proposal is to assign data to a suitable cloud region. In the cloud, scheduling is an essential process for guiding files to be stored. After receiving user requests and data, the scheduler component should gather accepted files, analyze them according to customer constraints and estimate the needed capacities.
 
@@ -179,9 +179,9 @@ Algorithm 2 Longest file size Algorithm (LFS)_____________________________
 
 The content of the groups depends on the manner that the files are sorted initially. We adopt three manners to sort the files.
 
-- • First manner: Take the files as given initially without applying any sorting.
-- • Second manner: Sort the files according to the increasing order of their size.
-- • Third manner: Sort the files according to the decreasing order of their size.
+- First manner: Take the files as given initially without applying any sorting.
+- Second manner: Sort the files according to the increasing order of their size.
+- Third manner: Sort the files according to the decreasing order of their size.
 
 For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute a sequence of groups. The first sequence is *G*_1, *G*_2, and *G*_3 denoted as {*G*_1, *G*_2, *G*_3}. For this sequence, we schedule all files in *G*_1, next we schedule all files in *G*_2 and finally, we schedule all files in *G*_3. The second sequence is {*G*_1, *G*_3, *G*_2}. The third sequence is {*G*_2, *G*_1, *G*_3}. The fourth sequence is {*G*_2, *G*_3, *G*_1}. The fifth sequence is {*G*_3, *G*_1, *G*_2}. The last sequence is {*G*_3, *G*_2, *G*_1}. So, for each manner, six sequences are executed and the best solution is picked and returned.
 
@@ -255,11 +255,11 @@ Algorithm 4 Third-Grouped One-by-one Algorithm (TGO)_______________________
 
 The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first file *F*1 from *G*_1, the first file *F*2 from *G*_2, and the first file *F*3 from *G*_3. The swapping is as follows:
 
-- • Restore a copy of *F*1
-- • Apply a translation of the *f*_1 − 1 files to the left beginning with position 2 and ending with position *f*_1.
-- • Move *F*2 at the end of *G*_1.
-- • Move *F*3 at the front of *G*_2.
-- • Move the stored copy of *F*1 at the front of *G*_3.
+- Restore a copy of *F*1
+- Apply a translation of the *f*_1 − 1 files to the left beginning with position 2 and ending with position *f*_1.
+- Move *F*2 at the end of *G*_1.
+- Move *F*3 at the front of *G*_2.
+- Move the stored copy of *F*1 at the front of *G*_3.
 
 Now, after the swapping *TGO* described in the ‘Third-grouped one-by-one algorithm (*TGO*)’ on the new set of files obtained after swapping.
 
@@ -292,11 +292,11 @@ Algorithm 5 Three-files Swap Third-Grouped Algorithm (TST)________________
 
 The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first $\frac{F_n}{10}$ files from *G*_1, the first $\frac{F_n}{10}$ files from *G*_2, and the first $\frac{F_n}{10}$ files from *G*_3. The swapping is as follows:
 
-- • Restore a copy of the first $\frac{F_n}{10}$ files from *G*_1
-- • Apply a translation of the *f*_1 − 10 files to the left beginning with position 11 and ending with position *f*_1.
-- • Move the first $\frac{F_n}{10}$ files from *G*_2 at the end of *G*_1.
-- • Move the first $\frac{F_n}{10}$ files from *G*_3 at the front of *G*_2.
-- • Move the stored copy of the first $\frac{F_n}{10}$ files from *G*_1 at the front of *G*_3.
+- Restore a copy of the first $\frac{F_n}{10}$ files from *G*_1
+- Apply a translation of the *f*_1 − 10 files to the left beginning with position 11 and ending with position *f*_1.
+- Move the first $\frac{F_n}{10}$ files from *G*_2 at the end of *G*_1.
+- Move the first $\frac{F_n}{10}$ files from *G*_3 at the front of *G*_2.
+- Move the stored copy of the first $\frac{F_n}{10}$ files from *G*_1 at the front of *G*_3.
 
 Now, after the swapping *TGO* described in the ‘Third-grouped one-by-one algorithm (*TGO*)’ on the new set of files obtained after swapping.
 
@@ -338,10 +338,10 @@ The tested instances are coded to be used by the proposed algorithms measuring t
 
 The generated classes are illustrated as follows:
 
-- • *Class* 1: *Sz*_i in *UN*[25, 130].
-- • *Class* 2: *Sz*_i in *UN*[110, 370].
-- • *Class* 3: *Sz*_i in *NO*[220, 25].
-- • *Class* 4: *Sz*_i in *NO*[330, 110].
+- *Class* 1: *Sz*_i in *UN*[25, 130].
+- *Class* 2: *Sz*_i in *UN*[110, 370].
+- *Class* 3: *Sz*_i in *NO*[220, 25].
+- *Class* 4: *Sz*_i in *NO*[330, 110].
 
 The choice of the number of virtual machines and the number of files that can be tested are presented in Table 4.
 
@@ -359,12 +359,12 @@ For each number of virtual machines and each number of files, 10 different insta
 
 All algorithms presented in ‘Proposed algorithms’ will be discussed based on several metrics. These metrics are defined as follows.
 
-- • $\vec{Z}$ The minimum value obtained after executing of all algorithms.
-- • *Z* The value of the presented algorithm.
-- • *Mp* The percentage of instances when $\vec{Z}=Z$.
-- • $Gp=\frac{Z−\vec{Z}}{Z}$, if *Z* = 0, then *Gp* = 0.
-- • *Ag* The average *Gp* for a fixed set of instances.
-- • *Time* The time of execution of an algorithm for a fixed set of instances. This time is in seconds and we recorded it as “.” if the time is less than 0.0001 s.
+- $\vec{Z}$ The minimum value obtained after executing of all algorithms.
+- *Z* The value of the presented algorithm.
+- *Mp* The percentage of instances when $\vec{Z}=Z$.
+- $Gp=\frac{Z−\vec{Z}}{Z}$, if *Z* = 0, then *Gp* = 0.
+- *Ag* The average *Gp* for a fixed set of instances.
+- *Time* The time of execution of an algorithm for a fixed set of instances. This time is in seconds and we recorded it as “.” if the time is less than 0.0001 s.
 
 ### Discussion results
 

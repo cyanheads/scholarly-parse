@@ -252,16 +252,36 @@ describe('tex-math preambles and <alternatives> (#135)', () => {
 });
 
 describe('display formulas (#130)', () => {
-  it('drops a graphic-only formula rather than keeping a bare label', () => {
-    const blocks = sectionOf(
-      '<disp-formula><label>(1)</label><alternatives><graphic xlink:href="eq1.gif"/>' +
+  it('keeps a graphic-only formula as its image, marked and reported', () => {
+    // Europe PMC serves formulas it has no source for as GIFs: the content is not in the
+    // text, so the output marks where it stood instead of closing up around it.
+    const document = parseBody(
+      '<sec><title>Model</title>' +
+        '<disp-formula><label>(1)</label><alternatives><graphic xlink:href="eq1.gif"/>' +
         '<tex-math>E = mc^2</tex-math></alternatives></disp-formula>' +
-        '<disp-formula><label>(2)</label><graphic xlink:href="e2.gif"/></disp-formula>' +
-        '<p>Trailing prose.</p>',
+        '<disp-formula id="Equ2"><label>(2)</label><graphic xlink:href="e2.gif"/></disp-formula>' +
+        '<p>where <inline-formula id="IEq1"><inline-graphic xlink:href="i1.gif"/>' +
+        '</inline-formula> is the speed of light.</p></sec>',
     );
-    expect(blocks).toEqual([
+    expect(document.body[0]?.blocks).toEqual([
       { label: '(1)', tex: 'E = mc^2', type: 'formula' },
-      { text: 'Trailing prose.', type: 'paragraph' },
+      { href: 'e2.gif', id: 'Equ2', label: '(2)', type: 'formula' },
+      { text: 'where [formula] is the speed of light.', type: 'paragraph' },
+    ]);
+    expect(toMarkdown(document)).toContain('[formula] (2)\n\nwhere [formula] is');
+    expect(
+      document.diagnostics.warnings.filter((warning) => warning.code === 'math-without-tex'),
+    ).toEqual([
+      {
+        code: 'math-without-tex',
+        message: 'A formula is published only as an image (e2.gif)',
+        where: 'Equ2',
+      },
+      {
+        code: 'math-without-tex',
+        message: 'A formula is published only as an image (i1.gif)',
+        where: 'IEq1',
+      },
     ]);
   });
 

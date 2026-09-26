@@ -157,13 +157,21 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
     case 'fig-group':
     case 'disp-formula-group':
       return [
-        ...captionParagraph(findOne(node, 'caption'), ctx),
+        ...groupCaption(node, ctx),
         ...flowBlocks(withoutTags(children, 'caption', 'label'), ctx),
       ];
-    case 'fig':
+    case 'fig': {
+      // A figure with no label, caption, or alt text whose file is a `<media>` (a review
+      // report's PDF) has nothing to show: it is a file to open.
+      const shown = figure(node, ctx);
+      const pointer = assetPointer(node);
+      const opaque = !shown.label && !shown.caption && !shown.alt;
+      const asset =
+        opaque && pointer && tagNameOf(pointer) === 'media' ? supplement(node, ctx) : shown;
       // Figure supplements nest inside their parent figure, often wrapped in a
       // `<p content-type="supplemental-figure">`; they follow it as figures of their own.
-      return [figure(node, ctx), ...flowBlocks(withoutTags(children, ...FIGURE_PARTS), ctx)];
+      return [asset, ...flowBlocks(withoutTags(children, ...FIGURE_PARTS), ctx)];
+    }
     case 'graphic': {
       const href = attrOf(node, 'xlink:href');
       const alt = text(findOne(node, 'alt-text')) || undefined;
@@ -189,7 +197,7 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
       return code ? [{ text: code, type: 'code', ...(language && { language }) }] : [];
     }
     case 'disp-formula': {
-      const formula = displayFormula(node);
+      const formula = displayFormula(node, ctx);
       return formula ? [formula] : [];
     }
     case 'array': {
@@ -238,9 +246,16 @@ export function captionText(caption: XmlNode | undefined, ctx: JatsContext): str
   return parts.join(' ') || undefined;
 }
 
-function captionParagraph(caption: XmlNode | undefined, ctx: JatsContext): Block[] {
-  const text = captionText(caption, ctx);
-  return text ? [{ text, type: 'paragraph' }] : [];
+/**
+ * A figure, table, or formula group's label and caption as one paragraph, the label in
+ * bold the way a figure's renders; the panels inside carry neither.
+ */
+function groupCaption(group: XmlNode, ctx: JatsContext): Block[] {
+  const label = text(findOne(group, 'label')).replace(/[.:]\s*$/, '');
+  const line = [label && `**${escapeInline(label)}.**`, captionText(findOne(group, 'caption'), ctx)]
+    .filter(Boolean)
+    .join(' ');
+  return line ? [{ text: line, type: 'paragraph' }] : [];
 }
 
 /** A figure's own parts; anything else inside a `<fig>` is content that follows it. */
@@ -323,6 +338,9 @@ function supplement(node: XmlNode, ctx: JatsContext): SupplementBlock {
 /** List types JATS numbers or letters. */
 const ORDERED_LIST_TYPE = /^(order|alpha-|roman-)/;
 
+/** An item label that is only a bullet glyph, which the list marker already draws. */
+const BULLET_LABEL = /^[•◦▪▫●○■□▸►‣⁃∙·*–-]$/u;
+
 /**
  * A `<list>`. An item's `<label>` ("(a)", "i.") leads its first paragraph, and a list
  * whose items carry labels renders unordered so the printed labels are the only numbering.
@@ -332,7 +350,7 @@ function list(node: XmlNode, ctx: JatsContext, withTitle: boolean): ListBlock {
   let labeled = false;
   const items: Block[][] = [];
   for (const item of findAll(node, 'list-item')) {
-    const label = text(findOne(item, 'label'));
+    const label = text(findOne(item, 'label')).replace(BULLET_LABEL, '');
     const blocks = flowBlocks(withoutTags(childrenOf(item), 'label'), ctx);
     if (label) {
       labeled = true;
@@ -416,12 +434,11 @@ function statement(node: XmlNode, ctx: JatsContext): BoxBlock {
 }
 
 /**
- * A `<disp-formula>`: TeX from `<tex-math>` or converted MathML, else text. A
- * graphic-only formula has nothing to show and is left out rather than kept as a bare
- * label. (#130, #135)
+ * A `<disp-formula>`: TeX from `<tex-math>` or converted MathML, else text, else the
+ * image it is published as. (#130, #135)
  */
-function displayFormula(node: XmlNode): FormulaBlock | undefined {
-  const parts = formulaParts(withoutTags(childrenOf(node), 'label'));
+function displayFormula(node: XmlNode, ctx: JatsContext): FormulaBlock | undefined {
+  const parts = formulaParts(node, ctx);
   if (!parts) return;
   const id = attrOf(node, 'id');
   const label = text(findOne(node, 'label')) || undefined;

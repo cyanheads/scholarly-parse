@@ -56,6 +56,19 @@ function count(text: string, pattern: RegExp): number {
   return [...text.matchAll(pattern)].length;
 }
 
+/**
+ * `<fig>` elements the model must hold as figures. One with no label or caption whose
+ * only file is a `<media>` (a review report's PDF) is parsed as a supplement. Each is
+ * read up to the first `</fig>` after it, so a figure holding its own supplement figures
+ * still counts once per `<fig>`.
+ */
+function sourceFigures(source: string): number {
+  return [...source.matchAll(/<fig[\s>]/g)].filter((match) => {
+    const element = source.slice(match.index, source.indexOf('</fig>', match.index));
+    return /<(graphic|label|caption|alt-text)[\s>]/.test(element) || !element.includes('<media');
+  }).length;
+}
+
 /** Problems with a parsed document; empty when every invariant holds. */
 export function checkInvariants({ document, format, markdown, source }: InvariantInput): string[] {
   const problems: string[] = [];
@@ -95,7 +108,7 @@ export function checkInvariants({ document, format, markdown, source }: Invarian
     const modelTables = countBlocks(document, 'table');
     if (modelTables !== tables)
       problems.push(`${tables} <table-wrap> in the source, ${modelTables} tables parsed`);
-    const figures = count(source, /<fig[\s>]/g);
+    const figures = sourceFigures(source);
     const modelFigures = countBlocks(document, 'figure');
     if (modelFigures < figures)
       problems.push(`${figures} <fig> in the source, ${modelFigures} figures parsed`);

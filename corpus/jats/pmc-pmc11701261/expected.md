@@ -11,10 +11,10 @@ Classical observations suggest a connection between 3D gene structure and functi
 
 ## Highlights
 
-- • Polymer simulations of all active genes in GM12878 lymphoblastoid cells
-- • Simulations validated by high-resolution experimental datasets
-- • 3DGene database for searching and visualizing 3D structures
-- • Structural variability in chromatin is related to interaction hotspots
+- Polymer simulations of all active genes in GM12878 lymphoblastoid cells
+- Simulations validated by high-resolution experimental datasets
+- 3DGene database for searching and visualizing 3D structures
+- Structural variability in chromatin is related to interaction hotspots
 
 ## Summary
 

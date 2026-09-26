@@ -13,15 +13,23 @@ We revisit the non-relativistic limit of the Dirac equation in finite scalar and
 
 ## Introduction
 
-The Dirac equation, introduced nearly 100 years ago in 1928, represents the most successful attempt to incorporate the effects of special relativity into quantum mechanics in describing the behaviour of spin-1/2 particles. One fundamental departure from the standard Schrödinger equation is that the Dirac equation describes particles with 4-component spinors (two bi-spinors) instead of scalar wavefunctions . Nevertheless, the product is positive-definite, and is still associated with the particle probability density[1]. That can be compared to the Born’s postulate of quantum mechanics that the wave function product defines the probability density of finding a particle at position *r* and time *t*. It may be interesting to mention that, in the de Broglie–Bohm interpretation of quantum mechanics (Bohmian mechanics), the link between the probability density and the wave function appears naturally as a result of the dynamic consequences of the quantum equilibrium hypothesis.
+The Dirac equation, introduced nearly 100 years ago in 1928, represents the most successful attempt to incorporate the effects of special relativity into quantum mechanics in describing the behaviour of spin-1/2 particles. One fundamental departure from the standard Schrödinger equation is that the Dirac equation describes particles with 4-component spinors (two bi-spinors) [formula] instead of scalar wavefunctions [formula]. Nevertheless, the product [formula] is positive-definite, and is still associated with the particle probability density[1]. That can be compared to the Born’s postulate of quantum mechanics that the wave function product [formula] defines the probability density of finding a particle at position *r* and time *t*. It may be interesting to mention that, in the de Broglie–Bohm interpretation of quantum mechanics (Bohmian mechanics), the link between the probability density and the wave function appears naturally as a result of the dynamic consequences of the quantum equilibrium hypothesis.
 
 It may be interesting to mention that the Dirac equation for a free particle reduces to the Schrödinger equation in the non-relativistic limit where the 4-component spinors acquire the approximate form
 
-where both and are two-component spinors. The spinor has the explicit form
+[formula]
+
+where both [formula] and [formula] are two-component spinors. The spinor [formula] has the explicit form
+
+[formula]
 
 with
 
-where and is a constant normalized Pauli spinor. The two-component spinors and are often respectively referred to as the large and small components of the Dirac wave functions. approaches the non-relativistic wave function as energy decreases while vanishes. In a recent work by Wilczek and Yu[2], it is argued that the usual identification of as the probability density is conceptually unsatisfactory as the product contains a relativistic correction in the form
+[formula]
+
+where [formula] and [formula] is a constant normalized Pauli spinor. The two-component spinors [formula] and [formula] are often respectively referred to as the large and small components of the Dirac wave functions. [formula] approaches the non-relativistic wave function [formula] as energy decreases while [formula] vanishes. In a recent work by Wilczek and Yu[2], it is argued that the usual identification of [formula] as the probability density is conceptually unsatisfactory as the product [formula] contains a relativistic correction in the form
+
+[formula] (1)
 
 A fundamental consequence is that the density thus defined will never vanish, except at infinity, as one can not have the wave function and its derivative approach zero at the same time.
 
@@ -33,77 +41,151 @@ There is a wide literature of semi-relativistic approximation schemes to the Dir
 
 We start with a general Dirac Hamiltonian with scalar potential S and vector potential V:
 
+[formula] (2)
+
+[formula] (3)
+
 where *m* is the mass of the particle, *E* is the energy and
+
+[formula]
 
 It can be written in a simpler matrix form as
 
+[formula] (4)
+
 which gives us two coupled equations
+
+[formula] (5)
+
+[formula] (6)
 
 where we have taken
 
+[formula]
+
 The equations can be written in second derivative form as
+
+[formula] (7)
 
 Taking the non-relativistic limit:
 
+[formula]
+
 the above equation can be rewritten as
+
+[formula] (8)
 
 Using Taylor series expansion, the equation can be approximated as
 
-From now on, we will replace with *E* for simplicity as we focus on the non-relativistic regime. The above equation can be further rewritten as
+[formula]
+
+From now on, we will replace [formula] with *E* for simplicity as we focus on the non-relativistic regime. The above equation can be further rewritten as
+
+[formula] (9)
 
 By expanding the fourth term on right side in the form
 
+[formula] (10)
+
 and by replacing
+
+[formula]
 
 we have
 
+[formula] (11)
+
 So, as an operator:
 
-The so-called Darwin term is often considered in non-relativistic studies[11,12]. Considering that and may not commute, the first term up to the second order term is given by
+[formula] (12)
+
+[formula] (13)
+
+The so-called Darwin term is often considered in non-relativistic studies[11,12]. Considering that [formula] and [formula] may not commute, the first term up to the second order term is given by
+
+[formula] (14)
 
 where
 
+[formula]
+
 and the double commutator is
+
+[formula]
 
 For the second term:
 
+[formula] (15)
+
 Combining both terms above, we get the full expansion:
+
+[formula] (16)
 
 We reach the final form of the Schrödinger equation-like non relativistic limit of the Dirac equation
 
+[formula] (17)
+
 which includes, as expected, the standard Schrödinger equation terms as well as energy- and potential-dependent relativistic correction terms.
 
-The Darwin term appears in some Schrödinger-equivalent potential derived from the Dirac equation including for examples Refs[13–15].. The Darwin term is generally small compared to the central and spin-orbit terms. It may be interesting to point out that the Darwin ends up as a constant correction for a harmonic oscillator, which can therefore be neglected, and a surface correction for a Woods-Saxon potential. For the Coulomb potential, it is known to acquire a Dirac function form which affects only the *s* wave at the origin.
+The Darwin term appears in some Schrödinger-equivalent potential derived from the Dirac equation including for examples Refs[13–15].. The Darwin term is generally small compared to the central and spin-orbit terms. It may be interesting to point out that the Darwin ends up as a constant correction for a harmonic oscillator, which can therefore be neglected, and a surface correction for a Woods-Saxon potential. For the Coulomb potential, it is known to acquire a Dirac function form [formula] which affects only the *s* wave at the origin.
 
 Now we would like to re-express the equation in explicit second derivative form. We will be now writing the equation explicitly. We assume spherical symmetry and that the potentials only dependent on the radius. In spherical coordinates, we have for any function *f*
 
+[formula]
+
 Therefore, we have for the second correction term
+
+[formula] (18)
 
 which represents the spin-orbit coupling, and can be written in the more known form as
 
-We can define an operator , as often done in the solving of the Dirac equation, in the form
+[formula]
 
-The eigenvalues of are such that, , if and if . Given that operator acts on spin spherical harmonics , as follows:
+We can define an operator [formula], as often done in the solving of the Dirac equation, in the form
+
+[formula]
+
+The eigenvalues of [formula] are such that, [formula], if [formula] and [formula] if [formula]. Given that operator [formula] acts on spin spherical harmonics [formula], as follows:
+
+[formula]
 
 The fourth correction term for the upper spinor is:
 
+[formula] (19)
+
 The fifth term can be rewritten as
+
+[formula] (20)
 
 where we applied the following property:
 
+[formula]
+
 The sixth term is:
+
+[formula]
 
 The non-relativistic limit of the Dirac equation in spherical polar coordinates:
 
-where it may be useful to remind that contains two components and that for standard operator one has
+[formula] (21)
 
-We can thus separate the form of 21 into radial (*R*(*r*)) and angular () components. Collecting all the terms with the radial component, multiplying them by
+where it may be useful to remind that [formula] contains two components and that for standard [formula] operator one has
 
-The third term above is exactly the inverse of the effective mass given in the following section, in Equation 60, multiplying the equation by and equating the radial terms to the separation constant
+[formula] (22)
 
-Dividing the whole by we arrive at
+We can thus separate the form of 21 into radial (*R*(*r*)) and angular ([formula]) components. Collecting all the terms with the radial component, multiplying them by [formula]
 
-We have considered both potentials *S* and *V* in our derivation. It may be interesting to mention that both the concepts of spin and pseudospin symmetries are often discussed in relativistic quantum mechanics. Spin symmetry arises in the Dirac equation when the difference between the vector and scalar potentials, , is approximately constant, , while pseudospin symmetry appears when the sum of the potentials, , is nearly constant, [16]. These symmetries are typically understood as emerging from the decoupling of the large and small components of the Dirac spinor, leading to degenerate doublets in the spectrum.
+[formula] (23)
+
+The third term above is exactly the inverse of the effective mass given in the following section, in Equation 60, multiplying the equation by [formula] and equating the radial terms to the separation constant
+
+[formula] (24)
+
+Dividing the whole by [formula] we arrive at
+
+[formula] (25)
+
+We have considered both potentials *S* and *V* in our derivation. It may be interesting to mention that both the concepts of spin and pseudospin symmetries are often discussed in relativistic quantum mechanics. Spin symmetry arises in the Dirac equation when the difference between the vector and scalar potentials, [formula], is approximately constant, [formula], while pseudospin symmetry appears when the sum of the potentials, [formula], is nearly constant, [formula][16]. These symmetries are typically understood as emerging from the decoupling of the large and small components of the Dirac spinor, leading to degenerate doublets in the spectrum.
 
 In our formulation, we focus on the modified Schrödinger equation obtained in the non-relativistic limit which retains the spin–orbit and Darwin terms explicitly in closed analytical form, without requiring the restrictive assumptions that are usually imposed to achieve exact spin or pseudospin symmetry. This approach therefore allows for a broad class of potentials and provides a flexible framework to study relativistic corrections and fine-structure effects in systems where spin and pseudospin symmetry may be only approximate or partially realized (see, for example, Ref[17]. and references therein).
 
@@ -111,207 +193,351 @@ In our formulation, we focus on the modified Schrödinger equation obtained in t
 
 The modified Schödinger equation distilled from the Dirac equation(for a purely radial potential), can be expressed as below second-order differential equation
 
+[formula] (26)
+
 where,
 
-For , the function is chosen such that the first-order term disappears from the differential equation. In the following discussion, we treat the effective mass as a constant and use it to construct as
+[formula] (27)
+
+For [formula], the function [formula] is chosen such that the first-order term disappears from the differential equation. In the following discussion, we treat the effective mass [formula] as a constant and use it to construct [formula] as
+
+[formula] (28)
 
 substituting this in Equation 26 we get,
 
+[formula] (29)
+
 The above equation is valid for a general potential dependent on r except for a Coulomb-like potential with inverse r dependence. The differential equation for such a potential is given below
 
+[formula] (30)
+
 Both the above equations are in Schrödinger-like equation form
+
+[formula] (31)
 
 depending on the chosen potential, such equations may admit exact or quasi-exact solutions. We have demonstrated how analytical solutions for the Harmonic oscillator and the Coulomb potentials can be derived in the following subsections along with their Perturbative analysis in the next section.
 
 #### Harmonic oscillator
 
-When affected by a Harmonic oscillator potential such as Equation 29 becomes,
+When affected by a Harmonic oscillator potential such as [formula] Equation 29 becomes,
 
-We introduce to write the coefficient of in a succinct form,
+[formula] (32)
+
+We introduce [formula] to write the coefficient of [formula] in a succinct form,
+
+[formula] (33)
 
 Expressing derivatives in *r* as primed quantities, Equation 32 becomes
 
-Now, observing the asymptotic behaviour of this equation for , Equation 34 reduces to
+[formula] (34)
+
+Now, observing the asymptotic behaviour of this equation for [formula], Equation 34 reduces to
+
+[formula] (35)
 
 The form of the equation suggests that the solution exhibits Gaussian-like behaviour in the limit of large *r*,
 
+[formula] (36)
+
 Similarly, at the limit *r* is very small, Equation 34 reduces to
+
+[formula] (37)
 
 In this limit, the solution takes the form
 
+[formula] (38)
+
 Combining the results from asymptotic analysis gives a general solution of the form
 
-expressing as a power series
+[formula] (39)
 
-and substituting the expression for in Equation 34, we get a recurrence relationship,
+expressing [formula] as a power series
+
+[formula] (40)
+
+and substituting the expression for [formula] in Equation 34, we get a recurrence relationship,
+
+[formula]
 
 The above recurrence relation enables us to find the expression for energy levels
 
-The recurrence equation is exactly that of an associated Laguerre polynomial, hence can be succinctly expressed as
+[formula] (41)
 
-The exact solution for *R*(*r*) can be expressed by multiplying (from Equation 28) and *u*(*r*),
+The recurrence equation is exactly that of an associated Laguerre polynomial, hence [formula] can be succinctly expressed as
+
+[formula] (42)
+
+The exact solution for *R*(*r*) can be expressed by multiplying [formula] (from Equation 28) and *u*(*r*),
+
+[formula] (43)
 
 #### Coulomb potential
 
-When potential , where is the fine-structure constant times the atomic number *Z*, is substituted in Equation 30,the equation for all points except , takes a Doubly-Confluent Heun equation form,
+When potential [formula], where [formula] is the fine-structure constant times the atomic number *Z*, is substituted in Equation 30,the equation for all points except [formula], takes a Doubly-Confluent Heun equation form,
 
-The above equation is also of the Kratzer-like potential Schrödinger equation () form
+[formula] (44)
+
+The above equation is also of the Kratzer-like potential Schrödinger equation ([formula]) form
+
+[formula] (45)
 
 where the corresponding coefficients are
 
+[formula] (46)
+
 A broad class of exactly and quasi-exactly solvable models has been established through algebraic and analytical methods[18–20]. There were also studies on general conditions for obtaining polynomial solutions of second-order differential equations[21] and solvable Schrödinger potentials using confluent Heun functions[22]. Refs[23,24]. applied these principles to relativistic wave equations including the Dirac and Duffin–Kemmer–Petiau formulations which suggest that solvable structures persist in quantum-corrected and spin-one settings. To derive the quasi-exact solution, we introduce the following transformation:
 
-where,
-
-such that and . After substituting values of and in Equation 48, we get , for the condition to always be true, *k* takes the value . The Hamiltonian can now be expressed as ,
+[formula] (47)
 
 where,
 
-This Hamiltonian can be expressed as a quadratic combination of generators of an set
+[formula] (48)
 
-if is of the form,
+such that [formula] and [formula]. After substituting values of [formula] and [formula] in Equation 48, we get [formula], for the condition [formula] to always be true, *k* takes the value [formula]. The Hamiltonian can now be expressed as [formula],
 
-The generators of the set are
+[formula] (49)
+
+where,
+
+[formula] (50)
+
+This Hamiltonian can be expressed as a quadratic combination of generators of an [formula] set
+
+[formula] (51)
+
+if [formula] is of the form,
+
+[formula] (52)
+
+The generators of the [formula] set are
+
+[formula] (53)
 
 Using the relation introduced by Equation 52, we can derive the expression for energy levels
 
-The ability to construct the Hamiltonian in terms of quadratic combinations of generators implies that it leaves invariant an -dimensional finite vector space. Hence, preserves the finite-dimensional space of polynomials of degree at most *n*,
+[formula] (54)
 
-Substituting the value of in *u*, followed by evaluating the Hamiltonian equation, we get a three-term recurrence relation,
+The ability to construct the Hamiltonian in terms of quadratic combinations of [formula] generators implies that it leaves invariant an [formula]-dimensional finite vector space. Hence, [formula] preserves the finite-dimensional space of polynomials of degree at most *n*,
 
-with . Finally, the radial part of the wavefunction *R* can be expressed as product of and *u*,
+[formula] (55)
 
-In the limit , , it follows that . In this regime, the radial solutions given by equations 43 and 57 reduce to their corresponding solutions of the Schrödinger equation.
+Substituting the value of [formula] in *u*, followed by evaluating the Hamiltonian equation, we get a three-term recurrence relation,
+
+[formula] (56)
+
+with [formula]. Finally, the radial part of the wavefunction *R* can be expressed as product of [formula] and *u*,
+
+[formula] (57)
+
+In the limit [formula], [formula], it follows that [formula]. In this regime, the radial solutions given by equations 43 and 57 reduce to their corresponding solutions of the Schrödinger equation.
 
 ### Effective mass
 
 We will refer to the non-relativistic limit of the Dirac equation with the correction terms as the modified Schrödinger equation for simplicity. The modified equation can be simplified by considering specific terms to be contributing to an effective mass:
 
+[formula] (58)
+
+[formula] (59)
+
 Using again the Taylor expansion, we have:
+
+[formula] (60)
 
 ### Probability density
 
 The general Dirac Spinor for a particle in a finite potential has now the form
 
+[formula]
+
 The Dirac density probability is:
+
+[formula] (61)
 
 Taking again the non-relativistic limit:
 
+[formula]
+
 we then have
 
-In our derivation above, we considered the general Dirac Hamiltonian containing both scalar *S*(*r*) and vector *V*(*r*) potentials to ensure formal completeness. For the applications discussed below, primarily atomic and electronic systems where relativistic effects are most relevant, the scalar term is either negligible or can be effectively absorbed into the mass term. Therefore, we focused on the case (or equivalently ) to emphasize the physically dominant vector potential contribution.
+[formula]
 
-The derivation, however, remains fully general, and the inclusion of a finite scalar potential is straightforward by reintroducing *S*(*r*) through the definitions and . Such scalar contributions are mainly relevant in nuclear, hypernuclear, or quark-level systems, where Lorentz-scalar couplings modify the rest mass. Extending the present framework to those regimes would require a more elaborate treatment of the poorly constrained vector and scalar potentials.
+In our derivation above, we considered the general Dirac Hamiltonian containing both scalar *S*(*r*) and vector *V*(*r*) potentials to ensure formal completeness. For the applications discussed below, primarily atomic and electronic systems where relativistic effects are most relevant, the scalar term is either negligible or can be effectively absorbed into the mass term. Therefore, we focused on the case [formula] (or equivalently [formula]) to emphasize the physically dominant vector potential contribution.
+
+The derivation, however, remains fully general, and the inclusion of a finite scalar potential is straightforward by reintroducing *S*(*r*) through the definitions [formula] and [formula]. Such scalar contributions are mainly relevant in nuclear, hypernuclear, or quark-level systems, where Lorentz-scalar couplings modify the rest mass. Extending the present framework to those regimes would require a more elaborate treatment of the poorly constrained vector and scalar potentials.
 
 ## Perturbation corrections
 
 ### Harmonic oscillator
 
-Despite the added complexity, it is of interest to search for analytical solutions to Equation 24, which can be done by identifying it as a Schrödinger equation with correction terms, allowing us to employ perturbation-theoretical methods to find good analytical approximations. In this section, we apply this method to find approximate analytical expressions for the useful case of the harmonic oscillator. We start by taking simply a vector potential and no scalar potential such that , and therefore Equation 24 becomes
+Despite the added complexity, it is of interest to search for analytical solutions to Equation 24, which can be done by identifying it as a Schrödinger equation with correction terms, allowing us to employ perturbation-theoretical methods to find good analytical approximations. In this section, we apply this method to find approximate analytical expressions for the useful case of the harmonic oscillator. We start by taking simply a vector potential and no scalar potential such that [formula], and therefore Equation 24 becomes
 
-Since the term has an explicit *E* and *V* dependence, we substitute its form back in Equation 62, together with the form of the potential and arrive at
+[formula] (62)
 
-It is now of interest to reorganize this result into two parts. One is an unperturbed Hamiltonian that corresponds to the standard harmonic oscillator pieces and a perturbation Hamiltonian that contains the extra terms. We have that
+Since the [formula] term has an explicit *E* and *V* dependence, we substitute its form back in Equation 62, together with the form of the potential [formula] and arrive at
+
+[formula] (63)
+
+It is now of interest to reorganize this result into two parts. One is an unperturbed Hamiltonian [formula] that corresponds to the standard harmonic oscillator pieces and a perturbation Hamiltonian [formula] that contains the extra terms. We have that
+
+[formula] (64)
 
 which gives us the zeroth order energy as the usual eigenvalues of the harmonic oscillator, given by
 
+[formula] (65)
+
 with *n* and *l* the radial and angular quantum numbers, respectively. As for the perturbation, we have
 
-Working to first order in our small expansion parameter, and keeping in mind that is much smaller than *m*, we can make a series of observations. Firstly, we can take in terms that multiply an expectation value or that serve as correction factors the approximation
+[formula] (66)
+
+Working to first order in our small expansion parameter, and keeping in mind that [formula] is much smaller than *m*, we can make a series of observations. Firstly, we can take in terms that multiply an expectation value or that serve as correction factors the approximation
+
+[formula] (67)
 
 Secondly, we assume the terms involving *dR*/*dr* to vanish upon integration by parts under the standard boundary conditions. This allows us to, for the purpose of computing the first-order corrections, work only with
 
+[formula] (68)
+
 The time-independent perturbation theory tells us that
+
+[formula] (69)
 
 And therefore
 
+[formula] (70)
+
 Here, a series of simplifications are possible, namely the fact that via the virial theorem for the harmonic oscillator, one finds that
+
+[formula] (71)
 
 and therefore the first term adopts the neat form
 
+[formula] (72)
+
 and therefore we finally find
 
-where the fourth moment computed in the unperturbed state can usually be expressed in a closed form as a function of the quantum numbers. As for the first-order correction to the radial wavefunction, we have the standard formula
+[formula] (73)
 
-where is given by the form of Equation 68. Exploiting the orthogonality of the oscillator eigenfunctions, one can deduce that only the and pieces will contribute to the wavefunction correction as the constant pieces in would yield matrix elements proportional to , which is vanishing for . Therefore, the first-order correction to the wavefunction is given by Equation 74 using an effective Hamiltonian
+where the fourth moment [formula] computed in the unperturbed state can usually be expressed in a closed form as a function of the quantum numbers. As for the first-order correction to the radial wavefunction, we have the standard formula
+
+[formula] (74)
+
+where [formula] is given by the form of Equation 68. Exploiting the orthogonality of the oscillator eigenfunctions, one can deduce that only the [formula] and [formula] pieces will contribute to the wavefunction correction as the constant pieces in [formula] would yield matrix elements proportional to [formula], which is vanishing for [formula]. Therefore, the first-order correction to the wavefunction is given by Equation 74 using an effective Hamiltonian
+
+[formula] (75)
 
 ### Coulomb potential
 
 Using the same approach as for the Harmonic Oscillator, we shall now derive the perturbation correction for the case of a Coulomb potential, given by:
 
+[formula] (76)
+
 This yields a perturbation of the form
+
+[formula] (77)
 
 where we define for the sake of compactness
 
-The last term is the Darwin term, which is henceforth omitted, as we shall evaluate the energies for for which the Dirac delta function term will have no contribution. Using Equation 74:
+[formula] (78)
+
+The last term is the Darwin term, which is henceforth omitted, as we shall evaluate the energies for [formula] for which the Dirac delta function term will have no contribution. Using Equation 74:
+
+[formula] (79)
 
 Let us first focus on the initial bracketed term. Since
 
+[formula] (80)
+
 one finds that
 
-For a Coulomb potential, the radial wavefunction behaves as , which vanishes as due to the exponential decay. Near the origin, the behavior is so as for all . Let us now examine the second bracketed term:
+[formula] (81)
+
+For a Coulomb potential, the radial wavefunction behaves as [formula], which vanishes as [formula] due to the exponential decay. Near the origin, the behavior is [formula] so [formula] as [formula] for all [formula]. Let us now examine the second bracketed term:
+
+[formula] (82)
 
 Therefore, we find the energy correction to be
 
+[formula] (83)
+
 ## Numerical implementation
 
-In order to study the prevalence of the effects described in the previous section, a numerical implementation of Equation 24 was developed. The enforcing of the wavefunction boundary conditions is significantly simplified if we introduce a variable change , leading to
+In order to study the prevalence of the effects described in the previous section, a numerical implementation of Equation 24 was developed. The enforcing of the wavefunction boundary conditions is significantly simplified if we introduce a variable change [formula], leading to
 
-For , we can simply impose that the wavefunction vanish. The main advantage of this variable change is that, for , *R*(*u*) is strictly zero, while for *R*(*r*) is simply finite, and a non-zero boundary condition would have to be enforced. As shall be seen, our numerical implementation employs the Finite Difference Method (FDM), where zero Dirichlet boundary conditions are convenient.
+[formula] (84)
+
+For [formula], we can simply impose that the wavefunction vanish. The main advantage of this variable change is that, for [formula], *R*(*u*) is strictly zero, while for [formula] *R*(*r*) is simply finite, and a non-zero boundary condition would have to be enforced. As shall be seen, our numerical implementation employs the Finite Difference Method (FDM), where zero Dirichlet boundary conditions are convenient.
 
 ### Finite Difference Method (FDM)
 
 The Finite Difference Method (FDM) is the name given to a series of techniques that rely on discretizing the parameter space in a mesh and approximate derivatives using finite differences, effectively reducing the problem to a linearized version of itself, making it significantly simpler[25]. This has the advantage of allowing the usage of highly optimized matrix operation routines to solve the problem in a time- and resource-efficient way. With a sufficiently small step between grid points, the derivatives are well-approximated by the finite differences. The discretization of the parameter space is most often done using a uniform spacing, although methods of discretization for arbitrarily spaced meshes exist as well (e.g[26][27][28].). In this work, a uniform spacing was used. A typical approach would be the use of second-order accuracy central first- and second-order derivatives of *u*(*r*)
 
-where we let *h* denote the step of the mesh. However, in order to increase the accuracy of the solver, we can increase the number of mesh points to the left and right of the point of interest that we involve in the calculation, effectively increasing the accuracy of the finite difference. Let *m* and *n* be the number of points to the left and right of *i*, be coefficients obtained by solving the system from the Taylor expansion and q the order of accuracy, we can derive finite differences of arbitrary order of accuracy to approximate the p-th derivative of *u*(*r*) at point *i* by expanding in a Taylor series around as
+[formula] (85)
 
-In this work, we opted for a five-point central difference scheme (). This increases the accuracy significantly from the simple near-neighbor three-point scheme, and is a usual technique to avoid the well-known spurious state problem that arises in FDM approaches to the Dirac equation[29][30], and should also arise in its non-relativistic limit[31].
+where we let *h* denote the step of the mesh. However, in order to increase the accuracy of the solver, we can increase the number of mesh points to the left and right of the point of interest that we involve in the calculation, effectively increasing the accuracy of the finite difference. Let *m* and *n* be the number of points to the left and right of *i*, [formula] be coefficients obtained by solving the system from the Taylor expansion and q the order of accuracy, we can derive finite differences of arbitrary order of accuracy to approximate the p-th derivative of *u*(*r*) at point *i* by expanding [formula] in a Taylor series around [formula] as
+
+[formula] (86)
+
+In this work, we opted for a five-point central difference scheme ([formula]). This increases the accuracy significantly from the simple near-neighbor three-point scheme, and is a usual technique to avoid the well-known spurious state problem that arises in FDM approaches to the Dirac equation[29][30], and should also arise in its non-relativistic limit[31].
 
 The FDM has been extensively employed in the field, namely in numerical implementations of the Schrödinger[32][33][34] and Dirac[35][29][30] equations, in both time-dependent and -independent contexts. Other common numerical methods include Runge-Kutta 4[36][37], and specifically for the more intricate Dirac equation methods such as mapped Fourier method[38], Green’s function method[39][40], evolutionary algorithms[41] or power-series expansion[42] among others have been employed.
 
 ### Numerical method
 
-One immediately sees that Equation 84, equipped with the respective boundary conditions, is an eigenvalue problem with eigenfunction *u*(*r*) and respective eigen energies *E*, which can be solved after finite-difference discretization as a matrix eigenvalue problem. It should be noted, however, that the factor , defined in Equation 60, also includes an *E* term. Therefore, the term of Equation 84 where and *E* are multiplied is effectively quadratic in *E*, meaning that we are dealing with a Quadratic Eigenvalue Problem (QEP), a special case of non-linear eigenvalue problem. For a survey of this method see e.g[43].. Upon explicit substitution of Equation 60 onto Equation 84, we are able to write it in an eigenvalue form
+One immediately sees that Equation 84, equipped with the respective boundary conditions, is an eigenvalue problem with eigenfunction *u*(*r*) and respective eigen energies *E*, which can be solved after finite-difference discretization as a matrix eigenvalue problem. It should be noted, however, that the factor [formula], defined in Equation 60, also includes an *E* term. Therefore, the term of Equation 84 where [formula] and *E* are multiplied is effectively quadratic in *E*, meaning that we are dealing with a Quadratic Eigenvalue Problem (QEP), a special case of non-linear eigenvalue problem. For a survey of this method see e.g[43].. Upon explicit substitution of Equation 60 onto Equation 84, we are able to write it in an eigenvalue form
 
-Upon discretization, the resulting linear systems can be written as matrices. Let *N* be the number of points of the mesh, then *A*, *B* and *C* will become matrices. Note that, due to the boundary conditions that we enforce, we know that , meaning that the first and last rows and columns of the matrices , and can be casted away and the matrices can be reduced to their non-trivial core.
+[formula] (87)
+
+[formula] (88)
+
+Upon discretization, the resulting linear systems can be written as matrices. Let *N* be the number of points of the mesh, then *A*, *B* and *C* will become [formula] matrices. Note that, due to the boundary conditions that we enforce, we know that [formula], meaning that the first and last rows and columns of the matrices [formula], [formula] and [formula] can be casted away and the matrices can be reduced to their non-trivial [formula] core.
 
 The method was implemented in Python, where the standard numerical computation libraries such as NumPy[44] or SciPy[45] don’t feature solvers for nonlinear eigenvalue problems. Since, as aforementioned, the main reason for using the FDM is the possibility to exploit the highly optimized linear algebra algorithms featured in these packages, one can transform our current problem into a generalized eigenvalue problem, which is supported, and solve that one instead. Starting from our current form
 
-and by employing an auxiliary vector , we get
+[formula] (89)
 
-where , which can now be solved as a generalized eigenvalue problem using the routines in the aforementioned libraries. It should also be noted that, as usual in FDM implementations, the resulting matrices are sparse matrices, contributing to the numerical efficiency of the eigenvalue problem solving routines. Nonetheless, solving a quadratic eigenvalue problem is significantly more computationally demanding than the usual eigenvalue problem. The main reason for this is that the generalized linear problem that we obtained in Equation 90 increases the cost from to . We therefore end up with a matrix with twice the size, and twice the number of eigenvalues, and hence twice the spectral work. It should also be noted that the newly obtained form is non-Hermitian, which requires the usage of more complex algorithms.
+and by employing an auxiliary vector [formula], we get
 
-Due to the fact that we are discretizing the space using a uniform grid with constant spacing, one must be attentive to the fact that some states can end up poorly resolved at the lower-*r* end, at distances of the order of magnitude of the step size. If neglected, this can hinder the retrieval of their wavefunctions and energies of deep states such as . In order to ensure that the results in the following section are accurate, we wrote a second code with logarithmic spacing to cross-check that the energy levels and wavefunctions were exactly reproduced in both, ensuring that the results were robust and not resolution-dependent.
+[formula] (90)
+
+where [formula], which can now be solved as a generalized eigenvalue problem using the routines in the aforementioned libraries. It should also be noted that, as usual in FDM implementations, the resulting matrices are sparse matrices, contributing to the numerical efficiency of the eigenvalue problem solving routines. Nonetheless, solving a quadratic eigenvalue problem is significantly more computationally demanding than the usual eigenvalue problem. The main reason for this is that the generalized linear problem that we obtained in Equation 90 increases the cost from [formula] to [formula]. We therefore end up with a matrix with twice the size, and twice the number of eigenvalues, and hence twice the spectral work. It should also be noted that the newly obtained form is non-Hermitian, which requires the usage of more complex algorithms.
+
+Due to the fact that we are discretizing the space using a uniform grid with constant spacing, one must be attentive to the fact that some states can end up poorly resolved at the lower-*r* end, at distances of the order of magnitude of the step size. If neglected, this can hinder the retrieval of their wavefunctions and energies of deep states such as [formula]. In order to ensure that the results in the following section are accurate, we wrote a second code with logarithmic spacing to cross-check that the energy levels and wavefunctions were exactly reproduced in both, ensuring that the results were robust and not resolution-dependent.
 
 ### Numerical results
 
-One expects the contribution of the relativistic corrections to be extremely subtle for low energies, which was put to test as both a benchmark and sanity check using the electronic state of the Hydrogen atom, with a binding energy of about . To retrieve it, a Coulomb potential was employed, with the familiar form
+One expects the contribution of the relativistic corrections to be extremely subtle for low energies, which was put to test as both a benchmark and sanity check using the [formula] electronic state of the Hydrogen atom, with a binding energy of about [formula]. To retrieve it, a Coulomb potential was employed, with the familiar form
 
-with *e* the elementary charge, the vacuum permittivity and *Z* the number of protons in the nucleus. Note that we are using the unit or for distance. This is depicted in Fig. 1 (Top), where the standard radial Schrödinger equation solution and the numerical solution to the corrected form derived in this work are plotted against each other. They are virtually indistinguishable, as expected. Nonetheless, there is a small correction, which is easily seen in Fig. 1 (Bottom), where the standard wavefunction was subtracted from the corrected one. It is interesting to notice that the correction, although small, gives us some insights on the effect of the corrections: where the standard wavefunction vanishes, the corrected one is non-vanishing, since a contribution appears due to the term in Equation 1.
+[formula] (91)
 
-**Fig. 1.** (Top) Comparison of the Hydrogen state probability density solved using both the standard Schrödinger equation and the modified form described in this work; (Bottom) Magnitude of the correction, given by the difference between the corrected and standard probability densities. The effect of the correction terms is negligible, as expected.
+with *e* the elementary charge, [formula] the vacuum permittivity and *Z* the number of protons in the nucleus. Note that we are using the unit [formula] or [formula] for distance. This is depicted in Fig. 1 (Top), where the standard radial Schrödinger equation solution and the numerical solution to the corrected form derived in this work are plotted against each other. They are virtually indistinguishable, as expected. Nonetheless, there is a small correction, which is easily seen in Fig. 1 (Bottom), where the standard wavefunction was subtracted from the corrected one. It is interesting to notice that the correction, although small, gives us some insights on the effect of the corrections: where the standard wavefunction vanishes, the corrected one is non-vanishing, since a contribution appears due to the [formula] term in Equation 1.
+
+**Fig. 1.** (Top) Comparison of the Hydrogen [formula] state probability density solved using both the standard Schrödinger equation and the modified form described in this work; (Bottom) Magnitude of the correction, given by the difference between the corrected and standard probability densities. The effect of the correction terms is negligible, as expected.
 
 As expected, relativistic corrections are negligible in Hydrogen but become substantial for heavy nuclei such as Lead and superheavy ones like Oganesson. We investigate this by comparing the wavefunctions and probability densities for both modified (as introduced in this work) and standard Schrödinger equations, as well as the large component of the Dirac equation using a series of different potentials. Firstly, we study Lead using a Coulomb potential Lead, treating it as a hydrogenic atom. We also investigate Oganesson using a Yukawa screening potential. For heavier atomic systems, one often considers to introduce effective Coulomb potentials of various form to account for effect from the electron screening, exchange, and self-consistency (see, for example, Ref[46].). To further investigate our formalism in a more general view, we also study the effects on systems with a Woods-Saxon potential and harmonic oscillator potential. A few selected states of each potential are provided in Fig. 2, and a brief description and discussion on each of the potentials follows in the next subsections.
 
-**Fig. 2.** Comparison between selected wavefunctions (left column) and probability densities (right column) across the four studied potentials: (**a**,**b**) Coulomb ; (**c**,**d**) Yukawa ; (**e**,**f**) Woods–Saxon ; (**g**,**h**) Harmonic Oscillator .
+**Fig. 2.** Comparison between selected wavefunctions (left column) and probability densities (right column) across the four studied potentials: (**a**,**b**) Coulomb [formula]; (**c**,**d**) Yukawa [formula]; (**e**,**f**) Woods–Saxon [formula]; (**g**,**h**) Harmonic Oscillator [formula].
 
-Regarding the scope and accuracy, one should note the limits of the applicability of this formalism. Firstly, the effective-mass expansion in Equation 60 is valid in the regime , and degrades as the binding gets very deep or grows (i.e., the potential becomes steeper). Furthermore, we note that for s states the relative energy error is slightly higher, decreasing with increasing . The accuracy is also dependent on the type of potential. As a rule of thumb, the formalism is quantitatively reliable for moderate-Z and gently varying central fields, and for sharper potential and higher-Z systems, the higher-order terms become increasingly relevant. Even in that regime, the formalism remains qualitatively correct, since we recover the nodal smearing due to Equation 1 even in those limits.
+Regarding the scope and accuracy, one should note the limits of the applicability of this formalism. Firstly, the effective-mass expansion in Equation 60 is valid in the regime [formula], and degrades as the binding gets very deep or [formula] grows (i.e., the potential becomes steeper). Furthermore, we note that for s states the relative energy error is slightly higher, decreasing with increasing [formula]. The accuracy is also dependent on the type of potential. As a rule of thumb, the formalism is quantitatively reliable for moderate-Z and gently varying central fields, and for sharper potential and higher-Z systems, the higher-order terms become increasingly relevant. Even in that regime, the formalism remains qualitatively correct, since we recover the nodal smearing due to Equation 1 even in those limits.
 
 #### Coulomb potential
 
-In order to study the corrections in a Coulomb potential (Equation 91), we use Pb () as a case study. This is a heavy element for which relativistic corrections are already noticeable for the deeper states. We have solved for this potential using Dirac, Schrödinger and our modified Schrödinger with spin-relativistic corrections, and compared the energies of various states obtained using the three formalisms, which are tabled in the Appendix section. The wavefunction and probability density for a selected state is provide in the top two panels of Fig. 2, for reference. The spin-relativistic-corrected Schrödinger form explored in this work very neatly reproduces the large component of the Dirac equation, showing the effectiveness of the correction terms in bridging the two formalisms.
+In order to study the corrections in a Coulomb potential (Equation 91), we use Pb ([formula]) as a case study. This is a heavy element for which relativistic corrections are already noticeable for the deeper states. We have solved for this potential using Dirac, Schrödinger and our modified Schrödinger with spin-relativistic corrections, and compared the energies of various states obtained using the three formalisms, which are tabled in the Appendix section. The wavefunction and probability density for a selected state is provide in the top two panels of Fig. 2, for reference. The spin-relativistic-corrected Schrödinger form explored in this work very neatly reproduces the large component of the Dirac equation, showing the effectiveness of the correction terms in bridging the two formalisms.
 
 #### Yukawa potential
 
-The next potential that was studied was a Yukawa potential. It would also be of interest to look at an example of system where corrections would be very significant. Therefore, using this potential, we modelled Oganesson (), the largest superheavy element synthesized as of the development of this work. We consider this to be a particularly relevant case, especially in a time when the study of superheavy elements such as those beyond and the influence of relativistic effects in their physicochemical structure is an active and interesting field of research aligned with NuPECC’s Long Range Plan for European Nuclear Physics[47]. It is well known that Oganesson is heavy enough that relativistic corrections become extremely important, as well as a series of corrections namely Breit and QED contributions, vacuum polarization, among others[48]. Therefore, the simplistic Coulomb potential approach we used before becomes rather unfitting, and more robust methods are necessary to discuss its electronic shell structure[49]. Nonetheless, recent results seem to indicate that in superheavy elements the single-electron wave function is fairly similar to the bare electron wave function after the screening effect is taken into account[50]. Therefore, for a reasonable order-of-magnitude comparison, we model Oganesson via a Yukawa potential
+The next potential that was studied was a Yukawa potential. It would also be of interest to look at an example of system where corrections would be very significant. Therefore, using this potential, we modelled Oganesson ([formula]), the largest superheavy element synthesized as of the development of this work. We consider this to be a particularly relevant case, especially in a time when the study of superheavy elements such as those beyond [formula] and the influence of relativistic effects in their physicochemical structure is an active and interesting field of research aligned with NuPECC’s Long Range Plan for European Nuclear Physics[47]. It is well known that Oganesson is heavy enough that relativistic corrections become extremely important, as well as a series of corrections namely Breit and QED contributions, vacuum polarization, among others[48]. Therefore, the simplistic Coulomb potential approach we used before becomes rather unfitting, and more robust methods are necessary to discuss its electronic shell structure[49]. Nonetheless, recent results seem to indicate that in superheavy elements the single-electron wave function is fairly similar to the bare electron wave function after the screening effect is taken into account[50]. Therefore, for a reasonable order-of-magnitude comparison, we model Oganesson via a Yukawa potential
+
+[formula] (92)
 
 with *a* a Thomas–Fermi screening length given by
 
+[formula] (93)
+
 The obtained energy levels, compared with those retrieved from Dirac and the standard Schrödinger equation, can be found in the Appendix, in Table 2. Furthermore, the wavefunction and probability density of an illustrative state are given in the second row of Fig. 2. Note that for our Oganesson model, the deep states are highly relativistic, and therefore the wavefunctions are significantly shifted in relation to the Schrödinger solution, as can be seen by the Dirac solution. The formalism derived in this work reproduces the Dirac solution remarkably well. Namely, the non-vanishing behavior of the probability density in the zeroes of the wavefunction, which is ensured by the second term of Equation 1, is remarkably accurate.
 
-**Table 2.** Selected bound-state energies for a Yukawa potential with (see Equation 92). Columns list principal quantum number *n*, orbital , total *j*, and energies for Schrödinger (Schr.), modified Schrödinger with spin-relativistic corrections (Mod-Schr., this work), and Dirac (large component).
+**Table 2.** Selected bound-state energies for a Yukawa potential with [formula] (see Equation 92). Columns list principal quantum number *n*, orbital [formula], total *j*, and energies for Schrödinger (Schr.), modified Schrödinger with spin-relativistic corrections (Mod-Schr., this work), and Dirac (large component).
 
-| *n* |  | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
+| *n* | [formula] | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 0 | 1/2 | 164461 | 182315 | 229897 |
 | 2 | 0 | 1/2 | 30905 | 39891 | 52958 |
@@ -334,17 +560,21 @@ The obtained energy levels, compared with those retrieved from Dirac and the sta
 
 In order to investigate the effects of the correction terms in a potential of Woods-Saxon (WS) type, we used the familiar form
 
-scaled to reproduce energies in the order of for ease of comparison with the previous potentials. Naturally, the reproduced energies don’t correspond to electron shells of an atom, since WS is a nuclear potential and cannot reproduce the 1/*r* Coulomb tail, which is much more adequate for atomic purposes. In any case, we consider it to be of academic interest to study the effects of the corrections in this type of potential as well, as it differs only from the nuclear case via a scaling. For this purpose, we used a radius parameter of , diffuseness of and depth of . The energy table can be found in the Appendix, and a comparison between two wavefunctions and probability densities can be found in the third row of Fig. 2.
+[formula] (94)
+
+scaled to reproduce energies in the order of [formula] for ease of comparison with the previous potentials. Naturally, the reproduced energies don’t correspond to electron shells of an atom, since WS is a nuclear potential and cannot reproduce the 1/*r* Coulomb tail, which is much more adequate for atomic purposes. In any case, we consider it to be of academic interest to study the effects of the corrections in this type of potential as well, as it differs only from the nuclear case via a scaling. For this purpose, we used a radius parameter of [formula], diffuseness of [formula] and depth of [formula]. The energy table can be found in the Appendix, and a comparison between two wavefunctions and probability densities can be found in the third row of Fig. 2.
 
 ### Harmonic oscillator
 
 The final type of potential investigated in this work was the Harmonic Oscillator potential. The usual form of the Harmonic Oscillator potential is given by
 
-where *m* represents the mass of the particle, is the angular frequency of the oscillator and *r* is the position. A perturbative analysis of this case has been performed in a previous section, and here we shall focus on the numerical implementation. In order to simulate energies in orders of magnitude comparable with the previous potentials analysed in this work, we have taken and assumed an electron trapped in the potential. We then introduced a shift on the potential by ,with . We do this in order to shift the eigen-energies into a depth at which relativistic corrections become appreciable and comparable to the previous potentials. The wavefunction and probability density of a selected state is provided in the fourth row of Fig. 2 and the energies of selected states can be found in the Appendix.
+[formula] (95)
+
+where *m* represents the mass of the particle, [formula] is the angular frequency of the oscillator and *r* is the position. A perturbative analysis of this case has been performed in a previous section, and here we shall focus on the numerical implementation. In order to simulate energies in orders of magnitude comparable with the previous potentials analysed in this work, we have taken [formula] and assumed an electron trapped in the potential. We then introduced a shift on the potential by [formula],with [formula]. We do this in order to shift the eigen-energies into a depth at which relativistic corrections become appreciable and comparable to the previous potentials. The wavefunction and probability density of a selected state is provided in the fourth row of Fig. 2 and the energies of selected states can be found in the Appendix.
 
 ## Conclusions
 
-In this work we have recovered that the non-relativistic reduction of the Dirac equation, when performed for finite scalar and vector potentials without a prior neglecting order- terms, naturally yields a Schrödinger-type equation augmented by four relativistic operators. Collecting the momentum–dependent pieces into an energy- and potential-dependent effective mass leads to a compact representation, henceforth called the modified Schrödinger equation, that reproduces the conventional Schrödinger dynamics in the limit, while retaining a series of correction terms that start to become relevant as elements become heavier and the respective electron shells more relativistic.
+In this work we have recovered that the non-relativistic reduction of the Dirac equation, when performed for finite scalar and vector potentials without a prior neglecting order-[formula] terms, naturally yields a Schrödinger-type equation augmented by four relativistic operators. Collecting the momentum–dependent pieces into an energy- and potential-dependent effective mass leads to a compact representation, henceforth called the modified Schrödinger equation, that reproduces the conventional Schrödinger dynamics in the [formula] limit, while retaining a series of correction terms that start to become relevant as elements become heavier and the respective electron shells more relativistic.
 
 Numerically, casting the radial equation as a quadratic eigenvalue problem and solving it by sparse-matrix linearization within a finite-difference discretization furnishes a stable and computationally inexpensive scheme. We use this method to compute and compare the Schrödinger, Dirac and spin-relativistic-corrected Schrödinger formalisms in terms of their energies and wavefunctions and observe the effect of the corrections and their effectiveness. The method reproduces hydrogenic spectra very precisely, which is expected for low energy orbits, and also exposes sizeable deviations for inner shells of heavy ions. The analysis is extended to Lead and Oganesson, respectively modelled as Coulomb and Yukawa potentials, as well as Woods-Saxon and Harmonic Oscillator-type potentials.
 
@@ -362,9 +592,9 @@ CQ acknowledges the computational resources provided by the National Academic In
 
 See Tables 1, 2, 3, and 4.
 
-**Table 1.** Selected bound-state energies for a Coulomb potential with (Eq. 91). Columns list *n*, , *j*, and energies for Schrödinger (Schr.), modified Schrödinger (Mod-Schr., this work), and Dirac (large component).
+**Table 1.** Selected bound-state energies for a Coulomb potential with [formula] (Eq. 91). Columns list *n*, [formula], *j*, and energies for Schrödinger (Schr.), modified Schrödinger (Mod-Schr., this work), and Dirac (large component).
 
-| *n* |  | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
+| *n* | [formula] | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 0 | 1/2 | 88769 | 95737 | 100705 |
 | 2 | 0 | 1/2 | 22529 | 25208 | 27034 |
@@ -383,9 +613,9 @@ See Tables 1, 2, 3, and 4.
 | 1 | 3 | 5/2 | 5718 | 5795 | 5912 |
 | 1 | 3 | 7/2 | 5718 | 5750 | 5738 |
 
-**Table 3.** Selected bound-state energies for a Woods-Saxon potential with , , (see Equation 94).
+**Table 3.** Selected bound-state energies for a Woods-Saxon potential with [formula], [formula], [formula] (see Equation 94).
 
-| *n* |  | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
+| *n* | [formula] | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 0 | 1/2 | 178573 | 178332 | 179047 |
 | 1 | 1 | 1/2 | 161800 | 162767 | 163664 |
@@ -404,9 +634,9 @@ See Tables 1, 2, 3, and 4.
 | 3 | 1 | 3/2 | 70477 | 77301 | 81096 |
 | 4 | 0 | 1/2 | 46940 | 56152 | 61431 |
 
-**Table 4.** Selected bound-state energies for a Harmonic Oscillator potential with , (see Equation 95). Columns list principal quantum number *n*, orbital , total *j*, and energies for Schrödinger (Schr.), modified Schrödinger with spin-relativistic corrections (Mod-Schr., this work), and Dirac (large component).
+**Table 4.** Selected bound-state energies for a Harmonic Oscillator potential with [formula], [formula] (see Equation 95). Columns list principal quantum number *n*, orbital [formula], total *j*, and energies for Schrödinger (Schr.), modified Schrödinger with spin-relativistic corrections (Mod-Schr., this work), and Dirac (large component).
 
-| *n* |  | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
+| *n* | [formula] | *j* | Schr. (eV) | Mod-Schr. (eV) | Dirac (eV) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 0 | 1/2 | 169939 | 170305 | 170454 |
 | 1 | 1 | 1/2 | 150000 | 151046 | 152142 |

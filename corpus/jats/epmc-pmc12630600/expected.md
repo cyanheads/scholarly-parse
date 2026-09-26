@@ -31,46 +31,60 @@ Two additional points are worth noting. First, the similarity between the KG and
 
 The most general form of the KG equation is:
 
-where is the speed of light in the medium, is a damping (or dissipation) coefficient, captures inhomogeneities in the medium, is, in general, a nonlinear function, and is an external forcing term[15]. Let 3D time-varying vector fields and satisfy:
+[formula] (1)
 
-wherein and can be regarded as the dual of and the source term, respectively. As long as numerical solution using the FDTD method is of interest, and are left unconstrained, since the Yee algorithm solves Maxwell’s curl equations. Additionally, let one of the Cartesian components of coincide with the KG field variable. Noting that the Cartesian components of the vector Laplacian operator are the same as the scalar Laplacian operator, the analogy between the MH and KG equation can be established if satisfies
+where [formula] is the speed of light in the medium, [formula] is a damping (or dissipation) coefficient, [formula] captures inhomogeneities in the medium, [formula] is, in general, a nonlinear function, and [formula] is an external forcing term[15]. Let 3D time-varying vector fields [formula] and [formula] satisfy:
 
-wherein is a constant vector. Consequently, the vector extension of the KG equation is equivalent to the propagation of an EM wave within a complex medium that has field-dependent sources. Moreover, any general Maxwell solver can be utilized for the numerical solution of the KG equation. It is important to mention that there are auxiliary conditions associated to (2), including initial conditions (ICs). Specifally, let and . The imposition of the former is straightforward. To impose the later, it can be assumed that , leading to . Consequently, the time-domain equations that need to be discretized are:
+[formula] (2)
 
-The numerical solution of the KG equation in all dimensions is of particular interest, prompting further study of the specialized forms of Eq. (4). It is essential to highlight that although the FDTD method is easier to implement than other techniques, such as the Finite Element Method (FEM), there are two key factors that can significantly impact the accuracy of the solution if not properly addressed. The first factor is the order of the update equations. Mathematically, the arrangement of the equations in (4) is not important; however, from a numerical standpoint, the ordering is critical for obtaining accurate results. The second factor involves the Yee algorithm, which is based on central differences in both space and time. When represented using arrays, these differences become either forward or backward differences. Given the presence of an additional vector field in (4), the details of discretization are vital. Therefore, for each case, the relevant pseudocode for numerical implementation is provided, wherein it is assumed that and , for brevity. Also, in accordance with (4), “f” and “g” denote predefined functions representing nonlinearity and forcing functions.
+wherein [formula] and [formula] can be regarded as the dual of [formula] and the source term, respectively. As long as numerical solution using the FDTD method is of interest, [formula] and [formula] are left unconstrained, since the Yee algorithm solves Maxwell’s curl equations. Additionally, let one of the Cartesian components of [formula] coincide with the KG field variable. Noting that the Cartesian components of the vector Laplacian operator are the same as the scalar Laplacian operator, the analogy between the MH and KG equation can be established if [formula] satisfies
+
+[formula] (3)
+
+wherein [formula] is a constant vector. Consequently, the vector extension of the KG equation is equivalent to the propagation of an EM wave within a complex medium that has field-dependent sources. Moreover, any general Maxwell solver can be utilized for the numerical solution of the KG equation. It is important to mention that there are auxiliary conditions associated to (2), including initial conditions (ICs). Specifally, let [formula] and [formula]. The imposition of the former is straightforward. To impose the later, it can be assumed that [formula], leading to [formula]. Consequently, the time-domain equations that need to be discretized are:
+
+[formula] (4)
+
+The numerical solution of the KG equation in all dimensions is of particular interest, prompting further study of the specialized forms of Eq. (4). It is essential to highlight that although the FDTD method is easier to implement than other techniques, such as the Finite Element Method (FEM), there are two key factors that can significantly impact the accuracy of the solution if not properly addressed. The first factor is the order of the update equations. Mathematically, the arrangement of the equations in (4) is not important; however, from a numerical standpoint, the ordering is critical for obtaining accurate results. The second factor involves the Yee algorithm, which is based on central differences in both space and time. When represented using arrays, these differences become either forward or backward differences. Given the presence of an additional vector field in (4), the details of discretization are vital. Therefore, for each case, the relevant pseudocode for numerical implementation is provided, wherein it is assumed that [formula] and [formula], for brevity. Also, in accordance with (4), “f” and “g” denote predefined functions representing nonlinearity and forcing functions.
 
 ### One-dimensional case
 
-Let and . Then, and which simplifies (4) to:
+Let [formula] and [formula]. Then, [formula] and [formula] which simplifies (4) to:
 
-In analogy with TEM waves, the above-mentioned solution can be regarded as a quantum wave. Especially, (5) becomes the Telegrapher’s equations governing a uniform lossy transmission line if [39]. The pseudocode corresponding to (5) is listed below.
+[formula] (5)
+
+In analogy with TEM waves, the above-mentioned solution can be regarded as a [formula] quantum wave. Especially, (5) becomes the Telegrapher’s equations governing a uniform lossy transmission line if [formula][39]. The pseudocode corresponding to (5) is listed below.
 
 ### Two-dimensional case
 
-Let and with . Then, and , leading to:
+Let [formula] and [formula] with [formula]. Then, [formula] and [formula], leading to:
 
-which is analog to the TE wave and can be called a wave. The pseudocode corresponding to (6) is listed below.
+[formula] (6)
+
+which is analog to the TE wave and can be called a [formula] wave. The pseudocode corresponding to (6) is listed below.
 
 ### Three-dimensional case
 
-Let with . Then, and . Hence, (4) becomes:
+Let [formula] with [formula]. Then, [formula] and [formula]. Hence, (4) becomes:
+
+[formula] (7)
 
 The pseudocode corresponding to (7) is listed subsequently.
 
 ## Validation though numerical implementation
 
-To assess the feasibility of the proposed representation of the KG equation from a computational perspective, various test problems (TPs) are numerically solved, as outlined in Table 1. The figure corresponding to the numerical solution of each problem matches the problem number, including figure 1-10. The boundary conditions (BCs) for the first five problems are Dirichlet, while the last five utilize homogeneous Neumann conditions. These correspond to the sine–Gordon equations, which include the collision of two circular ring solitons, a symmetrically perturbed static line soliton, a line soliton in a lossless inhomogeneous medium, a circular ring soliton, and the collision of two circular ring solitons[9]. In all problems, the weighting function is set to unity, except for test problem number eight, where . For cases where the exact solution is available, all auxiliary conditions can be derived from the solution and are omitted for brevity. Additionally, validation is conducted through a convergence analysis. For problems without an exact solution, readers are referred to the relevant references to verify the correctness of the solutions. Following the Courant–Friedrichs–Lewy (CFL) condition, the time step-sizes are chosen as follows: for 1D problems, for 2D, and for 3D problems. The number on nodes in the , , and dimensions are denoted by , , and , respectively, and are set equal to in all dimensions for both 2D and 3D problems. For convergence studies, the mean squared error (MSE) is calculated using , where and represent the analytical and numerical solutions, respectively (Figs. 1, 2, 3, 4, 5, 6, 7, 8, 9 and 10).
+To assess the feasibility of the proposed representation of the KG equation from a computational perspective, various test problems (TPs) are numerically solved, as outlined in Table 1. The figure corresponding to the numerical solution of each problem matches the problem number, including figure 1-10. The boundary conditions (BCs) for the first five problems are Dirichlet, while the last five utilize homogeneous Neumann conditions. These correspond to the sine–Gordon equations, which include the collision of two circular ring solitons, a symmetrically perturbed static line soliton, a line soliton in a lossless inhomogeneous medium, a circular ring soliton, and the collision of two circular ring solitons[9]. In all problems, the weighting function is set to unity, except for test problem number eight, where [formula]. For cases where the exact solution is available, all auxiliary conditions can be derived from the solution and are omitted for brevity. Additionally, validation is conducted through a convergence analysis. For problems without an exact solution, readers are referred to the relevant references to verify the correctness of the solutions. Following the Courant–Friedrichs–Lewy (CFL) condition, the time step-sizes are chosen as follows: [formula] for 1D problems, [formula] for 2D, and [formula] for 3D problems. The number on nodes in the [formula], [formula], and [formula] dimensions are denoted by [formula], [formula], and [formula], respectively, and are set equal to [formula] in all dimensions for both 2D and 3D problems. For convergence studies, the mean squared error (MSE) is calculated using [formula], where [formula] and [formula] represent the analytical and numerical solutions, respectively (Figs. 1, 2, 3, 4, 5, 6, 7, 8, 9 and 10).
 
 **Table 1.** Test problems for validating the proposed FDTD scheme for the Klein–Gordon equation.
 
-| Test problem | Dimension |  |  |  |  | References |
+| Test problem | Dimension | [formula] | [formula] | [formula] | [formula] | References |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 1 |  | 0 | 0 |  | [12] |
-| 2 | 1 |  | 0 | 0 |  | [40] |
-| 3 | 2 |  |  | 0 |  | [41] |
-| 4 | 2 |  | 0 | 0 |  | [11] |
-| 5 | 3 |  |  | 0 |  | [42] |
-| 6–-10 | 2 |  | 0 | 0, 1.5 | NA | [9] |
+| 1 | 1 | [formula] | 0 | 0 | [formula] | [12] |
+| 2 | 1 | [formula] | 0 | 0 | [formula] | [40] |
+| 3 | 2 | [formula] | [formula] | 0 | [formula] | [41] |
+| 4 | 2 | [formula] | 0 | 0 | [formula] | [11] |
+| 5 | 3 | [formula] | [formula] | 0 | [formula] | [42] |
+| 6–-10 | 2 | [formula] | 0 | 0, 1.5 | NA | [9] |
 
 **Fig. 1.** Convergence test for TP1.
 
@@ -80,17 +94,17 @@ To assess the feasibility of the proposed representation of the KG equation from
 
 **Fig. 4.** Convergence test for TP4.
 
-**Fig. 5.** Convergence test for TP5 at
+**Fig. 5.** Convergence test for TP5 at [formula]
 
-**Fig. 6.** Solution of TP6 with at : (**a**) 3D plot with , (**b**) 3D plot with , (**c**) contour plots.
+**Fig. 6.** Solution of TP6 with [formula] at [formula]: (**a**) 3D plot with [formula], (**b**) 3D plot with [formula], (**c**) contour plots.
 
-**Fig. 7.** Solution of TP7 with at : (**a**) 3D plot with , (**b**) 3D plot with , (**c**) contour plots.
+**Fig. 7.** Solution of TP7 with [formula] at [formula]: (**a**) 3D plot with [formula], (**b**) 3D plot with [formula], (**c**) contour plots.
 
-**Fig. 8.** Solution of TP8 with : (**a**) 3D plot at , (**b**) 3D plot at , (**c**) contour plots.
+**Fig. 8.** Solution of TP8 with [formula]: (**a**) 3D plot at [formula], (**b**) 3D plot at [formula], (**c**) contour plots.
 
-**Fig. 9.** Solution of TP9 with and : (**a**) 3D plot at , (**b**) 3D plot at , (**c**) 3D plot at , (**d**) contour plot at ,( **e**) contour plot at , (**f**) contour plot at .
+**Fig. 9.** Solution of TP9 with [formula] and [formula]: (**a**) 3D plot at [formula], (**b**) 3D plot at [formula], (**c**) 3D plot at [formula], (**d**) contour plot at [formula],( **e**) contour plot at [formula], (**f**) contour plot at [formula].
 
-**Fig. 10.** Solution of TP10 with and : (**a**) 3D plot at , (**b**) 3D plot at , (**c**) 3D plot at , (**d**) contour plot at ,(**e**) contour plot at , (**f**) contour plot at .
+**Fig. 10.** Solution of TP10 with [formula] and [formula]: (**a**) 3D plot at [formula], (**b**) 3D plot at [formula], (**c**) 3D plot at [formula], (**d**) contour plot at [formula],(**e**) contour plot at [formula], (**f**) contour plot at [formula].
 
 Numerical solutions for the first five TPs exhibit uniform convergence to the corresponding analytical solutions as the spatial grid is refined. In TP6 and TP7, an increase in the damping factor produces a progressive smoothing of the solution, which aligns with established physical intuition. TP9 and TP10 clearly display wave-like dynamics. Taken together, these results demonstrate that the proposed FDTD scheme is accurate, stable, and broadly applicable for the numerical solution of Klein–Gordon equations across a wide range of physical regimes.
 
@@ -98,81 +112,133 @@ Numerical solutions for the first five TPs exhibit uniform convergence to the co
 
 Similar to section two, the original form of the KG equation, given by
 
-can be derived from Maxwellian vector fields. Specifically, consider the symmetric form of the MH equations that govern 3D complex-valued time-varying vector fields and :
+[formula] (8)
 
-wherein one of the Cartesian components of corresponds to the desired KG field variable. Unlike section two, divergences of the associated vector fields are also included, and the field may have more than one non-zero component. An analogy between the MH and KG equations can be established if the source terms and are selected such that:
+can be derived from Maxwellian vector fields. Specifically, consider the symmetric form of the MH equations that govern 3D complex-valued time-varying vector fields [formula] and [formula]:
 
-As before, the terms and can be understood as EM sources, and it is possible to define them in a way that satisfies Eq. (10). Additionally, all the theorems and concepts related to time-harmonic electromagnetic fields apply to the Maxwellian representation of the original Klein–Gordon (KG) equation[35]. Specifically, based on the equivalence theorem and the solutions to the Helmholtz equations, which include cylindrical and spherical harmonics, it can be concluded that for sources of finite extent, the decay rates of and is at least proportional to and in two and three dimensions. Furthermore, in addition to , which serves as the dual vector field of , the proposed representation of the KG equation introduces new elements including:
+[formula] (9)
 
-wherein . Thus, if the source terms are such that vanishes, the Poynting theorem can serve as a desirable conservation law. Specifically, the non-negative scalar field may be a better choice than the conventional probability current density of the KG field.
+wherein one of the Cartesian components of [formula] corresponds to the desired KG field variable. Unlike section two, divergences of the associated vector fields are also included, and the [formula] field may have more than one non-zero component. An analogy between the MH and KG equations can be established if the source terms [formula] and [formula] are selected such that:
 
-The central issue which should be address is the existence of source terms that ensure the condition , which will be referred to as the *Fundamental Conservation Relation* (FCR) from now on. Furthermore, Maxwellian vector fields that satisfy this condition will be called *Conserved Maxwellian Fields* (CMF). The sufficient condition to ensure FCR is that , which is a simpler to work with. It is important to note that one can relate the source terms using the expression to construct CMFs. However, this choice may lead to singular solution due to zero crossings of . Additionally, this method may not be feasible if the primary interest lies in the plane-wave solution, as the resulting solution space may not be complete.
+[formula] (10)
+
+As before, the terms [formula] and [formula] can be understood as EM sources, and it is possible to define them in a way that satisfies Eq. (10). Additionally, all the theorems and concepts related to time-harmonic electromagnetic fields apply to the Maxwellian representation of the original Klein–Gordon (KG) equation[35]. Specifically, based on the equivalence theorem and the solutions to the Helmholtz equations, which include cylindrical and spherical harmonics, it can be concluded that for sources of finite extent, the decay rates of [formula] and [formula] is at least proportional to [formula] and [formula] in two and three dimensions. Furthermore, in addition to [formula], which serves as the dual vector field of [formula], the proposed representation of the KG equation introduces new elements including:
+
+[formula] (11)
+
+wherein [formula]. Thus, if the source terms are such that [formula] vanishes, the Poynting theorem can serve as a desirable conservation law. Specifically, the non-negative scalar field [formula] may be a better choice than the conventional probability current density of the KG field.
+
+The central issue which should be address is the existence of source terms that ensure the condition [formula], which will be referred to as the *Fundamental Conservation Relation* (FCR) from now on. Furthermore, Maxwellian vector fields that satisfy this condition will be called *Conserved Maxwellian Fields* (CMF). The sufficient condition to ensure FCR is that [formula], which is a simpler to work with. It is important to note that one can relate the source terms using the expression [formula] to construct CMFs. However, this choice may lead to singular solution due to zero crossings of [formula]. Additionally, this method may not be feasible if the primary interest lies in the plane-wave solution, as the resulting solution space may not be complete.
 
 ## Plane-wave solution of the Maxwellian Klein–Gordon equation
 
 The most common solution type used to ensure completeness of the functional space is the plane-wave solution, which, for the original KG equation—i.e., (8)—takes the form:
 
-with the dispersion relation given by . Here, denotes the imaginary unit, is the reduced Planck’s constant and is the particle mass[32]. The focus of this work will be on determining the coefficients such that the FCR holds. The coefficients can be obtained in a similar manner. It is worth noting that any field component beyond the scalar KG solution may represent a potential hidden aspect of QFT. Let the vector fields and be defined as:
+[formula] (12)
 
-where . By the linearity of (9), such expansions are valid. Furthermore, in view of the dispersion relation, (10) is automatically satisfied for this basis. Assume that the component of corresponds to the scalar KG field of interest. This requires for at least one . Additionally, let , , , , and . The goal is to determine , , , , and such that (13) satisfies the curl equations from (9), together with . This, in turn, determines and . It can be shown that is equivalent to
+with the dispersion relation given by [formula]. Here, [formula] denotes the imaginary unit, [formula] is the reduced Planck’s constant and [formula] is the particle mass[32]. The focus of this work will be on determining the coefficients [formula] such that the FCR holds. The coefficients [formula] can be obtained in a similar manner. It is worth noting that any field component beyond the scalar KG solution may represent a potential hidden aspect of QFT. Let the vector fields [formula] and [formula] be defined as:
 
-wherein . Clearly, (14) is a highly nonlinear equation, and thus, it would be informative to go through its solution step-by-step; from one to three dimensions, to construct the corresponding CMFs.
+[formula] (13)
+
+where [formula]. By the linearity of (9), such expansions are valid. Furthermore, in view of the dispersion relation, (10) is automatically satisfied for this basis. Assume that the [formula] component of [formula] corresponds to the scalar KG field of interest. This requires [formula] for at least one [formula]. Additionally, let [formula], [formula], [formula], [formula], and [formula]. The goal is to determine [formula], [formula], [formula], [formula], and [formula] such that (13) satisfies the curl equations from (9), together with [formula]. This, in turn, determines [formula] and [formula]. It can be shown that [formula] is equivalent to
+
+[formula] (14)
+
+wherein [formula]. Clearly, (14) is a highly nonlinear equation, and thus, it would be informative to go through its solution step-by-step; from one to three dimensions, to construct the corresponding CMFs.
 
 ### CMF in one dimension
 
-Let and . Then, (14) simplifies to:
+Let [formula] and [formula]. Then, (14) simplifies to:
 
-Since the right-hand side contains a constant term, let and , where and are complex constants. Substituting these into (15), it can be verified that it holds provided and . Accordingly, for a given set of ,
+[formula] (15)
 
-This solution can be interpreted as an elliptically polarized quantum wave, propagating along the positive -axis. Notably, since the coefficients are arbitrary, there exists an infinite family of 1D solutions. However, if only the original KG scalar solution is of interest, one may choose , resulting in a linearly polarized wave and reducing the solution space to two. Thus, the scalar field taken as the component of , induces a corresponding single-component such that the pair form a 1D CMF. The fields are related via
+Since the right-hand side contains a constant term, let [formula] and [formula], where [formula] and [formula] are complex constants. Substituting these into (15), it can be verified that it holds provided [formula] and [formula] . Accordingly, for a given set of [formula],
 
-wherein the subscript denotes the corresponding vector component. The aforesaid time-domain solution resembles TEM wave propagation in lossy media in the time-harmonic regime, with acting as a complex wave vector. Nevertheless, despite the difference in the solution domain, the fields are non-decaying propagating fields. Interestingly, the phase difference between the vector fields is proportional to the particle mass and vanishes for a massless particle, similar to the behavior of a TEM wave in unbounded, lossless media. Moreover, the ratio between transverse field components is , which duo to the dispersion relation, leads to
+[formula] (16)
 
-and mimics the wave impedance of a classical TEM mode in free space. Finally, the resulting CMF is symmetric, satisfying . An interested reader may verify the existence of an alternative 1D solution to Eq. (13) by assuming and . However, no solution exists for the case and .
+This solution can be interpreted as an elliptically polarized [formula] quantum wave, propagating along the positive [formula]-axis. Notably, since the coefficients [formula] are arbitrary, there exists an infinite family of 1D solutions. However, if only the original KG scalar solution is of interest, one may choose [formula], resulting in a linearly polarized wave and reducing the solution space to two. Thus, the scalar field taken as the [formula] component of [formula], induces a corresponding single-component [formula] such that the pair [formula] form a 1D CMF. The fields are related via
+
+[formula] (17)
+
+wherein the subscript [formula] denotes the corresponding vector component. The aforesaid time-domain solution resembles TEM wave propagation in lossy media in the time-harmonic regime, with [formula] acting as a complex wave vector. Nevertheless, despite the difference in the solution domain, the fields are non-decaying propagating fields. Interestingly, the phase difference between the vector fields is proportional to the particle mass and vanishes for a massless particle, similar to the behavior of a TEM wave in unbounded, lossless media. Moreover, the ratio between transverse field components is [formula] , which duo to the dispersion relation, leads to
+
+[formula] (18)
+
+and mimics the wave impedance of a classical TEM mode in free space. Finally, the resulting CMF is symmetric, satisfying [formula]. An interested reader may verify the existence of an alternative 1D solution to Eq. (13) by assuming [formula] and [formula]. However, no solution exists for the case [formula] and [formula].
 
 ### CMF in two dimensions
 
-Let and , which simplifies (14) to:
+Let [formula] and [formula], which simplifies (14) to:
 
-Proceeding as in the 1D case, let and , where and are complex constants. Then, (19) holds if , and with satisfying . Consequently,
+[formula] (19)
 
-This solution can be interpreted as a linearly polarized quantum wave, propagating along the positive -axis. As in the 1D case, the number of 2D solutions is infinite, due to the arbitrary choice of on the circle defined by the mass constraint. Thus, the scalar KG field, represented by the components of , induces a two-component field , yielding a 2D CMF. The relationship between the fields can be compactly written as
+Proceeding as in the 1D case, let [formula] and [formula], where [formula] and [formula] are complex constants. Then, (19) holds if [formula], [formula] and [formula] with [formula] satisfying [formula]. Consequently,
 
-wherein . Additionally, the impedance-like magnitude ratio satisfies:
+[formula] (20)
 
-Thus, both the magnitude and phase of the dual field are controlled by the position on the circle defined by . However, unlike the 1D case, the resulting CMF is not symmetric, because
+This solution can be interpreted as a linearly polarized [formula] quantum wave, propagating along the positive [formula]-axis. As in the 1D case, the number of 2D solutions is infinite, due to the arbitrary choice of [formula] on the circle defined by the mass constraint. Thus, the scalar KG field, represented by the [formula] components of [formula], induces a two-component field [formula], yielding a 2D CMF. The relationship between the fields can be compactly written as
+
+[formula] (21)
+
+wherein [formula]. Additionally, the impedance-like magnitude ratio satisfies:
+
+[formula] (22)
+
+Thus, both the magnitude and phase of the dual field [formula] are controlled by the position on the circle defined by [formula]. However, unlike the 1D case, the resulting CMF is not symmetric, because
+
+[formula] (23)
 
 Finally, one may verify that no other 2D solution exists for (16).
 
 ### CMF in three dimensions
 
-A rather tedious algebraic analysis shows that no 3D CMF solution exists if or if both and . However, following the same strategy as in lower dimensions, two nontrivial 3D solutions are possible under asymmetric conditions.
+A rather tedious algebraic analysis shows that no 3D CMF solution exists if [formula] or if both [formula] and [formula]. However, following the same strategy as in lower dimensions, two nontrivial 3D solutions are possible under asymmetric conditions.
 
-*Case* 1. and .
+*Case* 1. [formula] and [formula].
 
-Assume the auxiliary field relations , , and , wherein satisfies . Substituting into (14), one finds a valid solution if
+Assume the auxiliary field relations [formula], [formula], and [formula], wherein [formula] satisfies [formula]. Substituting into (14), one finds a valid solution if
+
+[formula] (24)
 
 The resulting fields are:
 
-This solution introduces a fully 3D , and also adds a *y*-component to . Moreover,
+[formula] (25)
+
+This solution introduces a fully 3D [formula], and also adds a *y*-component to [formula]. Moreover,
+
+[formula] (26)
 
 and
 
-*Case* 2. and .
+[formula] (27)
 
-Let , , and with the same constrain on as before. Then, (14) admits a solution for:
+*Case* 2. [formula] and [formula].
+
+Let [formula], [formula], and [formula] with the same constrain on [formula] as before. Then, (14) admits a solution for:
+
+[formula] (28)
 
 The fields then become:
 
+[formula] (29)
+
 This structure mirrors that of the previous case, leading to:
+
+[formula] (30)
 
 And
 
-Thus, in contrast to 1D and 2D cases, each with infinite number of solutions, there are only two 3D solutions. Furthermore, similar to the 1D case, the resulting CMF is symmetric. Specifically, both of the vector fields of a 3D CMF have monopole sources. Another intriguing aspect of these solutions is their formal analogy with the plane‑wave spinors of the Dirac equation[43]. In the special case , one may identify the propagation direction with the spin quantization along the z-axis. Under this reduction (25) and (29) leads to:
+[formula] (31)
+
+Thus, in contrast to 1D and 2D cases, each with infinite number of solutions, there are only two 3D solutions. Furthermore, similar to the 1D case, the resulting CMF is symmetric. Specifically, both of the vector fields of a 3D CMF have monopole sources. Another intriguing aspect of these solutions is their formal analogy with the plane‑wave spinors of the Dirac equation[43]. In the special case [formula], one may identify the propagation direction with the spin quantization along the z-axis. Under this reduction (25) and (29) leads to:
+
+[formula] (32)
 
 and
 
-Equations (32) and (33) exhibit a striking structural resemblance to the spin-up and spin-down solutions of the Dirac equation, particularly in their orthogonality and component organization. Like the mutually orthogonal, these solutions form an orthogonal set. Furthermore, each “spinor” in the proposed framework consists of a single-component dual field coupled with a two-component primary field , mirroring the way Dirac spinors for opposite spin projections distribute their non-zero momentum components along the quantization axis. This parallelism extends to antiparticles: the CMF solutions associated with the ​ coefficients exhibit a charge-conjugation-like duality, akin to the spinors in the Dirac theory.
+[formula] (33)
+
+Equations (32) and (33) exhibit a striking structural resemblance to the spin-up and spin-down solutions of the Dirac equation, particularly in their orthogonality and component organization. Like the mutually orthogonal, these solutions form an orthogonal set. Furthermore, each “spinor” in the proposed framework consists of a single-component dual field [formula] coupled with a two-component primary field [formula], mirroring the way Dirac spinors for opposite spin projections distribute their non-zero momentum components along the quantization axis. This parallelism extends to antiparticles: the CMF solutions associated with the [formula]​ coefficients exhibit a charge-conjugation-like duality, akin to the [formula] spinors in the Dirac theory.
 
 ## Discussion
 

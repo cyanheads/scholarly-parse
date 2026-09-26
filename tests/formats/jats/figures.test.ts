@@ -226,6 +226,45 @@ describe('figures (#130)', () => {
     expect(paragraphTexts(document)).toEqual(['…suggests that further scrutiny is warranted.']);
   });
 
+  it('heads a figure group with its label and caption, its panels after it', () => {
+    // Europe PMC preprints: <fig-group><label>Figure 1</label><caption>…</caption>
+    // <fig><graphic/></fig><fig><graphic/></fig></fig-group>, the panels bare.
+    const document = parseBody(
+      '<sec><title>Results</title><fig-group id="F1"><label>Figure 1</label><caption>' +
+        '<title>Study overview.</title><p>(A) Design. (B) Results.</p></caption>' +
+        '<fig id="F1a"><graphic xlink:href="f001"/></fig>' +
+        '<fig id="F1b"><graphic xlink:href="f002"/></fig></fig-group></sec>',
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      { text: '**Figure 1.** **Study overview.** (A) Design. (B) Results.', type: 'paragraph' },
+      { href: 'f001', id: 'F1a', type: 'figure' },
+      { href: 'f002', id: 'F1b', type: 'figure' },
+    ]);
+  });
+
+  it('reads a figure with nothing to show but a <media> file as a supplement', () => {
+    // A peer-review sub-article whose body is <fig><media xlink:href="….pdf"/></fig>.
+    const document = parseBody(
+      '<sec><title>Review Process File</title><fig id="d1">' +
+        '<media xlink:href="reviewer_comments.pdf" mimetype="application" mime-subtype="pdf"/>' +
+        '</fig></sec>',
+    );
+    expect(document.body[0]?.blocks).toEqual([
+      { href: 'reviewer_comments.pdf', id: 'd1', type: 'supplement' },
+    ]);
+    expect(toMarkdown(document)).toContain(
+      '**Supplementary material.** (file: reviewer_comments.pdf)',
+    );
+  });
+
+  it('renders nothing for a box holding only an image with no label or caption', () => {
+    const document = parseBody(
+      '<sec><title>Results</title><p>Text.</p>' +
+        '<boxed-text><fig><graphic xlink:href="f1.jpg"/></fig></boxed-text></sec>',
+    );
+    expect(toMarkdown(document)).toMatch(/## Results\n\nText\.\n$/);
+  });
+
   it('reports no figures or supplements for an article that has none', () => {
     const document = parseBody('<sec><title>Results</title><p>No figures here.</p></sec>');
     expect(allBlocks(document).map((b) => b.type)).toEqual(['paragraph']);
@@ -333,9 +372,9 @@ describe('a pointer wrapped in <alternatives> (#142)', () => {
       onlyFigure(`<label>Figure 1</label><graphic xlink:href="direct.jpg"/>${wrapped}`).figure
         ?.href,
     ).toBe('direct.jpg');
-    expect(onlyFigure(`<media xlink:href="direct.mp4"/>${wrapped}`).figure?.href).toBe(
-      'direct.mp4',
-    );
+    expect(
+      onlyFigure(`<label>Video 1</label><media xlink:href="direct.mp4"/>${wrapped}`).figure?.href,
+    ).toBe('direct.mp4');
   });
 
   it('reports no href when neither the figure nor its <alternatives> holds a pointer', () => {

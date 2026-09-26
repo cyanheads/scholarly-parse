@@ -29,8 +29,6 @@ BS demonstrated more consistent and statistically significant reductions in all 
 
 BS demonstrated more consistent and statistically significant reductions in all cardiovascular outcomes compared to GLP‐1RAs, which showed more variable efficacy, particularly for HF and MI. Nevertheless, GLP‐1RAs remain effective evidence‐based alternatives for cardiovascular risk reduction in patients who are not candidates for surgery.
 
->
-
 ## Abbreviations
 
 - **BS** — bariatric surgery
