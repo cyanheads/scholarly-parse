@@ -1,0 +1,432 @@
+/**
+ * @fileoverview LaTeXML HTML → typed blocks and sections. LaTeXML marks every construct
+ * with an `ltx_*` class — `ltx_para`, `ltx_equation`, `ltx_theorem`, `ltx_tabular` —
+ * and those classes, not the HTML tags, decide what a node is.
+ * @module src/formats/latexml/blocks
+ */
+
+import {
+  childElements,
+  childNodes,
+  childWhere,
+  hasClass,
+  isElement,
+  resolveUrl,
+  TEXT_NODE,
+  tagOf,
+  textOfElement,
+} from '../../html/dom.js';
+import { readHtmlTable } from '../../html/tables.js';
+import type {
+  Block,
+  BoxBlock,
+  FormulaBlock,
+  ListBlock,
+  Section,
+  SectionKind,
+  TableBlock,
+} from '../../model/document.js';
+import { issueId } from '../../model/section-ids.js';
+import { escapeInline } from '../../render/escape.js';
+import { emphasis } from '../../render/inline.js';
+import { type LatexmlContext, SKIP_TAGS } from './context.js';
+import { inlineMarkdown, inlineText, mathTex } from './inline.js';
+
+const BLOCK_TAGS: ReadonlySet<string> = new Set([
+  'article',
+  'blockquote',
+  'div',
+  'dl',
+  'figure',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'hr',
+  'ol',
+  'p',
+  'pre',
+  'section',
+  'table',
+  'ul',
+]);
+
+/** Selector for anything that must not be flattened into a sentence. */
+const BLOCK_SELECTOR = [...BLOCK_TAGS, '.ltx_tabular', '.ltx_equation', '.ltx_equationgroup'].join(
+  ',',
+);
+
+function isBlock(element: Element): boolean {
+  return (
+    BLOCK_TAGS.has(tagOf(element)) ||
+    hasClass(element, 'ltx_tabular') ||
+    hasClass(element, 'ltx_equation') ||
+    hasClass(element, 'ltx_equationgroup')
+  );
+}
+
+/** Notes are inline even when they contain blocks: their content becomes a footnote. */
+function isNote(element: Element): boolean {
+  return hasClass(element, 'ltx_note');
+}
+
+interface Flow {
+  blocks: Block[];
+  run: string;
+}
+
+function flushRun(flow: Flow): void {
+  const text = flow.run.replace(/\s+/g, ' ').trim();
+  if (text) flow.blocks.push({ text, type: 'paragraph' });
+  flow.run = '';
+}
+
+function walk(nodes: Node[], flow: Flow, ctx: LatexmlContext): void {
+  for (const node of nodes) {
+    if (node.nodeType === TEXT_NODE) {
+      flow.run += escapeInline(node.textContent ?? '');
+      continue;
+    }
+    if (!isElement(node) || SKIP_TAGS.has(tagOf(node))) continue;
+    if (!isNote(node) && isBlock(node)) {
+      flushRun(flow);
+      flow.blocks.push(...renderBlock(node, ctx));
+    } else if (!isNote(node) && tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {
+      walk(childNodes(node), flow, ctx);
+    } else {
+      flow.run += inlineMarkdown([node], ctx);
+    }
+  }
+}
+
+/** Blocks for a node list, in document order. */
+export function flowBlocks(nodes: Node[], ctx: LatexmlContext): Block[] {
+  const flow: Flow = { blocks: [], run: '' };
+  walk(nodes, flow, ctx);
+  flushRun(flow);
+  return flow.blocks;
+}
+
+function renderBlock(element: Element, ctx: LatexmlContext): Block[] {
+  const tag = tagOf(element);
+  if (hasClass(element, 'ltx_pagination') || tag === 'hr') return [];
+  if (hasClass(element, 'ltx_equation') || hasClass(element, 'ltx_equationgroup'))
+    return equations(element);
+  if (hasClass(element, 'ltx_theorem') || hasClass(element, 'ltx_proof'))
+    return [theorem(element, ctx)];
+  if (hasClass(element, 'ltx_listing')) return nonEmpty(listing(element));
+  if (tag === 'figure') return figure(element, ctx);
+  if (tag === 'table' || hasClass(element, 'ltx_tabular'))
+    return [table(element, undefined, undefined, ctx)];
+  if (tag === 'ul' || tag === 'ol') return listBlock(element, ctx);
+  if (tag === 'dl') return descriptionList(element, ctx);
+  if (tag === 'pre') {
+    const text = element.textContent?.replace(/^\n|\s+$/g, '') ?? '';
+    return text ? [{ text, type: 'code' }] : [];
+  }
+  if (tag === 'blockquote')
+    return [{ blocks: flowBlocks(childNodes(element), ctx), type: 'quote' }];
+  if (/^h[1-6]$/.test(tag)) {
+    const title = inlineText(element, ctx);
+    return title ? [{ text: emphasis(title, '**'), type: 'paragraph' }] : [];
+  }
+  return flowBlocks(childNodes(element), ctx);
+}
+
+function nonEmpty(block: Block | undefined): Block[] {
+  return block ? [block] : [];
+}
+
+/** A caption's printed tag (`Figure 3:`, `Table 1:`) as a label, and the rest as the caption. */
+function captionParts(
+  caption: Element | undefined,
+  ctx: LatexmlContext,
+): { caption?: string; label?: string } {
+  if (!caption) return {};
+  const tagSpan = caption.querySelector('.ltx_tag');
+  const label =
+    textOfElement(tagSpan)
+      .replace(/[:.]\s*$/, '')
+      .trim() || undefined;
+  const text = inlineMarkdown(
+    childNodes(caption).filter((n) => n !== tagSpan),
+    ctx,
+  )
+    .replace(/\s+/g, ' ')
+    .trim();
+  return { ...(label && { label }), ...(text && { caption: text }) };
+}
+
+/** Top-level tabulars in a figure: those not nested inside another tabular. */
+function topTabulars(figure: Element): Element[] {
+  return Array.from(figure.querySelectorAll('.ltx_tabular')).filter(
+    (tabular) => !tabular.parentElement?.closest('.ltx_tabular'),
+  );
+}
+
+/**
+ * A LaTeXML float. Its caption's tag and content decide what it is: a table (a tabular
+ * and no image), an algorithm (a listing), or a figure. Subfigure panels with captions
+ * of their own follow the main figure.
+ */
+function figure(element: Element, ctx: LatexmlContext): Block[] {
+  const captionEl = childWhere(element, (c) => tagOf(c) === 'figcaption');
+  const { caption, label } = captionParts(captionEl, ctx);
+  const id = element.getAttribute('id') ?? undefined;
+  const images = Array.from(element.querySelectorAll('img'));
+  const tabulars = topTabulars(element);
+  const tagClass = captionEl?.querySelector('.ltx_tag')?.className ?? '';
+
+  if (
+    hasClass(element, 'ltx_float_algorithm') ||
+    (/ltx_tag_float/.test(tagClass) && element.querySelector('.ltx_listing'))
+  ) {
+    const code = listing(element.querySelector('.ltx_listing') ?? element);
+    const head: Block[] =
+      label || caption
+        ? [
+            {
+              text: [label && `**${escapeInline(label)}.**`, caption].filter(Boolean).join(' '),
+              type: 'paragraph',
+            },
+          ]
+        : [];
+    return [...head, ...(code ? [code] : [])];
+  }
+  if (
+    tabulars.length > 0 &&
+    (hasClass(element, 'ltx_table') || /ltx_tag_table/.test(tagClass) || images.length === 0)
+  ) {
+    return tabulars.map((tabular, i) =>
+      table(
+        tabular,
+        i === 0 ? label : undefined,
+        i === 0 ? caption : undefined,
+        ctx,
+        i === 0 ? id : undefined,
+      ),
+    );
+  }
+
+  const [image] = images;
+  const src = image?.getAttribute('src');
+  const alt = image?.getAttribute('alt')?.trim();
+  const blocks: Block[] = [
+    {
+      type: 'figure',
+      ...(id && { id }),
+      ...(label && { label }),
+      ...(caption && { caption }),
+      ...(src && { href: resolveUrl(src, ctx.baseUrl) }),
+      ...(alt && { alt }),
+    },
+  ];
+  for (const panel of Array.from(element.querySelectorAll('figure'))) {
+    const panelCaption = childWhere(panel, (c) => tagOf(c) === 'figcaption');
+    if (!panelCaption) continue;
+    const parts = captionParts(panelCaption, ctx);
+    const panelSrc = panel.querySelector('img')?.getAttribute('src');
+    const panelId = panel.getAttribute('id') ?? undefined;
+    blocks.push({
+      type: 'figure',
+      ...(panelId && { id: panelId }),
+      ...parts,
+      ...(panelSrc && { href: resolveUrl(panelSrc, ctx.baseUrl) }),
+    });
+  }
+  return blocks;
+}
+
+function table(
+  tabular: Element,
+  label: string | undefined,
+  caption: string | undefined,
+  ctx: LatexmlContext,
+  id?: string,
+): TableBlock {
+  const { headerRows, rows } = readHtmlTable(tabular, (cell) => inlineText(cell, ctx), {
+    boldHeaders: true,
+  });
+  if (rows.length === 0)
+    ctx.diag.warn('table-unextractable', `Table ${label ?? ''} has no rows`.trim(), id);
+  return {
+    type: 'table',
+    ...(id && { id }),
+    ...(label && { label }),
+    ...(caption && { caption }),
+    headerRows,
+    rows,
+    ...(rows.length === 0 && { unextractable: 'no-rows' as const }),
+  };
+}
+
+/**
+ * Display equations: one formula per equation row. Aligned rows split an equation
+ * across cells (`a` | `= b`); their TeX joins in order. The row's number cell is its label.
+ */
+function equations(element: Element): Block[] {
+  const rows = Array.from(element.querySelectorAll('tr'));
+  const formulas: FormulaBlock[] = [];
+  for (const row of rows.length > 0 ? rows : [element]) {
+    const cells = childElements(row).filter((cell) => !hasClass(cell, 'ltx_eqn_eqno'));
+    const tex = cells
+      .flatMap((cell) => Array.from(cell.querySelectorAll('math')))
+      .map(mathTex)
+      .filter(Boolean)
+      .join(' ');
+    const text = tex ? '' : cells.map(textOfElement).filter(Boolean).join(' ');
+    if (!tex && !text) continue;
+    const label = textOfElement(row.querySelector('.ltx_eqn_eqno')) || undefined;
+    const id = row.getAttribute('id') ?? undefined;
+    formulas.push({
+      type: 'formula',
+      ...(id && { id }),
+      ...(label && { label }),
+      ...(tex ? { tex } : { text }),
+    });
+  }
+  const [first] = formulas;
+  const tableId = element.getAttribute('id');
+  if (formulas.length === 1 && first && !first.id && tableId) first.id = tableId;
+  return formulas;
+}
+
+/** A theorem-like environment or proof: its run-in heading becomes the label and title. */
+function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
+  const heading = childWhere(element, (c) => /^h[1-6]$/.test(tagOf(c)));
+  const tagSpan = heading?.querySelector('.ltx_tag');
+  const label = textOfElement(tagSpan).replace(/[.:]\s*$/, '') || undefined;
+  const title = heading
+    ? inlineMarkdown(
+        childNodes(heading).filter((n) => n !== tagSpan),
+        ctx,
+      )
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/^\.|\.$/g, '')
+        .trim()
+    : '';
+  const id = element.getAttribute('id') ?? undefined;
+  return {
+    type: 'box',
+    ...(id && { id }),
+    ...(label && { label }),
+    ...(title && { title }),
+    blocks: flowBlocks(
+      childNodes(element).filter((n) => n !== heading),
+      ctx,
+    ),
+    sections: [],
+  };
+}
+
+/** A LaTeXML listing (algorithms, code): one line per `ltx_listingline`. */
+function listing(element: Element): Block | undefined {
+  const lines = Array.from(element.querySelectorAll('.ltx_listingline')).map(
+    (line) => line.textContent?.replace(/ /g, ' ').replace(/\s+$/, '') ?? '',
+  );
+  const text = (lines.length > 0 ? lines.join('\n') : (element.textContent ?? '')).replace(
+    /^\n+|\s+$/g,
+    '',
+  );
+  return text ? { text, type: 'code' } : undefined;
+}
+
+/** Bullet characters an unordered item's tag can hold. */
+const BULLETS = /^[•∙◦▪‣⁃–—\-∗*·]$/;
+
+/**
+ * An itemize or enumerate list. Printed tags that are custom (`(i)`, `(a)`) lead each
+ * item's text and the list renders unordered, so they stay the only numbering.
+ */
+function listBlock(element: Element, ctx: LatexmlContext): Block[] {
+  const items: Block[][] = [];
+  let custom = false;
+  let expected = 1;
+  for (const item of childElements(element).filter((c) => tagOf(c) === 'li')) {
+    const tagSpan = childWhere(item, (c) => hasClass(c, 'ltx_tag'));
+    const tagText = textOfElement(tagSpan);
+    const blocks = flowBlocks(
+      childNodes(item).filter((n) => n !== tagSpan),
+      ctx,
+    );
+    const sequential = tagText === `${expected}.` || tagText === `${expected})`;
+    expected += 1;
+    if (tagText && !BULLETS.test(tagText) && !sequential) {
+      custom = true;
+      const [first] = blocks;
+      if (first?.type === 'paragraph') first.text = `${escapeInline(tagText)} ${first.text}`;
+      else blocks.unshift({ text: escapeInline(tagText), type: 'paragraph' });
+    }
+    if (blocks.length > 0) items.push(blocks);
+  }
+  if (items.length === 0) return [];
+  const list: ListBlock = { type: 'list', items, ordered: tagOf(element) === 'ol' && !custom };
+  return [list];
+}
+
+/** A description list: `**term** — definition` per item. */
+function descriptionList(element: Element, ctx: LatexmlContext): Block[] {
+  const items: Block[][] = [];
+  let term = '';
+  for (const child of childElements(element)) {
+    if (tagOf(child) === 'dt') term = inlineText(child, ctx);
+    else if (tagOf(child) === 'dd') {
+      const blocks = flowBlocks(childNodes(child), ctx);
+      const [first] = blocks;
+      if (term && first?.type === 'paragraph')
+        first.text = `${emphasis(term, '**')} — ${first.text}`;
+      else if (term) blocks.unshift({ text: emphasis(term, '**'), type: 'paragraph' });
+      if (blocks.length > 0) items.push(blocks);
+      term = '';
+    }
+  }
+  return items.length > 0 ? [{ type: 'list', items, ordered: false }] : [];
+}
+
+// ─── Sections ───────────────────────────────────────────────────────────────
+
+/** The section's heading: a direct `ltx_title` heading child. */
+function headingOf(section: Element): Element | undefined {
+  return childWhere(section, (c) => /^h[1-6]$/.test(tagOf(c)) && hasClass(c, 'ltx_title'));
+}
+
+/** Parse a `<section>`: its heading's tag is the label, the rest the title. */
+export function parseSection(
+  element: Element,
+  ctx: LatexmlContext,
+  kind: SectionKind,
+  fallbackId: string,
+): Section | undefined {
+  const id = issueId(ctx.sectionIds, element.getAttribute('id') ?? undefined, fallbackId);
+  const heading = headingOf(element);
+  const tagSpan = heading?.querySelector('.ltx_tag');
+  const label = textOfElement(tagSpan).replace(/[.:]\s*$/, '') || undefined;
+  const title = heading
+    ? inlineMarkdown(
+        childNodes(heading).filter((n) => n !== tagSpan),
+        ctx,
+      )
+        .replace(/\s+/g, ' ')
+        .trim() || undefined
+    : undefined;
+
+  const blocks: Block[] = [];
+  const sections: Section[] = [];
+  for (const child of childNodes(element)) {
+    if (child === heading) continue;
+    if (isElement(child) && tagOf(child) === 'section') {
+      const sub = parseSection(child, ctx, kind, `${id}.${sections.length + 1}`);
+      if (sub) sections.push(sub);
+      continue;
+    }
+    blocks.push(...flowBlocks([child], ctx));
+  }
+  if (blocks.length === 0 && sections.length === 0) {
+    ctx.sectionIds.delete(id);
+    return;
+  }
+  return { blocks, id, kind, ...(label && { label }), sections, ...(title && { title }) };
+}
