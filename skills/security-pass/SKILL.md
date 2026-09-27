@@ -4,7 +4,7 @@ description: >
   Review scholarly-parse's parsers against hostile documents: XML entity expansion and external entities, recursion depth on deeply nested input, input size and amplification budgets, regex backtracking on attacker-controlled text, prototype pollution through element or attribute names used as object keys, raw HTML or `javascript:` links surviving into rendered Markdown, PDF resource exhaustion, and lazy loading of optional peers. Builds a map and a set of hostile probe inputs, walks eight axes, reports grouped findings with a numbered options list, then fixes what's picked and files the rest. Use before a release, after adding or changing a format, or when asked for a security review, audit, hardening pass, or to fuzz the parsers.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: audit
 ---
 
@@ -55,7 +55,7 @@ Track one task per axis and mark each done as you go.
 | 1 | Nested entity definitions ten levels deep ("billion laughs"); one 100 KB entity referenced 100,000 times; `SYSTEM` entities pointing at `file:///etc/passwd` and an `http://` URL; parameter entities |
 | 2 | 100,000 nested `<sec>`, `<list>`, `<div>`, `<table>`-in-cell, and inline `<italic><bold>…` elements, per format |
 | 3 | Input at `maxInputBytes + 1` as a string and as bytes; `colspan="1000000" rowspan="1000000"`; a list with `start="999999999999"` |
-| 4 | Tens of thousands of spaces, dots, digits, or hyphens followed by one character that forces a match failure, fed through every text-facing path |
+| 4 | Tens of thousands of spaces, dots, digits, or hyphens followed by one character that forces a match failure, fed through every text-facing path; runs of an opener that never closes (`<`, `<meta`, `<script`, `\(`, `**x `, `[x](`), in raw markup and in text that reaches the renderers |
 | 5 | Elements and attributes named `__proto__`, `constructor`, `prototype`, `toString`, `hasOwnProperty`; `id`, `xml:id`, and `rid` values with the same names |
 | 6 | `<script>`, `<img src=x onerror=…>`, `<iframe>`, and HTML comments inside text nodes, CDATA, and titles; link targets `javascript:alert(1)`, ` JaVaScRiPt:…`, `&#106;avascript:…`, `vbscript:…`, `data:text/html,…`, `file:///…`; text containing `[x](javascript:y)`, `<javascript:y>`, backticks, and a newline followed by `# Heading` |
 | 7 | A small PDF whose compressed stream inflates to gigabytes; a PDF with thousands of pages; a broken cross-reference table; an object cycle; an encrypted PDF; a PDF with no text layer |
@@ -116,7 +116,9 @@ Every regex over document text sees attacker-length strings.
 
 **Check:**
 
-- Each pattern is linear-time on hostile input. Nested quantifiers (`(a+)+`), overlapping alternations, and optional separators around a repeated group are the usual culprits. Time each one against the Axis 4 probes: milliseconds is fine; seconds is a finding.
+- Each pattern is linear-time on hostile input. Nested quantifiers (`(a+)+`), overlapping alternations, and optional separators around a repeated group are the usual culprits.
+- No pattern restarts a scan to the end of the text from every start of an unclosed run: `<[^>]*>` over `<<<…`, a lazy `[\s\S]*?` with no terminator, a `\s+$` or `[.,;]+$` trim that stops short of the end. Each looks linear and is quadratic on a run of its opener. Read a tag to its `>` or the next `<`, find a terminator with `indexOf`, and trim an end by walking back from it.
+- Prove linearity by growth, not by one timing: quadrupling a run about quadruples the time, where a quadratic path takes sixteen times as long. Measure under Bun (JavaScriptCore) and Node (V8), since one engine can hide what the other shows.
 - No `new RegExp(...)` is built from document text; where one must be, the text is escaped.
 - Patterns run on bounded slices — a line, a heading candidate — rather than the whole document, where the logic allows.
 
