@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-26 22:15:11
+Generated on: 2026-09-27 03:59:12
 
 ```text
 scholarly-parse/
@@ -99,6 +99,7 @@ scholarly-parse/
 │   │   │   └── parse.ts
 │   │   ├── pdf/
 │   │   │   ├── blocks.ts
+│   │   │   ├── context.ts
 │   │   │   ├── index.ts
 │   │   │   ├── inline.ts
 │   │   │   ├── layout.ts
@@ -118,13 +119,15 @@ scholarly-parse/
 │   ├── model/
 │   │   ├── diagnostics.ts
 │   │   ├── document.ts
+│   │   ├── doi.ts
 │   │   ├── extremes.ts
 │   │   ├── index.ts
 │   │   ├── input.ts
 │   │   ├── result.ts
 │   │   ├── section-ids.ts
 │   │   ├── section-kinds.ts
-│   │   └── table-grid.ts
+│   │   ├── table-grid.ts
+│   │   └── trailing.ts
 │   ├── render/
 │   │   ├── escape.ts
 │   │   ├── index.ts
@@ -164,9 +167,12 @@ scholarly-parse/
 │   │   ├── latexml/
 │   │   │   └── latexml.test.ts
 │   │   ├── pdf/
+│   │   │   ├── budgets.test.ts
 │   │   │   ├── build-pdf.ts
+│   │   │   ├── doi.test.ts
 │   │   │   ├── layout.test.ts
-│   │   │   └── pdf.test.ts
+│   │   │   ├── pdf.test.ts
+│   │   │   └── tables.test.ts
 │   │   └── tei/
 │   │       └── tei.test.ts
 │   ├── model/
@@ -179,8 +185,11 @@ scholarly-parse/
 │   │   └── markdown.test.ts
 │   ├── xml/
 │   │   ├── mathml.test.ts
+│   │   ├── ordered.test.ts
 │   │   └── well-formed.test.ts
 │   ├── detect.test.ts
+│   ├── linear.test.ts
+│   ├── linear.ts
 │   └── parse.test.ts
 ├── .env.example
 ├── .gitattributes

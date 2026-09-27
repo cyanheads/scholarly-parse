@@ -5,7 +5,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/Version-0.1.0-blue.svg?style=flat-square)](./CHANGELOG.md) [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg?style=flat-square)](./LICENSE) [![TypeScript](https://img.shields.io/badge/TypeScript-^7.0.2-3178C6.svg?style=flat-square)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node-%E2%89%A522-339933.svg?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Version](https://img.shields.io/badge/Version-0.1.1-blue.svg?style=flat-square)](./CHANGELOG.md) [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg?style=flat-square)](./LICENSE) [![TypeScript](https://img.shields.io/badge/TypeScript-^7.0.2-3178C6.svg?style=flat-square)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node-%E2%89%A522-339933.svg?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 
 </div>
 
@@ -54,7 +54,7 @@ if (!result.ok && result.error.reason === 'blocked') {
 }
 ```
 
-`toSections` flattens the document into sections with their heading paths and sizes, for serving a long paper a piece at a time:
+`toSections` flattens the document into sections with their heading paths and sizes, for serving a long paper a piece at a time. Figures and tables that sit outside any section come last, as one entry:
 
 ```ts
 import { toSections } from 'scholarly-parse';
@@ -75,7 +75,9 @@ for (const { path, chars, markdown } of toSections(document)) {
 | `scholarly-parse/html` | `parseHtml` |
 | `scholarly-parse/pdf` | `parsePdf` |
 
-Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links, and `parsePdf` a `maxPages` limit (default 300). `parseJats` and `parseTei` are synchronous; the rest are async.
+Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links, and `parsePdf` reading budgets counted across the document: `maxPages` (default 300), `maxTextItems` (500,000), `maxTextChars` (4,000,000), and `maxOperators` (10,000,000). A PDF that reaches one parses as far as it was read, with a `truncated-input` warning. `parseJats` and `parseTei` are synchronous; the rest are async.
+
+For a hard time or memory bound on untrusted PDFs, run `parsePdf` in a worker or process you can terminate.
 
 ## Formats
 
