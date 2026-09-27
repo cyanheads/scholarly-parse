@@ -12,6 +12,7 @@ import type {
   DocumentMetadata,
   ScholarlyDocument,
 } from '../../model/document.js';
+import { trimDoi } from '../../model/doi.js';
 import { exceedsBudget } from '../../model/input.js';
 import {
   failed,
@@ -20,19 +21,40 @@ import {
   type ParseResult,
   parsed,
 } from '../../model/result.js';
+import { createGridBudget } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
+import type { PdfContext } from './context.js';
 import { layout } from './layout.js';
-import { type LoadedPdf, loadPdf } from './load.js';
-import { type PdfContext, structure } from './structure.js';
+import { type LoadedPdf, loadPdf, type ReadBudgets, type ReadStop } from './load.js';
+import { structure } from './structure.js';
 
-/** Options for {@link parsePdf}. */
+/**
+ * Options for {@link parsePdf}. The reading budgets count across the whole document;
+ * reading stops at the first one reached, keeps what was read, and warns `truncated-input`.
+ */
 export interface PdfOptions extends ParseOptions {
+  /** Read no further page once the pages read hold more than this many operators. Defaults to 10,000,000. */
+  maxOperators?: number;
   /** Read at most this many pages. Defaults to 300. */
   maxPages?: number;
+  /** Read at most this many characters of text; the item that reaches it is cut. Defaults to 4,000,000. */
+  maxTextChars?: number;
+  /** Read at most this many text items, blank and skipped ones included. Defaults to 500,000. */
+  maxTextItems?: number;
 }
 
 const DEFAULT_MAX_INPUT_BYTES = 64 * 1024 * 1024;
-const DEFAULT_MAX_PAGES = 300;
+
+/**
+ * The reading budgets' defaults: the corpus's densest page (text items, characters) and
+ * its heaviest paper's operators per page, times 300 pages, rounded up.
+ */
+export const DEFAULT_BUDGETS: Readonly<ReadBudgets> = {
+  maxOperators: 10_000_000,
+  maxPages: 300,
+  maxTextChars: 4_000_000,
+  maxTextItems: 500_000,
+};
 
 /** Fewer characters than this across the pages read means there is no usable text layer. */
 const MIN_TEXT_CHARS = 200;
@@ -49,19 +71,39 @@ async function readPdf(input: Uint8Array, options: PdfOptions): Promise<ParseRes
   if (!/%PDF-/.test(new TextDecoder('latin1').decode(input.subarray(0, 1024)))) {
     return failed('wrong-format', 'Not a PDF: no %PDF- header');
   }
-  const loaded = await loadPdf(input, options.maxPages ?? DEFAULT_MAX_PAGES);
+  const budgets: ReadBudgets = {
+    maxOperators: options.maxOperators ?? DEFAULT_BUDGETS.maxOperators,
+    maxPages: options.maxPages ?? DEFAULT_BUDGETS.maxPages,
+    maxTextChars: options.maxTextChars ?? DEFAULT_BUDGETS.maxTextChars,
+    maxTextItems: options.maxTextItems ?? DEFAULT_BUDGETS.maxTextItems,
+  };
+  const loaded = await loadPdf(input, budgets);
   if ('reason' in loaded) return failed(loaded.reason, loaded.message);
+  const { pageCount, stop } = loaded;
 
   const chars = loaded.pages.reduce(
     (n, page) => n + page.runs.reduce((m, run) => m + run.text.trim().length, 0),
     0,
   );
-  if (chars < MIN_TEXT_CHARS)
-    return failed('empty', 'The PDF has no text layer: it is scanned images and needs OCR');
+  if (chars < MIN_TEXT_CHARS) {
+    if (!stop)
+      return failed('empty', 'The PDF has no text layer: it is scanned images and needs OCR');
+    const stopped = stopMessage(stop, pageCount, budgets);
+    // A page that could not be read, with nothing usable before it, is a broken file.
+    return 'error' in stop
+      ? failed('malformed', stopped)
+      : failed('empty', `${stopped}, before ${MIN_TEXT_CHARS} characters of text were read`);
+  }
 
-  const ctx: PdfContext = { diag: createDiagnostics(), sectionIds: new Set() };
-  if (loaded.pages.length < loaded.pageCount) {
-    ctx.diag.warn('truncated-input', `Read ${loaded.pages.length} of ${loaded.pageCount} pages`);
+  const ctx: PdfContext = {
+    diag: createDiagnostics(),
+    gridBudget: createGridBudget(),
+    sectionIds: new Set(),
+  };
+  if (stop) {
+    ctx.diag.warn('truncated-input', stopMessage(stop, pageCount, budgets), `page ${stop.page}`);
+  } else if (loaded.pages.length < pageCount) {
+    ctx.diag.warn('truncated-input', `Read ${loaded.pages.length} of ${pageCount} pages`);
   }
   warnUnmappedGlyphs(loaded, ctx);
   const parts = structure(layout(loaded.pages), ctx);
@@ -87,6 +129,22 @@ async function readPdf(input: Uint8Array, options: PdfOptions): Promise<ParseRes
     references: parts.references,
   };
   return parsed(document);
+}
+
+const BUDGET_UNITS = {
+  maxOperators: 'operator',
+  maxTextChars: 'character text',
+  maxTextItems: 'item text',
+} as const;
+
+/** Where reading stopped and why: the budget reached, with its option, or the page's error. */
+function stopMessage(stop: ReadStop, pageCount: number, budgets: ReadBudgets): string {
+  const where = `page ${stop.page} of ${pageCount}`;
+  if ('error' in stop) return `Reading stopped at ${where}, which could not be read: ${stop.error}`;
+  const budget = `the ${budgets[stop.budget]}-${BUDGET_UNITS[stop.budget]} budget (${stop.budget})`;
+  return stop.budget === 'maxOperators'
+    ? `Reading stopped after ${where}: the pages read passed ${budget}`
+    : `Reading stopped on ${where} at ${budget}`;
 }
 
 /**
@@ -142,14 +200,12 @@ function extractMetadata(
     .filter((name) => name.length > 1)
     .map((name) => ({ name }));
   const firstPage = pdf.pages[0]?.runs.map((run) => run.text).join(' ') ?? '';
-  const doi = [
+  const found = [
     stringOf(xmp['prism:doi']),
     stringOf(info.doi),
     /\b(?:doi\.org\/|doi:\s*)(10\.\d{4,9}\/[^\s"<>]+)/i.exec(firstPage)?.[1],
-  ]
-    .find((value) => value && /^10\.\d{4,9}\//.test(value))
-    ?.replace(/[.,;)\]]+$/, '')
-    .toLowerCase();
+  ].find((value) => value && /^10\.\d{4,9}\//.test(value));
+  const doi = found && trimDoi(found)?.toLowerCase();
   const infoKeywords =
     stringOf(info.keywords)
       ?.split(/\s*[;,]\s*/)

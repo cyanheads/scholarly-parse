@@ -14,8 +14,14 @@ export interface AutoParseOptions extends ParseOptions {
   baseUrl?: string;
   /** The format, when the caller knows it: skips detection. */
   format?: SourceFormat;
+  /** Read no further page once the pages read hold more than this many operators (PDF). */
+  maxOperators?: number;
   /** Read at most this many pages (PDF). */
   maxPages?: number;
+  /** Read at most this many characters of text (PDF). */
+  maxTextChars?: number;
+  /** Read at most this many text items (PDF). */
+  maxTextItems?: number;
 }
 
 /**
@@ -27,7 +33,7 @@ export async function parse(
   input: string | Uint8Array,
   options: AutoParseOptions = {},
 ): Promise<ParseResult> {
-  const { baseUrl, format = detect(input), maxInputBytes, maxPages } = options;
+  const { baseUrl, format = detect(input), maxInputBytes, ...pdfLimits } = options;
   const budget = maxInputBytes === undefined ? {} : { maxInputBytes };
   const located = baseUrl === undefined ? budget : { ...budget, baseUrl };
   switch (format) {
@@ -45,10 +51,10 @@ export async function parse(
           'wrong-format',
           'PDF must be passed as bytes: text decoding loses its binary content',
         );
-      return (await import('./formats/pdf/index.js')).parsePdf(
-        input,
-        maxPages === undefined ? budget : { ...budget, maxPages },
-      );
+      return (await import('./formats/pdf/index.js')).parsePdf(input, {
+        ...budget,
+        ...pdfLimits,
+      });
     case undefined:
       return failed(
         'wrong-format',

@@ -6,6 +6,8 @@
  */
 import type { Block, FigureBlock, TableBlock } from '../../model/document.js';
 import { largest } from '../../model/extremes.js';
+import { type GridBudget, truncatedGridMessage } from '../../model/table-grid.js';
+import type { PdfContext } from './context.js';
 import { cellMarkdown, joinLines, lineMarkdown } from './inline.js';
 import type { Layout, Line } from './layout.js';
 import { CAPTION_START, formulaOf, isCaptionStart } from './lines.js';
@@ -15,7 +17,12 @@ import type { Run } from './load.js';
  * A section's lines as blocks: paragraphs, captioned figures and tables, and formulas.
  * `textSize` is the size its running text is set in: the body's, or an abstract's own.
  */
-export function flow(lines: Line[], layout: Layout, textSize = layout.bodySize): Block[] {
+export function flow(
+  lines: Line[],
+  layout: Layout,
+  ctx: PdfContext,
+  textSize = layout.bodySize,
+): Block[] {
   const { lineGap } = layout;
   const tables = tableRows(lines, lineGap);
   const blocks: Block[] = [];
@@ -41,12 +48,19 @@ export function flow(lines: Line[], layout: Layout, textSize = layout.bodySize):
       const block = captionBlock(caption);
       const rows = tables.rows.get(line) ?? [];
       if (block.type === 'table' && rows.length > 0) {
-        block.rows = tableGrid(rows);
-        // A bold first row is the header.
-        block.headerRows = rows[0]?.cells.flat().every((run) => run.bold || !run.text.trim())
-          ? 1
-          : 0;
-        delete block.unextractable;
+        const grid = tableGrid(rows, ctx.gridBudget);
+        if (grid.truncated) {
+          const message = truncatedGridMessage(block.label ?? 'Table');
+          ctx.diag.warn('truncated-input', message, `page ${line.page}`);
+        }
+        if (grid.rows.length > 0) {
+          block.rows = grid.rows;
+          // A bold first row is the header.
+          block.headerRows = rows[0]?.cells.flat().every((run) => run.bold || !run.text.trim())
+            ? 1
+            : 0;
+          delete block.unextractable;
+        }
       }
       blocks.push(block);
       previous = undefined;
@@ -102,11 +116,13 @@ function rowCells(row: Line): Run[][] {
 }
 
 /**
- * Table rows as a grid. Columns are the horizontal spans the cells of the fuller rows
- * cover; each cell lands in the column it overlaps, so a row with an empty cell or a
- * spanning header keeps the others under their headings.
+ * Table rows as a grid, charged to the document's `budget`. Columns are the horizontal
+ * spans the cells of the fuller rows cover; each cell lands in the column it overlaps, or
+ * else the nearest one left of it, so a row with an empty cell or a spanning header keeps
+ * the others under their headings. Every row is as wide as the columns, so the grid can
+ * outgrow its text many times over: rows are kept in order while it fits the cells left.
  */
-function tableGrid(rows: Line[]): string[][] {
+function tableGrid(rows: Line[], budget: GridBudget): { rows: string[][]; truncated: boolean } {
   const split = rows.map(rowCells);
   const extent = (cell: Run[]): [number, number] => [
     cell[0]?.x ?? 0,
@@ -123,17 +139,34 @@ function tableGrid(rows: Line[]): string[][] {
     if (last && left <= last[1] + 1) last[1] = Math.max(last[1], right);
     else spans.push([left, right]);
   }
-  return split.map((cells, k) => {
+  const kept = Math.min(split.length, Math.floor(budget.cells / spans.length));
+  budget.cells -= kept * spans.length;
+  const grid = split.slice(0, kept).map((cells, k) => {
     const out = Array<string>(spans.length).fill('');
     for (const cell of cells) {
-      const [left, right] = extent(cell);
-      let column = spans.findIndex(([a, b]) => left <= b && right >= a);
-      if (column < 0) column = Math.max(0, spans.findIndex(([a]) => a > left) - 1);
+      const column = columnOf(spans, ...extent(cell));
       const text = cellMarkdown(cell, rows[k] as Line);
       out[column] = out[column] ? `${out[column]} ${text}` : text;
     }
     return out;
   });
+  return { rows: grid, truncated: kept < split.length };
+}
+
+/**
+ * The column of a cell from `left` to `right`: the first span it overlaps, else the last
+ * span starting left of it, else the first. The spans are ordered and apart, so the span
+ * that settles it is the first ending at or after `left`, found by bisection.
+ */
+function columnOf(spans: [number, number][], left: number, right: number): number {
+  let low = 0;
+  let high = spans.length;
+  while (low < high) {
+    const middle = (low + high) >>> 1;
+    if ((spans[middle]?.[1] ?? 0) < left) low = middle + 1;
+    else high = middle;
+  }
+  return (spans[low]?.[0] ?? Number.POSITIVE_INFINITY) <= right ? low : Math.max(0, low - 1);
 }
 
 /**

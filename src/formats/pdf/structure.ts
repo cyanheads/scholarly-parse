@@ -5,13 +5,13 @@
  * size, weight, case, and numbering, and footnotes from small type below a page's text.
  * @module src/formats/pdf/structure
  */
-import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Reference, Section, SectionKind } from '../../model/document.js';
 import { smallest } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { flow } from './blocks.js';
+import type { PdfContext } from './context.js';
 import { joinLines } from './inline.js';
 import { byColumn, cellText, type Layout, type Line, linesSize } from './layout.js';
 import {
@@ -29,11 +29,6 @@ import {
 } from './lines.js';
 import type { Run } from './load.js';
 import { references } from './references.js';
-
-export interface PdfContext {
-  diag: DiagnosticsCollector;
-  sectionIds: Set<string>;
-}
 
 export interface PdfStructure {
   /** The abstract's parts: one untitled section, or a structured abstract's titled ones. */
@@ -95,7 +90,7 @@ export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
     ...(title.text && { title: title.text }),
   };
   for (const part of parts.abstract) {
-    const blocks = flow(part.lines, layout, parts.abstractSize);
+    const blocks = flow(part.lines, layout, ctx, parts.abstractSize);
     if (blocks.length === 0 && !part.title) continue;
     const id = issueId(ctx.sectionIds, undefined, 'abstract');
     result.abstract.push({
@@ -623,6 +618,7 @@ function convert(
   const blocks = flow(
     raw.lines,
     layout,
+    ctx,
     Math.min(layout.bodySize, linesSize(raw.lines) || layout.bodySize),
   );
   const sections = raw.sections
