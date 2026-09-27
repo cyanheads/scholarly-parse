@@ -8,8 +8,11 @@
  * printed as.
  *
  * ```sh
- * bun run scripts/corpus/sample.ts [--source epmc,arxiv,openalex,pdf,html] [--count 20] [--seed N] [--json <file>]
+ * bun run scripts/corpus/sample.ts [--source epmc,arxiv,openalex,pdf,html] [--count 20] [--seed N] [--json <file>] [--save <dir>]
  * ```
+ *
+ * `--save <dir>` also writes every fetched document there, named for its example, so a
+ * class can be triaged without fetching it again (an OpenAlex TEI costs a second $0.01).
  *
  * Sources, `--count` documents from each:
  * - `epmc`: open-access CC BY articles with Europe PMC full text, from random
@@ -29,7 +32,8 @@
  * paced per upstream (`http.ts`).
  * @module scripts/corpus/sample
  */
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
 import { parseHtml } from '../../src/formats/html/index.js';
@@ -220,13 +224,24 @@ async function drawOpenalex(count: number, seed: number): Promise<Draw[]> {
     const workId = work.id.replace(/^https:\/\/openalex\.org\//, '');
     const source = work.primary_location?.source;
     const url = `https://content.openalex.org/works/${workId}.grobid-xml`;
-    const result = await request(url, 'openalex', 'application/xml', {
-      Authorization: `Bearer ${key}`,
-    });
-    draws.push({
+    const base = {
       id: workId,
       publisher: source?.host_organization_name ?? source?.display_name ?? 'unknown source',
-      source: 'openalex',
+      source: 'openalex' as const,
+    };
+    let result: HttpResult;
+    try {
+      result = await request(url, 'openalex', 'application/xml', {
+        Authorization: `Bearer ${key}`,
+      });
+    } catch (error) {
+      // One failed download must not lose the others already paid for.
+      const message = error instanceof Error ? error.message : String(error);
+      draws.push({ ...base, unavailable: `request failed: ${message}` });
+      continue;
+    }
+    draws.push({
+      ...base,
       ...(result.status === 200
         ? { bytes: result.bytes, url }
         : { unavailable: `Grobid TEI answered HTTP ${result.status}` }),
@@ -471,10 +486,27 @@ const { values } = parseArgs({
   options: {
     count: { default: '20', type: 'string' },
     json: { type: 'string' },
+    save: { type: 'string' },
     seed: { type: 'string' },
     source: { default: SOURCES.join(','), type: 'string' },
   },
 });
+
+const EXTENSION: Record<Source, string> = {
+  arxiv: 'html',
+  epmc: 'xml',
+  html: 'html',
+  openalex: 'xml',
+  pdf: 'pdf',
+};
+
+/** Writes a fetched document to `--save`, named for its example. */
+function save(draw: Draw): void {
+  if (!values.save || !draw.bytes) return;
+  const name = draw.id.replace(/[^\w.-]+/g, '_').slice(0, 150);
+  mkdirSync(values.save, { recursive: true });
+  writeFileSync(join(values.save, `${name}.${EXTENSION[draw.source]}`), draw.bytes);
+}
 
 const count = Number(values.count);
 const seed = values.seed === undefined ? Math.floor(Math.random() * 2 ** 31) : Number(values.seed);
@@ -482,7 +514,7 @@ const sources = values.source.split(',').map((s) => s.trim()) as Source[];
 const invalid = sources.filter((s) => !SOURCES.includes(s));
 if (!Number.isInteger(count) || count < 1 || !Number.isInteger(seed) || invalid.length > 0) {
   console.error(
-    `usage: bun run scripts/corpus/sample.ts [--source ${SOURCES.join(',')}] [--count N] [--seed N] [--json <file>]`,
+    `usage: bun run scripts/corpus/sample.ts [--source ${SOURCES.join(',')}] [--count N] [--seed N] [--json <file>] [--save <dir>]`,
   );
   process.exit(1);
 }
@@ -499,6 +531,8 @@ for (const source of sources) {
         : source === 'openalex'
           ? await drawOpenalex(count, seed)
           : await drawOpenAccess(source, count, seed);
+  // Saved before any parse, so a parse that hangs or crashes loses nothing already fetched.
+  for (const draw of draws) save(draw);
   for (const [index, draw] of draws.entries()) {
     console.error(`sample: parsing ${index + 1}/${draws.length} ${draw.id}`);
     outcomes.push(await analyze(draw));
