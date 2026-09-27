@@ -6,6 +6,9 @@
 import { describe, expect, it } from 'vitest';
 import type { Block, ScholarlyDocument, Section } from '../../src/model/document.js';
 import { toMarkdown, toSections, toText } from '../../src/render/index.js';
+import { MAX_BLOCK_NESTING } from '../../src/render/markdown.js';
+import { stripInline } from '../../src/render/text.js';
+import { expectLinear } from '../linear.js';
 
 function section(id: string, fields: Partial<Section> = {}): Section {
   return { blocks: [], id, kind: 'body', sections: [], ...fields };
@@ -105,6 +108,50 @@ describe('toMarkdown', () => {
       '### Scope\n\nDetail.\n\n## Acknowledgments\n\nThanks.\n',
     );
     expect(toMarkdown(PAPER, { sections: ['missing'] })).toBe('');
+  });
+
+  it('renders every entry toSections returns, by its ID, as that entry and its subsections', () => {
+    const appendix = section('app', {
+      kind: 'appendix',
+      sections: [
+        section('app.1', { blocks: [{ text: 'Part.', type: 'paragraph' }], kind: 'appendix' }),
+      ],
+    });
+    const document = documentOf({
+      ...PAPER,
+      back: [...PAPER.back, appendix],
+      floats: [{ caption: 'A chart.', label: 'Figure 1', type: 'figure' }],
+    });
+    const entries = toSections(document);
+    expect(entries.map((entry) => entry.id)).toEqual([
+      'abstract-1',
+      'abstract-2',
+      's1',
+      's1.1',
+      'b1',
+      'app',
+      'app.1',
+      'floats',
+    ]);
+    entries.forEach((entry, index) => {
+      // A section's subsections are the entries after it, up to the next one at its level or above.
+      const next = entries.findIndex((later, i) => i > index && later.level <= entry.level);
+      const own = entries.slice(index, next === -1 ? undefined : next);
+      expect(toMarkdown(document, { sections: [entry.id] }), entry.id).toBe(
+        `${own
+          .map((e) => e.markdown)
+          .filter(Boolean)
+          .join('\n\n')}\n`,
+      );
+    });
+  });
+
+  it('renders the entries asked for in reading order', () => {
+    const floats: Block[] = [{ caption: 'A chart.', type: 'figure' }];
+    const document = { ...PAPER, floats };
+    expect(toMarkdown(document, { sections: ['floats', 'b1', 'abstract-1'] })).toBe(
+      '## Abstract\n\nWe did this.\n\n## Acknowledgments\n\nThanks.\n\n## Figures and tables\n\n**Figure.** A chart.\n',
+    );
   });
 
   it('caps heading depth at six', () => {
@@ -232,6 +279,89 @@ describe('blocks', () => {
         { href: 'data.xlsx', type: 'supplement' },
       ]),
     ).toBe('**Figure 1.** A cell.\n\n**Supplementary material.** (file: data.xlsx)\n');
+  });
+});
+
+describe('nesting past eight levels', () => {
+  const p = (text: string): Block => ({ text, type: 'paragraph' });
+
+  /** A list nested `depth` deep: each item holds its level's paragraph, then the next list. */
+  function nestedList(depth: number): Block {
+    let block: Block = { items: [[p(`L${depth}`)]], ordered: false, type: 'list' };
+    for (let level = depth - 1; level >= 1; level--)
+      block = { items: [[p(`L${level}`), block]], ordered: false, type: 'list' };
+    return block;
+  }
+
+  /** Quotes nested `depth` deep, each opening with its level's paragraph. */
+  function nestedQuote(depth: number): Block {
+    let block: Block = { blocks: [p(`Q${depth}`)], type: 'quote' };
+    for (let level = depth - 1; level >= 1; level--)
+      block = { blocks: [p(`Q${level}`), block], type: 'quote' };
+    return block;
+  }
+
+  const lines = (markdown: string) => markdown.split('\n').filter(Boolean);
+
+  it('caps list, quote, and box nesting at eight levels', () => {
+    expect(MAX_BLOCK_NESTING).toBe(8);
+  });
+
+  it('renders nesting of eight levels as before', () => {
+    const expected = Array.from({ length: 8 }, (_, i) => `${'  '.repeat(i)}- L${i + 1}`);
+    expect(blocksMarkdown([nestedList(8)])).toBe(`${expected.join('\n\n')}\n`);
+    expect(lines(blocksMarkdown([nestedQuote(8)])).filter((line) => /Q/.test(line))).toEqual(
+      Array.from({ length: 8 }, (_, i) => `${'> '.repeat(i + 1)}Q${i + 1}`),
+    );
+  });
+
+  it('indents list items past the eighth level like the eighth, and adds no quote marker', () => {
+    const indent = (level: number) => '  '.repeat(Math.min(level, 8) - 1);
+    expect(lines(blocksMarkdown([nestedList(10)]))).toEqual(
+      Array.from({ length: 10 }, (_, i) => `${indent(i + 1)}- L${i + 1}`),
+    );
+    expect(lines(blocksMarkdown([nestedQuote(10)])).filter((line) => /Q/.test(line))).toEqual(
+      Array.from({ length: 10 }, (_, i) => `${'> '.repeat(Math.min(i + 1, 8))}Q${i + 1}`),
+    );
+  });
+
+  it('keeps an ordered item its number and a box its title past the eighth level', () => {
+    const box: Block = { blocks: [p('Boxed.')], sections: [], title: 'Key', type: 'box' };
+    const deep: Block = { items: [[p('first')], [p('second'), box]], ordered: true, type: 'list' };
+    let block = deep;
+    for (let level = 8; level >= 1; level--)
+      block = { items: [[p(`L${level}`), block]], ordered: false, type: 'list' };
+    expect(lines(blocksMarkdown([block])).slice(-4)).toEqual([
+      `${'  '.repeat(7)}1. first`,
+      `${'  '.repeat(7)}2. second`,
+      `${'  '.repeat(7)}   **Key**`,
+      `${'  '.repeat(7)}   Boxed.`,
+    ]);
+  });
+
+  it('renders a list and a quote nested 100,000 deep, in proportion to their size', () => {
+    const depth = 100_000;
+    // A line and a blank line per level, each prefixed by at most eight levels of markers.
+    const bound = 50 * depth;
+    for (const block of [nestedList(depth), nestedQuote(depth)]) {
+      const document = documentOf({ body: [section('s1', { blocks: [block] })] });
+      expect(toMarkdown(document).length).toBeLessThan(bound);
+      expect(toText(document).length).toBeLessThan(bound);
+      expect(toSections(document)[0]?.chars).toBeLessThan(bound);
+    }
+  });
+
+  it('renders a list nested 2,000 deep at under four times the page it came from', () => {
+    // The model `parseHtml` reads from this page on a runtime with a deeper stack than Node's.
+    const html = `<html><head><meta name="citation_title" content="T"></head><body><article><h1>T</h1><h2>Intro</h2><p>intro</p>${'<ul><li>a'.repeat(2_000)}${'</li></ul>'.repeat(2_000)}</article></body></html>`;
+    let list: Block = { items: [[p('a')]], ordered: false, type: 'list' };
+    for (let level = 1; level < 2_000; level++)
+      list = { items: [[p('a'), list]], ordered: false, type: 'list' };
+    const document = documentOf({
+      body: [section('s1', { blocks: [p('intro'), list], title: 'Intro' })],
+      metadata: { title: 'T' },
+    });
+    expect(toMarkdown(document).length).toBeLessThan(4 * html.length);
   });
 });
 
@@ -364,6 +494,96 @@ describe('toText', () => {
     expect(performance.now() - started).toBeLessThan(1_000);
     expect(text).toBe(`${brackets}\n\n${destinations}\n`);
   });
+
+  it('leaves code and TeX as written, and drops the code fence lines', () => {
+    const document = documentOf({
+      body: [
+        section('s1', {
+          blocks: [
+            { text: 'Use `a*b*c` or `[x](y)`.', type: 'paragraph' },
+            { text: 'Let $a*b*c$ and $\\{x\\}\\,y$ hold.', type: 'paragraph' },
+            { language: 'python', text: 'y = a*b*c  # **ok**\nprint("\\\\n")', type: 'code' },
+            { tex: '\\{x \\mid x_1\\} \\, a*b*c', type: 'formula' },
+          ],
+        }),
+      ],
+    });
+    expect(toText(document, { metadata: false })).toBe(
+      'Use a*b*c or [x](y).\n\nLet $a*b*c$ and $\\{x\\}\\,y$ hold.\n\ny = a*b*c  # **ok**\nprint("\\\\n")\n\n\\{x \\mid x_1\\} \\, a*b*c\n',
+    );
+  });
+
+  it('keeps code lines that look like block markup, in a list item or a quote too', () => {
+    const code: Block = { text: '# not a heading\n> not a quote\n| --- |\n$$\n\\*', type: 'code' };
+    const lines = '# not a heading\n> not a quote\n| --- |\n$$\n\\*';
+    const document = documentOf({
+      body: [
+        section('s1', {
+          blocks: [
+            code,
+            { items: [[{ text: 'Step.', type: 'paragraph' }, code]], ordered: false, type: 'list' },
+            { items: [[code]], ordered: true, type: 'list' },
+            { blocks: [code], type: 'quote' },
+          ],
+        }),
+      ],
+    });
+    const indented = (prefix: string) =>
+      lines
+        .split('\n')
+        .map((line) => prefix + line)
+        .join('\n');
+    expect(toText(document, { metadata: false })).toBe(
+      `${lines}\n\n- Step.\n\n${indented('  ')}\n\n1. ${indented('   ').slice(3)}\n\n${lines}\n`,
+    );
+  });
+
+  it('strips quote markers at every depth', () => {
+    const deep: Block = { blocks: [{ text: 'deep', type: 'paragraph' }], type: 'quote' };
+    const document = documentOf({
+      body: [
+        section('s1', {
+          blocks: [
+            { blocks: [deep], type: 'quote' },
+            { items: [[deep]], ordered: false, type: 'list' },
+          ],
+        }),
+      ],
+    });
+    expect(toText(document, { metadata: false })).toBe('deep\n\n- deep\n');
+  });
+
+  it('reads long runs of unclosed autolinks in time linear in them', async () => {
+    await expectLinear(
+      (n) =>
+        documentOf({
+          body: [section('s1', { blocks: [{ text: '\\<https:'.repeat(n), type: 'paragraph' }] })],
+        }),
+      (document) => toText(document, { metadata: false }),
+      { from: 250, to: 64_000 },
+    );
+  });
+});
+
+describe('stripInline', () => {
+  it('removes emphasis in pairs and leaves a delimiter with no partner as written', () => {
+    expect(stripInline('**a *b* c**, ~~d~~, *a\\*b*, **~~e~~**, and 2 * 3 **')).toBe(
+      'a b c, d, a*b, e, and 2 * 3 **',
+    );
+  });
+
+  it('keeps a link destination out of the text and an escaped angle bracket in it', () => {
+    expect(
+      stripInline('[the $x$ value](https://x.org/$a), \\<https://y.org>, <https://z.org>'),
+    ).toBe('the $x$ value, <https://y.org>, https://z.org');
+  });
+
+  it.each(['**x ', '*x ', '~~x ', '\\<https:', '<https:', '$x \\$', '[x](', '`x ``'])(
+    'reads a long run of %j in time linear in it',
+    async (run) => {
+      await expectLinear((n) => run.repeat(n), stripInline, { from: 250, to: 64_000 });
+    },
+  );
 });
 
 describe('toSections', () => {
@@ -380,5 +600,25 @@ describe('toSections', () => {
     expect(intro?.markdown).toBe('## 1 Introduction\n\nWhy.');
     expect(intro?.chars).toBe(intro?.markdown.length);
     expect(sections[4]?.markdown).toBe('## Acknowledgments\n\nThanks.');
+  });
+
+  it('ends with the figures and tables outside any section, as toMarkdown renders them', () => {
+    const floats: Block[] = [
+      { caption: 'A chart.', label: 'Figure 1', type: 'figure' },
+      { headerRows: 1, rows: [['a'], ['1']], type: 'table' },
+    ];
+    const markdown = '## Figures and tables\n\n**Figure 1.** A chart.\n\n| a |\n| --- |\n| 1 |';
+    const document = { ...PAPER, floats };
+    expect(toSections(document).at(-1)).toEqual({
+      chars: markdown.length,
+      id: 'floats',
+      kind: 'floats',
+      level: 1,
+      markdown,
+      path: ['Figures and tables'],
+      title: 'Figures and tables',
+    });
+    expect(toMarkdown(document)).toContain(`\n\n${markdown}\n\n`);
+    expect(toSections(PAPER).map((entry) => entry.kind)).not.toContain('floats');
   });
 });

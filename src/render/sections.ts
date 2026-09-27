@@ -5,14 +5,24 @@
  * @module src/render/sections
  */
 import type { Abstract, ScholarlyDocument, Section, SectionKind } from '../model/document.js';
-import { abstractHeading, headingText, renderBlocks, renderSection } from './markdown.js';
+import {
+  abstractHeading,
+  abstractId,
+  abstractMarkdown,
+  FLOATS_HEADING,
+  FLOATS_ID,
+  headingText,
+  renderBlocks,
+  renderFloats,
+} from './markdown.js';
 
 /** One section, flattened out of the tree. */
 export interface FlatSection {
   /** Characters in {@link markdown}. */
   chars: number;
   id: string;
-  kind: SectionKind | 'abstract';
+  /** The section's kind; `abstract` for an abstract, `floats` for the figures and tables outside any section. */
+  kind: SectionKind | 'abstract' | 'floats';
   /** Heading depth, 1 for a top-level section. */
   level: number;
   /** The section's own heading and blocks. Subsections are separate entries. */
@@ -23,24 +33,38 @@ export interface FlatSection {
   title?: string;
 }
 
-/** Every section, abstracts first, then body, then back matter. */
+/**
+ * Every section, abstracts first, then body, then back matter, then one entry for the
+ * figures and tables outside any section (`document.floats`) when there are any. Each
+ * entry's ID renders it through `toMarkdown`'s `sections` option.
+ */
 export function toSections(document: ScholarlyDocument): FlatSection[] {
   const out: FlatSection[] = [];
   document.abstracts.forEach((abstract, index) => {
     visitAbstract(abstract, index, out);
   });
   for (const section of [...document.body, ...document.back]) visit(section, 1, [], out);
+  if (document.floats.length > 0) {
+    const markdown = renderFloats(document.floats).trim();
+    out.push({
+      chars: markdown.length,
+      id: FLOATS_ID,
+      kind: 'floats',
+      level: 1,
+      markdown,
+      path: [FLOATS_HEADING],
+      title: FLOATS_HEADING,
+    });
+  }
   return out;
 }
 
 function visitAbstract(abstract: Abstract, index: number, out: FlatSection[]): void {
   const title = abstractHeading(abstract);
-  const markdown = [`## ${title}`, ...abstract.sections.map((s) => renderSection(s, 3))]
-    .filter(Boolean)
-    .join('\n\n');
+  const markdown = abstractMarkdown(abstract);
   out.push({
     chars: markdown.length,
-    id: `abstract-${index + 1}`,
+    id: abstractId(index),
     kind: 'abstract',
     level: 1,
     markdown,

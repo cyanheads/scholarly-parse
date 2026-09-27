@@ -6,7 +6,10 @@ import type {
   Abstract,
   AbstractKind,
   Block,
+  BoxBlock,
   Identifiers,
+  ListBlock,
+  QuoteBlock,
   ScholarlyDocument,
   Section,
   SectionKind,
@@ -34,8 +37,12 @@ export interface MarkdownOptions {
   metadata?: boolean;
   references?: boolean;
   /**
-   * Render only these sections (by ID, from `toSections` or the model), each with its
-   * subsections. Abstracts, metadata, footnotes, and references are left out.
+   * Render only these entries, by the IDs `toSections` returns: `abstract-N` for the Nth
+   * abstract, a section's ID for that section, and `floats` for the figures and tables
+   * outside any section. An abstract or the floats render as their `toSections` entry; a
+   * section renders as its entry followed by its subsections'. An abstract's own sections
+   * can be named by their IDs from the model too. Entries come in reading order, and
+   * metadata, footnotes, and references are left out.
    */
   sections?: string[];
 }
@@ -73,8 +80,7 @@ export function toMarkdown(document: ScholarlyDocument, options: MarkdownOptions
   if (options.back !== false) {
     for (const section of document.back) parts.push(renderSection(section, 2));
   }
-  if (document.floats.length > 0)
-    parts.push(`## Figures and tables\n\n${renderBlocks(document.floats)}`);
+  if (document.floats.length > 0) parts.push(renderFloats(document.floats));
   if (options.footnotes !== false && document.footnotes.length > 0) {
     const lines = document.footnotes.map(
       (fn) =>
@@ -100,19 +106,38 @@ function selectAbstracts(abstracts: Abstract[], mode: 'all' | 'main' | 'none'): 
   return main ? [main] : [];
 }
 
+/** The ID `toSections` gives the abstract at `index` in `document.abstracts`. */
+export function abstractId(index: number): string {
+  return `abstract-${index + 1}`;
+}
+
+/** The ID `toSections` gives the figures and tables outside any section. */
+export const FLOATS_ID = 'floats';
+
+/**
+ * The entries `ids` names, in reading order, each rendered as `toSections` renders it: a
+ * section at the heading level and under the parent kind it has there, followed by its
+ * subsections.
+ */
 function renderSelected(document: ScholarlyDocument, ids: string[]): string {
   const wanted = new Set(ids);
   const found: string[] = [];
-  const visit = (sections: Section[], level: number) => {
+  const visit = (sections: Section[], level: number, parentKind?: SectionKind) => {
     for (const section of sections) {
-      if (wanted.has(section.id)) found.push(renderSection(section, level));
-      else visit(section.sections, level + 1);
+      if (wanted.has(section.id)) found.push(renderSection(section, level, parentKind));
+      else visit(section.sections, level + 1, section.kind);
     }
   };
+  document.abstracts.forEach((abstract, index) => {
+    if (wanted.has(abstractId(index))) found.push(abstractMarkdown(abstract));
+    else visit(abstract.sections, 3);
+  });
   visit(document.body, 2);
   visit(document.back, 2);
-  for (const abstract of document.abstracts) visit(abstract.sections, 3);
-  return found.length > 0 ? `${found.join('\n\n')}\n` : '';
+  if (wanted.has(FLOATS_ID) && document.floats.length > 0)
+    found.push(renderFloats(document.floats).trim());
+  const rendered = found.filter(Boolean);
+  return rendered.length > 0 ? `${rendered.join('\n\n')}\n` : '';
 }
 
 function renderMetadata(document: ScholarlyDocument): string[] {
@@ -168,10 +193,16 @@ export function abstractHeading(abstract: Abstract): string {
   return abstract.title ?? ABSTRACT_HEADINGS[abstract.kind];
 }
 
+/** An abstract under its heading; nothing when nothing is under the heading. */
 function renderAbstract(abstract: Abstract): string {
   const body = abstract.sections.map((section) => renderSection(section, 3)).filter(Boolean);
   if (body.length === 0) return '';
   return [`## ${abstractHeading(abstract)}`, ...body].join('\n\n');
+}
+
+/** An abstract as `toSections` lists it: under its heading, which stands even with nothing under it. */
+export function abstractMarkdown(abstract: Abstract): string {
+  return renderAbstract(abstract) || `## ${abstractHeading(abstract)}`;
 }
 
 /**
@@ -190,23 +221,100 @@ export function headingText(
     : title;
 }
 
-/** Render a section and its subsections, its heading at `level` (capped at 6). */
-export function renderSection(section: Section, level: number, parentKind?: SectionKind): string {
+/**
+ * Render a section and its subsections, its heading at `level` (capped at 6). `depth`
+ * counts the lists, quotes, and boxes around the section (a box can hold sections).
+ */
+export function renderSection(
+  section: Section,
+  level: number,
+  parentKind?: SectionKind,
+  depth = 0,
+): string {
   const parts: string[] = [];
   const heading = headingText(section, parentKind);
   if (heading) parts.push(`${'#'.repeat(Math.min(level, 6))} ${heading}`);
-  const blocks = renderBlocks(section.blocks);
+  const blocks = renderBlocks(section.blocks, depth);
   if (blocks) parts.push(blocks);
   for (const sub of section.sections) {
-    const rendered = renderSection(sub, level + 1, section.kind);
+    const rendered = renderSection(sub, level + 1, section.kind, depth);
     if (rendered) parts.push(rendered);
   }
   return parts.join('\n\n');
 }
 
-/** Render blocks separated by blank lines. */
-export function renderBlocks(blocks: Block[]): string {
-  return blocks.map(renderBlock).filter(Boolean).join('\n\n');
+/** Heading over the figures and tables the source places outside any section. */
+export const FLOATS_HEADING = 'Figures and tables';
+
+/** The figures and tables outside any section, under their own heading. */
+export function renderFloats(floats: Block[]): string {
+  return `## ${FLOATS_HEADING}\n\n${renderBlocks(floats)}`;
+}
+
+/**
+ * Render blocks separated by blank lines. `depth` counts the lists, quotes, and boxes
+ * around them.
+ */
+export function renderBlocks(blocks: Block[], depth = 0): string {
+  return blocks
+    .map((block) => renderBlock(block, depth))
+    .filter(Boolean)
+    .join('\n\n');
+}
+
+/**
+ * Deepest nesting of lists, quotes, and boxes that indents or marks what it holds. The
+ * list, quote, or box at this level renders everything inside it at its own prefix: list
+ * items deeper still keep their markers at its items' indentation, and deeper quotes and
+ * boxes add no `>`. A line's prefix stays within eight levels, and the renderer's stack
+ * stays fixed, however deep a document nests. The corpus nests lists two deep at most,
+ * and LaTeX's list environments stop at four.
+ */
+export const MAX_BLOCK_NESTING = 8;
+
+type ContainerBlock = ListBlock | QuoteBlock | BoxBlock;
+type LeafBlock = Exclude<Block, ContainerBlock>;
+
+function renderBlock(block: Block, depth: number): string {
+  switch (block.type) {
+    case 'list':
+    case 'quote':
+    case 'box':
+      return depth + 1 < MAX_BLOCK_NESTING ? renderNested(block, depth + 1) : renderAtCap(block);
+    default:
+      return renderLeaf(block);
+  }
+}
+
+/** A list, quote, or box at `level` of nesting, below the cap; what it holds nests one level deeper. */
+function renderNested(block: ContainerBlock, level: number): string {
+  switch (block.type) {
+    case 'list':
+      return renderList(block, level);
+    case 'quote':
+      return quoteLines(renderBlocks(block.blocks, level));
+    case 'box': {
+      const inner = [
+        boxTitle(block),
+        renderBlocks(block.blocks, level),
+        ...block.sections.map((s) => renderSection(s, 4, undefined, level)),
+      ].filter(Boolean);
+      return inner.length > 0 ? quoteLines(inner.join('\n\n')) : '';
+    }
+  }
+}
+
+/** A list, quote, or box at the cap, with everything inside it at its own prefix. */
+function renderAtCap(block: ContainerBlock): string {
+  const flat = renderFlat(block);
+  if (block.type === 'list') return flat;
+  if (block.type === 'box' && !flat) return '';
+  return quoteLines(flat);
+}
+
+function boxTitle(block: BoxBlock): string {
+  const title = [block.label && escapeInline(block.label), block.title].filter(Boolean).join(' ');
+  return title ? `**${title}**` : '';
 }
 
 function labeled(label: string | undefined, caption: string | undefined): string {
@@ -214,12 +322,10 @@ function labeled(label: string | undefined, caption: string | undefined): string
   return [head, caption].filter(Boolean).join(' ');
 }
 
-function renderBlock(block: Block): string {
+function renderLeaf(block: LeafBlock): string {
   switch (block.type) {
     case 'paragraph':
       return escapeBlockStart(block.text);
-    case 'list':
-      return renderList(block.items, block.ordered, block.title);
     case 'table':
       return renderTable(block);
     case 'figure':
@@ -240,19 +346,6 @@ function renderBlock(block: Block): string {
       const fence = codeFence(block.text);
       const language = block.language && CODE_LANGUAGE.test(block.language) ? block.language : '';
       return `${fence}${language}\n${block.text}\n${fence}`;
-    }
-    case 'quote':
-      return quoteLines(renderBlocks(block.blocks));
-    case 'box': {
-      const title = [block.label && escapeInline(block.label), block.title]
-        .filter(Boolean)
-        .join(' ');
-      const inner = [
-        title ? `**${title}**` : '',
-        renderBlocks(block.blocks),
-        ...block.sections.map((s) => renderSection(s, 4)),
-      ].filter(Boolean);
-      return inner.length > 0 ? quoteLines(inner.join('\n\n')) : '';
     }
   }
 }
@@ -280,19 +373,136 @@ function quoteLines(markdown: string): string {
     .join('\n');
 }
 
-function renderList(items: Block[][], ordered: boolean, title: string | undefined): string {
+function renderList(list: ListBlock, level: number): string {
   const lines: string[] = [];
-  if (title) lines.push(`**${title}**`, '');
-  items.forEach((item, index) => {
-    const marker = ordered ? `${index + 1}. ` : '- ';
+  if (list.title) lines.push(`**${list.title}**`, '');
+  list.items.forEach((item, index) => {
+    const marker = list.ordered ? `${index + 1}. ` : '- ';
     const indent = ' '.repeat(marker.length);
-    const body = renderBlocks(item)
+    const body = renderBlocks(item, level)
       .split('\n')
       .map((line, i) => (i === 0 ? `${marker}${line}` : line ? `${indent}${line}` : ''))
       .join('\n');
     lines.push(body);
   });
   return lines.join('\n');
+}
+
+/** A list item met in a flat walk: its marker until its first line is written, then an indent as wide. */
+interface FlatItem {
+  indent: string;
+  marker: string;
+  started: boolean;
+}
+
+/** One step of a flat walk. `item` is the list item the output belongs to, if any. */
+type FlatStep =
+  | { block: Block; item: FlatItem | undefined; type: 'block' }
+  | { blocks: Block[]; first: boolean; marker: string; parent: FlatItem | undefined; type: 'item' }
+  | { item: FlatItem; type: 'end-item' }
+  | {
+      heading: number;
+      item: FlatItem | undefined;
+      parentKind: SectionKind | undefined;
+      section: Section;
+      type: 'section';
+    }
+  | { item: FlatItem | undefined; text: string; type: 'text' };
+
+/**
+ * A list, quote, or box and everything inside it, walked with a stack instead of
+ * recursion and written without the prefix of the nesting below it: every list item keeps
+ * its marker at the same indentation, and quotes and boxes inside add nothing. Content
+ * without nesting renders as {@link renderNested} writes it, blocks a blank line apart and
+ * the items of a list a line break apart.
+ */
+function renderFlat(root: ContainerBlock): string {
+  let out = '';
+  let gap = '';
+  const write = (text: string, item: FlatItem | undefined) => {
+    if (!text) return;
+    const indent = item?.indent ?? '';
+    const lines = text.split('\n');
+    const first = lines[0] ?? '';
+    const head =
+      item && !item.started ? `${item.marker}${first}` : first ? `${indent}${first}` : '';
+    if (item) item.started = true;
+    let body = head;
+    for (let i = 1; i < lines.length; i++) body += `\n${lines[i] ? `${indent}${lines[i]}` : ''}`;
+    out += gap + body;
+    gap = '\n\n';
+  };
+
+  const steps: FlatStep[] = [{ block: root, item: undefined, type: 'block' }];
+  const pushBlocks = (blocks: Block[], item: FlatItem | undefined) => {
+    for (let i = blocks.length - 1; i >= 0; i--)
+      steps.push({ block: blocks[i] as Block, item, type: 'block' });
+  };
+  const pushSections = (
+    sections: Section[],
+    heading: number,
+    parentKind: SectionKind | undefined,
+    item: FlatItem | undefined,
+  ) => {
+    for (let i = sections.length - 1; i >= 0; i--)
+      steps.push({ heading, item, parentKind, section: sections[i] as Section, type: 'section' });
+  };
+
+  for (let step = steps.pop(); step; step = steps.pop()) {
+    switch (step.type) {
+      case 'text':
+        write(step.text, step.item);
+        break;
+      case 'end-item':
+        // An item with nothing written still shows its marker, as an empty item does nested.
+        if (!step.item.started) write(step.item.marker, undefined);
+        break;
+      case 'item': {
+        // An item whose parent has written nothing yet opens on the parent's line.
+        const lead = step.parent && !step.parent.started ? step.parent.marker : '';
+        if (step.parent) step.parent.started = true;
+        const item = {
+          indent: ' '.repeat(step.marker.length),
+          marker: lead + step.marker,
+          started: false,
+        };
+        if (!step.first) gap = '\n';
+        steps.push({ item, type: 'end-item' });
+        pushBlocks(step.blocks, item);
+        break;
+      }
+      case 'section': {
+        const { heading, item, section } = step;
+        pushSections(section.sections, heading + 1, section.kind, item);
+        pushBlocks(section.blocks, item);
+        const title = headingText(section, step.parentKind);
+        if (title)
+          steps.push({ item, text: `${'#'.repeat(Math.min(heading, 6))} ${title}`, type: 'text' });
+        break;
+      }
+      case 'block': {
+        const { block, item } = step;
+        if (block.type === 'list') {
+          for (let k = block.items.length - 1; k >= 0; k--) {
+            const marker = block.ordered ? `${k + 1}. ` : '- ';
+            const blocks = block.items[k] as Block[];
+            steps.push({ blocks, first: k === 0, marker, parent: item, type: 'item' });
+          }
+          if (block.title) steps.push({ item, text: `**${block.title}**`, type: 'text' });
+        } else if (block.type === 'quote') {
+          pushBlocks(block.blocks, item);
+        } else if (block.type === 'box') {
+          pushSections(block.sections, 4, undefined, item);
+          pushBlocks(block.blocks, item);
+          steps.push({ item, text: boxTitle(block), type: 'text' });
+        } else {
+          write(renderLeaf(block), item);
+        }
+        break;
+      }
+    }
+  }
+  return out;
 }
 
 /**
