@@ -4,7 +4,7 @@ description: >
   Review scholarly-parse's parsers against hostile documents: XML entity expansion and external entities, recursion depth on deeply nested input, input size and amplification budgets, regex backtracking on attacker-controlled text, prototype pollution through element or attribute names used as object keys, raw HTML or `javascript:` links surviving into rendered Markdown, PDF resource exhaustion, and lazy loading of optional peers. Builds a map and a set of hostile probe inputs, walks eight axes, reports grouped findings with a numbered options list, then fixes what's picked and files the rest. Use before a release, after adding or changing a format, or when asked for a security review, audit, hardening pass, or to fuzz the parsers.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: audit
 ---
 
@@ -118,7 +118,7 @@ Every regex over document text sees attacker-length strings.
 
 - Each pattern is linear-time on hostile input. Nested quantifiers (`(a+)+`), overlapping alternations, and optional separators around a repeated group are the usual culprits.
 - No pattern restarts a scan to the end of the text from every start of an unclosed run: `<[^>]*>` over `<<<…`, a lazy `[\s\S]*?` with no terminator, a `\s+$` or `[.,;]+$` trim that stops short of the end. Each looks linear and is quadratic on a run of its opener. Read a tag to its `>` or the next `<`, find a terminator with `indexOf`, and trim an end by walking back from it.
-- Prove linearity by growth, not by one timing: quadrupling a run about quadruples the time, where a quadratic path takes sixteen times as long. Measure under Bun (JavaScriptCore) and Node (V8), since one engine can hide what the other shows.
+- Prove linearity by growth, not by one timing: quadrupling a run about quadruples the time, where a quadratic path takes sixteen times as long. Measure under Bun (JavaScriptCore) and Node (V8), since one engine can hide what the other shows. A fixed pattern's regression test calls `expectLinear` from `tests/linear.ts`, which times the thread's CPU so it holds under a loaded suite; start its range where the old path already fails the first step.
 - No `new RegExp(...)` is built from document text; where one must be, the text is escaped.
 - Patterns run on bounded slices — a line, a heading candidate — rather than the whole document, where the logic allows.
 
