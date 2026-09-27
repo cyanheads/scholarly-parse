@@ -24,6 +24,8 @@ import type {
   SupplementBlock,
   TableBlock,
 } from '../../model/document.js';
+import { append } from '../../model/extremes.js';
+import { tableName, truncatedGridMessage } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis, joinAdjacentMath } from '../../render/inline.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
@@ -168,7 +170,7 @@ function walk(nodes: Node[], flow: Flow, ctx: HtmlContext): void {
     if (isFurniture(node)) continue;
     if (isBlockElement(node)) {
       flushRun(flow);
-      flow.blocks.push(...renderBlock(node, ctx));
+      append(flow.blocks, renderBlock(node, ctx));
     } else if (tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {
       walk(childNodes(node), flow, ctx);
     } else {
@@ -202,7 +204,7 @@ function renderBlock(element: Element, ctx: HtmlContext): Block[] {
   if (tag === 'ul' || tag === 'ol') return listBlock(element, ctx);
   if (tag === 'dl') return descriptionList(element, ctx);
   if (tag === 'pre') {
-    const text = element.textContent?.replace(/^\n|\s+$/g, '') ?? '';
+    const text = (element.textContent ?? '').replace(/^\n/, '').trimEnd();
     return text ? [{ text, type: 'code' }] : [];
   }
   if (
@@ -530,24 +532,23 @@ function tableBlock(container: Element, ctx: HtmlContext): TableBlock {
   if (captionEl) pieces.caption.unshift(inlineText(captionEl, ctx));
   if (!table) {
     const around = captionPieces(container, imageOf(container), ctx);
-    pieces.caption.push(...around.caption, ...around.notes);
+    append(pieces.caption, around.caption);
+    append(pieces.caption, around.notes);
   }
   const { caption, label } = splitCaption(pieces.caption);
   const id = container.getAttribute('id') ?? table?.getAttribute('id') ?? undefined;
   const grid = table
-    ? readHtmlTable(table, (cell) => inlineText(cell, ctx), { boldHeaders: true })
-    : { headerRows: 0, rows: [] };
+    ? readHtmlTable(table, (cell) => inlineText(cell, ctx), ctx.gridBudget, { boldHeaders: true })
+    : { headerRows: 0, rows: [], truncated: false };
   const unextractable =
     grid.rows.length > 0
       ? undefined
       : imageOf(container)
         ? ('graphic-only' as const)
         : ('no-rows' as const);
-  if (unextractable) {
-    // A label usually names the table itself ("Table 2"); a bare number does not.
-    const name = label && /^\p{L}/u.test(label) ? label : `Table ${label ?? ''}`.trim();
-    ctx.diag.warn('table-unextractable', `${name} has no readable rows`, id);
-  }
+  const name = tableName(label);
+  if (grid.truncated) ctx.diag.warn('truncated-input', truncatedGridMessage(name), id);
+  if (unextractable) ctx.diag.warn('table-unextractable', `${name} has no readable rows`, id);
   const footnotes = pieces.notes;
   return {
     type: 'table',

@@ -36,6 +36,7 @@ import {
 } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
+import { createGridBudget } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import { floatKind, flowBlocks, isLinkList } from './blocks.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
@@ -75,6 +76,7 @@ async function readHtml(input: string | Uint8Array, options: HtmlOptions): Promi
     baseUrl: options.baseUrl,
     diag: createDiagnostics(),
     footnotes: [],
+    gridBudget: createGridBudget(),
     sectionIds: new Set(),
   };
   const tags = readMetaTags(document);

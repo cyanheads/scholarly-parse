@@ -6,10 +6,12 @@
 
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type { Block, ScholarlyDocument, Section, SectionKind } from '../../model/document.js';
+import { append } from '../../model/extremes.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
+import { createGridBudget } from '../../model/table-grid.js';
 import {
   attrOf,
   childrenOf,
@@ -64,6 +66,7 @@ function readJats(input: string | Uint8Array, options: ParseOptions): ParseResul
   const ctx: JatsContext = {
     diag: createDiagnostics(),
     footnotes: [],
+    gridBudget: createGridBudget(),
     noteOwners: noteOwners(articleMeta),
     sectionIds: new Set(),
   };
@@ -149,7 +152,7 @@ function parseBody(
       const section = parseSection(child, ctx, own, nextId());
       if (!section) continue;
       if (section.title === undefined && section.blocks.length === 0)
-        sections.push(...section.sections);
+        append(sections, section.sections);
       else sections.push(section);
       continue;
     }
@@ -160,7 +163,7 @@ function parseBody(
       sections.push({ blocks: blocksWithoutTitle(child, ctx), id, kind, sections: [], title });
       continue;
     }
-    pending.push(...flowBlocks([child], ctx));
+    append(pending, flowBlocks([child], ctx));
   }
   flushPending();
   return sections;
@@ -207,7 +210,7 @@ function parseBack(nodes: XmlNodeList, ctx: JatsContext, where: 'back' | 'front'
     const section = parseSection(node, ctx, kind, `${where}${sections.length + 1}`);
     if (!section) return;
     if (section.title === undefined && section.blocks.length === 0)
-      sections.push(...section.sections);
+      append(sections, section.sections);
     else sections.push(section);
   };
   for (const child of nodes) {

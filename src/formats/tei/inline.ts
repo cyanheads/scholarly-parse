@@ -5,6 +5,7 @@
  */
 import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Footnote } from '../../model/document.js';
+import type { GridBudget } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis, link, subscript, superscript } from '../../render/inline.js';
 import {
@@ -23,12 +24,13 @@ export interface TeiContext {
   /** Each footnote's printed mark by its `xml:id`. */
   footnoteMarks: ReadonlyMap<string, string>;
   footnotes: Footnote[];
+  /** What the document's tables may still repeat and hold. */
+  gridBudget: GridBudget;
   sectionIds: Set<string>;
 }
 
 /** Elements whose content reads in place with no formatting of their own. */
 const TRANSPARENT: ReadonlySet<string> = new Set([
-  's',
   'seg',
   'term',
   'rs',
@@ -45,12 +47,15 @@ const TRANSPARENT: ReadonlySet<string> = new Set([
   'emph',
   'q',
   'quote',
-  'p',
   'head',
-  'item',
-  'cell',
-  'row',
 ]);
+
+/**
+ * Elements whose content reads in place followed by a space: Grobid writes the sentences
+ * it segments as adjacent `<s>` elements with nothing between them, and wraps a caption
+ * in `<div>` and `<p>`, so without it `end.</s><s>Next` reads `end.Next`.
+ */
+const SPACED: ReadonlySet<string> = new Set(['s', 'p', 'ab', 'div', 'item', 'row', 'cell', 'lb']);
 
 /** Plain text of a node list, whitespace collapsed. */
 export function plainText(input: XmlNode | XmlNodeList | undefined): string {
@@ -58,7 +63,11 @@ export function plainText(input: XmlNode | XmlNodeList | undefined): string {
   const nodes = Array.isArray(input) ? input : [input];
   const concat = (list: XmlNodeList): string =>
     list
-      .map((n) => (isTextNode(n) ? textOf(n) : tagNameOf(n) === 'lb' ? ' ' : concat(childrenOf(n))))
+      .map((n) => {
+        if (isTextNode(n)) return textOf(n);
+        const text = concat(childrenOf(n));
+        return SPACED.has(tagNameOf(n) ?? '') ? `${text} ` : text;
+      })
       .join('');
   return collapseWhitespace(concat(nodes));
 }
@@ -103,8 +112,6 @@ function inlineNode(node: XmlNode, ctx: TeiContext): string {
       const inner = inlineMarkdown(children, ctx);
       return /^(https?|ftp):/i.test(target) ? link(inner, target) : inner;
     }
-    case 'lb':
-      return ' ';
     case 'formula':
       return escapeInline(plainText(children.filter((c) => tagNameOf(c) !== 'label')));
     case 'note':
@@ -115,6 +122,7 @@ function inlineNode(node: XmlNode, ctx: TeiContext): string {
     case 'fw':
       return '';
     default:
+      if (SPACED.has(tag)) return `${inlineMarkdown(children, ctx)} `;
       if (!TRANSPARENT.has(tag)) ctx.diag.unhandled(`tei:${tag}`);
       return inlineMarkdown(children, ctx);
   }

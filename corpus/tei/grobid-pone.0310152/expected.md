@@ -244,6 +244,8 @@ In this section, we investigate the effect of the gap between two consecutive do
 
 Scenario-1: Vaccine doses administered with 4 months gap.
 
+### Scenario-2: Vaccine doses administered with 8 months gap.
+
 ### Scenario-3: Vaccine doses administered with 12 months gap.
 
 For simplicity, we assumed that each vaccine dose has the same efficacy. From Fig 8, we observe that Scenario-1 and Scenario-2 depict almost the same epidemic progression whereas Scenario-3 depicts a different type of progression. The result shows that instead of administrating the vaccine with a gap of 4 months, a vaccination spanning a gap of 8 months produces the same type of epidemic progression, though the level of immunity is slightly less. Also, we note that Scenario-1 requires repeated vaccinations compared to Scenario-2 within the period 0 to 2000 days, but both scenarios eventually accord the same level of immunity. This is a key observation that can help us to avoid unnecessary vaccinations. On the other hand, from Fig 8 (e) and 8(f), we observe that if the vaccination gap is larger (i.e., 1 year in this case), then consecutive epidemic peaks can appear in future. Thus a proper gap should be maintained to minimize future epidemic outbreaks. The summary of these observations is the need to exercise optimal control.

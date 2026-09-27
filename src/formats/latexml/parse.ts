@@ -28,6 +28,8 @@ import type {
   Section,
   SectionKind,
 } from '../../model/document.js';
+import { doiInText } from '../../model/doi.js';
+import { append } from '../../model/extremes.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import {
   failed,
@@ -38,6 +40,7 @@ import {
 } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle } from '../../model/section-kinds.js';
+import { createGridBudget } from '../../model/table-grid.js';
 import { flowBlocks, parseSection } from './blocks.js';
 import type { LatexmlContext } from './context.js';
 import { inlineMarkdown, inlineText } from './inline.js';
@@ -84,6 +87,7 @@ async function readLatexml(
     baseUrl: options.baseUrl,
     diag: createDiagnostics(),
     footnotes: [],
+    gridBudget: createGridBudget(),
     sectionIds: new Set(),
   };
   const watermark = parseWatermark(document, options.baseUrl);
@@ -136,11 +140,14 @@ const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', '
 /**
  * arXiv stamps each render with `arXiv:2401.04088v1 [cs.LG] 08 Jan 2024`; that line
  * gives the identifier and version date. The page URL is the fallback for the identifier.
+ * The stamp is short, so only its first 400 characters are read: the pattern rescans the
+ * rest of the text from each `[` that nothing closes.
  */
 function parseWatermark(document: Document, baseUrl: string | undefined): Watermark {
-  const text =
+  const text = (
     textOfElement(document.querySelector('#watermark-tr')) ||
-    textOfElement(document.querySelector('.ltx_page_main')).slice(0, 400);
+    textOfElement(document.querySelector('.ltx_page_main'))
+  ).slice(0, 400);
   const match =
     /arXiv:(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+(?:\.[A-Z]{2})?\/\d{7}(?:v\d+)?)\s*\[[^\]]+\]\s*(\d{1,2}) (\w{3}) (\d{4})/.exec(
       text,
@@ -414,7 +421,7 @@ function extractContent(
 
   for (const child of childNodes(article)) {
     if (!isElement(child)) {
-      pending.push(...flowBlocks([child], ctx));
+      append(pending, flowBlocks([child], ctx));
       continue;
     }
     if (FRONT_CLASSES.some((c) => hasClass(child, c))) continue;
@@ -423,7 +430,7 @@ function extractContent(
     const isSection =
       tagOf(child) === 'section' || hasClass(child, 'ltx_appendix') || acknowledgments;
     if (!isSection) {
-      pending.push(...flowBlocks([child], ctx));
+      append(pending, flowBlocks([child], ctx));
       continue;
     }
     flushPending();
@@ -449,7 +456,6 @@ function withKind(section: Section, kind: SectionKind): Section {
   return { ...section, kind, sections: section.sections.map((sub) => withKind(sub, kind)) };
 }
 
-const DOI = /\b(10\.\d{4,9}\/[^\s"<>]+?)(?=[.,;)]?(?:\s|$))/i;
 const ARXIV = /arXiv[:\s]+(\d{4}\.\d{4,5}(?:v\d+)?)/i;
 
 /** The bibliography: one reference per `ltx_bibitem`, its printed tag as the label. */
@@ -478,7 +484,7 @@ function extractReferences(bibliography: Element, ctx: LatexmlContext): Referenc
     );
     const doi = (
       hrefs.map((h) => /doi\.org\/(10\.\d{4,9}\/\S+)/i.exec(h)?.[1]).find(Boolean) ??
-      DOI.exec(plain)?.[1]
+      doiInText(plain)
     )?.toLowerCase();
     const arxiv = ARXIV.exec(plain)?.[1];
     const url = doi ? undefined : hrefs.find((h) => /^https?:/i.test(h) && !h.includes('#'));

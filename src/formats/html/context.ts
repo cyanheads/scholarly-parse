@@ -8,11 +8,14 @@
 import { tagOf } from '../../html/dom.js';
 import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Footnote } from '../../model/document.js';
+import type { GridBudget } from '../../model/table-grid.js';
 
 export interface HtmlContext {
   baseUrl: string | undefined;
   diag: DiagnosticsCollector;
   footnotes: Footnote[];
+  /** What the document's tables may still repeat and hold. */
+  gridBudget: GridBudget;
   sectionIds: Set<string>;
 }
 

@@ -129,6 +129,8 @@ All staff spoke of the positive impact of perinatal ESGs on participants' mental
 
 Participants and staff all reported that the study procedures had been acceptable. Although some TAU participants expressed feeling initially disappointed with their assigned group and another felt relief for not being allocated to the ESG (which she would have withdrawn from), most of the participants reported finding the randomisation process and communication acceptable and clear: 'I think I like that it's random. Because it kind of feels a bit more equal, if it's just completely random. I think that's a good thing.' (LO-003)
 
+## Discussion
+
 ## Main findings
 
 Our overarching aim was to investigate whether it is feasible to undertake a randomised controlled trial of perinatal ESGs for people with BPD. Our results demonstrate that such a trial is entirely feasible. We recruited 100% of our pre-specified target and followed-up 92% of all participants at 4 months. In the intervention group, 54% of participants attended 75% of the 12 sessions, which was below our 75% target. Notwithstanding, this was a high bar for determining adherence, and nearly 80% of participants attended at least half of the group treatment, with high median attendance of nine sessions (equating to 75% of the 12-session group course). The trial steering committee overseeing this study reported that although performance on this criterion fell within the 'review' category, for a perinatal sample of people with severe symptoms of BPD this represented a very positive achievement indeed.

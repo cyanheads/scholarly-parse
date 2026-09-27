@@ -14,6 +14,8 @@ Since the first large-scale genetic study of HF six years ago 3 [,](https://pape
 
 To address these gaps, we performed large-scale multi-ancestry genome-wide association studies (GWAS) and plasma proteome-and multi-tissue transcriptome-wide Mendelian randomization (MR) studies of HF, HFpEF, and HFrEF, comprising 345,687 individuals with HF (47,192 with HFpEF and 46,934 with HFrEF) and >4.12 million control individuals, spanning European, African, Asian, and Admixed American ancestries. To improve the generalizability of HF genetic discoveries, we incorporated substantial representation of non-European ancestry populations, including 55,854 individuals with HF (16,023 with HFpEF and 14,160 with HFrEF) and 970,872 control individuals of African, Asian, and Admixed American ancestries. To strengthen the validity of our findings, we triangulated orthogonal evidence spanning cardiac imaging, pathway analysis, RNA expression profiling, functional annotation, and therapeutic tractability assessment.
 
+## RESULTS
+
 ## Genomic loci associated with HF, HFrEF, and HFpEF
 
 We meta-analyzed the Million Veteran Program (MVP), HERMES Consortium, Biobank Japan, the Global Biobank Meta-analysis Initiative, the All of Us Research Program, the Mexico City Prospective Study, and FinnGen R12, comprising 4,468,166 individuals, including 345,687 HF cases. The HFpEF analysis included 47,192 cases and a total of 1,514,078 individuals; the HFrEF analysis included 46,934 cases and a total of 1,695,762 individuals (Figure 1A). Study characteristics for all included cohorts are provided in Table S1.

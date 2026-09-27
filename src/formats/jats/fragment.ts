@@ -5,6 +5,7 @@
  * @module src/formats/jats/fragment
  */
 import { createDiagnostics } from '../../model/diagnostics.js';
+import { createGridBudget } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import { renderBlocks } from '../../render/markdown.js';
 import { childrenOf, collapseWhitespace, parseOrderedXml } from '../../xml/ordered.js';
@@ -29,6 +30,7 @@ export function jatsInlineToMarkdown(fragment: string): string {
   const ctx: JatsContext = {
     diag: createDiagnostics(),
     footnotes: [],
+    gridBudget: createGridBudget(),
     noteOwners: new Map(),
     sectionIds: new Set(),
   };

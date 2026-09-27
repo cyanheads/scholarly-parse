@@ -1,13 +1,16 @@
 /**
  * @fileoverview `parseTei`: TEI as Grobid writes it for a scholarly PDF → `ScholarlyDocument`.
  * Two shapes arrive: the standard `<TEI>` document with `text/body/div`, and a lowercase
- * `<tei>` wrapped in HTML with `text/div`. Tag names are lowercased on parse, so one
- * reader handles both.
+ * `<tei>` wrapped in HTML with `text/div` and `<back>` beside `<text>` rather than in it.
+ * Tag names are lowercased on parse, so one reader handles both.
  *
  * Grobid writes sections as a flat run of `<div>`s whose `<head n="2.1">` numbering is
  * the only hierarchy; the tree is rebuilt from those numbers. A `<div>` with no heading
- * continues the section before it. Figures and tables sit after the body text, so they
- * are reported as floats.
+ * continues the section before it, and an unnumbered heading is a paragraph heading of the
+ * numbered section before it. Grobid also writes the items of a numbered list as headings
+ * numbered like sections (`1.` inside `5.5`); a run of them the outline resumes after is
+ * read as the paragraph headings of the section it interrupts. Figures and tables sit after
+ * the body text, so they are reported as floats.
  * @module src/formats/tei/parse
  */
 import { createDiagnostics } from '../../model/diagnostics.js';
@@ -25,11 +28,19 @@ import type {
   TableBlock,
   Venue,
 } from '../../model/document.js';
+import { append } from '../../model/extremes.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
-import { buildGrid, spanValue } from '../../model/table-grid.js';
+import {
+  buildGrid,
+  createGridBudget,
+  type Grid,
+  spanValue,
+  tableName,
+  truncatedGridMessage,
+} from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis } from '../../render/inline.js';
 import {
@@ -78,14 +89,15 @@ function readTei(input: string | Uint8Array, options: ParseOptions): ParseResult
     diag: createDiagnostics(),
     footnoteMarks: footnoteMarks(text),
     footnotes: [],
+    gridBudget: createGridBudget(),
     sectionIds: new Set(),
   };
   const metadata = extractMetadata(header, text, ctx);
   const abstracts = extractAbstracts(header, ctx);
   const bodyNode = findOne(text, 'body') ?? text;
   const { floats, sections: body } = extractBody(bodyNode, ctx);
-  const backNode = findOne(text, 'back');
-  const back = extractBack(backNode, ctx);
+  const backNode = findOne(text, 'back') ?? findOne(tei, 'back');
+  const { floats: backFloats, sections: back } = extractBack(backNode, ctx);
   const listBibl = findAllDescendants(backNode ?? text, 'listbibl')[0];
   const references = findAll(listBibl, 'biblstruct').flatMap((b) => {
     const ref = parseBiblStruct(b);
@@ -109,7 +121,7 @@ function readTei(input: string | Uint8Array, options: ParseOptions): ParseResult
       /grobid/i.test(plainText(findOne(header, 'encodingdesc')))
         ? 'grobid'
         : 'tei',
-    floats,
+    floats: [...floats, ...backFloats],
     footnotes: ctx.footnotes,
     format: 'tei',
     metadata,
@@ -177,9 +189,14 @@ function extractMetadata(
   const monogr = findOne(biblStruct, 'monogr');
 
   const affiliations: string[] = [];
+  const affIndices = new Map<string, number>();
   const affIndex = (value: string) => {
-    const existing = affiliations.indexOf(value);
-    return existing === -1 ? affiliations.push(value) - 1 : existing;
+    let index = affIndices.get(value);
+    if (index === undefined) {
+      index = affiliations.push(value) - 1;
+      affIndices.set(value, index);
+    }
+    return index;
   };
   const authors: Author[] = findAll(analytic, 'author').flatMap((author) => {
     const person = personName(findOne(author, 'persname'));
@@ -244,7 +261,10 @@ function extractMetadata(
     findAll(publicationStmt, 'date').find((d) => attrOf(d, 'type') === 'published') ??
     findOne(imprint, 'date');
   const published = parseDate(attrOf(dateNode, 'when') ?? plainText(dateNode));
-  const keywords = findAllDescendants(findOne(findOne(header, 'profiledesc'), 'textclass'), 'term')
+  const textClass = findOne(findOne(header, 'profiledesc'), 'textclass');
+  const terms = findAllDescendants(textClass, 'term');
+  // Keywords Grobid could not split into terms stay the text of `<keywords>`.
+  const keywords = (terms.length > 0 ? terms : findAll(textClass, 'keywords'))
     .map(plainText)
     .filter(Boolean);
   const licence = findAllDescendants(findOne(publicationStmt, 'availability'), 'licence')[0];
@@ -341,10 +361,19 @@ function divContent(
   return { blocks, ...(head && { head }), nested };
 }
 
+/** A heading's printed number and its title. */
+function headingOf(head: XmlNode | undefined, ctx: TeiContext): { label?: string; title?: string } {
+  // Grobid leaves the punctuation of a number it moved into `@n` (`. Soil chemistry`).
+  return splitSectionNumber(
+    head ? inlineText(head, ctx).replace(/^[\s.,;:]+/, '') || undefined : undefined,
+    attrOf(head, 'n'),
+  );
+}
+
 /**
  * A `<div>` as a section: heading, `n` as label, blocks, nested divs as subsections.
- * With `keepHeading`, a titled div holding nothing is kept, for the divs after it to
- * nest under.
+ * With `keepHeading`, a titled div holding nothing is kept: a heading over the divs after
+ * it, or a statement Grobid wrote entirely as a heading.
  */
 function divSection(
   div: XmlNode,
@@ -355,11 +384,7 @@ function divSection(
 ): Section | undefined {
   const { blocks, head, nested } = divContent(div, ctx);
   const id = issueId(ctx.sectionIds, attrOf(div, 'xml:id'), fallbackId);
-  // Grobid leaves the punctuation of a number it moved into `@n` (`. Soil chemistry`).
-  const { label, title } = splitSectionNumber(
-    head ? inlineText(head, ctx).replace(/^[\s.,;:]+/, '') || undefined : undefined,
-    attrOf(head, 'n'),
-  );
+  const { label, title } = headingOf(head, ctx);
   const sections = nested.flatMap((sub, i) => {
     const section = divSection(sub, ctx, kind, `${id}.${i + 1}`);
     return section ? [section] : [];
@@ -371,14 +396,26 @@ function divSection(
   return { blocks, id, kind, ...(label && { label }), sections, ...(title && { title }) };
 }
 
-/** Sections holding nothing, at any depth, removed. */
+/**
+ * Sections holding nothing, at any depth, removed, except a titled one with a section
+ * after it: in an outline without numbers, a heading with no text of its own heads the
+ * sections that follow it, and in back matter Grobid writes some statements entirely as
+ * a heading. One with nothing after it is a stray heading, and one with no letter or
+ * digit (`------`) says nothing.
+ */
 function withoutEmpty(sections: Section[], ctx: TeiContext): Section[] {
-  return sections.flatMap((section) => {
-    const kept = { ...section, sections: withoutEmpty(section.sections, ctx) };
-    if (kept.blocks.length > 0 || kept.sections.length > 0) return [kept];
-    ctx.sectionIds.delete(section.id);
-    return [];
-  });
+  const kept: Section[] = [];
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = sections[i] as Section;
+    const pruned = { ...section, sections: withoutEmpty(section.sections, ctx) };
+    const empty = pruned.blocks.length === 0 && pruned.sections.length === 0;
+    if (!empty || (kept.length > 0 && /[\p{L}\p{N}]/u.test(pruned.title ?? ''))) {
+      kept.push(pruned);
+    } else {
+      ctx.sectionIds.delete(section.id);
+    }
+  }
+  return kept.reverse();
 }
 
 /** True when `child` numbers a subsection of `parent`: `2.1` under `2`, `A.1` under `A`. */
@@ -388,6 +425,105 @@ function isNumberedChild(parent: string | undefined, child: string | undefined):
   return child.replace(/\.$/, '').startsWith(`${p}.`);
 }
 
+/** A titled body div's heading, as the list-item scan reads it. */
+interface BodyHeading {
+  div: XmlNode;
+  /** Number and title: what a section Grobid writes twice repeats. */
+  key: string;
+  kind: SectionKind | undefined;
+  /** The number's parts (`5.5.` is 5, 5); none for no number, or one like `A.1` or `IV`. */
+  parts: number[] | undefined;
+}
+
+/** The number a list item carries: a one-part heading number (`3.`). */
+function itemNumber(parts: number[]): number | undefined {
+  return parts.length === 1 ? parts[0] : undefined;
+}
+
+/**
+ * True when `next` is where the outline goes after `at`: its first subsection (`5.5.1`
+ * after `5.5`) or the next number at its level or above (`5.6`, `6`).
+ */
+function resumes(at: number[], next: number[]): boolean {
+  const last = next.length - 1;
+  if (next.length === at.length + 1) {
+    return next[last] === 1 && at.every((part, k) => part === next[k]);
+  }
+  return (
+    next.length <= at.length &&
+    next.every((part, k) => part === (k < last ? at[k] : (at[k] ?? 0) + 1))
+  );
+}
+
+/**
+ * The body divs whose headings are the items of a numbered list. A one-part number that
+ * does not advance the top level (`1.` inside `5.5`) opens a run of increasing one-part
+ * numbers, unnumbered headings riding along. The list is the run's longest prefix after
+ * which the next numbered heading resumes the outline where it stopped (after `5.5`:
+ * `5.5.1`, `5.6`, or `6`), the unnumbered headings among its items included. A run the
+ * outline never resumes is left alone, a heading repeating an earlier section's number
+ * and title (Grobid writes some sections twice) is never an item, and a back-matter
+ * heading ends both a run and the outline. Only numbers are read: the items' wording and
+ * `n` form vary.
+ */
+function listItems(body: XmlNode | undefined, ctx: TeiContext): Set<XmlNode> {
+  // Headings read as `divSection` reads them, with nothing collected into the document.
+  const quiet: TeiContext = { ...ctx, diag: createDiagnostics(), footnotes: [] };
+  const headings = findAll(body, 'div').flatMap((div): BodyHeading[] => {
+    const { label, title } = headingOf(findOne(div, 'head'), quiet);
+    if (!title) return [];
+    const parts =
+      label && /^\d+(\.\d+)*\.?$/.test(label)
+        ? label.replace(/\.$/, '').split('.').map(Number)
+        : undefined;
+    return [{ div, key: `${label} ${title}`, kind: kindFromTitle(title), parts }];
+  });
+  /** Numbered headings read as sections, by number and title. */
+  const placed = new Set<string>();
+
+  /** The index of the last item of the list opening at `start`, if the outline resumes. */
+  const listEnd = (start: number, outline: number[]): number | undefined => {
+    const run: number[] = [];
+    let last = 0;
+    let next = start;
+    for (; next < headings.length; next++) {
+      const { key, kind, parts } = headings[next] as BodyHeading;
+      if (kind || placed.has(key)) break;
+      if (!parts) continue;
+      const item = itemNumber(parts);
+      if (item === undefined || (run.length > 0 && item <= last)) break;
+      run.push(next);
+      last = item;
+    }
+    for (let k = run.length; k > 0; k--) {
+      const follower = headings[run[k] ?? next];
+      if (follower?.parts && !follower.kind && resumes(outline, follower.parts)) {
+        return run[k - 1];
+      }
+    }
+    return;
+  };
+
+  const items = new Set<XmlNode>();
+  let outline: number[] | undefined;
+  for (let i = 0; i < headings.length; i++) {
+    const { key, kind, parts } = headings[i] as BodyHeading;
+    if (kind) outline = undefined;
+    if (kind || !parts) continue;
+    const item = itemNumber(parts);
+    const end =
+      outline && item !== undefined && item <= (outline[0] ?? 0) ? listEnd(i, outline) : undefined;
+    if (end === undefined) {
+      outline = parts;
+      placed.add(key);
+      continue;
+    }
+    for (const heading of headings.slice(i, end + 1)) items.add(heading.div);
+    i = end;
+  }
+  return items;
+}
+
 function extractBody(
   body: XmlNode | undefined,
   ctx: TeiContext,
@@ -395,17 +531,19 @@ function extractBody(
   const sections: Section[] = [];
   const floats: Block[] = [];
   const stack: Section[] = [];
+  const items = listItems(body, ctx);
+  /** The list item placed last, while no section has followed it. */
+  let item: Section | undefined;
   /**
    * The outline comes from heading numbers: `3.2` nests under `3`. An unnumbered heading
-   * is never a numbered section's parent; inside a numbered subsection (`3.1`) it is a
-   * paragraph heading and nests there, and anywhere else it stands at the top.
+   * is never a numbered section's parent: it is a paragraph heading of the numbered section
+   * before it (`2`, `2.`, or `3.1`) and nests there, and with none before it stands at the
+   * top.
    */
   const place = (section: Section) => {
     while (stack.length > 0 && !stack.at(-1)?.label) stack.pop();
     if (section.label) {
       while (stack.length > 0 && !isNumberedChild(stack.at(-1)?.label, section.label)) stack.pop();
-    } else if (!stack.at(-1)?.label?.includes('.')) {
-      stack.length = 0;
     }
     const parent = stack.at(-1);
     if (parent) parent.sections.push(section);
@@ -429,16 +567,22 @@ function extractBody(
       );
       if (!section) continue;
       const kind = kindFromTitle(section.title);
-      const current = stack.at(-1);
+      const current = item ?? stack.at(-1);
       if (!section.title && current) {
         // A heading-less div continues the section before it.
-        current.blocks.push(...section.blocks);
-        current.sections.push(...section.sections);
+        append(current.blocks, section.blocks);
+        append(current.sections, section.sections);
         ctx.sectionIds.delete(section.id);
+      } else if (items.has(child)) {
+        // A list item heads a paragraph of the section the list interrupts, never a section.
+        (stack.at(-1)?.sections ?? sections).push(section);
+        item = section;
       } else if (kind) {
+        item = undefined;
         stack.length = 0;
         sections.push({ ...section, kind });
       } else {
+        item = undefined;
         place(section);
       }
     } else if (tag === 'p') {
@@ -458,7 +602,11 @@ function figureBlocks(figure: XmlNode, ctx: TeiContext): Block[] {
   const id = attrOf(figure, 'xml:id');
   if (attrOf(figure, 'type') === 'table') {
     const table = findOne(figure, 'table');
-    const { headerRows, rows } = table ? readTeiTable(table, ctx) : { headerRows: 0, rows: [] };
+    const { headerRows, rows, truncated } = table
+      ? readTeiTable(table, ctx)
+      : { headerRows: 0, rows: [], truncated: false };
+    const name = tableName(label, id);
+    if (truncated) ctx.diag.warn('truncated-input', truncatedGridMessage(name), id);
     const note = inlineText(findOne(figure, 'note'), ctx);
     const block: TableBlock = {
       type: 'table',
@@ -470,8 +618,7 @@ function figureBlocks(figure: XmlNode, ctx: TeiContext): Block[] {
       ...(note && { footnotes: [note] }),
       ...(rows.length === 0 && { unextractable: 'no-rows' as const }),
     };
-    if (rows.length === 0)
-      ctx.diag.warn('table-unextractable', `Table ${label ?? id ?? ''} has no rows`.trim(), id);
+    if (rows.length === 0) ctx.diag.warn('table-unextractable', `${name} has no rows`, id);
     return [block];
   }
   const href = attrOf(findOne(figure, 'graphic'), 'url');
@@ -486,8 +633,11 @@ function figureBlocks(figure: XmlNode, ctx: TeiContext): Block[] {
   ];
 }
 
-/** A TEI `<table>`: `<row>`s of `<cell>`s, spans from `@cols` and `@rows`, headers from `@role="label"`. */
-function readTeiTable(table: XmlNode, ctx: TeiContext): { headerRows: number; rows: string[][] } {
+/**
+ * A TEI `<table>`: `<row>`s of `<cell>`s, spans from `@cols` and `@rows`, headers from
+ * `@role="label"`, on the document's table budget.
+ */
+function readTeiTable(table: XmlNode, ctx: TeiContext): Grid {
   return buildGrid(
     findAll(table, 'row').map((row) => ({
       cells: findAll(row, 'cell').map((cell) => ({
@@ -498,6 +648,7 @@ function readTeiTable(table: XmlNode, ctx: TeiContext): { headerRows: number; ro
       })),
       inHead: attrOf(row, 'role') === 'label',
     })),
+    ctx.gridBudget,
   );
 }
 
@@ -519,17 +670,27 @@ const BACK_TYPES: ReadonlyMap<string, SectionKind> = new Map(
 /**
  * Back matter by Grobid's typed divs. An untitled part joins the untitled section of the
  * same kind before it (Grobid writes each author-contribution paragraph as a div of its
- * own), so one heading covers them.
+ * own), so one heading covers them. A part that is only a heading is kept when another
+ * follows it: Grobid writes some statements (`Funding Open access funding provided by …`)
+ * entirely as one. The figures and tables a typed div holds beside its parts are floats,
+ * as in the body.
  */
-function extractBack(back: XmlNode | undefined, ctx: TeiContext): Section[] {
+function extractBack(
+  back: XmlNode | undefined,
+  ctx: TeiContext,
+): { floats: Block[]; sections: Section[] } {
   const sections: Section[] = [];
+  const floats: Block[] = [];
   for (const div of findAll(back, 'div')) {
     const type = (attrOf(div, 'type') ?? '').toLowerCase();
     if (type === 'references') continue;
     const inner = findAll(div, 'div');
-    const targets = inner.length > 0 && !findOne(div, 'head') ? inner : [div];
-    for (const target of targets) {
-      const section = divSection(target, ctx, 'notes', `back${sections.length + 1}`);
+    const container = inner.length > 0 && !findOne(div, 'head');
+    if (container) {
+      for (const figure of findAll(div, 'figure')) floats.push(...figureBlocks(figure, ctx));
+    }
+    for (const target of container ? inner : [div]) {
+      const section = divSection(target, ctx, 'notes', `back${sections.length + 1}`, true);
       if (!section) continue;
       const part = {
         ...section,
@@ -537,15 +698,15 @@ function extractBack(back: XmlNode | undefined, ctx: TeiContext): Section[] {
       };
       const previous = sections.at(-1);
       if (!part.title && previous && !previous.title && previous.kind === part.kind) {
-        previous.blocks.push(...part.blocks);
-        previous.sections.push(...part.sections);
+        append(previous.blocks, part.blocks);
+        append(previous.sections, part.sections);
         ctx.sectionIds.delete(part.id);
       } else {
         sections.push(part);
       }
     }
   }
-  return sections;
+  return { floats, sections: withoutEmpty(sections, ctx) };
 }
 
 /** One `<biblStruct>`: Grobid's raw citation when present, else a citation built from its fields. */

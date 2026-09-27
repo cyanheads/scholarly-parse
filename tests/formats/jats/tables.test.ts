@@ -6,7 +6,13 @@
  * @module tests/formats/jats/tables.test
  */
 import { describe, expect, it } from 'vitest';
-import type { TableBlock } from '../../../src/index.js';
+import {
+  type ScholarlyDocument,
+  type TableBlock,
+  toMarkdown,
+  toSections,
+  toText,
+} from '../../../src/index.js';
 import { MAX_TABLE_COLUMNS } from '../../../src/model/table-grid.js';
 import { blocksOfType, paragraphTexts, parseArticle, parseBody } from './helpers.js';
 
@@ -359,5 +365,73 @@ describe('spans (#111)', () => {
         '<td rowspan="-4">c</td></tr></tbody></table>',
     );
     expect(table.rows).toEqual([['a', 'b', 'c']]);
+  });
+});
+
+describe('the table budget', () => {
+  /** A 512 × 512 span holding 10,000 characters, over one-cell rows. */
+  const spanTable = (id: string) =>
+    `<table-wrap id="${id}"><label>Table ${id}</label><table><tr><td colspan="512" rowspan="512">${'W '.repeat(5_000)}</td></tr>${'<tr><td/></tr>'.repeat(511)}</table></table-wrap>`;
+
+  /** Characters of every cell but the top left one, where the spanning cell's text sits once. */
+  const copiedChars = (table: TableBlock) =>
+    table.rows.reduce(
+      (sum, cells, r) =>
+        sum + cells.reduce((s, text, c) => s + (r > 0 || c > 0 ? text.length : 0), 0),
+      0,
+    );
+
+  const budgetWarnings = (document: ScholarlyDocument) =>
+    document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input');
+
+  it('repeats a spanned cell into at most a million characters of copies, and says so', () => {
+    const document = parseBody(`<sec><title>S</title>${spanTable('t1')}</sec>`);
+    const [table] = blocksOfType(document, 'table');
+    expect(table?.rows).toHaveLength(512);
+    expect(table?.rows[0]?.[0]).toBe('W '.repeat(5_000).trim());
+    expect(copiedChars(table as TableBlock)).toBeLessThanOrEqual(1_000_000);
+    expect(toMarkdown(document).length).toBeLessThan(2_000_000);
+    expect(toText(document).length).toBeLessThan(2_000_000);
+    const sections = toSections(document).reduce((sum, section) => sum + section.chars, 0);
+    expect(sections).toBeLessThan(2_000_000);
+    expect(budgetWarnings(document)).toEqual([
+      { code: 'truncated-input', message: expect.stringMatching(/^Table t1 /), where: 't1' },
+    ]);
+  });
+
+  it('counts copies a colspan makes with no rowspan against the same budget', () => {
+    const row = `<tr><td colspan="512">${'C'.repeat(20)}</td></tr>`;
+    const document = parseBody(
+      `<sec><table-wrap id="c1"><table>${row.repeat(200)}</table></table-wrap></sec>`,
+    );
+    const [table] = blocksOfType(document, 'table');
+    expect(table?.rows).toHaveLength(200);
+    expect(table?.rows.flat().join('').length).toBeLessThanOrEqual(1_000_000 + 200 * 20);
+    expect(budgetWarnings(document)).toHaveLength(1);
+  });
+
+  it('pads the rows below a wide one only as far as two million grid cells', () => {
+    const table = `<tr>${'<td/>'.repeat(512)}</tr>${'<tr><td/></tr>'.repeat(1_000_000)}`;
+    const document = parseBody(
+      `<sec><table-wrap id="p1"><table>${table}</table></table-wrap></sec>`,
+    );
+    const [block] = blocksOfType(document, 'table');
+    expect((block?.rows.length ?? 0) * 512).toBeLessThanOrEqual(2_000_000);
+    expect(block?.rows.length).toBe(3_906);
+    expect(budgetWarnings(document)).toMatchObject([{ where: 'p1' }]);
+  });
+
+  it('shares one budget across the tables of a document', () => {
+    const ids = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8'];
+    const document = parseBody(`<sec><title>S</title>${ids.map(spanTable).join('')}</sec>`);
+    const tables = blocksOfType(document, 'table');
+    const copied = tables.reduce((sum, table) => sum + copiedChars(table), 0);
+    const cells = tables.reduce((sum, table) => sum + table.rows.length * 512, 0);
+    expect(copied).toBeLessThanOrEqual(1_000_000);
+    expect(cells).toBeLessThanOrEqual(2_000_000);
+    expect(tables.map((table) => table.rows.length)).toEqual([
+      512, 512, 512, 512, 512, 512, 512, 322,
+    ]);
+    expect(budgetWarnings(document).map((warning) => warning.where)).toEqual(ids);
   });
 });

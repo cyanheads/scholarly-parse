@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { parseLatexml } from '../../../src/formats/latexml/index.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
 import { toMarkdown } from '../../../src/render/index.js';
+import { expectLinear } from '../../linear.js';
 
 const ABSTRACT = `<div class="ltx_abstract"><h6 class="ltx_title ltx_title_abstract">Abstract</h6>
     <p class="ltx_p">The abstract.</p></div>`;
@@ -290,5 +291,69 @@ describe('inline text', () => {
     expect(blocks(document.body)).toEqual([
       { text: 'See [the book](https://doi.org/10.1201/9781439894552).', type: 'paragraph' },
     ]);
+  });
+});
+
+describe('document-sized lists', () => {
+  /** V8 rejects a call spreading ~120,000 arguments, so the case runs past that on Node. */
+  it('reads a paragraph block of 200,000 paragraphs', async () => {
+    const document = await parse(
+      page(
+        `<section class="ltx_section" id="S1"><h2 class="ltx_title ltx_title_section">Intro</h2><div class="ltx_para">${'<p class="ltx_p">x</p>'.repeat(200_000)}</div></section>`,
+      ),
+    );
+    expect(blocks(document.body)).toHaveLength(200_000);
+  });
+});
+
+describe('long unclosed runs', () => {
+  const bibitem = (entry: string) =>
+    `<section class="ltx_bibliography"><ul class="ltx_biblist"><li class="ltx_bibitem" id="bib.bib1"><span class="ltx_tag ltx_tag_bibitem">[1]</span><span class="ltx_bibblock">${entry}</span></li></ul></section>`;
+  const theorem = (title: string) =>
+    `<div class="ltx_theorem"><h6 class="ltx_title ltx_runin"><span class="ltx_tag">Theorem 1</span>${title}</h6><div class="ltx_para"><p class="ltx_p">Body.</p></div></div>`;
+  const listing = (line: string) =>
+    `<div class="ltx_listing"><div class="ltx_listingline">${line}</div></div>`;
+  const watermarked = (watermark: string) =>
+    page('<p class="ltx_p">Text.</p>').replace(
+      '<div class="ltx_page_main">',
+      `<div class="ltx_page_main"><div id="watermark-tr">${watermark}</div>`,
+    );
+  it.each([
+    ['a <pre> of spaces', (n: number) => page(`<pre>a${' '.repeat(n)}b</pre>`)],
+    ['a listing line of spaces', (n: number) => page(listing(`a${' '.repeat(n)}b`))],
+    ['a listing line of no-break spaces', (n: number) => page(listing(`a${' '.repeat(n)}b`))],
+    ['a theorem title of dots', (n: number) => page(theorem(`a${'.'.repeat(n)}b`))],
+    ['a DOI run', (n: number) => page(bibitem(`A work. ${'10.1234/.'.repeat(n / 8)}"`))],
+    ['a watermark of brackets', (n: number) => watermarked('arXiv:1234.12345 ['.repeat(n / 16))],
+  ])('reads a page in time linear in %s that closes nothing', async (_, html) => {
+    await expectLinear(html, parse, { from: 2_000, to: 512_000 });
+  });
+
+  it('reads the watermark, a theorem title, a listing, and a DOI as before', async () => {
+    const document = await parse(
+      watermarked('arXiv:2401.04088v1 [cs.LG] 08 Jan 2024').replace(
+        '<p class="ltx_p">Text.</p>',
+        theorem(' (Informal).:') + listing('a  b  \n  c ') + bibitem('A work. doi:10.1234/AB.5.'),
+      ),
+    );
+    expect(document.metadata).toMatchObject({
+      identifiers: { arxiv: '2401.04088v1' },
+      published: { day: 8, month: 1, year: 2024 },
+    });
+    expect(blocks(document.body).map((block) => block.type === 'box' && block.title)).toContain(
+      '(Informal)',
+    );
+    expect(blocks(document.body)).toContainEqual({ text: 'a  bc', type: 'code' });
+    expect(document.references[0]?.doi).toBe('10.1234/ab.5');
+  });
+
+  it.each([
+    ['10.1002/(SICI)1097-4636(199907)', '10.1002/(sici)1097-4636(199907)'],
+    ['(doi: 10.1234/xyz).', '10.1234/xyz'],
+    ['"10.1234/abc".', '10.1234/abc'],
+    ['doi: 10.1234/abc: more', '10.1234/abc'],
+  ])('reads the DOI in a bibitem %j without what closes it', async (text, doi) => {
+    const document = await parse(page(bibitem(`A work. ${text}`)));
+    expect(document.references[0]?.doi).toBe(doi);
   });
 });

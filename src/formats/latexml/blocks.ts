@@ -26,8 +26,11 @@ import type {
   SectionKind,
   TableBlock,
 } from '../../model/document.js';
+import { append } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
+import { truncatedGridMessage } from '../../model/table-grid.js';
+import { trimTrailing } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
 import { emphasis, joinAdjacentMath } from '../../render/inline.js';
 import { type LatexmlContext, SKIP_TAGS } from './context.js';
@@ -113,7 +116,7 @@ function walk(nodes: Node[], flow: Flow, ctx: LatexmlContext): void {
       inlineMarkdown([node], ctx);
     } else if (!isNote(node) && isBlock(node)) {
       flushRun(flow);
-      flow.blocks.push(...renderBlock(node, ctx));
+      append(flow.blocks, renderBlock(node, ctx));
     } else if (!isNote(node) && tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {
       walk(childNodes(node), flow, ctx);
     } else {
@@ -147,7 +150,7 @@ function renderBlock(element: Element, ctx: LatexmlContext): Block[] {
   if (tag === 'ul' || tag === 'ol') return listBlock(element, ctx);
   if (tag === 'dl') return descriptionList(element, ctx);
   if (tag === 'pre') {
-    const text = element.textContent?.replace(/^\n|\s+$/g, '') ?? '';
+    const text = (element.textContent ?? '').replace(/^\n/, '').trimEnd();
     return text ? [{ text, type: 'code' }] : [];
   }
   if (tag === 'blockquote')
@@ -320,11 +323,15 @@ function table(
   ctx: LatexmlContext,
   id?: string,
 ): TableBlock {
-  const { headerRows, rows } = readHtmlTable(tabular, (cell) => inlineText(cell, ctx), {
-    boldHeaders: true,
-  });
-  if (rows.length === 0)
-    ctx.diag.warn('table-unextractable', `Table ${label ?? ''} has no rows`.trim(), id);
+  const { headerRows, rows, truncated } = readHtmlTable(
+    tabular,
+    (cell) => inlineText(cell, ctx),
+    ctx.gridBudget,
+    { boldHeaders: true },
+  );
+  const name = `Table ${label ?? ''}`.trim();
+  if (truncated) ctx.diag.warn('truncated-input', truncatedGridMessage(name), id);
+  if (rows.length === 0) ctx.diag.warn('table-unextractable', `${name} has no rows`, id);
   return {
     type: 'table',
     ...(id && { id }),
@@ -381,10 +388,13 @@ function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
   const punctuation = (node: Node | undefined) => /^[\s.:]*$/.test(node?.textContent ?? '');
   while (parts.length > 0 && punctuation(parts[0])) parts.shift();
   while (parts.length > 0 && punctuation(parts.at(-1))) parts.pop();
-  const title = inlineMarkdown(parts, ctx)
-    .replace(/\*\*/g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/^[\s.:]+|[\s.:]+$/g, '');
+  const title = trimTrailing(
+    inlineMarkdown(parts, ctx)
+      .replace(/\*\*/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/^[\s.:]+/, ''),
+    /[\s.:]/,
+  );
   const id = element.getAttribute('id') ?? undefined;
   return {
     type: 'box',
@@ -402,11 +412,14 @@ function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
 /**
  * A listing line's text: math as its TeX, the printed line number and the page's own
  * layout whitespace (a run holding a line break) dropped. Spaces the listing prints
- * arrive as no-break spaces.
+ * arrive as no-break spaces. Each whitespace run is read once, whether or not it breaks
+ * a line.
  */
 function listingText(node: Node): string {
   if (node.nodeType === TEXT_NODE)
-    return (node.textContent ?? '').replace(/[ \t\r]*\n[ \t\r\n]*/g, '');
+    return (node.textContent ?? '').replace(/[ \t\r\n]+/g, (run) =>
+      run.includes('\n') ? '' : run,
+    );
   if (!isElement(node) || hasClass(node, 'ltx_tag_listingline')) return '';
   if (tagOf(node) === 'math') return `$${mathTex(node)}$`;
   return childNodes(node).map(listingText).join('');
@@ -415,12 +428,11 @@ function listingText(node: Node): string {
 /** A LaTeXML listing (algorithms, code): one line per `ltx_listingline`. */
 function listing(element: Element): Block | undefined {
   const lines = Array.from(element.querySelectorAll('.ltx_listingline')).map((line) =>
-    listingText(line).replace(/ /g, ' ').replace(/\s+$/, ''),
+    listingText(line).replace(/ /g, ' ').trimEnd(),
   );
-  const text = (lines.length > 0 ? lines.join('\n') : (element.textContent ?? '')).replace(
-    /^\n+|\s+$/g,
-    '',
-  );
+  const text = (lines.length > 0 ? lines.join('\n') : (element.textContent ?? ''))
+    .replace(/^\n+/, '')
+    .trimEnd();
   return text ? { text, type: 'code' } : undefined;
 }
 
@@ -512,7 +524,7 @@ export function parseSection(
       if (sub) sections.push(sub);
       continue;
     }
-    blocks.push(...flowBlocks([child], ctx));
+    append(blocks, flowBlocks([child], ctx));
   }
   if (blocks.length === 0 && sections.length === 0) {
     ctx.sectionIds.delete(id);

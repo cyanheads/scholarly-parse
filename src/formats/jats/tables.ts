@@ -9,7 +9,14 @@
  * @module src/formats/jats/tables
  */
 import type { TableBlock, TableUnextractableReason } from '../../model/document.js';
-import { buildGrid, type SourceRow, spanValue } from '../../model/table-grid.js';
+import {
+  buildGrid,
+  type Grid,
+  type SourceRow,
+  spanValue,
+  tableName,
+  truncatedGridMessage,
+} from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
 import {
   attrOf,
@@ -33,7 +40,9 @@ export function parseTableWrap(
   const label = text(findOne(tableWrap, 'label')) || undefined;
   const footnotes = tableFootnotes(findOne(tableWrap, 'table-wrap-foot'), ctx);
   const table = findOne(tableWrap, 'table') ?? findOne(findOne(tableWrap, 'alternatives'), 'table');
-  const { headerRows, rows } = table ? readTable(table, ctx) : { headerRows: 0, rows: [] };
+  const { headerRows, rows, truncated } = table
+    ? readTable(table, ctx)
+    : { headerRows: 0, rows: [], truncated: false };
 
   const block: TableBlock = {
     type: 'table',
@@ -44,10 +53,10 @@ export function parseTableWrap(
     rows,
     ...(footnotes.length > 0 && { footnotes }),
   };
+  const name = tableName(label, id);
+  if (truncated) ctx.diag.warn('truncated-input', truncatedGridMessage(name), id);
   if (rows.length === 0) {
     block.unextractable = classifyUnextractable(tableWrap, table);
-    // A label usually names the table itself ("Table 2"); a bare number does not.
-    const name = label && /^\p{L}/u.test(label) ? label : `Table ${label ?? id ?? ''}`.trim();
     ctx.diag.warn(
       'table-unextractable',
       `${name} has no readable rows (${block.unextractable})`,
@@ -59,7 +68,8 @@ export function parseTableWrap(
 
 /** A table with no wrapper (JATS `<array>`, or a bare `<table>`). */
 export function parseBareTable(table: XmlNode, ctx: JatsContext): TableBlock {
-  const { headerRows, rows } = readTable(table, ctx);
+  const { headerRows, rows, truncated } = readTable(table, ctx);
+  if (truncated) ctx.diag.warn('truncated-input', truncatedGridMessage('Table'));
   return {
     type: 'table',
     headerRows,
@@ -104,11 +114,11 @@ function classifyUnextractable(
 }
 
 /**
- * Read an XHTML `<table>` into the shared grid, spans expanded and short rows padded.
- * Header rows are those in `<thead>`, plus any leading row of only `<th>` cells in a
- * table without a `<thead>`.
+ * Read an XHTML `<table>` into the shared grid, spans expanded and short rows padded, on
+ * the document's table budget. Header rows are those in `<thead>`, plus any leading row
+ * of only `<th>` cells in a table without a `<thead>`.
  */
-function readTable(table: XmlNode, ctx: JatsContext): { headerRows: number; rows: string[][] } {
+function readTable(table: XmlNode, ctx: JatsContext): Grid {
   const sourceRow = (tr: XmlNode, inHead: boolean): SourceRow => ({
     cells: childrenOf(tr).flatMap((cell) => {
       const tag = tagNameOf(cell);
@@ -132,5 +142,5 @@ function readTable(table: XmlNode, ctx: JatsContext): { headerRows: number; rows
       for (const tr of findAll(child, 'tr')) rows.push(sourceRow(tr, tag === 'thead'));
     }
   }
-  return buildGrid(rows);
+  return buildGrid(rows, ctx.gridBudget);
 }

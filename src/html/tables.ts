@@ -4,7 +4,13 @@
  * text, not to the outer table.
  * @module src/html/tables
  */
-import { buildGrid, type SourceRow, spanValue } from '../model/table-grid.js';
+import {
+  buildGrid,
+  type Grid,
+  type GridBudget,
+  type SourceRow,
+  spanValue,
+} from '../model/table-grid.js';
 import { childElements, hasClass, tagOf } from './dom.js';
 
 const SECTION_TAGS = new Set(['thead', 'tbody', 'tfoot']);
@@ -29,15 +35,17 @@ function isBoldText(text: string): boolean {
 }
 
 /**
- * Read a table into a grid; `cellText` renders one cell's content. With `boldHeaders`,
- * a cell whose text is entirely bold counts as a header cell, so a leading all-bold row
- * becomes the header: LaTeX tables mark their header row that way, with no `<th>`.
+ * Read a table into a grid, charging the document's `budget`; `cellText` renders one
+ * cell's content. With `boldHeaders`, a cell whose text is entirely bold counts as a
+ * header cell, so a leading all-bold row becomes the header: LaTeX tables mark their
+ * header row that way, with no `<th>`.
  */
 export function readHtmlTable(
   table: Element,
   cellText: (cell: Element) => string,
+  budget: GridBudget,
   options: { boldHeaders?: boolean } = {},
-): { headerRows: number; rows: string[][] } {
+): Grid {
   const rows: SourceRow[] = [];
   const collect = (container: Element, inHead: boolean) => {
     for (const child of childElements(container)) {
@@ -67,5 +75,5 @@ export function readHtmlTable(
     }
   };
   collect(table, false);
-  return buildGrid(rows);
+  return buildGrid(rows, budget);
 }
