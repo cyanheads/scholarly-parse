@@ -119,8 +119,8 @@ function rowCells(row: Line): Run[][] {
  * Table rows as a grid, charged to the document's `budget`. Columns are the horizontal
  * spans the cells of the fuller rows cover; each cell lands in the column it overlaps, or
  * else the nearest one left of it, so a row with an empty cell or a spanning header keeps
- * the others under their headings. Every row is as wide as the columns, so the grid can
- * outgrow its text many times over: rows are kept in order while it fits the cells left.
+ * the others under their headings. Every row is as wide as the columns, and rows are kept
+ * in order while the grid fits the cells left.
  */
 function tableGrid(rows: Line[], budget: GridBudget): { rows: string[][]; truncated: boolean } {
   const split = rows.map(rowCells);

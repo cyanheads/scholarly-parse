@@ -8,9 +8,9 @@
  * and keeping the source cell count would put values under the wrong headers.
  * (pubmed-mcp-server#111)
  *
- * The grids of one document draw on one {@link GridBudget}: a span of a few bytes covers
- * up to 262,144 positions, so what the tables of a document may repeat and hold is capped
- * where the grid is built, where a parser can still record what it cut.
+ * The grids of one document draw on one {@link GridBudget}: what the tables of a document
+ * may repeat and hold is capped where the grid is built, where a parser can still record
+ * what it cut.
  * @module src/model/table-grid
  */
 
