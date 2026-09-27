@@ -6,7 +6,7 @@
  * footers, page numbers, and margin text (a publisher sidebar, line numbers) are dropped.
  * @module src/formats/pdf/layout
  */
-import { largest } from '../../model/extremes.js';
+import { append, largest } from '../../model/extremes.js';
 import type { Page, Run } from './load.js';
 
 /** A line of text in one column: one cell for prose, several for a table row. */
@@ -275,7 +275,8 @@ function pageLines(page: Page, rowCells: Run[][][], split: number | undefined): 
     let top = Number.POSITIVE_INFINITY;
     for (const y of [...bandBreaks(leftBand, rightBand), Number.NEGATIVE_INFINITY]) {
       const within = (line: Line) => line.y < top && line.y > y;
-      lines.push(...leftBand.filter(within), ...rightBand.filter(within));
+      append(lines, leftBand.filter(within));
+      append(lines, rightBand.filter(within));
       top = y;
     }
     leftBand = [];
@@ -311,8 +312,9 @@ function shape(text: string): string {
 
 /**
  * Lines that are page furniture: a running header or footer (the same text in a page's
- * top or bottom margin on several pages), a bare page number, and text outside the
- * frame the body text occupies (a publisher sidebar, line numbers, a margin logo).
+ * top or bottom margin on several pages), a page number, and text outside the frame the
+ * body text occupies (a publisher sidebar, line numbers, a margin logo). Repetition needs
+ * two pages read: on one, only a page number in the margin is dropped.
  */
 function furniture(lines: Line[], pages: Page[], bodySize: number): Set<Line> {
   const drop = new Set<Line>();
@@ -332,12 +334,10 @@ function furniture(lines: Line[], pages: Page[], bodySize: number): Set<Line> {
     const key = shape(line.text);
     if (
       /^(?:page )?#(?: (?:of|\/) #)?$/.test(key) ||
-      (seen.get(key)?.size ?? 0) >= Math.min(repeats, pages.length)
+      (pages.length > 1 && (seen.get(key)?.size ?? 0) >= repeats)
     )
       drop.add(line);
   }
-  if (pages.length === 1)
-    for (const line of lines) if (/^#$/.test(shape(line.text)) && inMargin(line)) drop.add(line);
 
   // The body frame: where lines of body text start and end, ignoring the widest outliers.
   const body = lines.filter(

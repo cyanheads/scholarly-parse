@@ -118,6 +118,28 @@ describe('parsePdf', () => {
     expect(markdown).not.toMatch(/^\s*[12]\s*$/m);
   });
 
+  it('keeps the margin lines of a one-page read, dropping only its page number', async () => {
+    const page: TextSpec[] = [
+      { font: 'bold', size: 20, text: 'A title set near the top edge', x: 72, y: 750 },
+      { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 700 },
+      ...paragraph(
+        Array.from({ length: 14 }, (_, i) => `Body line ${i + 1} of the running text on the page`),
+        { y: 214 },
+      ),
+      { size: 10, text: '1', x: 300, y: 30 },
+    ];
+    const once = await parse(buildPdf({ pages: [page] }));
+    // One page of two read: nothing on it can be shown to repeat.
+    const result = await parsePdf(buildPdf({ pages: [page, page] }), { maxPages: 1 });
+    if (!result.ok) throw new Error(result.error.message);
+    for (const document of [once, result.document]) {
+      expect(document.metadata.title).toBe('A title set near the top edge');
+      const markdown = toMarkdown(document);
+      expect(markdown).toContain('Body line 14 of the running text on the page');
+      expect(markdown).not.toMatch(/^\s*1\s*$/m);
+    }
+  });
+
   it('reads a captioned table with its rows, the bold first row as header', async () => {
     const table = (await parse(PAPER)).body[1]?.blocks.find((block) => block.type === 'table');
     expect(table).toMatchObject({
