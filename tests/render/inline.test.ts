@@ -13,12 +13,22 @@ import {
   subscript,
   superscript,
 } from '../../src/render/inline.js';
+import { expectLinear } from '../linear.js';
 
 describe('emphasis', () => {
   it('moves edge whitespace outside the markers and leaves empty content alone', () => {
     expect(emphasis(' word ', '*')).toBe(' *word* ');
     expect(emphasis('bold', '**')).toBe('**bold**');
     expect(emphasis('  ', '*')).toBe('  ');
+    expect(emphasis('\n a \t', '~~')).toBe('\n ~~a~~ \t');
+  });
+
+  it('reads a long run of inner whitespace in time linear in it', async () => {
+    await expectLinear(
+      (n) => `a${' '.repeat(n)}b`,
+      (markdown) => emphasis(markdown, '**'),
+      { from: 2_000, to: 512_000 },
+    );
   });
 });
 

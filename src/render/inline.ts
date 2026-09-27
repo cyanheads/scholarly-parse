@@ -9,12 +9,13 @@ import { codeSpan, escapeInline, escapeTex, escapeUrl, isSafeUrl } from './escap
 /**
  * Wrap already-rendered Markdown in an emphasis marker (`*`, `**`, `~~`). Whitespace at
  * the edges moves outside the markers, where CommonMark requires it, and empty content
- * renders as itself.
+ * renders as itself. The edges are found by trimming, which reads each end once.
  */
 export function emphasis(markdown: string, marker: string): string {
-  const match = /^(\s*)([\s\S]*?)(\s*)$/.exec(markdown);
-  const [, lead = '', core = '', trail = ''] = match ?? [];
-  return core ? `${lead}${marker}${core}${marker}${trail}` : markdown;
+  const core = markdown.trim();
+  if (!core) return markdown;
+  const lead = markdown.length - markdown.trimStart().length;
+  return `${markdown.slice(0, lead)}${marker}${core}${marker}${markdown.slice(lead + core.length)}`;
 }
 
 /**
