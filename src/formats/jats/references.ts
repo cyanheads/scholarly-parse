@@ -4,6 +4,7 @@
  * @module src/formats/jats/references
  */
 import type { Reference } from '../../model/document.js';
+import { trailingLength } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
 import { inlineMath, joinAdjacentMath } from '../../render/inline.js';
 import {
@@ -112,23 +113,46 @@ export function citationMarkdown(node: XmlNode | undefined): string {
     tagNameOf(node) === 'mixed-citation'
       ? renderMixedCitation(node, formulas)
       : renderElementCitation(node, formulas);
-  let markdown = escapeInline(plain);
-  for (const [index, tex] of formulas.entries()) {
-    markdown = markdown.split(formulaMark(index)).join(inlineMath(tex));
-  }
-  return joinAdjacentMath(markdown);
+  return joinAdjacentMath(restoreFormulas(escapeInline(plain), formulas));
 }
 
 /** Formula tags a citation can hold. */
 const FORMULA_TAGS: ReadonlySet<string> = new Set(['inline-formula', 'disp-formula']);
 
 /**
- * Where a citation's formula `index` sits in its text until escaping is done. U+0001
- * cannot occur in XML 1.0 text, and escaping leaves it alone, so the TeX is restored
- * as math afterwards rather than escaped as text.
+ * What brackets a {@link formulaMark}. U+0001 cannot occur in XML 1.0 text, and escaping
+ * leaves it alone, so the TeX is restored as math afterwards rather than escaped as text.
  */
+const MARK = '\u0001';
+
+/** Where a citation's formula `index` sits in its text until escaping is done. */
 function formulaMark(index: number): string {
-  return `\u0001${index}\u0001`;
+  return `${MARK}${index}${MARK}`;
+}
+
+/**
+ * Escaped citation text with each {@link formulaMark} replaced by its formula as inline
+ * math, in one pass over the marks. A mark character that brackets no formula's index
+ * stays as it is.
+ */
+function restoreFormulas(markdown: string, formulas: readonly string[]): string {
+  let out = '';
+  let copied = 0;
+  let open = markdown.indexOf(MARK);
+  while (open !== -1) {
+    const close = markdown.indexOf(MARK, open + 1);
+    if (close === -1) break;
+    const index = markdown.slice(open + 1, close);
+    const tex = /^\d+$/.test(index) ? formulas[Number(index)] : undefined;
+    if (tex === undefined) {
+      open = close;
+      continue;
+    }
+    out += markdown.slice(copied, open) + inlineMath(tex);
+    copied = close + 1;
+    open = markdown.indexOf(MARK, copied);
+  }
+  return out + markdown.slice(copied);
 }
 
 /** True when a formula sits anywhere below `node`. */
@@ -262,9 +286,20 @@ const PLACED_FIELDS: ReadonlySet<string> = new Set([
   'pub-id',
 ]);
 
-/** `text` closed with a full stop unless it already ends a sentence or is a URL. */
+/** `text` closed with a full stop unless it already ends a sentence or with a URL. */
 function sentence(text: string): string {
-  return /[.?!]$|:\/\/\S+$/.test(text) ? text : `${text}.`;
+  return /[.?!]$/.test(text) || endsWithUrl(text) ? text : `${text}.`;
+}
+
+/**
+ * True when `text` ends with a URL: its last run without whitespace holds `://` and at
+ * least one character after it. The run is found by walking back from the end, where
+ * `/:\/\/\S+$/` reads from every `://` in it to the end.
+ */
+function endsWithUrl(text: string): boolean {
+  const run = text.slice(text.length - trailingLength(text, /\S/));
+  const scheme = run.indexOf('://');
+  return scheme !== -1 && scheme + 3 < run.length;
 }
 
 /**
@@ -386,11 +421,43 @@ function printsIdentifier(text: string, value: string): boolean {
   return new RegExp(`(?<![\\w.-])${pattern}(?![\\w/-]|\\.\\w)`, 'i').test(text);
 }
 
-/** True when the text so far already ends with a prefix naming this ID type (`doi:`). (#115) */
-function hasLiteralIdPrefix(rendered: string, pubIdType: string): boolean {
-  const tail = rendered.trimEnd().replace(/[:.]$/, '').trimEnd();
-  return tail.toLowerCase().endsWith(pubIdType.toLowerCase());
+/**
+ * True when the text so far — `parts`, in order — already ends with a prefix naming this
+ * ID type (`doi:`). (#115) The parts are read back from the end only as far as the prefix
+ * reaches, and never joined: a citation holding many identifiers asks this once for each,
+ * and reading the end of one growing string copies the whole of it every time.
+ */
+function hasLiteralIdPrefix(parts: readonly string[], pubIdType: string): boolean {
+  const chars = backwards(parts);
+  let char = chars.next();
+  const skipWhitespace = () => {
+    while (!char.done && /\s/.test(char.value)) char = chars.next();
+  };
+  skipWhitespace();
+  if (!char.done && (char.value === ':' || char.value === '.')) {
+    char = chars.next();
+    skipWhitespace();
+  }
+  let tail = '';
+  for (; !char.done && tail.length < pubIdType.length; char = chars.next())
+    tail = char.value + tail;
+  return tail.toLowerCase() === pubIdType.toLowerCase();
 }
+
+/** The characters of `parts`, joined, from the last back to the first. */
+function* backwards(parts: readonly string[]): Generator<string> {
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const part = parts[i] ?? '';
+    for (let j = part.length - 1; j >= 0; j--) yield part.charAt(j);
+  }
+}
+
+/**
+ * How many of a `<mixed-citation>`'s identifiers are checked against its text. Each check
+ * reads the whole text, so later identifiers are printed unchecked; real citations carry
+ * a handful.
+ */
+const MAX_CHECKED_IDS = 16;
 
 /**
  * A `<mixed-citation>` as text. Its punctuation lives in the text between elements, so
@@ -403,13 +470,14 @@ function hasLiteralIdPrefix(rendered: string, pubIdType: string): boolean {
  */
 function renderMixedCitation(node: XmlNode, formulas: string[]): string {
   const printed = rawText(node, PUB_ID_TAGS);
-  let rendered = '';
+  const rendered: string[] = [];
   let prevWasElement = false;
+  let checked = 0;
   for (const child of childrenOf(node)) {
     if (isTextNode(child)) {
       const raw = textOf(child);
       if (raw) {
-        rendered += raw;
+        rendered.push(raw);
         prevWasElement = false;
       }
       continue;
@@ -419,7 +487,9 @@ function renderMixedCitation(node: XmlNode, formulas: string[]): string {
     let labeled = false;
     if (tag === 'pub-id') {
       const value = text(child);
-      if (!value || printsIdentifier(printed, value)) continue;
+      if (!value) continue;
+      checked++;
+      if (checked <= MAX_CHECKED_IDS && printsIdentifier(printed, value)) continue;
       const type = attrOf(child, 'pub-id-type') ?? '';
       const label = PUB_ID_LABELS.get(type);
       if (label && !hasLiteralIdPrefix(rendered, type) && !hasLiteralIdPrefix(rendered, label)) {
@@ -435,11 +505,11 @@ function renderMixedCitation(node: XmlNode, formulas: string[]): string {
     } else {
       part = citationText(child, formulas);
     }
-    if (prevWasElement || labeled) rendered += ' ';
-    rendered += part;
+    if (prevWasElement || labeled) rendered.push(' ');
+    rendered.push(part);
     prevWasElement = true;
   }
   // A name part that renders empty (a given name holding only a soft hyphen) or markup
   // whitespace before a comma leaves "Colaneri A. , Staffa N."; the comma closes up.
-  return collapseWhitespace(rendered).replace(/\s+(?=[,;])/g, '');
+  return collapseWhitespace(rendered.join('')).replace(/\s+(?=[,;])/g, '');
 }

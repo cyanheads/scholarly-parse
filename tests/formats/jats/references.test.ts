@@ -7,6 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { toMarkdown } from '../../../src/index.js';
+import { expectLinear } from '../../linear.js';
 import { paragraphTexts, parseArticle, parseBody, texMath } from './helpers.js';
 
 /** References of an article whose `<back>` is `back`. */
@@ -427,5 +428,52 @@ describe('reference-list placement (#116)', () => {
         '<pub-id pub-id-type="doi">10.5281/zenodo.1</pub-id></element-citation>.</p></sec>',
     );
     expect(paragraphTexts(document)).toEqual(['Data are at Zenodo. 2024. DOI 10.5281/zenodo.1.']);
+  });
+});
+
+describe('long citations', () => {
+  const ids = (n: number, id: (i: number) => string) =>
+    Array.from({ length: n }, (_, i) => id(i)).join('');
+  const elementCitation = (fields: string) =>
+    referencesOf(
+      `<ref-list><ref id="R1"><element-citation>${fields}</element-citation></ref></ref-list>`,
+    )[0]?.text;
+
+  const labeled = (i: number) => `<pub-id pub-id-type="doi">10.1/${'v'.repeat(40)}${i}</pub-id>`;
+  const unlabeled = (i: number) => `<pub-id pub-id-type="other">10.1/v${i}</pub-id>`;
+
+  it.each([
+    ['labeled identifiers', (n: number) => mixedCitation(ids(n, labeled))],
+    [
+      'identifiers and words',
+      (n: number) => mixedCitation(`${'10.1/w '.repeat(n)}${ids(n, unlabeled)}`),
+    ],
+    [
+      'formulas',
+      (n: number) =>
+        mixedCitation('<inline-formula><tex-math>x</tex-math></inline-formula> '.repeat(n)),
+    ],
+    [
+      'a field of "://"',
+      (n: number) => elementCitation(`<source>${'://'.repeat(n * 8)} x</source>`),
+    ],
+  ])('reads a citation in time linear in its %s', async (_, citation) => {
+    await expectLinear((n) => n, citation, { from: 125, to: 8_000 });
+  });
+
+  it('checks the first 16 identifiers against the text, and prints the rest', () => {
+    const unlabeled = (i: number) => `<pub-id pub-id-type="other">10.1/x${i + 1}</pub-id>`;
+    const printed = Array.from({ length: 15 }, (_, i) => `10.1/x${i + 2}`).join(' ');
+    expect(mixedCitation(`Cites 10.1/x1 and 10.1/x17. ${ids(17, unlabeled)}`)).toBe(
+      `Cites 10.1/x1 and 10.1/x17. ${printed} 10.1/x17`,
+    );
+  });
+
+  it('closes a field with a full stop unless it ends a sentence or a URL', () => {
+    expect(
+      elementCitation(
+        '<source>See https://x.org/a</source><edition>ftp://</edition><year>2020</year>',
+      ),
+    ).toBe('See https://x.org/a ftp://. 2020.');
   });
 });
