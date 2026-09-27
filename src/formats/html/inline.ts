@@ -64,31 +64,89 @@ export function mathmlTex(math: Element): string {
 export function scriptTex(script: Element): string {
   const source = script.textContent ?? '';
   if (/mml/i.test(script.getAttribute('type') ?? '')) {
-    return (
-      /<annotation[^>]*x-tex[^>]*>([\s\S]*?)<\/annotation>/i.exec(source)?.[1]?.trim() ??
-      /alttext\s*=\s*"([^"]*)"/i.exec(source)?.[1]?.trim() ??
-      ''
-    );
+    return (texAnnotation(source) ?? /alttext\s*=\s*"([^"]*)"/i.exec(source)?.[1])?.trim() ?? '';
   }
   return source.trim();
 }
 
-/** Delimited TeX in text: `\(…\)`, `\[…\]`, `$$…$$`, and — inside a MathJax container — `$…$`. */
-const TEX_DELIMITED = /\\\(([\s\S]+?)\\\)|\\\[([\s\S]+?)\\\]|\$\$([\s\S]+?)\$\$/g;
-const TEX_DELIMITED_WITH_DOLLAR =
-  /\\\(([\s\S]+?)\\\)|\\\[([\s\S]+?)\\\]|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
+/** Each `<annotation>` tag in MathML source, read to its `>` or the next `<`. */
+const ANNOTATION_TAG = /<annotation[^<>]*/gi;
 
-/** Text with its delimited TeX as inline math and everything else escaped. */
+/**
+ * The content of the first `<annotation>` in MathML source whose tag names `x-tex`, up
+ * to the next `</annotation>`. Each tag is read once, and the closing tag is searched for
+ * once: when there is none after one annotation, there is none after a later one either.
+ */
+function texAnnotation(source: string): string | undefined {
+  for (const tag of source.matchAll(ANNOTATION_TAG)) {
+    const content = tag.index + tag[0].length + 1;
+    if (source.charAt(content - 1) !== '>' || !/x-tex/i.test(tag[0])) continue;
+    const close = /<\/annotation>/gi;
+    close.lastIndex = content;
+    const end = close.exec(source);
+    return end ? source.slice(content, end.index) : undefined;
+  }
+  return;
+}
+
+/** Where delimited TeX can open: `\(`, `\[`, `$$`, and `$`. */
+const TEX_OPENER = /\\[([]|\$/g;
+
+/**
+ * Text with its delimited TeX as inline math and everything else escaped. Delimiters are
+ * `\(…\)`, `\[…\]`, `$$…$$`, and — `singleDollar`, inside a MathJax container — `$…$`
+ * with no line break inside; each holds at least one character, and an opener with no
+ * closer is text. Each closer is found with one forward search that later openers of its
+ * kind reuse, so a run of unclosed openers is read once.
+ */
 function textWithMath(text: string, singleDollar: boolean): string {
-  const pattern = singleDollar ? TEX_DELIMITED_WITH_DOLLAR : TEX_DELIMITED;
+  const found = new Map<string, number>();
+  /** The first `closer` at or after `from`, or -1. */
+  const closerAt = (closer: string, from: number): number => {
+    const known = found.get(closer);
+    if (known !== undefined && (known === -1 || known >= from)) return known;
+    const at = text.indexOf(closer, from);
+    found.set(closer, at);
+    return at;
+  };
   let out = '';
   let last = 0;
-  for (const match of text.matchAll(pattern)) {
-    out += escapeInline(text.slice(last, match.index));
-    out += inlineMath(match[1] ?? match[2] ?? match[3] ?? match[4] ?? '');
-    last = match.index + match[0].length;
+  const opener = new RegExp(TEX_OPENER);
+  for (let open = opener.exec(text); open; open = opener.exec(text)) {
+    const start = open.index;
+    const math = delimitedTex(text, start, singleDollar, closerAt);
+    if (!math) {
+      opener.lastIndex = start + 1;
+      continue;
+    }
+    out += escapeInline(text.slice(last, start)) + inlineMath(math.tex);
+    last = math.end;
+    opener.lastIndex = math.end;
   }
   return out + escapeInline(text.slice(last));
+}
+
+/** The TeX delimited at `start` and where its closer ends, or undefined when nothing closes it there. */
+function delimitedTex(
+  text: string,
+  start: number,
+  singleDollar: boolean,
+  closerAt: (closer: string, from: number) => number,
+): { end: number; tex: string } | undefined {
+  const dollar = text.charAt(start) === '$';
+  const next = text.charAt(start + 1);
+  const pair = dollar ? (next === '$' ? '$$' : undefined) : next === '(' ? '\\)' : '\\]';
+  if (pair) {
+    const close = closerAt(pair, start + 3);
+    if (close !== -1) return { end: close + 2, tex: text.slice(start + 2, close) };
+  }
+  if (!singleDollar || !dollar) return;
+  // `$…$`: the first `$` after at least one character, with no line break before it.
+  const stop = /[$\n]/g;
+  stop.lastIndex = start + 1;
+  const close = stop.exec(text)?.index;
+  if (close === undefined || close === start + 1 || text.charAt(close) !== '$') return;
+  return { end: close + 1, tex: text.slice(start + 1, close) };
 }
 
 /** True for an element MathJax reads raw TeX from (`span.mathjax-tex`, `.tex2jax_process`). */

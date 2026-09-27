@@ -6,6 +6,7 @@
  * @module src/formats/html/metadata
  */
 import type { Author, DocumentMetadata, PartialDate, Reference } from '../../model/document.js';
+import { trimTrailing } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
 
 /** One `<meta>` tag: lowercased `name` (or `property`) and its content. */
@@ -39,11 +40,12 @@ function all(tags: MetaTag[], name: string): string[] {
 
 /** A DOI without a resolver or `doi:` prefix, lowercased. */
 export function normalizeDoi(value: string | undefined): string | undefined {
-  const doi = value
-    ?.trim()
-    .replace(/^(?:https?:\/\/(?:dx\.)?doi\.org\/|doi:\s*)/i, '')
-    .replace(/[.,;]+$/, '');
-  return doi && /^10\.\d{4,9}\//.test(doi) ? doi.toLowerCase() : undefined;
+  if (value === undefined) return;
+  const doi = trimTrailing(
+    value.trim().replace(/^(?:https?:\/\/(?:dx\.)?doi\.org\/|doi:\s*)/i, ''),
+    /[.,;]/,
+  );
+  return /^10\.\d{4,9}\//.test(doi) ? doi.toLowerCase() : undefined;
 }
 
 /** `2024/05/12`, `2024-05-12`, `2024-05`, `2024`, `May 12, 2024` → a partial date. */

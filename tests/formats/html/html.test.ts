@@ -6,7 +6,11 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parseHtml } from '../../../src/formats/html/index.js';
+import { normalizeDoi } from '../../../src/formats/html/metadata.js';
+import { interstitialReason } from '../../../src/html/interstitial.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
+import { toMarkdown } from '../../../src/render/index.js';
+import { expectLinear } from '../../linear.js';
 
 const META = [
   '<meta name="citation_title" content="A study of things">',
@@ -377,5 +381,140 @@ describe('references', () => {
         year: '2020',
       },
     ]);
+  });
+});
+
+describe('document-sized lists', () => {
+  /** V8 rejects a call spreading ~120,000 arguments, so the case runs past that on Node. */
+  it('reads a container of 200,000 paragraphs', async () => {
+    const document = await parse(page(`<h2>Intro</h2><div>${'<p>x</p>'.repeat(200_000)}</div>`));
+    const intro = document.body.find((section) => section.title === 'Intro');
+    expect(intro?.blocks).toHaveLength(200_000);
+  });
+});
+
+describe('the table budget', () => {
+  it('repeats a spanned cell into at most a million characters of copies, and says so', async () => {
+    const text = 'W '.repeat(5_000);
+    const table = `<table id="t1"><tr><td colspan="512" rowspan="512">${text}</td></tr>${'<tr><td></td></tr>'.repeat(511)}</table>`;
+    const document = await parse(page(`<h2>Results</h2><p>${PROSE}</p>${table}`));
+    const block = document.body
+      .flatMap((section) => section.blocks)
+      .find((candidate) => candidate.type === 'table');
+    const copied =
+      block?.type === 'table' ? block.rows.flat().join('').length - text.trim().length : 0;
+    expect(copied).toBeLessThanOrEqual(1_000_000);
+    expect(
+      document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input'),
+    ).toMatchObject([{ where: 't1' }]);
+  });
+});
+
+describe('long unclosed runs', () => {
+  /** A page whose article holds `main` after an introduction, parsed. */
+  const article = (main: string) => parse(page(`<h2>Introduction</h2><p>${PROSE}</p>${main}`));
+  /** A page whose reference list holds one entry, `entry`. */
+  const reference = (entry: string) =>
+    article(`<h2>References</h2><ol class="references"><li id="r1">${entry}</li></ol>`);
+
+  it.each([
+    ['<', '<p>', ''],
+    ['<meta', '<html><body>', ''],
+    [' http-equiv=refresh', '<meta http-equiv=refresh', '>'],
+    ['<script', '<p>', ''],
+  ])('checks a page for an interstitial in time linear in a run of %j', async (run, lead, end) => {
+    // Up to 480,000 characters, inside the 512 KiB an interstitial is read to.
+    const to = 4 ** 4 * Math.floor(480_000 / run.length / 4 ** 4);
+    await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, interstitialReason, {
+      from: to / 4 ** 4,
+      to,
+    });
+  });
+
+  it('still reads a redirect stub whose content comes before its http-equiv', () => {
+    expect(
+      interstitialReason(
+        '<html><head><meta content="0;URL=https://example.org/a" http-equiv="Refresh"></head></html>',
+      ),
+    ).toBe('The page is a redirect stub to https://example.org/a, not the document');
+  });
+
+  it.each([
+    ['<annotation', '<p>x <script type="math/mml">', '</script></p>'],
+    ['\\(', '<p>', '</p>'],
+    ['\\[', '<p><span class="mathjax">', '</span></p>'],
+  ])('reads math in time linear in a run of unclosed %j', async (run, lead, end) => {
+    await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, article, {
+      from: 500,
+      to: 32_000,
+    });
+  });
+
+  it('reads delimited TeX as math and an unclosed delimiter as text', async () => {
+    const document = await article(
+      '<p>From \\(a\\) and $$b$$ to \\[c <span class="mathjax">$d$ and \\(e</span></p>',
+    );
+    expect(blocks(document.body).at(-1)).toEqual({
+      text: 'From $a$ and $b$ to \\\\[c $d$ and \\\\(e',
+      type: 'paragraph',
+    });
+  });
+
+  it.each([
+    [', ;|', 'a', 'b'],
+    ['10.1234/.', 'A work. ', '"'],
+    ['arxiv.org/abs/', 'A work. <a href="https://arxiv.org/abs/', '!">arXiv</a>'],
+  ])('reads a reference in time linear in a run of %j', async (run, lead, end) => {
+    await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, reference, {
+      from: 250,
+      to: 16_000,
+    });
+  });
+
+  it('reads a DOI in reference text and an arXiv ID from a link, as before', async () => {
+    const document = await reference(
+      'Roe R. A work. doi:10.1234/Ab.5. <a href="https://arxiv.org/abs/2401.12345v2">arXiv</a>',
+    );
+    expect(document.references).toMatchObject([{ arxiv: '2401.12345', doi: '10.1234/ab.5' }]);
+  });
+
+  it.each([
+    ['10.1002/(SICI)1097-4636(199907)', '10.1002/(sici)1097-4636(199907)'],
+    ['(doi: 10.1234/xyz).', '10.1234/xyz'],
+    ['"10.1234/abc".', '10.1234/abc'],
+    ['doi: 10.1234/abc: more', '10.1234/abc'],
+  ])('reads the DOI in reference text %j without what closes it', async (text, doi) => {
+    const document = await reference(`Roe R. A work. ${text}`);
+    expect(document.references[0]?.doi).toBe(doi);
+  });
+
+  it('normalizes a DOI in time linear in a run of trailing punctuation', async () => {
+    await expectLinear((n) => `10.1234/a${'.'.repeat(n)}b`, normalizeDoi, {
+      from: 2_000,
+      to: 512_000,
+    });
+    expect(normalizeDoi('https://doi.org/10.1234/A.b.;,')).toBe('10.1234/a.b');
+  });
+
+  it('reads preformatted text in time linear in a run of spaces inside it', async () => {
+    await expectLinear((n) => `<pre>\na${' '.repeat(n)}b \n</pre>`, article, {
+      from: 2_000,
+      to: 512_000,
+    });
+    const document = await article('<pre>\n  a  b \n\n</pre>');
+    expect(blocks(document.body).at(-1)).toEqual({ text: '  a  b', type: 'code' });
+  });
+});
+
+describe('deep nesting', () => {
+  it('renders quotes nested 1,000 deep around 1,000 paragraphs at under four times the page', async () => {
+    const paragraphs = Array.from({ length: 1_000 }, (_, i) => `<p>p${i}</p>`).join('');
+    const html = page(
+      `<h2>Intro</h2><p>${PROSE}</p>${'<blockquote><p>a</p>'.repeat(1_000)}${paragraphs}${'</blockquote>'.repeat(1_000)}`,
+    );
+    const document = await parse(html);
+    const markdown = toMarkdown(document);
+    expect(markdown).toContain('p999');
+    expect(markdown.length).toBeLessThan(4 * html.length);
   });
 });

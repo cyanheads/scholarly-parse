@@ -39,8 +39,14 @@ const SIGNATURES: [RegExp, string][] = [
   ],
 ];
 
-const META_REFRESH =
-  /<meta[^>]+http-equiv=["']?refresh["']?[^>]*content=["']?\s*\d+\s*;\s*url=\s*['"]?([^'">\s]+)/i;
+/**
+ * Every `<meta>` tag's text, each read to its `>` or the next `<`: a tag pattern that
+ * reads to the next `>` rereads the rest of the page from each of a run of unclosed tags.
+ */
+const META_TAG = /<meta\b[^<>]*/gi;
+
+/** A refresh tag's `content`: its delay, then the URL it redirects to. */
+const REFRESH_TARGET = /content=["']?\s*\d+\s*;\s*url=\s*['"]?([^'">\s]+)/i;
 
 /**
  * Describes the interstitial `html` is, or returns undefined for a real page. A page
@@ -49,21 +55,58 @@ const META_REFRESH =
  */
 export function interstitialReason(html: string): string | undefined {
   if (html.length > MAX_INTERSTITIAL_CHARS) return;
-  if (/<meta[^>]+name=["']citation_title["']/i.test(html)) return;
+  const metaTags = html.match(META_TAG) ?? [];
+  if (metaTags.some((tag) => /name=["']citation_title["']/i.test(tag))) return;
   if (visibleText(html).length > MAX_INTERSTITIAL_TEXT) return;
   const match = SIGNATURES.find(([pattern]) => pattern.test(html));
   if (match) return `The page is ${match[1]}, not the document`;
-  const refresh = META_REFRESH.exec(html)?.[1];
+  const refresh = metaTags.map(redirectTarget).find(Boolean);
   if (refresh)
     return `The page is a redirect stub to ${refresh.replace(/&amp;/g, '&')}, not the document`;
   return;
 }
 
+/**
+ * Where a `<meta http-equiv="refresh">` tag redirects to, its attributes in either order.
+ * Each attribute is searched for once within the tag, never from every place in it.
+ */
+function redirectTarget(tag: string): string | undefined {
+  return /http-equiv=["']?refresh/i.test(tag) ? REFRESH_TARGET.exec(tag)?.[1] : undefined;
+}
+
 /** Text a reader would see: scripts, styles, and tags removed, whitespace collapsed. */
 function visibleText(html: string): string {
-  return html
-    .replace(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/gi, ' ')
-    .replace(/<[^>]*>/g, ' ')
+  return withoutHiddenElements(html)
+    .replace(/<[^<>]*>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/** Elements whose content a reader never sees. */
+const HIDDEN_ELEMENT = /<(script|style|noscript|template)\b/gi;
+
+/**
+ * `html` with each script, style, noscript, and template element, from its opening tag to
+ * the first closing tag of its name, replaced by a space; an opening tag with no closing
+ * tag after it stays. Each closing tag is found with one forward search, and a name with
+ * no closing tag left is not searched for again, so a run of unclosed openers is read once.
+ */
+function withoutHiddenElements(html: string): string {
+  const unclosed = new Set<string>();
+  let out = '';
+  let copied = 0;
+  for (const open of html.matchAll(HIDDEN_ELEMENT)) {
+    const name = open[1]?.toLowerCase() ?? '';
+    if (open.index < copied || unclosed.has(name)) continue;
+    const close = new RegExp(`</${name}\\s*>`, 'gi');
+    close.lastIndex = open.index + open[0].length;
+    const end = close.exec(html);
+    if (!end) {
+      unclosed.add(name);
+      continue;
+    }
+    out += `${html.slice(copied, open.index)} `;
+    copied = end.index + end[0].length;
+  }
+  return out + html.slice(copied);
 }
