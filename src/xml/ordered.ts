@@ -34,7 +34,9 @@ export const MAX_XML_DEPTH = 256;
  * - `trimValues: false` keeps the spacing between text and adjacent inline elements.
  * - Entity processing stays on because publishers use character references for
  *   punctuation and diacritics, with expansion capped against entity-expansion attacks.
- *   External entities are never fetched.
+ *   The cap counts only entities a DOCTYPE declares (`appliesTo: 'external'`), the only
+ *   ones that expand past a character or two; counting `&amp;` and `&#233;` too would
+ *   reject a large article for its punctuation. External entities are never fetched.
  */
 const PARSER_OPTIONS = {
   attributeNamePrefix: '@_',
@@ -46,6 +48,7 @@ const PARSER_OPTIONS = {
   parseTagValue: false,
   preserveOrder: true,
   processEntities: {
+    appliesTo: 'external',
     enabled: true,
     maxEntityCount: 1_000,
     maxEntitySize: 10_000,
@@ -70,10 +73,40 @@ export function parseOrderedXml(
     ? { ...PARSER_OPTIONS, transformTagName: (name: string) => name.toLowerCase() }
     : PARSER_OPTIONS;
   try {
-    return { nodes: new XMLParser(config).parse(text) as XmlNodeList };
+    return { nodes: new XMLParser(config).parse(withValidReferences(text)) as XmlNodeList };
   } catch (error) {
     return { error: error instanceof Error ? error.message : String(error) };
   }
+}
+
+/**
+ * The text with every character reference to a code point no document can hold — U+0000,
+ * a surrogate, or one past U+10FFFF — rewritten as a reference to U+FFFD, the replacement
+ * character, which is how the HTML parsers decode all three. The XML decoder would drop
+ * the first two and leave the third as text. One pass; CDATA sections and comments are
+ * skipped, since a reference there is text as written. Digits run no longer than the
+ * decoder reads a reference.
+ */
+function withValidReferences(text: string): string {
+  if (!text.includes('&#')) return text;
+  const pattern = /&#(?:[xX]([\dA-Fa-f]{1,30})|(\d{1,31}));|<!\[CDATA\[|<!--/g;
+  let out = '';
+  let copied = 0;
+  for (let match = pattern.exec(text); match; match = pattern.exec(text)) {
+    const [token, hex, decimal] = match;
+    if (hex === undefined && decimal === undefined) {
+      const end = text.indexOf(token === '<!--' ? '-->' : ']]>', pattern.lastIndex);
+      if (end === -1) break;
+      pattern.lastIndex = end + 3;
+      continue;
+    }
+    const code = hex === undefined ? Number.parseInt(decimal ?? '', 10) : Number.parseInt(hex, 16);
+    if (code === 0 || (code >= 0xd800 && code <= 0xdfff) || code > 0x10ffff) {
+      out += `${text.slice(copied, match.index)}&#xFFFD;`;
+      copied = pattern.lastIndex;
+    }
+  }
+  return out + text.slice(copied);
 }
 
 /** Tag name of an element; undefined for a text node. */
