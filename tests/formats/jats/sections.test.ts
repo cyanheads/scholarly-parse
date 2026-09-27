@@ -7,6 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { toMarkdown } from '../../../src/index.js';
+import { expectLinear } from '../../linear.js';
 import {
   article,
   blocksOfType,
@@ -331,6 +332,20 @@ describe('lists, quotes, and boxes (#130)', () => {
     expect(text.trim()).toBe('CME  Infectious diseases - 1\nMalaria: treatment');
     expect(text).not.toMatch(/^\n|\s$/);
     expect(document.diagnostics.warnings.map((w) => w.code)).not.toContain('no-body');
+  });
+
+  it('reads code in time linear in a run of spaces inside it', async () => {
+    await expectLinear(
+      (n) => `<sec><title>S</title><code>a${' '.repeat(n)}b</code></sec>`,
+      parseBody,
+      {
+        from: 2_000,
+        to: 512_000,
+      },
+    );
+    expect(blocksOfType(parseBody('<code> \t\n  a  b \n\n</code>'), 'code')).toEqual([
+      { text: '  a  b', type: 'code' },
+    ]);
   });
 });
 
@@ -794,5 +809,15 @@ describe('back matter', () => {
       ['Methods', 'body'],
     ]);
     expect(document.back).toEqual([]);
+  });
+});
+
+describe('document-sized lists', () => {
+  /** V8 rejects a call spreading ~120,000 arguments, so the case runs past that on Node. */
+  it('reads a paragraph holding 200,000 display formulas', () => {
+    const document = parseBody(
+      `<sec><title>S</title><p>${'<disp-formula>a</disp-formula>'.repeat(200_000)}</p></sec>`,
+    );
+    expect(blocksOfType(document, 'formula')).toHaveLength(200_000);
   });
 });

@@ -19,6 +19,7 @@ import type {
   SectionKind,
   SupplementBlock,
 } from '../../model/document.js';
+import { append } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
@@ -115,7 +116,7 @@ function walk(nodes: XmlNodeList, flow: Flow, ctx: JatsContext): void {
       const chosen = selectAlternative(node);
       if (chosen && BLOCK_TAGS.has(tagNameOf(chosen) ?? '')) {
         flushRun(flow);
-        flow.blocks.push(...renderBlock(chosen, ctx));
+        append(flow.blocks, renderBlock(chosen, ctx));
       } else {
         flow.run += inlineMarkdown([node], ctx);
       }
@@ -127,7 +128,7 @@ function walk(nodes: XmlNodeList, flow: Flow, ctx: JatsContext): void {
     }
     if (BLOCK_TAGS.has(tag)) {
       flushRun(flow);
-      flow.blocks.push(...renderBlock(node, ctx));
+      append(flow.blocks, renderBlock(node, ctx));
       continue;
     }
     if (containsBlock(node)) walk(childrenOf(node), flow, ctx);
@@ -206,7 +207,9 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
       return [statement(node, ctx)];
     case 'preformat':
     case 'code': {
-      const code = rawText(node).replace(/^\s*\n|\s+$/g, '');
+      const code = rawText(node)
+        .replace(/^\s*\n/, '')
+        .trimEnd();
       const language = tagNameOf(node) === 'code' ? attrOf(node, 'language') : undefined;
       return code ? [{ text: code, type: 'code', ...(language && { language }) }] : [];
     }
@@ -419,7 +422,7 @@ function box(node: XmlNode, ctx: JatsContext, withTitle: boolean): BoxBlock {
       const section = parseSection(child, ctx, 'body', `${id ?? 'box'}-s${sections.length + 1}`);
       if (section) sections.push(section);
     } else {
-      blocks.push(...flowBlocks([child], ctx));
+      append(blocks, flowBlocks([child], ctx));
     }
   }
   return {
@@ -664,11 +667,11 @@ export function parseSection(
         continue;
       }
       if (notesAreContent) {
-        blocks.push(...noteBlocks(child, ctx));
+        append(blocks, noteBlocks(child, ctx));
         continue;
       }
     }
-    blocks.push(...flowBlocks([child], ctx));
+    append(blocks, flowBlocks([child], ctx));
   }
 
   if (blocks.length === 0 && sections.length === 0) {
