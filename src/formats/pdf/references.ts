@@ -5,6 +5,7 @@
  * @module src/formats/pdf/references
  */
 import type { Reference } from '../../model/document.js';
+import { doiInText } from '../../model/doi.js';
 import { smallest } from '../../model/extremes.js';
 import { joinLines, lineMarkdown } from './inline.js';
 import { byColumn, type Layout, type Line } from './layout.js';
@@ -12,7 +13,6 @@ import { isCaptionStart } from './lines.js';
 
 const NUMBERED_ENTRY =
   /^\s*(?:\[(\d{1,4})\]|(\d{1,4})[.)](?=\s|\p{Lu})|(\d{1,4})(?=\s+[\p{L}"“‘'(]))\s*/u;
-const DOI = /\b(10\.\d{4,9}\/[^\s"<>]+?)(?=[.,;)\]]?(?:\s|$))/i;
 const ARXIV = /arXiv[:\s]+(\d{4}\.\d{4,5})(?:v\d+)?/i;
 const URL = /\bhttps?:\/\/[^\s<>"]+[^\s<>".,;)]/;
 
@@ -39,9 +39,7 @@ export function references(lines: Line[], layout: Layout): Reference[] {
     const label = numbered ? (numbered[1] ?? numbered[2] ?? numbered[3]) : undefined;
     if (numbered) text = text.slice(numbered[0].length);
     if (!text) return [];
-    const doi = DOI.exec(plain)?.[1]
-      ?.replace(/[.,;]+$/, '')
-      .toLowerCase();
+    const doi = doiInText(plain)?.toLowerCase();
     const arxiv = ARXIV.exec(plain)?.[1];
     const url = doi ? undefined : URL.exec(plain)?.[0];
     return [
