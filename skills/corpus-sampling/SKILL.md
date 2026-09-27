@@ -4,7 +4,7 @@ description: >
   Run a wild-sampling round for scholarly-parse with `scripts/corpus/sample.ts`: draw fresh openly licensed documents from Europe PMC (JATS), arXiv (LaTeXML), and OpenAlex (Grobid TEI, and open-access PDFs and publisher pages), parse each, check the corpus invariants, and read the report of failure classes. Then triage every class against the source, turn each real one into a fixture and a fix through the add-fixture skill, and repeat with new seeds until a round finds no new class. Use when asked to sample, run the wild sampling, find new failures, or measure how a format holds up on documents outside the corpus.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -12,7 +12,7 @@ metadata:
 
 The corpus only proves the parsers on documents already in it. Wild sampling (`docs/design.md` § Quality engine, layer 5) runs them on documents nobody picked: each round draws at random, and every failure class it finds becomes a fixture. Rounds for a format continue until one finds no new class.
 
-`sample.ts` writes nothing to the corpus. It prints a Markdown report to stdout and progress to stderr, and `--json <file>` also saves every outcome.
+`sample.ts` writes nothing to the corpus. It prints a Markdown report to stdout and progress to stderr, `--json <file>` also saves every outcome, and `--save <dir>` saves every fetched document, so triage re-parses it instead of fetching it again.
 
 | Source | Draws | Format | Needs |
 |:---|:---|:---|:---|
@@ -41,10 +41,10 @@ A PDF link that serves anything but a PDF, a landing page the publisher blocks, 
 ### 1. Run a round
 
 ```bash
-bun run corpus:sample --source epmc,arxiv --count 30 --seed <N> --json <scratch>/sample-<N>.json > <scratch>/sample-<N>.md
+bun run corpus:sample --source epmc,arxiv --count 30 --seed <N> --json <scratch>/sample-<N>.json --save <scratch>/sources-<N> > <scratch>/sample-<N>.md
 ```
 
-Run it in the background: it paces every request (`scripts/corpus/http.ts`) and a round takes minutes. The report and JSON belong in the session scratchpad, not the repo. The seed repeats the random choices, but upstream search results can shift over time, so a repeat is close to the original draw, not guaranteed identical.
+Run it in the background: it paces every request (`scripts/corpus/http.ts`) and a round takes minutes. The report, JSON, and saved sources belong in the session scratchpad, not the repo; with `openalex` in the mix, always pass `--save`, since fetching a TEI again costs another $0.01. The seed repeats the random choices, but upstream search results can shift over time, so a repeat is close to the original draw, not guaranteed identical.
 
 ### 2. Read the report
 
@@ -63,7 +63,7 @@ The table at the top gives, per source: drawn, parsed, unavailable (arXiv could 
 
 For each class, take one example and find the cause in the parser, not in the report:
 
-1. Fetch the example's source into the session scratchpad (the Europe PMC `fullTextXML` URL, `https://arxiv.org/html/<id>`, the PDF or landing-page URL in a `pdf` or `html` example).
+1. Take the example's source from the `--save` directory, or fetch it into the session scratchpad (the Europe PMC `fullTextXML` URL, `https://arxiv.org/html/<id>`, the PDF or landing-page URL in a `pdf` or `html` example).
 2. Parse it with a throwaway script in the repo root (`.x.tmp.ts`, deleted afterwards) and locate the block, section, or text that breaks.
 3. Read the source markup there. Decide:
    - **Parser bug** → step 4.
