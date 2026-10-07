@@ -1,6 +1,7 @@
 /**
- * @fileoverview Bounds on untrusted input that more than one loader shares, in a module
- * of their own so the HTML loader can use them without pulling in `fast-xml-parser`.
+ * @fileoverview Bounds on untrusted input that the XML parser (`src/xml/`) and the HTML
+ * loader (`src/html/dom.ts`) share, in a module of their own so neither imports the
+ * other's module for a constant.
  * @module src/model/limits
  */
 
