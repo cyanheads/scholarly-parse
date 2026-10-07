@@ -4,7 +4,7 @@ description: >
   Review pass on an open scholarly-parse release PR (`release/<version>` → `main`) — the step between `git-wrapup` and `release-and-publish`, run on Opus. Reads the PR's commit range through the `code-simplifier` lens plus a correctness and release review (corpus snapshots, fixture licensing, the model contract, changelog vs diff), verifies whatever an automated reviewer or code scanning left on the PR, lands fixes as ordinary commits on top of the release branch and pushes it, keeps the PR body in sync with what ships, and leaves one summary comment. The only role that both edits and commits — it never rewrites pushed history, tags, merges, touches `main`, or publishes.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -120,7 +120,7 @@ The PR body — theme line, `## Changes`, `## Gates`, changelog link (`git-wrapu
 
 ### 7. File what is out of scope
 
-A finding whose fix would widen this release — an adjacent bug, a refactor the diff exposed but did not cause — is filed via `skills/report-issue-local/SKILL.md` (dedup search first), then named in the summary comment. Never stranded in the report, never folded into the release to finish the thought. An exploitable security finding in a published version is never a public issue — see `report-issue-local` § Security reports.
+A finding whose fix would widen this release — an adjacent bug, a refactor the diff exposed but did not cause — is filed via `skills/report-issue-local/SKILL.md` (dedup search first), then named in the summary comment. Never stranded in the report, never folded into the release to finish the thought. A security finding is routed as `report-issue-local` § Security reports says.
 
 ### 8. Leave one summary comment
 
