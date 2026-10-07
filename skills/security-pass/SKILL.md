@@ -247,7 +247,7 @@ End with:
 ### 5. Fix or file
 
 - **Picked options are fixed.** Each fix lands with a unit test that feeds the crafted input and asserts a bounded `ParseResult` — seen failing first — then `bun run devcheck`. A source-code security fix sets `security: true` in the release's changelog entry.
-- **Real findings not picked are filed** via `skills/report-issue-local/SKILL.md` unless the caller says otherwise: hardening goes in a public issue with the `security` label; anything exploitable against a published version stays out of public issues (`report-issue-local` § Security reports).
+- **Real findings not picked are filed** via `skills/report-issue-local/SKILL.md` unless the caller says otherwise. Follow its Security reports section: a maintainer-requested GitHub issue audit keeps findings in the issue queue; private contributor disclosures stay protected. A formal security advisory requires an explicit maintainer request.
 - Never commit, tag, or push from this pass — leave the fixes in the working tree for `git-wrapup`.
 
 ## Checklist
@@ -265,4 +265,4 @@ End with:
 - [ ] Axis 8 — peers lazy, literal, and absent from the root and XML subpaths
 - [ ] Quick sanity pass: audit, bunfig guard, new-dependency scripts and provenance, tarball contents, no env/fetch/Buffer in `src/`
 - [ ] Report: summary → grouped findings → numbered options
-- [ ] Picked options fixed with failing-first unit tests; the rest filed, exploitable findings kept private
+- [ ] Picked options fixed with failing-first unit tests; the rest filed in the requested queue; private disclosures protected; no unrequested advisory

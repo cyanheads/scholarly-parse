@@ -1,10 +1,10 @@
 ---
 name: report-issue-local
 description: >
-  File a bug or feature request against cyanheads/scholarly-parse — a document that parses wrong, a parser that fails on valid input, a detection or rendering defect, a missing format, flavor, model field, or renderer option. Covers the dedup search, triage to the right format or area, the issue forms field for field, titles, labels, word budgets, and routing security reports away from public issues.
+  File a bug or feature request against cyanheads/scholarly-parse — a document that parses wrong, a parser that fails on valid input, a detection or rendering defect, a missing format, flavor, model field, or renderer option. Covers the dedup search, triage to the right format or area, the issue forms field for field, titles, labels, word budgets, and security findings in maintainer audits versus private contributor disclosures.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -55,7 +55,9 @@ When genuinely ambiguous, pick the format the failing document is in and say wha
 
 ## Security reports
 
-A crafted document that does more than parse wrong — unbounded memory or CPU (entity expansion, deep nesting, pathological regex input), a crash that escapes the `ParseResult` contract, or content that survives into rendered Markdown as live HTML or script — is in scope for `.github/SECURITY.md`. When it is exploitable against a published version, **never file it as a public issue** — report it privately through the channels in `.github/SECURITY.md` (Security tab → Report a vulnerability). Working in this repo on the maintainer's behalf, fix it directly or hand it to the maintainer for a draft advisory. Defense-in-depth hardening with no exploit behind it can be a public issue with the `security` label.
+A crafted document that causes unbounded memory or CPU, a crash outside the `ParseResult` contract, or active HTML or script in rendered Markdown is a security finding. When the maintainer requests an audit with GitHub issues, file actionable findings in that issue queue with `bug` and `security` labels, including the verified reproduction. Honor an explicit request for private handling. Never create a repository security advisory unless the maintainer explicitly requests one.
+
+Outside contributor disclosures follow `.github/SECURITY.md`. Never publish a contributor's private disclosure without the maintainer's explicit approval.
 
 ## Writing well-structured issues
 
@@ -195,7 +197,7 @@ Every issue gets exactly one primary label and the `cyanheads` assignee — the 
 |:------|:-----|
 | `regression` | Worked before, broken after an update |
 | `performance` | Memory, CPU, or latency |
-| `security` | Hardening against crafted input (exploitable reports go privately — § Security reports) |
+| `security` | A security defect or hardening against crafted input; disclosure routing follows § Security reports |
 | `breaking-change` | The fix or feature changes the public API or model |
 | `surplus-token-idea` | Worth exploring when time allows |
 
@@ -232,7 +234,7 @@ Closing is a deliberate step after the fix ships, with a comment naming the rele
 - [ ] Searched existing issues — no duplicate; close matches commented instead
 - [ ] Reproduced on the exact document; version, runtime, parser, and `diagnostics` noted
 - [ ] Triaged to a format or area; dependency faults filed upstream
-- [ ] Exploitable security findings kept out of public issues
+- [ ] Security findings filed in the maintainer's requested queue; private contributor disclosures protected; no unrequested advisory
 - [ ] Secrets redacted
 - [ ] Title is `type(scope): description` with a scope from the list
 - [ ] One primary label, `--assignee cyanheads`
