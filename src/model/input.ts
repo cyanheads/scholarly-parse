@@ -29,7 +29,8 @@ export function decodeText(input: string | Uint8Array): string {
   return decoder.decode(input).replace(/^﻿/, '');
 }
 
-function bomEncoding(bytes: Uint8Array): string | undefined {
+/** The encoding a leading byte-order mark names: UTF-8, UTF-16LE, or UTF-16BE. */
+export function bomEncoding(bytes: Uint8Array): 'utf-8' | 'utf-16le' | 'utf-16be' | undefined {
   if (bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf) return 'utf-8';
   if (bytes[0] === 0xff && bytes[1] === 0xfe) return 'utf-16le';
   if (bytes[0] === 0xfe && bytes[1] === 0xff) return 'utf-16be';

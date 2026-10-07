@@ -59,7 +59,8 @@ function readJats(input: string | Uint8Array, options: ParseOptions): ParseResul
 
   const article = findDescendant(tree.nodes, 'article', 6);
   if (!article) return failed('wrong-format', 'No <article> element: not a JATS document');
-  const flavor = findDescendant(tree.nodes, 'pmc-articleset', 2) ? 'pmc' : undefined;
+  const flavor =
+    findDescendant(tree.nodes, 'pmc-articleset', 2) || isPmcRecord(tree.nodes) ? 'pmc' : undefined;
 
   const front = findOne(article, 'front');
   const articleMeta = findOne(front, 'article-meta');
@@ -106,6 +107,16 @@ function readJats(input: string | Uint8Array, options: ParseOptions): ParseResul
     references,
   };
   return parsed(document);
+}
+
+/**
+ * True for a record PMC serves over OAI-PMH: the header of the response's first record
+ * names it `oai:pubmedcentral.nih.gov:<id>`.
+ */
+function isPmcRecord(nodes: XmlNodeList): boolean {
+  const record = findDescendant(childrenOf(findOne(nodes, 'OAI-PMH')), 'record', 1);
+  const identifier = text(findOne(findOne(record, 'header'), 'identifier'));
+  return identifier.startsWith('oai:pubmedcentral.nih.gov:');
 }
 
 /**

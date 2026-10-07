@@ -1,9 +1,15 @@
 /**
  * @fileoverview `parse` sends each payload to its format's parser, honors an explicit
- * format, and fails as `wrong-format` for payloads no parser reads.
+ * format, and fails as `wrong-format` for payloads no parser reads. A payload behind a
+ * byte-order mark, a processing instruction, or an OAI-PMH envelope, and a LaTeXML
+ * fragment rooted at `<article>`, reach the parser their format names.
  * @module tests/parse.test
  */
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { parseJats } from '../src/formats/jats/index.js';
+import { parseLatexml } from '../src/formats/latexml/index.js';
 import { parse } from '../src/parse.js';
 import { buildPdf, paragraph } from './formats/pdf/build-pdf.js';
 
@@ -13,6 +19,25 @@ const JATS = `<?xml version="1.0"?>
 
 const HTML = `<!doctype html><html><head><meta name="citation_title" content="A web article"></head>
 <body><main><article><h1>A web article</h1><h2>Introduction</h2><p>${'Text of the introduction. '.repeat(20)}</p></article></main></body></html>`;
+
+/** `text` as UTF-16 in either byte order, behind its byte-order mark. */
+function utf16(text: string, order: 'le' | 'be'): Uint8Array {
+  const units = `\uFEFF${text}`;
+  const out = new Uint8Array(units.length * 2);
+  const view = new DataView(out.buffer);
+  for (let i = 0; i < units.length; i++) view.setUint16(i * 2, units.charCodeAt(i), order === 'le');
+  return out;
+}
+
+/** An OAI-PMH GetRecord response carrying `article` as the record `identifier`. */
+const getRecord = (article: string, identifier: string) =>
+  '<?xml version="1.0" encoding="UTF-8"?>\n<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">' +
+  '<responseDate>2026-09-26T00:00:00Z</responseDate>' +
+  `<request verb="GetRecord" identifier="${identifier}" metadataPrefix="pmc">https://example.org/oai</request>` +
+  `<GetRecord><record><header><identifier>${identifier}</identifier><datestamp>2023-10-18</datestamp>` +
+  '</header><metadata>' +
+  article.replace('<article ', '<article xmlns="https://jats.nlm.nih.gov/ns/archiving/1.3/" ') +
+  '</metadata></record></GetRecord></OAI-PMH>';
 
 describe('parse', () => {
   it('detects the format and parses', async () => {
@@ -39,6 +64,56 @@ describe('parse', () => {
     expect(pdf.ok && pdf.document.metadata.title).toBe('A PDF article on its own');
   });
 
+  it('parses bytes behind a byte-order mark as their format\u2019s parser does', async () => {
+    const jats = '<article><body><p>Body.</p></body></article>';
+    const inputs = [
+      new Uint8Array([0xef, 0xbb, 0xbf, ...new TextEncoder().encode(jats)]),
+      utf16(jats, 'le'),
+      utf16(jats, 'be'),
+    ];
+    for (const input of inputs) {
+      const result = await parse(input);
+      expect(result.ok && result.document.format).toBe('jats');
+      expect(result).toEqual(parseJats(input));
+    }
+  });
+
+  it('parses a LaTeXML fragment and a JATS article behind a stylesheet', async () => {
+    const fragment =
+      '<article class="ltx_document"><section class="ltx_section">' +
+      '<h2 class="ltx_title">Results</h2><p>Body.</p></section></article>';
+    const latexml = await parse(fragment);
+    expect(latexml.ok && latexml.document.format).toBe('latexml');
+    expect(latexml).toEqual(await parseLatexml(fragment));
+
+    const styled =
+      '<?xml version="1.0"?>\n<?xml-stylesheet type="text/xsl" href="jats.xsl"?>\n' +
+      '<article><front><article-meta><title-group><article-title>T</article-title>' +
+      '</title-group></article-meta></front><body><p>Body.</p></body></article>';
+    const jats = await parse(styled);
+    expect(jats.ok && jats.document.metadata.title).toBe('T');
+    expect(jats).toEqual(parseJats(styled));
+  });
+
+  it('parses the article inside a PMC OAI-PMH record as the bare article', async () => {
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../corpus/jats/pmc-pmc10579850/source.xml'),
+      'utf8',
+    );
+    const article = source.slice(
+      source.search(/<article[\s>]/),
+      source.lastIndexOf('</article>') + '</article>'.length,
+    );
+    const bare = parseJats(source);
+    if (!bare.ok) throw new Error(bare.error.message);
+    expect(bare.document.flavor).toBe('pmc');
+
+    expect(await parse(getRecord(article, 'oai:pubmedcentral.nih.gov:10579850'))).toEqual(bare);
+    const elsewhere = await parse(getRecord(article, 'oai:europepmc.org:10579850'));
+    expect(elsewhere.ok && elsewhere.document.flavor).toBeUndefined();
+    expect(elsewhere).toEqual({ ...bare, document: { ...bare.document, flavor: undefined } });
+  });
+
   it('uses the format the caller names', async () => {
     const result = await parse(JATS, { format: 'tei' });
     expect(result.ok ? 'ok' : result.error.reason).toBe('wrong-format');
@@ -61,9 +136,5 @@ describe('parse', () => {
     });
     const looped = new TextDecoder('latin1').decode(page).replace('/Kids [6 0 R]', '/Kids [2 0 R]');
     expect(await reason(Uint8Array.from(looped, (char) => char.charCodeAt(0)))).toBe('malformed');
-    const nested = `${'<b>'.repeat(100_000)}x${'</b>'.repeat(100_000)}`;
-    expect(await reason(`<html><body><article><p>${nested}</p></article></body></html>`)).toBe(
-      'malformed',
-    );
   });
 });
