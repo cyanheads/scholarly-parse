@@ -15,12 +15,13 @@ import {
   textOfElement,
 } from '../../html/dom.js';
 import type { Reference } from '../../model/document.js';
-import { doiInText } from '../../model/doi.js';
+import { doiInText, normalizeDoi } from '../../model/doi.js';
 import { trailingLength, trimTrailing } from '../../model/trailing.js';
+import { collapseInline } from '../../render/inline.js';
 import { isLinkList, LINK_LABEL } from './blocks.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
 import { inlineMarkdown, safeDecode } from './inline.js';
-import { normalizeDoi } from './metadata.js';
+import { textLength } from './subtree.js';
 
 /** Class tokens of an element holding an entry's printed number. */
 const LABEL_TOKENS = new Set(['label', 'order', 'number', 'counter', 'num']);
@@ -28,7 +29,7 @@ const LABEL_TOKENS = new Set(['label', 'order', 'number', 'counter', 'num']);
 const TEXT_TOKENS = new Set(['citation', 'cite', 'content', 'text', 'mixed']);
 
 /** The entry elements of a reference list among `nodes`. */
-function entries(nodes: Node[]): Element[] {
+function entries(nodes: Node[], ctx: HtmlContext): Element[] {
   const elements = nodes.filter(isElement).filter((el) => !isFurniture(el));
   const lists = elements.flatMap((el) =>
     ['ul', 'ol'].includes(tagOf(el)) ? [el] : Array.from(el.querySelectorAll('ul, ol')),
@@ -36,7 +37,7 @@ function entries(nodes: Node[]): Element[] {
   const longest = lists
     .filter((list) => !list.parentElement?.closest('li'))
     .map((list) =>
-      childElements(list).filter((child) => tagOf(child) === 'li' && !isLinkList(child)),
+      childElements(list).filter((child) => tagOf(child) === 'li' && !isLinkList(child, ctx)),
     )
     .sort((a, b) => b.length - a.length)[0];
   if (longest && longest.length > 0) return longest;
@@ -45,7 +46,7 @@ function entries(nodes: Node[]): Element[] {
   while (level.length === 1 && level[0] && childElements(level[0]).length > 0)
     level = childElements(level[0]);
   return sameShape(
-    level.filter((el) => !isFurniture(el) && !isLinkList(el) && textOfElement(el).length > 20),
+    level.filter((el) => !isFurniture(el) && !isLinkList(el, ctx) && textLength(el, ctx) > 20),
   );
 }
 
@@ -79,8 +80,8 @@ function citationText(entry: Element, labelEl: Element | undefined, ctx: HtmlCon
     Array.from(entry.querySelectorAll('*')).find(
       (el) =>
         nameTokens(el.getAttribute('class')).some((t) => TEXT_TOKENS.has(t)) &&
-        !isLinkList(el) &&
-        textOfElement(el).length > 20,
+        !isLinkList(el, ctx) &&
+        textLength(el, ctx) > 20,
     );
   const nodes = textEl ? childNodes(textEl) : childNodes(entry).filter((node) => node !== labelEl);
   const kept = nodes.filter(
@@ -89,14 +90,11 @@ function citationText(entry: Element, labelEl: Element | undefined, ctx: HtmlCon
       !(
         isFurniture(node) ||
         node === labelEl ||
-        isLinkList(node) ||
+        isLinkList(node, ctx) ||
         (tagOf(node) === 'a' && LINK_LABEL.test(textOfElement(node)))
       ),
   );
-  const markdown = inlineMarkdown(kept, ctx)
-    .replace(/\[\s*\]|\(\s*\)/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const markdown = collapseInline(inlineMarkdown(kept, ctx).replace(/\[\s*\]|\(\s*\)/g, ' '));
   return trimTrailing(markdown, /[\s|,;]/);
 }
 
@@ -119,7 +117,7 @@ function arxivFromHref(href: string): string | undefined {
 
 /** References from the nodes of a References section. */
 export function extractReferences(nodes: Node[], ctx: HtmlContext): Reference[] {
-  return entries(nodes).flatMap((entry) => {
+  return entries(nodes, ctx).flatMap((entry) => {
     const labelEl = Array.from(entry.querySelectorAll('*')).find((el) =>
       nameTokens(el.getAttribute('class')).some((t) => LABEL_TOKENS.has(t)),
     );

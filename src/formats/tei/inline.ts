@@ -7,7 +7,7 @@ import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Footnote } from '../../model/document.js';
 import type { GridBudget } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis, link, subscript, superscript } from '../../render/inline.js';
+import { collapseInline, emphasis, link, subscript, superscript } from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
@@ -79,9 +79,12 @@ export function inlineMarkdown(nodes: XmlNodeList, ctx: TeiContext): string {
   return out;
 }
 
-/** Inline Markdown of an element's content, whitespace collapsed. */
+/**
+ * Inline Markdown of an element's content, whitespace collapsed and the seams between
+ * its separately escaped pieces repaired (`collapseInline`).
+ */
 export function inlineText(node: XmlNode | undefined, ctx: TeiContext): string {
-  return node ? collapseWhitespace(inlineMarkdown(childrenOf(node), ctx)) : '';
+  return node ? collapseInline(inlineMarkdown(childrenOf(node), ctx)) : '';
 }
 
 function inlineNode(node: XmlNode, ctx: TeiContext): string {

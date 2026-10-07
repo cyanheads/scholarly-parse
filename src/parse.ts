@@ -22,6 +22,8 @@ export interface AutoParseOptions extends ParseOptions {
   maxTextChars?: number;
   /** Read at most this many text items (PDF). */
   maxTextItems?: number;
+  /** Stop reading at the next page boundary once aborted, keeping what was read (PDF). */
+  signal?: AbortSignal;
 }
 
 /**

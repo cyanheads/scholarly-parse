@@ -6,15 +6,18 @@
  * @module tests/formats/jats/sections.test
  */
 import { describe, expect, it } from 'vitest';
+import { jatsInlineToMarkdown } from '../../../src/formats/jats/index.js';
 import { toMarkdown } from '../../../src/index.js';
 import { expectLinear } from '../../linear.js';
 import {
   article,
   blocksOfType,
+  liveMarkup,
   paragraphTexts,
   parse,
   parseArticle,
   parseBody,
+  SPLIT_MARKUP,
 } from './helpers.js';
 
 const p = (text: string) => ({ text, type: 'paragraph' });
@@ -714,12 +717,117 @@ describe('back matter', () => {
     );
   });
 
+  it('reads a titled <notes> as a subsection when only subsections and headings follow it (#10)', () => {
+    const document = parseArticle({
+      back:
+        '<notes><title>Declarations</title><notes><title>A</title><p>a</p></notes>\n' +
+        '<sec><title>B</title><p>b</p></sec><notes><title>C</title><p>c</p></notes>' +
+        '<label>1</label></notes>',
+      body: '<p>Body.</p>',
+    });
+    expect(document.back[0]?.sections.map((section) => section.title)).toEqual(['A', 'B', 'C']);
+  });
+
+  it('reads 50,000 titled <notes> in one section in time linear in their count (#10)', async () => {
+    const xml = (n: number) =>
+      article({
+        back: `<notes><title>All</title>${'<notes><title>N</title><p>x</p></notes>'.repeat(n)}</notes>`,
+        body: '<p>Body.</p>',
+      });
+    await expectLinear(xml, parse, { from: 3_125, to: 50_000 });
+    expect(parse(xml(50_000)).back[0]?.sections).toHaveLength(50_000);
+  }, 60_000);
+
   it('collects an inline footnote and leaves its label as a marker', () => {
     const document = parseBody(
       '<p>Measured twice<fn id="fn2"><label>a</label><p>By two raters.</p></fn> in total.</p>',
     );
     expect(document.footnotes).toEqual([{ id: 'fn2', label: 'a', text: 'By two raters.' }]);
     expect(paragraphTexts(document)).toEqual(['Measured twice^a in total.']);
+  });
+
+  it('writes the block content of a footnote and a definition into its text (#35)', () => {
+    const document = parse(
+      '<article><body><p>Body.</p>' +
+        '<fn-group><fn id="f1"><label>1</label><p>First.<list><list-item><p>Important item.</p>' +
+        '</list-item></list></p><p>Last.</p></fn></fn-group>' +
+        '<p>Text<fn id="f2"><label>a</label><p>Alpha.</p><p>Beta.</p></fn> more.</p>' +
+        '<def-list><def-item><term>Term</term><def><p>First sentence.</p><p>Second sentence.</p>' +
+        '</def></def-item></def-list></body></article>',
+    );
+    expect(toMarkdown(document)).toContain(
+      'Text^a more.\n\n- **Term** — First sentence.\n\n  Second sentence.\n\n' +
+        '## Footnotes\n\n- **1** First. Important item. Last.\n- **a** Alpha. Beta.\n',
+    );
+    expect(document.diagnostics.quality).toBe('structured');
+    expect(document.diagnostics.warnings.map((w) => w.code)).toEqual(['no-title', 'no-abstract']);
+  });
+
+  it('writes a formula and code in a footnote into its text (#35)', () => {
+    const { footnotes } = parseArticle({
+      back:
+        '<fn-group><fn id="f1"><p>See <disp-formula><tex-math>E=mc^2</tex-math></disp-formula>' +
+        'and <preformat>x</preformat> and <disp-formula>a + b</disp-formula></p></fn></fn-group>',
+      body: '<p>Body.</p>',
+    });
+    expect(footnotes).toEqual([{ id: 'f1', text: 'See $E=mc^2$ and `x` and a + b' }]);
+  });
+
+  it('keeps the label and caption of a table in a footnote, and warns of its rows (#35)', () => {
+    const document = parseArticle({
+      back:
+        '<fn-group><fn id="f1"><p>Counts:</p><table-wrap id="t9"><label>Table 9</label>' +
+        '<caption><title>Counts by site</title></caption><table><tr><td>1</td></tr></table>' +
+        '</table-wrap><fig><label>Figure 2</label><caption><p>A map.</p></caption></fig>' +
+        '<supplementary-material><label>Data S1</label><caption><p>Raw counts.</p></caption>' +
+        '</supplementary-material><graphic xlink:href="qr.png"/></fn></fn-group>',
+      body: '<p>Body.</p>',
+    });
+    expect(document.footnotes).toEqual([
+      {
+        id: 'f1',
+        text: 'Counts: **Table 9.** **Counts by site** **Figure 2.** A map. **Data S1.** Raw counts.',
+      },
+    ]);
+    expect(
+      document.diagnostics.warnings.filter((warning) => warning.code === 'unhandled-element'),
+    ).toEqual([expect.objectContaining({ where: 'f1' })]);
+  });
+
+  it('writes the quotes, boxes, and lists of a footnote into its text, in order (#35)', () => {
+    const { footnotes } = parseArticle({
+      back:
+        '<fn-group><fn id="f1"><p>Lead.</p><disp-quote><p>Quoted.</p><attrib>Someone</attrib>' +
+        '</disp-quote><boxed-text><caption><title>Box</title></caption><p>Boxed.</p></boxed-text>' +
+        '<list><title>Steps</title><list-item><p>One.</p><list><list-item><p>Two.</p></list-item>' +
+        '</list></list-item></list><code>a\n  b</code></fn></fn-group>',
+      body: '<p>Body.</p>',
+    });
+    expect(footnotes).toEqual([
+      { id: 'f1', text: 'Lead. Quoted. — Someone **Box** Boxed. **Steps** One. Two. `a b`' },
+    ]);
+  });
+
+  it('keeps a definition list item term-led, block content after it (#35)', () => {
+    const document = parseBody(
+      '<def-list><def-item><term>BMI</term><def><p>body mass index</p></def></def-item>' +
+        '<def-item><term>Steps</term><def><p>In order:<list><list-item><p>Weigh.</p></list-item>' +
+        '</list></p></def></def-item><def-item><term>Bare</term></def-item></def-list>',
+    );
+    const [list] = blocksOfType(document, 'list');
+    expect(list?.items).toEqual([
+      [p('**BMI** — body mass index')],
+      [p('**Steps** — In order:'), { items: [[p('Weigh.')]], ordered: false, type: 'list' }],
+      [p('**Bare**')],
+    ]);
+  });
+
+  it('spaces the paragraphs of a definition read as inline text (#35)', () => {
+    const document = parseBody(
+      '<sec><title>Terms<def-list><def-item><term>A</term><def><p>One.</p><p>Two.</p></def>' +
+        '</def-item></def-list></title><p>Body.</p></sec>',
+    );
+    expect(document.body[0]?.title).toBe('Terms A One. Two.');
   });
 
   it("reads a section's keyword groups as labeled lines, not run-together text", () => {
@@ -819,5 +927,42 @@ describe('document-sized lists', () => {
       `<sec><title>S</title><p>${'<disp-formula>a</disp-formula>'.repeat(200_000)}</p></sec>`,
     );
     expect(blocksOfType(document, 'formula')).toHaveLength(200_000);
+  });
+});
+
+describe('source text split across inline elements (#44)', () => {
+  it.each(SPLIT_MARKUP)('makes no live markup of %j in any field', (...row) => {
+    const split = row.map((piece) => `<named-content>${piece}</named-content>`).join('');
+    const document = parseArticle({
+      back:
+        `<fn-group><fn id="n2"><p>${split}</p></fn></fn-group>` +
+        `<ref-list><ref id="r1"><mixed-citation>${split}</mixed-citation></ref></ref-list>`,
+      body:
+        `<p>${split}</p><fig id="f1"><caption><p>${split}</p></caption></fig>` +
+        `<table-wrap id="t1"><table><tr><td>${split}</td></tr></table></table-wrap>` +
+        `<p>Noted<fn id="n1"><p>${split}</p></fn>.</p>`,
+      meta: `<title-group><article-title>${split}</article-title></title-group>`,
+    });
+    const fields = [
+      document.metadata.title ?? '',
+      ...paragraphTexts(document),
+      ...blocksOfType(document, 'figure').map((figure) => figure.caption ?? ''),
+      ...blocksOfType(document, 'table').flatMap((table) => table.rows.flat()),
+      ...document.footnotes.map((footnote) => footnote.text),
+      ...document.references.map((reference) => reference.text),
+      jatsInlineToMarkdown(split),
+      toMarkdown(document),
+    ];
+    expect(fields.filter((field) => liveMarkup(field).length > 0)).toEqual([]);
+  });
+
+  it('escapes a link split across elements, and keeps one a link writes', () => {
+    const document = parseBody(
+      '<p><named-content>[click]</named-content><named-content>(javascript:alert(1))</named-content> ' +
+        '<ext-link xlink:href="https://example.org">site</ext-link></p>',
+    );
+    expect(paragraphTexts(document)).toEqual([
+      '[click\\](javascript:alert(1)) [site](https://example.org)',
+    ]);
   });
 });

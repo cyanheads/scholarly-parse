@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: the same data paper is also in the corpus as Europe PMC JATS (epmc-s41597-024-04291-z) and Grobid TEI (grobid-s41597-024-04291-z). Pins what this Nature page shares with the JATS parse (title, abstract opening, the Methods and Technical Validation subsections, two caption-only tables reported unextractable, four figures with the same captions) plus the page's 57 references, journal and bold volume kept apart.",
+  "why": "Rosetta: the same data paper is also in the corpus as Europe PMC JATS (epmc-s41597-024-04291-z) and Grobid TEI (grobid-s41597-024-04291-z). Pins what this Nature page shares with the JATS parse (title, abstract opening, the Methods and Technical Validation subsections, two caption-only tables reported unextractable, four figures with the same captions) plus the page's 57 references, journal and bold volume kept apart. cyanheads/scholarly-parse#29: the page links its CC BY 4.0 license only from an <a rel=\"license\"> in the open-access statement; pins the License line it yields.",
   "title": "Whole genome sequencing of three native chicken varieties (Common Deshi, Hilly and Naked Neck) of Bangladesh",
   "quality": "partial",
   "abstractKinds": ["main"],
@@ -27,6 +27,7 @@
     "**Fig. 1.** Sample collection sites from across Bangladesh.",
     "**Table 1.** Selected samples (total = 96) for WGS from BLRI improved native chicken",
     "**Fig. 4.** Chromosome-wise SNP distribution heat map across the Bangladeshi native chicken genome",
-    "*Worlds Poult Sci J* **64**, 99–118 (2019)."
+    "*Worlds Poult Sci J* **64**, 99–118 (2019).",
+    "License: <http://creativecommons.org/licenses/by/4.0/>"
   ]
 }

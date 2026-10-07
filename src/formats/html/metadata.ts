@@ -1,12 +1,13 @@
 /**
  * @fileoverview Front matter from a publisher page's `<meta>` tags: the Highwire Press
  * `citation_*` set (what Google Scholar indexes, so nearly every scholarly page carries
- * it), Dublin Core `dc.*`, and `<link rel="license">`. Reading tags instead of the
- * visible header avoids every publisher's own author-list and affiliation markup.
+ * it), Dublin Core `dc.*`, and the license a `<link>`, `<a>`, or `<area>` names with
+ * `rel="license"`. Reading tags instead of the visible header avoids every publisher's
+ * own author-list and affiliation markup.
  * @module src/formats/html/metadata
  */
 import type { Author, DocumentMetadata, PartialDate, Reference } from '../../model/document.js';
-import { trimTrailing } from '../../model/trailing.js';
+import { normalizeDoi } from '../../model/doi.js';
 import { escapeInline } from '../../render/escape.js';
 
 /** One `<meta>` tag: lowercased `name` (or `property`) and its content. */
@@ -38,14 +39,9 @@ function all(tags: MetaTag[], name: string): string[] {
   return tags.filter((t) => t.name === name).map((t) => t.content);
 }
 
-/** A DOI without a resolver or `doi:` prefix, lowercased. */
-export function normalizeDoi(value: string | undefined): string | undefined {
-  if (value === undefined) return;
-  const doi = trimTrailing(
-    value.trim().replace(/^(?:https?:\/\/(?:dx\.)?doi\.org\/|doi:\s*)/i, ''),
-    /[.,;]/,
-  );
-  return /^10\.\d{4,9}\//.test(doi) ? doi.toLowerCase() : undefined;
+/** The title the `citation_title` or `dc.title` tag names, as source text. */
+export function titleTag(tags: MetaTag[]): string | undefined {
+  return first(tags, 'citation_title', 'dc.title');
 }
 
 /** `2024/05/12`, `2024-05-12`, `2024-05`, `2024`, `May 12, 2024` → a partial date. */
@@ -75,22 +71,32 @@ function authorFrom(value: string): Author {
   return { family, ...(given && { given }), name: given ? `${given} ${family}` : family };
 }
 
-/** Front matter from the page's tags. `fallbackTitle` is the visible `<h1>`, used when no tag names one. */
+/**
+ * Front matter from the page's tags. `fallbackTitle` is the visible title heading as
+ * inline Markdown, used as given when no `citation_title` or `dc.title` tag names one;
+ * tag values are source text and are escaped.
+ */
 export function extractMetadata(
   document: Document,
   tags: MetaTag[],
   fallbackTitle: string | undefined,
 ): DocumentMetadata {
-  const affiliations: string[] = [];
+  // Each affiliation's index, and each author's indices in the order the tags give them.
+  const affiliationIndex = new Map<string, number>();
+  const authorAffiliations = new Map<Author, Set<number>>();
   const authors: Author[] = [];
   for (const tag of tags) {
     const current = authors.at(-1);
     if (tag.name === 'citation_author') {
       authors.push(authorFrom(tag.content));
     } else if (current && tag.name === 'citation_author_institution') {
-      const existing = affiliations.indexOf(tag.content);
-      const index = existing === -1 ? affiliations.push(tag.content) - 1 : existing;
-      current.affiliations = [...new Set([...(current.affiliations ?? []), index])];
+      let index = affiliationIndex.get(tag.content);
+      if (index === undefined) {
+        index = affiliationIndex.size;
+        affiliationIndex.set(tag.content, index);
+      }
+      const indices = authorAffiliations.get(current) ?? new Set();
+      authorAffiliations.set(current, indices.add(index));
     } else if (current && tag.name === 'citation_author_orcid') {
       const orcid = /\d{4}-\d{4}-\d{4}-\d{3}[\dX]/.exec(tag.content)?.[0];
       if (orcid) current.orcid = orcid;
@@ -98,11 +104,18 @@ export function extractMetadata(
       current.email = tag.content;
     }
   }
+  for (const [author, indices] of authorAffiliations) author.affiliations = [...indices];
+  const affiliations = [...affiliationIndex.keys()];
   if (authors.length === 0)
     for (const creator of all(tags, 'dc.creator')) authors.push(authorFrom(creator));
 
+  // Tag values are source text; the fallback is already inline Markdown.
+  const tagTitle = titleTag(tags);
+  const ogTitle = first(tags, 'og:title');
   const title =
-    first(tags, 'citation_title', 'dc.title') ?? fallbackTitle ?? first(tags, 'og:title');
+    tagTitle !== undefined
+      ? escapeInline(tagTitle)
+      : fallbackTitle || (ogTitle !== undefined ? escapeInline(ogTitle) : undefined);
   const doi = normalizeDoi(
     first(tags, 'citation_doi', 'prism.doi') ??
       all(tags, 'dc.identifier').find((value) => /10\.\d{4,9}\//.test(value)),
@@ -143,11 +156,13 @@ export function extractMetadata(
   const keywords = all(tags, 'citation_keywords')
     .flatMap((value) => value.split(/\s*[;,]\s*/))
     .filter(Boolean);
+  // Statements in the head come before links in the body: a footer can link a site-wide license.
   const licenseUrl =
-    document.querySelector('link[rel="license"]')?.getAttribute('href') ??
+    licenseLinks(document, 'link[rel]')[0] ??
     [first(tags, 'dc.rights'), first(tags, 'citation_license')].find((value) =>
       /^https?:\/\//.test(value ?? ''),
-    );
+    ) ??
+    licenseLinks(document, 'a[rel], area[rel]').find((href) => /^https?:\/\//i.test(href));
   // `dc.rights` often holds only a copyright line; it counts as a license when it names one.
   const licenseText = [first(tags, 'dc.rights'), first(tags, 'citation_license')].find(
     (value) =>
@@ -172,7 +187,7 @@ export function extractMetadata(
   const articleType = first(tags, 'citation_article_type', 'dc.type');
 
   return {
-    ...(title && { title: escapeInline(title) }),
+    ...(title && { title }),
     ...(authors.length > 0 && { authors }),
     ...(affiliations.length > 0 && { affiliations }),
     ...(Object.keys(identifiers).length > 0 && { identifiers }),
@@ -185,6 +200,15 @@ export function extractMetadata(
     ...(language && { language }),
     ...(articleType && { articleType }),
   };
+}
+
+/** The `href` of each element matching `selector` whose `rel` tokens include `license`, in document order. */
+function licenseLinks(document: Document, selector: string): string[] {
+  return Array.from(document.querySelectorAll(selector)).flatMap((element) => {
+    const rel = element.getAttribute('rel')?.toLowerCase().split(/\s+/) ?? [];
+    const href = element.getAttribute('href');
+    return rel.includes('license') && href ? [href] : [];
+  });
 }
 
 function optional<K extends string>(

@@ -1,10 +1,11 @@
 /**
  * @fileoverview `parsePdf`'s document-wide reading budgets — text items, characters, and
- * operators — and the per-page catch: each stop keeps what was read and reports one
- * `truncated-input` warning naming the budget or error and the page, and a text budget
- * reached mid-page leaves pdf.js idle.
+ * operators — the per-page catch, and a caller's abort signal: each stop keeps what was
+ * read and reports one `truncated-input` warning naming the budget, error, or abort and
+ * the page, and a text budget reached mid-page leaves pdf.js idle.
  * @module tests/formats/pdf/budgets.test
  */
+import { readFileSync } from 'node:fs';
 import { getDocumentProxy } from 'unpdf';
 import { describe, expect, it, vi } from 'vitest';
 import { type PdfOptions, parsePdf } from '../../../src/formats/pdf/index.js';
@@ -258,5 +259,92 @@ describe('parsePdf reading budgets', () => {
       expect.stringContaining('(maxTextChars)'),
     ]);
     expect(await stopped({ maxOperators: 1 })).toEqual([expect.stringContaining('(maxOperators)')]);
+  });
+});
+
+/** Abort `controller` once pdf.js has handed over page `after` of the next document opened. */
+function abortAfterPage(controller: AbortController, after: number): void {
+  const opened = vi.mocked(getDocumentProxy);
+  const open = opened.getMockImplementation();
+  if (!open) throw new Error('getDocumentProxy is not mocked');
+  opened.mockImplementationOnce(async (...args) => {
+    const document = await open(...args);
+    const getPage = document.getPage.bind(document);
+    document.getPage = async (number) => {
+      const page = await getPage(number);
+      if (number === after) controller.abort();
+      return page;
+    };
+    return document;
+  });
+}
+
+describe('parsePdf abort signal', () => {
+  const pages = () => buildPdf({ pages: [opening('a'), lines('b'), lines('c'), lines('d')] });
+
+  it('stops at the page boundary after the abort and keeps the pages read', async () => {
+    const controller = new AbortController();
+    abortAfterPage(controller, 2);
+    const document = await parse(pages(), { signal: controller.signal });
+    const markdown = toMarkdown(document);
+    expect(markdown).toContain('b11 is a line');
+    expect(markdown).not.toContain('c00');
+    expect(truncations(document)).toEqual([
+      {
+        code: 'truncated-input',
+        message: 'Reading stopped before page 3 of 4: the signal was aborted',
+        where: 'page 3',
+      },
+    ]);
+  });
+
+  it('fails as empty, naming the abort, when the signal is already aborted', async () => {
+    const result = await parsePdf(pages(), { signal: AbortSignal.abort() });
+    expect(result).toMatchObject({
+      error: {
+        message:
+          'Reading stopped before page 1 of 4: the signal was aborted, before 200 characters of text were read',
+        reason: 'empty',
+      },
+      ok: false,
+    });
+  });
+
+  it('is reachable through parse()', async () => {
+    const controller = new AbortController();
+    abortAfterPage(controller, 2);
+    const result = await parseAny(pages(), { signal: controller.signal });
+    expect(result.ok && truncations(result.document)).toEqual([
+      expect.objectContaining({ where: 'page 3' }),
+    ]);
+  });
+
+  it('turns the event loop once a page only when a signal is passed', async () => {
+    const timers = vi.spyOn(globalThis, 'setTimeout');
+    // A turn is a zero-delay timer; the test runner's own timers have delays.
+    const turns = () => timers.mock.calls.filter(([, delay]) => !delay).length;
+    try {
+      await parse(pages());
+      expect(turns()).toBe(0);
+      await parse(pages(), { signal: new AbortController().signal });
+      expect(turns()).toBe(4);
+    } finally {
+      timers.mockRestore();
+    }
+  });
+
+  it('lets a timeout end a long parse between pages', async () => {
+    const bytes = new Uint8Array(
+      readFileSync(
+        new URL('../../../corpus/pdf/medrxiv-2026.08.13.26360411v1/source.pdf', import.meta.url),
+      ),
+    );
+    // Read once so the timeout below spends nothing on loading pdf.js.
+    await parsePdf(bytes, { maxPages: 1 });
+    const result = await parsePdf(bytes, { signal: AbortSignal.timeout(100) });
+    // A machine slow enough to spend the whole timeout opening the file reads no page at all.
+    const stop = result.ok ? truncations(result.document)[0]?.message : result.error.message;
+    expect(stop).toMatch(/^Reading stopped before page (\d+) of 41: the signal was aborted/);
+    expect(Number(/page (\d+)/.exec(stop ?? '')?.[1])).toBeLessThanOrEqual(41);
   });
 });

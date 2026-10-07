@@ -3,8 +3,9 @@
  * serverless pdf.js build), loaded on first use. Only text is read: no page is
  * rendered and no image is decoded into output. Font names come from each page's
  * operator list, which is what makes bold and italic runs recognizable. Reading stops
- * at document-wide budgets on text items, characters, and operators, or at a page
- * pdf.js cannot read, and keeps what was read before it.
+ * at document-wide budgets on text items, characters, and operators, at a page pdf.js
+ * cannot read, or at the page boundary after a caller's signal is aborted, and keeps what
+ * was read before it.
  * @module src/formats/pdf/load
  */
 
@@ -52,7 +53,9 @@ type TextBudget = 'maxTextChars' | 'maxTextItems';
 /** Why reading ended before the last page it would have read. */
 export type ReadStop =
   | { budget: 'maxOperators' | TextBudget; page: number }
-  | { error: string; page: number };
+  | { error: string; page: number }
+  /** The signal was aborted before `page` was read. */
+  | { aborted: true; page: number };
 
 export interface LoadedPdf {
   metadata: PdfMetadata;
@@ -150,12 +153,17 @@ function fontStyle(page: PdfjsPage, fontName: string, cache: Map<string, FontSty
 const XMP_FIELDS = ['dc:title', 'dc:creator', 'prism:doi'];
 
 /**
- * Open a PDF and read the text runs of its pages until a budget or a page pdf.js cannot
- * read stops it, or say why it could not be opened.
+ * Open a PDF and read the text runs of its pages until a budget, a page pdf.js cannot
+ * read, or an aborted `signal` stops it, or say why it could not be opened.
+ *
+ * pdf.js interprets a page without giving control back, so no timer fires while a page is
+ * read. With a `signal`, each page waits one turn of the event loop first, in which a due
+ * timer (an `AbortSignal.timeout`) can abort it; without one, no turn is taken.
  */
 export async function loadPdf(
   bytes: Uint8Array,
   budgets: ReadBudgets,
+  signal?: AbortSignal,
 ): Promise<LoadedPdf | PdfOpenFailure> {
   const { getDocumentProxy } = await loadUnpdf();
   let document: PdfjsDocument;
@@ -176,6 +184,13 @@ export async function loadPdf(
     const count = Math.min(document.numPages, budgets.maxPages);
     let stop: ReadStop | undefined;
     for (let number = 1; number <= count && !stop; number++) {
+      if (signal) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        if (signal.aborted) {
+          stop = { aborted: true, page: number };
+          break;
+        }
+      }
       let read: PageRead;
       try {
         read = await readPage(document, number, tally, budgets);

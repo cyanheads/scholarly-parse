@@ -214,6 +214,37 @@ describe('element-citation (#69)', () => {
       pmcid: 'PMC11662537',
     });
   });
+
+  it('takes a resolver or doi: prefix off a reference DOI, keeping the text as printed (#38)', () => {
+    const doiOf = (citation: string) =>
+      referencesOf(`<ref-list><ref id="a">${citation}</ref></ref-list>`)[0]?.doi;
+    const pubId = (value: string) =>
+      `<element-citation><article-title>A</article-title><pub-id pub-id-type="doi">${value}</pub-id></element-citation>`;
+    expect(doiOf(pubId('doi:10.1234/RefA'))).toBe('10.1234/refa');
+    expect(doiOf(pubId('https://doi.org/10.1234/RefA.'))).toBe('10.1234/refa');
+    expect(doiOf(pubId('DOI: 10.1234/RefA'))).toBe('10.1234/refa');
+    expect(doiOf(pubId('n/a'))).toBeUndefined();
+    expect(
+      doiOf(
+        '<mixed-citation>A. <ext-link ext-link-type="doi" xlink:href="doi:10.1234/Typed"/></mixed-citation>',
+      ),
+    ).toBe('10.1234/typed');
+    expect(
+      doiOf(
+        '<mixed-citation>A. <ext-link ext-link-type="doi" xlink:href="http://dx.doi.org/10.1234/Typed"/></mixed-citation>',
+      ),
+    ).toBe('10.1234/typed');
+    expect(
+      doiOf(
+        '<mixed-citation>A. <ext-link xlink:href="https://doi.org/10.1234/Untyped).">x</ext-link></mixed-citation>',
+      ),
+    ).toBe('10.1234/untyped');
+
+    const [reference] = referencesOf(
+      `<ref-list><ref id="a">${pubId('doi:10.1234/RefA')}</ref></ref-list>`,
+    );
+    expect(reference?.text).toBe('A. DOI doi:10.1234/RefA');
+  });
 });
 
 describe('mixed-citation adjacency (#115, #123, #124)', () => {

@@ -5,15 +5,18 @@
  * @module src/render/sections
  */
 import type { Abstract, ScholarlyDocument, Section, SectionKind } from '../model/document.js';
+import { abstractId, FLOATS_ID, FOOTNOTES_ID, REFERENCES_ID } from '../model/section-ids.js';
 import {
   abstractHeading,
-  abstractId,
   abstractMarkdown,
   FLOATS_HEADING,
-  FLOATS_ID,
+  FOOTNOTES_HEADING,
   headingText,
+  REFERENCES_HEADING,
   renderBlocks,
   renderFloats,
+  renderFootnotes,
+  renderReferences,
 } from './markdown.js';
 
 /** One section, flattened out of the tree. */
@@ -21,8 +24,11 @@ export interface FlatSection {
   /** Characters in {@link markdown}. */
   chars: number;
   id: string;
-  /** The section's kind; `abstract` for an abstract, `floats` for the figures and tables outside any section. */
-  kind: SectionKind | 'abstract' | 'floats';
+  /**
+   * The section's kind; `abstract` for an abstract, `floats` for the figures and tables
+   * outside any section, and `footnotes` and `references` for those lists.
+   */
+  kind: SectionKind | 'abstract' | 'floats' | 'footnotes' | 'references';
   /** Heading depth, 1 for a top-level section. */
   level: number;
   /** The section's own heading and blocks. Subsections are separate entries. */
@@ -34,9 +40,10 @@ export interface FlatSection {
 }
 
 /**
- * Every section, abstracts first, then body, then back matter, then one entry for the
- * figures and tables outside any section (`document.floats`) when there are any. Each
- * entry's ID renders it through `toMarkdown`'s `sections` option.
+ * Every section, abstracts first, then body, then back matter, then one entry each for
+ * the figures and tables outside any section (`document.floats`), the footnotes, and the
+ * references, when there are any, in `toMarkdown`'s order. Each entry's ID renders it
+ * through `toMarkdown`'s `sections` option.
  */
 export function toSections(document: ScholarlyDocument): FlatSection[] {
   const out: FlatSection[] = [];
@@ -44,19 +51,28 @@ export function toSections(document: ScholarlyDocument): FlatSection[] {
     visitAbstract(abstract, index, out);
   });
   for (const section of [...document.body, ...document.back]) visit(section, 1, [], out);
-  if (document.floats.length > 0) {
-    const markdown = renderFloats(document.floats).trim();
-    out.push({
-      chars: markdown.length,
-      id: FLOATS_ID,
-      kind: 'floats',
-      level: 1,
-      markdown,
-      path: [FLOATS_HEADING],
-      title: FLOATS_HEADING,
-    });
+  if (document.floats.length > 0)
+    out.push(trailingEntry(FLOATS_ID, 'floats', FLOATS_HEADING, renderFloats(document.floats)));
+  if (document.footnotes.length > 0) {
+    const markdown = renderFootnotes(document.footnotes);
+    out.push(trailingEntry(FOOTNOTES_ID, 'footnotes', FOOTNOTES_HEADING, markdown));
+  }
+  if (document.references.length > 0) {
+    const markdown = renderReferences(document.references);
+    out.push(trailingEntry(REFERENCES_ID, 'references', REFERENCES_HEADING, markdown));
   }
   return out;
+}
+
+/** The entry for the floats, the footnotes, or the references, under its heading. */
+function trailingEntry(
+  id: string,
+  kind: 'floats' | 'footnotes' | 'references',
+  heading: string,
+  rendered: string,
+): FlatSection {
+  const markdown = rendered.trim();
+  return { chars: markdown.length, id, kind, level: 1, markdown, path: [heading], title: heading };
 }
 
 function visitAbstract(abstract: Abstract, index: number, out: FlatSection[]): void {

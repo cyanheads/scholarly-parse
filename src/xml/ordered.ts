@@ -9,6 +9,7 @@
  * @module src/xml/ordered
  */
 import { XMLParser } from 'fast-xml-parser';
+import { MAX_XML_DEPTH } from '../model/limits.js';
 import { findMarkupFault } from './well-formed.js';
 
 /** A node in the ordered tree: an element `{ tag: Node[], ':@'?: attrs }` or text `{ '#text': v }`. */
@@ -19,13 +20,6 @@ export type XmlNodeList = XmlNode[];
 
 const ATTR_KEY = ':@';
 const TEXT_KEY = '#text';
-
-/**
- * Deepest element nesting accepted. Real articles stay far shallower — body, section,
- * paragraph, and inline markup rarely pass 20 levels, and the deepest MathML seen
- * stays under 60 — so this bounds hostile input and the recursive walks over it.
- */
-export const MAX_XML_DEPTH = 256;
 
 /**
  * Parser options shared by every XML format.

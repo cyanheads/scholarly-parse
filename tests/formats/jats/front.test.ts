@@ -6,7 +6,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parseJats } from '../../../src/formats/jats/index.js';
-import { toMarkdown } from '../../../src/index.js';
+import { toMarkdown, toSections } from '../../../src/index.js';
 import { allBlocks, article, paragraphTexts, parseArticle } from './helpers.js';
 
 const TITLE = '<title-group><article-title>Test Article Title</article-title></title-group>';
@@ -176,6 +176,33 @@ describe('article metadata', () => {
         text: 'Retracted: A Study',
       },
       { relation: 'commentary-article', url: 'https://example.org/topic/1' },
+    ]);
+  });
+
+  it('takes a resolver or doi: prefix off the article and related-work DOIs (#38)', () => {
+    const doiOf = (value: string) =>
+      metadataOf(`<article-id pub-id-type="doi">${value}</article-id>${TITLE}`).identifiers?.doi;
+    expect(doiOf('https://doi.org/10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('http://dx.doi.org/10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('doi:10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('DOI: 10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('https://doi.org/10.1234/x.')).toBe('10.1234/x');
+    expect(doiOf('10.1002/(SICI)1097-4636(199907)')).toBe('10.1002/(sici)1097-4636(199907)');
+    expect(doiOf('n/a')).toBeUndefined();
+
+    const { related } = metadataOf(
+      TITLE +
+        '<related-article related-article-type="corrected-article" ext-link-type="doi" ' +
+        'xlink:href="doi:10.1234/Href"/>' +
+        '<related-article related-article-type="retraction-forward">' +
+        '<pub-id pub-id-type="doi">https://doi.org/10.1234/PubId.</pub-id></related-article>' +
+        '<related-article related-article-type="commentary-article" ext-link-type="doi" ' +
+        'xlink:href="http://dx.doi.org/10.1234/Dx"/>',
+    );
+    expect(related?.map((work) => work.doi)).toEqual([
+      '10.1234/href',
+      '10.1234/pubid',
+      '10.1234/dx',
     ]);
   });
 
@@ -410,5 +437,42 @@ describe('abstracts', () => {
     const other = document.metadata.identifiers?.other ?? {};
     expect(Object.entries(other)).toEqual(types.map((type) => [type, `${type}-id`]));
     expect(Object.getPrototypeOf(other)).toBe(Object.prototype);
+  });
+
+  it('issues a loose abstract part its ID beside the body sections (#24)', () => {
+    const document = parseArticle({
+      body: '<sec id="abstract-1-1"><title>Intro</title><p>Body text.</p></sec>',
+      meta: `${TITLE}<abstract><p>We did this.</p></abstract>`,
+    });
+    expect(document.abstracts[0]?.sections.map((section) => section.id)).toEqual(['abstract-1-1']);
+    expect(document.body.map((section) => section.id)).toEqual(['abstract-1-1-2']);
+    expect(toMarkdown(document, { sections: ['abstract-1-1'] })).toBe('We did this.\n');
+  });
+
+  it.each([
+    ['a body section named abstract-1', '<abstract><p>A.</p></abstract>', '<sec id="abstract-1">'],
+    ['a body section named floats', '', '<sec id="floats">'],
+    [
+      'a body section named like a loose part',
+      '<abstract><p>A.</p></abstract>',
+      '<sec id="abstract-1-1">',
+    ],
+    [
+      'an abstract section named like the next abstract',
+      '<abstract><sec id="abstract-2"><title>Aim</title><p>A.</p></sec></abstract>' +
+        '<abstract abstract-type="teaser"><p>T.</p></abstract>',
+      '<sec>',
+    ],
+  ])('gives every toSections entry its own ID: %s (#24)', (_, abstracts, sec) => {
+    const document = parseArticle({
+      body: `${sec}<title>Intro</title><p>Body text.</p></sec>`,
+      floats: '<fig id="f1"><caption><p>Floating.</p></caption></fig>',
+      meta: TITLE + abstracts,
+    });
+    const ids = toSections(document).map((entry) => entry.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const entry of toSections(document)) {
+      expect(toMarkdown(document, { sections: [entry.id] }).trim()).toBe(entry.markdown);
+    }
   });
 });

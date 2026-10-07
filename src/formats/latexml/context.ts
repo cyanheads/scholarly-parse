@@ -1,6 +1,7 @@
 /**
  * @fileoverview State one LaTeXML parse carries: diagnostics, footnotes, issued section
- * IDs, the table budget, and the base URL relative image paths resolve against.
+ * IDs, the table budget, the base URL relative image paths resolve against, and what the
+ * block walk has learned about each element.
  * @module src/formats/latexml/context
  */
 import type { DiagnosticsCollector } from '../../model/diagnostics.js';
@@ -9,6 +10,8 @@ import type { GridBudget } from '../../model/table-grid.js';
 
 export interface LatexmlContext {
   baseUrl: string | undefined;
+  /** Whether a block sits below each element the walk has asked about, read once per element. */
+  blockHolders: WeakMap<Element, boolean>;
   diag: DiagnosticsCollector;
   footnotes: Footnote[];
   /** What the document's tables may still repeat and hold. */

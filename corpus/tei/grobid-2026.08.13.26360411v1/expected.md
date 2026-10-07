@@ -196,7 +196,7 @@ We evaluated the effects of cis-eQTLs and cis-pQTLs on HF, HFrEF, and HFpEF usin
 
 To assess weak instrument bias, we calculated the proportion of variance explained (𝑅 ! ) and the F-statistic from the first-stage regression of the exposure on the genetic instrument. R² was derived as a function of the effect size estimate, minor allele frequency, standard error, and sample size. The F-statistic was calculated as 𝐹 =
 
-" ! (\$%!%&) ((%" ! )&
+" ! (\$%!%&) ((%" ! )\&
 
 , where k denotes the number of instruments and n the sample size; instruments with F < 10 were considered weak. To evaluate the consistency of instrumental variable estimates, we performed heterogeneity tests and reported corresponding p-values, with P < 0.05 indicating evidence of heterogeneity. Directional pleiotropy was assessed using the MR-Egger intercept test for genes with ≥3 instruments, with P < 0.05 indicating evidence of directional pleiotropy.
 

@@ -47,13 +47,53 @@ function dominantSize(runs: Run[]): number {
   return [...weight].sort((a, b) => b[1] - a[1])[0]?.[0] ?? 10;
 }
 
+/** Runs sharing a baseline, which the largest of them sets. */
+interface Row {
+  base: Run;
+  runs: Run[];
+}
+
+/**
+ * Runs a page's rows are scanned over, in all, for one drawn under a line's text: many
+ * times the corpus's most math-dense page (about 6,000). Past it a run joins the row it is
+ * level with, so a page of hostile runs costs time in proportion to its runs.
+ */
+const UNDER_SCANS = 100_000;
+
+/**
+ * Whether `run` is drawn under a row's text rather than on its line: set more than a fifth
+ * of the smaller size below the row's baseline, inside a run on that baseline at least
+ * four times its width and clear of both its ends by 0.3 of its size. A fraction's
+ * numerator from the next line set under a heading's middle is; a subscript at its base
+ * run's end, and an accent on its letter's baseline, are not.
+ */
+function drawnUnder(run: Run, { base, runs }: Row): boolean {
+  return runs.some((other) => {
+    if (Math.abs(other.y - base.y) > 0.2 * Math.min(other.size, base.size)) return false;
+    const margin = 0.3 * other.size;
+    return (
+      other.width >= 4 * run.width &&
+      run.x >= other.x + margin &&
+      run.x + run.width <= other.x + other.width - margin
+    );
+  });
+}
+
 /** Runs sharing a baseline: a superscript or subscript joins the line it sits on. */
 function rows(runs: Run[]): Run[][] {
   const sorted = runs.toSorted((a, b) => b.y - a.y || a.x - b.x);
-  const result: { base: Run; runs: Run[] }[] = [];
+  const result: Row[] = [];
+  let scans = UNDER_SCANS;
   for (const run of sorted) {
     const row = result.at(-1);
-    if (row && Math.abs(row.base.y - run.y) <= 0.5 * Math.max(row.base.size, run.size)) {
+    const level = row && Math.abs(row.base.y - run.y) <= 0.5 * Math.max(row.base.size, run.size);
+    const below = row && run.y < row.base.y - 0.2 * Math.min(run.size, row.base.size);
+    let under = false;
+    if (row && level && below && scans > 0) {
+      scans -= row.runs.length;
+      under = drawnUnder(run, row);
+    }
+    if (row && level && !under) {
       row.runs.push(run);
       if (run.size > row.base.size) row.base = run;
     } else {

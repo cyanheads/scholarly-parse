@@ -1,8 +1,9 @@
 /**
  * @fileoverview Inline Markdown for publisher HTML: emphasis, links, sub- and
  * superscripts, citation markers as printed, and math from whichever form the page
- * carries it in — MathML with TeX annotations (and KaTeX's copy of it), MathJax source
- * scripts, or raw TeX delimiters inside a MathJax container.
+ * carries it in — MathML (its TeX annotation, its alttext, or the markup linearized, and
+ * KaTeX's copy of it), MathJax source scripts, or raw TeX delimiters inside a MathJax
+ * container.
  * @module src/formats/html/inline
  */
 
@@ -15,18 +16,22 @@ import {
   tagOf,
   textOfElement,
 } from '../../html/dom.js';
+import { domMathTex } from '../../html/math.js';
 import { escapeInline } from '../../render/escape.js';
 import {
+  collapseInline,
   emphasis,
   FORMULA_IMAGE,
   inlineCode,
   inlineMath,
-  joinAdjacentMath,
   link,
   subscript,
   superscript,
 } from '../../render/inline.js';
+import { mathmlToTex } from '../../xml/mathml.js';
+import { localNameOf, parseOrderedXml } from '../../xml/ordered.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
+import { BELOW, below } from './subtree.js';
 
 /** Inline Markdown for a list of nodes, spacing intact. */
 export function inlineMarkdown(nodes: Node[], ctx: HtmlContext): string {
@@ -37,11 +42,7 @@ export function inlineMarkdown(nodes: Node[], ctx: HtmlContext): string {
 
 /** Inline Markdown of an element's content, whitespace collapsed. */
 export function inlineText(element: Element | null | undefined, ctx: HtmlContext): string {
-  return element ? collapse(inlineMarkdown(childNodes(element), ctx)) : '';
-}
-
-function collapse(text: string): string {
-  return joinAdjacentMath(text.replace(/\s+/g, ' ').trim());
+  return element ? collapseInline(inlineMarkdown(childNodes(element), ctx)) : '';
 }
 
 /** A `<script>` holding MathJax source: `math/tex`, `math/tex; mode=display`, or `math/mml`. */
@@ -50,23 +51,20 @@ export function isMathScript(element: Element): boolean {
 }
 
 /**
- * TeX for a MathML `<math>`: its `application/x-tex` annotation (KaTeX and LaTeXML
- * keep one), else `@alttext`. Empty when the page carries neither.
+ * TeX for a MathJax source script. MathML source yields its TeX annotation or alttext,
+ * else its presentation markup linearized — unless the source declares a DOCTYPE, since
+ * each script's parse would start a fresh entity allowance. Source that is not
+ * well-formed XML yields nothing.
  */
-export function mathmlTex(math: Element): string {
-  const annotation = Array.from(math.getElementsByTagName('annotation')).find((a) =>
-    /^application\/x-tex$/i.test(a.getAttribute('encoding') ?? ''),
-  );
-  return (annotation?.textContent ?? math.getAttribute('alttext') ?? '').trim();
-}
-
-/** TeX for a MathJax source script; MathML source yields its annotation or alttext. */
 export function scriptTex(script: Element): string {
   const source = script.textContent ?? '';
-  if (/mml/i.test(script.getAttribute('type') ?? '')) {
-    return (texAnnotation(source) ?? /alttext\s*=\s*"([^"]*)"/i.exec(source)?.[1])?.trim() ?? '';
-  }
-  return source.trim();
+  if (!/mml/i.test(script.getAttribute('type') ?? '')) return source.trim();
+  const tex = (texAnnotation(source) ?? /alttext\s*=\s*"([^"]*)"/i.exec(source)?.[1])?.trim();
+  if (tex || /<!DOCTYPE/i.test(source)) return tex ?? '';
+  const parsed = parseOrderedXml(source);
+  const math =
+    'nodes' in parsed ? parsed.nodes.find((node) => localNameOf(node) === 'math') : undefined;
+  return math ? mathmlToTex(math) : '';
 }
 
 /** Each `<annotation>` tag in MathML source, read to its `>` or the next `<`. */
@@ -160,12 +158,11 @@ function isTexContainer(element: Element): boolean {
  * True for a link to an element on this page: `#ref-CR1`, or the page's own path with a
  * fragment (`/articles/s41467-024-44824-z#ref-CR1`), as publishers link citations.
  */
-function isInPageLink(link: Element): boolean {
+function isInPageLink(link: Element, ctx: HtmlContext): boolean {
   const href = link.getAttribute('href') ?? '';
   const hash = href.indexOf('#');
   if (hash === -1) return false;
-  const target = safeDecode(href.slice(hash + 1));
-  return hash === 0 || (target !== '' && link.ownerDocument.getElementById(target) !== null);
+  return hash === 0 || ctx.elementIds.has(safeDecode(href.slice(hash + 1)));
 }
 
 /** A percent-encoded URL or URL part decoded; unchanged when its encoding is malformed. */
@@ -178,9 +175,9 @@ export function safeDecode(value: string): string {
 }
 
 /** A superscript that holds only in-page links (`<sup><a href="#ref-CR12">12</a></sup>`) is a citation. */
-function isCitationSup(sup: Element): boolean {
+function isCitationSup(sup: Element, ctx: HtmlContext): boolean {
   const links = Array.from(sup.querySelectorAll('a[href]'));
-  if (links.length === 0 || !links.every(isInPageLink)) return false;
+  if (links.length === 0 || !links.every((link) => isInPageLink(link, ctx))) return false;
   const outside = Array.from(sup.childNodes)
     .map((node) => (isElement(node) && tagOf(node) === 'a' ? '' : (node.textContent ?? '')))
     .join('');
@@ -244,7 +241,7 @@ function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
       return emphasis(inner(), '~~');
     case 'sup': {
       const plain = visibleText(node);
-      return superscript(escapeInline(plain), plain, isCitationSup(node));
+      return superscript(escapeInline(plain), plain, isCitationSup(node, ctx));
     }
     case 'sub': {
       const plain = visibleText(node);
@@ -253,14 +250,14 @@ function inlineNode(node: Node, ctx: HtmlContext, inTex: boolean): string {
     case 'a': {
       const href = node.getAttribute('href') ?? '';
       // Cross-references and citations point inside the page; they read as printed.
-      if (!href || isInPageLink(node)) return inner();
+      if (!href || isInPageLink(node, ctx)) return inner();
       return link(inner(), resolveUrl(href, ctx.baseUrl));
     }
     case 'code':
     case 'kbd':
     case 'samp':
     case 'tt':
-      return node.querySelector('a[href]') ? inner() : inlineCode(textOfElement(node));
+      return below(node, ctx).kinds & BELOW.link ? inner() : inlineCode(textOfElement(node));
     case 'br':
       return ' ';
     case 'img':
@@ -327,7 +324,8 @@ export function warnImageFormula(ctx: HtmlContext, href: string, id: string | un
 function formulaImage(img: Element, ctx: HtmlContext): boolean {
   const container = formulaContainer(img);
   const src = img.getAttribute('src');
-  if (!container || !src || container.querySelector('math, script[type^="math/"]')) return false;
+  if (!container || !src || below(container, ctx).kinds & (BELOW.math | BELOW.mathScript))
+    return false;
   warnImageFormula(ctx, resolveUrl(src, ctx.baseUrl), container.getAttribute('id') ?? undefined);
   return true;
 }
@@ -343,6 +341,6 @@ function formulaContainer(img: Element): Element | undefined {
 }
 
 function mathOrText(math: Element): string {
-  const tex = mathmlTex(math);
+  const tex = domMathTex(math);
   return tex ? inlineMath(tex) : escapeInline(textOfElement(math));
 }

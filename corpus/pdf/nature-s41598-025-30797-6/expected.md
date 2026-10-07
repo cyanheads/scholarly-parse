@@ -100,7 +100,7 @@ Then, the following singular periodic solution is obtained 216*α*_4 + 810*α*_3
 
 Then, the latter admits the following singular periodic solution. (18) 216*α*_4 − 72L*α*_4 + 810*α*_3*α*_5*α*_4 − 15*α*_5 (14L*α*_3 + 25*α*_5) *α*_4 + 25 (18*α*_3 + 5L) *α*_5
 
-#### Jacobi elliptic functions and weierstrass solutiond2m2(1−m2)
+### Jacobi elliptic functions and weierstrass solution
 
 *Result 1* *c*_1 = −*d*_4 *ν, c*_0 = *c*_{−1} = 0*, k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 which admits the following Jacobi elliptic function solution. (19) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
 

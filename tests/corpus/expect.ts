@@ -16,6 +16,8 @@ export const fixtureExpectSchema = z
     /** Substrings the Markdown must contain. */
     contains: z.array(z.string()).optional(),
     figures: z.number().int().nonnegative().optional(),
+    /** Footnotes in `document.footnotes`. */
+    footnotes: z.number().int().nonnegative().optional(),
     formulas: z.number().int().nonnegative().optional(),
     /** Substrings the Markdown must not contain. */
     notContains: z.array(z.string()).optional(),
@@ -50,6 +52,7 @@ export function checkExpect(
   equal('tables', countBlocks(document, 'table'), expect.tables);
   equal('figures', countBlocks(document, 'figure'), expect.figures);
   equal('formulas', countBlocks(document, 'formula'), expect.formulas);
+  equal('footnotes', document.footnotes.length, expect.footnotes);
   equal('references', document.references.length, expect.references);
 
   if (expect.abstractKinds) {

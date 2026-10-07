@@ -9,14 +9,35 @@ import { tagOf } from '../../html/dom.js';
 import type { DiagnosticsCollector } from '../../model/diagnostics.js';
 import type { Footnote } from '../../model/document.js';
 import type { GridBudget } from '../../model/table-grid.js';
+import type { Below, OwnText, TextFacts } from './subtree.js';
 
 export interface HtmlContext {
   baseUrl: string | undefined;
   diag: DiagnosticsCollector;
+  /** Every element ID on the page, so a fragment link is matched to its target once. */
+  elementIds: ReadonlySet<string>;
   footnotes: Footnote[];
   /** What the document's tables may still repeat and hold. */
   gridBudget: GridBudget;
   sectionIds: Set<string>;
+  /** What each element's subtree holds, read once per element however many walks ask. */
+  subtrees: SubtreeFacts;
+}
+
+/** Facts about elements' subtrees (`subtree.ts`), filled in as the walks ask for them. */
+export interface SubtreeFacts {
+  below: Map<Element, Below>;
+  own: Map<Element, OwnText>;
+  /** The text of the elements whose text was read past the cap, by owner. */
+  plain: Map<Element, string>;
+  /** The TeX each `<math>` or math script read gives. */
+  tex: Map<Element, string>;
+  text: Map<Element, TextFacts>;
+}
+
+/** Fresh, empty subtree facts for one parse. */
+export function createSubtreeFacts(): SubtreeFacts {
+  return { below: new Map(), own: new Map(), plain: new Map(), tex: new Map(), text: new Map() };
 }
 
 const FURNITURE_TAGS: ReadonlySet<string> = new Set([

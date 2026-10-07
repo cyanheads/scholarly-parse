@@ -12,7 +12,7 @@ import type {
   DocumentMetadata,
   ScholarlyDocument,
 } from '../../model/document.js';
-import { trimDoi } from '../../model/doi.js';
+import { labeledDoiInText, normalizeDoi } from '../../model/doi.js';
 import { exceedsBudget } from '../../model/input.js';
 import {
   failed,
@@ -41,6 +41,11 @@ export interface PdfOptions extends ParseOptions {
   maxTextChars?: number;
   /** Read at most this many text items, blank and skipped ones included. Defaults to 500,000. */
   maxTextItems?: number;
+  /**
+   * Stop reading at the next page boundary once aborted; what was read is kept and warned
+   * `truncated-input`. Each page then waits one turn of the event loop, so a timeout can fire.
+   */
+  signal?: AbortSignal;
 }
 
 const DEFAULT_MAX_INPUT_BYTES = 64 * 1024 * 1024;
@@ -77,7 +82,7 @@ async function readPdf(input: Uint8Array, options: PdfOptions): Promise<ParseRes
     maxTextChars: options.maxTextChars ?? DEFAULT_BUDGETS.maxTextChars,
     maxTextItems: options.maxTextItems ?? DEFAULT_BUDGETS.maxTextItems,
   };
-  const loaded = await loadPdf(input, budgets);
+  const loaded = await loadPdf(input, budgets, options.signal);
   if ('reason' in loaded) return failed(loaded.reason, loaded.message);
   const { pageCount, stop } = loaded;
 
@@ -123,7 +128,7 @@ async function readPdf(input: Uint8Array, options: PdfOptions): Promise<ParseRes
     body: parts.body,
     diagnostics: ctx.diag.finish(headed ? 'partial' : 'flat'),
     floats: [],
-    footnotes: [],
+    footnotes: parts.footnotes,
     format: 'pdf',
     metadata,
     references: parts.references,
@@ -137,9 +142,10 @@ const BUDGET_UNITS = {
   maxTextItems: 'item text',
 } as const;
 
-/** Where reading stopped and why: the budget reached, with its option, or the page's error. */
+/** Where reading stopped and why: the budget reached, with its option, the page's error, or the abort. */
 function stopMessage(stop: ReadStop, pageCount: number, budgets: ReadBudgets): string {
   const where = `page ${stop.page} of ${pageCount}`;
+  if ('aborted' in stop) return `Reading stopped before ${where}: the signal was aborted`;
   if ('error' in stop) return `Reading stopped at ${where}, which could not be read: ${stop.error}`;
   const budget = `the ${budgets[stop.budget]}-${BUDGET_UNITS[stop.budget]} budget (${stop.budget})`;
   return stop.budget === 'maxOperators'
@@ -199,13 +205,12 @@ function extractMetadata(
     .map((name) => name.trim())
     .filter((name) => name.length > 1)
     .map((name) => ({ name }));
+  // On the first page, only a DOI after its label (`doi:`, `DOI `, `doi.org/`) is the paper's own.
   const firstPage = pdf.pages[0]?.runs.map((run) => run.text).join(' ') ?? '';
-  const found = [
-    stringOf(xmp['prism:doi']),
-    stringOf(info.doi),
-    /\b(?:doi\.org\/|doi:\s*)(10\.\d{4,9}\/[^\s"<>]+)/i.exec(firstPage)?.[1],
-  ].find((value) => value && /^10\.\d{4,9}\//.test(value));
-  const doi = found && trimDoi(found)?.toLowerCase();
+  const found = [stringOf(xmp['prism:doi']), stringOf(info.doi), labeledDoiInText(firstPage)].find(
+    (value) => value && /^10\.\d{4,9}\//.test(value),
+  );
+  const doi = normalizeDoi(found);
   const infoKeywords =
     stringOf(info.keywords)
       ?.split(/\s*[;,]\s*/)

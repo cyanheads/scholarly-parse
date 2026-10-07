@@ -277,6 +277,7 @@ export interface Reference {
   arxiv?: string;
   /** Author names as printed. */
   authors?: string[];
+  /** Lowercased DOI without a resolver prefix, whatever form `text` prints it in. */
   doi?: string;
   id?: string;
   /** Printed label without brackets or a trailing period: `12` for `[12]` or `12.`. */
@@ -296,6 +297,10 @@ export interface Reference {
 export interface Footnote {
   id?: string;
   label?: string;
+  /**
+   * The note as inline Markdown. A note is text in every format: block content the source
+   * puts in one (a list's items, a formula, code, a figure's caption) is written into it.
+   */
   text: string;
 }
 

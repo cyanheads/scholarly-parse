@@ -83,7 +83,8 @@ export const FEATURES = [
   'rosetta',
   // Formulas carried only as images (<graphic>/<inline-graphic>), with no TeX or MathML
   'formula-graphic-only',
-  // A JATS record with front matter and abstract but no <body> (a PDF-only deposit)
+  // Front matter and an abstract but no body: a JATS record without <body> (a PDF-only
+  // deposit), or a publisher's landing page
   'no-body',
 ] as const;
 

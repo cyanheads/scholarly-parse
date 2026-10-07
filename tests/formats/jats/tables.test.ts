@@ -254,6 +254,13 @@ describe('table bodies (#111)', () => {
     expect(table.rows).toEqual([['*NF1*^a', 'IC_{50}', 'p = 0.01\\*']]);
   });
 
+  it('spaces the paragraphs of a cell (#35)', () => {
+    const table = onlyTable(
+      '<table><tbody><tr><td><p>cell one.</p><p>cell two.</p></td></tr></tbody></table>',
+    );
+    expect(table.rows).toEqual([['cell one. cell two.']]);
+  });
+
   it('collects every footnote line in a table-wrap-foot with its label', () => {
     const table = onlyTable(
       '<table><tbody><tr><td>x</td></tr></tbody></table><table-wrap-foot>' +

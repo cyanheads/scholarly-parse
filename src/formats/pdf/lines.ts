@@ -1,6 +1,6 @@
 /**
  * @fileoverview What a PDF line is, read from its text and type: a heading and how
- * sure that is, a caption's first line, a display equation.
+ * sure that is, a caption's first line, a figure's panel label, a display equation.
  * @module src/formats/pdf/lines
  */
 import { cellText, type Line } from './layout.js';
@@ -49,6 +49,23 @@ export function isCaptionStart(line: Line): boolean {
     (/[.:|—–]\s*$/.test(match[0]) && !alone) ||
     (alone && !/\.$/.test(line.text))
   );
+}
+
+/** The letter of a one-letter panel label opening a line: `A)`, `(b)`. */
+function panelLetter(text: string): string | undefined {
+  return /^\(?(\p{L})\)(?:\s|$)/u.exec(text.trim())?.[1];
+}
+
+/**
+ * Whether a line opens with a figure's panel label: a one-letter label (`A)`, `(A)`) whose
+ * next line opens with the next letter's label or starts a caption. A lettered subsection
+ * heading (`(a) Background`) goes on with prose instead.
+ */
+export function isPanelLabel(line: Line, next: Line | undefined): boolean {
+  const letter = panelLetter(line.text);
+  if (!letter || !next) return false;
+  const following = panelLetter(next.text)?.codePointAt(0);
+  return following === (letter.codePointAt(0) ?? 0) + 1 || isCaptionStart(next);
 }
 
 export interface HeadingStyle {

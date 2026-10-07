@@ -2,7 +2,8 @@
 
 Maryam Mansour, Arwa Shamasnah, Deema Alsaadi, Saja Abu Saif, Akram krama  
 *Journal of Medical Case Reports*, 2024, 18(1), 643  
-DOI: 10.1186/s13256-024-05002-3
+DOI: 10.1186/s13256-024-05002-3  
+License: <http://creativecommons.org/licenses/by/4.0/>
 
 ## Abstract
 

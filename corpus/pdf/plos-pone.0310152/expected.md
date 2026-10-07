@@ -89,13 +89,13 @@ m(t) = �(t − Z)V (Z)dZ (7)
 
 *N* _0
 
-where *V*(*t*) is the number of vaccinated individuals at time *t*, and *V*^0(*t*) is the rate of vaccination, the function *ϕ*(*t*) describes how immunity changes with time. It is a positive function with *ϕ*(0) = 1 (if a vaccine is initially fully efficient), otherwise *ϕ*(0) > 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 < *ϕ*(*t*) < 1.
+where *V*(*t*) is the number of vaccinated individuals at time *t*, and *V*^0(*t*) is the rate of vaccination, the function *ϕ*(*t*) describes how immunity changes with time. It is a positive function with *ϕ*(0) = 1 (if a vaccine is initially fully efficient), otherwise *ϕ*(0) > 0, then it increases up to some maximal value and decreases after that due to immunity waning. Overall, we assume that 0 \< *ϕ*(*t*) \< 1.
 
 #### 2.2.1 Multiple vaccination doses
 
 Now, we incorporate the impact of multiple vaccine doses in the population at various intervals. The expression for the immunity level *m*(*t*) is then provided as follows:
 
-Z !
+Z \!
 
 1 X^K ^t
 
@@ -109,7 +109,7 @@ Here *Vi*(*t*) and *ϕi*(*t*) denote the number of vaccination and the efficacy 
 
 \>>
 
-<
+\<
 
 Vi(t) = (9)
 
@@ -135,7 +135,7 @@ Z ! Z
 
 m2(t) = �i(t − Z)Vi0(Z)dZ + �c(t − Z)Rn(Z)dZ (11)
 
-where, 0 < � < 1 is a constant, α is the proportion of healthy susceptible *S* who are newly vaccinated. The value of � < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕj* and *ψj* focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕj* � *ϕ* and *ψj* � *ψ*, for *j* = 1, 2, � � �, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 < *m*_{1(}*t*) + *m*_{2(}*t*) < 1.
+where, 0 < � \< 1 is a constant, α is the proportion of healthy susceptible *S* who are newly vaccinated. The value of � \< 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕj* and *ψj* focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕj* � *ϕ* and *ψj* � *ψ*, for *j* = 1, 2, � � �, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 \< *m*_{1(}*t*) + *m*_{2(}*t*) \< 1.
 
 #### 2.2.3 Impact of multiple strains
 
@@ -257,7 +257,7 @@ We assume that the vaccination function *V*(*t*) that is started at time *t* = *
 
 (
 
-0; *t* < *t*_0
+0; *t* \< *t*_0
 
 V(t) = (20)
 
@@ -439,7 +439,7 @@ Conceptualization: Malay Banerjee, Amit K. Chattopadhyay. Data curation: Samiran
 - [25] Zhao Jiandong, Wang Lisha, and Han Zhixia. Stability analysis of two new sirs models with two viruses. *International Journal of Computer Mathematics*, 95(10):2026–2035, 2018. https://doi.org/10.1080/ 00207160.2017.1364369
 - [26] Zhang Ziyu, Mei Xuehui, Jiang Haijun, Luo Xupeng, and Xia Yang. Dynamical analysis of hyper-sir rumor spreading model. *Applied Mathematics and Computation*, 446:127887, 2023. https://doi.org/10. 1016/j.amc.2023.127887
 - [27] Brauer Fred, Castillo-Chavez Carlos, and Feng Zhilan. *Mathematical models in epidemiology*, volume 32. Springer, 2019.
-- [28] Capasso Vincenzo. *Mathematical structures of epidemic systems*, volume 97. Springer Science & Business Media, 2008.
+- [28] Capasso Vincenzo. *Mathematical structures of epidemic systems*, volume 97. Springer Science \& Business Media, 2008.
 - [29] https://www.who.int/teams/immunization-vaccines-and-biologicals/diseases.
 - [30] Liu Y.et al. Dosing interval strategies for two-dose covid-19 vaccination in 13 middle-income countries of europe: Health impact modelling and benefit-risk analysis. *The Lancet Reg Health*, 17:100381, 2022. https://doi.org/10.1016/j.lanepe.2022.100381 PMID: 35434685
 - [31] Dogra P.et al. A modeling-based approach to optimize covid-19 vaccine dosing schedules for improved protection. *JCI Insight*, 8(13):e169860, 2023. https://doi.org/10.1172/jci.insight.169860 PMID: 37227783

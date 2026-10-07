@@ -402,7 +402,7 @@ Title: Numerical Scheme for Compartmental Models: New Matlab Software Codes for 
 
 The authors proposed new Matlab Software Codes for Numerical Simulation and also an alternative codes for statistical software package R has been proposed for the same compartmental model.
 
-1. In their discussion section the authors written as the SEIR model is extended, and alternative software, R codes has been provided at the appendix section. In their manuscript I did not find the appendix section and I have seen only the MATLAB code to illustrate the proposed SIER model. Give the R code on the revised manuscript!
+1. In their discussion section the authors written as the SEIR model is extended, and alternative software, R codes has been provided at the appendix section. In their manuscript I did not find the appendix section and I have seen only the MATLAB code to illustrate the proposed SIER model. Give the R code on the revised manuscript\!
 2. The authors needs to disclose the numerical codes using MATLAB and R software for potential new researchers and possibly students but they should refine the two codes separately and compare and contrast them with the proposed trivial SIER model.
 3. I do not think, with these current details, that the manuscript can be accepted. It needs a modification.
 

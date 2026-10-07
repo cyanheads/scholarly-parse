@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: BJPsych Open PDF of the article also in the corpus as JATS (epmc-bjo.2024.833), publisher HTML, and Grobid TEI. The structured abstract is boxed in two columns above the body on page 1, so the band has to read through the box before the body starts; its part headings are small bold lines. The introduction has no heading and becomes an untitled first section. Pins the abstract parts, the section outline, three tables, one figure, and 37 references (entry 24 begins with a lower-case name).",
+  "why": "Rosetta: BJPsych Open PDF of the article also in the corpus as JATS (epmc-bjo.2024.833), publisher HTML, and Grobid TEI. The structured abstract is boxed in two columns above the body on page 1, so the band has to read through the box before the body starts; its part headings are small bold lines. The introduction has no heading and becomes an untitled first section. Pins the abstract parts, the section outline, three tables, one figure, the Declaration of interest's text (set in 6 pt at the foot of page 8, below the body text, with no note label), and 37 references (entry 24 begins with a lower-case name).",
   "title": "Perinatal emotional skills groups for women and birthing people with borderline personality disorder: outcomes from a feasibility randomised controlled trial",
   "quality": "partial",
   "abstractKinds": [
@@ -28,12 +28,14 @@
   ],
   "tables": 3,
   "figures": 1,
+  "footnotes": 0,
   "references": 37,
   "warnings": [
     "structure-inferred"
   ],
   "contains": [
-    "van Asselt AD, Dirksen CD, Arntz A"
+    "van Asselt AD, Dirksen CD, Arntz A",
+    "M.S. receives income from training in dialectical behaviour therapy (DBT)"
   ],
   "notContains": [
     "Copyright and usage",

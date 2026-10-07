@@ -4,9 +4,10 @@
  * @module src/formats/jats/references
  */
 import type { Reference } from '../../model/document.js';
+import { normalizeDoi } from '../../model/doi.js';
 import { trailingLength } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
-import { inlineMath, joinAdjacentMath } from '../../render/inline.js';
+import { inlineMath, joinInlineSeams } from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
@@ -113,7 +114,7 @@ export function citationMarkdown(node: XmlNode | undefined): string {
     tagNameOf(node) === 'mixed-citation'
       ? renderMixedCitation(node, formulas)
       : renderElementCitation(node, formulas);
-  return joinAdjacentMath(restoreFormulas(escapeInline(plain), formulas));
+  return joinInlineSeams(restoreFormulas(escapeInline(plain), formulas));
 }
 
 /** Formula tags a citation can hold. */
@@ -212,7 +213,7 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
       ids.set(type, type === 'doi' ? (doiFromUrl(target) ?? target) : target);
   }
   const url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
-  const doi = ids.get('doi') ?? doiFromUrl(url);
+  const doi = normalizeDoi(ids.get('doi')) ?? normalizeDoi(doiFromUrl(url));
   const authors = findAllDescendants(citation, 'person-group')
     .filter((group) => (attrOf(group, 'person-group-type') ?? 'author') === 'author')
     .flatMap((group) => childrenOf(group).map(renderName).filter(Boolean));
@@ -228,7 +229,7 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     ...(title && { title }),
     ...(source && { source }),
     ...(year && { year }),
-    ...(doi && { doi: doi.toLowerCase() }),
+    ...(doi && { doi }),
     ...(pmid && { pmid }),
     ...(pmcid && { pmcid: pmcid.startsWith('PMC') ? pmcid : `PMC${pmcid}` }),
     ...(arxiv && { arxiv: arxiv.replace(/^arxiv:/i, '') }),
@@ -236,6 +237,7 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
   };
 }
 
+/** What follows `doi.org/` in a link, on any resolver host; {@link normalizeDoi} reads the DOI in it. */
 function doiFromUrl(url: string | undefined): string | undefined {
   return url ? /doi\.org\/(10\.\d{4,9}\/\S+)/i.exec(url)?.[1] : undefined;
 }

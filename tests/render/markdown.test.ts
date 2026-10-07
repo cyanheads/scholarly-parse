@@ -3,11 +3,19 @@
  * with its options, `toText`, and the flat section list `toSections` returns.
  * @module tests/render/markdown.test
  */
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { parseJats } from '../../src/formats/jats/index.js';
 import type { Block, ScholarlyDocument, Section } from '../../src/model/document.js';
+import { RESERVED_SECTION_ID } from '../../src/model/section-ids.js';
 import { toMarkdown, toSections, toText } from '../../src/render/index.js';
+import { link } from '../../src/render/inline.js';
 import { MAX_BLOCK_NESTING } from '../../src/render/markdown.js';
 import { stripInline } from '../../src/render/text.js';
+import { CORPUS_DIR, type CorpusFormat, fixtureMetaSchema } from '../corpus/fixtures.js';
+import { PARSERS } from '../corpus/parsers.js';
+import { allSections } from '../corpus/walk.js';
 import { expectLinear } from '../linear.js';
 
 function section(id: string, fields: Partial<Section> = {}): Section {
@@ -32,6 +40,39 @@ function documentOf(fields: Partial<ScholarlyDocument> = {}): ScholarlyDocument 
 /** Markdown for blocks in one untitled section, with nothing around them. */
 function blocksMarkdown(blocks: Block[]): string {
   return toMarkdown(documentOf({ body: [section('s1', { blocks })] }), { metadata: false });
+}
+
+/**
+ * Check that `toSections` gives each entry its own ID and that each ID renders, through
+ * `toMarkdown`'s `sections` option, as its entry followed by its subsections' entries.
+ */
+function expectEachEntryRenders(document: ScholarlyDocument): void {
+  const entries = toSections(document);
+  const ids = entries.map((entry) => entry.id);
+  expect(new Set(ids).size, ids.join(', ')).toBe(ids.length);
+  entries.forEach((entry, index) => {
+    // A section's subsections are the entries after it, up to the next one at its level or above.
+    const next = entries.findIndex((later, i) => i > index && later.level <= entry.level);
+    const own = entries.slice(index, next === -1 ? undefined : next);
+    expect(toMarkdown(document, { sections: [entry.id] }), entry.id).toBe(
+      `${own
+        .map((e) => e.markdown)
+        .filter(Boolean)
+        .join('\n\n')}\n`,
+    );
+  });
+}
+
+/** Every model section's ID, abstracts' sections included. */
+function allSectionIds(document: ScholarlyDocument): string[] {
+  return allSections(document).map((s) => s.id);
+}
+
+/** A JATS article parsed from its XML. */
+function jats(xml: string): ScholarlyDocument {
+  const result = parseJats(new TextEncoder().encode(xml));
+  if (!result.ok) throw new Error(result.error.message);
+  return result.document;
 }
 
 const PAPER = documentOf({
@@ -122,8 +163,7 @@ describe('toMarkdown', () => {
       back: [...PAPER.back, appendix],
       floats: [{ caption: 'A chart.', label: 'Figure 1', type: 'figure' }],
     });
-    const entries = toSections(document);
-    expect(entries.map((entry) => entry.id)).toEqual([
+    expect(toSections(document).map((entry) => entry.id)).toEqual([
       'abstract-1',
       'abstract-2',
       's1',
@@ -132,18 +172,49 @@ describe('toMarkdown', () => {
       'app',
       'app.1',
       'floats',
+      'footnotes',
+      'references',
     ]);
-    entries.forEach((entry, index) => {
-      // A section's subsections are the entries after it, up to the next one at its level or above.
-      const next = entries.findIndex((later, i) => i > index && later.level <= entry.level);
-      const own = entries.slice(index, next === -1 ? undefined : next);
-      expect(toMarkdown(document, { sections: [entry.id] }), entry.id).toBe(
-        `${own
-          .map((e) => e.markdown)
-          .filter(Boolean)
-          .join('\n\n')}\n`,
-      );
-    });
+    expectEachEntryRenders(document);
+  });
+
+  it('renders the footnotes or the references by their IDs, whatever the other options say', () => {
+    expect(toMarkdown(PAPER, { references: false, sections: ['references'] })).toBe(
+      '## References\n\n- [1] Alpha B. Title. 2020.\n',
+    );
+    expect(toMarkdown(PAPER, { sections: ['references', 'footnotes', 's1.1'] })).toBe(
+      '### Scope\n\nDetail.\n\n## Footnotes\n\n- **1** A note.\n\n## References\n\n- [1] Alpha B. Title. 2020.\n',
+    );
+    expect(toMarkdown(documentOf(), { sections: ['footnotes', 'references'] })).toBe('');
+  });
+
+  it.each([
+    [
+      'a body section with the ID of the first abstract',
+      '<front><article-meta><abstract><p>We did this.</p></abstract></article-meta></front><body><sec id="abstract-1"><title>Intro</title><p>Body text.</p></sec></body>',
+    ],
+    [
+      'a body section with the ID of the floats',
+      '<body><sec id="floats"><title>Floats section</title><p>Body text.</p></sec></body><floats-group><fig id="f1"><label>Figure 1</label><caption><p>A chart.</p></caption></fig></floats-group>',
+    ],
+    [
+      "a body section with the ID of the abstract's loose paragraphs",
+      '<front><article-meta><abstract><p>We did this.</p></abstract></article-meta></front><body><sec id="abstract-1-1"><title>Intro</title><p>Body text.</p></sec></body>',
+    ],
+    [
+      "an abstract's own section with the ID of the second abstract",
+      '<front><article-meta><abstract><sec id="abstract-2"><title>Background</title><p>Main.</p></sec></abstract><abstract abstract-type="graphical"><p>Graphical.</p></abstract></article-meta></front><body><sec id="s1"><title>Intro</title><p>Body.</p></sec></body>',
+    ],
+    [
+      'body sections with the IDs of the footnotes and the references',
+      '<body><sec id="footnotes"><title>A</title><p>a<fn id="n1"><p>Note.</p></fn></p></sec><sec id="references"><title>B</title><p>b</p></sec></body><back><ref-list><ref id="r1"><mixed-citation>Alpha B. 2020.</mixed-citation></ref></ref-list></back>',
+    ],
+  ])('gives %s an ID of its own', (_, parts) => {
+    const document = jats(`<article>${parts}</article>`);
+    const ids = allSectionIds(document);
+    expect(new Set(ids).size, ids.join(', ')).toBe(ids.length);
+    expect(ids.filter((id) => RESERVED_SECTION_ID.test(id))).toEqual([]);
+    expectEachEntryRenders(document);
   });
 
   it('renders the entries asked for in reading order', () => {
@@ -563,6 +634,62 @@ describe('toText', () => {
       { from: 250, to: 64_000 },
     );
   });
+
+  it('reads a link whose text holds brackets as its text alone', () => {
+    const paragraphs = [
+      '[A [trial] result](https://example.org)',
+      '[see `a]b`](https://example.org)',
+      'arXiv:[2304.05660 [math.NA]](https://arxiv.org/abs/2304.05660)',
+      '[[email protected]](https://www.medrxiv.org/cdn-cgi/l/email-protection)',
+      '[x\\](y)',
+      '[a \\] b](https://example.org)',
+    ];
+    const document = documentOf({
+      body: [section('s1', { blocks: paragraphs.map((text) => ({ text, type: 'paragraph' })) })],
+    });
+    expect(toText(document, { metadata: false }).split('\n\n')).toEqual([
+      'A [trial] result',
+      'see a]b',
+      'arXiv:2304.05660 [math.NA]',
+      '[email protected]',
+      '[x](y)',
+      'a ] b\n',
+    ]);
+  });
+
+  it('reads back the text of a link written around a bracket with no partner', () => {
+    for (const label of ['A trial] result', 'A [trial result', 'see $[0,1)$', '$a]$ b]']) {
+      const text = link(label, 'https://example.org');
+      expect(stripInline(text)).toBe(label);
+    }
+  });
+
+  it.each([
+    ['latexml', 'arxiv-2402.16746v1'],
+    ['html', 'medrxiv-2026.05.05.26351600v2'],
+  ] as const)('leaves no link in the text of corpus/%s/%s', async (format, name) => {
+    const dir = join(CORPUS_DIR, format, name);
+    const { url } = fixtureMetaSchema.parse(
+      JSON.parse(readFileSync(join(dir, 'meta.json'), 'utf8')),
+    );
+    const source = new Uint8Array(readFileSync(join(dir, 'source.html')));
+    const result = await PARSERS[format as CorpusFormat]?.(source, url);
+    if (!result?.ok) throw new Error(`corpus/${format}/${name} did not parse`);
+    expect(toMarkdown(result.document)).toMatch(/\]\(http/);
+    expect(toText(result.document)).not.toMatch(/\]\(http/);
+  });
+
+  it('keeps a ! that comes right before a link', () => {
+    expect(stripInline('Wow\\![x](https://x.org)')).toBe('Wow!x');
+  });
+
+  it('reads links nested deep in time linear in their depth', async () => {
+    await expectLinear((n) => `${'['.repeat(n)}x${'](https://x.org)'.repeat(n)}`, stripInline, {
+      from: 250,
+      to: 64_000,
+    });
+    expect(stripInline('[*a [b*](u) c*](v) d')).toBe('a b* c d');
+  });
 });
 
 describe('stripInline', () => {
@@ -578,12 +705,22 @@ describe('stripInline', () => {
     ).toBe('the $x$ value, <https://y.org>, https://z.org');
   });
 
-  it.each(['**x ', '*x ', '~~x ', '\\<https:', '<https:', '$x \\$', '[x](', '`x ``'])(
-    'reads a long run of %j in time linear in it',
-    async (run) => {
-      await expectLinear((n) => run.repeat(n), stripInline, { from: 250, to: 64_000 });
-    },
-  );
+  it.each([
+    '**x ',
+    '*x ',
+    '~~x ',
+    '\\<https:',
+    '<https:',
+    '$x \\$',
+    '[x](',
+    '`x ``',
+    '[[x',
+    '[a [b]',
+    '[`]`',
+    '[\\]',
+  ])('reads a long run of %j in time linear in it', async (run) => {
+    await expectLinear((n) => run.repeat(n), stripInline, { from: 250, to: 64_000 });
+  });
 });
 
 describe('toSections', () => {
@@ -595,6 +732,8 @@ describe('toSections', () => {
       { id: 's1', kind: 'body', level: 1, path: ['1 Introduction'] },
       { id: 's1.1', kind: 'body', level: 2, path: ['1 Introduction', 'Scope'] },
       { id: 'b1', kind: 'acknowledgments', level: 1, path: ['Acknowledgments'] },
+      { id: 'footnotes', kind: 'footnotes', level: 1, path: ['Footnotes'] },
+      { id: 'references', kind: 'references', level: 1, path: ['References'] },
     ]);
     const intro = sections[2];
     expect(intro?.markdown).toBe('## 1 Introduction\n\nWhy.');
@@ -609,7 +748,7 @@ describe('toSections', () => {
     ];
     const markdown = '## Figures and tables\n\n**Figure 1.** A chart.\n\n| a |\n| --- |\n| 1 |';
     const document = { ...PAPER, floats };
-    expect(toSections(document).at(-1)).toEqual({
+    expect(toSections(document).at(-3)).toEqual({
       chars: markdown.length,
       id: 'floats',
       kind: 'floats',
@@ -620,5 +759,34 @@ describe('toSections', () => {
     });
     expect(toMarkdown(document)).toContain(`\n\n${markdown}\n\n`);
     expect(toSections(PAPER).map((entry) => entry.kind)).not.toContain('floats');
+  });
+
+  it('ends with the footnotes and then the references, as toMarkdown renders them', () => {
+    const footnotes = '## Footnotes\n\n- **1** A note.';
+    const references = '## References\n\n- [1] Alpha B. Title. 2020.';
+    expect(toSections(PAPER).slice(-2)).toEqual([
+      {
+        chars: footnotes.length,
+        id: 'footnotes',
+        kind: 'footnotes',
+        level: 1,
+        markdown: footnotes,
+        path: ['Footnotes'],
+        title: 'Footnotes',
+      },
+      {
+        chars: references.length,
+        id: 'references',
+        kind: 'references',
+        level: 1,
+        markdown: references,
+        path: ['References'],
+        title: 'References',
+      },
+    ]);
+    expect(toMarkdown(PAPER).endsWith(`\n\n${footnotes}\n\n${references}\n`)).toBe(true);
+    const bare = documentOf({ body: PAPER.body });
+    expect(toSections(bare).map((entry) => entry.kind)).toEqual(['body', 'body']);
+    expect(toSections({ ...bare, references: PAPER.references }).at(-1)?.id).toBe('references');
   });
 });

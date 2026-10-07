@@ -14,6 +14,7 @@
   "attribution": "Stanovsky G, Smith NA, Zettlemoyer L. Evaluating Gender Bias in Machine Translation. arXiv:1906.00591v1. 2019.",
   "features": [
     "two-column",
+    "footnotes",
     "hyphenation",
     "page-furniture",
     "tables",

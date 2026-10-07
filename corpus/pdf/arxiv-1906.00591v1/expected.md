@@ -130,6 +130,15 @@ We presented the first large-scale multilingual quantitative evidence for gender
 
 We would like to thank Mark Yatskar, Iz Beltagy, Tim Dettmers, Ronan Le Bras, Kyle Richardson, Ariel and Claudia Stanovsky, and Paola Virga for many insightful discussions about the role gender plays in the languages evaluated in this work, as well as the reviewers for their helpful comments.
 
+## Footnotes
+
+- **1** https://translate.google.com
+- **2** https://www.bing.com/translator
+- **3** https://aws.amazon.com/translate
+- **4** http://www.systransoft.com
+- **5** https://github.com/pytorch/fairseq
+- **6** https://www.bls.gov/cps/cpsaat11.htm
+
 ## References
 
 - [1] Meni Adler and Michael Elhadad. 2006. An unsupervised morpheme-based HMM for Hebrew morphological disambiguation. In *ACL*.

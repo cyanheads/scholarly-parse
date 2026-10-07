@@ -2,7 +2,8 @@
 
 Md Ataul Goni Rabbani, Adriana Vallejo-Trujillo, Zhou Wu, Katarzyna Miedzinska, Shakila Faruque, Kellie A. Watson, Jacqueline Smith  
 *Scientific Data*, 2024, 11(1), 1432  
-DOI: 10.1038/s41597-024-04291-z
+DOI: 10.1038/s41597-024-04291-z  
+License: <http://creativecommons.org/licenses/by/4.0/>
 
 ## Abstract
 

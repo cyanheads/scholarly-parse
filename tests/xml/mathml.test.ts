@@ -1,11 +1,13 @@
 /**
  * @fileoverview MathML → TeX: the TeX a `<math>` already carries is preferred, else the
- * presentation markup is linearized construct by construct; publisher TeX is reduced to
- * its expression.
+ * presentation markup is linearized construct by construct, from the ordered XML tree or
+ * any tree read through an accessor; publisher TeX is reduced to its expression.
  * @module tests/xml/mathml.test
  */
 import { describe, expect, it } from 'vitest';
-import { cleanTex, mathmlToTex } from '../../src/xml/mathml.js';
+import { parseJats } from '../../src/formats/jats/index.js';
+import { toMarkdown } from '../../src/render/index.js';
+import { cleanTex, type MathNodes, mathmlToTex } from '../../src/xml/mathml.js';
 import { parseOrderedXml, type XmlNode } from '../../src/xml/ordered.js';
 
 /** TeX for the `<math>` element whose content is `inner`, with the `mml:` prefix JATS uses. */
@@ -102,6 +104,99 @@ describe('mathmlToTex', () => {
           '<mml:mover><mml:mi>y</mml:mi><mml:mo>__proto__</mml:mo></mml:mover>',
       ),
     ).toBe('xtoString\\overset{__proto__}{y}');
+  });
+});
+
+describe('mathmlToTex on mmultiscripts', () => {
+  const multi = (...children: string[]) =>
+    tex(`<mml:mmultiscripts>${children.join('')}</mml:mmultiscripts>`);
+  const none = '<mml:none/>';
+  const pre = '<mml:mprescripts/>';
+  const mi = (x: string) => `<mml:mi>${x}</mml:mi>`;
+  const mn = (x: string) => `<mml:mn>${x}</mml:mn>`;
+
+  it('writes prescripts before the base, each pair after an empty group', () => {
+    expect(multi(mi('C'), none, none, pre, mn('6'), mn('14'))).toBe('{}_6^{14}C');
+    expect(multi('<mml:mtext>F</mml:mtext>', pre, none, mn('18'))).toBe('{}^{18}\\text{F}');
+  });
+
+  it('attaches the first postscript pair to the base and staggers the later ones', () => {
+    expect(multi(mi('R'), mi('i'), none, none, mi('j'), mi('k'), none)).toBe('R_i{}^j{}_k');
+    expect(multi(mi('x'), mi('a'), mi('b'))).toBe('x_a^b');
+  });
+
+  it('reads an empty mrow as an empty script', () => {
+    expect(
+      multi(
+        mi('E'),
+        mi('q'),
+        '<mml:mrow/>',
+        '<mml:mrow/>',
+        `<mml:mrow><mml:mo>(</mml:mo>${mi('j')}<mml:mo>)</mml:mo></mml:mrow>`,
+      ),
+    ).toBe('E_q{}^{(j)}');
+  });
+
+  it('reads a lone last script as a subscript, and a base with no scripts as itself', () => {
+    expect(multi(mi('x'), mi('a'))).toBe('x_a');
+    expect(multi(mi('x'))).toBe('x');
+    expect(multi(mi('x'), pre)).toBe('x');
+  });
+
+  it('renders through parseJats as inline math, with no new warning', async () => {
+    const article = (inner: string) =>
+      `<article><body><p><inline-formula><mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML">${inner}</mml:math></inline-formula></p></body></article>`;
+    const result = await parseJats(
+      article(`<mml:mmultiscripts>${mi('C')}${none}${none}
+        ${pre}${mn('6')}${mn('14')}
+        </mml:mmultiscripts>`),
+    );
+    const plain = await parseJats(article(mi('C')));
+    if (!result.ok || !plain.ok) throw new Error('parse failed');
+    expect(toMarkdown(result.document)).toBe(`\${}_6^{14}C$\n`);
+    expect(result.document.diagnostics).toEqual(plain.document.diagnostics);
+  });
+});
+
+/** A tree that is neither the ordered XML tree nor a DOM. */
+interface Plain {
+  attrs?: Record<string, string>;
+  kids?: Plain[];
+  tag?: string;
+  text?: string;
+}
+
+const PLAIN: MathNodes<Plain> = {
+  attr: (node, name) => node.attrs?.[name],
+  children: (node) => node.kids ?? [],
+  isText: (node) => node.tag === undefined,
+  name: (node) => node.tag,
+  text: (node) => node.text ?? '',
+};
+
+const el = (tag: string, ...kids: Plain[]): Plain => ({ kids, tag });
+const txt = (text: string): Plain => ({ text });
+
+describe('mathmlToTex through another accessor', () => {
+  it('linearizes the same constructs', () => {
+    const math = el(
+      'math',
+      el('msup', el('mi', txt('x')), el('mn', txt('2'))),
+      el('mo', txt('+')),
+      el('mfrac', el('mi', txt('a')), el('mi', txt('b'))),
+    );
+    expect(mathmlToTex(math, PLAIN)).toBe('x^2+\\frac{a}{b}');
+    expect(mathmlToTex({ ...math, attrs: { alttext: 'y^{2}' } }, PLAIN)).toBe('y^{2}');
+  });
+
+  it('writes what lies past the depth bound as its text, without recursing', () => {
+    // 100,000 nested rows: a walk with no depth stop overflows the stack.
+    let row = el('msup', el('mi', txt('x')), el('mn', txt('2')));
+    for (let i = 0; i < 100_000; i++) row = el('mrow', row);
+    expect(mathmlToTex(el('math', row), PLAIN)).toBe('x2');
+    expect(mathmlToTex(el('math', el('msup', el('mi', txt('y')), el('mn', txt('3')))), PLAIN)).toBe(
+      'y^3',
+    );
   });
 });
 

@@ -120,3 +120,46 @@ export function texDocument(expression: string): string {
 export function texMath(expression: string): string {
   return `<tex-math>${texDocument(expression)}</tex-math>`;
 }
+
+/**
+ * Fragments of source text that, joined, spell markup a Markdown renderer passing raw HTML
+ * through would make live (#44): a tag, a comment, an autolink of any scheme, an image,
+ * and a link with no web or mail destination. Each row's pieces are XML text, escaped.
+ */
+export const SPLIT_MARKUP: readonly (readonly string[])[] = [
+  ['&lt;', 'img src=x onerror=alert(1)&gt;'],
+  ['[click]', '(javascript:alert(1))'],
+  ['\\', '&lt;img src=x onerror=alert(1)&gt;'],
+  ['&lt;', 'javascript:alert(1)&gt;'],
+  ['!', '[x]', '(https://example.org/a.png)'],
+  ['&lt;', '!-- hidden --&gt;'],
+];
+
+/**
+ * The live constructs in Markdown without code spans: an unescaped `<` opening a tag, a
+ * comment, or an autolink outside `http(s)`, `ftp`, and `mailto`; an unescaped `](` whose
+ * destination is outside those schemes; and an unescaped `![` that an unescaped `](`
+ * follows, an image's opening.
+ */
+export function liveMarkup(markdown: string): string[] {
+  const escaped = (at: number) => {
+    let backslashes = 0;
+    while (markdown.charAt(at - 1 - backslashes) === '\\') backslashes++;
+    return backslashes % 2 === 1;
+  };
+  const found: string[] = [];
+  for (const { index } of markdown.matchAll(/<[A-Za-z/!?]/g)) {
+    const safeAutolink = /^<(?:https?|ftp|mailto):[^\s<>]*>/i.test(markdown.slice(index));
+    if (!escaped(index) && !safeAutolink) found.push(`tag at ${index}`);
+  }
+  const linkEnds = [...markdown.matchAll(/\]\(/g)]
+    .map(({ index }) => index)
+    .filter((index) => !escaped(index));
+  for (const index of linkEnds) {
+    if (!/^\]\((?:https?|ftp|mailto):/i.test(markdown.slice(index))) found.push(`link at ${index}`);
+  }
+  for (const { index } of markdown.matchAll(/!\[/g)) {
+    if (!escaped(index) && linkEnds.some((end) => end > index)) found.push(`image at ${index}`);
+  }
+  return found;
+}

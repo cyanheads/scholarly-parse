@@ -23,17 +23,24 @@ const ESCAPABLE_AFTER_BACKSLASH = /\\(?=[!-/:-@[-`{-~])/g;
  * - `<` — only before a letter, `/`, `!`, or `?`, where it could open an HTML tag.
  * - `&` — only where it would read as an entity reference.
  *
+ * Readers join the escaped text of adjacent elements, so the text's end is closed as if
+ * anything could follow it, as the `_` rule already does: a trailing `\` is doubled, and
+ * a trailing `<`, `!` (an image's opener), or `&` with a partial entity name is escaped.
+ * A `](` split across two pieces is left to `joinInlineSeams`.
+ *
  * Soft hyphens are dropped: they only mark where a word may break.
  */
 export function escapeInline(text: string): string {
   return text
     .replace(/\u00AD/g, '')
     .replace(ESCAPABLE_AFTER_BACKSLASH, '\\\\')
+    .replace(/\\$/, '\\\\')
     .replace(/[*`$~]/g, '\\$&')
     .replace(/(^|[^\p{L}\p{N}])_|_(?=$|[^\p{L}\p{N}])/gu, (match) => match.replace('_', '\\_'))
     .replace(/\]\(/g, '\\](')
-    .replace(/<(?=[A-Za-z/!?])/g, '\\<')
-    .replace(/&(?=#?[A-Za-z0-9]+;)/g, '\\&');
+    .replace(/<(?=[A-Za-z/!?]|$)/g, '\\<')
+    .replace(/!$/, '\\!')
+    .replace(/&(?=#?[A-Za-z0-9]+;|#?[A-Za-z0-9]*$)/g, '\\&');
 }
 
 /**

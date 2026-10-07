@@ -4,6 +4,8 @@
  * @module tests/corpus/invariants
  */
 import type { ScholarlyDocument } from '../../src/model/document.js';
+import { RESERVED_SECTION_ID } from '../../src/model/section-ids.js';
+import { toSections } from '../../src/render/sections.js';
 import { allSections, countBlocks } from './walk.js';
 
 export interface InvariantInput {
@@ -54,6 +56,12 @@ function leakedValues(document: ScholarlyDocument, tokens: string[]): string[] {
   };
   visit(document, '');
   return found;
+}
+
+/** The first value that appears twice in `values`. */
+function firstDuplicate(values: string[]): string | undefined {
+  const seen = new Set<string>();
+  return values.find((value) => seen.has(value) || !seen.add(value));
 }
 
 function count(text: string, pattern: RegExp): number {
@@ -116,8 +124,12 @@ export function checkInvariants({ document, format, markdown, source }: Invarian
   if (rendered) problems.push(`"${rendered}" rendered as content`);
 
   const ids = allSections(document).map((section) => section.id);
-  const duplicate = ids.find((id, i) => ids.indexOf(id) !== i);
+  const duplicate = firstDuplicate(ids);
   if (duplicate) problems.push(`duplicate section id "${duplicate}"`);
+  const reserved = ids.find((id) => RESERVED_SECTION_ID.test(id));
+  if (reserved) problems.push(`section id "${reserved}" is one toSections generates`);
+  const entry = firstDuplicate(toSections(document).map((e) => e.id));
+  if (entry) problems.push(`duplicate toSections id "${entry}"`);
 
   if (format === 'jats' && source) {
     const tables = sourceTables(source);

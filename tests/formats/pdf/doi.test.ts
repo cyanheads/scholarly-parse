@@ -1,7 +1,8 @@
 /**
  * @fileoverview DOIs read from a PDF's first page and its reference entries: the closing
  * punctuation, quotes, and brackets around one are left out while brackets its suffix
- * balances stay, and a long run of DOI characters reads in time linear in its length.
+ * balances stay, a first-page DOI is read only after a label, and a long run of DOI
+ * characters reads in time linear in its length.
  * @module tests/formats/pdf/doi.test
  */
 import { describe, expect, it } from 'vitest';
@@ -28,6 +29,17 @@ const TINY = 0.005;
 
 function firstPage(doi: TextSpec): Uint8Array {
   return buildPdf({ pages: [[...BODY, { text: 'doi:', x: 72, y: 500 }, doi]] });
+}
+
+/**
+ * A first page with `line` below the body, its `^` and `|` set as typographic quotes: the
+ * test PDF's text is ASCII, and the font's encoding has the quotes at single bytes.
+ */
+function firstPageLine(line: TextSpec): Uint8Array {
+  const pdf = new TextDecoder('latin1').decode(buildPdf({ pages: [[...BODY, line]] }));
+  return Uint8Array.from(pdf.replace('^', '\x93').replace('|', '\x94'), (char) =>
+    char.charCodeAt(0),
+  );
 }
 
 /** A numbered reference list whose first entry ends with `run`. */
@@ -59,6 +71,24 @@ describe('PDF DOIs', () => {
     expect(await doi('10.1234/Abc.Def.')).toBe('10.1234/abc.def');
     expect(await doi('10.1234/abc).')).toBe('10.1234/abc');
     expect(await doi('10.1234/abc],;')).toBe('10.1234/abc');
+  });
+
+  it('reads a first-page DOI after its label, quoted or not', async () => {
+    const doi = async (text: string) =>
+      (await parse(firstPageLine({ text, x: 72, y: 500 }))).metadata.identifiers?.doi;
+    for (const text of [
+      'doi: 10.1234/abc',
+      'doi: "10.1234/abc"',
+      'doi:"10.1234/abc"',
+      "doi: '10.1234/abc'",
+      'See doi: "10.1234/abc". More',
+      'DOI 10.1234/abc',
+      'doi: ^10.1234/abc|',
+    ])
+      expect(await doi(text)).toBe('10.1234/abc');
+    // With no label before it, a DOI on the first page is not the paper's own.
+    expect(await doi('Cite 10.1234/abc here')).toBeUndefined();
+    expect(await doi('DOIs 10.1234/abc')).toBeUndefined();
   });
 
   it('leaves out the punctuation that closes a reference DOI', async () => {
@@ -108,6 +138,14 @@ describe('PDF DOIs', () => {
       `10.1234/a${'.'.repeat(1_000)}b`,
     );
     await expectLinear(build, parsePdf, { from: 20_000, to: 80_000 });
+  });
+
+  it('reads a first page of labeled, quoted DOI runs in linear time', async () => {
+    // Each run is labeled and quoted, and leaves no suffix once its full stop goes.
+    const build = (n: number) =>
+      firstPageLine({ size: TINY, text: 'doi: "10.1234/." '.repeat(n), x: 72, y: 500 });
+    expect((await parse(build(100))).metadata.identifiers?.doi).toBeUndefined();
+    await expectLinear(build, parsePdf, { from: 1_000, to: 4_000 });
   });
 
   it('reads a reference DOI with a long run of dots in linear time', async () => {

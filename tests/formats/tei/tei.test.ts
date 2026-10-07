@@ -8,8 +8,9 @@
 import { describe, expect, it } from 'vitest';
 import { parseTei } from '../../../src/formats/tei/index.js';
 import type { ScholarlyDocument, Section } from '../../../src/model/document.js';
-import { toMarkdown } from '../../../src/render/index.js';
+import { toMarkdown, toSections } from '../../../src/render/index.js';
 import { expectLinear } from '../../linear.js';
+import { liveMarkup, SPLIT_MARKUP } from '../jats/helpers.js';
 
 const HEADER = `<teiHeader xml:lang="en"><fileDesc>
   <titleStmt><title level="a" type="main">A study of things</title></titleStmt>
@@ -143,13 +144,37 @@ describe('front matter', () => {
         sections: [
           {
             blocks: [{ text: 'We did this.', type: 'paragraph' }],
-            id: 'abstract-1',
+            id: 'abstract-1-1',
             kind: 'body',
             sections: [],
           },
         ],
       },
     ]);
+  });
+});
+
+describe('abstract part IDs (#24)', () => {
+  it('numbers abstract parts abstract-1-<m>, apart from the IDs toSections generates', () => {
+    const header = HEADER.replace(
+      '<abstract><div><p>We did this.</p></div></abstract>',
+      '<abstract><div><p>Aim.</p></div><div xml:id="abstract-2"><p>Method.</p></div></abstract>',
+    );
+    const document = parse(
+      tei(
+        '<div xml:id="abstract-1"><head n="1">Intro</head><p>Text.</p></div>' +
+          '<div xml:id="floats"><head n="2">Floats</head><p>Text.</p></div>',
+        '',
+        header,
+      ),
+    );
+    expect(document.abstracts[0]?.sections.map((section) => section.id)).toEqual([
+      'abstract-1-1',
+      'abstract-2-2',
+    ]);
+    expect(document.body.map((section) => section.id)).toEqual(['abstract-1-2', 'floats-2']);
+    const ids = toSections(document).map((entry) => entry.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });
 
@@ -735,12 +760,45 @@ describe('back matter and references', () => {
           <monogr><title level="j">J</title><imprint><date when="2020"/>
             <biblScope unit="volume">&lt;b&gt;</biblScope><biblScope unit="issue">*2*</biblScope>
             <biblScope unit="page">&lt;i&gt;</biblScope></imprint></monogr>
-          <idno type="DOI">10.1/&lt;s&gt;</idno></biblStruct></listBibl></div>`,
+          <idno type="DOI">10.1234/&lt;s&gt;</idno></biblStruct></listBibl></div>`,
       ),
     );
     expect(document.references[0]?.text).toBe(
-      '\\<img src=a>. (2020). T. *J* \\<b>(\\*2\\*):\\<i>. DOI 10.1/\\<s>',
+      '\\<img src=a>. (2020). T. *J* \\<b>(\\*2\\*):\\<i>. DOI 10.1234/\\<s>',
     );
+  });
+
+  it('takes a resolver or doi: prefix off the header and reference DOIs (#38)', () => {
+    const doiOf = (value: string) =>
+      parse(
+        tei(div('1', 'A', 'x'), '', HEADER.replace('10.1234/ABC', value.replaceAll('&', '&amp;'))),
+      ).metadata.identifiers?.doi;
+    expect(doiOf('https://doi.org/10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('http://dx.doi.org/10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('doi:10.1234/AbC')).toBe('10.1234/abc');
+    expect(doiOf('DOI: 10.1234/AbC.')).toBe('10.1234/abc');
+    expect(doiOf('n/a')).toBeUndefined();
+
+    const references = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl>
+          <biblStruct xml:id="b0"><analytic><title level="a">A</title>
+            <idno type="DOI">doi:10.1234/RefA</idno></analytic></biblStruct>
+          <biblStruct xml:id="b1"><analytic><title level="a">B</title>
+            <idno type="DOI">https://doi.org/10.1002/(SICI)1097-4636(199907).</idno></analytic>
+            <note type="raw_reference">B. https://doi.org/10.1002/(SICI)1097-4636(199907).</note></biblStruct>
+        </listBibl></div>`,
+      ),
+    ).references;
+    expect(references.map((reference) => reference.doi)).toEqual([
+      '10.1234/refa',
+      '10.1002/(sici)1097-4636(199907)',
+    ]);
+    expect(references.map((reference) => reference.text)).toEqual([
+      'A. DOI 10.1234/refa',
+      'B. https://doi.org/10.1002/(SICI)1097-4636(199907).',
+    ]);
   });
 });
 
@@ -778,5 +836,52 @@ describe('the table budget', () => {
     expect(
       document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input'),
     ).toMatchObject([{ message: expect.stringMatching(/^Table 1 /), where: 'tab_0' }]);
+  });
+});
+
+describe('source text split across inline elements (#44)', () => {
+  it.each(SPLIT_MARKUP)('makes no live markup of %j in any field', (...row) => {
+    const split = row.map((piece) => `<seg>${piece}</seg>`).join('');
+    const header = HEADER.replace('A study of things', split);
+    const document = parse(
+      tei(
+        `<div><head n="1">Intro</head><p>${split}</p><p>Noted<note place="foot" n="1">${split}</note>.</p>` +
+          `<figure xml:id="f1"><head>Figure 1</head><figDesc>${split}</figDesc></figure>` +
+          `<figure type="table" xml:id="t1"><head>Table 1</head><table><row><cell>${split}</cell></row></table></figure></div>`,
+        `<div type="references"><listBibl><biblStruct><analytic><title>${split}</title></analytic>` +
+          '<monogr><title level="j">J</title></monogr></biblStruct></listBibl></div>',
+        header,
+      ),
+    );
+    const blocks = [...document.body.flatMap((section) => section.blocks), ...document.floats];
+    const fields = [
+      document.metadata.title ?? '',
+      ...blocks.flatMap((block) =>
+        block.type === 'paragraph'
+          ? [block.text]
+          : block.type === 'figure'
+            ? [block.caption ?? '']
+            : block.type === 'table'
+              ? block.rows.flat()
+              : [],
+      ),
+      ...document.footnotes.map((footnote) => footnote.text),
+      ...document.references.map((reference) => reference.text),
+      toMarkdown(document),
+    ];
+    expect(fields.filter((field) => liveMarkup(field).length > 0)).toEqual([]);
+  });
+
+  it('escapes a link the fields of a built citation spell together', () => {
+    const [reference] = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        '<div type="references"><listBibl><biblStruct><analytic><title>T</title></analytic>' +
+          '<monogr><title level="j">J</title><imprint><biblScope unit="volume">[click]</biblScope>' +
+          '<biblScope unit="issue">javascript:alert(1)</biblScope></imprint></monogr></biblStruct>' +
+          '</listBibl></div>',
+      ),
+    ).references;
+    expect(reference?.text).toBe('T. *J* [click\\](javascript:alert(1)).');
   });
 });

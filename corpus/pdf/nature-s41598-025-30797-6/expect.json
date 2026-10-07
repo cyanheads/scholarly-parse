@@ -8,6 +8,7 @@
   "abstractStartsWith": "In this work, a sixth–order extension of the nonlinear Schrödinger equation (NLSE) within its integrable hierarchy",
   "sectionTitles": [
     "Proposed technique",
+    "Jacobi elliptic functions and weierstrass solution",
     "Results and discussion",
     "Conclusion",
     "Data availability",
@@ -16,5 +17,8 @@
   "references": 33,
   "warnings": [
     "structure-inferred"
+  ],
+  "notContains": [
+    "solutiond2m2"
   ]
 }

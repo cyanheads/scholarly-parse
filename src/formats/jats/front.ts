@@ -16,6 +16,8 @@ import type {
   Section,
   Venue,
 } from '../../model/document.js';
+import { normalizeDoi } from '../../model/doi.js';
+import { issueId } from '../../model/section-ids.js';
 import { escapeInline } from '../../render/escape.js';
 import {
   attrOf,
@@ -258,7 +260,7 @@ function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): Rel
     }
     const isSentence = childrenOf(node).some((child) => isTextNode(child) && textOf(child).trim());
     const description = inlineText(isSentence ? node : findOne(node, 'article-title'), ctx);
-    const doi = ids.doi?.replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, '').toLowerCase();
+    const doi = normalizeDoi(ids.doi);
     const pmcid =
       ids.pmcid && (/^PMC/i.test(ids.pmcid) ? ids.pmcid.toUpperCase() : `PMC${ids.pmcid}`);
     if (!description && !doi && !pmcid && !ids.pmid && !ids.url) return [];
@@ -284,8 +286,10 @@ function extractIdentifiers(articleMeta: XmlNode | undefined): Identifiers {
     const type = attrOf(node, 'pub-id-type') ?? '';
     const value = text(node);
     if (!value) continue;
-    if (type === 'doi') ids.doi ??= value.toLowerCase();
-    else if (type === 'pmid') ids.pmid ??= value;
+    if (type === 'doi') {
+      const doi = normalizeDoi(value);
+      if (doi) ids.doi ??= doi;
+    } else if (type === 'pmid') ids.pmid ??= value;
     else if (type === 'pmcid' || type === 'pmc' || type === 'pmc-uid' || type === 'pmcaid') {
       if (/^(PMC)?\d+$/.test(value)) ids.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
     } else if (type === 'arxiv') ids.arxiv ??= value.replace(/^arxiv:/i, '');
@@ -421,8 +425,9 @@ function parseAbstract(
   const idBase = `abstract-${index + 1}`;
   const flushLoose = () => {
     const blocks = flowBlocks(loose.splice(0), ctx);
-    if (blocks.length > 0)
-      sections.push({ blocks, id: `${idBase}-${sections.length + 1}`, kind: 'body', sections: [] });
+    if (blocks.length === 0) return;
+    const id = issueId(ctx.sectionIds, undefined, `${idBase}-${sections.length + 1}`);
+    sections.push({ blocks, id, kind: 'body', sections: [] });
   };
   for (const child of childrenOf(node)) {
     const tag = tagNameOf(child);

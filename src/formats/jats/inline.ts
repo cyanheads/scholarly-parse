@@ -9,11 +9,11 @@
  */
 import { escapeInline } from '../../render/escape.js';
 import {
+  collapseInline,
   emphasis,
   FORMULA_IMAGE,
   inlineCode,
   inlineMath,
-  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -95,6 +95,24 @@ const TRANSPARENT_TAGS: ReadonlySet<string> = new Set([
   'verse-line',
 ]);
 
+/**
+ * Blocks whose content reads as text with a space on each side, so the paragraphs of a
+ * note, a definition, or a table cell read `One. Two.`, not `One.Two.`. A `<term>` is
+ * left out: a `<def-item>` and the `<def>` after it space it already, and inline in a
+ * paragraph a space would split `(<term>BMI</term>)`.
+ */
+const SPACED_TAGS: ReadonlySet<string> = new Set([
+  'boxed-text',
+  'def',
+  'def-item',
+  'disp-quote',
+  'list-item',
+  'p',
+  'sec',
+  'statement',
+  'verse-line',
+]);
+
 /** Ranks a taxonomic name's parts are tagged with (`<named-content content-type="genus">`). */
 const TAXON_RANKS: ReadonlySet<string> = new Set([
   'kingdom',
@@ -145,7 +163,7 @@ export function inlineMarkdown(nodes: XmlNodeList, ctx: JatsContext): string {
 export function inlineText(input: XmlNode | XmlNodeList | undefined, ctx: JatsContext): string {
   if (!input) return '';
   const nodes = Array.isArray(input) ? input : childrenOf(input);
-  return joinAdjacentMath(inlineMarkdown(nodes, ctx).replace(/\s+/g, ' ').trim());
+  return collapseInline(inlineMarkdown(nodes, ctx));
 }
 
 function inlineNode(node: XmlNode, ctx: JatsContext): string {
@@ -206,10 +224,12 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
       return ' ';
     case 'fn':
       return inlineFootnote(node, ctx);
-    default:
+    default: {
       if (localNameOf(node) === 'math') return inlineMath(mathmlToTex(node));
       if (!TRANSPARENT_TAGS.has(tag)) ctx.diag.unhandled(`jats:${tag}`);
-      return inlineMarkdown(children, ctx);
+      const content = inlineMarkdown(children, ctx);
+      return SPACED_TAGS.has(tag) ? ` ${content} ` : content;
+    }
   }
 }
 

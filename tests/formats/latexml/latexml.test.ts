@@ -2,7 +2,8 @@
  * @fileoverview `parseLatexml` on synthetic LaTeXML pages: the section outline rebuilt
  * when an unclosed inline element swallows the sections after it, floats LaTeXML writes
  * as spans, subfigure and subtable panels, a bare tabular used as a spacer, an abstract
- * set as a section, entity-written text, and `\url` links.
+ * set as a section, entity-written text, `\url` links, MathML with no TeX, text split
+ * across spans, and front matter at document size.
  * @module tests/formats/latexml/latexml.test
  */
 import { describe, expect, it } from 'vitest';
@@ -79,7 +80,7 @@ describe('abstract', () => {
         sections: [
           {
             blocks: [{ text: 'What we did.', type: 'paragraph' }],
-            id: 'abstract-1',
+            id: 'abstract-1-1',
             kind: 'body',
             sections: [],
           },
@@ -294,7 +295,156 @@ describe('inline text', () => {
   });
 });
 
+describe('MathML with no TeX', () => {
+  const squared = '<math><msup><mi>x</mi><mn>2</mn></msup></math>';
+
+  it('linearizes it inline, in a listing line, and in an equation row', async () => {
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">Value ${squared} is measured.</p></div>
+        <div class="ltx_listing"><div class="ltx_listingline">Input: <math><msub><mi>x</mi><mi>i</mi></msub></math></div></div>
+        <table id="S1.E1" class="ltx_equation ltx_eqn_table"><tbody><tr class="ltx_equation ltx_eqn_row">
+        <td class="ltx_eqn_cell">${squared}</td>
+        <td class="ltx_eqn_cell ltx_eqn_eqno"><span class="ltx_tag ltx_tag_equation">(1)</span></td></tr></tbody></table>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      { text: 'Value $x^2$ is measured.', type: 'paragraph' },
+      { text: 'Input: $x_i$', type: 'code' },
+      { id: 'S1.E1', label: '(1)', tex: 'x^2', type: 'formula' },
+    ]);
+  });
+
+  it('prefers the TeX annotation, then the alttext, as before', async () => {
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">A <math alttext="y^{2}"><semantics><msup><mi>x</mi><mn>2</mn></msup>
+        <annotation encoding="application/x-tex">x^{2}</annotation></semantics></math>,
+        B <math alttext="z"><mi>q</mi></math>.</p></div>`),
+    );
+    expect(blocks(document.body)).toEqual([{ text: 'A $x^{2}$, B $z$.', type: 'paragraph' }]);
+  });
+
+  it('writes nothing for math whose linearization is empty', async () => {
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">Value <math><mphantom><mi>x</mi></mphantom></math> is.</p></div>
+        <div class="ltx_listing"><div class="ltx_listingline">Input: <math><mrow></mrow></math></div></div>`),
+    );
+    expect(blocks(document.body)).toEqual([
+      { text: 'Value is.', type: 'paragraph' },
+      { text: 'Input:', type: 'code' },
+    ]);
+  });
+
+  it('reads 100,000 nested rows, keeping their text', async () => {
+    const deep = `<math>${'<mrow>'.repeat(100_000)}<mi>x</mi>${'</mrow>'.repeat(100_000)}</math>`;
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">Value ${deep} is measured.</p></div>`),
+    );
+    expect(blocks(document.body)).toEqual([{ text: 'Value $x$ is measured.', type: 'paragraph' }]);
+  });
+});
+
+describe('text split across spans', () => {
+  const span = (parts: string[]) =>
+    parts.map((part) => `<span class="ltx_text">${part}</span>`).join('');
+
+  /** Every field a LaTeXML page writes inline Markdown into, each holding `split`. */
+  async function fields(split: string): Promise<string[]> {
+    const document = await parse(
+      `<html><body><article class="ltx_document"><h1 class="ltx_title ltx_title_document">T ${split}</h1>
+      <section id="S1" class="ltx_section"><h2 class="ltx_title">H ${split}</h2>
+      <div class="ltx_para"><p class="ltx_p">P ${split}<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup>
+      <span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup>N ${split}</span></span></span></p></div>
+      <figure id="F1" class="ltx_figure"><img src="a.png"><figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>C ${split}</figcaption></figure>
+      <table class="ltx_tabular"><tr class="ltx_tr"><td class="ltx_td">D ${split}</td></tr></table>
+      <div class="ltx_theorem"><h6 class="ltx_title ltx_runin"><span class="ltx_tag">Theorem 1</span> (M ${split})</h6>
+      <div class="ltx_para"><p class="ltx_p">Body.</p></div></div></section>
+      <section class="ltx_bibliography"><ul class="ltx_biblist"><li class="ltx_bibitem" id="bib.bib1">
+      <span class="ltx_tag ltx_tag_bibitem">[1]</span><span class="ltx_bibblock">R ${split}</span></li></ul></section>
+      </article></body></html>`,
+    );
+    const [section] = document.body;
+    const [paragraph, figure, table, box] = section?.blocks ?? [];
+    return [
+      document.metadata.title ?? '',
+      section?.title ?? '',
+      paragraph?.type === 'paragraph' ? paragraph.text : '',
+      document.footnotes[0]?.text ?? '',
+      figure?.type === 'figure' ? (figure.caption ?? '') : '',
+      table?.type === 'table' ? (table.rows[0]?.[0] ?? '') : '',
+      box?.type === 'box' ? (box.title ?? '') : '',
+      document.references[0]?.text ?? '',
+    ];
+  }
+
+  it.each([
+    [['&lt;', 'img src=x onerror=alert(1)&gt;'], '\\<img src=x onerror=alert(1)>'],
+    [['[click]', '(javascript:alert(1))'], '[click\\](javascript:alert(1))'],
+    [['\\', '&lt;img src=x onerror=alert(1)&gt;'], '\\\\\\<img src=x onerror=alert(1)>'],
+    [['&lt;', 'javascript:alert(1)&gt;'], '\\<javascript:alert(1)>'],
+    [['!', '[x]', '(https://example.org/a.png)'], '\\![x](https://example.org/a.png)'],
+    [['&lt;', '!-- hidden --&gt;'], '\\<!-- hidden -->'],
+  ])('writes %j as text in every field, however the spans split it', async (parts, written) => {
+    expect(await fields(span(parts))).toEqual([
+      `T ${written}`,
+      `H ${written}`,
+      `P ${written}^1`,
+      `N ${written}`,
+      `C ${written}`,
+      `D ${written}`,
+      `(M ${written})`,
+      `R ${written}`,
+    ]);
+  });
+});
+
+describe('front matter at document size', () => {
+  /** One author with `n` affiliation lines, each distinct, or all the same. */
+  const affiliated = (n: number, distinct = true) =>
+    page(
+      `<div class="ltx_authors"><span class="ltx_creator ltx_role_author"><span class="ltx_personname">An Author${Array.from(
+        { length: n },
+        (_, i) =>
+          `<br class="ltx_break">Department of Applied Mathematics, University ${String(distinct ? i : 0).padStart(6, '0')}`,
+      ).join('')}</span></span></div><div class="ltx_para"><p class="ltx_p">Text.</p></div>`,
+    );
+
+  it('lists each affiliation once, in order of first mention, and indexes authors into it', async () => {
+    const creator = (name: string, ...lines: string[]) =>
+      `<span class="ltx_creator ltx_role_author"><span class="ltx_personname">${[name, ...lines].join('<br class="ltx_break">')}</span></span>`;
+    const document = await parse(
+      page(
+        `<div class="ltx_authors">${creator('A One', 'X', 'Y')}${creator('B Two', 'Y', 'Z', 'X')}${creator('C Three', 'Z', 'Z')}</div>`,
+      ),
+    );
+    expect(document.metadata.affiliations).toEqual(['X', 'Y', 'Z']);
+    expect(document.metadata.authors?.map((a) => a.affiliations)).toEqual([[0, 1], [1, 2, 0], [2]]);
+  });
+
+  it('reads 50,000 distinct affiliation lines in time linear in their count', async () => {
+    await expectLinear(affiliated, parse, { from: 3_125, to: 50_000 });
+    const { affiliations, authors } = (await parse(affiliated(50_000))).metadata;
+    expect(affiliations).toHaveLength(50_000);
+    expect(authors?.[0]?.affiliations).toEqual(affiliations?.map((_, i) => i));
+  }, 60_000);
+});
+
 describe('document-sized lists', () => {
+  it('reads a paragraph of footnotes in time linear in their number', async () => {
+    const words = ' word'.repeat(50);
+    const note = (i: number) =>
+      `<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">${i}</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">${i}</sup>Note ${i}.</span></span></span>`;
+    const notes = (n: number) =>
+      page(
+        `<div class="ltx_para"><p class="ltx_p">${Array.from({ length: n }, (_, i) => `${note(i)}${words}`).join('')}</p></div>`,
+      );
+    const document = await parse(notes(3));
+    // The first note has no text before it for its mark to follow.
+    expect(blocks(document.body)).toEqual([
+      { text: `${words.trim()}^1${words}^2${words}`, type: 'paragraph' },
+    ]);
+    expect(document.footnotes.map((fn) => fn.text)).toEqual(['Note 0.', 'Note 1.', 'Note 2.']);
+    await expectLinear(notes, parse, { from: 500, to: 8_000 });
+  }, 60_000);
+
   /** V8 rejects a call spreading ~120,000 arguments, so the case runs past that on Node. */
   it('reads a paragraph block of 200,000 paragraphs', async () => {
     const document = await parse(

@@ -11,10 +11,11 @@ import {
   childNodes,
   hasClass,
   isElement,
-  loadDocument,
+  loadBoundedDocument,
   resolveUrl,
   tagOf,
   textOfElement,
+  truncatedNestingMessage,
 } from '../../html/dom.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
@@ -43,7 +44,7 @@ import { kindFromTitle } from '../../model/section-kinds.js';
 import { createGridBudget } from '../../model/table-grid.js';
 import { flowBlocks, parseSection } from './blocks.js';
 import type { LatexmlContext } from './context.js';
-import { inlineMarkdown, inlineText } from './inline.js';
+import { inlineRun, inlineText } from './inline.js';
 
 /** Options for {@link parseLatexml}. */
 export interface LatexmlOptions extends ParseOptions {
@@ -79,17 +80,19 @@ async function readLatexml(
       : failed('wrong-format', 'Not a LaTeXML page: no ltx_document element');
   }
 
-  const document = await loadDocument(source);
+  const { document, droppedTags } = await loadBoundedDocument(source);
   const article = document.querySelector('.ltx_document');
   if (!article) return failed('wrong-format', 'Not a LaTeXML page: no ltx_document element');
 
   const ctx: LatexmlContext = {
     baseUrl: options.baseUrl,
+    blockHolders: new WeakMap(),
     diag: createDiagnostics(),
     footnotes: [],
     gridBudget: createGridBudget(),
     sectionIds: new Set(),
   };
+  if (droppedTags > 0) ctx.diag.warn('truncated-input', truncatedNestingMessage(droppedTags));
   const watermark = parseWatermark(document, options.baseUrl);
   const metadata = extractMetadata(article, document, watermark, ctx);
   const marked = extractAbstracts(article, ctx);
@@ -219,9 +222,14 @@ const NAME_LIKE = /^(?:[\p{Lu}][\p{L}'.-]*\s+){1,4}[\p{Lu}][\p{L}'.-]*$/u;
  */
 function extractAuthors(article: Element): { affiliations: string[]; authors: Author[] } {
   const affiliations: string[] = [];
+  const indexes = new Map<string, number>();
   const affIndex = (value: string) => {
-    const existing = affiliations.indexOf(value);
-    return existing === -1 ? affiliations.push(value) - 1 : existing;
+    let index = indexes.get(value);
+    if (index === undefined) {
+      index = affiliations.push(value) - 1;
+      indexes.set(value, index);
+    }
+    return index;
   };
   const authors: Author[] = [];
   for (const creator of Array.from(
@@ -275,7 +283,7 @@ function extractAbstracts(article: Element, ctx: LatexmlContext): Abstract[] {
         sections: [
           {
             blocks,
-            id: issueId(ctx.sectionIds, undefined, `abstract-${index + 1}`),
+            id: issueId(ctx.sectionIds, undefined, `abstract-${index + 1}-1`),
             kind: 'body' as const,
             sections: [],
           },
@@ -320,7 +328,7 @@ function abstractFromBody(
     if (paragraph?.type !== 'paragraph') continue;
     const part: Section = {
       blocks: [{ text: paragraph.text.replace(RUN_IN_ABSTRACT, ''), type: 'paragraph' }],
-      id: issueId(ctx.sectionIds, undefined, 'abstract-1'),
+      id: issueId(ctx.sectionIds, undefined, 'abstract-1-1'),
       kind: 'body',
       sections: [],
     };
@@ -407,6 +415,8 @@ function extractContent(
   const bibliography = article.querySelector('.ltx_bibliography');
   const references: Reference[] = bibliography ? extractReferences(bibliography, ctx) : [];
   bibliography?.remove();
+  // What each element holds was read before the sections moved and the bibliography went.
+  ctx.blockHolders = new WeakMap();
   let pending: Block[] = [];
   const flushPending = () => {
     if (pending.length === 0) return;
@@ -464,19 +474,16 @@ function extractReferences(bibliography: Element, ctx: LatexmlContext): Referenc
     const tagSpan = item.querySelector('.ltx_tag_bibitem');
     const label = textOfElement(tagSpan).replace(/^\[|\]$/g, '') || undefined;
     const blocks = Array.from(item.querySelectorAll('.ltx_bibblock'));
-    const text = (
+    const text =
       blocks.length > 0
         ? blocks
             .map((block) => inlineText(block, ctx))
             .filter(Boolean)
             .join(' ')
-        : inlineMarkdown(
+        : inlineRun(
             childNodes(item).filter((n) => n !== tagSpan),
             ctx,
-          )
-    )
-      .replace(/\s+/g, ' ')
-      .trim();
+          );
     if (!text) return [];
     const plain = textOfElement(item);
     const hrefs = Array.from(item.querySelectorAll('a[href]')).map((a) =>

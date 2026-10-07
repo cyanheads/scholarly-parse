@@ -7,15 +7,18 @@ import type {
   AbstractKind,
   Block,
   BoxBlock,
+  Footnote,
   Identifiers,
   ListBlock,
   QuoteBlock,
+  Reference,
   ScholarlyDocument,
   Section,
   SectionKind,
   TableBlock,
 } from '../model/document.js';
 import { largest } from '../model/extremes.js';
+import { abstractId, FLOATS_ID, FOOTNOTES_ID, REFERENCES_ID } from '../model/section-ids.js';
 import {
   codeFence,
   escapeBlockStart,
@@ -38,11 +41,12 @@ export interface MarkdownOptions {
   references?: boolean;
   /**
    * Render only these entries, by the IDs `toSections` returns: `abstract-N` for the Nth
-   * abstract, a section's ID for that section, and `floats` for the figures and tables
-   * outside any section. An abstract or the floats render as their `toSections` entry; a
+   * abstract, a section's ID for that section, `floats` for the figures and tables
+   * outside any section, and `footnotes` and `references` for those lists. An abstract,
+   * the floats, the footnotes, or the references render as their `toSections` entry; a
    * section renders as its entry followed by its subsections'. An abstract's own sections
-   * can be named by their IDs from the model too. Entries come in reading order, and
-   * metadata, footnotes, and references are left out.
+   * can be named by their IDs from the model too. Entries come in reading order, metadata
+   * is left out, and the other options are ignored.
    */
   sections?: string[];
 }
@@ -81,20 +85,10 @@ export function toMarkdown(document: ScholarlyDocument, options: MarkdownOptions
     for (const section of document.back) parts.push(renderSection(section, 2));
   }
   if (document.floats.length > 0) parts.push(renderFloats(document.floats));
-  if (options.footnotes !== false && document.footnotes.length > 0) {
-    const lines = document.footnotes.map(
-      (fn) =>
-        `- ${fn.label ? `**${escapeInline(fn.label)}** ${fn.text}` : escapeBlockStart(fn.text)}`,
-    );
-    parts.push(`## Footnotes\n\n${lines.join('\n')}`);
-  }
-  if (options.references !== false && document.references.length > 0) {
-    const lines = document.references.map(
-      (ref) =>
-        `- ${ref.label ? `[${escapeInline(ref.label)}] ${ref.text}` : escapeBlockStart(ref.text)}`,
-    );
-    parts.push(`## References\n\n${lines.join('\n')}`);
-  }
+  if (options.footnotes !== false && document.footnotes.length > 0)
+    parts.push(renderFootnotes(document.footnotes));
+  if (options.references !== false && document.references.length > 0)
+    parts.push(renderReferences(document.references));
   return `${parts.filter(Boolean).join('\n\n')}\n`;
 }
 
@@ -105,14 +99,6 @@ function selectAbstracts(abstracts: Abstract[], mode: 'all' | 'main' | 'none'): 
     abstracts.find((a) => a.kind === 'main') ?? abstracts.find((a) => a.kind !== 'graphical');
   return main ? [main] : [];
 }
-
-/** The ID `toSections` gives the abstract at `index` in `document.abstracts`. */
-export function abstractId(index: number): string {
-  return `abstract-${index + 1}`;
-}
-
-/** The ID `toSections` gives the figures and tables outside any section. */
-export const FLOATS_ID = 'floats';
 
 /**
  * The entries `ids` names, in reading order, each rendered as `toSections` renders it: a
@@ -136,6 +122,10 @@ function renderSelected(document: ScholarlyDocument, ids: string[]): string {
   visit(document.back, 2);
   if (wanted.has(FLOATS_ID) && document.floats.length > 0)
     found.push(renderFloats(document.floats).trim());
+  if (wanted.has(FOOTNOTES_ID) && document.footnotes.length > 0)
+    found.push(renderFootnotes(document.footnotes).trim());
+  if (wanted.has(REFERENCES_ID) && document.references.length > 0)
+    found.push(renderReferences(document.references).trim());
   const rendered = found.filter(Boolean);
   return rendered.length > 0 ? `${rendered.join('\n\n')}\n` : '';
 }
@@ -249,6 +239,30 @@ export const FLOATS_HEADING = 'Figures and tables';
 /** The figures and tables outside any section, under their own heading. */
 export function renderFloats(floats: Block[]): string {
   return `## ${FLOATS_HEADING}\n\n${renderBlocks(floats)}`;
+}
+
+/** Heading over the footnotes. */
+export const FOOTNOTES_HEADING = 'Footnotes';
+
+/** The footnotes as a list under their own heading, each led by its label. */
+export function renderFootnotes(footnotes: Footnote[]): string {
+  const lines = footnotes.map(
+    (fn) =>
+      `- ${fn.label ? `**${escapeInline(fn.label)}** ${fn.text}` : escapeBlockStart(fn.text)}`,
+  );
+  return `## ${FOOTNOTES_HEADING}\n\n${lines.join('\n')}`;
+}
+
+/** Heading over the references. */
+export const REFERENCES_HEADING = 'References';
+
+/** The references as a list under their own heading, each led by its bracketed label. */
+export function renderReferences(references: Reference[]): string {
+  const lines = references.map(
+    (ref) =>
+      `- ${ref.label ? `[${escapeInline(ref.label)}] ${ref.text}` : escapeBlockStart(ref.text)}`,
+  );
+  return `## ${REFERENCES_HEADING}\n\n${lines.join('\n')}`;
 }
 
 /**

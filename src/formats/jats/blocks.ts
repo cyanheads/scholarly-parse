@@ -22,12 +22,18 @@ import type {
 import { append } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { splitSectionNumber } from '../../model/section-kinds.js';
-import { escapeInline } from '../../render/escape.js';
-import { emphasis, joinAdjacentMath } from '../../render/inline.js';
+import { tableName } from '../../model/table-grid.js';
+import { escapeInline, foldLineBreaks } from '../../render/escape.js';
+import {
+  collapseInline,
+  emphasis,
+  FORMULA_IMAGE,
+  inlineCode,
+  inlineMath,
+} from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
-  collapseWhitespace,
   findAll,
   findOne,
   isTextNode,
@@ -100,7 +106,7 @@ interface Flow {
 }
 
 function flushRun(flow: Flow): void {
-  const text = joinAdjacentMath(collapseWhitespace(flow.run));
+  const text = collapseInline(flow.run);
   if (text) flow.blocks.push({ text, type: 'paragraph' });
   flow.run = '';
 }
@@ -269,11 +275,17 @@ export function captionText(caption: XmlNode | undefined, ctx: JatsContext): str
  * bold the way a figure's renders; the panels inside carry neither.
  */
 function groupCaption(group: XmlNode, ctx: JatsContext): Block[] {
-  const label = text(findOne(group, 'label')).replace(/[.:]\s*$/, '');
-  const line = [label && `**${escapeInline(label)}.**`, captionText(findOne(group, 'caption'), ctx)]
-    .filter(Boolean)
-    .join(' ');
+  const line = labelLine(
+    text(findOne(group, 'label')),
+    captionText(findOne(group, 'caption'), ctx),
+  );
   return line ? [{ text: line, type: 'paragraph' }] : [];
+}
+
+/** A label in bold, the way a figure's renders, before a caption: `**Table 1.** Caption`. */
+function labelLine(label: string | undefined, caption: string | undefined): string {
+  const bare = label?.replace(/[.:]\s*$/, '');
+  return [bare && `**${escapeInline(bare)}.**`, caption].filter(Boolean).join(' ');
 }
 
 /** A figure's own parts; anything else inside a `<fig>` is content that follows it. */
@@ -382,15 +394,23 @@ function list(node: XmlNode, ctx: JatsContext, withTitle: boolean): ListBlock {
   return { type: 'list', ordered, items, ...(title && { title }) };
 }
 
-/** A `<def-list>`: one item per `<def-item>`, the term in bold before its definition. */
+/**
+ * A `<def-list>`: one item per `<def-item>`, the blocks of its definitions led by the term
+ * in bold, the way {@link list} leads an item with its label.
+ */
 function defList(node: XmlNode, ctx: JatsContext, withTitle: boolean): ListBlock {
   const title = withTitle ? inlineText(findOne(node, 'title'), ctx) : '';
   const items: Block[][] = [];
   for (const item of findAll(node, 'def-item')) {
     const term = inlineText(findOne(item, 'term'), ctx);
-    const definition = inlineText(findOne(item, 'def'), ctx);
-    const entry = [term && emphasis(term, '**'), definition].filter(Boolean).join(' — ');
-    if (entry) items.push([{ text: entry, type: 'paragraph' }]);
+    const blocks = findAll(item, 'def').flatMap((def) => flowBlocks(childrenOf(def), ctx));
+    if (term) {
+      const lead = emphasis(term, '**');
+      const [first] = blocks;
+      if (first?.type === 'paragraph') first.text = `${lead} — ${first.text}`;
+      else blocks.unshift({ text: lead, type: 'paragraph' });
+    }
+    if (blocks.length > 0) items.push(blocks);
   }
   return { type: 'list', ordered: false, items, ...(title && { title }) };
 }
@@ -462,22 +482,98 @@ function displayFormula(node: XmlNode, ctx: JatsContext): FormulaBlock | undefin
   return { type: 'formula', ...(id && { id }), ...(label && { label }), ...parts };
 }
 
-/** Collect every `<fn>` under a node into the document's footnotes. */
+/**
+ * Collect every `<fn>` under a node into the document's footnotes. A footnote is text in
+ * every format, so each block of a note is written into it, in order ({@link noteText}).
+ */
 export function collectFootnotes(node: XmlNode, ctx: JatsContext): void {
   for (const fn of childrenOf(node)) {
     const tag = tagNameOf(fn);
     if (tag === 'fn') {
       const label = text(findOne(fn, 'label')) || undefined;
-      const body = flowBlocks(withoutTags(childrenOf(fn), 'label'), ctx)
-        .map((block) => (block.type === 'paragraph' ? block.text : ''))
-        .filter(Boolean)
-        .join(' ');
       const id = attrOf(fn, 'id');
+      const body = noteText(flowBlocks(withoutTags(childrenOf(fn), 'label'), ctx), ctx, id);
       if (body) ctx.footnotes.push({ ...(id && { id }), ...(label && { label }), text: body });
     } else if (tag && tag !== 'title' && tag !== 'label') {
       collectFootnotes(fn, ctx);
     }
   }
+}
+
+/**
+ * A note's blocks as one line of inline Markdown, in order: a paragraph's text, a list's
+ * title and items, a formula as inline math (else its text), code as inline code, the
+ * title and blocks of a quote or box, and the label and caption of a figure, table, or
+ * supplement. A table's rows do not fit in a line, so leaving them out is warned of, with
+ * the note's ID as `where`.
+ */
+function noteText(blocks: readonly Block[], ctx: JatsContext, where: string | undefined): string {
+  return blocks
+    .map((block) => blockText(block, ctx, where))
+    .filter(Boolean)
+    .join(' ');
+}
+
+function blockText(block: Block, ctx: JatsContext, where: string | undefined): string {
+  switch (block.type) {
+    case 'paragraph':
+      return block.text;
+    case 'list':
+      return [block.title && emphasis(block.title, '**'), noteText(block.items.flat(), ctx, where)]
+        .filter(Boolean)
+        .join(' ');
+    case 'formula':
+      if (block.tex) return inlineMath(block.tex);
+      return block.text === undefined ? FORMULA_IMAGE : escapeInline(block.text);
+    case 'code':
+      return inlineCode(foldLineBreaks(block.text));
+    case 'quote':
+      return noteText(block.blocks, ctx, where);
+    case 'box':
+      return [
+        boldHeading(block.label, block.title),
+        noteText(block.blocks, ctx, where),
+        sectionsText(block.sections, ctx, where),
+      ]
+        .filter(Boolean)
+        .join(' ');
+    case 'table':
+      ctx.diag.warn(
+        'unhandled-element',
+        `${tableName(block.label, block.id)} in a footnote keeps its label and caption; its rows are left out`,
+        where,
+      );
+      return labelLine(block.label, block.caption);
+    case 'figure':
+    case 'supplement':
+      return labelLine(block.label, block.caption);
+  }
+}
+
+/** Sections inside a note's box as text: each heading in bold, then its blocks and subsections. */
+function sectionsText(
+  sections: readonly Section[],
+  ctx: JatsContext,
+  where: string | undefined,
+): string {
+  return sections
+    .map((section) =>
+      [
+        boldHeading(section.label, section.title),
+        noteText(section.blocks, ctx, where),
+        sectionsText(section.sections, ctx, where),
+      ]
+        .filter(Boolean)
+        .join(' '),
+    )
+    .filter(Boolean)
+    .join(' ');
+}
+
+/** A label (plain text) and title (Markdown) as one bold heading, as a box's renders. */
+function boldHeading(label: string | undefined, title: string | undefined): string {
+  const heading = [label && escapeInline(label), title].filter(Boolean).join(' ');
+  return heading && emphasis(heading, '**');
 }
 
 // ─── Sections ───────────────────────────────────────────────────────────────
@@ -518,21 +614,32 @@ function isSubsectionTag(node: XmlNode): boolean {
   return tag === 'sec' || (tag === 'notes' && text(findOne(node, 'title')) !== '');
 }
 
+/** A child that can follow a section's subsections: a subsection, a heading, or whitespace. */
+function isTrailing(node: XmlNode): boolean {
+  return isTextNode(node)
+    ? textOf(node).trim() === ''
+    : isSubsectionTag(node) || ['label', 'title'].includes(tagNameOf(node) ?? '');
+}
+
 /**
- * True when a titled `<notes>` can be a subsection: nothing but other subsections
- * follows it. A section's blocks come before its subsections, and unlike `<sec>`,
- * which JATS places after every paragraph, `<notes>` may be followed by more text,
- * which would otherwise move above it.
+ * Where a section's trailing run starts: the index of the first child after which, itself
+ * included, only {@link isTrailing} children follow. Found once per section, walking back
+ * from the end.
  */
-function isTrailingNotes(notes: XmlNode, siblings: XmlNodeList): boolean {
-  if (!isSubsectionTag(notes)) return false;
-  return siblings
-    .slice(siblings.indexOf(notes) + 1)
-    .every((sibling) =>
-      isTextNode(sibling)
-        ? textOf(sibling).trim() === ''
-        : isSubsectionTag(sibling) || ['label', 'title'].includes(tagNameOf(sibling) ?? ''),
-    );
+function trailingStart(children: XmlNodeList): number {
+  let start = children.length;
+  while (start > 0 && isTrailing(children[start - 1] as XmlNode)) start--;
+  return start;
+}
+
+/**
+ * True when a titled `<notes>`, child `index` of its section, can be a subsection:
+ * nothing but other subsections follows it ({@link trailingStart}). A section's blocks
+ * come before its subsections, and unlike `<sec>`, which JATS places after every
+ * paragraph, `<notes>` may be followed by more text, which would otherwise move above it.
+ */
+function isTrailingNotes(notes: XmlNode, index: number, trailing: number): boolean {
+  return index >= trailing && isSubsectionTag(notes);
 }
 
 /** The one element a `<sec>` holds besides its title and label, if it holds only one. */
@@ -640,12 +747,13 @@ export function parseSection(
   const blocks: Block[] = [];
   const sections: Section[] = [];
   const children = childrenOf(sec);
+  const trailing = trailingStart(children);
   const only = loneContent(sec);
   const notesAreContent =
     only !== undefined &&
     tagNameOf(only) === 'fn-group' &&
     namesNotes(inlineText(findOne(sec, 'title'), ctx));
-  for (const child of children) {
+  for (const [index, child] of children.entries()) {
     const tag = tagNameOf(child);
     if (tag === 'title' && title === undefined) {
       title = inlineText(child, ctx) || undefined;
@@ -655,7 +763,7 @@ export function parseSection(
       label = text(child) || undefined;
       continue;
     }
-    if (tag === 'sec' || (tag === 'notes' && isTrailingNotes(child, children))) {
+    if (tag === 'sec' || (tag === 'notes' && isTrailingNotes(child, index, trailing))) {
       const section = parseSection(child, ctx, kind, `${id}.${sections.length + 1}`);
       if (section) sections.push(section);
       continue;

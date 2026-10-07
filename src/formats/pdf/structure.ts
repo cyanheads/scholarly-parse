@@ -5,14 +5,14 @@
  * size, weight, case, and numbering, and footnotes from small type below a page's text.
  * @module src/formats/pdf/structure
  */
-import type { Reference, Section, SectionKind } from '../../model/document.js';
+import type { Footnote, Reference, Section, SectionKind } from '../../model/document.js';
 import { smallest } from '../../model/extremes.js';
 import { issueId } from '../../model/section-ids.js';
 import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js';
 import { escapeInline } from '../../render/escape.js';
 import { flow } from './blocks.js';
 import type { PdfContext } from './context.js';
-import { joinLines } from './inline.js';
+import { joinLines, lineMarkdown, noteLabel, trimCells } from './inline.js';
 import { byColumn, cellText, type Layout, type Line, linesSize } from './layout.js';
 import {
   ABSTRACT_HEADING,
@@ -22,12 +22,12 @@ import {
   type HeadingStyle,
   headingOf,
   isCaptionStart,
+  isPanelLabel,
   KEYWORDS_LINE,
   REFERENCES_HEADING,
   styleOf,
   words,
 } from './lines.js';
-import type { Run } from './load.js';
 import { references } from './references.js';
 
 export interface PdfStructure {
@@ -35,6 +35,8 @@ export interface PdfStructure {
   abstract: Section[];
   back: Section[];
   body: Section[];
+  /** Notes set below a page's text before the reference list, by their printed labels. */
+  footnotes: Footnote[];
   keywords: string[];
   references: Reference[];
   title?: string;
@@ -63,9 +65,23 @@ interface Collected {
   /** The size the abstract text is set in. */
   abstractSize?: number;
   keywords: string[];
+  /** Footnote lines, in reading order. */
+  notes: Line[];
   references?: RawSection;
   roots: RawSection[];
 }
+
+/** The lines of the zones {@link footnoteZones} finds, sorted by what they hold. */
+interface NoteLines {
+  /** First-page front matter set like a note (affiliations, correspondence, a licence): dropped. */
+  front: Set<Line>;
+  /** Footnotes: zones opening with a label. */
+  notes: Set<Line>;
+}
+
+/** Text a first-page note zone holds when it is front matter: an affiliation, an address, a licence. */
+const FRONT_NOTE =
+  /\b(?:universit|institut|department|faculty|school of|hospital|cent(?:re|er)\b|college|laborator|e-?mail|correspondence)|@|©|creative commons|licen[cs]e|open access/i;
 
 /**
  * Split the document into its parts. Everything before the abstract or the first
@@ -73,18 +89,19 @@ interface Collected {
  */
 export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
   const title = titleOf(layout.lines, layout.bodySize);
-  const footnotes = footnoteLines(layout.lines, layout.bodySize);
-  let parts = collect(layout, title.lines, footnotes, false);
+  const notes = noteLines(layout);
+  let parts = collect(layout, title.lines, notes, false);
   // No body section heading was recognized as one, only back matter: fall back to taking
   // any heading as the first.
   if (parts.roots.every((raw) => raw === parts.references || isBackMatter(raw)))
-    parts = collect(layout, title.lines, footnotes, true);
+    parts = collect(layout, title.lines, notes, true);
   if (!parts.references) ctx.diag.warn('structure-inferred', 'No reference list heading was found');
 
   const result: PdfStructure = {
     abstract: [],
     back: [],
     body: [],
+    footnotes: footnotesOf(parts.notes),
     keywords: parts.keywords,
     references: [],
     ...(title.text && { title: title.text }),
@@ -92,7 +109,8 @@ export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
   for (const part of parts.abstract) {
     const blocks = flow(part.lines, layout, ctx, parts.abstractSize);
     if (blocks.length === 0 && !part.title) continue;
-    const id = issueId(ctx.sectionIds, undefined, 'abstract');
+    // Parts of the one abstract a PDF has: `abstract-1-<m>`, outside the IDs `toSections` reserves.
+    const id = issueId(ctx.sectionIds, undefined, `abstract-1-${result.abstract.length + 1}`);
     result.abstract.push({
       blocks,
       id,
@@ -149,12 +167,32 @@ function titleOf(lines: Line[], bodySize: number): { lines: Set<Line>; text?: st
 }
 
 /**
- * Small lines closing a page's column, set off by a gap below all of its body text:
- * footnotes, affiliations, a correspondence address, a licence statement.
+ * Note zones sorted by their first line. A zone opening with a label holds footnotes,
+ * unless on the first page it names an institution, an address, or a licence: that, and
+ * any unlabelled zone on the first page, is front matter. An unlabelled zone on a later
+ * page (back matter set small, a table's cells) stays where it is read.
  */
-function footnoteLines(lines: Line[], bodySize: number): Set<Line> {
+function noteLines(layout: Layout): NoteLines {
+  const firstPage = layout.lines[0]?.page;
+  const sorted: NoteLines = { front: new Set(), notes: new Set() };
+  for (const zone of footnoteZones(layout.lines, layout.bodySize)) {
+    const [top] = zone;
+    if (!top) continue;
+    const front = top.page === firstPage;
+    if (noteLabel(top) && !(front && FRONT_NOTE.test(zone.map((line) => line.text).join(' '))))
+      for (const line of zone) sorted.notes.add(line);
+    else if (front) for (const line of zone) sorted.front.add(line);
+  }
+  return sorted;
+}
+
+/**
+ * Small lines closing a page's column, set off by a gap below all of its body text, one
+ * zone per column: footnotes, affiliations, a correspondence address, a licence statement.
+ */
+function footnoteZones(lines: Line[], bodySize: number): Line[][] {
   const small = (line: Line) => line.size < bodySize - 0.3;
-  const found = new Set<Line>();
+  const found: Line[][] = [];
   for (const column of byColumn(lines).values()) {
     let start = column.length;
     while (
@@ -179,9 +217,23 @@ function footnoteLines(lines: Line[], bodySize: number): Set<Line> {
         (first.column === -1 || line.column === first.column || line.column === -1),
     );
     const floor = smallest(above.map((line) => line.y));
-    if (zone.every((line) => line.y < floor)) for (const line of zone) found.add(line);
+    if (zone.every((line) => line.y < floor)) found.push(zone);
   }
   return found;
+}
+
+/** Footnote lines as notes: each label opens one, which runs on over the lines after it. */
+function footnotesOf(lines: Line[]): Footnote[] {
+  const notes: { label: string; texts: string[] }[] = [];
+  for (const line of lines) {
+    const found = noteLabel(line);
+    if (found) notes.push({ label: found.label, texts: [found.text] });
+    else notes.at(-1)?.texts.push(lineMarkdown(line));
+  }
+  return notes.flatMap(({ label, texts }) => {
+    const text = joinLines(texts.filter(Boolean));
+    return text ? [{ label, text }] : [];
+  });
 }
 
 /** Where the lines below a column's lowest paragraph-sized gap begin, or its length when there is none. */
@@ -263,19 +315,33 @@ function runInHeading(
 }
 
 /**
+ * A bold label naming back matter that opens a line inside the reference list
+ * (`Conflict of Interest:`): end matter set after the last entry with no heading of its
+ * own. The label ends in a colon and holds no comma or initials, so a bold author name
+ * opening an entry (`Funder DC:`, `Funder, D. C.:`) stays in the list.
+ */
+function backMatterLabel(line: Line): { rest: Line; title: string } | undefined {
+  const found = leadingLabel(line);
+  if (
+    !found ||
+    !/:$/.test(found.label) ||
+    words(found.label) > 6 ||
+    /,|\b\p{Lu}{1,3}\.?:?$|\b\p{Lu}\./u.test(found.label)
+  )
+    return;
+  const title = found.label.replace(/:$/, '').trim();
+  return kindFromTitle(title) ? { rest: found.rest, title } : undefined;
+}
+
+/**
  * Walk the lines once, sorting each into the front matter (dropped), the abstract, the
  * keywords, or a section. `lenient` lets any heading end the front matter, for papers
  * whose section headings are neither numbered nor named the usual way.
  */
-function collect(
-  layout: Layout,
-  title: Set<Line>,
-  footnotes: Set<Line>,
-  lenient: boolean,
-): Collected {
+function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: boolean): Collected {
   const { bodySize, lines } = layout;
   const edges = columnEdges(lines, bodySize);
-  const out: Collected = { abstract: [], keywords: [], roots: [] };
+  const out: Collected = { abstract: [], keywords: [], notes: [], roots: [] };
   const stack: RawSection[] = [];
   const front: Line[] = [];
   const partTitles = new Set<string>();
@@ -363,7 +429,14 @@ function collect(
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i] as Line;
     if (title.has(line)) beforeTitle = false;
-    if (beforeTitle || title.has(line) || (!out.references && footnotes.has(line))) continue;
+    if (beforeTitle || title.has(line)) continue;
+    // Below the reference list's heading, small lines closing a column are its entries, and
+    // after it they are end matter (`backMatterLabel`).
+    if (!out.references && notes.front.has(line)) continue;
+    if (!out.references && notes.notes.has(line)) {
+      out.notes.push(line);
+      continue;
+    }
 
     const keywords = KEYWORDS_LINE.exec(line.text);
     if (keywords && out.keywords.length === 0 && !out.references && line.page <= 2) {
@@ -394,7 +467,8 @@ function collect(
       continue;
     }
 
-    const heading = headingOf(line, bodySize);
+    // A figure's panel labels set above its panels (`A) Pathway`, then `B)`) are its lettering.
+    const heading = isPanelLabel(line, lines[i + 1]) ? undefined : headingOf(line, bodySize);
     if (heading) {
       const bare = bareTitle(line.text.trim());
       const style = styleOf(line, line.text.trim());
@@ -514,9 +588,14 @@ function collect(
       continue;
     }
     // Back matter's bold labels (`Conceptualization:`, `Funding:`) are its text, not subsections.
+    // Inside the reference list only a back-matter label opens a section, ending the list:
+    // the line before it usually ends in a DOI, so its punctuation is not checked.
     const inBackMatter = stack.some((ancestor) => !ancestor.style.runIn && isBackMatter(ancestor));
-    const runIn =
-      inReferences || inBackMatter ? undefined : runInHeading(line, stack.at(-1)?.lines.at(-1));
+    const runIn = inReferences
+      ? backMatterLabel(line)
+      : inBackMatter
+        ? undefined
+        : runInHeading(line, stack.at(-1)?.lines.at(-1));
     if (runIn) {
       const number = /^((?:\d{1,2}\.)*\d{1,2})\.?\s/.exec(runIn.title)?.[1];
       const style = { ...styleOf(line, runIn.title), bold: true, runIn: true };
@@ -560,23 +639,6 @@ function wrapped(line: Line, next: Line, edges: Map<string, number>): boolean {
   const firstWord = next.text.split(/\s+/)[0] ?? '';
   const wordWidth = ((next.right - next.x) * firstWord.length) / Math.max(1, next.text.length);
   return line.right + wordWidth + line.size * 0.25 >= edge - line.size * 0.5;
-}
-
-/** A line's cells without its opening `prefix`, matched by its non-space characters (runs may not carry the spaces between them). */
-function trimCells(line: Line, prefix: string): Run[][] {
-  let remaining = prefix.replace(/\s/g, '').length;
-  return line.cells.map((cell) =>
-    cell.flatMap((run) => {
-      if (remaining <= 0) return [run];
-      let cut = 0;
-      while (cut < run.text.length && remaining > 0) {
-        if (!/\s/.test(run.text[cut] ?? '')) remaining--;
-        cut++;
-      }
-      const text = run.text.slice(cut).replace(/^\s+/, '');
-      return text ? [{ ...run, text }] : [];
-    }),
-  );
 }
 
 /**

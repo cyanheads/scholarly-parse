@@ -1,7 +1,7 @@
 /**
  * @fileoverview Inline Markdown for LaTeXML HTML: fonts, links, cross-references and
  * citations as printed, footnotes collected with their mark left in place, and math as
- * the TeX LaTeXML keeps beside every MathML tree.
+ * the TeX LaTeXML keeps beside every MathML tree, else the MathML linearized.
  * @module src/formats/latexml/inline
  */
 
@@ -15,12 +15,13 @@ import {
   tagOf,
   textOfElement,
 } from '../../html/dom.js';
+import { domMathTex } from '../../html/math.js';
 import { escapeInline } from '../../render/escape.js';
 import {
+  collapseInline,
   emphasis,
   inlineCode,
   inlineMath,
-  joinAdjacentMath,
   link,
   subscript,
   superscript,
@@ -36,19 +37,15 @@ export function inlineMarkdown(nodes: Node[], ctx: LatexmlContext): string {
 
 /** Inline Markdown of an element's content, whitespace collapsed. */
 export function inlineText(element: Element | null | undefined, ctx: LatexmlContext): string {
-  return element
-    ? joinAdjacentMath(inlineMarkdown(childNodes(element), ctx).replace(/\s+/g, ' ').trim())
-    : '';
+  return element ? inlineRun(childNodes(element), ctx) : '';
 }
 
 /**
- * TeX LaTeXML keeps for a `<math>`: the `application/x-tex` annotation, else `@alttext`.
+ * Inline Markdown for a list of nodes as one finished run: whitespace collapsed, and the
+ * seams between separately escaped pieces repaired.
  */
-export function mathTex(math: Element): string {
-  const annotation = Array.from(math.getElementsByTagName('annotation')).find(
-    (a) => (a.getAttribute('encoding') ?? '').toLowerCase() === 'application/x-tex',
-  );
-  return (annotation?.textContent ?? math.getAttribute('alttext') ?? '').trim();
+export function inlineRun(nodes: Node[], ctx: LatexmlContext): string {
+  return collapseInline(inlineMarkdown(nodes, ctx));
 }
 
 function inlineNode(node: Node, ctx: LatexmlContext): string {
@@ -58,7 +55,7 @@ function inlineNode(node: Node, ctx: LatexmlContext): string {
   if (SKIP_TAGS.has(tag)) return '';
   const inner = () => inlineMarkdown(childNodes(node), ctx);
 
-  if (tag === 'math') return inlineMath(mathTex(node));
+  if (tag === 'math') return inlineMath(domMathTex(node));
   // LaTeXML's marker for a macro it could not expand holds only the macro's name
   // (`\argmax`, `{inparablank}`); the content around it is converted as usual.
   if (hasClass(node, 'ltx_ERROR')) return '';
@@ -131,7 +128,7 @@ function footnote(note: Element, ctx: LatexmlContext): string {
       (child) =>
         !isElement(child) || !(hasClass(child, 'ltx_note_mark') || hasClass(child, 'ltx_tag_note')),
     );
-    const text = inlineMarkdown(parts, ctx).replace(/\s+/g, ' ').trim();
+    const text = inlineRun(parts, ctx);
     const id = note.getAttribute('id') ?? undefined;
     if (text) ctx.footnotes.push({ ...(id && { id }), ...(mark && { label: mark }), text });
   }

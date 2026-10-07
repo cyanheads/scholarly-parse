@@ -28,6 +28,7 @@ import type {
   TableBlock,
   Venue,
 } from '../../model/document.js';
+import { normalizeDoi } from '../../model/doi.js';
 import { append } from '../../model/extremes.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
@@ -42,11 +43,10 @@ import {
   truncatedGridMessage,
 } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis } from '../../render/inline.js';
+import { collapseInline, emphasis, joinInlineSeams } from '../../render/inline.js';
 import {
   attrOf,
   childrenOf,
-  collapseWhitespace,
   findAll,
   findAllDescendants,
   findDescendant,
@@ -229,8 +229,10 @@ function extractMetadata(
     const type = (attrOf(idno, 'type') ?? '').toLowerCase();
     const value = plainText(idno);
     if (!value) continue;
-    if (type === 'doi') identifiers.doi ??= value.toLowerCase();
-    else if (type === 'arxiv') identifiers.arxiv ??= arxivId(value);
+    if (type === 'doi') {
+      const doi = normalizeDoi(value);
+      if (doi) identifiers.doi ??= doi;
+    } else if (type === 'arxiv') identifiers.arxiv ??= arxivId(value);
     else if (type === 'pmid') identifiers.pmid ??= value;
     else if (type === 'pmcid')
       identifiers.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
@@ -290,12 +292,16 @@ function extractMetadata(
   };
 }
 
+/**
+ * The abstract in the header, one section per `<div>`. Its parts are numbered
+ * `abstract-1-<m>`: `abstract-1` names the abstract itself in `toSections`.
+ */
 function extractAbstracts(header: XmlNode | undefined, ctx: TeiContext): Abstract[] {
   const abstract = findOne(findOne(header, 'profiledesc'), 'abstract');
   if (!abstract) return [];
   const divs = findAll(abstract, 'div');
   const sections = (divs.length > 0 ? divs : [abstract]).flatMap((div, i) => {
-    const section = divSection(div, ctx, 'body', `abstract-${i + 1}`);
+    const section = divSection(div, ctx, 'body', `abstract-1-${i + 1}`);
     return section ? [section] : [];
   });
   return sections.length > 0 ? [{ kind: 'main', sections }] : [];
@@ -313,7 +319,7 @@ function divContent(
   const nested: XmlNode[] = [];
   let run = '';
   const flush = () => {
-    const text = collapseWhitespace(run);
+    const text = collapseInline(run);
     if (text) blocks.push({ text, type: 'paragraph' });
     run = '';
   };
@@ -736,7 +742,7 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
     const type = (attrOf(idno, 'type') ?? '').toLowerCase();
     if (type && !ids.has(type)) ids.set(type, plainText(idno));
   }
-  const doi = ids.get('doi')?.toLowerCase();
+  const doi = normalizeDoi(ids.get('doi'));
   const url = attrOf(findAllDescendants(bibl, 'ptr')[0], 'target');
   const raw = plainText(findAll(bibl, 'note').find((n) => attrOf(n, 'type') === 'raw_reference'));
 
@@ -753,7 +759,7 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   ]
     .filter(Boolean)
     .join(' ');
-  const text = raw ? escapeInline(raw) : built;
+  const text = raw ? escapeInline(raw) : joinInlineSeams(built);
   if (!text) return;
   const id = attrOf(bibl, 'xml:id');
   const arxivValue = ids.get('arxiv');

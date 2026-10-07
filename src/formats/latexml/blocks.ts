@@ -16,6 +16,7 @@ import {
   tagOf,
   textOfElement,
 } from '../../html/dom.js';
+import { domMathTex } from '../../html/math.js';
 import { readHtmlTable } from '../../html/tables.js';
 import type {
   Block,
@@ -32,9 +33,9 @@ import { splitSectionNumber } from '../../model/section-kinds.js';
 import { truncatedGridMessage } from '../../model/table-grid.js';
 import { trimTrailing } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis, joinAdjacentMath } from '../../render/inline.js';
+import { collapseInline, emphasis, joinInlineSeams } from '../../render/inline.js';
 import { type LatexmlContext, SKIP_TAGS } from './context.js';
-import { inlineMarkdown, inlineText, mathTex } from './inline.js';
+import { inlineMarkdown, inlineRun, inlineText } from './inline.js';
 
 const BLOCK_TAGS: ReadonlySet<string> = new Set([
   'article',
@@ -64,19 +65,11 @@ const BLOCK_TAGS: ReadonlySet<string> = new Set([
  */
 const FLOAT_CLASSES = ['ltx_figure', 'ltx_table', 'ltx_float'];
 
-/** Selector for anything that must not be flattened into a sentence. */
-const BLOCK_SELECTOR = [
-  ...BLOCK_TAGS,
-  '.ltx_tabular',
-  '.ltx_equation',
-  '.ltx_equationgroup',
-  ...FLOAT_CLASSES.map((name) => `.${name}`),
-].join(',');
-
 function isFloat(element: Element): boolean {
   return tagOf(element) === 'figure' || FLOAT_CLASSES.some((name) => hasClass(element, name));
 }
 
+/** True for anything that must not be flattened into a sentence. */
 function isBlock(element: Element): boolean {
   return (
     BLOCK_TAGS.has(tagOf(element)) ||
@@ -87,6 +80,18 @@ function isBlock(element: Element): boolean {
   );
 }
 
+/**
+ * True when a block sits anywhere below the element. Each element's answer is kept, so
+ * a chain of inline wrappers around a block is read once, not once per wrapper above it.
+ */
+function holdsBlock(element: Element, ctx: LatexmlContext): boolean {
+  const known = ctx.blockHolders.get(element);
+  if (known !== undefined) return known;
+  const holds = childElements(element).some((child) => isBlock(child) || holdsBlock(child, ctx));
+  ctx.blockHolders.set(element, holds);
+  return holds;
+}
+
 /** Notes are inline even when they contain blocks: their content becomes a footnote. */
 function isNote(element: Element): boolean {
   return hasClass(element, 'ltx_note');
@@ -95,39 +100,48 @@ function isNote(element: Element): boolean {
 interface Flow {
   blocks: Block[];
   run: string;
+  /** Whether the run holds anything but whitespace, kept as it grows rather than read back. */
+  runHasText: boolean;
+}
+
+/** Add inline Markdown to the run. */
+function addToRun(flow: Flow, markdown: string): void {
+  flow.run += markdown;
+  if (!flow.runHasText) flow.runHasText = /\S/.test(markdown);
 }
 
 function flushRun(flow: Flow): void {
-  const text = joinAdjacentMath(flow.run.replace(/\s+/g, ' ').trim());
+  const text = collapseInline(flow.run);
   if (text) flow.blocks.push({ text, type: 'paragraph' });
   flow.run = '';
+  flow.runHasText = false;
 }
 
 function walk(nodes: Node[], flow: Flow, ctx: LatexmlContext): void {
   for (const node of nodes) {
     if (node.nodeType === TEXT_NODE) {
-      flow.run += escapeInline(node.textContent ?? '');
+      addToRun(flow, escapeInline(node.textContent ?? ''));
       continue;
     }
     if (!isElement(node) || SKIP_TAGS.has(tagOf(node))) continue;
-    if (isNote(node) && !flow.run.trim()) {
+    if (isNote(node) && !flow.runHasText) {
       // A note outside any paragraph (author notes set between the front matter and §1)
       // has no text for its mark to follow: its content is still collected.
       inlineMarkdown([node], ctx);
     } else if (!isNote(node) && isBlock(node)) {
       flushRun(flow);
       append(flow.blocks, renderBlock(node, ctx));
-    } else if (!isNote(node) && tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {
+    } else if (!isNote(node) && tagOf(node) !== 'math' && holdsBlock(node, ctx)) {
       walk(childNodes(node), flow, ctx);
     } else {
-      flow.run += inlineMarkdown([node], ctx);
+      addToRun(flow, inlineMarkdown([node], ctx));
     }
   }
 }
 
 /** Blocks for a node list, in document order. */
 export function flowBlocks(nodes: Node[], ctx: LatexmlContext): Block[] {
-  const flow: Flow = { blocks: [], run: '' };
+  const flow: Flow = { blocks: [], run: '', runHasText: false };
   walk(nodes, flow, ctx);
   flushRun(flow);
   return flow.blocks;
@@ -177,12 +191,10 @@ function captionParts(
     textOfElement(tagSpan)
       .replace(/[:.]\s*$/, '')
       .trim() || undefined;
-  const text = inlineMarkdown(
+  const text = inlineRun(
     childNodes(caption).filter((n) => n !== tagSpan),
     ctx,
-  )
-    .replace(/\s+/g, ' ')
-    .trim();
+  );
   return { ...(label && { label }), ...(text && { caption: text }) };
 }
 
@@ -354,7 +366,7 @@ function equations(element: Element): Block[] {
     const cells = childElements(row).filter((cell) => !hasClass(cell, 'ltx_eqn_eqno'));
     const tex = cells
       .flatMap((cell) => Array.from(cell.querySelectorAll('math')))
-      .map(mathTex)
+      .map(domMathTex)
       .filter(Boolean)
       .join(' ');
     const text = tex ? '' : cells.map(textOfElement).filter(Boolean).join(' ');
@@ -388,12 +400,14 @@ function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
   const punctuation = (node: Node | undefined) => /^[\s.:]*$/.test(node?.textContent ?? '');
   while (parts.length > 0 && punctuation(parts[0])) parts.shift();
   while (parts.length > 0 && punctuation(parts.at(-1))) parts.pop();
-  const title = trimTrailing(
-    inlineMarkdown(parts, ctx)
-      .replace(/\*\*/g, '')
-      .replace(/\s+/g, ' ')
-      .replace(/^[\s.:]+/, ''),
-    /[\s.:]/,
+  const title = joinInlineSeams(
+    trimTrailing(
+      inlineMarkdown(parts, ctx)
+        .replace(/\*\*/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/^[\s.:]+/, ''),
+      /[\s.:]/,
+    ),
   );
   const id = element.getAttribute('id') ?? undefined;
   return {
@@ -410,10 +424,10 @@ function theorem(element: Element, ctx: LatexmlContext): BoxBlock {
 }
 
 /**
- * A listing line's text: math as its TeX, the printed line number and the page's own
- * layout whitespace (a run holding a line break) dropped. Spaces the listing prints
- * arrive as no-break spaces. Each whitespace run is read once, whether or not it breaks
- * a line.
+ * A listing line's text: math as its TeX (none when it has none), the printed line
+ * number and the page's own layout whitespace (a run holding a line break) dropped.
+ * Spaces the listing prints arrive as no-break spaces. Each whitespace run is read once,
+ * whether or not it breaks a line.
  */
 function listingText(node: Node): string {
   if (node.nodeType === TEXT_NODE)
@@ -421,7 +435,10 @@ function listingText(node: Node): string {
       run.includes('\n') ? '' : run,
     );
   if (!isElement(node) || hasClass(node, 'ltx_tag_listingline')) return '';
-  if (tagOf(node) === 'math') return `$${mathTex(node)}$`;
+  if (tagOf(node) === 'math') {
+    const tex = domMathTex(node);
+    return tex && `$${tex}$`;
+  }
   return childNodes(node).map(listingText).join('');
 }
 
@@ -507,12 +524,10 @@ export function parseSection(
   const tagSpan = heading?.querySelector('.ltx_tag');
   const label = textOfElement(tagSpan).replace(/[.:]\s*$/, '') || undefined;
   const title = heading
-    ? inlineMarkdown(
+    ? inlineRun(
         childNodes(heading).filter((n) => n !== tagSpan),
         ctx,
-      )
-        .replace(/\s+/g, ' ')
-        .trim() || undefined
+      ) || undefined
     : undefined;
 
   const blocks: Block[] = [];

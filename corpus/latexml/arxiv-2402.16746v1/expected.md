@@ -1090,7 +1090,7 @@ The work of Chinmay Patwardhan and Martin Frank was funded by the Deutsche Forsc
 
 We start by stating some lemmas and properties used to prove stability in energy norm (Theorem 2) for the linearized modal macro-micro scheme (3.3).
 
-> **Lemma 2 (Lemma 3.3 [19](Summation by parts))**
+> **Lemma 2 (Lemma 3.3 [19\](Summation by parts))**
 >
 > *For vectors $\boldsymbol{\phi}_{i+1/2},\boldsymbol{\zeta}_{i+1/2}\in\mathbb{R}^{N}$ where $i=0,\ldots,N_{x}$, the equality*
 >

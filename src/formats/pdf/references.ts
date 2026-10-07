@@ -11,8 +11,9 @@ import { joinLines, lineMarkdown } from './inline.js';
 import { byColumn, type Layout, type Line } from './layout.js';
 import { isCaptionStart } from './lines.js';
 
+/** An entry's printed number: `[n]`, `n.` or `n)` (before a space, a capital, or a bracket), or a bare `n`. */
 const NUMBERED_ENTRY =
-  /^\s*(?:\[(\d{1,4})\]|(\d{1,4})[.)](?=\s|\p{Lu})|(\d{1,4})(?=\s+[\p{L}"“‘'(]))\s*/u;
+  /^\s*(?:\[(\d{1,4})\]|(\d{1,4})[.)](?=\s|\p{Lu}|[[(])|(\d{1,4})(?=\s+[\p{L}"“‘'(]))\s*/u;
 const ARXIV = /arXiv[:\s]+(\d{4}\.\d{4,5})(?:v\d+)?/i;
 const URL = /\bhttps?:\/\/[^\s<>"]+[^\s<>".,;)]/;
 
@@ -24,8 +25,10 @@ export function references(lines: Line[], layout: Layout): Reference[] {
   const texts = lines.filter((line) => line.text.trim() && !isCaptionStart(line));
   if (texts.length === 0) return [];
   let starts = numberedStarts(texts);
-  if (starts.size < 3) starts = indentStarts(texts);
-  if (starts.size < 3) starts = gapStarts(texts, layout);
+  if (starts.size < 3 && !isShortList(texts, starts)) {
+    starts = indentStarts(texts);
+    if (starts.size < 3) starts = gapStarts(texts, layout);
+  }
 
   const entries: Line[][] = [];
   for (const line of texts) {
@@ -54,12 +57,18 @@ export function references(lines: Line[], layout: Layout): Reference[] {
   });
 }
 
+/** A line's printed entry number, and which of {@link NUMBERED_ENTRY}'s marker forms it is set in. */
+function entryNumber(text: string): { form: number; number: number } | undefined {
+  const match = NUMBERED_ENTRY.exec(text);
+  const form = match ? [1, 2, 3].find((group) => match[group] !== undefined) : undefined;
+  return match && form ? { form, number: Number(match[form]) } : undefined;
+}
+
 function numberedStarts(lines: Line[]): Set<Line> {
   const starts = new Set<Line>();
   let expected = 1;
   for (const line of lines) {
-    const match = NUMBERED_ENTRY.exec(line.text);
-    const number = match ? Number(match[1] ?? match[2] ?? match[3]) : Number.NaN;
+    const number = entryNumber(line.text)?.number ?? Number.NaN;
     // One number may go unread (a line that starts oddly); the next one picks the run back up.
     if (
       number === expected ||
@@ -71,6 +80,31 @@ function numberedStarts(lines: Line[]): Set<Line> {
     }
   }
   return starts;
+}
+
+/**
+ * Whether fewer than three numbered starts still split the whole list: it opens on entry
+ * 1, the numbers run on without a gap, every start is set in the first one's marker form,
+ * and those in the first one's column sit at its left edge. A stray number opening a
+ * wrapped line (`2 (4), 100–110.`) or a line of prose fails one of these.
+ */
+function isShortList(lines: Line[], starts: Set<Line>): boolean {
+  const [first] = lines;
+  if (!first || !starts.has(first)) return false;
+  const opening = entryNumber(first.text);
+  let expected = 1;
+  for (const line of starts) {
+    const entry = entryNumber(line.text);
+    const sameColumn = line.page === first.page && line.column === first.column;
+    if (
+      entry?.number !== expected ||
+      entry.form !== opening?.form ||
+      (sameColumn && Math.abs(line.x - first.x) > line.size * 0.4)
+    )
+      return false;
+    expected++;
+  }
+  return true;
 }
 
 /**

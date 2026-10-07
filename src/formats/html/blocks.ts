@@ -16,6 +16,7 @@ import {
   tagOf,
   textOfElement,
 } from '../../html/dom.js';
+import { domMathTex } from '../../html/math.js';
 import { readHtmlTable } from '../../html/tables.js';
 import type {
   Block,
@@ -27,45 +28,21 @@ import type {
 import { append } from '../../model/extremes.js';
 import { tableName, truncatedGridMessage } from '../../model/table-grid.js';
 import { escapeInline } from '../../render/escape.js';
-import { emphasis, joinAdjacentMath } from '../../render/inline.js';
+import { collapseInline, emphasis } from '../../render/inline.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
+import { inlineMarkdown, inlineText, isMathScript, scriptTex, warnImageFormula } from './inline.js';
 import {
-  inlineMarkdown,
-  inlineText,
-  isMathScript,
-  mathmlTex,
-  scriptTex,
-  warnImageFormula,
-} from './inline.js';
-
-const BLOCK_TAGS: ReadonlySet<string> = new Set([
-  'address',
-  'article',
-  'blockquote',
-  'center',
-  'details',
-  'div',
-  'dl',
-  'figure',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'header',
-  'hr',
-  'main',
-  'ol',
-  'p',
-  'pre',
-  'section',
-  'summary',
-  'table',
-  'ul',
-]);
-
-const BLOCK_SELECTOR = [...BLOCK_TAGS].join(',');
+  BELOW,
+  type Below,
+  BLOCK_TAGS,
+  below,
+  ownText,
+  plainText,
+  shortText,
+  textFacts,
+  textLead,
+  textLength,
+} from './subtree.js';
 
 /** What a container holds, when it is a figure, table, or supplementary file read as one block. */
 export type FloatKind = 'figure' | 'table' | 'supplement';
@@ -86,7 +63,7 @@ const SUPPLEMENT_TOKENS: ReadonlySet<string> = new Set([
  * `tw`, `supplementary`) together with the image, table, or file link they wrap, so a
  * class alone never swallows a section.
  */
-export function floatKind(element: Element): FloatKind | undefined {
+export function floatKind(element: Element, ctx: HtmlContext): FloatKind | undefined {
   const tag = tagOf(element);
   if (tag === 'table') return 'table';
   // An inline element with a figure or table class is a cross-reference (`<a class="xref table">`), not a float.
@@ -96,31 +73,19 @@ export function floatKind(element: Element): FloatKind | undefined {
   const tableLike = tokens.includes('table') || tokens.includes('tw');
   const supplementLike = tokens.some((t) => SUPPLEMENT_TOKENS.has(t));
   if (!figureLike && !tableLike && !supplementLike) return;
+  const inside = below(element, ctx);
   // A class names a wrapper; one that holds sections is a layout region, not a float.
-  if (tag !== 'figure' && element.querySelector('h1, h2, section, article')) return;
+  if (tag !== 'figure' && inside.kinds & BELOW.sectioning) return;
   if (supplementLike)
-    return element.querySelector('a[href]') && !element.querySelector('table')
-      ? 'supplement'
-      : undefined;
-  const tables = element.querySelectorAll('table');
-  if (tables.length > 1) return;
-  if (tables.length === 1) return 'table';
-  const hasImage = element.querySelector('img, picture, object') !== null;
+    return inside.kinds & BELOW.link && inside.tables === 0 ? 'supplement' : undefined;
+  if (inside.tables > 1) return;
+  if (inside.tables === 1) return 'table';
+  const hasImage = (inside.kinds & BELOW.image) !== 0;
   if (!hasImage && !tableLike) return;
-  if (!hasImage && !/^\s*Table\b/i.test(textOfElement(element))) return;
-  return /^\s*(?:Supplementary\s+)?Table\b/i.test(captionLead(element)) || !hasImage
-    ? 'table'
-    : 'figure';
-}
-
-/** The first caption-like text in a container, to tell a table rendered as an image from a figure. */
-function captionLead(element: Element): string {
-  const caption = Array.from(
-    element.querySelectorAll(
-      'figcaption, caption, h1, h2, h3, h4, h5, h6, [class*="caption"], [class*="title"], [class*="label"]',
-    ),
-  ).find((candidate) => textOfElement(candidate) && !insideFurniture(candidate, element));
-  return textOfElement(caption ?? element).slice(0, 40);
+  if (!hasImage && !/^\s*Table\b/i.test(textLead(element, ctx, 40))) return;
+  // The first caption-like text tells a table rendered as an image from a figure.
+  const caption = textLead(inside.firstCaption ?? element, ctx, 40);
+  return /^\s*(?:Supplementary\s+)?Table\b/i.test(caption) || !hasImage ? 'table' : 'figure';
 }
 
 /** True when `element` or an ancestor below `container` is furniture. */
@@ -137,16 +102,16 @@ interface Flow {
 }
 
 function flushRun(flow: Flow): void {
-  const text = joinAdjacentMath(flow.run.replace(/\s+/g, ' ').trim());
+  const text = collapseInline(flow.run);
   if (text) flow.blocks.push({ text, type: 'paragraph' });
   flow.run = '';
 }
 
-function isBlockElement(element: Element): boolean {
+function isBlockElement(element: Element, ctx: HtmlContext): boolean {
   return (
     BLOCK_TAGS.has(tagOf(element)) ||
-    floatKind(element) !== undefined ||
-    displayFormula(element) !== undefined
+    floatKind(element, ctx) !== undefined ||
+    displayFormula(element, ctx) !== undefined
   );
 }
 
@@ -168,10 +133,10 @@ function walk(nodes: Node[], flow: Flow, ctx: HtmlContext): void {
       continue;
     }
     if (isFurniture(node)) continue;
-    if (isBlockElement(node)) {
+    if (isBlockElement(node, ctx)) {
       flushRun(flow);
       append(flow.blocks, renderBlock(node, ctx));
-    } else if (tagOf(node) !== 'math' && node.querySelector(BLOCK_SELECTOR)) {
+    } else if (tagOf(node) !== 'math' && below(node, ctx).kinds & BELOW.block) {
       walk(childNodes(node), flow, ctx);
     } else {
       flow.run += inlineMarkdown([node], ctx);
@@ -188,14 +153,14 @@ export function flowBlocks(nodes: Node[], ctx: HtmlContext): Block[] {
 }
 
 function renderBlock(element: Element, ctx: HtmlContext): Block[] {
-  const formula = displayFormula(element);
+  const formula = displayFormula(element, ctx);
   if (formula?.href) {
     const href = resolveUrl(formula.href, ctx.baseUrl);
     warnImageFormula(ctx, href, formula.id);
     return [{ ...formula, href }];
   }
   if (formula) return [formula];
-  const kind = floatKind(element);
+  const kind = floatKind(element, ctx);
   if (kind === 'table') return [tableBlock(element, ctx)];
   if (kind === 'figure') return [figureBlock(element, ctx)];
   if (kind === 'supplement') return [supplementBlock(element, ctx)];
@@ -231,60 +196,71 @@ const EQUATION_NUMBER = /^\(?\s*([A-Z]?\d+(?:\.\d+)*[a-z]?)\s*\)?$/;
  * often its number in a separate cell. One holding only an image of the formula (PLOS
  * sets each as a `<span class="equation">` around it) yields that image's address.
  */
-function displayFormula(element: Element): FormulaBlock | undefined {
+function displayFormula(element: Element, ctx: HtmlContext): FormulaBlock | undefined {
   const tag = tagOf(element);
   if (tag === 'math' && element.getAttribute('display') === 'block')
-    return formulaFrom(element, undefined);
+    return formulaFrom(element, undefined, false, ctx);
   const tokens = nameTokens(element.getAttribute('class'));
   if (tokens.includes('inline') || !tokens.some((t) => t === 'equation' || t === 'formula')) return;
-  const numberEl = Array.from(element.querySelectorAll('*')).find((child) =>
-    nameTokens(child.getAttribute('class')).some(
-      (t) => t === 'number' || t === 'label' || t === 'eqno' || t === 'note',
-    ),
-  );
-  const label = EQUATION_NUMBER.exec(textOfElement(numberEl))?.[1];
-  const image = equationImage(element, numberEl);
+  const inside = below(element, ctx);
+  const number = inside.firstNumbered && shortText(inside.firstNumbered, ctx);
+  const label = EQUATION_NUMBER.exec(number ?? '')?.[1];
+  const image = equationImage(element, inside, ctx);
   if (image) {
     const id = element.getAttribute('id') ?? undefined;
     return { type: 'formula', href: image, ...(id && { id }), ...(label && { label }) };
   }
   if (!CONTAINER_TAGS.has(tag)) return;
-  if (element.querySelector('table, img:not([class*="math"]), figure')) return;
-  return formulaFrom(element, label, numberEl);
+  if (inside.kinds & (BELOW.table | BELOW.plainImage | BELOW.figure)) return;
+  return formulaFrom(element, label, true, ctx);
 }
 
 /** The one image an equation container holds when it has no math, source, or text besides its number. */
-function equationImage(element: Element, numberEl: Element | undefined): string | undefined {
-  if (element.querySelector('math, script, table, figure')) return;
-  const images = element.querySelectorAll('img');
-  if (images.length !== 1 || ownText(element, numberEl).trim()) return;
-  return images[0]?.getAttribute('src') ?? undefined;
+function equationImage(element: Element, inside: Below, ctx: HtmlContext): string | undefined {
+  if (inside.kinds & (BELOW.math | BELOW.script | BELOW.table | BELOW.figure)) return;
+  if (inside.images !== 1 || ownText(element, ctx).besidesNumber.visible > 0) return;
+  return inside.firstImage?.getAttribute('src') ?? undefined;
 }
 
+/** Delimiters that wrap a display formula's TeX written as text: `$$…$$`, `\[…\]`, `\(…\)`. */
+const TEX_DELIMITERS: ReadonlyMap<string, string> = new Map([
+  ['$$', '$$'],
+  ['\\[', '\\]'],
+  ['\\(', '\\)'],
+]);
+
+/**
+ * A formula from an equation container (or a display `<math>`): TeX from its MathML, else
+ * its math source script, else its own text when delimiters wrap it whole; else its text.
+ * `besidesNumber` leaves the container's equation number out of its own text. The
+ * subtree is read in full only for a formula it returns.
+ */
 function formulaFrom(
   element: Element,
   label: string | undefined,
-  exclude?: Element,
+  besidesNumber: boolean,
+  ctx: HtmlContext,
 ): FormulaBlock | undefined {
   const id = element.getAttribute('id') ?? undefined;
-  const math = tagOf(element) === 'math' ? element : element.querySelector('math');
-  const script = element.querySelector('script[type^="math/"]');
-  let tex = math ? mathmlTex(math) : '';
-  if (!tex && script) tex = scriptTex(script);
+  const inside = below(element, ctx);
+  const math = tagOf(element) === 'math' ? element : inside.firstMath;
+  const script = inside.firstMathScript;
+  let tex = math ? cachedTex(math, domMathTex, ctx) : '';
+  if (!tex && script) tex = cachedTex(script, scriptTex, ctx);
   if (!tex) {
-    const raw = ownText(element, exclude).trim();
-    tex =
-      /^(?:\$\$([\s\S]+)\$\$|\\\[([\s\S]+)\\\]|\\\(([\s\S]+)\\\))$/
-        .exec(raw)
-        ?.slice(1)
-        .find(Boolean)
-        ?.trim() ?? '';
+    const own = ownText(element, ctx);
+    const { head, tail, visible } = besidesNumber ? own.besidesNumber : own.all;
+    // Delimiters around at least one character other than whitespace: the TeX between them.
+    if (visible === 5 && TEX_DELIMITERS.get(head) === tail) {
+      const exclude = besidesNumber ? inside.firstNumbered : undefined;
+      tex = sourceText(element, exclude).trim().slice(2, -2).trim();
+    }
   }
-  const text = tex
-    ? ''
-    : textOfElement(math ?? element)
-        .replace(EQUATION_NUMBER, '')
-        .trim();
+  const source = math ?? element;
+  const text =
+    tex || textLength(source, ctx) === 0
+      ? ''
+      : plainText(source, ctx).replace(EQUATION_NUMBER, '').trim();
   if (!tex && !text) return;
   return {
     type: 'formula',
@@ -294,12 +270,22 @@ function formulaFrom(
   };
 }
 
+/** The TeX `read` gives for a `<math>` or math script, read once per element. */
+function cachedTex(element: Element, read: (element: Element) => string, ctx: HtmlContext): string {
+  let tex = ctx.subtrees.tex.get(element);
+  if (tex === undefined) {
+    tex = read(element);
+    ctx.subtrees.tex.set(element, tex);
+  }
+  return tex;
+}
+
 /** Text of an element without furniture and without one descendant (the equation number). */
-function ownText(element: Element, exclude: Element | undefined): string {
+function sourceText(element: Element, exclude: Element | undefined): string {
   return Array.from(element.childNodes)
     .map((node) => {
       if (!isElement(node)) return node.textContent ?? '';
-      return node === exclude || isFurniture(node) ? '' : ownText(node, exclude);
+      return node === exclude || isFurniture(node) ? '' : sourceText(node, exclude);
     })
     .join('');
 }
@@ -320,23 +306,17 @@ export const LINK_LABEL =
 /**
  * True for an element that holds only links and link-list words ("Download: PNG TIFF",
  * "Full size image", "[DOI] [PubMed]"): navigation around a caption, not caption text.
+ * Text outside its links that runs past the subtree text cap is not a link list.
  */
-export function isLinkList(element: Element): boolean {
-  const links = Array.from(element.querySelectorAll('a'));
-  const text = textOfElement(element);
-  if (!text) return true;
-  if (links.length === 0) return LINK_LABEL.test(text);
-  const outside = Array.from(element.childNodes)
-    .map((node) => outsideLinks(node))
-    .join('')
-    .replace(/\b(?:download|view|export)s?\s*:?/gi, '');
-  return /^[\s[\]()|,;:.·•/-]*$/.test(outside);
-}
-
-function outsideLinks(node: Node): string {
-  if (!isElement(node)) return node.textContent ?? '';
-  if (tagOf(node) === 'a' || tagOf(node) === 'button') return '';
-  return Array.from(node.childNodes).map(outsideLinks).join('');
+export function isLinkList(element: Element, ctx: HtmlContext): boolean {
+  const text = shortText(element, ctx);
+  if (text === '') return true;
+  const { links, outside } = textFacts(element, ctx);
+  if (!links) return text !== undefined && LINK_LABEL.test(text);
+  return (
+    outside !== undefined &&
+    /^[\s[\]()|,;:.·•/-]*$/.test(outside.replace(/\b(?:download|view|export)s?\s*:?/gi, ''))
+  );
 }
 
 /** Class tokens marking a container's caption text, and those marking its notes. */
@@ -388,13 +368,17 @@ function captionPieces(
   ctx: HtmlContext,
 ): CaptionPieces {
   const pieces: CaptionPieces = { caption: [], notes: [] };
+  // The elements between the container and its content, so each is known at a glance.
+  const aroundContent = new Set<Element>();
+  for (let el = content?.parentElement; el && el !== container; el = el.parentElement)
+    aroundContent.add(el);
   let passed = false;
   let run: Node[] = [];
   const push = (text: string, role: PieceRole | undefined) => {
     if (text) pieces[role ?? (passed ? 'notes' : 'caption')].push(text);
   };
   const flushInline = (role: PieceRole | undefined) => {
-    push(inlineMarkdown(run, ctx).replace(/\s+/g, ' ').trim(), role);
+    push(collapseInline(inlineMarkdown(run, ctx)), role);
     run = [];
   };
   const visit = (element: Element, inherited: PieceRole | undefined) => {
@@ -409,19 +393,17 @@ function captionPieces(
         continue;
       }
       const role = roleOf(node) ?? inherited;
-      if (content && node.contains(content)) {
+      if (aroundContent.has(node)) {
         flushInline(inherited);
         visit(node, role);
         continue;
       }
       if (isFurniture(node) || tagOf(node) === 'img' || tagOf(node) === 'picture') continue;
-      if (isBlockElement(node) || node.querySelector(BLOCK_SELECTOR)) {
+      const holdsBlock = (below(node, ctx).kinds & BELOW.block) !== 0;
+      if (isBlockElement(node, ctx) || holdsBlock) {
         flushInline(inherited);
-        if (isLinkList(node)) continue;
-        if (
-          node.querySelector(BLOCK_SELECTOR) &&
-          !/^(p|figcaption|caption|h[1-6])$/.test(tagOf(node))
-        ) {
+        if (isLinkList(node, ctx)) continue;
+        if (holdsBlock && !/^(p|figcaption|caption|h[1-6])$/.test(tagOf(node))) {
           visit(node, role);
           continue;
         }
@@ -564,12 +546,28 @@ function tableBlock(container: Element, ctx: HtmlContext): TableBlock {
 
 // ─── Lists ──────────────────────────────────────────────────────────────────
 
+/**
+ * A list: one item per `<li>`. Content between items (a list whose `<li>` tags were
+ * left out of markup nested too deep) is an item of its own, so its text is kept.
+ */
 function listBlock(element: Element, ctx: HtmlContext): Block[] {
-  const items = childElements(element)
-    .filter((child) => tagOf(child) === 'li' && !isFurniture(child))
-    .map((item) => flowBlocks(childNodes(item), ctx))
-    .filter((blocks) => blocks.length > 0);
-  return items.length > 0 ? [{ type: 'list', items, ordered: tagOf(element) === 'ol' }] : [];
+  const items: Block[][] = [];
+  let loose: Node[] = [];
+  const flushLoose = () => {
+    if (loose.length > 0) items.push(flowBlocks(loose, ctx));
+    loose = [];
+  };
+  for (const node of childNodes(element)) {
+    if (!isElement(node) || tagOf(node) !== 'li') {
+      loose.push(node);
+    } else if (!isFurniture(node)) {
+      flushLoose();
+      items.push(flowBlocks(childNodes(node), ctx));
+    }
+  }
+  flushLoose();
+  const kept = items.filter((blocks) => blocks.length > 0);
+  return kept.length > 0 ? [{ type: 'list', items: kept, ordered: tagOf(element) === 'ol' }] : [];
 }
 
 /** A description list: `**term** — definition` per item. */

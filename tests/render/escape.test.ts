@@ -45,6 +45,16 @@ describe('escapeInline', () => {
   it('drops soft hyphens', () => {
     expect(escapeInline('hyphen\u00adation')).toBe('hyphenation');
   });
+
+  it('closes its end, where the text joined after it could complete a construct', () => {
+    expect(escapeInline('a\\')).toBe('a\\\\');
+    expect(escapeInline('a <')).toBe('a \\<');
+    expect(escapeInline('wow!')).toBe('wow\\!');
+    expect(escapeInline('&am')).toBe('\\&am');
+    expect(escapeInline('&#6')).toBe('\\&#6');
+    expect(escapeInline('R&')).toBe('R\\&');
+    expect(escapeInline('a!b <c R&D x')).toBe('a!b \\<c R&D x');
+  });
 });
 
 describe('escapeBlockStart', () => {
