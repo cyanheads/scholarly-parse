@@ -4,7 +4,7 @@ description: >
   Add a source format to scholarly-parse end to end: corpus fixtures first, then a parser under `src/formats/<format>/` built on the shared XML, HTML, and model helpers, wired into `SourceFormat`, `detect`, `parse`, the package `exports`, the corpus harness, and `add.ts`, with bounds on untrusted input, an optional peer for any new engine, unit tests, docs, and a security pass. Use when asked to add or support a format no existing parser reads (Elsevier full-text XML, with its own `ce:` schema), or to split a format out of an existing parser.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 

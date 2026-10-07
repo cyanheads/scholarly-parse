@@ -4,7 +4,7 @@ description: >
   Review scholarly-parse's parsers against hostile documents: XML entity expansion and external entities, recursion depth on deeply nested input, input size and amplification budgets, regex backtracking on attacker-controlled text, prototype pollution through element or attribute names used as object keys, raw HTML or `javascript:` links surviving into rendered Markdown, PDF resource exhaustion, and lazy loading of optional peers. Builds a map and a set of hostile probe inputs, walks eight axes, reports grouped findings with a numbered options list, then fixes what's picked and files the rest. Use before a release, after adding or changing a format, or when asked for a security review, audit, hardening pass, or to fuzz the parsers.
 metadata:
   author: cyanheads
-  version: "1.2"
+  version: "1.3"
   type: audit
 ---
 
