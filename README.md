@@ -54,7 +54,7 @@ if (!result.ok && result.error.reason === 'blocked') {
 }
 ```
 
-`toSections` flattens the document into sections with their heading paths and sizes, for serving a long paper a piece at a time. Figures and tables that sit outside any section come last, as one entry:
+`toSections` flattens the document into sections with their heading paths and sizes, for serving a long paper a piece at a time. Figures and tables outside any section, the footnotes, and the references come last, one entry each, and each entry's `id` renders it alone through `toMarkdown(document, { sections: [id] })`:
 
 ```ts
 import { toSections } from 'scholarly-parse';
@@ -77,7 +77,7 @@ for (const { path, chars, markdown } of toSections(document)) {
 
 Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links, and `parsePdf` reading budgets counted across the document: `maxPages` (default 300), `maxTextItems` (500,000), `maxTextChars` (4,000,000), and `maxOperators` (10,000,000). A PDF that reaches one parses as far as it was read, with a `truncated-input` warning. `parseJats` and `parseTei` are synchronous; the rest are async.
 
-For a hard time or memory bound on untrusted PDFs, run `parsePdf` in a worker or process you can terminate.
+`parsePdf` and `parse` also take a `signal`: once it is aborted (`AbortSignal.timeout(ms)`, a request's cancellation), reading stops at the next page boundary and keeps what was read, warned `truncated-input`. pdf.js reads a page without yielding, so for a hard time or memory bound on untrusted PDFs, run `parsePdf` in a worker or process you can terminate.
 
 ## Formats
 
