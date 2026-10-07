@@ -37,7 +37,7 @@ function firstPage(doi: TextSpec): Uint8Array {
  */
 function firstPageLine(line: TextSpec): Uint8Array {
   const pdf = new TextDecoder('latin1').decode(buildPdf({ pages: [[...BODY, line]] }));
-  return Uint8Array.from(pdf.replace('^', '\x93').replace('|', '\x94'), (char) =>
+  return Uint8Array.from(pdf.replaceAll('^', '\x93').replaceAll('|', '\x94'), (char) =>
     char.charCodeAt(0),
   );
 }
