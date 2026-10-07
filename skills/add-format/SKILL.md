@@ -82,7 +82,8 @@ A new engine goes into `peerDependencies` with `peerDependenciesMeta.<name>.opti
 | `src/detect.ts` | A sniff on the opening bytes, placed so formats that wrap others are tested first (TEI inside HTML is why TEI precedes HTML); cases in `tests/detect.test.ts` |
 | `src/parse.ts` | A `case` that imports the format on first use and passes the options it reads; a case in `tests/parse.test.ts` |
 | `package.json` | An `exports` entry `./<format>` with `types`, `import`, and `default` under `dist/formats/<format>/`; the `description` and `keywords` when the format is a headline one |
-| `tests/corpus/corpus.test.ts` | The format's parser in `PARSERS`, and in `TEXT_FORMATS` when the source is text |
+| `tests/corpus/parsers.ts` | The format's parser in `PARSERS` |
+| `tests/corpus/corpus.test.ts` | The format in `TEXT_FORMATS` when the source is text |
 | `tests/corpus/invariants.ts` | Source counts the model must match, when the format marks tables, figures, or references countably (the JATS block is the example) |
 
 ### 5. Test

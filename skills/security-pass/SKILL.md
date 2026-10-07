@@ -90,8 +90,11 @@ Deep nesting overflows the stack of any recursive walker, and a `RangeError` esc
 - Every recursive walk over source input carries a depth counter with a limit. Past it, the subtree is flattened or dropped with a warning, never thrown.
 - The engine does not overflow first. If `fast-xml-parser` or `linkedom` recurses on the 100,000-deep probe before your walker's limit runs, bound nesting before the engine sees it, or catch the overflow at the parser boundary and return `malformed`.
 - Renderers recurse over the model. Parser depth limits bound what they receive — confirm the deepest section tree a parser can emit renders without overflow.
+- The engine is linear in depth, not only free of overflow. htmlparser2 does a `stack.unshift` per open tag and a `stack.indexOf` per unmatched close tag: time the 100,000-deep probe, and `<div>`×n then `</span>`×n, with `expectLinear`.
+- A DOM depth bound counts depth the way the engine builds the tree (`boundNesting` in `src/html/dom.ts` mirrors htmlparser2's stack, not the HTML standard's tree builder).
+- No walker reads an element's whole subtree at every level — a `querySelector`, `textContent`, or length check per ancestor. Under a depth bound of 256 that still costs up to ~100× flat: compute such facts once per element, and time a 250-deep chain repeated to 1 MiB against the same tags laid flat.
 
-**Smell:** `function walk(node) { for (const child of node.children) walk(child) }` with no depth parameter.
+**Smell:** `function walk(node) { for (const child of node.children) walk(child) }` with no depth parameter; `if (el.querySelector(SEL)) walk(el.childNodes)`.
 
 #### Axis 3 — Input size and amplification budgets
 
@@ -151,6 +154,7 @@ Consumers hand the Markdown to renderers that execute HTML and follow links.
 - Link and image targets pass a scheme allowlist — `http:`, `https:`, `mailto:`, relative paths, `#fragment`. `javascript:`, `vbscript:`, `data:`, and `file:` are dropped and the link text kept. Normalize before checking: case, leading whitespace and control characters, entity-encoded and percent-encoded forms.
 - Text can't forge structure: brackets, parentheses, backticks, `<`, and a leading `#`, `>`, or `-` are escaped where they would open a link, autolink, code span, or block. A newline in a title can't start a new heading.
 - TeX passes through verbatim inside `$…$`. `\href` or `\url` inside math is governed by the consumer's math renderer — document it, don't strip it.
+- A construct split across adjacent inline elements is escaped too: JATS `named-content`, TEI `seg`, HTML and LaTeXML `span`, PDF runs in different faces, each holding one piece of `<` | `img …>`, `[x]` | `(javascript:y)`, `\` | `<img …>`, `<` | `javascript:y>`, `![x]` | `(https://…)`, or `<` | `!-- …`. `escapeInline` closes each fragment's end, and every reader runs `joinInlineSeams` over finished inline Markdown.
 
 **Smell:** `` `[${text}](${href})` `` with neither escaped.
 
