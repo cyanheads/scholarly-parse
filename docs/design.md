@@ -58,7 +58,7 @@ Inline text is CommonMark with GFM: emphasis, links, `$…$` math where the sour
 | `/html` | Article pages from publishers and preprint servers | A walker over a `linkedom` DOM: `citation_*` and Dublin Core metadata, the article container, headings as the section tree, and page furniture skipped | `partial` |
 | `/pdf` | PDF with a text layer | `unpdf` text runs with their fonts, laid out into columns and reading order, then structure from typography: title and abstract from the first page, headings by size, weight, numbering, and name, captions by label, footnotes by label below a page's text, references by numbering or indentation | `partial` or `flat` |
 
-Elsevier full-text XML (its own `xocs`/`ce:` schema, not JATS) is a later format.
+Elsevier full-text XML (its own `xocs`/`ce:` schema, not JATS) is a later format ([#28](https://github.com/cyanheads/scholarly-parse/issues/28)).
 
 **Dependencies.** `fast-xml-parser` is the one required dependency. `linkedom` and `unpdf` are optional peers, loaded on first use.
 
