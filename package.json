@@ -1,6 +1,6 @@
 {
   "name": "scholarly-parse",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Parse scholarly papers — JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF — into one document model and Markdown.",
   "type": "module",
   "license": "Apache-2.0",

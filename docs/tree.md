@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-09-27 03:59:12
+Generated on: 2026-10-07 02:13:41
 
 ```text
 scholarly-parse/
@@ -21,6 +21,7 @@ scholarly-parse/
 │   └── SECURITY.md
 ├── changelog/
 │   ├── 0.1.x/
+│   ├── 0.2.x/
 │   └── template.md
 ├── corpus/
 │   ├── html/
@@ -79,7 +80,8 @@ scholarly-parse/
 │   │   │   ├── inline.ts
 │   │   │   ├── metadata.ts
 │   │   │   ├── parse.ts
-│   │   │   └── references.ts
+│   │   │   ├── references.ts
+│   │   │   └── subtree.ts
 │   │   ├── jats/
 │   │   │   ├── blocks.ts
 │   │   │   ├── context.ts
@@ -115,6 +117,7 @@ scholarly-parse/
 │   ├── html/
 │   │   ├── dom.ts
 │   │   ├── interstitial.ts
+│   │   ├── math.ts
 │   │   └── tables.ts
 │   ├── model/
 │   │   ├── diagnostics.ts
@@ -123,6 +126,7 @@ scholarly-parse/
 │   │   ├── extremes.ts
 │   │   ├── index.ts
 │   │   ├── input.ts
+│   │   ├── limits.ts
 │   │   ├── result.ts
 │   │   ├── section-ids.ts
 │   │   ├── section-kinds.ts
@@ -165,17 +169,20 @@ scholarly-parse/
 │   │   │   ├── sections.test.ts
 │   │   │   └── tables.test.ts
 │   │   ├── latexml/
-│   │   │   └── latexml.test.ts
+│   │   │   ├── latexml.test.ts
+│   │   │   └── nesting.test.ts
 │   │   ├── pdf/
 │   │   │   ├── budgets.test.ts
 │   │   │   ├── build-pdf.ts
 │   │   │   ├── doi.test.ts
 │   │   │   ├── layout.test.ts
 │   │   │   ├── pdf.test.ts
+│   │   │   ├── references.test.ts
 │   │   │   └── tables.test.ts
 │   │   └── tei/
 │   │       └── tei.test.ts
 │   ├── model/
+│   │   ├── doi.test.ts
 │   │   ├── result.test.ts
 │   │   ├── section-ids.test.ts
 │   │   └── table-grid.test.ts
