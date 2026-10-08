@@ -8,15 +8,8 @@
  * @module src/render/text
  */
 import type { ScholarlyDocument } from '../model/document.js';
-import {
-  autolinkAt,
-  codeSpanAt,
-  codeSpanCloser,
-  ESCAPABLE,
-  pairBrackets,
-  unescapedDollar,
-} from './inline.js';
 import { type MarkdownOptions, toMarkdown } from './markdown.js';
+import { readInline } from './read-inline.js';
 
 /** Render a document as plain text. Options are the same as for Markdown. */
 export function toText(document: ScholarlyDocument, options: MarkdownOptions = {}): string {
@@ -114,171 +107,11 @@ function insideBlock(line: string, parts: readonly PrefixPart[]): { kept: string
   return { kept, rest: line.slice(at) };
 }
 
-/** Where inline markup can start, or a link's text end. */
-const SPECIAL = /[\\`$<![\]*~]/g;
-
 /**
- * Inline Markdown this package emits → plain text, read left to right in one pass. Code
- * span content comes out as written, and inline math with its dollars; a link and an
- * autolink leave their text; a backslash escape leaves its character; emphasis,
- * strong, and strikethrough markers are removed in pairs, and one with no partner stays.
- *
- * A link's text is read in place, its brackets paired beforehand by `pairBrackets` with
- * inline math read as a span, as here and as `link` balances them, and its emphasis pairs
- * only within it. Nothing read inside a link's text reaches past the
- * text's end, so links nested any depth cost no more than their length.
+ * Inline Markdown this package emits → plain text, as GFM reads it ({@link readInline}):
+ * code span content and inline math as written, a link's text, emphasis markers removed
+ * in the pairs GFM forms, and one with no partner left in place.
  */
 export function stripInline(markdown: string): string {
-  const out: string[] = [];
-  /** Every delimiter run, to write back once paired. */
-  const runs: DelimiterRun[] = [];
-  /** The runs of the text around the read position, the innermost link's last. */
-  const scopes: DelimiterRun[][] = [[]];
-  /** The links whose text is being read, innermost last. */
-  const links: LinkAt[] = [];
-  const codeSpanEnd = codeSpanCloser(markdown);
-  const { pairs } = pairBrackets(markdown, { skipMath: true });
-  let mathCloses = true;
-  let at = 0;
-  const special = new RegExp(SPECIAL);
-  for (let found = special.exec(markdown); found; found = special.exec(markdown)) {
-    const start = found.index;
-    if (start > at) out.push(markdown.slice(at, start));
-    const limit = links.at(-1)?.close ?? markdown.length;
-    const char = found[0];
-    let end = start + 1;
-    if (char === '\\') {
-      const escaped = markdown.charAt(start + 1);
-      if (ESCAPABLE.test(escaped)) end = start + 2;
-      out.push(end > start + 1 ? escaped : char);
-    } else if (char === '`') {
-      const span = codeSpanAt(markdown, start, codeSpanEnd);
-      if (span.content === undefined || span.end > limit) {
-        while (markdown.charAt(end) === '`') end++;
-        out.push(markdown.slice(start, end));
-      } else {
-        out.push(unpad(span.content));
-        end = span.end;
-      }
-    } else if (char === '$') {
-      const close = mathCloses ? unescapedDollar(markdown, start + 1) : -1;
-      if (close === -1) mathCloses = false;
-      if (close > start + 1 && close < limit) end = close + 1;
-      out.push(markdown.slice(start, end));
-    } else if (char === '<') {
-      const autolink = autolinkAt(markdown, start);
-      if (autolink && autolink.end <= limit) {
-        end = autolink.end;
-        out.push(autolink.target);
-      } else {
-        out.push(char);
-      }
-    } else if (char === '*' || char === '~') {
-      while (markdown.charAt(end) === char) end++;
-      const run: DelimiterRun = {
-        canClose: start > 0 && !/\s/.test(markdown.charAt(start - 1)),
-        canOpen: end < markdown.length && !/\s/.test(markdown.charAt(end)),
-        char,
-        left: end - start,
-        piece: out.length,
-      };
-      runs.push(run);
-      scopes.at(-1)?.push(run);
-      out.push(markdown.slice(start, end));
-    } else if (char === ']') {
-      const link = links.at(-1);
-      if (link?.close === start) {
-        // The link's text ends: its emphasis is paired, and its destination dropped.
-        links.pop();
-        pairRuns(scopes.pop() ?? []);
-        end = link.end;
-      } else {
-        out.push(char);
-      }
-    } else {
-      // `[` opens a link, and `!` before one is dropped with it.
-      const open = char === '!' ? start + 1 : start;
-      const link = linkAt(markdown, open, pairs, limit);
-      if (link) {
-        links.push(link);
-        scopes.push([]);
-        end = open + 1;
-      } else {
-        out.push(char);
-      }
-    }
-    at = end;
-    special.lastIndex = end;
-  }
-  out.push(markdown.slice(at));
-  for (const scope of scopes) pairRuns(scope);
-  for (const run of runs) out[run.piece] = run.char.repeat(run.left);
-  return out.join('');
-}
-
-/** A run of `*` or `~`, and how much of it is left once pairs are removed. */
-interface DelimiterRun {
-  /** A character other than whitespace comes before it, so it can close a pair. */
-  canClose: boolean;
-  /** A character other than whitespace comes after it, so it can open a pair. */
-  canOpen: boolean;
-  char: '*' | '~';
-  left: number;
-  /** Its index among the output pieces. */
-  piece: number;
-}
-
-/**
- * Pair the runs of each character: a run that can close takes from the nearest open run
- * of its character, two at a time at most (`**` strong, `*` emphasis, `~~` strikethrough),
- * and whatever is left of a run that can open waits for a closer. Each run is pushed and
- * popped at most once.
- */
-function pairRuns(runs: DelimiterRun[]): void {
-  const open: Record<DelimiterRun['char'], DelimiterRun[]> = { '*': [], '~': [] };
-  for (const run of runs) {
-    const stack = open[run.char];
-    if (run.canClose) {
-      for (let opener = stack.at(-1); opener && run.left > 0; opener = stack.at(-1)) {
-        const paired = Math.min(opener.left, run.left, 2);
-        opener.left -= paired;
-        run.left -= paired;
-        if (opener.left === 0) stack.pop();
-      }
-    }
-    if (run.left > 0 && run.canOpen) stack.push(run);
-  }
-}
-
-/** A code span's content without the space padding both of its sides. */
-function unpad(content: string): string {
-  return content.startsWith(' ') && content.endsWith(' ') && content.trim() !== ''
-    ? content.slice(1, -1)
-    : content;
-}
-
-/** A link being read: where its text ends, at its `]`, and where its destination does. */
-interface LinkAt {
-  close: number;
-  end: number;
-}
-
-/**
- * A link `[text](destination)` whose `[` is at `start` and which ends by `limit`: its
- * text runs to the `]` `pairs` pairs with that `[`, and its destination, which holds no
- * parentheses (a written URL has them percent-encoded), to the next parenthesis.
- */
-function linkAt(
-  markdown: string,
-  start: number,
-  pairs: ReadonlyMap<number, number>,
-  limit: number,
-): LinkAt | undefined {
-  const close = pairs.get(start);
-  if (close === undefined || markdown.charAt(close + 1) !== '(') return;
-  const parenthesis = /[()]/g;
-  parenthesis.lastIndex = close + 2;
-  const end = parenthesis.exec(markdown);
-  if (end?.[0] !== ')' || end.index >= limit) return;
-  return { close, end: end.index + 1 };
+  return readInline(markdown).text;
 }

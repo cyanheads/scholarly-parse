@@ -18,6 +18,7 @@
   "warnings": [
     "structure-inferred"
   ],
+  "contains": ["*d*_0, *d*_1, *d*_2, *d*_3, *d*_4,"],
   "notContains": [
     "solutiond2m2"
   ]

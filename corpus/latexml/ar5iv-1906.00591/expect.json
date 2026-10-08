@@ -30,7 +30,8 @@
     "while for the latter two academic models we use the pretrained models provided by the Fairseq toolkit.^5",
     "- **5** <https://github.com/pytorch/fairseq>",
     "**Figure 1.** An example of gender bias in machine translation from English (top) to Spanish (bottom).",
-    "| The janitor does not like **the baker** because **she** always messes up the kitchen. |"
+    "| The janitor does not like **the baker** because **she** always messes up the kitchen. |",
+    "“*la* enfermer-*a*”"
   ],
   "notContains": ["El doctor le pidio", "Stereotypical Non-Stereotypical", "**Table.**"]
 }

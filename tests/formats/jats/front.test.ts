@@ -476,3 +476,136 @@ describe('abstracts', () => {
     }
   });
 });
+
+describe('arXiv article IDs (#65)', () => {
+  const arxivDocument = (...values: string[]) =>
+    parseArticle({
+      body: '<p>Body.</p>',
+      meta: TITLE + values.map((v) => `<article-id pub-id-type="arxiv">${v}</article-id>`).join(''),
+    });
+
+  it('keeps an arXiv ID already in the model form, and drops an arXiv label', () => {
+    expect(arxivDocument('2305.05320').metadata.identifiers).toEqual({ arxiv: '2305.05320' });
+    expect(arxivDocument('ARXIV:2401.12345v2').metadata.identifiers).toEqual({
+      arxiv: '2401.12345v2',
+    });
+  });
+
+  it('reads an old-style ID without its subject class, and the ID an arxiv.org link names', () => {
+    const document = arxivDocument('arXiv:math.GT/0309136v1');
+    expect(document.metadata.identifiers).toEqual({ arxiv: 'math/0309136v1' });
+    expect(toMarkdown(document)).toContain('arXiv: math/0309136v1');
+    expect(arxivDocument('https://arxiv.org/abs/2105.00001v3').metadata.identifiers).toEqual({
+      arxiv: '2105.00001v3',
+    });
+  });
+
+  it('reads no arXiv ID from a value that is not one, and takes a later one that is', () => {
+    const none = arxivDocument('pending', 'hep-th/0805123', '2105.00001v0');
+    expect(none.metadata.identifiers).toBeUndefined();
+    expect(toMarkdown(none)).not.toContain('arXiv:');
+    expect(arxivDocument('n/a', 'hep-th/9711200').metadata.identifiers).toEqual({
+      arxiv: 'hep-th/9711200',
+    });
+  });
+});
+
+describe('PMCID, PMID, and ORCID values (#59)', () => {
+  const idsOf = (articleIds: string) => metadataOf(TITLE + articleIds).identifiers;
+  const articleId = (type: string, value: string) =>
+    `<article-id pub-id-type="${type}">${value}</article-id>`;
+  const orcidOf = (contribId: string) =>
+    metadataOf(
+      `${TITLE}<contrib-group><contrib contrib-type="author">${contribId}` +
+        '<name><surname>Carberry</surname></name></contrib></contrib-group>',
+    ).authors?.[0]?.orcid;
+  const relatedOf = (relatedArticle: string) => metadataOf(TITLE + relatedArticle).related?.[0];
+
+  it('keeps PMC IDs, PMIDs, and ORCID iDs already in canonical form', () => {
+    expect(idsOf(articleId('pmcid', 'PMC999') + articleId('pmid', '21491125'))).toEqual({
+      pmcid: 'PMC999',
+      pmid: '21491125',
+    });
+    expect(idsOf(articleId('pmc', '999'))).toEqual({ pmcid: 'PMC999' });
+    expect(orcidOf('<contrib-id contrib-id-type="orcid">0000-0002-1694-233X</contrib-id>')).toBe(
+      '0000-0002-1694-233X',
+    );
+    expect(relatedOf('<related-article ext-link-type="pmc" xlink:href="pmc777"/>')?.pmcid).toBe(
+      'PMC777',
+    );
+  });
+
+  it('reads an article PMC ID or PMID in any case, without a label', () => {
+    expect(idsOf(articleId('pmcid', 'pmc999'))).toEqual({ pmcid: 'PMC999' });
+    expect(idsOf(articleId('pmid', 'PMID: 21491125'))).toEqual({ pmid: '21491125' });
+    expect(idsOf(articleId('pmcid', 'PMCID: PMC999'))).toEqual({ pmcid: 'PMC999' });
+  });
+
+  it('reads an article-id type in any case, filing none of them under other', () => {
+    expect(
+      idsOf(
+        articleId('PMID', '21491125') +
+          articleId('PMCID', 'PMC999') +
+          articleId('DOI', '10.1234/AB'),
+      ),
+    ).toEqual({ doi: '10.1234/ab', pmcid: 'PMC999', pmid: '21491125' });
+  });
+
+  it('reads no identifier from a value that is not one', () => {
+    expect(
+      idsOf(articleId('pmcid', 'pending') + articleId('pmid', 'n/a') + articleId('pmc', 'PMC')),
+    ).toBeUndefined();
+    expect(idsOf(articleId('pmid', '2149A125'))).toBeUndefined();
+  });
+
+  it('reads related-work PMC IDs and PMIDs from links to PMC and PubMed', () => {
+    expect(
+      relatedOf(
+        '<related-article related-article-type="corrected-article" ext-link-type="pmcid" ' +
+          'xlink:href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC777/"/>',
+      ),
+    ).toEqual({ pmcid: 'PMC777', relation: 'corrected-article' });
+    expect(
+      relatedOf(
+        '<related-article related-article-type="commentary"><ext-link ext-link-type="pubmed" ' +
+          'xlink:href="https://pubmed.ncbi.nlm.nih.gov/21491125/">A comment</ext-link></related-article>',
+      ),
+    ).toEqual({ pmid: '21491125', relation: 'commentary' });
+    expect(
+      relatedOf(
+        '<related-article related-article-type="commentary" ext-link-type="pubmed" ' +
+          'xlink:href="&#34;Carrami EM&#34;[Author]">A comment</related-article>',
+      ),
+    ).toEqual({ relation: 'commentary', text: 'A comment' });
+  });
+
+  it('renders the normalized identifiers in the Markdown', () => {
+    const document = parseArticle({
+      body: '<p>Body.</p>',
+      meta:
+        TITLE +
+        articleId('PMID', 'PMID: 21491125') +
+        articleId('pmcid', 'pmc999') +
+        '<related-article related-article-type="corrected-article" ext-link-type="pmcid" ' +
+        'xlink:href="https://pmc.ncbi.nlm.nih.gov/articles/PMC777/">A correction.</related-article>',
+    });
+    const markdown = toMarkdown(document);
+    expect(markdown).toContain('PMID: 21491125 · PMCID: PMC999');
+    expect(markdown).toContain('Related (corrected-article): A correction. · PMCID: PMC777');
+    expect(markdown).not.toContain('PMChttps');
+  });
+
+  it('reads a contributor ORCID iD whatever the case of its type or check character', () => {
+    expect(orcidOf('<contrib-id contrib-id-type="orcid">0000-0002-1694-233x</contrib-id>')).toBe(
+      '0000-0002-1694-233X',
+    );
+    expect(
+      orcidOf(
+        '<contrib-id contrib-id-type="ORCID">https://orcid.org/0000-0002-1694-233X</contrib-id>',
+      ),
+    ).toBe('0000-0002-1694-233X');
+    expect(
+      orcidOf('<contrib-id contrib-id-type="orcid">0000-0002-1694-233</contrib-id>'),
+    ).toBeUndefined();
+  });
+});

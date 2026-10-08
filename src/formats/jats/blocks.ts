@@ -30,6 +30,7 @@ import {
   FORMULA_IMAGE,
   inlineCode,
   inlineMath,
+  link,
 } from '../../render/inline.js';
 import {
   attrOf,
@@ -45,7 +46,7 @@ import {
 import type { JatsContext } from './context.js';
 import { formulaParts, inlineMarkdown, inlineText } from './inline.js';
 import { parseBareTable, parseTableWrap } from './tables.js';
-import { rawText, selectAlternative, text } from './text.js';
+import { LINK_TAGS, rawText, selectAlternative, text } from './text.js';
 
 /**
  * JATS block-level elements. Membership decides placement: each flushes the prose run
@@ -69,6 +70,13 @@ const BLOCK_TAGS: ReadonlySet<string> = new Set([
   'fig-group',
   'fn-group',
   'graphic',
+  // HTML headings, which Crossref and Europe PMC abstracts carry: blocks as `title` is.
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
   'list',
   'media',
   'p',
@@ -111,35 +119,40 @@ function flushRun(flow: Flow): void {
   flow.run = '';
 }
 
+/**
+ * Walk mixed content into `flow`. Consecutive inline siblings are read together, so the
+ * rules between touching siblings (`inlineMarkdown`) see them as siblings.
+ */
 function walk(nodes: XmlNodeList, flow: Flow, ctx: JatsContext): void {
+  let inline: XmlNodeList = [];
+  const readInline = () => {
+    if (inline.length === 0) return;
+    flow.run += inlineMarkdown(inline, ctx);
+    inline = [];
+  };
+  const block = (node: XmlNode) => {
+    readInline();
+    flushRun(flow);
+    append(flow.blocks, renderBlock(node, ctx));
+  };
   for (const node of nodes) {
-    if (isTextNode(node)) {
-      flow.run += escapeInline(textOf(node));
-      continue;
-    }
     const tag = tagNameOf(node) ?? '';
     if (tag === 'alternatives') {
       const chosen = selectAlternative(node);
-      if (chosen && BLOCK_TAGS.has(tagNameOf(chosen) ?? '')) {
-        flushRun(flow);
-        append(flow.blocks, renderBlock(chosen, ctx));
-      } else {
-        flow.run += inlineMarkdown([node], ctx);
-      }
-      continue;
+      if (chosen && BLOCK_TAGS.has(tagNameOf(chosen) ?? '')) block(chosen);
+      else inline.push(node);
+    } else if (BLOCK_TAGS.has(tag)) {
+      block(node);
+    } else if (tag !== 'fn' && !isTextNode(node) && containsBlock(node)) {
+      readInline();
+      walk(childrenOf(node), flow, ctx);
+      // A link whose content holds no text writes its target, as `link` does.
+      if (LINK_TAGS.has(tag) && text(node) === '') flow.run += link('', attrOf(node, 'xlink:href'));
+    } else {
+      inline.push(node);
     }
-    if (tag === 'fn') {
-      flow.run += inlineMarkdown([node], ctx);
-      continue;
-    }
-    if (BLOCK_TAGS.has(tag)) {
-      flushRun(flow);
-      append(flow.blocks, renderBlock(node, ctx));
-      continue;
-    }
-    if (containsBlock(node)) walk(childrenOf(node), flow, ctx);
-    else flow.run += inlineMarkdown([node], ctx);
   }
+  readInline();
 }
 
 /** Blocks for mixed content, in document order. */
@@ -156,7 +169,13 @@ function renderBlock(node: XmlNode, ctx: JatsContext): Block[] {
   switch (tagNameOf(node)) {
     case 'p':
       return flowBlocks(children, ctx);
-    case 'title': {
+    case 'title':
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6': {
       const title = inlineText(node, ctx);
       return title ? [{ text: emphasis(title, '**'), type: 'paragraph' }] : [];
     }
@@ -352,9 +371,17 @@ function figure(node: XmlNode, ctx: JatsContext): FigureBlock {
   };
 }
 
+/**
+ * A `<supplementary-material>` or `<media>` as a file to open. A `<p>` straight inside a
+ * `<supplementary-material>` (JMIR's description of an appendix file) follows its caption.
+ */
 function supplement(node: XmlNode, ctx: JatsContext): SupplementBlock {
-  const { caption, href, id, label } = assetParts(node, ctx);
-  const ownHref = tagNameOf(node) === 'media' ? attrOf(node, 'xlink:href') : undefined;
+  const { caption: assetCaption, href, id, label } = assetParts(node, ctx);
+  const tag = tagNameOf(node);
+  const prose =
+    tag === 'supplementary-material' ? findAll(node, 'p').map((p) => inlineText(p, ctx)) : [];
+  const caption = [assetCaption, ...prose].filter(Boolean).join(' ') || undefined;
+  const ownHref = tag === 'media' ? attrOf(node, 'xlink:href') : undefined;
   const target = href ?? ownHref;
   return {
     type: 'supplement',

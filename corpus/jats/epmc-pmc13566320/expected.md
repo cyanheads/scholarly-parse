@@ -234,7 +234,7 @@ This research received no external funding.
 
 ## References
 
-- [1] IASP . Announces Revised Definition of Pain. International Association for the Study of Pain; Washington, DC, USA: 2020.
+- [1] IASP. Announces Revised Definition of Pain. International Association for the Study of Pain; Washington, DC, USA: 2020.
 - [2] Raja S.N., Carr D.B., Cohen M., Finnerup N.B., Flor H., Gibson S., Keefe F.J., Mogil J.S., Ringkamp M., Sluka K.A., et al. The Revised International Association for the Study of Pain Definition of Pain: Concepts, Challenges, and Compromises. Pain. 2020;161:1976–1982. doi: 10.1097/j.pain.0000000000001939.
 - [3] Gazzetta Ufficiale. [(accessed on 18 June 2025)]. Available online: https://www.gazzettaufficiale.it/gunewsletter/dettaglio.jsp?service=1&datagu=2010-03-19&task=dettaglio&numgu=65&redaz=010G0056&tmstp=1269600292070.
 - [4] WHO Revision of Pain Management Guidelines. [(accessed on 18 June 2025)]. Available online: https://www.who.int/who-revision-of-pain-management-guidelines.
@@ -254,7 +254,7 @@ This research received no external funding.
 - [18] He S., Renne A., Argandykov D., Convissar D., Lee J. Comparison of an Emoji-Based Visual Analog Scale With a Numeric Rating Scale for Pain Assessment. J. Am. Med. Assoc. 2022;328:208–209. doi: 10.1001/jama.2022.7489.
 - [19] Unicode & The Unicode Standard. [(accessed on 19 June 2025)]. Available online: https://emojipedia.org/the-unicode-consortium.
 - [20] MedXCom Effective Communication in a Multicultural Medical Setting. MedXCom. 2023. [(accessed on 10 August 2026)]. Available online: https://medx.com/multicultural-medical-setting/
-- [21] Snyder J. The Picture of Health: Visual Representation as Communicative Practice in Healthcare Settings. [(accessed on 10 August 2026)]. Available online: https://ics.uci.edu/\~yunanc/cscw2013health/Final%20submissions/Snyder_The%20Picture%20of%20Health%20-%20Visual%20Representation%20as%20Communicative%20Practice%20in%20Healthcare%20Settings_Final.pdf#1#1.
+- [21] Snyder J. The Picture of Health: Visual Representation as Communicative Practice in Healthcare Settings. [(accessed on 10 August 2026)]. Available online: <https://ics.uci.edu/~yunanc/cscw2013health/Final%20submissions/Snyder_The%20Picture%20of%20Health%20-%20Visual%20Representation%20as%20Communicative%20Practice%20in%20Healthcare%20Settings_Final.pdf#1#1>.
 - [22] Huber M., Stamer U. Pain Assessment on a Numerical Scale with Uncertainty Intervals: A Proof-of-Concept Simulation Study. Front. Pain Res. 2025;6:1555185. doi: 10.3389/fpain.2025.1555185.
 - [23] King M., Patterson E.D. The FACES of the Future: Emojis in Perioperative Medicine. Anesth. Analg. 2023;137:466–467. doi: 10.1213/ANE.0000000000006279.
 - [24] Renne A., He S., Lee J. An Emoji-Based Visual Analog Scale Compared With a Numeric Rating Scale for Pain Assessment-Reply. J. Am. Med. Assoc. 2022;328:1980–1981. doi: 10.1001/jama.2022.16943.

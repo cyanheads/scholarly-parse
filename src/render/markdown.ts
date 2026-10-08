@@ -27,7 +27,7 @@ import {
   escapeTex,
   foldLineBreaks,
 } from './escape.js';
-import { FORMULA_IMAGE, link } from './inline.js';
+import { FORMULA_IMAGE, joinInlineSeams, link } from './inline.js';
 
 /** What to include when rendering. Everything is included by default. */
 export interface MarkdownOptions {
@@ -157,7 +157,10 @@ function renderMetadata(document: ScholarlyDocument): string[] {
     const parts = [work.text, ...identifierParts(work), work.url && link('', work.url)];
     details.push(`Related (${escapeInline(work.relation)}): ${parts.filter(Boolean).join(' · ')}`);
   }
-  if (details.length > 0) lines.push(details.join('  \n'));
+  // Each line joins separately escaped fields (`volume(issue)`), so its seams are repaired,
+  // and each starts a line where a `>` or `#` would open a block.
+  if (details.length > 0)
+    lines.push(details.map((line) => blockStart(joinInlineSeams(line))).join('  \n'));
   return lines;
 }
 
@@ -241,14 +244,24 @@ export function renderFloats(floats: Block[]): string {
   return `## ${FLOATS_HEADING}\n\n${renderBlocks(floats)}`;
 }
 
+/**
+ * Inline Markdown that starts a block, its start escaped ({@link escapeBlockStart}). An
+ * escaped `[` that would have opened a link reference definition also keeps the link it
+ * opened from forming, so that link's text, written for link text, is read again as
+ * running text ({@link joinInlineSeams}).
+ */
+function blockStart(markdown: string): string {
+  const escaped = escapeBlockStart(markdown);
+  return escaped !== markdown && escaped.startsWith('\\[') ? joinInlineSeams(escaped) : escaped;
+}
+
 /** Heading over the footnotes. */
 export const FOOTNOTES_HEADING = 'Footnotes';
 
 /** The footnotes as a list under their own heading, each led by its label. */
 export function renderFootnotes(footnotes: Footnote[]): string {
   const lines = footnotes.map(
-    (fn) =>
-      `- ${fn.label ? `**${escapeInline(fn.label)}** ${fn.text}` : escapeBlockStart(fn.text)}`,
+    (fn) => `- ${fn.label ? `**${escapeInline(fn.label)}** ${fn.text}` : blockStart(fn.text)}`,
   );
   return `## ${FOOTNOTES_HEADING}\n\n${lines.join('\n')}`;
 }
@@ -259,8 +272,7 @@ export const REFERENCES_HEADING = 'References';
 /** The references as a list under their own heading, each led by its bracketed label. */
 export function renderReferences(references: Reference[]): string {
   const lines = references.map(
-    (ref) =>
-      `- ${ref.label ? `[${escapeInline(ref.label)}] ${ref.text}` : escapeBlockStart(ref.text)}`,
+    (ref) => `- ${ref.label ? `[${escapeInline(ref.label)}] ${ref.text}` : blockStart(ref.text)}`,
   );
   return `## ${REFERENCES_HEADING}\n\n${lines.join('\n')}`;
 }
@@ -339,7 +351,7 @@ function labeled(label: string | undefined, caption: string | undefined): string
 function renderLeaf(block: LeafBlock): string {
   switch (block.type) {
     case 'paragraph':
-      return escapeBlockStart(block.text);
+      return blockStart(block.text);
     case 'table':
       return renderTable(block);
     case 'figure':
@@ -354,7 +366,7 @@ function renderLeaf(block: LeafBlock): string {
       const label = block.label?.replace(/^\((.*)\)$/, '$1').trim();
       if (block.tex) return displayMath(block.tex, label);
       const body = block.text === undefined ? FORMULA_IMAGE : escapeInline(block.text);
-      return `${escapeBlockStart(body)}${label ? ` (${escapeInline(label)})` : ''}`;
+      return `${blockStart(body)}${label ? ` (${escapeInline(label)})` : ''}`;
     }
     case 'code': {
       const fence = codeFence(block.text);

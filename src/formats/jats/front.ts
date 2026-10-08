@@ -3,6 +3,7 @@
  * `<abstract>` / `<trans-abstract>` with its kind.
  * @module src/formats/jats/front
  */
+import { normalizeArxiv } from '../../model/arxiv.js';
 import type {
   Abstract,
   AbstractKind,
@@ -17,6 +18,7 @@ import type {
   Venue,
 } from '../../model/document.js';
 import { normalizeDoi } from '../../model/doi.js';
+import { normalizeOrcid, normalizePmcid, normalizePmid } from '../../model/identifiers.js';
 import { issueId } from '../../model/section-ids.js';
 import { escapeInline } from '../../render/escape.js';
 import {
@@ -134,10 +136,10 @@ function parseContributor(
     if (index !== undefined) affiliations.add(index);
   }
 
-  const orcidNode = findAll(contrib, 'contrib-id').find(
-    (id) => attrOf(id, 'contrib-id-type') === 'orcid',
-  );
-  const orcid = orcidNode ? /(\d{4}-\d{4}-\d{4}-\d{3}[\dX])/.exec(text(orcidNode))?.[1] : undefined;
+  const orcid = findAll(contrib, 'contrib-id')
+    .filter((id) => attrOf(id, 'contrib-id-type')?.toLowerCase() === 'orcid')
+    .map((id) => normalizeOrcid(text(id)))
+    .find(Boolean);
   const email = text(findOne(contrib, 'email')) || undefined;
   const extras = {
     ...(affiliations.size > 0 && { affiliations: [...affiliations].sort((a, b) => a - b) }),
@@ -235,43 +237,43 @@ const RELATED_ID_TYPES: ReadonlyMap<string, 'doi' | 'pmcid' | 'pmid'> = new Map(
   } as const),
 );
 
+/** Each related-work identifier field's normalizer. */
+const NORMALIZE_ID = { doi: normalizeDoi, pmcid: normalizePmcid, pmid: normalizePmid } as const;
+
 /**
  * Works the article declares a relation to: each `<related-article>` in `<article-meta>`,
  * with its sentence (PLOS: `This corrects the article "…" in volume 10.`) or else its
  * title, and its identifiers from the element, an `<ext-link>` inside it, or the
- * `<pub-id>`s of Europe PMC's structured entries. Europe PMC adds a `retraction-forward`
- * entry to an article that has been retracted.
+ * `<pub-id>`s of Europe PMC's structured entries, each the first of its type that holds
+ * one. Europe PMC adds a `retraction-forward` entry to an article that has been retracted.
  */
 function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): RelatedWork[] {
   return findAll(articleMeta, 'related-article').flatMap((node) => {
     const ids: Partial<Record<'doi' | 'pmcid' | 'pmid' | 'url', string>> = {};
+    const add = (type: string | undefined, value: string) => {
+      const field = RELATED_ID_TYPES.get(type?.toLowerCase() ?? '');
+      const id = field && NORMALIZE_ID[field](value);
+      if (field && id) ids[field] ??= id;
+      return field;
+    };
     for (const link of [node, ...findAllDescendants(node, 'ext-link')]) {
       const target = attrOf(link, 'xlink:href')?.trim();
-      if (!target) continue;
-      const type = attrOf(link, 'ext-link-type')?.toLowerCase() ?? '';
-      const field =
-        RELATED_ID_TYPES.get(type) ?? (/^https?:\/\//i.test(target) ? 'url' : undefined);
-      if (field) ids[field] ??= target;
+      if (target && !add(attrOf(link, 'ext-link-type'), target) && /^https?:\/\//i.test(target))
+        ids.url ??= target;
     }
-    for (const pubId of findAll(node, 'pub-id')) {
-      const field = RELATED_ID_TYPES.get(attrOf(pubId, 'pub-id-type')?.toLowerCase() ?? '');
-      const value = text(pubId);
-      if (field && value) ids[field] ??= value;
-    }
+    for (const pubId of findAll(node, 'pub-id')) add(attrOf(pubId, 'pub-id-type'), text(pubId));
     const isSentence = childrenOf(node).some((child) => isTextNode(child) && textOf(child).trim());
     const description = inlineText(isSentence ? node : findOne(node, 'article-title'), ctx);
-    const doi = normalizeDoi(ids.doi);
-    const pmcid =
-      ids.pmcid && (/^PMC/i.test(ids.pmcid) ? ids.pmcid.toUpperCase() : `PMC${ids.pmcid}`);
-    if (!description && !doi && !pmcid && !ids.pmid && !ids.url) return [];
+    const { doi, pmcid, pmid, url } = ids;
+    if (!description && !doi && !pmcid && !pmid && !url) return [];
     return [
       {
         relation: attrOf(node, 'related-article-type') ?? 'related',
         ...(description && { text: description }),
         ...(doi && { doi }),
         ...(pmcid && { pmcid }),
-        ...(ids.pmid && { pmid: ids.pmid }),
-        ...(ids.url && { url: ids.url }),
+        ...(pmid && { pmid }),
+        ...(url && { url }),
       },
     ];
   });
@@ -279,20 +281,28 @@ function extractRelated(articleMeta: XmlNode | undefined, ctx: JatsContext): Rel
 
 // ─── Identifiers, venue, date, license ──────────────────────────────────────
 
+/** `pub-id-type`s, in any case, of an `<article-id>` holding the PMC ID. */
+const PMCID_TYPES: ReadonlySet<string> = new Set(['pmcid', 'pmc', 'pmc-uid', 'pmcaid']);
+
+/**
+ * The article's identifiers, each from the first `<article-id>` of its type (matched in
+ * any case) that holds one; any other type is kept under its own label.
+ */
 function extractIdentifiers(articleMeta: XmlNode | undefined): Identifiers {
   const ids: Identifiers = {};
   const other = new Map<string, string>();
+  const keep = (key: 'arxiv' | 'doi' | 'pmcid' | 'pmid', id: string | undefined) => {
+    if (id) ids[key] ??= id;
+  };
   for (const node of findAll(articleMeta, 'article-id')) {
     const type = attrOf(node, 'pub-id-type') ?? '';
+    const known = type.toLowerCase();
     const value = text(node);
     if (!value) continue;
-    if (type === 'doi') {
-      const doi = normalizeDoi(value);
-      if (doi) ids.doi ??= doi;
-    } else if (type === 'pmid') ids.pmid ??= value;
-    else if (type === 'pmcid' || type === 'pmc' || type === 'pmc-uid' || type === 'pmcaid') {
-      if (/^(PMC)?\d+$/.test(value)) ids.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
-    } else if (type === 'arxiv') ids.arxiv ??= value.replace(/^arxiv:/i, '');
+    if (known === 'doi') keep('doi', normalizeDoi(value));
+    else if (known === 'pmid') keep('pmid', normalizePmid(value));
+    else if (PMCID_TYPES.has(known)) keep('pmcid', normalizePmcid(value));
+    else if (known === 'arxiv') keep('arxiv', normalizeArxiv(value));
     else if (type && !other.has(type)) other.set(type, value);
   }
   // `fromEntries` defines each key as its own property, so `__proto__` stays a key.

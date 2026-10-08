@@ -1,5 +1,5 @@
 {
-  "why": "The fixture for cyanheads/pubmed-mcp-server#74 (U+00AD soft hyphens reaching display text): reference 46's citation string uses three of them as author-name placeholders. These assertions pin the structure around that case: reference 46 is present, the <boxed-text> before the first <sec> becomes its own 'STRENGTHS AND LIMITATIONS OF THIS STUDY' section, and the peer-review <sub-article> lands in back matter. That sub-article's one <fig> holds only a PDF <media>, so it is the file of the review, not a fourth figure.",
+  "why": "The fixture for cyanheads/pubmed-mcp-server#74 (U+00AD soft hyphens reaching display text): reference 46's citation string uses three of them as author-name placeholders. These assertions pin the structure around that case: reference 46 is present, the <boxed-text> before the first <sec> becomes its own 'STRENGTHS AND LIMITATIONS OF THIS STUDY' section, and the peer-review <sub-article> lands in back matter. That sub-article's one <fig> holds only a PDF <media>, so it is the file of the review, not a fourth figure. Reference 14's citation string writes `\\nBMJ\\n.`; the full stop closes up.",
   "title": "DREAM: an adaptive, randomised, placebo-controlled trial of duloxetine for reducing leg pain in people with chronic sciatica—trial protocol",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -19,7 +19,8 @@
     "## STRENGTHS AND LIMITATIONS OF THIS STUDY\n\n> - DREAM is a two arm, triple-blinded (participant, clinician and assessor) randomised controlled trial",
     "Impact of Polymorphism of CYP2D6 on Equilibrium Concentration of Duloxetine in Patients Suffering from Major Depressive Disorder. Psychopharmacol Bull. 2020;50:47–57.",
     "- [46] Zastrozhin, Petukhov, Pankratenko, et al. Impact of Polymorphism",
-    "## Review Process File\n\n**Supplementary material.** (file: bmjopen-2024-096796.reviewer_comments.pdf)"
+    "## Review Process File\n\n**Supplementary material.** (file: bmjopen-2024-096796.reviewer_comments.pdf)",
+    "overview of systematic reviews. BMJ. 2023;380:e072415."
   ],
-  "notContains": ["\u00ad"]
+  "notContains": ["\u00ad", "BMJ ."]
 }

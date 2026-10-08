@@ -23,6 +23,7 @@
     "The molecular characterization of cancer has undergone significant advancement due to the implementation of second-generation sequencing technologies",
     "**Table 1.** Patient Characteristics in the PROBLEM Cohort.",
     "**Figure 5.** **Compound *cis* oncogenic alleles across cancer types revealed by long-read haplotype phasing.**",
-    "Genomic data inspection and visualization were performed using IGV (v2.19.1, RRID:SCR_011793)[63]"
+    "Genomic data inspection and visualization were performed using IGV (v2.19.1, RRID:SCR_011793)[63]",
+    "*SpliceAI* (RRID:SCR_026278)"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/pubmed-mcp-server#112: body sections nest four levels deep (Methods › Phase 2 › β Workshops › Recruitment), and a consumer that capped depth at two silently dropped the deepest ones. Pins every depth-4 heading in order, rendered at #####, with its text under it.",
+  "why": "cyanheads/pubmed-mcp-server#112: body sections nest four levels deep (Methods › Phase 2 › β Workshops › Recruitment), and a consumer that capped depth at two silently dropped the deepest ones. Pins every depth-4 heading in order, rendered at #####, with its text under it. Its <app-group> holds a <supplementary-material> directly, with its description in a <p> of its own; it reads as an untitled appendix section after the acknowledgments.",
   "title": "Bio-Experiential Technology to Support Persons With Dementia and Care Partners at Home (TEND): Protocol for an Intervention Development Study",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -29,6 +29,7 @@
   "contains": [
     "#### β Workshops\n\n##### Design\n\nWe are implementing up to 20 iterations of platform β testing workshops",
     "##### Recruitment\n\nWe are recruiting dyads for platform β testing.",
-    "##### Data Analysis"
+    "##### Data Analysis",
+    "grants from the Robert Wood Johnson Foundation\n\n## Appendix\n\n**Multimedia Appendix 1.** Peer-reviewer report from Robert Wood Johnson Foundation. (file: resprot_v12i1e52799_app1.pdf)"
   ]
 }

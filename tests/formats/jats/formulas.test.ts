@@ -39,7 +39,6 @@ describe('tex-math preambles and <alternatives> (#135)', () => {
         '</inline-formula> throughout.',
     );
     expect(text).toBe('Operations run over $\\mathbb {F}_q$ throughout.');
-    for (const marker of PREAMBLE_MARKERS) expect(text).not.toContain(marker);
   });
 
   it('reads an <alternatives>-wrapped inline formula once, from its <tex-math>', () => {
@@ -49,7 +48,6 @@ describe('tex-math preambles and <alternatives> (#135)', () => {
         '</alternatives></inline-formula> by 0.8.',
     );
     expect(text).toBe('Reducing threshold RH $\\eta_{crit}$ by 0.8.');
-    expect(text).not.toContain('ηcrit');
   });
 
   it('keeps an <alternatives> formula inside the sentence that holds it (#130)', () => {
@@ -261,6 +259,38 @@ describe('tex-math preambles and <alternatives> (#135)', () => {
   });
 });
 
+describe('TeX in a CDATA processing instruction', () => {
+  /** IOP's Crossref deposit shape: TeX in `<?CDATA …?>`, MathML in a `<?MML …?>` beside it. */
+  const iop =
+    '<inline-formula><tex-math><?CDATA $(8\\pm 2)$?></tex-math>' +
+    '<?MML <mml:math><mml:mn>8</mml:mn></mml:math>?>' +
+    '<inline-graphic xlink:href="apj522286ieqn4.gif"/></inline-formula>';
+
+  it('reads the instruction as the formula, with no math-without-tex warning', () => {
+    const document = parseBody(
+      `<sec><title>Results</title><p>sodium blueshifted by ${iop} km s<sup>−1</sup></p>` +
+        `<sec><title>Lines</title><disp-formula id="e1"><tex-math><?CDATA E = mc^2?></tex-math>` +
+        '<graphic xlink:href="e1.gif"/></disp-formula></sec></sec>',
+    );
+    expect(paragraphTexts(document)).toEqual(['sodium blueshifted by $(8\\pm 2)$ km s^{−1}']);
+    expect(blocksOfType(document, 'formula')).toEqual([
+      { id: 'e1', tex: 'E = mc^2', type: 'formula' },
+    ]);
+    expect(toMarkdown(document)).toContain('sodium blueshifted by $(8\\pm 2)$ km s^{−1}');
+    expect(document.diagnostics.warnings).not.toContainEqual(
+      expect.objectContaining({ code: 'math-without-tex' }),
+    );
+  });
+
+  it("ignores PMC's own instructions inside <tex-math>", () => {
+    expect(
+      paragraphOf(
+        '<inline-formula><tex-math><?equation-image-name M1.gif?>x^2</tex-math></inline-formula>',
+      ),
+    ).toBe('$x^2$');
+  });
+});
+
 describe('display formulas (#130)', () => {
   it('keeps a graphic-only formula as its image, marked and reported', () => {
     // Europe PMC serves formulas it has no source for as GIFs: the content is not in the
@@ -351,6 +381,46 @@ describe('inline markup', () => {
         'and by Smith (<xref ref-type="bibr" rid="b8">2020</xref>).',
     );
     expect(text).toBe('Shown before[1,2] and since[3], again[4–7], and by Smith (2020).');
+  });
+
+  it('separates touching citation numbers in a paragraph, a caption, and a table cell', () => {
+    const bibr = (n: number) => `<xref ref-type="bibr" rid="b${n}">${n}</xref>`;
+    const document = parseBody(
+      `<sec><title>Intro</title><p>Known [${bibr(1)}${bibr(2)}${bibr(3)}].</p>` +
+        `<sec><title>Detail</title><p>Sup<sup>${bibr(1)}${bibr(2)}</sup> text.</p>` +
+        `<fig id="f1"><label>Figure 1</label><caption><p>Cap<sup>${bibr(4)}${bibr(5)}</sup> ` +
+        `and [${bibr(6)}${bibr(7)}].</p></caption><graphic xlink:href="f1.jpg"/></fig>` +
+        '<table-wrap id="t1"><table><tbody><tr>' +
+        `<td>Cell<sup>${bibr(8)}${bibr(9)}</sup></td><td>${bibr(1)}${bibr(2)}</td>` +
+        '</tr></tbody></table></table-wrap></sec></sec>',
+    );
+    expect(paragraphTexts(document)).toEqual(['Known [1,2,3].', 'Sup[1,2] text.']);
+    expect(blocksOfType(document, 'figure')[0]?.caption).toBe('Cap[4,5] and [6,7].');
+    expect(blocksOfType(document, 'table')[0]?.rows).toEqual([['Cell[8,9]', '1,2']]);
+    expect(toMarkdown(document)).toContain(
+      'Known [1,2,3].\n\n### Detail\n\nSup[1,2] text.\n\n**Figure 1.** Cap[4,5] and [6,7].',
+    );
+    expect(toMarkdown(document)).toContain('| Cell[8,9] | 1,2 |');
+  });
+
+  it('separates touching author-year citations as a citation list, wherever they sit', () => {
+    const cite = (rid: string, content: string) =>
+      `<xref ref-type="bibr" rid="${rid}">${content}</xref>`;
+    const pair = `${cite('b1', 'Smith 2008')}${cite('b2', '<italic>Jones</italic> 2010')}`;
+    const document = parseBody(
+      `<sec><title>Intro</title><p>Known (${pair}).</p>` +
+        `<p>Marked [${cite('b1', '1')}<target id="t1"/>${cite('b2', '2')}].</p>` +
+        `<fig id="f1"><label>Figure 1</label><caption><p>Cap (${pair}).</p></caption>` +
+        '<graphic xlink:href="f1.jpg"/></fig>' +
+        `<table-wrap id="t1"><table><tbody><tr><td>${pair}</td></tr></tbody></table></table-wrap></sec>`,
+    );
+    expect(paragraphTexts(document)).toEqual([
+      'Known (Smith 2008; *Jones* 2010).',
+      'Marked [1,2].',
+    ]);
+    expect(blocksOfType(document, 'figure')[0]?.caption).toBe('Cap (Smith 2008; *Jones* 2010).');
+    expect(blocksOfType(document, 'table')[0]?.rows).toEqual([['Smith 2008; *Jones* 2010']]);
+    expect(toMarkdown(document)).toContain('Known (Smith 2008; *Jones* 2010).\n\nMarked [1,2].');
   });
 
   it('writes links, keeping an unsafe scheme as text', () => {

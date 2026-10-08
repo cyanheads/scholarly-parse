@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/pubmed-mcp-server#93: Table 3's cells hold emoji (U+1F600 and neighbours), astral-plane characters that a code-unit cut can split into lone surrogates. Pins every emoji row of Table 3 whole, each emoji beside its code point, so a split or dropped pair shows up here as well as in the corpus-wide surrogate check.",
+  "why": "cyanheads/pubmed-mcp-server#93: Table 3's cells hold emoji (U+1F600 and neighbours), astral-plane characters that a code-unit cut can split into lone surrogates. Pins every emoji row of Table 3 whole, each emoji beside its code point, so a split or dropped pair shows up here as well as in the corpus-wide surrogate check. Reference 1's citation string writes `IASP  .`; the full stop closes up.",
   "title": "Pain Without Words: Emoji-Based Assessment of Acute Pain in the Emergency Department—Clinical and Medico-Legal Impact",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -22,6 +22,9 @@
     "| 🙁 | U+1F641 | Moderate pain | 4 | 3–4 |",
     "| 😟 | U+1F61F | Severe pain | 6 | 5–6 |",
     "| 😣 | U+1F623 | Very severe pain | 8 | 7–8 |",
-    "| 😩 | U+1F629 | Worst possible pain | 10 | 9–10 |"
-  ]
+    "| 😩 | U+1F629 | Worst possible pain | 10 | 9–10 |",
+    "Available online: <https://ics.uci.edu/~yunanc/cscw2013health/",
+    "- [1] IASP. Announces Revised Definition of Pain."
+  ],
+  "notContains": ["IASP ."]
 }

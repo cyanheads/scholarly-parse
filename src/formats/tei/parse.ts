@@ -13,6 +13,7 @@
  * the body text, so they are reported as floats.
  * @module src/formats/tei/parse
  */
+import { normalizeArxiv } from '../../model/arxiv.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
   Abstract,
@@ -30,6 +31,7 @@ import type {
 } from '../../model/document.js';
 import { normalizeDoi } from '../../model/doi.js';
 import { append } from '../../model/extremes.js';
+import { normalizeOrcid, normalizePmcid, normalizePmid } from '../../model/identifiers.js';
 import { decodeText, exceedsBudget } from '../../model/input.js';
 import { failed, guard, type ParseOptions, type ParseResult, parsed } from '../../model/result.js';
 import { issueId } from '../../model/section-ids.js';
@@ -143,10 +145,20 @@ function footnoteMarks(text: XmlNode | undefined): Map<string, string> {
 
 // ─── Metadata ───────────────────────────────────────────────────────────────
 
-/** An arXiv identifier without the `arXiv:` prefix or the `[cs.CL]` category Grobid keeps. */
-function arxivId(value: string): string {
-  return value.replace(/^arxiv:\s*/i, '').replace(/\s*\[[^\]]*\]$/, '');
-}
+/**
+ * `<idno>` types, lowercased, whose value is an arXiv ID (Grobid keeps arXiv's
+ * `arXiv:1906.00591v1[cs.CL]` form), DOI, PMID, or PMC ID, and each one's normalizer.
+ */
+const NORMALIZE_ID = {
+  arxiv: normalizeArxiv,
+  doi: normalizeDoi,
+  pmcid: normalizePmcid,
+  pmid: normalizePmid,
+} as const;
+
+/** Whether an `<idno>` type, lowercased, is one {@link NORMALIZE_ID} reads. */
+const isIdType = (type: string): type is keyof typeof NORMALIZE_ID =>
+  Object.hasOwn(NORMALIZE_ID, type);
 
 function parseDate(when: string | undefined): PartialDate | undefined {
   const match = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/.exec(when ?? '');
@@ -205,16 +217,16 @@ function extractMetadata(
       ...new Set(findAll(author, 'affiliation').map(affiliationText).filter(Boolean).map(affIndex)),
     ];
     const email = plainText(findOne(author, 'email')) || undefined;
-    const orcid = findAll(author, 'idno').find((i) => /orcid/i.test(attrOf(i, 'type') ?? ''));
-    const orcidValue = orcid
-      ? /(\d{4}-\d{4}-\d{4}-\d{3}[\dX])/.exec(plainText(orcid))?.[1]
-      : undefined;
+    const orcid = findAll(author, 'idno')
+      .filter((i) => /orcid/i.test(attrOf(i, 'type') ?? ''))
+      .map((i) => normalizeOrcid(plainText(i)))
+      .find(Boolean);
     return [
       {
         ...person,
         ...(indices.length > 0 && { affiliations: indices }),
         ...(email && { email }),
-        ...(orcidValue && { orcid: orcidValue }),
+        ...(orcid && { orcid }),
         ...(attrOf(author, 'role') === 'corresp' && { corresponding: true }),
       },
     ];
@@ -229,13 +241,10 @@ function extractMetadata(
     const type = (attrOf(idno, 'type') ?? '').toLowerCase();
     const value = plainText(idno);
     if (!value) continue;
-    if (type === 'doi') {
-      const doi = normalizeDoi(value);
-      if (doi) identifiers.doi ??= doi;
-    } else if (type === 'arxiv') identifiers.arxiv ??= arxivId(value);
-    else if (type === 'pmid') identifiers.pmid ??= value;
-    else if (type === 'pmcid')
-      identifiers.pmcid ??= value.startsWith('PMC') ? value : `PMC${value}`;
+    if (isIdType(type)) {
+      const id = NORMALIZE_ID[type](value);
+      if (id) identifiers[type] ??= id;
+    }
   }
 
   const imprint = findOne(monogr, 'imprint');
@@ -367,11 +376,16 @@ function divContent(
   return { blocks, ...(head && { head }), nested };
 }
 
-/** A heading's printed number and its title. */
+/**
+ * A heading's printed number and its title. Grobid leaves the punctuation of a number it
+ * moved into `@n` (`. Soil chemistry`); once it is dropped, the title's seams are read
+ * again, since a bare URL can start where it stood.
+ */
 function headingOf(head: XmlNode | undefined, ctx: TeiContext): { label?: string; title?: string } {
-  // Grobid leaves the punctuation of a number it moved into `@n` (`. Soil chemistry`).
+  const text = head ? inlineText(head, ctx) : '';
+  const title = text.replace(/^[\s.,;:]+/, '');
   return splitSectionNumber(
-    head ? inlineText(head, ctx).replace(/^[\s.,;:]+/, '') || undefined : undefined,
+    (title === text ? title : joinInlineSeams(title)) || undefined,
     attrOf(head, 'n'),
   );
 }
@@ -740,9 +754,11 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   const ids = new Map<string, string>();
   for (const idno of findAllDescendants(bibl, 'idno')) {
     const type = (attrOf(idno, 'type') ?? '').toLowerCase();
-    if (type && !ids.has(type)) ids.set(type, plainText(idno));
+    const value = plainText(idno);
+    const id = isIdType(type) ? NORMALIZE_ID[type](value) : value;
+    if (type && id && !ids.has(type)) ids.set(type, id);
   }
-  const doi = normalizeDoi(ids.get('doi'));
+  const doi = ids.get('doi');
   const url = attrOf(findAllDescendants(bibl, 'ptr')[0], 'target');
   const raw = plainText(findAll(bibl, 'note').find((n) => attrOf(n, 'type') === 'raw_reference'));
 
@@ -762,9 +778,9 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   const text = raw ? escapeInline(raw) : joinInlineSeams(built);
   if (!text) return;
   const id = attrOf(bibl, 'xml:id');
-  const arxivValue = ids.get('arxiv');
-  const arxiv = arxivValue && arxivId(arxivValue);
+  const arxiv = ids.get('arxiv');
   const pmid = ids.get('pmid');
+  const pmcid = ids.get('pmcid');
   return {
     ...(id && { id }),
     text,
@@ -775,6 +791,7 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
     ...(doi && { doi }),
     ...(arxiv && { arxiv }),
     ...(pmid && { pmid }),
+    ...(pmcid && { pmcid }),
     ...(url && !doi && { url }),
   };
 }

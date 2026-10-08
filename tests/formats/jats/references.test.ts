@@ -130,8 +130,6 @@ describe('element-citation (#69)', () => {
       title: 'Phage-assisted evolution yields compact prime editors',
       year: '2023',
     });
-    expect(reference?.text).not.toMatch(/e\+\d+/);
-    expect(reference?.text).not.toContain('DomanJ.L.');
   });
 
   it('renders collab and etal author forms', () => {
@@ -216,8 +214,11 @@ describe('element-citation (#69)', () => {
   });
 
   it('takes a resolver or doi: prefix off a reference DOI, keeping the text as printed (#38)', () => {
-    const doiOf = (citation: string) =>
-      referencesOf(`<ref-list><ref id="a">${citation}</ref></ref-list>`)[0]?.doi;
+    const doiOf = (citation: string) => {
+      const references = referencesOf(`<ref-list><ref id="a">${citation}</ref></ref-list>`);
+      expect(references).toHaveLength(1);
+      return references[0]?.doi;
+    };
     const pubId = (value: string) =>
       `<element-citation><article-title>A</article-title><pub-id pub-id-type="doi">${value}</pub-id></element-citation>`;
     expect(doiOf(pubId('doi:10.1234/RefA'))).toBe('10.1234/refa');
@@ -247,6 +248,99 @@ describe('element-citation (#69)', () => {
   });
 });
 
+describe('reference PMC IDs and PMIDs (#59)', () => {
+  const idsOf = (content: string) => {
+    const references = referencesOf(
+      `<ref-list><ref id="a"><mixed-citation>A. Work.${content}</mixed-citation></ref></ref-list>`,
+    );
+    expect(references).toHaveLength(1);
+    const [reference] = references;
+    return { pmcid: reference?.pmcid, pmid: reference?.pmid };
+  };
+  const pubId = (type: string, value: string) => `<pub-id pub-id-type="${type}">${value}</pub-id>`;
+  const extLink = (type: string, href: string) =>
+    `<ext-link ext-link-type="${type}" xlink:href="${href}"/>`;
+
+  it('keeps PMC IDs and PMIDs already in canonical form', () => {
+    expect(idsOf(pubId('pmcid', 'PMC123456') + pubId('pmid', '21491125'))).toEqual({
+      pmcid: 'PMC123456',
+      pmid: '21491125',
+    });
+    expect(idsOf(pubId('pmc', '123456'))).toEqual({ pmcid: 'PMC123456', pmid: undefined });
+  });
+
+  it('reads a PMC ID or PMID in any case, without a label', () => {
+    expect(idsOf(pubId('pmcid', 'pmc123456') + pubId('pmid', 'PMID: 21491125'))).toEqual({
+      pmcid: 'PMC123456',
+      pmid: '21491125',
+    });
+  });
+
+  it('reads the identifier a link to PubMed or PMC names', () => {
+    expect(
+      idsOf(
+        extLink('pmid', 'https://pubmed.ncbi.nlm.nih.gov/21491125/') +
+          extLink('pmcid', 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC123456/'),
+      ),
+    ).toEqual({ pmcid: 'PMC123456', pmid: '21491125' });
+  });
+
+  it('reads no identifier from a value that is not one, and takes a later one that is', () => {
+    expect(
+      idsOf(extLink('pubmed', '&#34;Carrami EM&#34;[Author]') + pubId('pmcid', 'pending')),
+    ).toEqual({ pmcid: undefined, pmid: undefined });
+    expect(idsOf(pubId('pmid', 'n/a') + extLink('pmid', '21491125'))).toEqual({
+      pmcid: undefined,
+      pmid: '21491125',
+    });
+  });
+
+  it('prints the citation text as the source has it', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><article-title>A</article-title>' +
+        `${pubId('pmid', 'PMID: 21491125')}</element-citation></ref></ref-list>`,
+    );
+    expect(reference).toMatchObject({ pmid: '21491125', text: 'A. PMID PMID: 21491125' });
+  });
+});
+
+describe('reference arXiv IDs (#65)', () => {
+  const arxivOf = (...values: string[]) => {
+    const references = referencesOf(
+      `<ref-list><ref id="a"><mixed-citation>A. Work.${values
+        .map((v) => `<pub-id pub-id-type="arxiv">${v}</pub-id>`)
+        .join('')}</mixed-citation></ref></ref-list>`,
+    );
+    expect(references).toHaveLength(1);
+    return references[0]?.arxiv;
+  };
+
+  it('keeps an arXiv ID already in the model form, and drops an arXiv label', () => {
+    expect(arxivOf('2105.00001')).toBe('2105.00001');
+    expect(arxivOf('arXiv:2105.00001v2')).toBe('2105.00001v2');
+  });
+
+  it('reads an old-style ID without its subject class, and the ID an arxiv.org link names', () => {
+    expect(arxivOf('math.GT/0309136')).toBe('math/0309136');
+    expect(arxivOf('http://arxiv.org/abs/hep-th/9711200')).toBe('hep-th/9711200');
+  });
+
+  it('reads no arXiv ID from a value that is not one, and takes a later one that is', () => {
+    expect(arxivOf('pending')).toBeUndefined();
+    expect(arxivOf('2105.00001v0')).toBeUndefined();
+    expect(arxivOf('n/a', '2105.00001')).toBe('2105.00001');
+  });
+
+  it('prints the citation text as the source has it', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><article-title>A</article-title>' +
+        '<pub-id pub-id-type="arxiv">math.GT/0309136</pub-id></element-citation></ref></ref-list>',
+    );
+    expect(reference).toMatchObject({ arxiv: 'math/0309136' });
+    expect(reference?.text).toContain('math.GT/0309136');
+  });
+});
+
 describe('mixed-citation adjacency (#115, #123, #124)', () => {
   it('separates and labels two adjacent zero-gap pub-ids (#115)', () => {
     // PMC11391094 ref C37: the literal `doi:` prefix must not be labeled twice, and the
@@ -258,7 +352,6 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       'C37',
     );
     expect(text).toBe('Clin Exp Allergy 2020; 50: 1267–1269. doi:10.1111/cea.13720 PMID 32762056');
-    expect(text).not.toContain('1372032762056');
   });
 
   it('separates and labels three adjacent zero-gap pub-ids (#115)', () => {
@@ -275,7 +368,6 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       'Thompson, M. C. Advances in methods. F1000Res. 9, 667 (2020). ' +
         'DOI 10.12688/f1000research.25097.1 PMCID PMC7333361 PMID 32676184',
     );
-    expect(text).not.toContain('25097.1PMC733336132676184');
   });
 
   it('separates an inserted label from the bracket before it (#115)', () => {
@@ -309,7 +401,6 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
     expect(text).toBe(
       'Steinegger, M. Protein-level assembly. Nat. Methods 16, 603–606 (2019). PMID 31235882',
     );
-    expect(text).not.toContain('Nat. Methods16');
   });
   it('applies the same spacing inside a citation-string wrapper (#123)', () => {
     // Europe PMC wraps the whole citation in `<named-content content-type="citation-string">`.
@@ -336,7 +427,6 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       'Nybakken JW Marine Biology: An Ecological Approach, 4th ed.; Addison-Wessley ' +
         'Publishing: Boston, MA, 2001.',
     );
-    expect(text).not.toContain('NybakkenJW');
   });
 
   /**
@@ -365,9 +455,7 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
     'doi:10.1111/cea.13720 PMID 32762056';
 
   it('separates a zero-gap <string-name> nested in a <person-group> (#124)', () => {
-    const text = personGroupCitation('');
-    expect(text).toBe(C37_CITATION);
-    expect(text).not.toContain('LommatzschM');
+    expect(personGroupCitation('')).toBe(C37_CITATION);
   });
 
   it('leaves a <person-group> whose name parts carry source whitespace unchanged (#124)', () => {
@@ -407,6 +495,190 @@ describe('mixed-citation adjacency (#115, #123, #124)', () => {
       );
       expect(element?.text).toBe('Src. 10.1/x');
     }
+  });
+});
+
+describe('mixed-citation names', () => {
+  const name = (surname: string, given: string, tag = 'name') =>
+    `<${tag} name-style="western"><surname>${surname}</surname><given-names>${given}</given-names></${tag}>`;
+
+  it('keeps surname and given names, names the source separates, and a written et al.', () => {
+    expect(
+      mixedCitation(
+        `<person-group>${name('Okyere', 'S')}, ${name('Oduro', 'FT')} and ${name('Bonyah', 'E')}, ` +
+          '<etal>et al.</etal></person-group> Title 1 : 2. <article-title>A .5 mg dose</article-title>.',
+      ),
+    ).toBe('Okyere S, Oduro FT and Bonyah E, et al. Title 1 : 2. A .5 mg dose.');
+    // epmc-pmc11662662: a written <etal> follows the last name with no separator, as printed.
+    expect(
+      mixedCitation(
+        `<person-group>${name('Ye', 'Z.', 'string-name')}, ${name('Ngo', 'Q.-M.', 'string-name')}` +
+          '<etal>et al</etal>.</person-group>\n<article-title>Human DNA methylomes</article-title>.',
+      ),
+    ).toBe('Ye Z., Ngo Q.-M. et al. Human DNA methylomes.');
+  });
+
+  it('separates names that touch or sit apart only by markup whitespace', () => {
+    expect(
+      mixedCitation(
+        `<person-group person-group-type="author">${name('Zwierenga', 'F')}${name('van Veggel', 'B')}` +
+          '<etal/></person-group>. High dose osimertinib.',
+      ),
+    ).toBe('Zwierenga F, van Veggel B, et al. High dose osimertinib.');
+    // pmc-pmc10579850 ref 4: a newline between names, an empty <etal/>, a newline before </person-group>.
+    expect(
+      mixedCitation(
+        `\n<person-group person-group-type="author">\n${name('Okyere', 'S')}\n${name('Oduro', 'FT')}\n` +
+          `${name('Bonyah', 'E')}\n<etal/>\n</person-group>:\n<article-title>Epidemiological model.</article-title>`,
+      ),
+    ).toBe('Okyere S, Oduro FT, Bonyah E, et al.: Epidemiological model.');
+    expect(
+      mixedCitation(
+        `${name('A', 'B')}${name('C', 'D', 'string-name')}\n<collab>The Group</collab>. Title.`,
+      ),
+    ).toBe('A B, C D, The Group. Title.');
+  });
+
+  it('separates names inside a citation-string wrapper the same way', () => {
+    expect(
+      mixedCitation(
+        '<named-content content-type="citation-string"><person-group>' +
+          `${name('Ahrens', 'D')}${name('Lago', 'PK')}</person-group> (2008) Title.</named-content>`,
+      ),
+    ).toBe('Ahrens D, Lago PK (2008) Title.');
+  });
+
+  it('reads an empty <etal/> as et al., with one period after it', () => {
+    expect(mixedCitation(`<person-group>${name('A', 'B')}, <etal/></person-group>. T. 2020.`)).toBe(
+      'A B, et al. T. 2020.',
+    );
+    expect(mixedCitation(`<person-group>${name('A', 'B')}<etal/>\n</person-group>\n. T.`)).toBe(
+      'A B, et al. T.',
+    );
+  });
+
+  it('writes one period after a name that ends in an initial, and keeps an ellipsis', () => {
+    expect(
+      mixedCitation(
+        `<person-group>${name('Smith', 'J.')}${name('Ngo', 'Q.-M.')}\n</person-group>. Title...`,
+      ),
+    ).toBe('Smith J., Ngo Q.-M. Title...');
+    expect(
+      mixedCitation(`<person-group>${name('Smith', 'J.')}</person-group>. DNA.. et al...`),
+    ).toBe('Smith J. DNA.. et al...');
+  });
+
+  describe('a name given in two forms (#73)', () => {
+    const alternatives = (...forms: string[]) =>
+      `<name-alternatives>${forms.join('')}</name-alternatives>`;
+    const han = '<string-name name-style="eastern">李</string-name>';
+    const hanName =
+      '<name name-style="eastern"><surname>李</surname><given-names>晓</given-names></name>';
+
+    it('reads one name, the Latin-script one, spaced like any other', () => {
+      const [reference] = referencesOf(
+        '<ref-list><ref id="R1"><mixed-citation publication-type="journal">' +
+          `<person-group person-group-type="author">${alternatives(name('Li', 'X'), han)}, ` +
+          `${name('Wu', 'Y')}${alternatives(hanName, name('Zhao', 'Z'))}</person-group>. ` +
+          'A title. J.</mixed-citation></ref></ref-list>',
+      );
+      expect(reference).toEqual({
+        authors: ['Li X', 'Wu Y', 'Zhao Z'],
+        id: 'R1',
+        text: 'Li X, Wu Y, Zhao Z. A title. J.',
+      });
+    });
+
+    it('reads the first name when none is in Latin script, nested in a citation string', () => {
+      expect(
+        mixedCitation(
+          '<named-content content-type="citation-string"><person-group>' +
+            `${alternatives(han, hanName)}${name('Wu', 'Y')}</person-group> (2020) T.</named-content>`,
+        ),
+      ).toBe('李, Wu Y (2020) T.');
+    });
+
+    it('reads the same name in an element citation and its authors', () => {
+      const document = parseArticle({
+        back:
+          '<ref-list><ref id="R1"><element-citation><person-group person-group-type="author">' +
+          `${alternatives(han, name('Li', 'X'))}${name('Wu', 'Y')}</person-group>` +
+          '<article-title>A title</article-title><source>J</source></element-citation></ref></ref-list>',
+        body: '<p>Body.</p>',
+      });
+      expect(document.references).toMatchObject([
+        { authors: ['Li X', 'Wu Y'], text: 'Li X, Wu Y. A title. J.' },
+      ]);
+      expect(toMarkdown(document)).toContain('\n- Li X, Wu Y. A title. J.');
+      // Outside a person group, the name still leads, once.
+      expect(
+        referencesOf(
+          `<ref-list><ref><element-citation>${alternatives(name('Li', 'X'), han)}` +
+            '<article-title>T</article-title></element-citation></ref></ref-list>',
+        )[0]?.text,
+      ).toBe('Li X. T.');
+    });
+  });
+
+  it('closes up whitespace before a full stop that ends a word', () => {
+    expect(
+      mixedCitation(
+        '<named-content content-type="citation-string">IASP  . Announces Revised Definition of ' +
+          'Pain. Caenorhabditis elegans\n. Nature. 2003. \nBMJ\n.</named-content>',
+      ),
+    ).toBe(
+      'IASP. Announces Revised Definition of Pain. Caenorhabditis elegans. Nature. 2003. BMJ.',
+    );
+    expect(
+      mixedCitation(
+        `<person-group>${name('Younossi', 'ZM')}, ${name('Henry', 'L')}\n  </person-group>. The global burden.`,
+      ),
+    ).toBe('Younossi ZM, Henry L. The global burden.');
+  });
+});
+
+describe('taxonomic names in a citation', () => {
+  const taxon = (genus: string, species: string) =>
+    '<italic><named-content content-type="taxon-name">' +
+    `<named-content content-type="genus">${genus}</named-content>` +
+    `<named-content content-type="species">${species}</named-content></named-content></italic>`;
+
+  it('keeps a citation title written in plain words as it is', () => {
+    expect(
+      referencesOf(
+        '<ref-list><ref><mixed-citation><article-title>A <italic>new</italic> species</article-title>. ' +
+          'Z.</mixed-citation></ref></ref-list>',
+      )[0],
+    ).toEqual({ text: 'A new species. Z.', title: 'A new species' });
+  });
+
+  it('keeps the parts of a taxonomic name set with nothing between them separate words', () => {
+    // epmc-pmc10768028: Pensoft sets genus and species with nothing between them.
+    const document = parseArticle({
+      back:
+        '<ref-list><ref id="R1"><mixed-citation>Wang CC (2016) <article-title>' +
+        `${taxon('Protagonista', 'lugubris')}, new to China</article-title>. ZooKeys 574: 57–73.` +
+        '</mixed-citation></ref><ref id="R2"><element-citation><article-title>Revision of the ' +
+        `${taxon('Dicranotropis', 'hamata')}<target id="t1"/> group</article-title><source>Z</source>` +
+        '</element-citation></ref></ref-list>',
+      body: '<p>Body.</p>',
+    });
+    expect(document.references).toEqual([
+      {
+        id: 'R1',
+        text: 'Wang CC (2016) Protagonista lugubris, new to China. ZooKeys 574: 57–73.',
+        title: 'Protagonista lugubris, new to China',
+      },
+      {
+        id: 'R2',
+        source: 'Z',
+        text: 'Revision of the Dicranotropis hamata group. Z.',
+        title: 'Revision of the Dicranotropis hamata group',
+      },
+    ]);
+    expect(toMarkdown(document)).toContain(
+      '\n- Wang CC (2016) Protagonista lugubris, new to China.',
+    );
   });
 });
 
@@ -473,22 +745,49 @@ describe('long citations', () => {
   const labeled = (i: number) => `<pub-id pub-id-type="doi">10.1/${'v'.repeat(40)}${i}</pub-id>`;
   const unlabeled = (i: number) => `<pub-id pub-id-type="other">10.1/v${i}</pub-id>`;
 
+  /** `n` pieces from `piece`, joined by `separator`. */
+  const joined = (n: number, piece: (i: number) => string, separator = ' ') =>
+    Array.from({ length: n }, (_, i) => piece(i)).join(separator);
+
+  /** Each case: the citation for size `n`, and the text it reads as. */
   it.each([
-    ['labeled identifiers', (n: number) => mixedCitation(ids(n, labeled))],
+    [
+      'labeled identifiers',
+      (n: number) => mixedCitation(ids(n, labeled)),
+      (n: number) => joined(n, (i) => `DOI 10.1/${'v'.repeat(40)}${i}`),
+    ],
     [
       'identifiers and words',
       (n: number) => mixedCitation(`${'10.1/w '.repeat(n)}${ids(n, unlabeled)}`),
+      (n: number) => `${'10.1/w '.repeat(n)}${joined(n, (i) => `10.1/v${i}`)}`,
     ],
     [
       'formulas',
       (n: number) =>
         mixedCitation('<inline-formula><tex-math>x</tex-math></inline-formula> '.repeat(n)),
+      (n: number) => joined(n, () => '$x$'),
     ],
     [
       'a field of "://"',
       (n: number) => elementCitation(`<source>${'://'.repeat(n * 8)} x</source>`),
+      (n: number) => `${'://'.repeat(n * 8)} x.`,
     ],
-  ])('reads a citation in time linear in its %s', async (_, citation) => {
+    [
+      'touching names and empty et al.s',
+      (n: number) =>
+        mixedCitation(
+          `<person-group>${'<name><surname>A</surname><given-names>B</given-names></name>\n<etal/>'.repeat(n)}\n</person-group>: T.`,
+        ),
+      (n: number) => `${joined(n, () => 'A B, et al.', ', ')}: T.`,
+    ],
+    [
+      'spaced full stops',
+      (n: number) => mixedCitation('a \n. et al. . '.repeat(n * 8)),
+      (n: number) => joined(n * 8, () => 'a. et al.'),
+    ],
+  ])('reads a citation in time linear in its %s', async (_, citation, text) => {
+    // The largest citation timed is read whole.
+    expect(citation(8_000)).toBe(text(8_000));
     await expectLinear((n) => n, citation, { from: 125, to: 8_000 });
   });
 

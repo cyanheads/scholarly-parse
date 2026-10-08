@@ -128,7 +128,7 @@ Fits of the pH dependence of TDs without synthase-direction steps from Equation 
 
 **Table 2.** **pKa values and probabilities of forming transient dwells (TDs) without synthase-direction steps for WT and subunit-a mutants.** Values were derived from the fits of the data of Figure 4C to Equation 2.
 
-|  | pKa_1 | P_1 (%) | pKa*_2* | P_2 |
+|  | pKa_1 | P_1 (%) | pKa_2 | P_2 |
 | --- | --- | --- | --- | --- |
 | WT | 6.5 | 38 | 7.7 | 33 |
 | aN214L | 8.0 | 37 | 8.4 | 5 |

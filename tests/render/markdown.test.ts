@@ -9,14 +9,23 @@ import { describe, expect, it } from 'vitest';
 import { parseJats } from '../../src/formats/jats/index.js';
 import type { Block, ScholarlyDocument, Section } from '../../src/model/document.js';
 import { RESERVED_SECTION_ID } from '../../src/model/section-ids.js';
+import { escapeInline, isSafeUrl } from '../../src/render/escape.js';
 import { toMarkdown, toSections, toText } from '../../src/render/index.js';
-import { link } from '../../src/render/inline.js';
+import {
+  emphasis,
+  inlineCode,
+  inlineMath,
+  joinInlineSeams,
+  link,
+} from '../../src/render/inline.js';
 import { MAX_BLOCK_NESTING } from '../../src/render/markdown.js';
 import { stripInline } from '../../src/render/text.js';
 import { CORPUS_DIR, type CorpusFormat, fixtureMetaSchema } from '../corpus/fixtures.js';
 import { PARSERS } from '../corpus/parsers.js';
 import { allSections } from '../corpus/walk.js';
+import { gfmFindings, gfmMarkup, gfmSpans, gfmText } from '../gfm.js';
 import { expectLinear } from '../linear.js';
+import { cases, failures, type Random, SEEDS, seeded, sourceText } from '../property.js';
 
 function section(id: string, fields: Partial<Section> = {}): Section {
   return { blocks: [], id, kind: 'body', sections: [], ...fields };
@@ -141,7 +150,10 @@ describe('toMarkdown', () => {
     expect(markdown).toBe(
       '## Abstract\n\nWe did this.\n\n## 1 Introduction\n\nWhy.\n\n### Scope\n\nDetail.\n',
     );
-    expect(toMarkdown(PAPER, { abstracts: 'none', metadata: false })).not.toContain('Abstract');
+    expect(toMarkdown(PAPER, { abstracts: 'none', metadata: false })).toBe(
+      '## 1 Introduction\n\nWhy.\n\n### Scope\n\nDetail.\n\n## Acknowledgments\n\nThanks.\n\n' +
+        '## Footnotes\n\n- **1** A note.\n\n## References\n\n- [1] Alpha B. Title. 2020.\n',
+    );
   });
 
   it('renders only the sections asked for, each with its subsections', () => {
@@ -301,12 +313,10 @@ describe('blocks', () => {
     ).toBe('$$\nE = mc^2 \\tag{1}\n$$\n\na < b (2)\n\n[formula] (3)\n');
   });
 
-  it('writes display math holding a long run of spaces in one pass', () => {
-    const spaces = ' '.repeat(100_000);
-    const started = performance.now();
-    const markdown = blocksMarkdown([{ tex: `a${spaces}b\n  c`, type: 'formula' }]);
-    expect(performance.now() - started).toBeLessThan(1_000);
-    expect(markdown).toBe(`$$\na${spaces}b c\n$$\n`);
+  it('writes display math holding a long run of spaces in time linear in it', async () => {
+    const formula = (n: number): Block[] => [{ tex: `a${' '.repeat(n)}b\n  c`, type: 'formula' }];
+    expect(blocksMarkdown(formula(128_000))).toBe(`$$\na${' '.repeat(128_000)}b c\n$$\n`);
+    await expectLinear(formula, blocksMarkdown, { from: 2_000, to: 128_000 });
   });
 
   it('nests lists, quotes boxes, and fences code', () => {
@@ -414,11 +424,22 @@ describe('nesting past eight levels', () => {
     const depth = 100_000;
     // A line and a blank line per level, each prefixed by at most eight levels of markers.
     const bound = 50 * depth;
-    for (const block of [nestedList(depth), nestedQuote(depth)]) {
+    const items = (text: string) => text.split('\n').filter((line) => /[LQ]\d/.test(line));
+    for (const [block, deepest, deepestText] of [
+      [nestedList(depth), `${'  '.repeat(7)}- L${depth}`, `${'  '.repeat(7)}- L${depth}`],
+      [nestedQuote(depth), `${'> '.repeat(8)}Q${depth}`, `Q${depth}`],
+    ] as const) {
       const document = documentOf({ body: [section('s1', { blocks: [block] })] });
-      expect(toMarkdown(document).length).toBeLessThan(bound);
-      expect(toText(document).length).toBeLessThan(bound);
-      expect(toSections(document)[0]?.chars).toBeLessThan(bound);
+      const markdown = toMarkdown(document);
+      const text = toText(document);
+      expect(markdown.length).toBeLessThan(bound);
+      expect(text.length).toBeLessThan(bound);
+      // Every level is written, down to the deepest.
+      expect(items(markdown)).toHaveLength(depth);
+      expect(items(markdown).at(-1)).toBe(deepest);
+      expect(items(text)).toHaveLength(depth);
+      expect(items(text).at(-1)).toBe(deepestText);
+      expect(toSections(document)[0]?.chars).toBe(markdown.length - 1);
     }
   });
 
@@ -432,7 +453,9 @@ describe('nesting past eight levels', () => {
       body: [section('s1', { blocks: [p('intro'), list], title: 'Intro' })],
       metadata: { title: 'T' },
     });
-    expect(toMarkdown(document).length).toBeLessThan(4 * html.length);
+    const markdown = toMarkdown(document);
+    expect(markdown.length).toBeLessThan(4 * html.length);
+    expect(markdown.split('\n').filter((line) => /^ *- a$/.test(line))).toHaveLength(2_000);
   });
 });
 
@@ -454,6 +477,102 @@ describe('source text that would become markup', () => {
       documentOf({ metadata: { license: { url: 'https://x.org/a><img src=z>' } } }),
     );
     expect(angled).toBe('License: <https://x.org/a%3E%3Cimg%20src=z%3E>\n');
+  });
+
+  it('keeps a bare URL in a metadata line from taking in the escape after it', () => {
+    const document = jats(
+      '<article xmlns:xlink="http://www.w3.org/1999/xlink"><front><article-meta><permissions>' +
+        '<license><license-p>See https://a.co/x&lt;b&gt;bold&lt;/b&gt;</license-p></license>' +
+        '</permissions></article-meta></front><body><p>Text.</p></body></article>',
+    );
+    const markdown = toMarkdown(document);
+    expect(markdown).toContain('License: See <https://a.co/x>\\<b>bold\\</b>');
+    expect(gfmMarkup(markdown)).toEqual(['link:https://a.co/x']);
+    expect(toText(document)).toContain('License: See https://a.co/x<b>bold</b>');
+  });
+
+  it('keeps a bare URL in one venue field from taking in the escape the next one writes', () => {
+    const markdown = toMarkdown(
+      documentOf({
+        metadata: { venue: { issue: '<img src=x>', title: 'J', volume: 'https://a.co/x' } },
+      }),
+    );
+    // The volume's URL is written as an autolink that ends where the volume does.
+    expect(markdown).toBe('*J*, <https://a.co/x(>\\<img src=x>)\n');
+    expect(gfmMarkup(markdown)).toEqual(['emphasis', 'link:https://a.co/x(']);
+    expect(gfmText(markdown)).toBe('J, https://a.co/x(<img src=x>)');
+  });
+
+  it('escapes what would open a block at the start of each metadata line', () => {
+    const markdown = toMarkdown(
+      documentOf({
+        metadata: {
+          authors: [{ name: '# A' }],
+          title: 'T',
+          venue: { issue: '<img src=x>', volume: '>www.' },
+        },
+      }),
+    );
+    expect(markdown).toBe('# T\n\n\\# A  \n\\>www.(\\<img src=x>)\n');
+    expect(gfmFindings(markdown, { text: markdown }, { textPassLinks: false })).toEqual([]);
+  });
+
+  it('keeps emphasis whose edge punctuation meets a word rendering, at every depth', () => {
+    const document = jats(
+      '<article><body><sec><title>A</title><sec><title>B <italic>(x)</italic>y</title>' +
+        '<p>in a <italic>daf-16-</italic>dependent way and <bold>a<italic>(x)</italic>b</bold>.</p>' +
+        '<p>lifespan<italic>.</italic> We</p>' +
+        '<fig id="f1"><label>Figure 1</label><caption><p>A <italic>daf-16-</italic>dependent' +
+        ' clone.</p></caption></fig></sec></sec></body></article>',
+    );
+    const markdown = toMarkdown(document);
+    expect(markdown).toBe(
+      [
+        '## A',
+        // Only the marker the word blocks moves: the opener after a space already opens.
+        '### B *(x*)y',
+        'in a *daf-16*-dependent way and **a(*x*)b**.',
+        // Emphasis over punctuation alone loses its markers.
+        'lifespan. We',
+        '**Figure 1.** A *daf-16*-dependent clone.\n',
+      ].join('\n\n'),
+    );
+    expect(gfmSpans(markdown)).toEqual([
+      'emphasis:(x',
+      'emphasis:daf-16',
+      'strong:a(x)b',
+      'emphasis:x',
+      'strong:Figure 1.',
+      'emphasis:daf-16',
+    ]);
+    const text = toText(document);
+    expect(text).toBe(
+      'A\n\nB (x)y\n\nin a daf-16-dependent way and a(x)b.\n\nlifespan. We\n\nFigure 1. A daf-16-dependent clone.\n',
+    );
+    expect(text.replace(/\n+/g, '\n').trim()).toBe(gfmText(markdown));
+  });
+
+  it('joins touching spans of one kind, and drops emphasis over punctuation a strong run shares', () => {
+    const document = jats(
+      '<article><body><p><bold>K</bold><bold>-step</bold>: update, <italic>a</italic><italic>b</italic>,' +
+        ' and <bold>Table 1<italic>.</italic></bold> next.</p></body></article>',
+    );
+    const markdown = toMarkdown(document);
+    expect(markdown).toBe('**K-step**: update, *ab*, and **Table 1.** next.\n');
+    expect(gfmSpans(markdown)).toEqual(['strong:K-step', 'emphasis:ab', 'strong:Table 1.']);
+    expect(toText(document)).toBe('K-step: update, ab, and Table 1. next.\n');
+    expect(gfmText(markdown)).toBe(toText(document).trim());
+  });
+
+  it('leaves emphasis GFM pairs whole as written, however it was meant', () => {
+    // The nested strong pairs as written; freeing `(**a` to close would take the outer opener.
+    const markdown = toMarkdown(
+      jats(
+        '<article><body><p><bold>T (<bold>a</bold>) b. (<bold>c</bold>) d.</bold></p></body></article>',
+      ),
+    );
+    expect(markdown).toBe('**T (**a**) b. (**c**) d.**\n');
+    expect(gfmSpans(markdown)).toEqual(['strong:T (a) b. (c) d.', 'strong:a', 'strong:c']);
   });
 
   it('escapes figure alt text and drops a code language that is not a name', () => {
@@ -536,34 +655,31 @@ describe('toText', () => {
     expect(toText(document, { metadata: false })).toBe('Run `ls`, then rm -r, a`b, and ```x``.\n');
   });
 
-  it('reads a long run of backticks in one pass', () => {
-    const run = '`'.repeat(100_000);
-    const document = documentOf({
-      body: [section('s1', { blocks: [{ text: `a${run}b`, type: 'code' }] })],
-    });
-    const started = performance.now();
-    const text = toText(document, { metadata: false });
-    expect(performance.now() - started).toBeLessThan(1_000);
-    expect(text).toContain(`a${run}b`);
+  it('reads a long run of backticks in time linear in it', async () => {
+    const code = (n: number) =>
+      documentOf({
+        body: [section('s1', { blocks: [{ text: `a${'`'.repeat(n)}b`, type: 'code' }] })],
+      });
+    const text = (document: ScholarlyDocument) => toText(document, { metadata: false });
+    expect(text(code(64_000))).toBe(`a${'`'.repeat(64_000)}b\n`);
+    await expectLinear(code, text, { from: 1_000, to: 64_000 });
   });
 
-  it('reads long runs of unclosed brackets and link destinations in one pass', () => {
-    const brackets = '['.repeat(60_000);
-    const destinations = '[]('.repeat(30_000);
-    const document = documentOf({
-      body: [
-        section('s1', {
-          blocks: [
-            { text: brackets, type: 'paragraph' },
-            { text: destinations, type: 'paragraph' },
-          ],
-        }),
-      ],
-    });
-    const started = performance.now();
-    const text = toText(document, { metadata: false });
-    expect(performance.now() - started).toBeLessThan(1_000);
-    expect(text).toBe(`${brackets}\n\n${destinations}\n`);
+  it('reads long runs of unclosed brackets and link destinations in time linear in them', async () => {
+    const runs = (n: number) =>
+      documentOf({
+        body: [
+          section('s1', {
+            blocks: [
+              { text: '['.repeat(n), type: 'paragraph' },
+              { text: '[]('.repeat(n), type: 'paragraph' },
+            ],
+          }),
+        ],
+      });
+    const text = (document: ScholarlyDocument) => toText(document, { metadata: false });
+    expect(text(runs(64_000))).toBe(`${'['.repeat(64_000)}\n\n${'[]('.repeat(64_000)}\n`);
+    await expectLinear(runs, text, { from: 1_000, to: 64_000 });
   });
 
   it('leaves code and TeX as written, and drops the code fence lines', () => {
@@ -692,11 +808,219 @@ describe('toText', () => {
   });
 });
 
+/** Inline Markdown built as the readers build it, and what its source holds. */
+interface Built {
+  hrefs: string[];
+  /** Every formula's TeX reads as written in GFM, which has no math: no backslash escape in it. */
+  literalMath: boolean;
+  markdown: string;
+  /** The source's text, a link's target where the link renders as it. */
+  text: string;
+}
+
+const BUILT_URLS = [
+  'https://y.org',
+  'https://y.org/a_b',
+  'http://z.org/(x)',
+  'https://y.org/x\\',
+  'https://y.org/a b',
+  'https://y.org/&amp;x',
+  'https://y.org/$x',
+  'www.q.org',
+  'mailto:a@b.org',
+  'javascript:alert(1)',
+];
+
+const BUILT_TEX = [
+  'x',
+  'x^2',
+  'a_{b}',
+  '\\alpha',
+  'a`b',
+  'a\\',
+  'a$b',
+  '\\\\',
+  '<img src=x>',
+  '[a](b)',
+];
+
+/** One to three pieces of inline Markdown from `escapeInline`, `emphasis`, `link`, `inlineMath`, and `inlineCode`, nested up to three deep. */
+function built(random: Random, depth = 0): Built {
+  const out: Built = { hrefs: [], literalMath: true, markdown: '', text: '' };
+  for (let n = 1 + random.int(3); n > 0; n--) {
+    const piece = builtPiece(random, depth);
+    out.hrefs.push(...piece.hrefs);
+    out.literalMath &&= piece.literalMath;
+    out.markdown += piece.markdown;
+    out.text += piece.text;
+  }
+  return out;
+}
+
+function builtPiece(random: Random, depth: number): Built {
+  const plain = { hrefs: [], literalMath: true };
+  switch (depth > 2 ? 0 : random.int(7)) {
+    case 1:
+    case 2: {
+      const inner = built(random, depth + 1);
+      return { ...inner, markdown: emphasis(inner.markdown, random.pick(['*', '**', '~~'])) };
+    }
+    case 3: {
+      const inner = random.chance(0.2)
+        ? { ...plain, markdown: '', text: '' }
+        : built(random, depth + 1);
+      const url = random.pick(BUILT_URLS);
+      const markdown = link(inner.markdown, url);
+      const text = isSafeUrl(url)
+        ? markdown.startsWith('<')
+          ? url
+          : inner.text
+        : inner.markdown
+          ? inner.text
+          : url;
+      return { ...inner, hrefs: [...inner.hrefs, url], markdown, text };
+    }
+    case 4: {
+      const markdown = inlineMath(random.pick(BUILT_TEX));
+      return {
+        ...plain,
+        literalMath: !/\\[!-/:-@[-`{-~]/.test(markdown),
+        markdown,
+        text: markdown,
+      };
+    }
+    case 5: {
+      const code = sourceText(random, 4).replace(/\s+/g, ' ');
+      return { ...plain, markdown: inlineCode(code), text: code };
+    }
+    default: {
+      const text = sourceText(random, 8);
+      return { ...plain, markdown: escapeInline(text), text };
+    }
+  }
+}
+
+/**
+ * True for a link whose destination source text spells after a `](` split across pieces,
+ * run on into the markup a later piece writes (`[](http:` then a struck-through `)` links
+ * `http:~~`). `link` writes a destination's `*`, `~`, `_`, `^`, braces, and brackets as they
+ * are, so the seam pass cannot tell that `](` from one `link` writes; `docs/design.md`
+ * names it as outside what the escaping bounds.
+ */
+function runsOnFromSplitLink(finding: string, text: string): boolean {
+  if (!finding.startsWith('link:')) return false;
+  const url = finding.slice('link:'.length);
+  for (const { index } of text.matchAll(/\]\((?=(?:https?|ftp|mailto):)/gi)) {
+    const spelled = text.slice(index + 2);
+    let common = 0;
+    while (common < url.length && url[common] === spelled[common]) common++;
+    if (common > url.indexOf(':') && common < url.length) return true;
+  }
+  return false;
+}
+
+/**
+ * The letters and digits of `text`, which escaping, markers, and a link's encoded spaces
+ * (`a%20b` for `a b`, the one encoding the built URLs need) never change.
+ */
+function words(text: string): string {
+  return text.replaceAll('%20', '').replace(/[^\p{L}\p{N}]/gu, '');
+}
+
 describe('stripInline', () => {
+  it.each(SEEDS)(
+    'reads generated inline Markdown as GFM does, and the Markdown holds no markup its source lacks, seed %i',
+    (seed) => {
+      const read = ({ hrefs, literalMath, markdown, text }: Built) => {
+        const joined = joinInlineSeams(`x ${markdown} x`);
+        const problems = gfmFindings(
+          joined,
+          { hrefs, markers: '*~', text: `x ${text} x` },
+          { textPassLinks: false },
+        ).filter((finding) => !runsOnFromSplitLink(finding, text));
+        const stripped = stripInline(joined);
+        // Every letter and digit of the source reads back, so no finding comes of text lost.
+        if (words(stripped) !== words(`x ${text} x`))
+          problems.push(`${JSON.stringify(joined)} reads as ${JSON.stringify(stripped)}`);
+        // GFM reads a backslash escape in TeX as one; inline math is kept as written.
+        if (literalMath && stripped !== gfmText(joined))
+          problems.push(`${JSON.stringify(joined)} strips to ${JSON.stringify(stripped)}`);
+        return problems;
+      };
+      expect(failures(cases(seeded(seed), 400, built), read)).toEqual([]);
+    },
+  );
+
   it('removes emphasis in pairs and leaves a delimiter with no partner as written', () => {
     expect(stripInline('**a *b* c**, ~~d~~, *a\\*b*, **~~e~~**, and 2 * 3 **')).toBe(
       'a b c, d, a*b, e, and 2 * 3 **',
     );
+  });
+
+  it.each([
+    ['**x (*t*) y**', 'x (t) y'],
+    ['**a*b*c**', 'abc'],
+    ['**V*max***', 'Vmax'],
+    ['**(*a*)**', '(a)'],
+    ['*(**a**)*', '(a)'],
+    ['**Plot of *I*(*t*) for different choice of κ.**', 'Plot of I(t) for different choice of κ.'],
+    ['*a*b*', 'ab*'],
+    ['**~~e~~** and ~~(a)~~b', 'e and ~~(a)~~b'],
+    ['*Rules*.We and a(**x**)b and **a *b*.c**', 'Rules.We and a(x)b and a b.c'],
+    // A `*` beside a `~` opens or closes as micromark's GFM reads it, whatever the flank.
+    ['a*~~b~~*c', 'abc'],
+    ['x*~~(a)~~*y', 'x(a)y'],
+    // Emphasis resolves before strikethrough when a `*` comes first: the `~~` stay text.
+    ['*~~*/*~~*', '~~/~~'],
+  ])('pairs emphasis as GFM does, by its flanking rules: %j', (markdown, text) => {
+    expect(stripInline(markdown)).toBe(text);
+    expect(stripInline(markdown)).toBe(gfmText(markdown));
+  });
+
+  it.each([
+    // An opener left with markers after a pair can pair again with a closer it barred before.
+    ['x ****)**`b`****\\*** x', 'x )**b*** x'],
+    ['x ****/**\\&**\\~****\\\\ x', 'x /&~\\ x'],
+    // Strikethrough resolves first when a tilde run comes first, link text included.
+    ['~~/~~*~~*/*~~*', '//'],
+    ['[~~](https://a.co) *~~*/*~~*', '~~ /'],
+    ['~~\\!~~*~~*.*~~*', '!.'],
+    ['~~a~~ *~~b*~~*', 'a b*'],
+    // In link text, strikethrough resolves first wherever the first run stands.
+    ['[x *~a*~ y](https://a.co)', 'x *a* y'],
+    ['*q* [x *~a*~ y](https://a.co)', 'q x *a* y'],
+    // An underscore GFM reads as an emphasis run puts emphasis first, in math too.
+    ['y_z ~~x~~ *~~*y*~~*', 'y_z x ~~y~~'],
+    ['$a_b$ ~~*~~*y*~~*', '$a_b$ ~~~~y~~'],
+    ['x $a_{b}$~~*~~;~~*~~ x', 'x $a_{b}$; x'],
+    ['[https://y.org/a_b](mailto:x) ~~*~~*y*~~*', 'https://y.org/a_b ~~~~y~~'],
+    ['www.a_b.co/x ~~*~~*y*~~*', 'www.a_b.co/x ~~~~y~~'],
+    ['x/me_x@a.co ~~*~~*y*~~*', 'x/me_x@a.co ~~~~y~~'],
+    // One inside a code span, or an autolink literal GFM forms, does not.
+    ['`a_b` ~~*~~*y*~~*', 'a_b *y~~*'],
+    ['https://y.org/a_b ~~x~~ *~~*y*~~*', 'https://y.org/a_b x y'],
+    ['me_x@a.co ~~*~~*y*~~*', 'me_x@a.co *y~~*'],
+  ])('pairs emphasis and strikethrough in the order GFM resolves them: %j', (markdown, text) => {
+    expect(gfmText(markdown)).toBe(text);
+    expect(stripInline(markdown)).toBe(text);
+  });
+
+  it.each([
+    ['jats', 'epmc-pmc10702718'],
+    ['jats', 'epmc-pone.0310152'],
+    ['html', 'plos-pone.0310152'],
+  ] as const)('leaves no strong marker in the text of corpus/%s/%s', async (format, name) => {
+    const dir = join(CORPUS_DIR, format, name);
+    const { url } = fixtureMetaSchema.parse(
+      JSON.parse(readFileSync(join(dir, 'meta.json'), 'utf8')),
+    );
+    const source = new Uint8Array(
+      readFileSync(join(dir, format === 'jats' ? 'source.xml' : 'source.html')),
+    );
+    const result = await PARSERS[format as CorpusFormat]?.(source, url);
+    if (!result?.ok) throw new Error(`corpus/${format}/${name} did not parse`);
+    expect(toMarkdown(result.document)).toContain('**');
+    expect(toText(result.document)).not.toContain('**');
   });
 
   it('keeps a link destination out of the text and an escaped angle bracket in it', () => {
@@ -718,6 +1042,16 @@ describe('stripInline', () => {
     '[a [b]',
     '[`]`',
     '[\\]',
+    '(*',
+    '*(',
+    '*a(**',
+    // Underscores in autolink literals, read for which kind GFM resolves first.
+    'w_@x.yz,',
+    'https://a.co/_ ',
+    'https://a.co/_',
+    'a_b@c_d.e',
+    '(www.a_',
+    '$\\_~~~$',
   ])('reads a long run of %j in time linear in it', async (run) => {
     await expectLinear((n) => run.repeat(n), stripInline, { from: 250, to: 64_000 });
   });

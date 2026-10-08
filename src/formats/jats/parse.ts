@@ -209,20 +209,53 @@ function backMatterKind(node: XmlNode): SectionKind | undefined {
   );
 }
 
+/** `<app-group>` children read other than as the group's display content. */
+const APP_GROUP_PARTS: ReadonlySet<string> = new Set(['label', 'ref-list', 'title']);
+
 /**
  * Back matter — acknowledgments, appendices, declarations, notes — from the children of
  * `<back>`, or of `<front>`, which may hold the same elements after its metadata (F1000's
  * version-change `<notes>`). Footnotes are collected. An untitled wrapper with no content
  * of its own gives way to its sections.
+ *
+ * An `<app-group>` gives a section per `<app>` or `<sec>`, and its other content — a
+ * paragraph, a figure, a `<supplementary-material>` (JMIR's multimedia appendices) — reads
+ * in document order as the blocks of appendix sections between them, under the group's
+ * label and title.
  */
 function parseBack(nodes: XmlNodeList, ctx: JatsContext, where: 'back' | 'front'): Section[] {
   const sections: Section[] = [];
+  const nextId = () => `${where}${sections.length + 1}`;
   const add = (node: XmlNode, kind: SectionKind) => {
-    const section = parseSection(node, ctx, kind, `${where}${sections.length + 1}`);
+    const section = parseSection(node, ctx, kind, nextId());
     if (!section) return;
     if (section.title === undefined && section.blocks.length === 0)
       append(sections, section.sections);
     else sections.push(section);
+  };
+  const appGroup = (group: XmlNode) => {
+    const heading = splitSectionNumber(
+      inlineText(findOne(group, 'title'), ctx) || undefined,
+      text(findOne(group, 'label')) || undefined,
+    );
+    let content: XmlNodeList = [];
+    const addContent = () => {
+      const blocks = flowBlocks(content, ctx);
+      content = [];
+      if (blocks.length === 0) return;
+      const id = issueId(ctx.sectionIds, undefined, nextId());
+      sections.push({ blocks, id, kind: 'appendix', sections: [], ...heading });
+    };
+    for (const child of childrenOf(group)) {
+      const tag = tagNameOf(child) ?? '';
+      if (tag === 'app' || tag === 'sec') {
+        addContent();
+        add(child, 'appendix');
+      } else if (!APP_GROUP_PARTS.has(tag)) {
+        content.push(child);
+      }
+    }
+    addContent();
   };
   for (const child of nodes) {
     switch (tagNameOf(child)) {
@@ -230,9 +263,7 @@ function parseBack(nodes: XmlNodeList, ctx: JatsContext, where: 'back' | 'front'
         add(child, 'acknowledgments');
         break;
       case 'app-group':
-        for (const app of childrenOf(child)) {
-          if (['app', 'sec', 'p'].includes(tagNameOf(app) ?? '')) add(app, 'appendix');
-        }
+        appGroup(child);
         break;
       case 'app':
         add(child, 'appendix');

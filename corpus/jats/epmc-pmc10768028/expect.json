@@ -1,5 +1,5 @@
 {
-  "why": "Pensoft taxonomic paper: six genus and species treatments are <sec sec-type=\"taxon-treatment\"> holding treatment-* subsections (type species or type materials, diagnosis, description, etymology, distribution, and others), plus a dichotomous identification key set as an unlabelled <table-wrap> and one XML-treatment <supplementary-material> per taxon. Pins the treatment hierarchy at its source depth, the key's rows, the ZooBank URLs kept, the invisible U+FEFF treatment labels dropped, and the Additional information subsections. Genus and species <named-content>s set with nothing between them read as two words, and each treatment's <sec-meta> taxon classification as one labeled line.",
+  "why": "Pensoft taxonomic paper: six genus and species treatments are <sec sec-type=\"taxon-treatment\"> holding treatment-* subsections (type species or type materials, diagnosis, description, etymology, distribution, and others), plus a dichotomous identification key set as an unlabelled <table-wrap> and one XML-treatment <supplementary-material> per taxon. Pins the treatment hierarchy at its source depth, the key's rows, the ZooBank URLs kept, the invisible U+FEFF treatment labels dropped, and the Additional information subsections. Genus and species <named-content>s set with nothing between them read as two words, in the body and in reference titles alike, and each treatment's <sec-meta> taxon classification as one labeled line. Its mixed citations set <name>s with nothing between them; they read comma-separated.",
   "title": "Two new genera (*Vittiblatta* gen. nov. and *Planiblatta* gen. nov.) of Blattinae (Blattodea, Blattidae) from Southwest China and the discovery of chirally dimorphic male genitalia in *Vittiblatta punctata* sp. nov.",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -35,7 +35,18 @@
     "**Supplementary material.** **XML Treatment for Vittiblatta punctata** (file: zookeys.1187.113403-treatment2.xml)",
     "### Author ORCIDs\n\nXin-Xing Luo <https://orcid.org/0009-0000-6838-1696>",
     "**Taxon classification:** Animalia, Blattodea, Blattidae",
-    "***V. ferruginea* Luo & Wang, sp. nov.**"
+    "***V. ferruginea* Luo & Wang, sp. nov.**",
+    "- Ahrens D, Lago PK (2008) Directional asymmetry reversal",
+    "Wang CC, Wang ZQ, Che YL (2016) Protagonista lugubris, a cockroach species new to China",
+    "Revision of the Dicranotropis hamata group"
   ],
-  "notContains": ["\ufeff", "Vittiblattapunctata", "Taxon classificationAnimalia"]
+  "notContains": [
+    "\ufeff",
+    "Vittiblattapunctata",
+    "Taxon classificationAnimalia",
+    "Ahrens D Lago PK",
+    "Protagonistalugubris",
+    "Periplanetaarabica",
+    "Dicranotropishamata"
+  ]
 }

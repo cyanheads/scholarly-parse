@@ -8,11 +8,11 @@
 import { describe, expect, it } from 'vitest';
 import { jatsInlineToMarkdown } from '../../../src/formats/jats/index.js';
 import { toMarkdown } from '../../../src/index.js';
+import { gfmFindings } from '../../gfm.js';
 import { expectLinear } from '../../linear.js';
 import {
   article,
   blocksOfType,
-  liveMarkup,
   paragraphTexts,
   parse,
   parseArticle,
@@ -623,6 +623,67 @@ describe('back matter', () => {
     expect(back[1]?.id).toBe('app1');
   });
 
+  it("reads an app-group's children other than <app> as appendix blocks, in document order", () => {
+    // epmc-pmc10787328: JMIR puts a <supplementary-material> straight in <app-group>.
+    const document = parseArticle({
+      back:
+        '<ack><p>Thanks.</p></ack><app-group><supplementary-material id="app1">' +
+        '<label>Multimedia Appendix 1</label><p>Peer-reviewer report.</p>' +
+        '<media xlink:href="app1.pdf"/></supplementary-material>' +
+        '<app id="appB"><title>Appendix B</title><p>Extra.</p></app></app-group>',
+      body: '<p>Body.</p>',
+    });
+    expect(document.back.map((s) => [s.kind, s.title, s.blocks.length])).toEqual([
+      ['acknowledgments', undefined, 1],
+      ['appendix', undefined, 1],
+      ['appendix', 'Appendix B', 1],
+    ]);
+    expect(document.back[1]?.blocks).toEqual([
+      {
+        caption: 'Peer-reviewer report.',
+        href: 'app1.pdf',
+        id: 'app1',
+        label: 'Multimedia Appendix 1',
+        type: 'supplement',
+      },
+    ]);
+    expect(document.diagnostics.unhandled).toEqual([]);
+    expect(toMarkdown(document)).toContain(
+      '## Appendix\n\n**Multimedia Appendix 1.** Peer-reviewer report. (file: app1.pdf)\n\n## Appendix B',
+    );
+  });
+
+  it('titles loose app-group blocks by the group title and keeps a loose <p> one paragraph', () => {
+    const { back, references } = parseArticle({
+      back:
+        '<app-group><label>S</label><title>Supplementary</title>' +
+        '<p>Loose para <italic>one</italic> two.</p>' +
+        '<fig id="FA1"><label>Figure A1</label><caption><p>Cap.</p></caption>' +
+        '<graphic xlink:href="a1.jpg"/></fig><boxed-text><p>Boxed.</p></boxed-text>' +
+        '<app><title>Appendix A</title><sec><title>Nested</title><p>Deep.</p></sec></app>' +
+        '<p>After the apps.</p>' +
+        '<ref-list><ref id="r1"><mixed-citation>App ref.</mixed-citation></ref></ref-list>' +
+        '</app-group>',
+      body: '<p>Body.</p>',
+    });
+    expect(back.map((s) => [s.kind, s.label, s.title])).toEqual([
+      ['appendix', 'S', 'Supplementary'],
+      ['appendix', undefined, 'Appendix A'],
+      ['appendix', 'S', 'Supplementary'],
+    ]);
+    expect(back[0]?.blocks).toMatchObject([
+      { text: 'Loose para *one* two.', type: 'paragraph' },
+      { caption: 'Cap.', id: 'FA1', type: 'figure' },
+      { blocks: [{ text: 'Boxed.', type: 'paragraph' }], type: 'box' },
+    ]);
+    expect(back[1]?.sections.map((s) => [s.title, s.blocks])).toEqual([
+      ['Nested', [{ text: 'Deep.', type: 'paragraph' }]],
+    ]);
+    expect(back[2]?.blocks).toEqual([{ text: 'After the apps.', type: 'paragraph' }]);
+    expect(new Set(back.map((s) => s.id)).size).toBe(3);
+    expect(references.map((r) => r.text)).toEqual(['App ref.']);
+  });
+
   it('moves back matter a body carries into the back, by declared type or title', () => {
     // Europe PMC's layout: <back> flattened into <body>, then its generated digest.
     const document = parseArticle({
@@ -953,7 +1014,13 @@ describe('source text split across inline elements (#44)', () => {
       jatsInlineToMarkdown(split),
       toMarkdown(document),
     ];
-    expect(fields.filter((field) => liveMarkup(field).length > 0)).toEqual([]);
+    const text = row.join('').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    // Every field but the paragraph the note marks holds the text, so each finds nothing for a reason.
+    const letters = (field: string) => field.replace(/[^\p{L}\p{N}]/gu, '');
+    expect(fields).toHaveLength(10);
+    expect(fields.filter((field) => !letters(field).includes(letters(text)))).toEqual(['Noted.']);
+    // The renderer's own spans (a figure's label) open with `*`; source text opens none.
+    expect(fields.flatMap((field) => gfmFindings(field, { markers: '*~', text }))).toEqual([]);
   });
 
   it('escapes a link split across elements, and keeps one a link writes', () => {

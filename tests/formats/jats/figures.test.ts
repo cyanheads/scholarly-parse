@@ -137,6 +137,37 @@ describe('figures (#130)', () => {
     ]);
   });
 
+  it("reads a supplement's own paragraphs after its caption, wherever it sits", () => {
+    const document = parseBody(
+      '<sec><title>Results</title><supplementary-material><label>Data S1</label>' +
+        '<p>Raw counts.</p><media xlink:href="a.csv"/></supplementary-material>' +
+        '<sec><title>More</title><supplementary-material id="S2"><label>Data S2</label>' +
+        '<caption><p>Cap.</p></caption><p>More <italic>x</italic>.</p><p>Last.</p>' +
+        '<media xlink:href="b.csv"/></supplementary-material></sec></sec>',
+    );
+    expect(blocksOfType(document, 'supplement')).toEqual([
+      { caption: 'Raw counts.', href: 'a.csv', label: 'Data S1', type: 'supplement' },
+      {
+        caption: 'Cap. More *x*. Last.',
+        href: 'b.csv',
+        id: 'S2',
+        label: 'Data S2',
+        type: 'supplement',
+      },
+    ]);
+    expect(toMarkdown(document)).toContain('**Data S1.** Raw counts. (file: a.csv)');
+  });
+
+  it('reads the paragraphs of a figure that is only a file once, after it', () => {
+    const { body } = parseBody(
+      '<sec><title>Results</title><fig><media xlink:href="r.pdf"/><p>After.</p></fig></sec>',
+    );
+    expect(body[0]?.blocks).toEqual([
+      { href: 'r.pdf', type: 'supplement' },
+      { text: 'After.', type: 'paragraph' },
+    ]);
+  });
+
   it('reads a label and caption hung on the pointer element', () => {
     // `label?, caption?` are in the content model of <media> and <graphic>; 19 of the
     // draw's supplements carry their text there and nothing on the element itself.

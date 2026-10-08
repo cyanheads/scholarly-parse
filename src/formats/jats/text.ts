@@ -8,8 +8,10 @@
  * (pubmed-mcp-server#135)
  * @module src/formats/jats/text
  */
+import { isSafeUrl } from '../../render/escape.js';
 import { cleanTex, mathmlToTex } from '../../xml/mathml.js';
 import {
+  attrOf,
   childrenOf,
   collapseWhitespace,
   isTextNode,
@@ -69,16 +71,56 @@ function pickAlternative(
   );
 }
 
+/** Ranks a taxonomic name's parts are tagged with (`<named-content content-type="genus">`). */
+const TAXON_RANKS: ReadonlySet<string> = new Set([
+  'kingdom',
+  'phylum',
+  'class',
+  'superorder',
+  'order',
+  'suborder',
+  'superfamily',
+  'family',
+  'subfamily',
+  'tribe',
+  'genus',
+  'subgenus',
+  'species',
+  'subspecies',
+  'variety',
+  'form',
+  'taxon-authority',
+  'taxon-status',
+]);
+
+/** True for one part of a taxonomic name: a `<named-content>` typed with its rank. */
+export function isTaxonPart(node: XmlNode | undefined): boolean {
+  return (
+    node !== undefined &&
+    tagNameOf(node) === 'named-content' &&
+    TAXON_RANKS.has(attrOf(node, 'content-type') ?? '')
+  );
+}
+
+/**
+ * The text of `input`. Parts of a taxonomic name set with nothing between them
+ * (`Protagonista` then `lugubris`) are separate words; an element that contributes no
+ * text never stands between two of them.
+ */
 function concatText(input: XmlNode | XmlNodeList, excluded?: ReadonlySet<string>): string {
   const nodes = Array.isArray(input) ? input : [input];
   let out = '';
+  let previous: XmlNode | undefined;
   for (const node of nodes) {
     if (isTextNode(node)) {
       out += textOf(node);
+      previous = node;
       continue;
     }
     const tag = tagNameOf(node) ?? '';
     if (excluded?.has(tag) || SILENT_TAGS.has(tag)) continue;
+    if (isTaxonPart(previous) && isTaxonPart(node)) out += ' ';
+    previous = node;
     if (tag === 'tex-math') {
       out += cleanTex(concatText(childrenOf(node)));
     } else if (tag === 'alternatives') {
@@ -88,6 +130,45 @@ function concatText(input: XmlNode | XmlNodeList, excluded?: ReadonlySet<string>
     }
   }
   return out;
+}
+
+/** Elements that read as links, with their `xlink:href` as the target. */
+export const LINK_TAGS: ReadonlySet<string> = new Set(['ext-link', 'uri']);
+
+/** A piece of a sub- or superscript's text: text, or the target of a link that has none. */
+export type ScriptPiece = { target: string } | { text: string };
+
+/**
+ * The text of a sub- or superscript in pieces, spacing intact: runs of text as
+ * {@link rawText} reads them, and apart from them each link with no text of its own, as its
+ * target, which `link` writes in its place.
+ */
+export function scriptPieces(input: XmlNodeList): ScriptPiece[] {
+  const pieces: ScriptPiece[] = [];
+  let run = '';
+  const walk = (nodes: XmlNodeList) => {
+    let previous: XmlNode | undefined;
+    for (const node of nodes) {
+      const tag = isTextNode(node) ? '' : (tagNameOf(node) ?? '');
+      if (SILENT_TAGS.has(tag)) continue;
+      if (isTaxonPart(previous) && isTaxonPart(node)) run += ' ';
+      previous = node;
+      const target = LINK_TAGS.has(tag) ? attrOf(node, 'xlink:href') : undefined;
+      const content = target ? concatText(childrenOf(node)) : '';
+      // As `link` writes it: a safe link with blank text as its target, any other with none.
+      if (target && (isSafeUrl(target) ? content.trim() : content) === '') {
+        pieces.push({ text: run }, { target });
+        run = '';
+      } else if (isTextNode(node) || tag === 'tex-math' || tag === 'alternatives') {
+        run += concatText(node);
+      } else {
+        walk(childrenOf(node));
+      }
+    }
+  };
+  walk(input);
+  pieces.push({ text: run });
+  return pieces;
 }
 
 /** Text in document order with source spacing intact — no collapsing, no trimming. */

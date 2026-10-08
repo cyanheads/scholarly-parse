@@ -22,7 +22,8 @@
   "contains": [
     "- [1] Thompson, M. C., Yeates, T. O. & Rodriguez, J. A. Advances in methods for atomic resolution macromolecular structure determination. F1000Res. 9, 667 (2020). DOI 10.12688/f1000research.25097.1 PMCID PMC7333361 PMID 32676184",
     "Nat. Methods 16, 603–606 (2019)",
-    "- [84] Flower, T. G. et al. Structure of SARS-CoV-2 ORF8, a rapidly evolving immune evasion protein."
+    "- [84] Flower, T. G. et al. Structure of SARS-CoV-2 ORF8, a rapidly evolving immune evasion protein.",
+    "Uniclust30 v.2018_08 (<https://wwwuser.gwdg.de/~compbiol/uniclust/2018_08/>)"
   ],
   "notContains": ["Nat. Methods16", "25097.1PMC7333361", "PMC733336132676184"]
 }

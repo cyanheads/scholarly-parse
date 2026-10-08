@@ -31,6 +31,7 @@
   "warnings": [
     "structure-inferred"
   ],
+  "contains": ["Available online at: <https://CRAN.R-project.org/package$=> \\$FSA"],
   "notContains": [
     "EDITED BY",
     "REVIEWED BY",

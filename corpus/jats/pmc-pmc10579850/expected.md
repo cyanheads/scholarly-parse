@@ -486,21 +486,21 @@ I confirm that I have read this submission and believe that I have an appropriat
 ## References
 
 - [1] MATLAB, Math: Graphics. Programming. Reference Source
-- [2] Okyere S Ackora-Prah J : A mathematical model of transmission dynamics of SARS CoV-2 (COVID-19) with an underlying condition of diabetes. Int. J. Math. Math. Sci. 2022;2022:1–15. Article ID 7984818. DOI 10.1155/2022/7984818
-- [3] Okyere S Ackora-Prah J : Modelling and analysis of monkeypox disease using fractional derivatives. Results in engineering. 2023; Vol.17:100786. 2590–1230. DOI 10.1016/j.rineng.2022.100786 PMID 36467285 PMCID PMC9705013
-- [4] Okyere S Oduro FT Bonyah E : Epidemiological model of Influenza A (H1N1) transmission in Ashanti Region of Ghana. J. Public Health Epidemiol. April, 2013;5(4):160–166. Reference Source
-- [5] Kim S Seo YB Jung E : Prediction of COVID-19 transmission dynamics using a mathematical model considering behavior changes in Korea. Epidemiol. Health. 2020;42:e2020026. DOI 10.4178/epih.e2020026 PMID 32375455 PMCID PMC7285444
-- [6] Habenom H Aychluh M Suthar DL : Modeling and analysis on the transmission of covid-19 Pandemic in Ethiopia. Alex. Eng. J. 2022;61(7):5323–5342. DOI 10.1016/j.aej.2021.10.054
-- [7] Ahmed I Modu GU Yusuf A : A mathematical model of coronavirus disease (COVID-19) containing asymptomatic and symptomatic classes. Elsevier public health emergency collection, Results Phys. 2021;21:103776. DOI 10.1016/j.rinp.2020.103776 PMID 33432294 PMCID PMC7787076
-- [8] Agarwal P Nieto JJ Ruzhansky M : Analysis of Infectious disease problems (Covid-19) and their global impact. J. Nanobiotechnol. 2021.
-- [9] Ghosh S Chatterjee AN Roy PK : Mathematical Modeling and Control of the Cell Dynamics in Leprosy. Comput. Math. Model. 2021;32:52–74. DOI 10.1007/s10598-021-09516-z
-- [10] Clark A Jit M Warren-Gash C : Global, regional, and national estimates of the population at increased risk of severe COVID-19 due to underlying health conditions in 2020: A modelling study. Lancet Glob. Health. 2020;8:e1003–e1017. DOI 10.1016/S2214-109X(20)30264-3 PMID 32553130 PMCID PMC7295519
-- [11] Nana-Kyere S Boateng FA Jonathan P : Global Analysis and optimal control model of COVID-19. Comput. Math. Methods Med. 2022;2022:20. Article ID 9491847. DOI 10.1155/2022/9491847 PMCID PMC8813235 PMID 35126644
-- [12] Harko T Lobo FS Mak MK : Exact analytical solutions of the Susceptible-Infected-Recovered (SIR) epidemic model and of the SIR model with equal death and birth rates. Appl. Math. Comput. 2014;236:184–194. DOI 10.1016/j.amc.2014.03.030
-- [13] Schlickeiser R Kröger M : Analytical solution of the SIR-model for the temporal evolution of epidemics. Part B: Semi-time case. J. Phys. A. 2021;54(17):175601. DOI 10.1088/1751-8121/abed66
-- [14] Alah MA Abdeen S Tayar E : The story behind the first few cases of monkeypox infection in non-endemic countries. J. Infect. Public Health. 2022; Volume15(Issue9): Pages970–974. DOI 10.1016/j.jiph.2022.07.014 PMID 35952458 PMCID PMC9534129
-- [15] Schlickeiser R Kröger M : Analytical Modeling of the Temporal Evolution of Epidemics Outbreaks Accounting for Vaccinations. Physics. 2021;3(2):386–426. DOI 10.3390/physics3020028
-- [16] Guo J Ye A Wang X : OpenSeesPyView: Python programming-based visualization and post-processing tool for OpenSeesPy. SoftwareX. 2023; Volume21:101278. DOI 10.1016/j.softx.2022.101278
-- [17] Brown D Sousa K de Etten J van : ag5Tools: An R package for downloading and extracting agrometeorological data from the AgERA5 database. SoftwareX. 2023;21:101267. DOI 10.1016/j.softx.2022.101267
-- [18] Egert J Kreutz C : Rcall: An R interface for MATLAB. SoftwareX. 2023; Volume21:101276. DOI 10.1016/j.softx.2022.101276
-- [19] Hoffmann TJ Miaskowski C Kober KM : ShinyGAStool: A user-friendly tool for candidate gene association studies. SoftwareX. 2023; volume21:101274. DOI 10.1016/j.softx.2022.101274 PMCID PMC13463389 PMID 42592379
+- [2] Okyere S, Ackora-Prah J: A mathematical model of transmission dynamics of SARS CoV-2 (COVID-19) with an underlying condition of diabetes. Int. J. Math. Math. Sci. 2022;2022:1–15. Article ID 7984818. DOI 10.1155/2022/7984818
+- [3] Okyere S, Ackora-Prah J: Modelling and analysis of monkeypox disease using fractional derivatives. Results in engineering. 2023; Vol.17:100786. 2590–1230. DOI 10.1016/j.rineng.2022.100786 PMID 36467285 PMCID PMC9705013
+- [4] Okyere S, Oduro FT, Bonyah E, et al.: Epidemiological model of Influenza A (H1N1) transmission in Ashanti Region of Ghana. J. Public Health Epidemiol. April, 2013;5(4):160–166. Reference Source
+- [5] Kim S, Seo YB, Jung E: Prediction of COVID-19 transmission dynamics using a mathematical model considering behavior changes in Korea. Epidemiol. Health. 2020;42:e2020026. DOI 10.4178/epih.e2020026 PMID 32375455 PMCID PMC7285444
+- [6] Habenom H, Aychluh M, Suthar DL, et al.: Modeling and analysis on the transmission of covid-19 Pandemic in Ethiopia. Alex. Eng. J. 2022;61(7):5323–5342. DOI 10.1016/j.aej.2021.10.054
+- [7] Ahmed I, Modu GU, Yusuf A, et al.: A mathematical model of coronavirus disease (COVID-19) containing asymptomatic and symptomatic classes. Elsevier public health emergency collection, Results Phys. 2021;21:103776. DOI 10.1016/j.rinp.2020.103776 PMID 33432294 PMCID PMC7787076
+- [8] Agarwal P, Nieto JJ, Ruzhansky M, et al.: Analysis of Infectious disease problems (Covid-19) and their global impact. J. Nanobiotechnol. 2021.
+- [9] Ghosh S, Chatterjee AN, Roy PK, et al.: Mathematical Modeling and Control of the Cell Dynamics in Leprosy. Comput. Math. Model. 2021;32:52–74. DOI 10.1007/s10598-021-09516-z
+- [10] Clark A, Jit M, Warren-Gash C, et al.: Global, regional, and national estimates of the population at increased risk of severe COVID-19 due to underlying health conditions in 2020: A modelling study. Lancet Glob. Health. 2020;8:e1003–e1017. DOI 10.1016/S2214-109X(20)30264-3 PMID 32553130 PMCID PMC7295519
+- [11] Nana-Kyere S, Boateng FA, Jonathan P, et al.: Global Analysis and optimal control model of COVID-19. Comput. Math. Methods Med. 2022;2022:20. Article ID 9491847. DOI 10.1155/2022/9491847 PMCID PMC8813235 PMID 35126644
+- [12] Harko T, Lobo FS, Mak MK: Exact analytical solutions of the Susceptible-Infected-Recovered (SIR) epidemic model and of the SIR model with equal death and birth rates. Appl. Math. Comput. 2014;236:184–194. DOI 10.1016/j.amc.2014.03.030
+- [13] Schlickeiser R, Kröger M: Analytical solution of the SIR-model for the temporal evolution of epidemics. Part B: Semi-time case. J. Phys. A. 2021;54(17):175601. DOI 10.1088/1751-8121/abed66
+- [14] Alah MA, Abdeen S, Tayar E, et al.: The story behind the first few cases of monkeypox infection in non-endemic countries. J. Infect. Public Health. 2022; Volume15(Issue9): Pages970–974. DOI 10.1016/j.jiph.2022.07.014 PMID 35952458 PMCID PMC9534129
+- [15] Schlickeiser R, Kröger M: Analytical Modeling of the Temporal Evolution of Epidemics Outbreaks Accounting for Vaccinations. Physics. 2021;3(2):386–426. DOI 10.3390/physics3020028
+- [16] Guo J, Ye A, Wang X, et al.: OpenSeesPyView: Python programming-based visualization and post-processing tool for OpenSeesPy. SoftwareX. 2023; Volume21:101278. DOI 10.1016/j.softx.2022.101278
+- [17] Brown D, Sousa K de, Etten J van: ag5Tools: An R package for downloading and extracting agrometeorological data from the AgERA5 database. SoftwareX. 2023;21:101267. DOI 10.1016/j.softx.2022.101267
+- [18] Egert J, Kreutz C: Rcall: An R interface for MATLAB. SoftwareX. 2023; Volume21:101276. DOI 10.1016/j.softx.2022.101276
+- [19] Hoffmann TJ, Miaskowski C, Kober KM: ShinyGAStool: A user-friendly tool for candidate gene association studies. SoftwareX. 2023; volume21:101274. DOI 10.1016/j.softx.2022.101274 PMCID PMC13463389 PMID 42592379

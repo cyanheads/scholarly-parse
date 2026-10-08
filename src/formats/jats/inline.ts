@@ -22,6 +22,7 @@ import { cleanTex, mathmlToTex } from '../../xml/mathml.js';
 import {
   attrOf,
   childrenOf,
+  collapseWhitespace,
   isTextNode,
   localNameOf,
   tagNameOf,
@@ -31,7 +32,15 @@ import {
 } from '../../xml/ordered.js';
 import type { JatsContext } from './context.js';
 import { citationMarkdown } from './references.js';
-import { formulaTex, rawText, SILENT_TAGS, selectAlternative, text } from './text.js';
+import {
+  formulaTex,
+  isTaxonPart,
+  rawText,
+  SILENT_TAGS,
+  scriptPieces,
+  selectAlternative,
+  text,
+} from './text.js';
 
 /**
  * Elements that carry no formatting of their own: their content reads in place. Tags
@@ -93,6 +102,13 @@ const TRANSPARENT_TAGS: ReadonlySet<string> = new Set([
   'speaker',
   'verse-group',
   'verse-line',
+  // HTML headings in a fragment, read as `title` is.
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
 ]);
 
 /**
@@ -113,48 +129,60 @@ const SPACED_TAGS: ReadonlySet<string> = new Set([
   'verse-line',
 ]);
 
-/** Ranks a taxonomic name's parts are tagged with (`<named-content content-type="genus">`). */
-const TAXON_RANKS: ReadonlySet<string> = new Set([
-  'kingdom',
-  'phylum',
-  'class',
-  'superorder',
-  'order',
-  'suborder',
-  'superfamily',
-  'family',
-  'subfamily',
-  'tribe',
-  'genus',
-  'subgenus',
-  'species',
-  'subspecies',
-  'variety',
-  'form',
-  'taxon-authority',
-  'taxon-status',
-]);
-
-function isTaxonPart(node: XmlNode | undefined): boolean {
-  return (
-    node !== undefined &&
-    tagNameOf(node) === 'named-content' &&
-    TAXON_RANKS.has(attrOf(node, 'content-type') ?? '')
-  );
+function isCitationLink(node: XmlNode | undefined): boolean {
+  return node !== undefined && tagNameOf(node) === 'xref' && attrOf(node, 'ref-type') === 'bibr';
 }
 
 /**
- * Inline Markdown for a node list, spacing intact (the caller collapses whitespace).
- * Parts of a taxonomic name set with nothing between them (`Vittiblatta` then
- * `punctata`) are separate words.
+ * True when a letter or digit ends `before` and starts `after`, emphasis markers at the
+ * seam set aside (`2008` then `*Jones*`): the two read as one word.
+ */
+function fuses(before: string, after: string): boolean {
+  return (
+    /[\p{L}\p{N}][*~]*$/u.test(before.slice(-8)) && /^[*~]*[\p{L}\p{N}]/u.test(after.slice(0, 8))
+  );
+}
+
+/** True when a citation link's text holds a word (`Smith 2008`), not just a number (`12`, `S1`). */
+function citesByName(text: string): boolean {
+  return /\p{L}{2}/u.test(text);
+}
+
+/**
+ * What goes between two siblings set with nothing between them, given what each reads as:
+ * a space between the parts of a taxonomic name (`Vittiblatta` then `punctata`), and
+ * between citation links whose text would otherwise fuse, the separator a citation list
+ * uses — a comma between numbers (`[1,2,3]`, as Europe PMC's copy of an NCBI deposit
+ * writes them), and `; ` once either link cites by name (`Smith 2008; Jones 2010`), as 72
+ * of the corpus's 86 author-year citations the source separates are written.
+ */
+function siblingSeparator(
+  previous: XmlNode | undefined,
+  previousText: string,
+  node: XmlNode,
+  nodeText: string,
+): string {
+  if (isTaxonPart(previous) && isTaxonPart(node)) return ' ';
+  if (!isCitationLink(previous) || !isCitationLink(node) || !fuses(previousText, nodeText))
+    return '';
+  return citesByName(previousText) || citesByName(nodeText) ? '; ' : ',';
+}
+
+/**
+ * Inline Markdown for a node list, spacing intact (the caller collapses whitespace), with
+ * the {@link siblingSeparator} between siblings that touch. An element that reads as
+ * nothing (a `<target/>` anchor) does not stand between two siblings.
  */
 export function inlineMarkdown(nodes: XmlNodeList, ctx: JatsContext): string {
   let out = '';
   let previous: XmlNode | undefined;
+  let previousText = '';
   for (const node of nodes) {
-    if (isTaxonPart(previous) && isTaxonPart(node)) out += ' ';
-    out += inlineNode(node, ctx);
+    const piece = inlineNode(node, ctx);
+    if (!piece) continue;
+    out += siblingSeparator(previous, previousText, node, piece) + piece;
     previous = node;
+    previousText = piece;
   }
   return out;
 }
@@ -184,10 +212,19 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
     case 'monospace':
       return inlineCode(text(children));
     // Script content is plain text: emphasis inside a subscript (`*s*_*i*`) is noise.
-    case 'sup':
-      return superscript(escapeInline(text(children)), text(children), isCitationGroup(children));
-    case 'sub':
-      return subscript(escapeInline(text(children)), text(children));
+    case 'sup': {
+      const citations = isCitationGroup(children);
+      if (citations) {
+        const plain = citationGroupText(children);
+        return superscript(escapeInline(plain), plain, true);
+      }
+      const { markdown, plain } = script(children);
+      return superscript(markdown, plain, false);
+    }
+    case 'sub': {
+      const { markdown, plain } = script(children);
+      return subscript(markdown, plain);
+    }
     case 'element-citation':
     case 'nlm-citation':
     case 'mixed-citation':
@@ -221,6 +258,7 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
     case 'long-desc':
       return '';
     case 'break':
+    case 'br':
       return ' ';
     case 'fn':
       return inlineFootnote(node, ctx);
@@ -231,6 +269,22 @@ function inlineNode(node: XmlNode, ctx: JatsContext): string {
       return SPACED_TAGS.has(tag) ? ` ${content} ` : content;
     }
   }
+}
+
+/**
+ * A sub- or superscript's content as plain text, and as Markdown: its text escaped, with a
+ * link that has no text of its own written as `link` writes one, so its target neither
+ * goes missing nor runs into the text after it.
+ */
+function script(children: XmlNodeList): { markdown: string; plain: string } {
+  const pieces = scriptPieces(children);
+  const markdown = pieces
+    .map((piece) =>
+      'target' in piece ? link('', piece.target) : escapeInline(piece.text.replace(/\s+/g, ' ')),
+    )
+    .join('');
+  const plain = pieces.map((piece) => ('target' in piece ? piece.target : piece.text)).join('');
+  return { markdown, plain: collapseWhitespace(plain) };
 }
 
 /**
@@ -253,8 +307,8 @@ function xref(node: XmlNode, children: XmlNodeList, ctx: JatsContext): string {
 }
 
 /**
- * True when a superscript holds nothing but citation links and the punctuation
- * between them: `<sup><xref ref-type="bibr">1</xref>,<xref …>2</xref></sup>`.
+ * True when a superscript holds nothing but citation links, the punctuation between them,
+ * and anchors with no text: `<sup><xref ref-type="bibr">1</xref>,<xref …>2</xref></sup>`.
  */
 function isCitationGroup(children: XmlNodeList): boolean {
   let links = 0;
@@ -263,10 +317,29 @@ function isCitationGroup(children: XmlNodeList): boolean {
       if (!/^[\s,;‒–—-]*$/.test(textOf(child))) return false;
       continue;
     }
-    if (tagNameOf(child) !== 'xref' || attrOf(child, 'ref-type') !== 'bibr') return false;
+    if (SILENT_TAGS.has(tagNameOf(child) ?? '')) continue;
+    if (!isCitationLink(child)) return false;
     links++;
   }
   return links > 0;
+}
+
+/**
+ * A citation group's text, with the {@link siblingSeparator} between links that touch or
+ * sit apart only by whitespace: the marker drops whitespace, which would fuse them too.
+ */
+function citationGroupText(children: XmlNodeList): string {
+  let out = '';
+  let previous: XmlNode | undefined;
+  let previousText = '';
+  for (const child of children) {
+    const piece = rawText(child).trim();
+    if (!piece) continue;
+    out += siblingSeparator(previous, previousText, child, piece) + piece;
+    previous = child;
+    previousText = piece;
+  }
+  return out;
 }
 
 /** Elements a formula can be published as an image through. */

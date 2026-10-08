@@ -151,6 +151,10 @@ In this protocol, we outline the development of bio-experiential technology for 
 
 Support for this research was provided by the Robert Wood Johnson Foundation. The views expressed here do not necessarily reflect the views of the Foundation. This study was funded by grants from the Robert Wood Johnson Foundation
 
+## Appendix
+
+**Multimedia Appendix 1.** Peer-reviewer report from Robert Wood Johnson Foundation. (file: resprot_v12i1e52799_app1.pdf)
+
 ## Abbreviations
 
 - **NIH** — National Institute of Health

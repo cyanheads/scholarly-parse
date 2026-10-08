@@ -25,6 +25,7 @@
     "**Listing 1.** LLM Prompt",
     "```\nsystem_msg = f\"\"\"\nYou are a cautious assistant, an expert in medical rules.\n",
     "**Table 1.** Mutation operators",
-    "**Figure 3.** Completion rates for all the rules per LLM."
+    "**Figure 3.** Completion rates for all the rules per LLM.",
+    "(1) *Rules that contain pre-aggregation constraints*.We observe"
   ]
 }

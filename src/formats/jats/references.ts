@@ -3,8 +3,10 @@
  * rendered as readable text, and the identifiers and fields the markup names.
  * @module src/formats/jats/references
  */
+import { normalizeArxiv } from '../../model/arxiv.js';
 import type { Reference } from '../../model/document.js';
 import { normalizeDoi } from '../../model/doi.js';
+import { normalizePmcid, normalizePmid } from '../../model/identifiers.js';
 import { trailingLength } from '../../model/trailing.js';
 import { escapeInline } from '../../render/escape.js';
 import { inlineMath, joinInlineSeams } from '../../render/inline.js';
@@ -185,22 +187,45 @@ function citationText(node: XmlNode, formulas: string[]): string {
  * `ext-link-type`s whose target is an identifier rather than a page: Europe PMC adds
  * empty `<ext-link ext-link-type="pmid" xlink:href="26023781"/>`s to a citation.
  */
-const ID_LINK_TYPES: ReadonlyMap<string, string> = new Map(
-  Object.entries({ doi: 'doi', pmcid: 'pmcid', pmid: 'pmid', pubmed: 'pmid' }),
+const ID_LINK_TYPES: ReadonlyMap<string, 'doi' | 'pmcid' | 'pmid'> = new Map(
+  Object.entries({ doi: 'doi', pmcid: 'pmcid', pmid: 'pmid', pubmed: 'pmid' } as const),
 );
+
+/** `pub-id-type`s naming an identifier a reference holds, and the field each fills. */
+const PUB_ID_FIELDS: ReadonlyMap<string, keyof typeof NORMALIZE_ID> = new Map(
+  Object.entries({
+    arxiv: 'arxiv',
+    doi: 'doi',
+    pmc: 'pmcid',
+    pmcid: 'pmcid',
+    pmid: 'pmid',
+  } as const),
+);
+
+/** Each identifier field's value as the model holds it, or undefined for a value that is not one. */
+const NORMALIZE_ID = {
+  arxiv: normalizeArxiv,
+  doi: (value: string) => normalizeDoi(doiFromUrl(value) ?? value),
+  pmcid: normalizePmcid,
+  pmid: normalizePmid,
+} as const;
 
 /** A link target a reader can open. */
 const WEB_URL = /^(?:https?|ftp):\/\//i;
 
-/** Structured fields from a citation element. */
+/**
+ * Structured fields from a citation element. Each identifier is the first of its type, a
+ * typed `<pub-id>` before a typed link, that holds one.
+ */
 function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> {
   if (!citation) return {};
-  const ids = new Map<string, string>();
-  for (const pubId of findAllDescendants(citation, 'pub-id')) {
-    const type = attrOf(pubId, 'pub-id-type')?.toLowerCase();
-    const value = text(pubId);
-    if (type && value && !ids.has(type)) ids.set(type, value);
-  }
+  const ids: Partial<Record<keyof typeof NORMALIZE_ID, string>> = {};
+  const keep = (field: keyof typeof NORMALIZE_ID | undefined, value: string) => {
+    const id = field && value ? NORMALIZE_ID[field](value) : undefined;
+    if (field && id) ids[field] ??= id;
+  };
+  for (const pubId of findAllDescendants(citation, 'pub-id'))
+    keep(PUB_ID_FIELDS.get(attrOf(pubId, 'pub-id-type')?.toLowerCase() ?? ''), text(pubId));
   const links = [
     ...findAllDescendants(citation, 'ext-link'),
     ...findAllDescendants(citation, 'uri'),
@@ -208,12 +233,10 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     type: ID_LINK_TYPES.get(attrOf(link, 'ext-link-type')?.toLowerCase() ?? ''),
     target: attrOf(link, 'xlink:href') ?? text(link),
   }));
-  for (const { type, target } of links) {
-    if (type && target && !ids.has(type))
-      ids.set(type, type === 'doi' ? (doiFromUrl(target) ?? target) : target);
-  }
+  for (const { type, target } of links) keep(type, target);
   const url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
-  const doi = normalizeDoi(ids.get('doi')) ?? normalizeDoi(doiFromUrl(url));
+  const { arxiv, pmcid, pmid } = ids;
+  const doi = ids.doi ?? normalizeDoi(doiFromUrl(url));
   const authors = findAllDescendants(citation, 'person-group')
     .filter((group) => (attrOf(group, 'person-group-type') ?? 'author') === 'author')
     .flatMap((group) => childrenOf(group).map(renderName).filter(Boolean));
@@ -221,9 +244,6 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     text(findOne(citation, 'article-title')) || text(findOne(citation, 'chapter-title'));
   const source = text(findOne(citation, 'source'));
   const year = text(findOne(citation, 'year'));
-  const pmcid = ids.get('pmcid') ?? ids.get('pmc');
-  const pmid = ids.get('pmid');
-  const arxiv = ids.get('arxiv');
   return {
     ...(authors.length > 0 && { authors }),
     ...(title && { title }),
@@ -231,8 +251,8 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     ...(year && { year }),
     ...(doi && { doi }),
     ...(pmid && { pmid }),
-    ...(pmcid && { pmcid: pmcid.startsWith('PMC') ? pmcid : `PMC${pmcid}` }),
-    ...(arxiv && { arxiv: arxiv.replace(/^arxiv:/i, '') }),
+    ...(pmcid && { pmcid }),
+    ...(arxiv && { arxiv }),
     ...(url && !doi && { url }),
   };
 }
@@ -242,9 +262,13 @@ function doiFromUrl(url: string | undefined): string | undefined {
   return url ? /doi\.org\/(10\.\d{4,9}\/\S+)/i.exec(url)?.[1] : undefined;
 }
 
-/** A `<person-group>` child — `<name>`, `<string-name>`, `<collab>`, `<etal>` — as text. */
+/** A `<person-group>` child — `<name>`, `<string-name>`, `<name-alternatives>`, `<collab>`, `<etal>` — as text. */
 function renderName(node: XmlNode): string {
   switch (tagNameOf(node)) {
+    case 'name-alternatives': {
+      const form = nameForm(node);
+      return form ? renderName(form) : '';
+    }
     case 'name':
     case 'string-name': {
       const parts = [text(findOne(node, 'surname')), text(findOne(node, 'given-names'))].filter(
@@ -261,11 +285,30 @@ function renderName(node: XmlNode): string {
   }
 }
 
+/**
+ * The one form of a `<name-alternatives>` a citation shows: the first `<name>` or
+ * `<string-name>` written in Latin script, else the first of them. Each form spells the
+ * same person, so showing two fuses them (`LiX李`). (#73)
+ */
+function nameForm(node: XmlNode): XmlNode | undefined {
+  const forms = childrenOf(node).filter((child) => {
+    const tag = tagNameOf(child);
+    return tag === 'name' || tag === 'string-name';
+  });
+  return forms.find((form) => isLatinScript(rawText(form))) ?? forms[0];
+}
+
+/** True when `text` has letters and every one of them is Latin script. */
+function isLatinScript(text: string): boolean {
+  return /\p{L}/u.test(text) && !/[^\p{Script=Latin}\P{L}]/u.test(text);
+}
+
 /** Element-citation fields placed by `renderElementCitation`; any other field follows them in source order. */
 const PLACED_FIELDS: ReadonlySet<string> = new Set([
   'person-group',
   'name',
   'string-name',
+  'name-alternatives',
   'collab',
   'etal',
   'article-title',
@@ -384,30 +427,79 @@ const CITATION_WRAPPER_TAGS: ReadonlySet<string> = new Set(['named-content', 'st
 /** Name wrappers whose parts often sit adjacent with nothing between them. (#124) */
 const NAME_WRAPPER_TAGS: ReadonlySet<string> = new Set(['name', 'string-name', 'person-group']);
 
+/** Elements that are each one name in a list of them. */
+const NAME_TAGS: ReadonlySet<string> = new Set([
+  'name',
+  'string-name',
+  'name-alternatives',
+  'collab',
+  'etal',
+]);
+
 /**
- * A name wrapper's text: one space between two adjacent elements with nothing between
- * them, source text verbatim otherwise, so existing punctuation is never doubled.
+ * True for a name in a list of them: a `<name>`, `<string-name>`, `<name-alternatives>`,
+ * or `<collab>`, or an `<etal/>` with no text of its own. A written `<etal>et al</etal>`
+ * follows the name before it as the source sets it (`Ngo Q.-M. et al`).
+ */
+function isListedName(node: XmlNode | undefined): boolean {
+  const tag = node && tagNameOf(node);
+  if (tag === 'etal') return rawText(node).trim() === '';
+  return tag !== undefined && NAME_TAGS.has(tag);
+}
+
+/**
+ * An element's text in a name list: a `<name-alternatives>` reads as its {@link nameForm},
+ * and an empty `<etal/>` reads `et al.`, as element citations read them.
+ */
+function namePart(node: XmlNode, tag: string): string {
+  if (tag === 'name-alternatives') {
+    const form = nameForm(node);
+    return form ? namePart(form, tagNameOf(form) ?? '') : '';
+  }
+  if (NAME_WRAPPER_TAGS.has(tag)) return renderNameWrapper(node);
+  const raw = rawText(node);
+  return tag === 'etal' && raw.trim() === '' ? 'et al.' : raw;
+}
+
+/**
+ * What goes before an element in a name wrapper or a citation, given the whitespace-only
+ * text since the element before it: `, ` between two {@link isListedName} names the source
+ * separates by nothing or by markup whitespace alone, else that whitespace, else one space
+ * between two adjacent elements.
+ */
+function elementGap(gap: string, previous: XmlNode | undefined, node: XmlNode): string {
+  if (isListedName(previous) && isListedName(node)) return ', ';
+  return gap || (previous === undefined ? '' : ' ');
+}
+
+/**
+ * A name wrapper's text: names set apart by {@link elementGap}, one space between two other
+ * adjacent elements with nothing between them, source text verbatim otherwise, so existing
+ * punctuation is never doubled. Markup whitespace at its end is kept for the caller.
  */
 function renderNameWrapper(node: XmlNode): string {
   let rendered = '';
-  let prevWasElement = false;
+  let gap = '';
+  let previous: XmlNode | undefined;
   for (const child of childrenOf(node)) {
     if (isTextNode(child)) {
       const raw = textOf(child);
-      if (raw) {
-        rendered += raw;
-        prevWasElement = false;
+      if (raw.trim() === '') {
+        gap += raw;
+      } else {
+        rendered += gap + raw;
+        gap = '';
+        previous = undefined;
       }
       continue;
     }
-    const tag = tagNameOf(child) ?? '';
-    const part = NAME_WRAPPER_TAGS.has(tag) ? renderNameWrapper(child) : rawText(child);
+    const part = namePart(child, tagNameOf(child) ?? '');
     if (!part) continue;
-    if (prevWasElement) rendered += ' ';
-    rendered += part;
-    prevWasElement = true;
+    rendered += elementGap(gap, previous, child) + part;
+    gap = '';
+    previous = child;
   }
-  return rendered;
+  return rendered + gap;
 }
 
 const PUB_ID_TAGS: ReadonlySet<string> = new Set(['pub-id']);
@@ -466,21 +558,27 @@ const MAX_CHECKED_IDS = 16;
  * the source reads correctly almost everywhere; three zero-gap adjacencies do not —
  * consecutive `<pub-id>`s (#115), an inline title against the volume after it (#123),
  * and surname against given names (#124). Adjacent elements with nothing between them
- * get one space. A typed identifier gets a label unless the text already names it, and
- * is left out when the text already prints it (PMC adds a `<pub-id>` for a DOI the
- * citation spells out).
+ * get one space, and adjacent names a comma ({@link elementGap}). Markup whitespace that
+ * closes a name wrapper is dropped before punctuation (`Bonyah E\n</person-group>:`). A
+ * typed identifier gets a label unless the text already names it, and is left out when
+ * the text already prints it (PMC adds a `<pub-id>` for a DOI the citation spells out).
  */
 function renderMixedCitation(node: XmlNode, formulas: string[]): string {
   const printed = rawText(node, PUB_ID_TAGS);
   const rendered: string[] = [];
-  let prevWasElement = false;
+  let gap = '';
+  let previous: XmlNode | undefined;
   let checked = 0;
   for (const child of childrenOf(node)) {
     if (isTextNode(child)) {
       const raw = textOf(child);
-      if (raw) {
-        rendered.push(raw);
-        prevWasElement = false;
+      if (raw.trim() === '') {
+        gap += raw;
+      } else {
+        const wrapperEnd = NAME_WRAPPER_TAGS.has((previous && tagNameOf(previous)) ?? '');
+        rendered.push(wrapperEnd && /^[.,:;]/.test(raw) ? raw : gap + raw);
+        gap = '';
+        previous = undefined;
       }
       continue;
     }
@@ -500,18 +598,27 @@ function renderMixedCitation(node: XmlNode, formulas: string[]): string {
       } else {
         part = value;
       }
-    } else if (NAME_WRAPPER_TAGS.has(tag)) {
-      part = renderNameWrapper(child);
+    } else if (NAME_WRAPPER_TAGS.has(tag) || NAME_TAGS.has(tag)) {
+      part = namePart(child, tag);
     } else if (CITATION_WRAPPER_TAGS.has(tag)) {
       part = renderMixedCitation(child, formulas);
     } else {
       part = citationText(child, formulas);
     }
-    if (prevWasElement || labeled) rendered.push(' ');
-    rendered.push(part);
-    prevWasElement = true;
+    const before = elementGap(gap, previous, child);
+    rendered.push(labeled && !before ? ' ' : before);
+    const shown = part.trimEnd();
+    rendered.push(shown);
+    gap = part.slice(shown.length);
+    previous = child;
   }
+  rendered.push(gap);
   // A name part that renders empty (a given name holding only a soft hyphen) or markup
-  // whitespace before a comma leaves "Colaneri A. , Staffa N."; the comma closes up.
-  return collapseWhitespace(rendered.join('')).replace(/\s+(?=[,;])/g, '');
+  // whitespace before a comma leaves "Colaneri A. , Staffa N."; the comma closes up, as
+  // does a full stop ending a word (`elegans\n. Nature`). A written full stop after a name
+  // that already ends in one — an initial (`Smith J.`) or `et al.`, an `<etal/>` included —
+  // is not doubled; an ellipsis is left as written.
+  return collapseWhitespace(rendered.join(''))
+    .replace(/\s+(?=[,;]|\.(?:\s|$))/g, '')
+    .replace(/(?<=(?:^|[^\p{L}])\p{Lu}|\bet al)\.\.(?!\.)/gu, '.');
 }

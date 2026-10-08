@@ -1,5 +1,5 @@
 {
-  "why": "F1000Research software tool article: 17 <preformat preformat-type=\"computer code\"> blocks of MATLAB and R, their syntax colouring carried in <styled-content> and their indentation in em spaces, and four open peer-review reports as <sub-article>s. Pins each listing as a fenced code block with the <styled-content> text kept and no markup (the leaked-tag invariant skips code blocks), the em-space indentation verbatim, each report as a back section under its own title, led by the referee's name and role and competing-interests note from its <front-stub>, and the version-change <notes> in <front> as a section of its own.",
+  "why": "F1000Research software tool article: 17 <preformat preformat-type=\"computer code\"> blocks of MATLAB and R, their syntax colouring carried in <styled-content> and their indentation in em spaces, and four open peer-review reports as <sub-article>s. Pins each listing as a fenced code block with the <styled-content> text kept and no markup (the leaked-tag invariant skips code blocks), the em-space indentation verbatim, each report as a back section under its own title, led by the referee's name and role and competing-interests note from its <front-stub>, and the version-change <notes> in <front> as a section of its own. Its mixed citations separate <name>s by a newline alone and close with an empty <etal/> and a newline before </person-group>: the names read comma-separated, the <etal/> as et al., and no space before the colon after the group.",
   "title": "Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -28,7 +28,8 @@
     "```\n# Load required packages\nlibrary(deSolve)\nlibrary(ggplot2)\n",
     "**Figure 12.** **All the compartments using R.**",
     "## Reviewer response for version 1\n\nShewafera Wondimagegnhu Teklu (Referee)\n\n**Competing interests:** No competing interests were disclosed.\n\nComments to the Authors",
-    "## Revised Amendments from Version 1\n\nAn inclusion of R software codes in the main body."
+    "## Revised Amendments from Version 1\n\nAn inclusion of R software codes in the main body.",
+    "- [4] Okyere S, Oduro FT, Bonyah E, et al.: Epidemiological model of Influenza A (H1N1) transmission"
   ],
-  "notContains": ["styled-content", "color:#"]
+  "notContains": ["styled-content", "color:#", "Okyere S Oduro FT", " :"]
 }

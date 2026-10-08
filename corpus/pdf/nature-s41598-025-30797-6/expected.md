@@ -14,7 +14,7 @@ In many modern photonic and quantum systems, wave packets may evolve on time sca
 
 The hierarchical extension of the NLSE, often referred to as the generalized nonlinear Schrödinger hierarchy, has been developed to characterize systems that require successive higher–order corrections while preserving integrability[10–12]. In this work, we focus on the sixth–order member of this hierarchy, given by This equation generalizes well-known integrable NLSE-type models. Specifically, setting *α*_5 = *α*_6 = 0 yields the LPD equation^3, while *α*_4 = *α*_5 = *α*_6 = 0, recovers the Hirota equation^{10}. Despite the theoretical significance of the sixth-order extension, systematic analytical studies and explicit solution constructions for this model remain scarce in the literature. This motivates the present investigation.
 
-From a physical perspective, the coefficients *α*_3*, α*_4, *α*_5, and *α*_6 represent progressively higher-order dispersive and nonlinear contributions : *α*_3, and *α*_4 is associated with third, and fourth-order dispersion, nonlinear dispersion, and self-frequency shift effects; *α*_5 governs fifth-order nonlinear dispersion and ultrafast self-steepening interactions; and *α*_6 corresponds to sixth-order dispersion and high-order nonlinear responses, which become significant in the propagation of ultrashort pulses where higher-order spectral broadening and nonlinear refractive index saturation occur. Such effects are particularly relevant in the design of high-power fiber lasers, super continuum generation in photonic-crystal fibers, and the manipulation of matter-wave solitons in condensates subjected to higher-order effective interactions.
+From a physical perspective, the coefficients *α*_3, *α*_4, *α*_5, and *α*_6 represent progressively higher-order dispersive and nonlinear contributions : *α*_3, and *α*_4 is associated with third, and fourth-order dispersion, nonlinear dispersion, and self-frequency shift effects; *α*_5 governs fifth-order nonlinear dispersion and ultrafast self-steepening interactions; and *α*_6 corresponds to sixth-order dispersion and high-order nonlinear responses, which become significant in the propagation of ultrashort pulses where higher-order spectral broadening and nonlinear refractive index saturation occur. Such effects are particularly relevant in the design of high-power fiber lasers, super continuum generation in photonic-crystal fibers, and the manipulation of matter-wave solitons in condensates subjected to higher-order effective interactions.
 
 Recently, many researchers have been actively modifying and applying various ansatz-based methods and analytical techniques to obtain soliton solutions. Among the commonly used methods are the Fan sub-equation method^{13}, the extended simplest equation method^{14}, the new extended auxiliary equation method[15,16], the solitary wave ansatz method^{17}, the Sardar sub-equation method^{18}, the modified extended direct algebraic method[19–21], the improved modified extended tanh function method[22–24], and the Jacobi elliptic function method^{25}, as well as the F-expansion method^{26}. In addition, other effective approaches such as the sine-Gordon method^{27}, the Hirota bilinear method[28–30], and the exp(*ϕ*(*ζ*))-function method^{31} have also been employed to derive analytical soliton solutions.
 
@@ -40,7 +40,7 @@ We briefly outline the steps involved in the improved modified extended tanh fun
 
 First, we assume that the nonlinear partial differential equation can be expressed in terms of *ψ* and its partial derivatives as follows:
 
-P(*ψ, ψ*_t*, ψ*_x*, ψ*_{xt}*, ψ*_{xx}*, . . .*) = 0*.* (2)
+P(*ψ, ψ*_t, *ψ*_x, *ψ*_{xt}*, ψ*_{xx}*, . . .*) = 0. (2)
 
 To reduce Eq. (2), we assume a traveling wave transformation for the wave envelope
 
@@ -48,7 +48,7 @@ To reduce Eq. (2), we assume a traveling wave transformation for the wave envelo
 
 where *ζ* = *x* − *νt* with *ν* ̸= 0, which converts the function *ψ* into a function of a single-variable form. Substituting this transformation into Eq. (2) yields the following ordinary differential equation:
 
-P(*ψ, ψ*^{(1)}*, ψ*^{(2)}*, ψ*^{(3)}*, ψ*^{(4)}*, . . .*) = 0*.* (3)
+P(*ψ, ψ*^{(1)}*, ψ*^{(2)}*, ψ*^{(3)}*, ψ*^{(4)}*, . . .*) = 0. (3)
 
 The next step in applying the IMETFM is to assume that the solution of Eq. (3) has the finite series form where *c*^2_N + *c*^2_{−N} ̸= 0, and the function *ϕ* satisfies the extended Riccati equation The integer *N* is determined by applying the homogeneous balance principle, which balances the highest-order derivative term with the highest-order nonlinear term in Eq. (3).
 
@@ -70,7 +70,7 @@ Applying the balancing principle by balancing the highest order derivative term 
 
 R(*ζ*) = *c*_0 + *c*_1*ϕ* + *c*_{−1}*ϕ*^{−1}*.* (7)
 
-Substituting Eq. (7) into the real part and considering the extended Riccati equation in Eq. (5), we obtain a polynomial in *ϕ*. By equating the coefficients of this polynomial to zero, we derive different algebraic systems based on the values of *d*_0*, d*_1*, d*_2*, d*_3*, d*_4, which are then solved using Mathematica.
+Substituting Eq. (7) into the real part and considering the extended Riccati equation in Eq. (5), we obtain a polynomial in *ϕ*. By equating the coefficients of this polynomial to zero, we derive different algebraic systems based on the values of *d*_0, *d*_1, *d*_2, *d*_3, *d*_4, which are then solved using Mathematica.
 
 ### Localized solitons
 
@@ -78,21 +78,21 @@ When {*d*_0 = *d*_1 = *d*_3 = 0}, we attain the following result. *k* =^1_2 *ω*
 
 Then, the preceding solution set admits the following bright soliton. 216*α*_4 − 72L*α*_4 + 810*α*_3*α*_5*α*_4 − 15*α*_5 (14L*α*_3 + 25*α*_5) *α*_4 + 25 (18*α*_3 + 5L) *α*_5 When {*d*_1 = *d*_3 = 0, *d*_0 =_{4d4} }, we attain the following result. *k* =^1_2 − 5*ν*^6*d*^3_2*α*_6 − 3*ν*^4*d*^2_2 *α*_4 + 5*ω*(*α*_5 − 3*ωα*_6) + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *.*
 
-Then, We get the following dark soliton. (9) 216*α*_4 − 72L*α*_4 + 810*α*_3*α*_5*α*_4 − 15*α*_5 (14L*α*_3 + 25*α*_5) *α*_4 + 25 (18*α*_3 + 5L) *α*_5 When {*d*_0 = *d*_1 = 0*, d*_2 =_{4d4} }, we get the following result. *c*_0 = √ *, c*_1 = *i d*_4 *ν, c*_{−1} = 0*,*  4 *d*_4 *k* = _3 5*α*_6*d*_3*ν* − 24*d*_4*d*_3*ν* (5*ω*(*α*_5 − 3*α*_6*ω*) + *α*_4) 1024*d*_4  + 64*d*_4*d*_3*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 + 512*d*_4*ω* 2*ω*(*α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3) + 1 *.*
+Then, We get the following dark soliton. (9) 216*α*_4 − 72L*α*_4 + 810*α*_3*α*_5*α*_4 − 15*α*_5 (14L*α*_3 + 25*α*_5) *α*_4 + 25 (18*α*_3 + 5L) *α*_5 When {*d*_0 = *d*_1 = 0, *d*_2 =_{4d4} }, we get the following result. *c*_0 = √ *, c*_1 = *i d*_4 *ν, c*_{−1} = 0,  4 *d*_4 *k* = _3 5*α*_6*d*_3*ν* − 24*d*_4*d*_3*ν* (5*ω*(*α*_5 − 3*α*_6*ω*) + *α*_4) 1024*d*_4  + 64*d*_4*d*_3*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 + 512*d*_4*ω* 2*ω*(*α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3) + 1 *.*
 
 Then, the preceding result yields the following dark soliton. *ψ*(*x, t*) = − √ *.* (10) 2 *d*_4 (−216*α*_4^4 − 810*α*_3*α*_5*α*_4^2 + 72*α*_4^3L + 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) − 25*α*_5^2 (18*α*_3^2 + 5L))
 
 ### Singular periodic solutions and singular solitons
 
-When {*d*_3 = *d*_4 = *d*_1 = 0}, we get the following solution set : *c*_0 = *c*_1 = 0*, c*_{−1} = −*d*_0 *ν, k* = 2*ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − 2*α*_6*d*_2*ν* − 2*d*_2*ν* (5*ω*(*α*_5 − 3*α*_6*ω*) + *α*_4) − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 + *ω .*
+When {*d*_3 = *d*_4 = *d*_1 = 0}, we get the following solution set : *c*_0 = *c*_1 = 0, *c*_{−1} = −*d*_0 *ν, k* = 2*ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − 2*α*_6*d*_2*ν* − 2*d*_2*ν* (5*ω*(*α*_5 − 3*α*_6*ω*) + *α*_4) − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 + *ω .*
 
 Consequently, we obtain the following singular periodic solution and singular soliton, respectively. 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L) When {*d*_1 = *d*_3 = 0, *d*_0 =_{4d4} }, we obtain the following results.
 
 *Result 1*
 
- *id*_2*ν* *c*_{−1} = √ *, c*_0 = *c*_1 = 0*,*  2 *d*_4 *k* =^1_2 − 5*ν*^6*d*^3_2*α*_6 − 3*ν*^4*d*^2_2(*α*_4 + 5*ω*(*α*_5 − 3*ωα*_6)) + *ω*^2 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω*^3*α*_6)  + *ν*^2*d* − 1 − 6*ωα* + 2*ω*^2(6*α* + 5*ω*(2*α* − 3*ωα* )) *.* Consequently, the previous result admits the following singular periodic solution, and singular soliton, respectively. *ψ*(*x, t*) = √ *,* (13) *d*_2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) *ψ*(*x, t*) = √ *.* (14) *d*_2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L))
+ *id*_2*ν* *c*_{−1} = √ *, c*_0 = *c*_1 = 0,  2 *d*_4 *k* =^1_2 − 5*ν*^6*d*^3_2*α*_6 − 3*ν*^4*d*^2_2(*α*_4 + 5*ω*(*α*_5 − 3*ωα*_6)) + *ω*^2 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω*^3*α*_6)  + *ν*^2*d* − 1 − 6*ωα* + 2*ω*^2(6*α* + 5*ω*(2*α* − 3*ωα* )) *.* Consequently, the previous result admits the following singular periodic solution, and singular soliton, respectively. *ψ*(*x, t*) = √ *,* (13) *d*_2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) *ψ*(*x, t*) = √ *.* (14) *d*_2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L))
 
-*Result 2* *c*_0 = 0*, c*_1 = *i d*_4 *ν, c*_{−1} = √ *,*  2 *d*_4 *k* =^1_2 − 5*ν*^6*d*^3_2*α*_6 − 3*ν*^4*d*^2_2 *α*_4 + 5*ω*(*α*_5 − 3*ωα*_6)  + *ω*^2 1 + 2*ω*(*α* − *ω*(*α* + *ωα* ) + *ω*^3*α* ) + *ν*^2*d* − 1 − 6*ωα* + 2*ω*^2(6*α* + 5*ω*(2*α* − 3*ωα* )) *.* Then, we associate with the preceding solution set, the following singular soliton, and singular periodic solution, respectively. −216*α*_4 − 810*α*_3*α*_5*α*_4 + 72*α*_4L + 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) − 25*α*_5 (18*α*_3 + 5L) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
+*Result 2* *c*_0 = 0, *c*_1 = *i d*_4 *ν, c*_{−1} = √ *,*  2 *d*_4 *k* =^1_2 − 5*ν*^6*d*^3_2*α*_6 − 3*ν*^4*d*^2_2 *α*_4 + 5*ω*(*α*_5 − 3*ωα*_6)  + *ω*^2 1 + 2*ω*(*α* − *ω*(*α* + *ωα* ) + *ω*^3*α* ) + *ν*^2*d* − 1 − 6*ωα* + 2*ω*^2(6*α* + 5*ω*(2*α* − 3*ωα* )) *.* Then, we associate with the preceding solution set, the following singular soliton, and singular periodic solution, respectively. −216*α*_4 − 810*α*_3*α*_5*α*_4 + 72*α*_4L + 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) − 25*α*_5 (18*α*_3 + 5L) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
 
 When {*d*_0 = *d*_1 = *d*_3 = 0}, we attain the following result. *k* =^1_2 *ω*^2 − 2*ν*^6*d*^3_2*α*_6 + 2*ω*^3 *α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω*^3*α*_6 − *ν d*_2 1 + 6*ωα*_3 − 4*ω* (3*α*_4 + 5*ωα*_5) + 30*ω α*_6 − 2*ν d*_2 *α*_4 + 5*ω*(*α*_5 − 3*ωα*_6) *.*
 
@@ -102,15 +102,15 @@ Then, the latter admits the following singular periodic solution. (18) 216*α*_4
 
 ### Jacobi elliptic functions and weierstrass solution
 
-*Result 1* *c*_1 = −*d*_4 *ν, c*_0 = *c*_{−1} = 0*, k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 which admits the following Jacobi elliptic function solution. (19) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
+*Result 1* *c*_1 = −*d*_4 *ν, c*_0 = *c*_{−1} = 0, *k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 which admits the following Jacobi elliptic function solution. (19) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
 
-*Result 2* *c*_1 = *c*_0 = 0*, c*_{−1} = √ *id*^2*m m* − 1 *ν ,*  −4*d m*^4 + 4*d m*^2 − *d k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1  2 which admits another Jacobi elliptic solution. *ψ*(*x, t*) = √ *.* (20) *d*_2 (2*m*^2 − 1) (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) When {*d*_1 = *d*_3 = 0, *d*_0 = _{2 2} }, we get the following results. *Result 1* *c*_0 = *c*_{−1} = 0*, c*_1 = −*d*_4 *ν,*  + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *.*
+*Result 2* *c*_1 = *c*_0 = 0, *c*_{−1} = √ *id*^2*m m* − 1 *ν ,*  −4*d m*^4 + 4*d m*^2 − *d k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − *d*_2*ν* 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1  2 which admits another Jacobi elliptic solution. *ψ*(*x, t*) = √ *.* (20) *d*_2 (2*m*^2 − 1) (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) When {*d*_1 = *d*_3 = 0, *d*_0 = _{2 2} }, we get the following results. *Result 1* *c*_0 = *c*_{−1} = 0, *c*_1 = −*d*_4 *ν,*  + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *.*
 
 Then, we obtain the following Jacobi elliptic function solution. (21) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
 
-*Result 2* *c*_1 = *c*_0 = 0*, c*_{−1} = √ *id*^2*m m* − 1 *ν ,*  −4*d*_4*m*^4 + 4*d*_4*m*^2 − *d*_4 + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *,*
+*Result 2* *c*_1 = *c*_0 = 0, *c*_{−1} = √ *id*^2*m m* − 1 *ν ,*  −4*d*_4*m*^4 + 4*d*_4*m*^2 − *d*_4 + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *,*
 
-which admits another Jacobi elliptic function solution. *m* 2 − *m*^2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) *Result 1* *c*_0 = *c*_{−1} = 0*, c*_1 = −*d*_4 *ν,*  + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *,*
+which admits another Jacobi elliptic function solution. *m* 2 − *m*^2 (216*α*_4^4 + 810*α*_3*α*_5*α*_4^2 − 72*α*_4^3L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5^2 (18*α*_3^2 + 5L)) *Result 1* *c*_0 = *c*_{−1} = 0, *c*_1 = −*d*_4 *ν,*  + *ω* 1 + 2*ω*(*α*_3 − *ω*(*α*_4 + *ωα*_5) + *ω α*_6) + *ν d*_2 − 1 − 6*ωα*_3 + 2*ω* (6*α*_4 + 5*ω*(2*α*_5 − 3*ωα*_6)) *,*
 
 which reads the following Jacobi elliptic solution. 1250*α*_5 _{m2+1} sn *ζ* −_{m2+1} ∣ *m* × *e* (23) 216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L)
 
@@ -122,17 +122,17 @@ which derive the following Jacobi elliptic solution.
 
 ( √ ∣ )_{−1} 1250*α*_5*d*_2sn *ζ* −_{m2+1} ∣ *m* × *e* _{d4} (216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L))
 
-When {*d*_2 = *d*_4 = 0}, the following result is revealed. *c*_{−1} = −*d*_0 *ν, c*_1 = 0*,* −*d*_0 *ν*^3 *ν*  *k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − 3*c*_0 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 2
+When {*d*_2 = *d*_4 = 0}, the following result is revealed. *c*_{−1} = −*d*_0 *ν, c*_1 = 0, −*d*_0 *ν*^3 *ν*  *k* = *ω α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3 − 3*c*_0 30*α*_6*ω* − 4*ω* (5*α*_5*ω* + 3*α*_4) + 6*α*_3*ω* + 1 2
 
 Then, we attain the following Weierstrass elliptic function solution.
 
 ### Exponential solution
 
-When {*d*3 = *d*4 = 0*, d*0 =_{4d2} }, the following result is obtained. *c*_1 = 0*, c*_0 = *i d*_2 *ν, c*_{−1} = √ *, k* = 8*ω* 2*ω*(*α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3) + 1 + 5*α*_6*d*_2*ν*  16 Then, We obtain the following exponential solution. (26) (216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L))
+When {*d*3 = *d*4 = 0, *d*0 =_{4d2} }, the following result is obtained. *c*_1 = 0, *c*_0 = *i d*_2 *ν, c*_{−1} = √ *, k* = 8*ω* 2*ω*(*α*_6*ω* − *ω*(*α*_5*ω* + *α*_4) + *α*_3) + 1 + 5*α*_6*d*_2*ν*  16 Then, We obtain the following exponential solution. (26) (216*α*_4 + 810*α*_3*α*_5*α*_4 − 72*α*_4L − 15*α*_5*α*_4 (25*α*_5 + 14*α*_3L) + 25*α*_5 (18*α*_3 + 5L))
 
-**Fig. 1.** Bright soliton solution of Eq. (8) visualized in two and three dimensions under identical parameter settings: *d*_2 = 3, *α*_3 = 5, *α*_4 = 2, and *α*_5 = 1, and in three different time instances *t* = 1*,* 5*,* 10.
+**Fig. 1.** Bright soliton solution of Eq. (8) visualized in two and three dimensions under identical parameter settings: *d*_2 = 3, *α*_3 = 5, *α*_4 = 2, and *α*_5 = 1, and in three different time instances *t* = 1, 5, 10.
 
-**Fig. 2.** Dark soliton solution for Eq. (9) visualized in two and three dimensions under identical parameter settings: *d*_2 = −1, *α*_3 = 3, *α*_4 = 1*.*5, and *α*_5 = 1, and in three different time instances *t* = 1*,* 5*,* 10.
+**Fig. 2.** Dark soliton solution for Eq. (9) visualized in two and three dimensions under identical parameter settings: *d*_2 = −1, *α*_3 = 3, *α*_4 = 1.5, and *α*_5 = 1, and in three different time instances *t* = 1, 5, 10.
 
 ## Results and discussion
 
@@ -140,39 +140,39 @@ This section presents the dynamical behavior of the obtained solutions for the s
 
 ### Bright soliton dynamics
 
-Figure 1 shows the bright soliton solution defined by Eq. (8), represented in both two and three dimensions under identical parameter settings: *d*_2 = 3, *α*_3 = 5, *α*_4 = 2, and *α*_5 = 1, and shown at three different snapshots. Bright solitons retain a localized peak as they propagate, owing to the balance between dispersion and nonlinear self-focusing. The soliton maintains its amplitude and width for all plotted time instances *t* = 1*,* 5*,* 10, demonstrating stable and localized propagation.
+Figure 1 shows the bright soliton solution defined by Eq. (8), represented in both two and three dimensions under identical parameter settings: *d*_2 = 3, *α*_3 = 5, *α*_4 = 2, and *α*_5 = 1, and shown at three different snapshots. Bright solitons retain a localized peak as they propagate, owing to the balance between dispersion and nonlinear self-focusing. The soliton maintains its amplitude and width for all plotted time instances *t* = 1, 5, 10, demonstrating stable and localized propagation.
 
 ### Dark soliton dynamics
 
-Figure 2 displays the dark soliton solution governed by Eq. (9), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −1, *α*_3 = 3, *α*_4 = 1*.*5, and *α*_5 = 1, and in three different time instances. Unlike bright solitons, dark solitons exhibit a localized dip on a continuous background. The structure remains stable for all time levels, reflecting the phase–shifted wave nature observed in defocusing nonlinear media.
+Figure 2 displays the dark soliton solution governed by Eq. (9), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −1, *α*_3 = 3, *α*_4 = 1.5, and *α*_5 = 1, and in three different time instances. Unlike bright solitons, dark solitons exhibit a localized dip on a continuous background. The structure remains stable for all time levels, reflecting the phase–shifted wave nature observed in defocusing nonlinear media.
 
 ### Singular soliton behavior
 
-Figure 3 illustrates the singular soliton solution of Eq. (14), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −0*.*01, *α*_3 = 0*.*5, *α*_4 = −3, *α*_5 = −1*.*5, and in three different time instances. Singular solitons represent a special class of nonlinear wave structures characterized by an infinite or extremely large amplitude at specific spatial points. Such solutions often arise in physical systems where nonlinear effects dominate over dispersion, leading to energy localization and field blow-up. In applications, singular solitons can model intense wave focusing in optical fibers, plasma collapses, or energy concentration in shallow-water dynamics. Singular solitons develop sharp peaks, indicating points where the amplitude becomes extremely large due to dominant nonlinear amplification. The plots show steep localized gradients, highlighting wave concentration phenomena.
+Figure 3 illustrates the singular soliton solution of Eq. (14), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −0.01, *α*_3 = 0.5, *α*_4 = −3, *α*_5 = −1.5, and in three different time instances. Singular solitons represent a special class of nonlinear wave structures characterized by an infinite or extremely large amplitude at specific spatial points. Such solutions often arise in physical systems where nonlinear effects dominate over dispersion, leading to energy localization and field blow-up. In applications, singular solitons can model intense wave focusing in optical fibers, plasma collapses, or energy concentration in shallow-water dynamics. Singular solitons develop sharp peaks, indicating points where the amplitude becomes extremely large due to dominant nonlinear amplification. The plots show steep localized gradients, highlighting wave concentration phenomena.
 
-**Fig. 3.** Singular soliton solution for Eq. (14), visualized in two and three dimensions under identical parameter settings: *d*_2 = −0*.*01, *α*_3 = 0*.*5, *α*_4 = −3, *α*_5 = −1*.*5, and in three different time instances *t* = 1*,* 5*,* 10.
+**Fig. 3.** Singular soliton solution for Eq. (14), visualized in two and three dimensions under identical parameter settings: *d*_2 = −0.01, *α*_3 = 0.5, *α*_4 = −3, *α*_5 = −1.5, and in three different time instances *t* = 1, 5, 10.
 
-**Fig. 4.** Singular periodic solution for Eq. (17) visualized in two and three dimensions under identical parameter settings: *d*_2 = −2, *α*_3 = −5, *α*_4 = −1, *α*_5 = −2*.*7, and in three different time instances *t* = 1*,* 5*,* 10.
+**Fig. 4.** Singular periodic solution for Eq. (17) visualized in two and three dimensions under identical parameter settings: *d*_2 = −2, *α*_3 = −5, *α*_4 = −1, *α*_5 = −2.7, and in three different time instances *t* = 1, 5, 10.
 
 ### Singular periodic wave profiles
 
-Figure 4 corresponds to the singular periodic solution of Eq. (17), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −2, *α*_3 = −5, *α*_4 = −1, *α*_5 = −2*.*7, and in three different time instances. These structures periodically develop singular behavior, combining periodic oscillations with sharp amplitude spikes. The plots clearly show repeating localized peaks, indicating strong nonlinear modulation across each period.
+Figure 4 corresponds to the singular periodic solution of Eq. (17), visualized in both two and three dimensions under identical parameter settings: *d*_2 = −2, *α*_3 = −5, *α*_4 = −1, *α*_5 = −2.7, and in three different time instances. These structures periodically develop singular behavior, combining periodic oscillations with sharp amplitude spikes. The plots clearly show repeating localized peaks, indicating strong nonlinear modulation across each period.
 
 ### Jacobi elliptic functions and their connection to periodic and soliton solutions
 
 The Jacobi elliptic functions sn(*u, m*), cn(*u, m*), and dn(*u, m*) arise naturally in the analysis of nonlinear evolution equations. Depending on the modulus *m* (0 ≤ *m* ≤ 1), they bridge trigonometric and hyperbolic behaviors, thereby linking periodic and soliton solutions. For *m* → 0, they reduce to trigonometric functions:
 
-sn(*u,* 0) = sin(*u*)*,* cn(*u,* 0) = cos(*u*)*,* dn(*u,* 0) = 1*,*
+sn(*u,* 0) = sin(*u*)*,* cn(*u,* 0) = cos(*u*)*,* dn(*u,* 0) = 1,
 
 while for *m* → 1, they become hyperbolic:
 
 **Fig. 5.** The Jacobi elliptic function cn(*ζ, m*) in Eq. (19) is illustrated in 3D, showing the transition from singular periodic to regular periodic waves and finally to a bright soliton as the modulus *m* → 1, with *d*_2 = 2, *α*_3 = −3, *α*_4 = 2, and *α*_5 = −1.
 
-**Fig. 6.** The Jacobi elliptic function cn(*ζ, m*) in Eq. (19) is illustrated in 2D, showing the evolution from singular periodic to regular periodic waves and ultimately to a bright soliton as the modulus *m* → 1, with *d*_2 = 2, *α*_3 = −3, *α*_4 = 2, and *α*_5 = −1, at three representative times *t* = 1*,* 5*,* 10*.*.
+**Fig. 6.** The Jacobi elliptic function cn(*ζ, m*) in Eq. (19) is illustrated in 2D, showing the evolution from singular periodic to regular periodic waves and ultimately to a bright soliton as the modulus *m* → 1, with *d*_2 = 2, *α*_3 = −3, *α*_4 = 2, and *α*_5 = −1, at three representative times *t* = 1, 5, 10..
 
 sn(*u,* 1) = tanh(*u*)*,* cn(*u,* 1) = sech(*u*)*,* dn(*u,* 1) = sech(*u*)*.*
 
-Thus, varying the modulus *m* from 0 to 1 gradually transforms the periodic Jacobi–elliptic waves into solitary structures. Figure 5 illustrates the evolution of the cn(*ζ, m*) solution in Eq.(19), showing its transition from singular periodic (arising when the argument becomes complex) to regular periodic and finally to brightsoliton profiles in 3D, under the parameter set *d*_2 = 2, *α*_3 = −3, *α*_4 = 2, and *α*_5 = −1. Figure 6 presents the corresponding 2D profiles for the same parameter values at three representative times *t* = 1*,* 5*,* 10, highlighting the transition from singular periodic to regular periodic and ultimately to bright-soliton behavior.
+Thus, varying the modulus *m* from 0 to 1 gradually transforms the periodic Jacobi–elliptic waves into solitary structures. Figure 5 illustrates the evolution of the cn(*ζ, m*) solution in Eq.(19), showing its transition from singular periodic (arising when the argument becomes complex) to regular periodic and finally to brightsoliton profiles in 3D, under the parameter set *d*_2 = 2, *α*_3 = −3, *α*_4 = 2, and *α*_5 = −1. Figure 6 presents the corresponding 2D profiles for the same parameter values at three representative times *t* = 1, 5, 10, highlighting the transition from singular periodic to regular periodic and ultimately to bright-soliton behavior.
 
 Overall, the graphical results validate the analytical solutions and demonstrate the complex propagation patterns permitted by the sixth–order NLSE model. The figures highlight the structural evolution, stability characteristics, and nonlinear effects associated with each solution type.
 

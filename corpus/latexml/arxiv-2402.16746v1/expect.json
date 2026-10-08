@@ -38,6 +38,10 @@
     "> We note that $\\beta_{N}$ remains bounded for all $N$. ∎",
     "**(b).** $\\varepsilon=10^{-5}$",
     "- *An asymptotic-preserving, mass conservative and rank-adaptive DLRA integrator:*",
-    "- **†** Jonas Kusch: jonas.kusch@nmbu.no"
-  ]
+    "- **†** Jonas Kusch: jonas.kusch@nmbu.no",
+    "DOI: <https://doi.org/10.1016/S0306-4549(96)00100-4>",
+    "**K-step**: Update",
+    "**L-step**: Update"
+  ],
+  "notContains": ["****"]
 }

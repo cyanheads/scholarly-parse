@@ -9,8 +9,9 @@ import { describe, expect, it } from 'vitest';
 import { parseTei } from '../../../src/formats/tei/index.js';
 import type { ScholarlyDocument, Section } from '../../../src/model/document.js';
 import { toMarkdown, toSections } from '../../../src/render/index.js';
+import { gfmFindings } from '../../gfm.js';
 import { expectLinear } from '../../linear.js';
-import { liveMarkup, SPLIT_MARKUP } from '../jats/helpers.js';
+import { SPLIT_MARKUP } from '../jats/helpers.js';
 
 const HEADER = `<teiHeader xml:lang="en"><fileDesc>
   <titleStmt><title level="a" type="main">A study of things</title></titleStmt>
@@ -73,11 +74,10 @@ describe('the result contract', () => {
     });
   });
 
-  it('finds the last closing tag in one pass over a run of them', () => {
-    const started = performance.now();
-    const result = parseTei(`<TEI>${'</tei >'.repeat(20_000)}${'x'.repeat(500_000)}`);
-    expect(result).toMatchObject({ error: { reason: 'malformed' }, ok: false });
-    expect(performance.now() - started).toBeLessThan(1_000);
+  it('finds the last closing tag in one pass over a run of them', async () => {
+    const xml = (n: number) => `<TEI>${'</tei >'.repeat(n)}${'x'.repeat(25 * n)}`;
+    await expectLinear(xml, parseTei, { from: 1_000, to: 64_000 });
+    expect(parseTei(xml(20_000))).toMatchObject({ error: { reason: 'malformed' }, ok: false });
   });
 
   it('reads the lowercase TEI OpenAlex serves inside an HTML page, divs directly under <text>', () => {
@@ -235,6 +235,14 @@ describe('keywords', () => {
 });
 
 describe('sections', () => {
+  it('reads a heading again after dropping the punctuation a moved number leaves', () => {
+    for (const lead of ['.', ',', ';', ':']) {
+      const markdown = toMarkdown(parse(tei(div('2', `${lead}www.&lt;b&gt;`, 'a'))));
+      const html = gfmFindings(markdown, { text: markdown }).filter((f) => f.startsWith('html'));
+      expect(html).toEqual([]);
+    }
+  });
+
   it('rebuilds the tree from heading numbers, the flat run of divs Grobid writes', () => {
     const document = parse(
       tei(
@@ -802,6 +810,117 @@ describe('back matter and references', () => {
   });
 });
 
+describe('PMCID, PMID, and ORCID values (#59)', () => {
+  /** The header identifiers when its DOI `<idno>` is replaced by `idnos`. */
+  const headerIds = (idnos: string) =>
+    parse(tei(div('1', 'A', 'x'), '', HEADER.replace('<idno type="DOI">10.1234/ABC</idno>', idnos)))
+      .metadata.identifiers;
+  const orcidOf = (value: string) =>
+    parse(tei(div('1', 'A', 'x'), '', HEADER.replace('0000-0002-1825-0097', value))).metadata
+      .authors?.[0]?.orcid;
+  /** The identifiers of a reference whose `<analytic>` holds `idnos`. */
+  const referenceIds = (idnos: string) => {
+    const [reference] = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl><biblStruct xml:id="b0"><analytic><title level="a">A</title>
+          ${idnos}</analytic></biblStruct></listBibl></div>`,
+      ),
+    ).references;
+    return { pmcid: reference?.pmcid, pmid: reference?.pmid };
+  };
+
+  it('keeps header and reference PMIDs and ORCID iDs already in canonical form', () => {
+    expect(
+      headerIds('<idno type="PMID">21491125</idno><idno type="PMCID">PMC123456</idno>'),
+    ).toEqual({ pmcid: 'PMC123456', pmid: '21491125' });
+    expect(referenceIds('<idno type="PMID">21491125</idno>')).toEqual({
+      pmcid: undefined,
+      pmid: '21491125',
+    });
+    expect(orcidOf('0000-0002-1694-233X')).toBe('0000-0002-1694-233X');
+  });
+
+  it('reads a header PMC ID or PMID in any case, without a label', () => {
+    expect(
+      headerIds('<idno type="PMID">PMID: 21491125</idno><idno type="PMCID">pmc123456</idno>'),
+    ).toEqual({ pmcid: 'PMC123456', pmid: '21491125' });
+  });
+
+  it('reads no header identifier from a value that is not one', () => {
+    expect(headerIds('<idno type="PMID">n/a</idno><idno type="PMCID">n/a</idno>')).toBeUndefined();
+  });
+
+  it('reads a reference PMC ID, and a reference PMID without its label', () => {
+    expect(
+      referenceIds('<idno type="PMCID">PMC123456</idno><idno type="PMID">PMID: 21491125</idno>'),
+    ).toEqual({ pmcid: 'PMC123456', pmid: '21491125' });
+    expect(referenceIds('<idno type="PMCID">pmc123456</idno>')).toEqual({
+      pmcid: 'PMC123456',
+      pmid: undefined,
+    });
+    expect(referenceIds('<idno type="PMID">n/a</idno><idno type="PMID">21491125</idno>')).toEqual({
+      pmcid: undefined,
+      pmid: '21491125',
+    });
+  });
+
+  it('reads an author ORCID iD with a lowercase check character or as a link', () => {
+    expect(orcidOf('0000-0002-1694-233x')).toBe('0000-0002-1694-233X');
+    expect(orcidOf('https://orcid.org/0000-0002-1694-233x')).toBe('0000-0002-1694-233X');
+    expect(orcidOf('0000-0002-1694-233')).toBeUndefined();
+  });
+
+  it('renders the normalized header identifiers in the Markdown', () => {
+    const header = HEADER.replace(
+      '<idno type="DOI">10.1234/ABC</idno>',
+      '<idno type="PMID">PMID: 21491125</idno><idno type="PMCID">pmc123456</idno>',
+    );
+    const markdown = toMarkdown(parse(tei(div('1', 'A', 'x'), '', header)));
+    expect(markdown).toContain('PMID: 21491125 · PMCID: PMC123456');
+  });
+});
+
+describe('arXiv values (#65)', () => {
+  /** The document whose header DOI `<idno>` is replaced by `idnos`. */
+  const withHeaderIds = (idnos: string) =>
+    parse(
+      tei(div('1', 'A', 'x'), '', HEADER.replace('<idno type="DOI">10.1234/ABC</idno>', idnos)),
+    );
+  /** The arXiv ID of a reference whose `<analytic>` holds `idnos`. */
+  const referenceArxiv = (idnos: string) =>
+    parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl><biblStruct xml:id="b0"><analytic><title level="a">A</title>
+          ${idnos}</analytic></biblStruct></listBibl></div>`,
+      ),
+    ).references[0]?.arxiv;
+
+  it('keeps a reference arXiv ID without its label', () => {
+    expect(referenceArxiv('<idno type="arXiv">arXiv:1808.09381</idno>')).toBe('1808.09381');
+  });
+
+  it('reads an old-style header ID without its subject class or the category Grobid keeps', () => {
+    const document = withHeaderIds('<idno type="arXiv">arXiv:math.GT/0309136v1 [math.GT]</idno>');
+    expect(document.metadata.identifiers).toEqual({ arxiv: 'math/0309136v1' });
+    expect(toMarkdown(document)).toContain('arXiv: math/0309136v1');
+    expect(referenceArxiv('<idno type="arXiv">math.GT/0309136</idno>')).toBe('math/0309136');
+  });
+
+  it('reads no arXiv ID from a value that is not one, and takes a later one that is', () => {
+    expect(withHeaderIds('<idno type="arXiv">n/a</idno>').metadata.identifiers).toBeUndefined();
+    expect(
+      withHeaderIds('<idno type="arXiv">n/a</idno><idno type="arXiv">2105.00001</idno>').metadata
+        .identifiers,
+    ).toEqual({ arxiv: '2105.00001' });
+    expect(referenceArxiv('<idno type="arXiv">2105.00001v0</idno>')).toBeUndefined();
+    expect(
+      referenceArxiv('<idno type="arXiv">pending</idno><idno type="arXiv">hep-th/9711200</idno>'),
+    ).toBe('hep-th/9711200');
+  });
+});
+
 describe('document-sized lists', () => {
   /** V8 rejects a call spreading ~120,000 arguments, so each case runs past that on Node. */
   it('joins a heading-less div of 200,000 paragraphs to the section before it', () => {
@@ -832,7 +951,8 @@ describe('the table budget', () => {
     const [block] = document.floats;
     const copied =
       block?.type === 'table' ? block.rows.flat().join('').length - text.trim().length : 0;
-    expect(copied).toBeLessThanOrEqual(1_000_000);
+    // The copies of the cell's 9,999 characters that fit a million: 100 of them.
+    expect(copied).toBe(Math.floor(1_000_000 / 9_999) * 9_999);
     expect(
       document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input'),
     ).toMatchObject([{ message: expect.stringMatching(/^Table 1 /), where: 'tab_0' }]);
@@ -869,7 +989,16 @@ describe('source text split across inline elements (#44)', () => {
       ...document.references.map((reference) => reference.text),
       toMarkdown(document),
     ];
-    expect(fields.filter((field) => liveMarkup(field).length > 0)).toEqual([]);
+    const text = row.join('').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    // Every field but the paragraph the note marks holds the text, so each finds nothing for a reason.
+    const letters = (field: string) => field.replace(/[^\p{L}\p{N}]/gu, '');
+    expect(fields).toHaveLength(8);
+    expect(fields.filter((field) => !letters(field).includes(letters(text)))).toEqual(['Noted^1.']);
+    // The renderer's own spans (a label, the venue) open with `*`; source text opens none.
+    const hrefs = ['https://creativecommons.org/licenses/by/4.0/'];
+    expect(fields.flatMap((field) => gfmFindings(field, { hrefs, markers: '*~', text }))).toEqual(
+      [],
+    );
   });
 
   it('escapes a link the fields of a built citation spell together', () => {

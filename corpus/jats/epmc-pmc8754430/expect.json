@@ -30,7 +30,8 @@
     "rotation?\n\nAll completed as requested.\n\n> Reviewer ",
     "**Figure 2—figure supplement 1.** **Examples each of the first 90° of ATP hydrolysis-driven power strokes",
     "- National Institute of General Medical Sciences R01GM097510 to Wayne D Frasch.",
-    "### Author contributions\n\n**Seiga Yanagisawa:** Data curation, Formal analysis"
+    "### Author contributions\n\n**Seiga Yanagisawa:** Data curation, Formal analysis",
+    "| pKa_1 | P_1 (%) | pKa_2 | P_2 |"
   ],
   "notContains": ["10.13039/100000057National"]
 }

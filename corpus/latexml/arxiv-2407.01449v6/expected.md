@@ -132,7 +132,7 @@ $$
 | - BGE-M3 | - | 28.4$\downarrow$5.7 | - | - | 36.1$\downarrow$7.9 | 68.5$\uparrow$8.9 | 88.4$\downarrow$2.0 | 76.8$\downarrow$1.5 | 77.7$\downarrow$1.1 | 84.6$\uparrow$2.0 | - |
 | **Unstructured + OCR** |  |  |  |  |  |  |  |  |  |  |  |
 | - BM25 | 31.6 | 36.8 | 62.9 | 46.5 | 62.7 | 64.3 | 92.8 | 85.9 | 83.9 | 87.2 | 65.5 |
-| - BGE-M3 | 31.4$\downarrow$0.2 | 25.7$\downarrow$11.1 | 60.1$\downarrow$2.8 | 70.8$\uparrow$24.3 | 50.5$\downarrow$12.2 | **73.2$\uparrow$**8.9 | 90.2$\downarrow$2.6 | 83.6$\downarrow$2.3 | 84.9$\uparrow$1.0 | 91.1$\uparrow$3.9 | 66.1$\uparrow$0.6 |
+| - BGE-M3 | 31.4$\downarrow$0.2 | 25.7$\downarrow$11.1 | 60.1$\downarrow$2.8 | 70.8$\uparrow$24.3 | 50.5$\downarrow$12.2 | **73.2**$\uparrow$8.9 | 90.2$\downarrow$2.6 | 83.6$\downarrow$2.3 | 84.9$\uparrow$1.0 | 91.1$\uparrow$3.9 | 66.1$\uparrow$0.6 |
 | **Unstructured + Captioning** |  |  |  |  |  |  |  |  |  |  |  |
 | - BM25 | 40.1 | 38.4 | 70.0 | 35.4 | 61.5 | 60.9 | 88.0 | 84.7 | 82.7 | 89.2 | 65.1 |
 | - BGE-M3 | 35.7$\downarrow$4.4 | 32.9$\downarrow$5.4 | 71.9$\uparrow$1.9 | 69.1$\uparrow$33.7 | 43.8$\downarrow$17.7 | 73.1$\uparrow$12.2 | 88.8$\uparrow$0.8 | 83.3$\downarrow$1.4 | 80.4$\downarrow$2.3 | 91.3$\uparrow$2.1 | 67.0$\uparrow$1.9 |
@@ -144,7 +144,7 @@ $$
 | SigLIP (Vanilla) | 43.2 | 30.3 | 64.1 | 58.1 | 26.2 | 18.7 | 62.5 | 65.7 | 66.1 | 79.1 | 51.4 |
 | BiSigLIP (+fine-tuning) | 58.5$\uparrow$15.3 | 32.9$\uparrow$2.6 | 70.5$\uparrow$6.4 | 62.7$\uparrow$4.6 | 30.5$\uparrow$4.3 | 26.5$\uparrow$7.8 | 74.3$\uparrow$11.8 | 73.7$\uparrow$8.0 | 74.2$\uparrow$8.1 | 82.3$\uparrow$3.2 | 58.6$\uparrow$7.2 |
 | BiPali (+LLM) | 56.5$\downarrow$-2.0 | 30.0$\downarrow$-2.9 | 67.4$\downarrow$-3.1 | 76.9$\uparrow$14.2 | 33.4$\uparrow$2.9 | 43.7$\uparrow$17.2 | 71.2$\downarrow$-3.1 | 61.9$\downarrow$-11.7 | 73.8$\downarrow$-0.4 | 73.6$\downarrow$-8.8 | 58.8$\uparrow$0.2 |
-| *ColPali* (+Late Inter.) | **79.1$\uparrow$**22.6 | **54.4$\uparrow$**24.5 | **81.8$\uparrow$**14.4 | **83.9$\uparrow$**7.0 | **65.8$\uparrow$**32.4 | **73.2$\uparrow$**29.5 | **96.2$\uparrow$**25.0 | **91.0$\uparrow$**29.1 | **92.7$\uparrow$**18.9 | **94.4$\uparrow$**20.8 | **81.3$\uparrow$**22.5 |
+| *ColPali* (+Late Inter.) | **79.1**$\uparrow$22.6 | **54.4**$\uparrow$24.5 | **81.8**$\uparrow$14.4 | **83.9**$\uparrow$7.0 | **65.8**$\uparrow$32.4 | **73.2**$\uparrow$29.5 | **96.2**$\uparrow$25.0 | **91.0**$\uparrow$29.1 | **92.7**$\uparrow$18.9 | **94.4**$\uparrow$20.8 | **81.3**$\uparrow$22.5 |
 
 ### 5.1 Performance (R1)
 
@@ -304,7 +304,7 @@ Examples of captions generated for visually rich document chunks with Claude-3 S
 | BGE-M3 | - | 22.8$\downarrow$3.8 | - | - | 26.1$\downarrow$8.5 | 51.0$\uparrow$6.0 | 81.0$\downarrow$5.0 | 72.0$\uparrow$2.0 | 67.0$\downarrow$1.0 | 77.0$\uparrow$3.0 | - |
 | **Unstructured + OCR** |  |  |  |  |  |  |  |  |  |  |  |
 | BM25 | 26.7 | 28.9 | 54.0 | 30.4 | 50.0 | 52.0 | 86.0 | 77.0 | 74.0 | 80.0 | 55.9 |
-| BGE-M3 | 28.1$\uparrow$1.4 | 22.9$\downarrow$6.0 | 53.8$\downarrow$0.2 | 55.7$\uparrow$25.3 | 38.6$\downarrow$11.4 | **56.0$\uparrow$**4.0 | 82.0$\downarrow$4.0 | 79.0$\uparrow$2.0 | 76.0$\uparrow$2.0 | 83.0$\uparrow$3.0 | 57.5$\uparrow$1.6 |
+| BGE-M3 | 28.1$\uparrow$1.4 | 22.9$\downarrow$6.0 | 53.8$\downarrow$0.2 | 55.7$\uparrow$25.3 | 38.6$\downarrow$11.4 | **56.0**$\uparrow$4.0 | 82.0$\downarrow$4.0 | 79.0$\uparrow$2.0 | 76.0$\uparrow$2.0 | 83.0$\uparrow$3.0 | 57.5$\uparrow$1.6 |
 | **Unstructured + Captioning** |  |  |  |  |  |  |  |  |  |  |  |
 | BM25 | 35.5 | 30.2 | 61.5 | 24.3 | 49.0 | 47.0 | 79.0 | 76.0 | 75.0 | 81.0 | 55.9 |
 | BGE-M3 | 29.3$\downarrow$6.2 | 26.0$\downarrow$4.2 | 62.1 $\uparrow$0.6 | 58.6$\uparrow$34.3 | 30.6$\downarrow$18.4 | 55.0$\uparrow$8.0 | 80.0$\uparrow$1.0 | 78.0$\uparrow$2.0 | 69.0$\downarrow$6.0 | 83.0$\uparrow$2.0 | 57.2$\uparrow$1.3 |
@@ -316,7 +316,7 @@ Examples of captions generated for visually rich document chunks with Claude-3 S
 | SigLIP (Vanilla) | 34.2 | 21.3 | 51.8 | 46.1 | 17.9 | 13.0 | 50.0 | 51.0 | 47.0 | 65.0 | 39.7 |
 | BiSigLIP (+fine-tuning) | 49.2$\uparrow$15.0 | 23.8$\uparrow$2.5 | 59.0$\uparrow$7.2 | 52.1$\uparrow$6.0 | 20.7$\uparrow$2.8 | 16.0$\uparrow$3.0 | 62.0$\uparrow$12.0 | 61.0$\uparrow$10.0 | 55.0$\uparrow$8.0 | 72.0$\uparrow$7.0 | 47.1$\uparrow$7.4 |
 | BiPali (+LLM) | 46.4$\downarrow$-2.8 | 20.0$\downarrow$-3.8 | 54.6$\downarrow$-4.4 | 63.2$\uparrow$11.1 | 20.4$\downarrow$-0.4 | 34.0$\uparrow$18.0 | 59.0$\downarrow$-3.0 | 45.0$\downarrow$-16.0 | 57.0$\uparrow$2.0 | 56.0$\downarrow$-16.0 | 45.6$\downarrow$-1.5 |
-| *ColPali* (+Late Inter.) | **72.4$\uparrow$**26.0 | **45.6$\uparrow$**25.6 | **74.6$\uparrow$**20.0 | **75.4$\uparrow$**12.1 | **53.1$\uparrow$**32.7 | 55.0$\uparrow$21.0 | **93.0$\uparrow$**34.0 | **85.0$\uparrow$**40.0 | **85.0$\uparrow$**28.0 | **88.0$\uparrow$**32.0 | **72.7$\uparrow$**27.1 |
+| *ColPali* (+Late Inter.) | **72.4**$\uparrow$26.0 | **45.6**$\uparrow$25.6 | **74.6**$\uparrow$20.0 | **75.4**$\uparrow$12.1 | **53.1**$\uparrow$32.7 | 55.0$\uparrow$21.0 | **93.0**$\uparrow$34.0 | **85.0**$\uparrow$40.0 | **85.0**$\uparrow$28.0 | **88.0**$\uparrow$32.0 | **72.7**$\uparrow$27.1 |
 
 ### C.2 Model Variants
 

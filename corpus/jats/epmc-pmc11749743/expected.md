@@ -312,7 +312,7 @@ Giovanni E Ferreira, Christopher G Maher, Chung-Wei Christine Lin, Laurent Billo
 - [11] Collaboration CatNTC Vascular and upper gastrointestinal effects of non-steroidal anti-inflammatory drugs: meta-analyses of individual participant data from randomised trials. The Lancet. 2013;382:769–79. doi: 10.1016/S0140-6736(13)60900-9.
 - [12] Enke O, New HA, New CH, et al. Anticonvulsants in the treatment of low back pain and lumbar radicular pain: a systematic review and meta-analysis. CMAJ. 2018;190:E786–93. doi: 10.1503/cmaj.171333.
 - [13] Mathieson S, Maher CG, McLachlan AJ, et al. Trial of Pregabalin for Acute and Chronic Sciatica. N Engl J Med. 2017;376:1111–20. doi: 10.1056/NEJMoa1614292.
-- [14] Ferreira GE, Abdel-Shaheed C, Underwood M, et al. Efficacy, safety, and tolerability of antidepressants for pain in adults: overview of systematic reviews. BMJ . 2023;380:e072415. doi: 10.1136/bmj-2022-072415.
+- [14] Ferreira GE, Abdel-Shaheed C, Underwood M, et al. Efficacy, safety, and tolerability of antidepressants for pain in adults: overview of systematic reviews. BMJ. 2023;380:e072415. doi: 10.1136/bmj-2022-072415.
 - [15] Ferreira GE, McLachlan AJ, Lin C-WC, et al. Efficacy and safety of antidepressants for the treatment of back pain and osteoarthritis: systematic review and meta-analysis. BMJ. 2021;372:m4825. doi: 10.1136/bmj.m4825.
 - [16] Hawton K, Bergen H, Simkin S, et al. Toxicity of antidepressants: rates of suicide relative to prescribing and non-fatal overdose. Br J Psychiatry. 2010;196:354–8. doi: 10.1192/bjp.bp.109.070219.
 - [17] Hilmer SN, Gnjidic D. The anticholinergic burden: from research to practice. Aust Prescr. 2022;45:118–20. doi: 10.18773/austprescr.2022.031.
