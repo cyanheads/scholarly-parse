@@ -6,9 +6,12 @@
  * own author-list and affiliation markup.
  * @module src/formats/html/metadata
  */
+import { normalizeArxiv } from '../../model/arxiv.js';
 import type { Author, DocumentMetadata, PartialDate, Reference } from '../../model/document.js';
 import { normalizeDoi } from '../../model/doi.js';
+import { normalizeOrcid, normalizePmcid, normalizePmid } from '../../model/identifiers.js';
 import { escapeInline } from '../../render/escape.js';
+import { joinInlineSeams } from '../../render/inline.js';
 
 /** One `<meta>` tag: lowercased `name` (or `property`) and its content. */
 interface MetaTag {
@@ -98,7 +101,7 @@ export function extractMetadata(
       const indices = authorAffiliations.get(current) ?? new Set();
       authorAffiliations.set(current, indices.add(index));
     } else if (current && tag.name === 'citation_author_orcid') {
-      const orcid = /\d{4}-\d{4}-\d{4}-\d{3}[\dX]/.exec(tag.content)?.[0];
+      const orcid = normalizeOrcid(tag.content);
       if (orcid) current.orcid = orcid;
     } else if (current && tag.name === 'citation_author_email') {
       current.email = tag.content;
@@ -120,9 +123,9 @@ export function extractMetadata(
     first(tags, 'citation_doi', 'prism.doi') ??
       all(tags, 'dc.identifier').find((value) => /10\.\d{4,9}\//.test(value)),
   );
-  const pmid = first(tags, 'citation_pmid')?.replace(/\D/g, '');
-  const pmcid = /PMC\d+/i.exec(first(tags, 'citation_pmcid') ?? '')?.[0]?.toUpperCase();
-  const arxiv = first(tags, 'citation_arxiv_id')?.replace(/^arxiv:/i, '');
+  const pmid = all(tags, 'citation_pmid').map(normalizePmid).find(Boolean);
+  const pmcid = all(tags, 'citation_pmcid').map(normalizePmcid).find(Boolean);
+  const arxiv = all(tags, 'citation_arxiv_id').map(normalizeArxiv).find(Boolean);
   const identifiers = {
     ...(doi && { doi }),
     ...(pmid && { pmid }),
@@ -260,21 +263,23 @@ export function metaReferences(tags: MetaTag[]): Reference[] {
       get('citation_year') ?? get('citation_publication_date') ?? get('citation_date') ?? '',
     )?.[0];
     const doi = normalizeDoi(get('citation_doi'));
-    const pmid = get('citation_pmid')?.replace(/\D/g, '');
+    const pmid = normalizePmid(get('citation_pmid'));
     const volume = get('citation_volume');
     const pages = get('citation_pages') ?? get('citation_firstpage');
-    const text = [
-      authors.length > 0 && `${escapeInline(authors.join(', '))}.`,
-      title && `${escapeInline(title.replace(/\.$/, ''))}.`,
-      source && `*${escapeInline(source)}*.`,
-      [year, volume && `${escapeInline(volume)}${pages ? `:${escapeInline(pages)}` : ''}`]
+    const text = joinInlineSeams(
+      [
+        authors.length > 0 && `${escapeInline(authors.join(', '))}.`,
+        title && `${escapeInline(title.replace(/\.$/, ''))}.`,
+        source && `*${escapeInline(source)}*.`,
+        [year, volume && `${escapeInline(volume)}${pages ? `:${escapeInline(pages)}` : ''}`]
+          .filter(Boolean)
+          .join(';'),
+        doi && `doi:${escapeInline(doi)}`,
+      ]
         .filter(Boolean)
-        .join(';'),
-      doi && `doi:${escapeInline(doi)}`,
-    ]
-      .filter(Boolean)
-      .join(' ')
-      .trim();
+        .join(' ')
+        .trim(),
+    );
     if (!text) return [];
     return [
       {

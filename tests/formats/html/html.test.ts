@@ -10,7 +10,6 @@ import { describe, expect, it } from 'vitest';
 import { parseHtml } from '../../../src/formats/html/index.js';
 import { interstitialReason } from '../../../src/html/interstitial.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
-import { normalizeDoi } from '../../../src/model/doi.js';
 import { toMarkdown, toSections, toText } from '../../../src/render/index.js';
 import { expectLinear } from '../../linear.js';
 
@@ -215,6 +214,102 @@ describe('front matter', () => {
       ),
     );
     expect(document.metadata.license).toBeUndefined();
+  });
+
+  describe('PMCID, PMID, and ORCID tags (#59)', () => {
+    /** A page whose citation tags add `tags` after the standard ones. */
+    const tagged = (tags: string) => parse(page(`<h2>Introduction</h2><p>${PROSE}</p>`, tags));
+    const pmidPmcid = (pmid: string, pmcid: string) =>
+      `<meta name="citation_pmid" content="${pmid}"><meta name="citation_pmcid" content="${pmcid}">`;
+    const orcidOf = async (value: string) =>
+      (
+        await tagged(
+          `<meta name="citation_author" content="Ann Lee"><meta name="citation_author_orcid" content="${value}">`,
+        )
+      ).metadata.authors?.[2]?.orcid;
+
+    it('reads a PMID or PMC ID tag with or without a label, in any case', async () => {
+      for (const [pmid, pmcid] of [
+        ['21491125', 'PMC123456'],
+        ['PMID: 21491125', 'pmc123456'],
+        ['https://pubmed.ncbi.nlm.nih.gov/21491125/', 'PMCID: PMC123456'],
+      ] as const) {
+        const document = await tagged(pmidPmcid(pmid, pmcid));
+        expect(document.metadata.identifiers).toEqual({
+          doi: '10.1234/abc.5',
+          pmcid: 'PMC123456',
+          pmid: '21491125',
+        });
+        expect(toMarkdown(document)).toContain(
+          'DOI: 10.1234/abc.5 · PMID: 21491125 · PMCID: PMC123456',
+        );
+      }
+    });
+
+    it('reads no PMID or PMC ID from a tag that holds none', async () => {
+      const document = await tagged(pmidPmcid('n/a', 'pending'));
+      expect(document.metadata.identifiers).toEqual({ doi: '10.1234/abc.5' });
+    });
+
+    it('reads the first PMID or PMC ID tag that holds one', async () => {
+      const document = await tagged(
+        pmidPmcid('n/a', 'pending') + pmidPmcid('21491125', 'PMC123456.1'),
+      );
+      expect(document.metadata.identifiers).toEqual({
+        doi: '10.1234/abc.5',
+        pmcid: 'PMC123456',
+        pmid: '21491125',
+      });
+    });
+
+    it('reads an ORCID iD tag whatever the case of its check character', async () => {
+      expect(await orcidOf('0000-0002-1694-233X')).toBe('0000-0002-1694-233X');
+      expect(await orcidOf('0000-0002-1694-233x')).toBe('0000-0002-1694-233X');
+      expect(await orcidOf('https://orcid.org/0000-0002-1694-233x')).toBe('0000-0002-1694-233X');
+      expect(await orcidOf('0000-0002-1694-233')).toBeUndefined();
+    });
+
+    it('reads a citation_reference PMID without its label', async () => {
+      const document = await tagged(
+        '<meta name="citation_reference" content="citation_title=A cited work;citation_pmid=PMID: 21491125">',
+      );
+      expect(document.references[0]?.pmid).toBe('21491125');
+    });
+  });
+
+  describe('arXiv ID tags (#65)', () => {
+    const arxivTags = (...values: string[]) =>
+      parse(
+        page(
+          `<h2>Introduction</h2><p>${PROSE}</p>`,
+          values.map((v) => `<meta name="citation_arxiv_id" content="${v}">`).join(''),
+        ),
+      );
+
+    it('reads an arXiv ID tag without its label', async () => {
+      const document = await arxivTags('arXiv:2401.12345v2');
+      expect(document.metadata.identifiers).toEqual({
+        arxiv: '2401.12345v2',
+        doi: '10.1234/abc.5',
+      });
+    });
+
+    it('reads an old-style ID without its subject class, and the ID an arxiv.org link names', async () => {
+      const document = await arxivTags('math.GT/0309136');
+      expect(document.metadata.identifiers?.arxiv).toBe('math/0309136');
+      expect(toMarkdown(document)).toContain('DOI: 10.1234/abc.5 · arXiv: math/0309136');
+      expect(
+        (await arxivTags('https://arxiv.org/abs/2105.00001')).metadata.identifiers?.arxiv,
+      ).toBe('2105.00001');
+    });
+
+    it('reads no arXiv ID from a tag that holds none, and takes a later one that does', async () => {
+      expect((await arxivTags('n/a')).metadata.identifiers).toEqual({ doi: '10.1234/abc.5' });
+      expect((await arxivTags('2105.00001v0')).metadata.identifiers?.arxiv).toBeUndefined();
+      expect((await arxivTags('n/a', 'hep-th/9711200')).metadata.identifiers?.arxiv).toBe(
+        'hep-th/9711200',
+      );
+    });
   });
 });
 
@@ -733,6 +828,16 @@ describe('references', () => {
       },
     ]);
   });
+
+  it('keeps a bare URL in one citation_reference field from taking in the escape the next one writes', async () => {
+    const document = await parse(
+      page(
+        `<h2>Introduction</h2><p>${PROSE}</p>`,
+        '<meta name="citation_reference" content="citation_title=T;citation_volume=https://a.co/x;citation_pages=&lt;img src=x&gt;">',
+      ),
+    );
+    expect(document.references[0]?.text).toBe('T. <https://a.co/x>:\\<img src=x>');
+  });
 });
 
 describe('document-sized lists', () => {
@@ -820,9 +925,16 @@ describe('the table budget', () => {
     const block = document.body
       .flatMap((section) => section.blocks)
       .find((candidate) => candidate.type === 'table');
-    const copied =
-      block?.type === 'table' ? block.rows.flat().join('').length - text.trim().length : 0;
-    expect(copied).toBeLessThanOrEqual(1_000_000);
+    expect(block?.type).toBe('table');
+    const [own, ...covered] = block?.type === 'table' ? block.rows.flat() : [];
+    const cell = text.trim();
+    // The cell's own position keeps its text; each covered one holds a whole copy until the
+    // next copy would pass the budget, and is empty after.
+    expect(own).toBe(cell);
+    expect(covered.filter((value) => value !== cell && value !== '')).toEqual([]);
+    expect(covered.filter((value) => value === cell)).toHaveLength(
+      Math.floor(1_000_000 / cell.length),
+    );
     expect(
       document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input'),
     ).toMatchObject([{ where: 't1' }]);
@@ -850,12 +962,18 @@ describe('long unclosed runs', () => {
     });
   });
 
-  it('still reads a redirect stub whose content comes before its http-equiv', () => {
+  it('still reads a redirect stub whose content comes before its http-equiv', async () => {
     expect(
-      interstitialReason(
+      await parseHtml(
         '<html><head><meta content="0;URL=https://example.org/a" http-equiv="Refresh"></head></html>',
       ),
-    ).toBe('The page is a redirect stub to https://example.org/a, not the document');
+    ).toMatchObject({
+      error: {
+        message: 'The page is a redirect stub to https://example.org/a, not the document',
+        reason: 'blocked',
+      },
+      ok: false,
+    });
   });
 
   it.each([
@@ -883,6 +1001,10 @@ describe('long unclosed runs', () => {
     [', ;|', 'a', 'b'],
     ['10.1234/.', 'A work. ', '"'],
     ['arxiv.org/abs/', 'A work. <a href="https://arxiv.org/abs/', '!">arXiv</a>'],
+    ['arxiv.org/abs/', 'A work. https://', '!'],
+    ['arXiv: ', 'A work. ', '!'],
+    ['1', 'A work. arXiv:', '!'],
+    ['hep-th/', 'A work. ', '!'],
   ])('reads a reference in time linear in a run of %j', async (run, lead, end) => {
     await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, reference, {
       from: 250,
@@ -890,11 +1012,37 @@ describe('long unclosed runs', () => {
     });
   });
 
-  it('reads a DOI in reference text and an arXiv ID from a link, as before', async () => {
+  it('reads a DOI in reference text and an arXiv ID from a link, its version kept (#65)', async () => {
     const document = await reference(
       'Roe R. A work. doi:10.1234/Ab.5. <a href="https://arxiv.org/abs/2401.12345v2">arXiv</a>',
     );
-    expect(document.references).toMatchObject([{ arxiv: '2401.12345', doi: '10.1234/ab.5' }]);
+    expect(document.references).toMatchObject([{ arxiv: '2401.12345v2', doi: '10.1234/ab.5' }]);
+  });
+
+  it.each([
+    ['A. Author. Old paper. arXiv:hep-th/9711200, 1997.', 'hep-th/9711200'],
+    ['A. Author. Knots. arXiv:math.GT/0309136.', 'math/0309136'],
+    ['A. Author. Old paper. Nucl. Phys. B 1 (1998) 1, hep-th/9711200.', 'hep-th/9711200'],
+    ['A. Author. arXiv:cond-mat/0501001v2.', 'cond-mat/0501001v2'],
+    ['C. Author. Newer. arXiv:2105.00001v2.', '2105.00001v2'],
+    ['B. Author. New. <a href="https://arxiv.org/abs/2105.00001">link</a>.', '2105.00001'],
+    ['B. Author. New. <a href="https://arxiv.org/abs/2105.00001v3">link</a>.', '2105.00001v3'],
+    ['B. Author. New. <a href="https://arxiv.org/pdf/2105.00001">link</a>.', '2105.00001'],
+    ['B. Author. Old. <a href="http://arxiv.org/abs/hep-th/9711200">link</a>.', 'hep-th/9711200'],
+  ])('reads the arXiv ID in reference %j (#65)', async (entry, arxiv) => {
+    const document = await reference(entry);
+    expect(document.references[0]?.arxiv).toBe(arxiv);
+  });
+
+  it.each([
+    'D. Author. Data and/1234567 samples.',
+    'D. Author. arXiv:foo-bar/9901001.',
+    'D. Author. A preprint, hep-th/0805123.',
+    'D. Author. Phys. Rev. 1999.12345 (2001).',
+    'E. Author. <a href="https://example.org/abs/2105.00001">link</a>.',
+  ])('reads no arXiv ID in reference %j (#65)', async (entry) => {
+    const document = await reference(entry);
+    expect(document.references[0]?.arxiv).toBeUndefined();
   });
 
   it.each([
@@ -905,14 +1053,6 @@ describe('long unclosed runs', () => {
   ])('reads the DOI in reference text %j without what closes it', async (text, doi) => {
     const document = await reference(`Roe R. A work. ${text}`);
     expect(document.references[0]?.doi).toBe(doi);
-  });
-
-  it('normalizes a DOI in time linear in a run of trailing punctuation', async () => {
-    await expectLinear((n) => `10.1234/a${'.'.repeat(n)}b`, normalizeDoi, {
-      from: 2_000,
-      to: 512_000,
-    });
-    expect(normalizeDoi('https://doi.org/10.1234/A.b.;,')).toBe('10.1234/a.b');
   });
 
   it('reads preformatted text in time linear in a run of spaces inside it', async () => {

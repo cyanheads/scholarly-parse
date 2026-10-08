@@ -17,6 +17,7 @@ import {
   textOfElement,
   truncatedNestingMessage,
 } from '../../html/dom.js';
+import { arxivFromPageUrl, arxivFromUrl, arxivId, arxivInText } from '../../model/arxiv.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
   Abstract,
@@ -48,7 +49,13 @@ import { inlineRun, inlineText } from './inline.js';
 
 /** Options for {@link parseLatexml}. */
 export interface LatexmlOptions extends ParseOptions {
-  /** The page's URL, so relative image paths resolve (`x1.png` → `https://arxiv.org/html/…/x1.png`). */
+  /**
+   * The page's URL, so relative image paths resolve
+   * (`2407.01449v6/x1.png` → `https://arxiv.org/html/2407.01449v6/x1.png`).
+   * For arXiv, pass the URL without a trailing slash (`https://arxiv.org/html/2407.01449v6`):
+   * arXiv serves the page at both forms, but its image paths repeat the paper ID and resolve
+   * only against the slashless one.
+   */
   baseUrl?: string;
 }
 
@@ -141,28 +148,37 @@ interface Watermark {
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 /**
- * arXiv stamps each render with `arXiv:2401.04088v1 [cs.LG] 08 Jan 2024`; that line
- * gives the identifier and version date. The page URL is the fallback for the identifier.
- * The stamp is short, so only its first 400 characters are read: the pattern rescans the
- * rest of the text from each `[` that nothing closes.
+ * arXiv's stamp: `arXiv:`, the ID, its subject class in brackets, and the version date.
+ * An archive without subject classes stamps no brackets (`arXiv:hep-th/9901001v2 10 May
+ * 1999`).
+ */
+const STAMP = /arXiv:([\w./-]+)(?:\s*\[[^\]]+\]\s*|\s+)(\d{1,2}) (\w{3}) (\d{4})/g;
+
+/**
+ * arXiv stamps each render with `arXiv:2401.04088v1 [cs.LG] 08 Jan 2024`; the first stamp
+ * whose ID is one gives the identifier and version date, and text shaped like a stamp
+ * around anything else gives neither. The page URL (an arxiv.org or ar5iv page) is the
+ * fallback for the identifier. Both are read as `arxivId` reads one, so an old-style ID
+ * loses its subject class (`math.GT/0309136v1` → `math/0309136v1`). The stamp is short,
+ * so only its first 400 characters are read: the pattern rescans the rest of the text
+ * from each `[` that nothing closes.
  */
 function parseWatermark(document: Document, baseUrl: string | undefined): Watermark {
   const text = (
     textOfElement(document.querySelector('#watermark-tr')) ||
     textOfElement(document.querySelector('.ltx_page_main'))
   ).slice(0, 400);
-  const match =
-    /arXiv:(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+(?:\.[A-Z]{2})?\/\d{7}(?:v\d+)?)\s*\[[^\]]+\]\s*(\d{1,2}) (\w{3}) (\d{4})/.exec(
-      text,
-    );
-  const fromUrl = /\/(?:html|abs)\/(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+\/\d{7}(?:v\d+)?)/.exec(
-    baseUrl ?? '',
-  )?.[1];
-  const arxiv = match?.[1] ?? fromUrl;
-  const month = match ? MONTHS.indexOf((match[3] ?? '').toLowerCase()) + 1 : 0;
-  const published =
-    match && month > 0 ? { day: Number(match[2]), month, year: Number(match[4]) } : undefined;
-  return { ...(arxiv && { arxiv }), ...(published && { published }) };
+  for (const [, id = '', day, monthName = '', year] of text.matchAll(STAMP)) {
+    const arxiv = arxivId(id);
+    if (!arxiv) continue;
+    const month = MONTHS.indexOf(monthName.toLowerCase()) + 1;
+    return {
+      arxiv,
+      ...(month > 0 && { published: { day: Number(day), month, year: Number(year) } }),
+    };
+  }
+  const arxiv = arxivFromPageUrl(baseUrl);
+  return arxiv ? { arxiv } : {};
 }
 
 function extractMetadata(
@@ -466,10 +482,17 @@ function withKind(section: Section, kind: SectionKind): Section {
   return { ...section, kind, sections: section.sections.map((sub) => withKind(sub, kind)) };
 }
 
-const ARXIV = /arXiv[:\s]+(\d{4}\.\d{4,5}(?:v\d+)?)/i;
+/** The document a URL names: the URL without its query and fragment. */
+function documentOf(url: string): string {
+  return url.slice(0, url.search(/[?#]|$/));
+}
 
-/** The bibliography: one reference per `ltx_bibitem`, its printed tag as the label. */
+/**
+ * The bibliography: one reference per `ltx_bibitem`, its printed tag as the label. An
+ * entry's arXiv ID is the one its text prints, else the one an arxiv.org link names.
+ */
 function extractReferences(bibliography: Element, ctx: LatexmlContext): Reference[] {
+  const page = ctx.baseUrl === undefined ? undefined : documentOf(resolveUrl('', ctx.baseUrl));
   return Array.from(bibliography.querySelectorAll('.ltx_bibitem')).flatMap((item) => {
     const tagSpan = item.querySelector('.ltx_tag_bibitem');
     const label = textOfElement(tagSpan).replace(/^\[|\]$/g, '') || undefined;
@@ -493,8 +516,15 @@ function extractReferences(bibliography: Element, ctx: LatexmlContext): Referenc
       hrefs.map((h) => /doi\.org\/(10\.\d{4,9}\/\S+)/i.exec(h)?.[1]).find(Boolean) ??
       doiInText(plain)
     )?.toLowerCase();
-    const arxiv = ARXIV.exec(plain)?.[1];
-    const url = doi ? undefined : hrefs.find((h) => /^https?:/i.test(h) && !h.includes('#'));
+    /**
+     * A link holding `#` is an in-page anchor ("Cited by: §2"), resolved against this page's
+     * URL, and an empty or query-only link resolves to the page itself: neither names a work.
+     */
+    const links = hrefs.filter(
+      (h) => /^https?:/i.test(h) && !h.includes('#') && documentOf(h) !== page,
+    );
+    const arxiv = arxivInText(plain) ?? links.map(arxivFromUrl).find(Boolean);
+    const url = doi ? undefined : links[0];
     const id = item.getAttribute('id') ?? undefined;
     return [
       {

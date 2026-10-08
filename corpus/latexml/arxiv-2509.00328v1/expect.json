@@ -1,5 +1,5 @@
 {
-  "why": "Token tables written with entities (&lt;bos&gt;, &lt;Ac0701&gt;): the DOM splits text at each entity, so escaping has to see the merged run or <bos> leaks as a raw tag. Two table floats hold subtable panels captioned (a)–(d); each table carries its panel's caption, and Table 2's own caption heads its four panels. Every \\url is a link. 7 tables: 8 tabulars less a rule-only spacer after the abstract, with Figure 9 a float that holds only a tabular. 28 figures: 29 ltx_figure elements less Figure 9. The unnumbered \"Simulation Experiments\" heading between B.2 and B.3 is the source's own section* in the appendix.",
+  "why": "Token tables written with entities (&lt;bos&gt;, &lt;Ac0701&gt;): the DOM splits text at each entity, so escaping has to see the merged run or <bos> leaks as a raw tag. Two table floats hold subtable panels captioned (a)–(d); each table carries its panel's caption, and Table 2's own caption heads its four panels. Every \\url is a link. 7 tables: 8 tabulars less a rule-only spacer after the abstract, with Figure 9 a float that holds only a tabular. 28 figures: 29 ltx_figure elements less Figure 9. The unnumbered \"Simulation Experiments\" heading between B.2 and B.3 is the source's own section* in the appendix. 14 references carry an arXiv ID: the 14 bibitems that link to arxiv.org/abs/ with no arXiv: label in their text (#65).",
   "title": "Mechanistic Interpretability for Steering Vision-Language-Action Models",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -23,6 +23,7 @@
   "tables": 7,
   "figures": 28,
   "references": 25,
+  "referenceIdentifiers": { "arxiv": 14 },
   "contains": [
     "| 6 | Non-semantic | Camel case variable names | \\<bos>, EndGlobalSection,",
     "**(a).** Example value vectors and their top tokens from the PaliGemma VLM.",

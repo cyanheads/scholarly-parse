@@ -143,9 +143,10 @@ describe('sections and floats', () => {
       ['T1.sf1', '(a)', 'Panel A'],
       ['T1.sf2', '(b)', 'Panel B'],
     ]);
+    // No float caption heads the panels: the first follows the abstract directly.
     const markdown = toMarkdown(uncaptioned);
+    expect(markdown).toContain('The abstract.\n\n**(a).** Panel A');
     expect(markdown).toContain('**(b).** Panel B');
-    expect(markdown).not.toContain('**Table.**');
 
     const captioned = await parse(
       page(
@@ -320,6 +321,15 @@ describe('MathML with no TeX', () => {
         B <math alttext="z"><mi>q</mi></math>.</p></div>`),
     );
     expect(blocks(document.body)).toEqual([{ text: 'A $x^{2}$, B $z$.', type: 'paragraph' }]);
+  });
+
+  it('decodes the entities in a TeX annotation', async () => {
+    // cyanheads/arxiv-mcp-server#4; the corpus entity invariant skips math, so this pins it.
+    const document = await parse(
+      page(`<div class="ltx_para"><p class="ltx_p">If <math alttext="a&lt;b"><semantics><mi>a</mi>
+        <annotation encoding="application/x-tex">a &lt; b &amp;&amp; c</annotation></semantics></math> holds.</p></div>`),
+    );
+    expect(blocks(document.body)).toEqual([{ text: 'If $a < b && c$ holds.', type: 'paragraph' }]);
   });
 
   it('writes nothing for math whose linearization is empty', async () => {
@@ -505,5 +515,177 @@ describe('long unclosed runs', () => {
   ])('reads the DOI in a bibitem %j without what closes it', async (text, doi) => {
     const document = await parse(page(bibitem(`A work. ${text}`)));
     expect(document.references[0]?.doi).toBe(doi);
+  });
+});
+
+describe('reference arXiv IDs (#65)', () => {
+  const bibitem = (entry: string) =>
+    `<section class="ltx_bibliography"><ul class="ltx_biblist"><li class="ltx_bibitem" id="bib.bib1"><span class="ltx_tag ltx_tag_bibitem">[1]</span><span class="ltx_bibblock">${entry}</span></li></ul></section>`;
+  const reference = async (entry: string) => (await parse(page(bibitem(entry)))).references[0];
+  const link = (href: string) => `<a href="${href}" class="ltx_ref ltx_url">${href}</a>`;
+
+  it('keeps a labelled new-style ID with its version, and a link as the URL', async () => {
+    expect(await reference('C. Author. Newer. arXiv:2105.00001v2.')).toMatchObject({
+      arxiv: '2105.00001v2',
+    });
+    expect(
+      await reference(`B. Author. New. ${link('https://arxiv.org/abs/2105.00001')}.`),
+    ).toMatchObject({ url: 'https://arxiv.org/abs/2105.00001' });
+  });
+
+  it.each([
+    ['A. Author. Old paper. arXiv:hep-th/9711200, 1997.', 'hep-th/9711200'],
+    ['A. Author. Knots. arXiv:math.GT/0309136.', 'math/0309136'],
+    ['A. Author. Old paper. Nucl. Phys. B 1 (1998) 1, hep-th/9711200.', 'hep-th/9711200'],
+    ['A. Author. arXiv:cond-mat/0501001v2.', 'cond-mat/0501001v2'],
+    ['C. Author. arXiv preprint arXiv:1706.03762, 2017.', '1706.03762'],
+    [`B. Author. New. ${link('https://arxiv.org/abs/2105.00001')}.`, '2105.00001'],
+    [`B. Author. New. ${link('https://arxiv.org/abs/2105.00001v3')}.`, '2105.00001v3'],
+    [`B. Author. New. ${link('https://arxiv.org/pdf/2105.00001')}.`, '2105.00001'],
+    [`B. Author. Old. ${link('http://arxiv.org/abs/hep-th/9711200')}.`, 'hep-th/9711200'],
+  ])('reads the arXiv ID in %j', async (entry, arxiv) => {
+    expect((await reference(entry))?.arxiv).toBe(arxiv);
+  });
+
+  it.each([
+    'D. Author. Data and/1234567 samples.',
+    'D. Author. arXiv:foo-bar/9901001.',
+    'D. Author. A preprint, hep-th/0805123.',
+    'D. Author. Phys. Rev. 1999.12345 (2001).',
+    `E. Author. ${link('https://example.org/abs/2105.00001')}.`,
+  ])('reads no arXiv ID in %j', async (entry) => {
+    expect((await reference(entry))?.arxiv).toBeUndefined();
+  });
+
+  it('reads no ID from a back-link to the citing paper itself', async () => {
+    const result = await parseLatexml(
+      page(
+        bibitem(
+          'A. Author. A blog post. <a href="https://example.org/post" class="ltx_ref">Link</a>. ' +
+            'Cited by: <a href="#S1.p1.1" class="ltx_ref">§1</a>.',
+        ),
+      ),
+      { baseUrl: 'https://arxiv.org/html/2604.21816v1' },
+    );
+    expect(result.ok && result.document.references[0]).toMatchObject({
+      url: 'https://example.org/post',
+    });
+    expect(result.ok && result.document.references[0]?.arxiv).toBeUndefined();
+  });
+
+  it.each([
+    ['https://arxiv.org/abs/2604.21816v1', '#S1.p1.1'],
+    ['https://ar5iv.org/abs/2604.21816', '#bib.bib2'],
+    ['https://arxiv.org/abs/2604.21816v1', ''],
+    ['https://ar5iv.org/abs/2604.21816', '?context=cs'],
+    ['https://arxiv.org/html/2604.21816v1', ''],
+  ])(
+    'reads neither an ID nor a URL from a link to the page at %s itself (%j)',
+    async (baseUrl, href) => {
+      const result = await parseLatexml(
+        page(bibitem(`A. Author. A talk. Cited by: <a href="${href}" class="ltx_ref">§1</a>.`)),
+        { baseUrl },
+      );
+      const reference = result.ok ? result.document.references[0] : undefined;
+      expect(reference?.text).toContain('A talk');
+      expect(reference?.arxiv).toBeUndefined();
+      expect(reference?.url).toBeUndefined();
+    },
+  );
+
+  it('reads the ID an entry prints before the one its link names', async () => {
+    expect(
+      await reference(
+        'C. Author. arXiv:2105.00001v2. <a href="https://arxiv.org/abs/2105.00001">link</a>.',
+      ),
+    ).toMatchObject({ arxiv: '2105.00001v2', url: 'https://arxiv.org/abs/2105.00001' });
+  });
+
+  it('reads an old-style ID from the watermark or page URL without its subject class', async () => {
+    const watermarked = page('<p class="ltx_p">Text.</p>').replace(
+      '<div class="ltx_page_main">',
+      '<div class="ltx_page_main"><div id="watermark-tr">arXiv:math.GT/0309136v1 [math.GT] 8 Sep 2003</div>',
+    );
+    const fromWatermark = await parse(watermarked);
+    expect(fromWatermark.metadata).toMatchObject({
+      identifiers: { arxiv: 'math/0309136v1' },
+      published: { day: 8, month: 9, year: 2003 },
+    });
+    expect(toMarkdown(fromWatermark)).toContain('arXiv: math/0309136v1');
+
+    for (const [baseUrl, arxiv] of [
+      ['https://ar5iv.labs.arxiv.org/html/math.GT/0309136', 'math/0309136'],
+      ['https://ar5iv.labs.arxiv.org/html/hep-th/9711200', 'hep-th/9711200'],
+      ['https://arxiv.org/html/2407.01449v6', '2407.01449v6'],
+    ] as const) {
+      const result = await parseLatexml(page('<p class="ltx_p">Text.</p>'), { baseUrl });
+      expect(result.ok && result.document.metadata.identifiers).toEqual({ arxiv });
+    }
+  });
+
+  describe('the watermark', () => {
+    const stamped = (watermark: string) =>
+      page('<p class="ltx_p">Text.</p>').replace(
+        '<div class="ltx_page_main">',
+        `<div class="ltx_page_main"><div id="watermark-tr">${watermark}</div>`,
+      );
+
+    it('reads a stamp with no subject class, as arXiv prints it for an archive without classes', async () => {
+      const document = await parse(stamped('arXiv:hep-th/9901001v2 10 May 1999'));
+      expect(document.metadata).toMatchObject({
+        identifiers: { arxiv: 'hep-th/9901001v2' },
+        published: { day: 10, month: 5, year: 1999 },
+      });
+      expect(toMarkdown(document)).toContain('arXiv: hep-th/9901001v2');
+    });
+
+    it('reads no ID or date from a stamp whose ID is not one, and reads a later one that is', async () => {
+      for (const watermark of [
+        'arXiv:foo-bar/9901001 [hep-th] 10 May 1999',
+        'arXiv:2105.00001v0 [cs.LG] 1 May 2021',
+        'arXiv:hep-th/9901001v 2 May 1999',
+      ]) {
+        const document = await parse(stamped(watermark));
+        expect(document.metadata.identifiers).toBeUndefined();
+        expect(document.metadata.published).toBeUndefined();
+      }
+      const later = await parse(
+        stamped('arXiv:foo-bar/9901001 [x] 1 Jan 2000; arXiv:2401.04088v1 [cs.LG] 08 Jan 2024'),
+      );
+      expect(later.metadata).toMatchObject({
+        identifiers: { arxiv: '2401.04088v1' },
+        published: { day: 8, month: 1, year: 2024 },
+      });
+    });
+
+    it('takes the ID from the page URL but no date when the stamp is not one', async () => {
+      const result = await parseLatexml(stamped('arXiv:foo-bar/9901001 [hep-th] 10 May 1999'), {
+        baseUrl: 'https://arxiv.org/html/2407.01449v6',
+      });
+      expect(result.ok && result.document.metadata.identifiers).toEqual({ arxiv: '2407.01449v6' });
+      expect(result.ok && result.document.metadata.published).toBeUndefined();
+    });
+
+    it.each([
+      ['stamps with no subject class', 'arXiv:hep-th/9901001v2 '],
+      ['labels and spaces', 'arXiv: '],
+    ])('reads a page in time linear in a watermark of %s', async (_, run) => {
+      await expectLinear((n) => stamped(run.repeat(n / run.length)), parse, {
+        from: 2_000,
+        to: 512_000,
+      });
+    });
+  });
+
+  it.each([
+    ['arXiv: labels with no ID', 'arXiv: '],
+    ['a digit run', '1'],
+    ['a run of /-separated archives', 'hep-th/'],
+    ['a run of arxiv.org links', 'arxiv.org/abs/'],
+  ])('reads a bibitem in time linear in %s', async (_, run) => {
+    await expectLinear((n) => page(bibitem(`A work. ${run.repeat(n / run.length)}`)), parse, {
+      from: 2_000,
+      to: 512_000,
+    });
   });
 });

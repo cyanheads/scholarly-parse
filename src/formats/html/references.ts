@@ -14,9 +14,10 @@ import {
   tagOf,
   textOfElement,
 } from '../../html/dom.js';
+import { arxivFromUrl, arxivInText } from '../../model/arxiv.js';
 import type { Reference } from '../../model/document.js';
 import { doiInText, normalizeDoi } from '../../model/doi.js';
-import { trailingLength, trimTrailing } from '../../model/trailing.js';
+import { trimTrailing } from '../../model/trailing.js';
 import { collapseInline } from '../../render/inline.js';
 import { isLinkList, LINK_LABEL } from './blocks.js';
 import { type HtmlContext, isFurniture, nameTokens } from './context.js';
@@ -98,23 +99,6 @@ function citationText(entry: Element, labelEl: Element | undefined, ctx: HtmlCon
   return trimTrailing(markdown, /[\s|,;]/);
 }
 
-/** The path an arXiv abstract link names a paper by. */
-const ARXIV_ABS = /arxiv\.org\/abs\//i;
-
-/**
- * The arXiv ID an `arxiv.org/abs/` link ends with, without its version (`v2`). The ID
- * runs to the end of the link, so it is read from the link's last run of ID characters.
- */
-function arxivFromHref(href: string): string | undefined {
-  const tail = href.slice(href.length - trailingLength(href, /[\w./-]/));
-  const path = ARXIV_ABS.exec(tail);
-  if (!path) return;
-  const id = tail.slice(path.index + path[0].length);
-  const digits = trailingLength(id, /\d/);
-  const version = digits > 0 && /v/i.test(id.charAt(id.length - digits - 1)) ? digits + 1 : 0;
-  return (version < id.length ? id.slice(0, id.length - version) : id) || undefined;
-}
-
 /** References from the nodes of a References section. */
 export function extractReferences(nodes: Node[], ctx: HtmlContext): Reference[] {
   return entries(nodes, ctx).flatMap((entry) => {
@@ -149,8 +133,8 @@ export function extractReferences(nodes: Node[], ctx: HtmlContext): Reference[] 
       .map((h) => /\/(PMC\d+)\b/i.exec(h)?.[1])
       .find(Boolean)
       ?.toUpperCase();
-    const arxiv =
-      hrefs.map(arxivFromHref).find(Boolean) ?? /arXiv[:\s]+(\d{4}\.\d{4,5})/i.exec(plain)?.[1];
+    // The ID the entry prints, its version kept, ahead of one a link names.
+    const arxiv = arxivInText(plain) ?? hrefs.map(arxivFromUrl).find(Boolean);
     const url = doi
       ? undefined
       : hrefs.find(

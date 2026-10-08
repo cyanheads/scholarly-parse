@@ -1,5 +1,5 @@
 {
-  "why": "cyanheads/arxiv-mcp-server#43: after </article> the arXiv page carries about 7.9 KB of site footer (build-log link, the LaTeXML logo as a base64 PNG, error-reporting instructions, funder credits) that leaked into the body. Pins that none of it reaches the Markdown while the paper's own sections, appendices, 26 figures and 61 references do (the relative figure URLs are outside what expect.json can check). A bare tabular holding only a rule, set as a spacer after the abstract, is layout and not an eighth table.",
+  "why": "cyanheads/arxiv-mcp-server#43: after </article> the arXiv page carries about 7.9 KB of site footer (build-log link, the LaTeXML logo as a base64 PNG, error-reporting instructions, funder credits) that leaked into the body. Pins that none of it reaches the Markdown while the paper's own sections, appendices, 26 figures and 61 references do (the relative figure URLs are outside what expect.json can check). A bare tabular holding only a rule, set as a spacer after the abstract, is layout and not an eighth table. 48 references carry an arXiv ID (#65): 2 print an arXiv: label, 32 only link to arxiv.org/abs/, and 14 print their arxiv.org/abs/ URL beside an arXiv DOI.",
   "title": "*ColPali*: Efficient Document Retrieval with Vision Language Models",
   "quality": "structured",
   "tables": 7,
@@ -24,9 +24,11 @@
   ],
   "figures": 26,
   "references": 61,
+  "referenceIdentifiers": { "arxiv": 48 },
   "contains": [
     "**Figure 1.** *ColPali* simplifies document retrieval w.r.t. standard retrieval methods",
-    "**Table 1.** *ViDoRe* comprehensively evaluates multimodal retrieval methods."
+    "**Table 1.** *ViDoRe* comprehensively evaluates multimodal retrieval methods.",
+    "| **73.2**$\\uparrow$8.9 |"
   ],
   "notContains": [
     "view the build logs",

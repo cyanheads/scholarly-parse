@@ -23,6 +23,17 @@ export const fixtureExpectSchema = z
     notContains: z.array(z.string()).optional(),
     quality: z.enum(['structured', 'partial', 'flat']).optional(),
     references: z.number().int().nonnegative().optional(),
+    /** How many references carry each identifier field. */
+    referenceIdentifiers: z
+      .object({
+        arxiv: z.number().int().nonnegative(),
+        doi: z.number().int().nonnegative(),
+        pmcid: z.number().int().nonnegative(),
+        pmid: z.number().int().nonnegative(),
+      })
+      .partial()
+      .strict()
+      .optional(),
     /** Section titles that must appear, in this order (others may sit between them). */
     sectionTitles: z.array(z.string()).optional(),
     tables: z.number().int().nonnegative().optional(),
@@ -54,6 +65,10 @@ export function checkExpect(
   equal('formulas', countBlocks(document, 'formula'), expect.formulas);
   equal('footnotes', document.footnotes.length, expect.footnotes);
   equal('references', document.references.length, expect.references);
+  for (const [field, wanted] of Object.entries(expect.referenceIdentifiers ?? {})) {
+    const key = field as keyof NonNullable<FixtureExpect['referenceIdentifiers']>;
+    equal(`references with ${field}`, document.references.filter((r) => r[key]).length, wanted);
+  }
 
   if (expect.abstractKinds) {
     const kinds = document.abstracts.map((a) => a.kind).join(',');

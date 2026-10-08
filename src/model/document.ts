@@ -40,20 +40,24 @@ export interface Author {
   given?: string;
   /** Display name as the source prints it, or `given family` when only parts are given. */
   name: string;
-  /** Bare ORCID iD, e.g. `0000-0002-1825-0097`. */
+  /** Bare hyphenated ORCID iD with an uppercase check character, e.g. `0000-0002-1694-233X`. */
   orcid?: string;
 }
 
 /** Identifiers the source carries for the work itself. */
 export interface Identifiers {
-  /** arXiv ID without the `arXiv:` prefix, version suffix kept when present. */
+  /**
+   * arXiv ID without an `arXiv:` label or an old-style ID's subject class
+   * (`math.GT/0309136` → `math/0309136`), version kept when the source prints one.
+   */
   arxiv?: string;
   /** Lowercased DOI without a resolver prefix. */
   doi?: string;
   /** Publisher-assigned identifiers keyed by the source's own type label. */
   other?: Record<string, string>;
-  /** PMC ID with the `PMC` prefix. */
+  /** PMC ID with an uppercase `PMC` prefix, e.g. `PMC123456`. */
   pmcid?: string;
+  /** PubMed ID: digits only, without a label or link. */
   pmid?: string;
 }
 
@@ -84,8 +88,9 @@ export interface License {
 export interface RelatedWork {
   /** Lowercased DOI without a resolver prefix. */
   doi?: string;
-  /** PMC ID with the `PMC` prefix. */
+  /** PMC ID with an uppercase `PMC` prefix, e.g. `PMC123456`. */
   pmcid?: string;
+  /** PubMed ID: digits only, without a label or link. */
   pmid?: string;
   /**
    * The relation as the source names it, e.g. JATS `@related-article-type`
@@ -274,6 +279,12 @@ export type Block =
 
 /** One entry in the reference list. */
 export interface Reference {
+  /**
+   * arXiv ID without the `arXiv:` prefix, version kept when the entry prints one
+   * (`2105.00001v2`). LaTeXML, HTML, and PDF references read it from an `arXiv` label, an
+   * arxiv.org `/abs/` or `/pdf/` link, or a bare old-style ID, dropping an old-style ID's
+   * subject class (`math.GT/0309136` → `math/0309136`).
+   */
   arxiv?: string;
   /** Author names as printed. */
   authors?: string[];
@@ -282,7 +293,9 @@ export interface Reference {
   id?: string;
   /** Printed label without brackets or a trailing period: `12` for `[12]` or `12.`. */
   label?: string;
+  /** PMC ID with an uppercase `PMC` prefix, e.g. `PMC123456`. */
   pmcid?: string;
+  /** PubMed ID: digits only, without a label or link. */
   pmid?: string;
   /** Journal, book, or proceedings title. */
   source?: string;
