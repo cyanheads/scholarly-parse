@@ -5,13 +5,18 @@
  * that fails this check is reported as malformed instead of parsed short.
  *
  * The check covers that failure mode: every `<` opens a tag, comment, CDATA section,
- * processing instruction, or declaration; each of those is terminated; end tags match
- * their start tags; nothing is left open. Entity references and attribute syntax are
- * left to the parser.
+ * processing instruction, or `<!DOCTYPE` declaration; each of those is terminated; a start
+ * tag's name ends at whitespace, `/`, or `>`; end tags match their start tags; nothing is
+ * left open. Entity references and attribute syntax are left to the parser.
  * @module src/xml/well-formed
  */
 
 const NAME = /[A-Za-z_:À-￿][\w.:·À-￿-]*/y;
+
+const DOCTYPE = /^DOCTYPE$/i;
+
+/** What may follow a start tag's name: whitespace, `/`, `>`, or the end, which faults later. */
+const AFTER_NAME = /^(?:[\s/>]|)$/;
 
 /** Describes the first well-formedness fault in `text`, or undefined when there is none. */
 export function findMarkupFault(text: string): string | undefined {
@@ -23,7 +28,9 @@ export function findMarkupFault(text: string): string | undefined {
     if (next === '!') {
       if (text.startsWith('<!--', at)) end = closingIndex(text, '-->', at + 4);
       else if (text.startsWith('<![CDATA[', at)) end = closingIndex(text, ']]>', at + 9);
-      else end = declarationEnd(text, at + 2);
+      // Any other declaration belongs in a DOCTYPE; the parser drops one in the text.
+      else if (DOCTYPE.test(text.slice(at + 2, at + 9))) end = declarationEnd(text, at + 2);
+      else return fault(text, at, 'unescaped "<"');
     } else if (next === '?') {
       end = closingIndex(text, '?>', at + 2);
     } else if (next === '/') {
@@ -44,6 +51,9 @@ export function findMarkupFault(text: string): string | undefined {
     } else {
       const name = nameAt(text, at + 1);
       if (name === undefined) return fault(text, at, 'unescaped "<"');
+      // The parser reads a name to the next space, so `<or= 2/>` would be an empty element.
+      if (!AFTER_NAME.test(text.charAt(at + 1 + name.length)))
+        return fault(text, at, `malformed start tag <${name}`);
       end = startTagEnd(text, at + 1 + name.length);
       if (end !== -1 && text[end - 1] !== '/') open.push(name);
     }
@@ -66,7 +76,7 @@ function closingIndex(text: string, delimiter: string, from: number): number {
 }
 
 /** The `>` ending a start tag, skipping quoted attribute values; -1 when a `<` or the end comes first. */
-function startTagEnd(text: string, from: number): number {
+export function startTagEnd(text: string, from: number): number {
   let quote = '';
   for (let i = from; i < text.length; i++) {
     const char = text[i];
@@ -83,14 +93,21 @@ function startTagEnd(text: string, from: number): number {
   return -1;
 }
 
-/** The `>` ending a `<!DOCTYPE …>` or other declaration, past any `[…]` internal subset. */
-function declarationEnd(text: string, from: number): number {
+/**
+ * The `>` ending a `<!DOCTYPE …>` or other declaration, past any `[…]` internal subset.
+ * A comment or processing instruction in the subset is skipped whole, so a quote or
+ * bracket in its text (`<!-- don't -->`) is not read as markup; -1 when one is never closed.
+ */
+export function declarationEnd(text: string, from: number): number {
   let quote = '';
   let depth = 0;
   for (let i = from; i < text.length; i++) {
     const char = text[i];
     if (quote) {
       if (char === quote) quote = '';
+    } else if (char === '<' && (text.startsWith('<!--', i) || text[i + 1] === '?')) {
+      i = text[i + 1] === '?' ? closingIndex(text, '?>', i + 2) : closingIndex(text, '-->', i + 4);
+      if (i === -1) return -1;
     } else if (char === '"' || char === "'") {
       quote = char;
     } else if (char === '[') {
