@@ -4,7 +4,7 @@ description: >
   Add one document to scholarly-parse's corpus: pick the smallest openly licensed document that shows the behavior, confirm its license through `scripts/corpus/add.ts` (never by hand), tag its features, snapshot and read the Markdown against the source, and write `expect.json` assertions reconciled against the source's own counts. Use when a paper parses wrong (a bug fix starts as a fixture), when a wild-sampling failure class needs pinning, when a consumer's parsing bug becomes a regression fixture, or when asked to add a paper to the corpus.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -96,6 +96,7 @@ The schema is `fixtureExpectSchema` in `tests/corpus/expect.ts`. The fields:
 | `title`, `quality`, `abstractKinds`, `abstractStartsWith` | Front matter and the parse quality |
 | `sectionTitles` | Titles that appear in this order among all sections (abstract parts, then body, then back, depth-first); others may sit between |
 | `tables`, `figures`, `formulas`, `references` | Block counts wherever the blocks sit (floats and boxes included), and the reference count |
+| `referenceIdentifiers` | How many references carry each of `arxiv`, `doi`, `pmcid`, `pmid` (fields the Markdown does not show) |
 | `contains`, `notContains` | Substrings of the rendered Markdown |
 | `warnings` | Warning codes that must be reported |
 

@@ -103,7 +103,7 @@ Bytes or text in → a format parser → `ScholarlyDocument` → a renderer. Not
 
 ## Publishing
 
-Release mode: `gated`. `git-wrapup` on a `release/<version>` branch, then the `release-pr-review` pass (Opus), then `release-and-publish`. The npm publish runs only on the maintainer's word.
+Release PR mode `gated`: `git-wrapup` on a `release/<version>` branch, then the `release-pr-review` pass (Opus), then `release-and-publish`. The npm publish runs only on the maintainer's word.
 
 ## Commit stance
 

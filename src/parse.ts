@@ -10,7 +10,10 @@ import { failed, type ParseOptions, type ParseResult } from './model/result.js';
 
 /** Options for {@link parse}. Each applies to the formats that read it. */
 export interface AutoParseOptions extends ParseOptions {
-  /** Where the document was retrieved, so relative links and images resolve (HTML, LaTeXML). */
+  /**
+   * Where the document was retrieved, so relative links and images resolve (HTML, LaTeXML).
+   * An arXiv HTML URL goes without a trailing slash; see `LatexmlOptions.baseUrl`.
+   */
   baseUrl?: string;
   /** The format, when the caller knows it: skips detection. */
   format?: SourceFormat;

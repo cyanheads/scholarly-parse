@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "scholarly-parse"
-abstract: "Parse scholarly papers — JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF — into one document model and Markdown."
+abstract: "Parse scholarly papers (JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF) into one document model and Markdown."
 type: software
 authors:
   - family-names: Hand

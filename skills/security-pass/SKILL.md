@@ -4,7 +4,7 @@ description: >
   Review scholarly-parse's parsers against hostile documents: XML entity expansion and external entities, recursion depth on deeply nested input, input size and amplification budgets, regex backtracking on attacker-controlled text, prototype pollution through element or attribute names used as object keys, raw HTML or `javascript:` links surviving into rendered Markdown, PDF resource exhaustion, and lazy loading of optional peers. Builds a map and a set of hostile probe inputs, walks eight axes, reports grouped findings with a numbered options list, then fixes what's picked and files the rest. Use before a release, after adding or changing a format, or when asked for a security review, audit, hardening pass, or to fuzz the parsers.
 metadata:
   author: cyanheads
-  version: "1.3"
+  version: "1.4"
   type: audit
 ---
 
@@ -150,10 +150,11 @@ Consumers hand the Markdown to renderers that execute HTML and follow links.
 
 **Check:**
 
+- Judge every probe's rendered Markdown with the oracle, never by its shape: `gfmFindings` in `tests/gfm.ts` parses it with micromark and GFM, as clients do, and reports each raw HTML node or image, each link outside `http(s)`/`ftp`/`mailto` or to a destination the source does not hold, and each emphasis span the source lacked. A regex over the string misses what GFM links on its own (bare URLs, `www.`, email addresses) and the emphasis an unescaped `_` opens. An escaping fix lands with a case in the seeded property tests (`tests/property.ts`) as well as an example.
 - Source text is escaped: a `<script>`, `<img onerror>`, `<iframe>`, or HTML comment in a text node, CDATA section, title, or attribute comes out as literal text, never raw HTML.
 - Link and image targets pass a scheme allowlist — `http:`, `https:`, `mailto:`, relative paths, `#fragment`. `javascript:`, `vbscript:`, `data:`, and `file:` are dropped and the link text kept. Normalize before checking: case, leading whitespace and control characters, entity-encoded and percent-encoded forms.
 - Text can't forge structure: brackets, parentheses, backticks, `<`, and a leading `#`, `>`, or `-` are escaped where they would open a link, autolink, code span, or block. A newline in a title can't start a new heading.
-- TeX passes through verbatim inside `$…$`. `\href` or `\url` inside math is governed by the consumer's math renderer — document it, don't strip it.
+- TeX inside `$…$` keeps its meaning, but nothing in it can close the math delimiters or open a code span, whether or not the consumer renders math. `\href` or `\url` inside math is governed by the consumer's math renderer — document it, don't strip it.
 - A construct split across adjacent inline elements is escaped too: JATS `named-content`, TEI `seg`, HTML and LaTeXML `span`, PDF runs in different faces, each holding one piece of `<` | `img …>`, `[x]` | `(javascript:y)`, `\` | `<img …>`, `<` | `javascript:y>`, `![x]` | `(https://…)`, or `<` | `!-- …`. `escapeInline` closes each fragment's end, and every reader runs `joinInlineSeams` over finished inline Markdown.
 
 **Smell:** `` `[${text}](${href})` `` with neither escaped.
