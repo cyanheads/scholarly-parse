@@ -1,11 +1,11 @@
 <div align="center">
   <h1>scholarly-parse</h1>
-  <p><b>Parse scholarly papers — JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF — into one document model and Markdown.</b></p>
+  <p><b>Parse scholarly papers (JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF) into one document model and Markdown.</b></p>
 </div>
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/Version-0.2.0-blue.svg?style=flat-square)](./CHANGELOG.md) [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg?style=flat-square)](./LICENSE) [![npm](https://img.shields.io/npm/v/scholarly-parse?style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/package/scholarly-parse) [![TypeScript](https://img.shields.io/badge/TypeScript-^7.0.2-3178C6.svg?style=flat-square)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node-%E2%89%A522-339933.svg?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Version](https://img.shields.io/badge/Version-0.2.1-blue.svg?style=flat-square)](./CHANGELOG.md) [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg?style=flat-square)](./LICENSE) [![npm](https://img.shields.io/npm/v/scholarly-parse?style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/package/scholarly-parse) [![TypeScript](https://img.shields.io/badge/TypeScript-^7.0.2-3178C6.svg?style=flat-square)](https://www.typescriptlang.org/) [![Node](https://img.shields.io/badge/Node-%E2%89%A522-339933.svg?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 
 </div>
 
@@ -75,7 +75,7 @@ for (const { path, chars, markdown } of toSections(document)) {
 | `scholarly-parse/html` | `parseHtml` |
 | `scholarly-parse/pdf` | `parsePdf` |
 
-Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links, and `parsePdf` reading budgets counted across the document: `maxPages` (default 300), `maxTextItems` (500,000), `maxTextChars` (4,000,000), and `maxOperators` (10,000,000). A PDF that reaches one parses as far as it was read, with a `truncated-input` warning. `parseJats` and `parseTei` are synchronous; the rest are async.
+Every parser returns `{ ok: true, document }` or `{ ok: false, error: { reason, message } }`, where `reason` is `malformed`, `wrong-format`, `empty`, `blocked`, or `too-large`. Each takes a `maxInputBytes` budget; `parseLatexml` and `parseHtml` take the page's `baseUrl` to resolve links (for arXiv, `https://arxiv.org/html/<id>` without a trailing slash, the only form its image paths resolve against), and `parsePdf` reading budgets counted across the document: `maxPages` (default 300), `maxTextItems` (500,000), `maxTextChars` (4,000,000), and `maxOperators` (10,000,000). A PDF that reaches one parses as far as it was read, with a `truncated-input` warning. `parseJats` and `parseTei` are synchronous; the rest are async.
 
 `parsePdf` and `parse` also take a `signal`: once it is aborted (`AbortSignal.timeout(ms)`, a request's cancellation), reading stops at the next page boundary and keeps what was read, warned `truncated-input`. pdf.js reads a page without yielding, so for a hard time or memory bound on untrusted PDFs, run `parsePdf` in a worker or process you can terminate.
 

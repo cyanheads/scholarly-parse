@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-10-07 02:13:41
+Generated on: 2026-10-08 15:34:23
 
 ```text
 scholarly-parse/
@@ -120,10 +120,12 @@ scholarly-parse/
 │   │   ├── math.ts
 │   │   └── tables.ts
 │   ├── model/
+│   │   ├── arxiv.ts
 │   │   ├── diagnostics.ts
 │   │   ├── document.ts
 │   │   ├── doi.ts
 │   │   ├── extremes.ts
+│   │   ├── identifiers.ts
 │   │   ├── index.ts
 │   │   ├── input.ts
 │   │   ├── limits.ts
@@ -133,10 +135,13 @@ scholarly-parse/
 │   │   ├── table-grid.ts
 │   │   └── trailing.ts
 │   ├── render/
+│   │   ├── bare-url.ts
 │   │   ├── escape.ts
 │   │   ├── index.ts
 │   │   ├── inline.ts
 │   │   ├── markdown.ts
+│   │   ├── read-inline.ts
+│   │   ├── scan.ts
 │   │   ├── sections.ts
 │   │   └── text.ts
 │   ├── xml/
@@ -182,7 +187,9 @@ scholarly-parse/
 │   │   └── tei/
 │   │       └── tei.test.ts
 │   ├── model/
+│   │   ├── arxiv.test.ts
 │   │   ├── doi.test.ts
+│   │   ├── identifiers.test.ts
 │   │   ├── result.test.ts
 │   │   ├── section-ids.test.ts
 │   │   └── table-grid.test.ts
@@ -195,9 +202,11 @@ scholarly-parse/
 │   │   ├── ordered.test.ts
 │   │   └── well-formed.test.ts
 │   ├── detect.test.ts
+│   ├── gfm.ts
 │   ├── linear.test.ts
 │   ├── linear.ts
-│   └── parse.test.ts
+│   ├── parse.test.ts
+│   └── property.ts
 ├── .env.example
 ├── .gitattributes
 ├── .gitignore
