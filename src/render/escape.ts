@@ -175,9 +175,7 @@ function unlinked(markdown: string, start: number): BareUrl {
 
 /** True when an odd run of backslashes ends right before `at`: the last one escapes what follows. */
 export function oddBackslashesBefore(markdown: string, at: number): boolean {
-  let backslashes = 0;
-  while (markdown.charAt(at - 1 - backslashes) === '\\') backslashes++;
-  return backslashes % 2 === 1;
+  return countBackslashesBefore(markdown, at) % 2 === 1;
 }
 
 /**

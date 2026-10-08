@@ -15,6 +15,7 @@ import {
   ESCAPABLE,
   pairBrackets,
   unescapedDollar,
+  unpadCode,
 } from './scan.js';
 
 /**
@@ -171,7 +172,7 @@ export function readInline(
         while (markdown.charAt(end) === '`') end++;
         out.push(markdown.slice(start, end));
       } else {
-        out.push(unpad(span.content));
+        out.push(unpadCode(span.content));
         end = span.end;
       }
     } else if (char === '$') {
@@ -414,13 +415,6 @@ function pairsWith(
       (opener.left + closer.left) % 3 === 0
     )
   );
-}
-
-/** A code span's content without the space padding both of its sides. */
-function unpad(content: string): string {
-  return content.startsWith(' ') && content.endsWith(' ') && content.trim() !== ''
-    ? content.slice(1, -1)
-    : content;
 }
 
 /** A link being read: where its text ends, at its `]`, and where its destination does. */

@@ -23,6 +23,7 @@ import {
   ESCAPABLE,
   insertBackslashes,
   pairBrackets,
+  unpadCode,
 } from './scan.js';
 
 /**
@@ -440,13 +441,6 @@ function touchingCodeReader(
       fence = closeLength - fence;
     }
   };
-}
-
-/** A code span's content as GFM reads it: one space off each end when both have one and it is not all spaces. */
-function unpadCode(content: string): string {
-  return content.startsWith(' ') && content.endsWith(' ') && content.trim() !== ''
-    ? content.slice(1, -1)
-    : content;
 }
 
 /**

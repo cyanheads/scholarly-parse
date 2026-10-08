@@ -86,6 +86,13 @@ export function codeSpanAt(
   return { content: markdown.slice(open, close), end: close + open - start };
 }
 
+/** A code span's content as GFM reads it: one space off each end when both have one and it is not all spaces. */
+export function unpadCode(content: string): string {
+  return content.startsWith(' ') && content.endsWith(' ') && content.trim() !== ''
+    ? content.slice(1, -1)
+    : content;
+}
+
 /**
  * A finder of code-span closers for `markdown`: the start of the first run of exactly
  * `length` backticks at or after `from`, which a run of that length opening before
