@@ -100,8 +100,8 @@ describe('layout', () => {
       ...Array.from({ length: n }, (_, i) => run('x', 100 + (i % 10), 597, { size: 6, width: 1 })),
     ];
     await expectLinear(page, (runs) => layout([{ height: 792, number: 1, runs, width: 612 }]), {
-      from: 1_000,
-      to: 16_000,
+      from: 2_000,
+      to: 32_000,
     });
   });
 });

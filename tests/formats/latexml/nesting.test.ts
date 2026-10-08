@@ -59,7 +59,8 @@ describe('loadBoundedDocument', () => {
       `<html><body>${nested(open, close, 100_000)}</body></html>`,
     );
     expect(droppedTags).toBeGreaterThan(0);
-    expect(depthBelow(document.body)).toBeLessThanOrEqual(MAX_XML_DEPTH);
+    // The chain fills the bound exactly, `<html>` counting as the first level.
+    expect(depthBelow(document)).toBe(MAX_XML_DEPTH);
     expect(document.body.textContent).toContain('deep');
   });
 
@@ -99,7 +100,7 @@ describe('loadBoundedDocument', () => {
         `<html><body>${prefix}${nested('<div>', '</div>', 1_000)}</body></html>`,
       );
       expect(droppedTags).toBeGreaterThan(0);
-      expect(depthBelow(document.body)).toBeLessThanOrEqual(MAX_XML_DEPTH);
+      expect(depthBelow(document)).toBe(MAX_XML_DEPTH);
     }
   });
 

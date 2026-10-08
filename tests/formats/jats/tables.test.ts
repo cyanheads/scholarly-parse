@@ -173,7 +173,7 @@ describe('table placement (#111)', () => {
   it('reports no tables for an article that has none', () => {
     const document = parseBody('<sec><title>Results</title><p>No tables here.</p></sec>');
     expect(blocksOfType(document, 'table')).toEqual([]);
-    expect(document.diagnostics.warnings.map((w) => w.code)).not.toContain('table-unextractable');
+    expect(document.diagnostics.warnings.map((w) => w.code)).toEqual(['no-abstract']);
   });
 });
 
@@ -388,6 +388,9 @@ describe('the table budget', () => {
       0,
     );
 
+  /** The copies of the spanning cell's 9,999 characters that fit a million: 100 of them. */
+  const SPAN_COPIES_CHARS = Math.floor(1_000_000 / 9_999) * 9_999;
+
   const budgetWarnings = (document: ScholarlyDocument) =>
     document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input');
 
@@ -396,7 +399,7 @@ describe('the table budget', () => {
     const [table] = blocksOfType(document, 'table');
     expect(table?.rows).toHaveLength(512);
     expect(table?.rows[0]?.[0]).toBe('W '.repeat(5_000).trim());
-    expect(copiedChars(table as TableBlock)).toBeLessThanOrEqual(1_000_000);
+    expect(copiedChars(table as TableBlock)).toBe(SPAN_COPIES_CHARS);
     expect(toMarkdown(document).length).toBeLessThan(2_000_000);
     expect(toText(document).length).toBeLessThan(2_000_000);
     const sections = toSections(document).reduce((sum, section) => sum + section.chars, 0);
@@ -413,7 +416,8 @@ describe('the table budget', () => {
     );
     const [table] = blocksOfType(document, 'table');
     expect(table?.rows).toHaveLength(200);
-    expect(table?.rows.flat().join('').length).toBeLessThanOrEqual(1_000_000 + 200 * 20);
+    // Each row's own 20 characters, and copies of them up to the million.
+    expect(table?.rows.flat().join('').length).toBe(200 * 20 + 1_000_000);
     expect(budgetWarnings(document)).toHaveLength(1);
   });
 
@@ -432,9 +436,9 @@ describe('the table budget', () => {
     const ids = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8'];
     const document = parseBody(`<sec><title>S</title>${ids.map(spanTable).join('')}</sec>`);
     const tables = blocksOfType(document, 'table');
-    const copied = tables.reduce((sum, table) => sum + copiedChars(table), 0);
     const cells = tables.reduce((sum, table) => sum + table.rows.length * 512, 0);
-    expect(copied).toBeLessThanOrEqual(1_000_000);
+    // The first table spends the copy budget; the rest keep their spanning cell once.
+    expect(tables.map(copiedChars)).toEqual([SPAN_COPIES_CHARS, 0, 0, 0, 0, 0, 0, 0]);
     expect(cells).toBeLessThanOrEqual(2_000_000);
     expect(tables.map((table) => table.rows.length)).toEqual([
       512, 512, 512, 512, 512, 512, 512, 322,

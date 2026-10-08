@@ -164,7 +164,8 @@ describe('parsePdf', () => {
         Array.from({ length: 14 }, (_, i) => `Body line ${i + 1} of the running text on the page`),
         { y: 214 },
       ),
-      { size: 10, text: '1', x: 300, y: 30 },
+      // Under the text, inside the frame its lines span, so only the page-number rule drops it.
+      { size: 10, text: '1', x: 150, y: 30 },
     ];
     const once = await parse(buildPdf({ pages: [page] }));
     // One page of two read: nothing on it can be shown to repeat.

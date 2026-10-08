@@ -165,10 +165,9 @@ describe('detect', () => {
     expect(decodeText(unmarked)).not.toContain('<article');
   });
 
-  it('reads a window of unclosed meta tags in one pass', () => {
-    const started = performance.now();
+  it('reads a window of unclosed meta tags in one pass', async () => {
     expect(detect(`<html>${'<meta '.repeat(13_000)}`)).toBe('html');
-    expect(performance.now() - started).toBeLessThan(100);
+    await expectLinear((n) => `<html>${'<meta '.repeat(n)}`, detect, { from: 160, to: 10_240 });
   });
 
   it('reads runs of unclosed metadata and article tags in time linear in the window', async () => {

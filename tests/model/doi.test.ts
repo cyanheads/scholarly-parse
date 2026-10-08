@@ -21,6 +21,7 @@ describe('normalizeDoi', () => {
   it('leaves out the marks closing a DOI, keeping balanced suffix brackets (#38)', () => {
     expect(normalizeDoi('https://doi.org/10.1234/x.')).toBe('10.1234/x');
     expect(normalizeDoi('10.1234/A.b.;,')).toBe('10.1234/a.b');
+    expect(normalizeDoi('https://doi.org/10.1234/A.b.;,')).toBe('10.1234/a.b');
     expect(normalizeDoi('10.1234/abc).')).toBe('10.1234/abc');
     expect(normalizeDoi('10.1002/(SICI)1097-4636(199907)')).toBe('10.1002/(sici)1097-4636(199907)');
   });
@@ -42,8 +43,8 @@ describe('normalizeDoi', () => {
 
   it('reads a long run of closing marks in linear time', async () => {
     await expectLinear((n) => `10.1234/a${'.'.repeat(n)}b`, normalizeDoi, {
-      from: 20_000,
-      to: 80_000,
+      from: 2_000,
+      to: 512_000,
     });
     await expectLinear((n) => `doi:${' '.repeat(n)}10.1234/a${')'.repeat(n)}`, normalizeDoi, {
       from: 20_000,

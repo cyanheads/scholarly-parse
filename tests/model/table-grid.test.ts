@@ -85,7 +85,9 @@ describe('the table budget', () => {
     );
     expect(grid.rows).toHaveLength(MAX_TABLE_COLUMNS);
     expect(grid.rows[0]?.[0]).toBe(text);
-    expect(copiedChars(grid.rows)).toBeLessThanOrEqual(MAX_SPAN_COPY_CHARS);
+    // The copies fill the budget exactly, in the first row: the cell's own position, then 100 copies.
+    expect(copiedChars(grid.rows)).toBe(MAX_SPAN_COPY_CHARS);
+    expect(grid.rows[0]?.indexOf('')).toBe(101);
     expect(grid.truncated).toBe(true);
   });
 
@@ -120,10 +122,13 @@ describe('the table budget', () => {
     const grids = Array.from({ length: 8 }, () =>
       buildGrid(spanTable(text, MAX_TABLE_COLUMNS, MAX_TABLE_COLUMNS), budget),
     );
-    const copied = grids.reduce((sum, grid) => sum + copiedChars(grid.rows), 0);
+    // The first table spends the whole copy budget; the cells run out in the eighth.
+    expect(grids.map((grid) => copiedChars(grid.rows))).toEqual([
+      MAX_SPAN_COPY_CHARS,
+      ...Array(7).fill(0),
+    ]);
     const cells = grids.reduce((sum, grid) => sum + cellCount(grid.rows), 0);
-    expect(copied).toBeLessThanOrEqual(MAX_SPAN_COPY_CHARS);
-    expect(cells).toBeLessThanOrEqual(MAX_GRID_CELLS);
+    expect(cells).toBe(MAX_GRID_CELLS - (MAX_GRID_CELLS % MAX_TABLE_COLUMNS));
     expect(grids.map((grid) => grid.rows.length)).toEqual([512, 512, 512, 512, 512, 512, 512, 322]);
     expect(grids.every((grid) => grid.truncated)).toBe(true);
   });

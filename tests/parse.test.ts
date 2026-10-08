@@ -11,6 +11,7 @@ import { describe, expect, it } from 'vitest';
 import { parseJats } from '../src/formats/jats/index.js';
 import { parseLatexml } from '../src/formats/latexml/index.js';
 import { parse } from '../src/parse.js';
+import { toMarkdown } from '../src/render/markdown.js';
 import { buildPdf, paragraph } from './formats/pdf/build-pdf.js';
 
 const JATS = `<?xml version="1.0"?>
@@ -18,7 +19,15 @@ const JATS = `<?xml version="1.0"?>
 <body><sec><title>Introduction</title><p>Text of the introduction.</p></sec></body></article>`;
 
 const HTML = `<!doctype html><html><head><meta name="citation_title" content="A web article"></head>
-<body><main><article><h1>A web article</h1><h2>Introduction</h2><p>${'Text of the introduction. '.repeat(20)}</p></article></main></body></html>`;
+<body><main><article><h1>A web article</h1><h2>Introduction</h2><p>${'Text of the introduction. '.repeat(20)}See <a href="/b/2">the data</a>.</p></article></main></body></html>`;
+
+const TEI =
+  '<TEI><teiHeader><fileDesc><titleStmt><title>A TEI article</title></titleStmt></fileDesc></teiHeader>' +
+  '<text><body><div><head n="1">Introduction</head><p>Text.</p></div></body></text></TEI>';
+
+const LATEXML =
+  '<article class="ltx_document"><section class="ltx_section">' +
+  '<h2 class="ltx_title">Results</h2><p>Body.</p></section></article>';
 
 /** `text` as UTF-16 in either byte order, behind its byte-order mark. */
 function utf16(text: string, order: 'le' | 'be'): Uint8Array {
@@ -47,6 +56,9 @@ describe('parse', () => {
 
     const html = await parse(HTML, { baseUrl: 'https://example.org/a/1' });
     expect(html.ok && html.document.format).toBe('html');
+    expect(html.ok && html.document.metadata.title).toBe('A web article');
+    // The link resolves against the base URL the caller passed.
+    expect(html.ok && toMarkdown(html.document)).toContain('[the data](https://example.org/b/2)');
 
     const pdf = await parse(
       buildPdf({
@@ -79,12 +91,9 @@ describe('parse', () => {
   });
 
   it('parses a LaTeXML fragment and a JATS article behind a stylesheet', async () => {
-    const fragment =
-      '<article class="ltx_document"><section class="ltx_section">' +
-      '<h2 class="ltx_title">Results</h2><p>Body.</p></section></article>';
-    const latexml = await parse(fragment);
+    const latexml = await parse(LATEXML);
     expect(latexml.ok && latexml.document.format).toBe('latexml');
-    expect(latexml).toEqual(await parseLatexml(fragment));
+    expect(latexml).toEqual(await parseLatexml(LATEXML));
 
     const styled =
       '<?xml version="1.0"?>\n<?xml-stylesheet type="text/xsl" href="jats.xsl"?>\n' +
@@ -112,6 +121,25 @@ describe('parse', () => {
     const elsewhere = await parse(getRecord(article, 'oai:europepmc.org:10579850'));
     expect(elsewhere.ok && elsewhere.document.flavor).toBeUndefined();
     expect(elsewhere).toEqual({ ...bare, document: { ...bare.document, flavor: undefined } });
+  });
+
+  it("passes the caller's budgets to the parser", async () => {
+    const reason = async (input: string | Uint8Array, options: Parameters<typeof parse>[1]) => {
+      const result = await parse(input, options);
+      return result.ok ? 'ok' : result.error.reason;
+    };
+    const pdf = buildPdf({
+      pages: [paragraph(Array(20).fill('Body text of the first page.'), { y: 700 }), 0],
+    });
+    for (const input of [JATS, TEI, LATEXML, HTML, pdf]) {
+      expect(await reason(input, {})).toBe('ok');
+      expect(await reason(input, { maxInputBytes: 64 })).toBe('too-large');
+    }
+    const firstPage = await parse(pdf, { maxPages: 1 });
+    expect(firstPage.ok && firstPage.document.diagnostics.warnings).toContainEqual({
+      code: 'truncated-input',
+      message: 'Read 1 of 2 pages',
+    });
   });
 
   it('uses the format the caller names', async () => {

@@ -7,7 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parsePdf } from '../../../src/formats/pdf/index.js';
-import type { ScholarlyDocument } from '../../../src/model/document.js';
+import type { Reference, ScholarlyDocument } from '../../../src/model/document.js';
 import { trimDoi } from '../../../src/model/doi.js';
 import { expectLinear } from '../../linear.js';
 import { buildPdf, paragraph, type TextSpec } from './build-pdf.js';
@@ -64,6 +64,17 @@ async function parse(bytes: Uint8Array): Promise<ScholarlyDocument> {
   return result.document;
 }
 
+/** The first entry of a {@link referenceList}, after checking the list reads as its three entries. */
+async function firstReference(bytes: Uint8Array): Promise<Reference> {
+  const { references } = await parse(bytes);
+  expect(references.map((reference) => reference.text.slice(0, 6))).toEqual([
+    'Doe J.',
+    'Roe R.',
+    'Poe E.',
+  ]);
+  return references[0] as Reference;
+}
+
 describe('PDF DOIs', () => {
   it('leaves out the punctuation that closes a first-page DOI', async () => {
     const doi = async (text: string) =>
@@ -108,8 +119,10 @@ describe('PDF DOIs', () => {
     expect(await doi('"10.1234/abc"')).toBe('10.1234/abc');
     expect(await doi('doi: "10.1234/abc".')).toBe('10.1234/abc');
     expect(await doi("'10.1234/abc',")).toBe('10.1234/abc');
-    // A quote that opens nowhere cuts the run short of a whole DOI.
-    expect(await doi('10.1234/abc"')).toBeUndefined();
+    // A quote that opens nowhere cuts the run short of a whole DOI: the entry keeps it as text.
+    const unopened = await firstReference(referenceList({ text: '10.1234/abc"', x: 250, y: 485 }));
+    expect(unopened.text).toBe('Doe J. A first title. J Tests. 2020. 10.1234/abc"');
+    expect(unopened.doi).toBeUndefined();
   });
 
   it('keeps the balanced parentheses of a DOI suffix whole', async () => {
@@ -134,31 +147,42 @@ describe('PDF DOIs', () => {
   it('reads a first-page DOI with a long run of dots in linear time', async () => {
     const build = (n: number) =>
       firstPage({ size: TINY, text: `10.1234/a${'.'.repeat(n)}b`, x: 95, y: 500 });
-    expect((await parse(build(1_000))).metadata.identifiers?.doi).toBe(
-      `10.1234/a${'.'.repeat(1_000)}b`,
+    expect((await parse(build(80_000))).metadata.identifiers?.doi).toBe(
+      `10.1234/a${'.'.repeat(80_000)}b`,
     );
     await expectLinear(build, parsePdf, { from: 20_000, to: 80_000 });
   });
 
   it('reads a first page of labeled, quoted DOI runs in linear time', async () => {
     // Each run is labeled and quoted, and leaves no suffix once its full stop goes.
-    const build = (n: number) =>
-      firstPageLine({ size: TINY, text: 'doi: "10.1234/." '.repeat(n), x: 72, y: 500 });
-    expect((await parse(build(100))).metadata.identifiers?.doi).toBeUndefined();
-    await expectLinear(build, parsePdf, { from: 1_000, to: 4_000 });
+    const runs = (n: number, after = '') =>
+      firstPageLine({
+        size: TINY,
+        text: `${'doi: "10.1234/." '.repeat(n)}${after}`,
+        x: 72,
+        y: 500,
+      });
+    const doi = async (bytes: Uint8Array) => (await parse(bytes)).metadata.identifiers?.doi;
+    expect(await doi(runs(4_000))).toBeUndefined();
+    // Every run is read and passed over: a DOI after the last one is the paper's.
+    expect(await doi(runs(4_000, 'doi: "10.1234/x." '))).toBe('10.1234/x');
+    await expectLinear(runs, parsePdf, { from: 1_000, to: 4_000 });
   });
 
   it('reads a reference DOI with a long run of dots in linear time', async () => {
     const build = (n: number) =>
       referenceList({ size: TINY, text: `10.1234/a${'.'.repeat(n)}b`, x: 250, y: 485 });
-    expect((await parse(build(1_000))).references[0]?.doi).toBe(`10.1234/a${'.'.repeat(1_000)}b`);
+    expect((await firstReference(build(80_000))).doi).toBe(`10.1234/a${'.'.repeat(80_000)}b`);
     await expectLinear(build, parsePdf, { from: 20_000, to: 80_000 });
   });
 
   it('rejects a run of DOI prefixes closed by a quote in linear time', async () => {
-    const build = (n: number) =>
-      referenceList({ size: TINY, text: `${'10.1234/.'.repeat(n)}"`, x: 250, y: 485 });
-    expect((await parse(build(100))).references[0]?.doi).toBeUndefined();
+    const run = (n: number) => '10.1234/.'.repeat(n);
+    const build = (n: number) => referenceList({ size: TINY, text: `${run(n)}"`, x: 250, y: 485 });
+    expect((await firstReference(build(10_000))).doi).toBeUndefined();
+    // Without the quote that cuts it short, the same run is a DOI.
+    const unquoted = referenceList({ size: TINY, text: run(10_000), x: 250, y: 485 });
+    expect((await firstReference(unquoted)).doi).toBe(run(10_000).slice(0, -1));
     await expectLinear(build, parsePdf, { from: 2_500, to: 10_000 });
   });
 
@@ -166,7 +190,7 @@ describe('PDF DOIs', () => {
     const suffix = (n: number) => `a${'('.repeat(n)}b${')'.repeat(n)}`;
     const build = (n: number) =>
       referenceList({ size: TINY, text: `(10.1234/${suffix(n)}).`, x: 250, y: 485 });
-    expect((await parse(build(1_000))).references[0]?.doi).toBe(`10.1234/${suffix(1_000)}`);
+    expect((await firstReference(build(80_000))).doi).toBe(`10.1234/${suffix(80_000)}`);
     await expectLinear(build, parsePdf, { from: 20_000, to: 80_000 });
   });
 });

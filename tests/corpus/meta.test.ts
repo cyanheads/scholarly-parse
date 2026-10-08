@@ -5,9 +5,15 @@
  */
 import { existsSync, statSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { fixtureMetaSchema, listFixtures } from './fixtures.js';
+import { FORMATS, fixtureMetaSchema, listFixtures } from './fixtures.js';
 
 const MAX_SOURCE_BYTES = 8 * 1024 * 1024;
+
+it('finds fixtures of every format', () => {
+  // An empty listing would leave every check below with nothing to run.
+  const found = new Set(listFixtures().map((fixture) => fixture.format));
+  expect([...found].sort()).toEqual([...FORMATS].sort());
+});
 
 describe.each(listFixtures())('corpus/$format/$name', (fixture) => {
   it('has a valid meta.json', () => {

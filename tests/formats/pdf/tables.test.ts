@@ -122,8 +122,9 @@ describe('PDF tables', () => {
           page.push({ text: 'x', x: 100 + 8 * (4 * i + row), y: 480 - 12 * row });
       return buildPdf({ pages: [page], width: 200 + 32 * n });
     };
-    const [table] = tablesOf((await parse(build(100))).body);
-    expect([table?.rows.length, table?.rows[0]?.length]).toEqual([4, 400]);
+    // The largest page timed is read whole into its table: four rows of 24,000 columns.
+    const [table] = tablesOf((await parse(build(6_000))).body);
+    expect([table?.rows.length, table?.rows[0]?.length]).toEqual([4, 24_000]);
     await expectLinear(build, parsePdf, { from: 1_500, to: 6_000 });
   });
 });

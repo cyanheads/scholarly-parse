@@ -13,6 +13,7 @@ import {
   REFERENCES_ID,
   RESERVED_SECTION_ID,
 } from '../../src/model/section-ids.js';
+import { expectLinear } from '../linear.js';
 
 describe('issueId', () => {
   it('keeps an unused source ID, else suffixes it, else uses the fallback', () => {
@@ -24,11 +25,14 @@ describe('issueId', () => {
     expect(issueId(issued, 'sec1', 's5')).toBe('sec1-4');
   });
 
-  it('issues a repeated ID thousands of times without searching from the start each time', () => {
-    const issued = new Set<string>();
-    const started = performance.now();
-    for (let i = 0; i < 20_000; i++) issueId(issued, 'dup', `s${i}`);
-    expect(performance.now() - started).toBeLessThan(1_000);
+  it('issues a repeated ID thousands of times without searching from the start each time', async () => {
+    const repeat = (n: number) => {
+      const issued = new Set<string>();
+      for (let i = 0; i < n; i++) issueId(issued, 'dup', `s${i}`);
+      return issued;
+    };
+    await expectLinear((n) => n, repeat, { from: 1_250, to: 20_000 });
+    const issued = repeat(20_000);
     expect(issued.size).toBe(20_000);
     expect(issued.has('dup-20000')).toBe(true);
   });

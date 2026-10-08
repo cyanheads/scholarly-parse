@@ -89,6 +89,31 @@ describe('parsePdf reading budgets', () => {
     });
   });
 
+  it.each(['maxOperators', 'maxPages', 'maxTextChars', 'maxTextItems'] as const)(
+    'applies the default %s when the caller passes none',
+    async (budget) => {
+      // Reaching a real default takes hundreds of pages, so the default is lowered to a
+      // budget this document reaches, and the parse must stop exactly as that budget passed.
+      const pdf = buildPdf({ pages: [opening('a'), lines('b'), lines('c')] });
+      const [first] = await pdfjsCounts(pdf);
+      const value = {
+        maxOperators: (first?.operators ?? 0) + 1,
+        maxPages: 2,
+        maxTextChars: (first?.items.join('').length ?? 0) + 5,
+        maxTextItems: (first?.items.length ?? 0) + 4,
+      }[budget];
+      const explicit = await parse(pdf, { [budget]: value });
+      expect(truncations(explicit)).toHaveLength(1);
+      const defaults = { ...DEFAULT_BUDGETS };
+      Object.assign(DEFAULT_BUDGETS, { [budget]: value });
+      try {
+        expect(await parse(pdf)).toEqual(explicit);
+      } finally {
+        Object.assign(DEFAULT_BUDGETS, defaults);
+      }
+    },
+  );
+
   it('stops at the text-item budget mid-page and keeps the items before it', async () => {
     const pdf = buildPdf({ pages: [opening('a'), lines('b'), lines('c')] });
     const [first] = await pdfjsCounts(pdf);
@@ -344,7 +369,6 @@ describe('parsePdf abort signal', () => {
     const result = await parsePdf(bytes, { signal: AbortSignal.timeout(100) });
     // A machine slow enough to spend the whole timeout opening the file reads no page at all.
     const stop = result.ok ? truncations(result.document)[0]?.message : result.error.message;
-    expect(stop).toMatch(/^Reading stopped before page (\d+) of 41: the signal was aborted/);
-    expect(Number(/page (\d+)/.exec(stop ?? '')?.[1])).toBeLessThanOrEqual(41);
+    expect(stop).toMatch(/^Reading stopped before page \d+ of 41: the signal was aborted/);
   });
 });
