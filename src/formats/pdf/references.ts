@@ -4,6 +4,7 @@
  * arXiv ID, or URL read from each entry's text.
  * @module src/formats/pdf/references
  */
+import { arxivInText } from '../../model/arxiv.js';
 import type { Reference } from '../../model/document.js';
 import { doiInText } from '../../model/doi.js';
 import { smallest } from '../../model/extremes.js';
@@ -14,7 +15,6 @@ import { isCaptionStart } from './lines.js';
 /** An entry's printed number: `[n]`, `n.` or `n)` (before a space, a capital, or a bracket), or a bare `n`. */
 const NUMBERED_ENTRY =
   /^\s*(?:\[(\d{1,4})\]|(\d{1,4})[.)](?=\s|\p{Lu}|[[(])|(\d{1,4})(?=\s+[\p{L}"“‘'(]))\s*/u;
-const ARXIV = /arXiv[:\s]+(\d{4}\.\d{4,5})(?:v\d+)?/i;
 const URL = /\bhttps?:\/\/[^\s<>"]+[^\s<>".,;)]/;
 
 /**
@@ -43,7 +43,7 @@ export function references(lines: Line[], layout: Layout): Reference[] {
     if (numbered) text = text.slice(numbered[0].length);
     if (!text) return [];
     const doi = doiInText(plain)?.toLowerCase();
-    const arxiv = ARXIV.exec(plain)?.[1];
+    const arxiv = arxivInText(plain);
     const url = doi ? undefined : URL.exec(plain)?.[0];
     return [
       {

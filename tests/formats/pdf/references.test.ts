@@ -150,3 +150,54 @@ describe('PDF reference lists', () => {
     ).toHaveLength(1);
   });
 });
+
+describe('PDF reference arXiv IDs (#65)', () => {
+  /** Each entry's arXiv ID and URL, the entries set as a numbered list. */
+  async function identifiers(entries: string[]): Promise<Pick<Reference, 'arxiv' | 'url'>[]> {
+    const lines = entries.map((entry, i) => line(`[${i + 1}] ${entry}`, i));
+    const result = await parsePdf(buildPdf({ pages: [[...HEAD, ...lines]] }));
+    if (!result.ok) throw new Error(`${result.error.reason}: ${result.error.message}`);
+    return result.document.references.map(({ arxiv, url }) => ({
+      ...(arxiv && { arxiv }),
+      ...(url && { url }),
+    }));
+  }
+
+  it('reads the arXiv ID an entry prints, labelled, linked, or in the old style', async () => {
+    expect(
+      await identifiers([
+        'A. Author. Old paper. arXiv:hep-th/9711200, 1997.',
+        'A. Author. Knots. arXiv:math.GT/0309136.',
+        'A. Author. Old paper. Nucl. Phys. B 1 (1998) 1, hep-th/9711200.',
+        'A. Author. arXiv:cond-mat/0501001v2.',
+        'C. Author. Newer. arXiv:2105.00001v2.',
+        'B. Author. New. https://arxiv.org/abs/2105.00001.',
+        'B. Author. New. https://arxiv.org/abs/2105.00001v3.',
+        'B. Author. New. https://arxiv.org/pdf/2105.00001.',
+        'B. Author. Old. http://arxiv.org/abs/hep-th/9711200.',
+      ]),
+    ).toEqual([
+      { arxiv: 'hep-th/9711200' },
+      { arxiv: 'math/0309136' },
+      { arxiv: 'hep-th/9711200' },
+      { arxiv: 'cond-mat/0501001v2' },
+      { arxiv: '2105.00001v2' },
+      { arxiv: '2105.00001', url: 'https://arxiv.org/abs/2105.00001' },
+      { arxiv: '2105.00001v3', url: 'https://arxiv.org/abs/2105.00001v3' },
+      { arxiv: '2105.00001', url: 'https://arxiv.org/pdf/2105.00001' },
+      { arxiv: 'hep-th/9711200', url: 'http://arxiv.org/abs/hep-th/9711200' },
+    ]);
+  });
+
+  it('reads no arXiv ID from what only looks like one', async () => {
+    expect(
+      await identifiers([
+        'D. Author. Data and/1234567 samples.',
+        'D. Author. arXiv:foo-bar/9901001.',
+        'D. Author. A preprint, hep-th/0805123.',
+        'D. Author. Phys. Rev. 1999.12345 (2001).',
+        'E. Author. https://example.org/abs/2105.00001.',
+      ]),
+    ).toEqual([{}, {}, {}, {}, { url: 'https://example.org/abs/2105.00001' }]);
+  });
+});
