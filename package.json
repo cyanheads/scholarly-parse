@@ -1,7 +1,7 @@
 {
   "name": "scholarly-parse",
   "version": "0.2.0",
-  "description": "Parse scholarly papers — JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF — into one document model and Markdown.",
+  "description": "Parse scholarly papers (JATS, Grobid TEI, arXiv HTML, publisher HTML, PDF) into one document model and Markdown.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "Casey Hand <casey@caseyjhand.com> (https://caseyjhand.com)",
@@ -119,19 +119,23 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@biomejs/biome": "^2.5.14",
+    "@biomejs/biome": "^2.5.15",
     "@socketsecurity/bun-security-scanner": "^1.1.3",
     "@types/bun": "^1.4.2",
-    "@types/node": "^26.6.2",
-    "ignore": "^7.0.10",
+    "@types/node": "^26.6.4",
+    "ignore": "^7.0.12",
     "linkedom": "^0.18.13",
-    "publint": "^0.3.24",
+    "mdast-util-from-markdown": "^2.1.0",
+    "mdast-util-gfm": "^3.1.0",
+    "micromark": "^4.0.3",
+    "micromark-extension-gfm": "^3.0.0",
+    "publint": "^0.3.25",
     "typescript": "^7.0.2",
     "unpdf": "^1.8.1",
-    "vitest": "^5.0.1",
+    "vitest": "^5.0.3",
     "zod": "^4.6.5"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.11.1"
+    "fast-xml-parser": "^5.11.2"
   }
 }
