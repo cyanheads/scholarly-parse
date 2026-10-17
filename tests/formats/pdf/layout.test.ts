@@ -70,7 +70,7 @@ describe('layout', () => {
       brace(519.74),
     ]);
     expect(texts.find((text) => text.includes('m'))).toContain('d4m4');
-    expect(texts.map((text) => text.replace('', '').trim())).not.toContain('4');
+    expect(texts.map((text) => text.trim())).not.toContain('4');
   });
 
   it('leaves a split lowercase letter alone outside a bold heading', () => {
