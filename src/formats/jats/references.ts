@@ -81,17 +81,19 @@ export function extractReferences(root: XmlNode): Reference[] {
 /**
  * One `<ref>`. The readable `<mixed-citation>` is preferred for the text, descending into
  * `<citation-alternatives>` when the forms sit there (#66); the structured
- * `<element-citation>` supplies fields when present, and the `<mixed-citation>` the
- * identifiers it leaves empty (#80).
+ * `<element-citation>` supplies fields when present, and inside `<citation-alternatives>`,
+ * which says both forms cite one work, the `<mixed-citation>` the identifiers it leaves
+ * empty (#80).
  */
 function parseReference(ref: XmlNode): Reference | undefined {
-  const container = findOne(ref, 'citation-alternatives') ?? ref;
+  const alternatives = findOne(ref, 'citation-alternatives');
+  const container = alternatives ?? ref;
   const mixed = findOne(container, 'mixed-citation');
   const element = findOne(container, 'element-citation') ?? findOne(container, 'nlm-citation');
   const citation = citationMarkdown(mixed ?? element);
   if (!citation) return;
 
-  const fields = element ? citationFields(element, mixed) : citationFields(mixed);
+  const fields = element ? citationFields(element, alternatives && mixed) : citationFields(mixed);
   const id = attrOf(ref, 'id');
   // `[12]` and `12.` are both printed forms of the label `12`.
   const label =

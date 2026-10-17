@@ -516,12 +516,14 @@ describe('identifiers in citation-alternatives (#80)', () => {
     });
   });
 
-  it('fills from a mixed-citation beside an element-citation without the wrapper too', () => {
+  it('fills nothing from a mixed-citation beside an element-citation outside the wrapper', () => {
+    // Two forms in one `<ref>` may cite two works; only `<citation-alternatives>` says they are one.
     const [reference] = referencesOf(
       `<ref-list><ref id="r1"><element-citation>${element}</element-citation>` +
-        '<mixed-citation>Doe. P. <pub-id pub-id-type="doi">10.1000/xyz</pub-id></mixed-citation></ref></ref-list>',
+        '<mixed-citation>Roe. Q. <pub-id pub-id-type="doi">10.1000/xyz</pub-id></mixed-citation></ref></ref-list>',
     );
-    expect(reference).toMatchObject({ doi: '10.1000/xyz', title: 'P' });
+    expect(reference).toMatchObject({ title: 'P' });
+    expect(reference?.doi).toBeUndefined();
   });
 
   it('reads a reference with one form as before', () => {
