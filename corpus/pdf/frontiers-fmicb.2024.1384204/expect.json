@@ -1,5 +1,5 @@
 {
-  "why": "Rosetta: Frontiers PDF of the article also in the corpus as JATS (epmc-fmicb.2024.1384204), publisher HTML, and Grobid TEI. Page 1 carries a sidebar of editors, dates, and licence in the left column; figure labels sit alone on their line in capitals (FIGURE 1) above a caption set at another width; subsection headings wrap over up to three lines; references mark each entry with an indented first line; the back matter shares page 13 with the start of the reference list. Pins the numbered outline, three tables, five figures, and 92 references.",
+  "why": "Rosetta: Frontiers PDF of the article also in the corpus as JATS (epmc-fmicb.2024.1384204), publisher HTML, and Grobid TEI. Page 1 carries a sidebar of editors, dates, and licence in the left column; figure labels sit alone on their line in capitals (FIGURE 1) above a caption set at another width; subsection headings wrap over up to three lines; references mark each entry with an indented first line; the back matter shares page 13 with the start of the reference list; a degree sign or subscript level with the other column's row stays with its word (−80°C, NO3). Pins the numbered outline, three tables, five figures, and 92 references.",
   "title": "Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils",
   "quality": "partial",
   "abstractKinds": [
@@ -31,8 +31,13 @@
   "warnings": [
     "structure-inferred"
   ],
-  "contains": ["Available online at: <https://CRAN.R-project.org/package$=> \\$FSA"],
+  "contains": [
+    "Available online at: <https://CRAN.R-project.org/package$=> \\$FSA",
+    "stored at −80^◦C until",
+    "NO_3- N"
+  ],
   "notContains": [
+    "\n\n◦\n\n",
     "EDITED BY",
     "REVIEWED BY",
     "CORRESPONDENCE"

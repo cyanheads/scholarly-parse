@@ -1,0 +1,23 @@
+{
+  "id": "frontiers-fcell.2021.786454",
+  "format": "pdf",
+  "title": "Modulation of Phase Separation by RNA: A Glimpse on N6-Methyladenosine Modification",
+  "identifiers": {
+    "doi": "10.3389/fcell.2021.786454"
+  },
+  "url": "https://www.frontiersin.org/articles/10.3389/fcell.2021.786454/pdf",
+  "retrieved": "2026-10-17",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Su Y, Maimaitiyiming Y, Wang L, Cheng X, Hsu CH. Modulation of Phase Separation by RNA: A Glimpse on N6-Methyladenosine Modification. Frontiers in Cell and Developmental Biology. 2021;9:786454. doi:10.3389/fcell.2021.786454",
+  "features": [
+    "two-column",
+    "running-headers",
+    "page-furniture",
+    "figures",
+    "review"
+  ],
+  "regression": "cyanheads/scholarly-parse#4"
+}

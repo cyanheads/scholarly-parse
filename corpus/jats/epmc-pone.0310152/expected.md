@@ -49,7 +49,7 @@ $$
 
 We assume here that the infection transmission rate at time *t* from the individuals *J*(*η*) infected at time *η* depends on the time difference *t* − *η*. In the case of respiratory viral infections, it depends on the viral load in the upper respiratory tract. We will specify the function *β*(*t*) below.
 
-Similarly, the number of newly recovered *R*_n(*t*) and dead individuals *D*_n(*t*) can be described by the following equations:
+Similarly, the number of newly recovered *R*\_n(*t*) and dead individuals *D*\_n(*t*) can be described by the following equations:
 
 $$
 \begin{matrix}R_n(t)≡\frac{dR(t)}{dt}=∫_0^tr(t-η)J(η)dη, D_n(t)≡\frac{dD(t)}{dt}=∫_0^td(t-η)J(η)dη.\end{matrix} \tag{4}
@@ -89,7 +89,7 @@ $$
 \begin{matrix}m(t)=\frac{1}{N}(∑_{i=1}^K∫_0^tϕ_i(t-η)V_i^′(η)dη).\end{matrix} \tag{8}
 $$
 
-Here *V*_i(*t*) and *ϕ*_i(*t*) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from *i* = 1. *K* is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses *i* and *i* + 1 are administrated with a time gap *T*_{i,i+1}, and the first dose was started from *t* = *T*_0. Then for any *i* ∈ {1, 2, ⋯, *K*}, we have
+Here *V*\_i(*t*) and *ϕ*\_i(*t*) denote the number of vaccination and the efficacy of vaccines respectively corresponding to all the doses, starting from *i* = 1. *K* is the total number of doses administrated in the population. Suppose that two consecutive vaccine doses *i* and *i* + 1 are administrated with a time gap *T*\_{i,i+1}, and the first dose was started from *t* = *T*\_0. Then for any *i* ∈ {1, 2, ⋯, *K*}, we have
 
 $$
 \begin{matrix}V_i(t)=\{\begin{matrix}0, & t< T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i} \\ & \\ \text{positive}, & t≥T_0+T_{1,2}+T_{2,3}+⋯+T_{i-1,i}\end{matrix}.\end{matrix} \tag{9}
@@ -111,7 +111,7 @@ $$
 \begin{matrix}m_2(t) & = & \frac{1-α}{N}(∑_{i=1}^K∫_0^tϕ_i(t-η)V_i^′(η)dη)+\frac{b}{N}∫_0^tϵψ(t-η)R_n(η)dη,\end{matrix} \tag{11}
 $$
 
-where, 0 < *ϵ* < 1 is a constant, *α* is the proportion of healthy susceptible *S* who are newly vaccinated. The value of *ϵ* < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕ*_j and *ψ*_j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 < *m*_1(*t*) + *m*_2(*t*) < 1.
+where, 0 < *ϵ* < 1 is a constant, *α* is the proportion of healthy susceptible *S* who are newly vaccinated. The value of *ϵ* < 1 signifies that the infection acquired immunity for the comorbid individuals is less than that for the non-comorbid individuals. Parameter *b* characterizes the proportion of comorbidity among the newly recovered individuals while the function *ψ*(*t*) describes how acquired immunity changes over time. We choose functions *ϕ*\_j and *ψ*\_j focusing on multiple criteria, prioritizing the acquisition-fading function, exponential fading function and the power law function. The functional fits are parameterized against epidemiological data comprising the epidemic form. Assuming homogeneity, we consider *ϕ*\_j ≡ *ϕ* and *ψ*\_j ≡ *ψ*, for *j* = 1, 2, ⋯, *K*. Moreover, to account for “bounded” infection growth, we impose a constraint on the population immunity level: 0 < *m*\_1(*t*) + *m*\_2(*t*) < 1.
 
 #### 2.2.3 Impact of multiple strains
 
@@ -121,7 +121,7 @@ $$
 \begin{matrix}S(t)=N-(I(t)+D(t)+P(t)+m_1(t)N).\end{matrix} \tag{12}
 $$
 
-Note that *m*_2(*t*) does not appear in the Eq (12) because *m*_2(*t*) is the level of immunity in the comorbid class; it is only considered later in the equation for *P*(*t*), where *P*(*t*) is the predisposed comorbid population. Let, *J*_1(*t*) represents the number of daily new infection in the healthy susceptible class *S*(*t*) and *J*_2(*t*) represents the number of daily new cases in the comorbid class *P*(*t*). Then the total number of daily new cases is given by
+Note that *m*\_2(*t*) does not appear in the Eq (12) because *m*\_2(*t*) is the level of immunity in the comorbid class; it is only considered later in the equation for *P*(*t*), where *P*(*t*) is the predisposed comorbid population. Let, *J*\_1(*t*) represents the number of daily new infection in the healthy susceptible class *S*(*t*) and *J*\_2(*t*) represents the number of daily new cases in the comorbid class *P*(*t*). Then the total number of daily new cases is given by
 
 $$
 J(t)=J_1(t)+J_2(t),
@@ -169,7 +169,7 @@ which represents the daily sum of completely recovered individuals (with proport
 
 ### 2.3 Basic reproduction number
 
-In the beginning of epidemic, assume that *I* = *P* = *D* = *m*_1 = 0. Then, using (2), we can write Eq (5) in the following form:
+In the beginning of epidemic, assume that *I* = *P* = *D* = *m*\_1 = 0. Then, using (2), we can write Eq (5) in the following form:
 
 $$
 \begin{matrix}S^′(t)=\frac{S}{N} ∫_0^tβ(t-η)S^′(η)dη.\end{matrix} \tag{16}
@@ -213,7 +213,7 @@ Then λ in (18) is positive (epidemic growth) if and only if $\mathcal{R}_0>1$.
 
 ### 3.1 Statistical toolbox
 
-The estimations and curve fittings are done by minimizing the Sum of Squared Errors (SSE). For the curve fitting to data we mainly use the ‘Curve Fitting Toolbox’, which is a collection of graphical user interfaces (GUIs) and M-file functions built on the MATLAB technical computing environment [36]. The toolbox provides the fitted curve along with the goodness of fit. Gamma distributions are estimated using the inbuilt function *fitdist(:,gamma)* in MATLAB. This function is used to fit a vector of data *X* = (*x*_1, *x*_2, ⋯, *x*_n) by a gamma distribution of the form $\frac{1}{b^aΓ(a)}x^{a-1}e^{-x/b}$, where *a* and *b* are the shape and scale parameters. This function gives the maximum likelihood estimators of *a* and *b* for the gamma distribution which are the solutions of the simultaneous equations
+The estimations and curve fittings are done by minimizing the Sum of Squared Errors (SSE). For the curve fitting to data we mainly use the ‘Curve Fitting Toolbox’, which is a collection of graphical user interfaces (GUIs) and M-file functions built on the MATLAB technical computing environment [36]. The toolbox provides the fitted curve along with the goodness of fit. Gamma distributions are estimated using the inbuilt function *fitdist(:,gamma)* in MATLAB. This function is used to fit a vector of data *X* = (*x*\_1, *x*\_2, ⋯, *x*\_n) by a gamma distribution of the form $\frac{1}{b^aΓ(a)}x^{a-1}e^{-x/b}$, where *a* and *b* are the shape and scale parameters. This function gives the maximum likelihood estimators of *a* and *b* for the gamma distribution which are the solutions of the simultaneous equations
 
 $$
 \text{log} \hat{a}-Ψ(\hat{a})=\text{log}(\bar{X}/(∏_{i=1}^nx_i)^{1/n}),
@@ -233,20 +233,20 @@ The function *fitdist(:,gamma)* estimates the shape and scale parameters with 95
 
 ### 3.2 Choice of vaccination function *V*(*t*)
 
-We assume that the vaccination function *V*(*t*) that is started at time *t* = *t*_0, follows the function
+We assume that the vaccination function *V*(*t*) that is started at time *t* = *t*\_0, follows the function
 
 $$
 \begin{matrix}V(t)=\{\begin{matrix}0, & t< t_0 \\ L[N-(N-V_0)e^{-k(t-t_0)}], & t≥t_0\end{matrix}.\end{matrix} \tag{20}
 $$
 
-where, *N* is the total population size, *L* is the proportion of the population expected to be vaccinated, *k* is the rate of vaccination, *V*_0 is the number of vaccination at time *t* = *t*_0, and the associated parameter values are listed in Table 1.
+where, *N* is the total population size, *L* is the proportion of the population expected to be vaccinated, *k* is the rate of vaccination, *V*\_0 is the number of vaccination at time *t* = *t*\_0, and the associated parameter values are listed in Table 1.
 
 **Table 1.** **Parameter values.**
 
 | Parameters | Description | Estimated value | Source |
 | --- | --- | --- | --- |
 | *N* | Total population | 10^7 | - |
-| *V* _0 | Initial number of vaccination | 500 | - |
+| *V* \_0 | Initial number of vaccination | 500 | - |
 | *L* | proportion of population to be vaccinated expected to be vaccinated | 0.75 | - |
 | *k* | rate of vaccination | 0.002, 0.003, 0.005 | - |
 | *c* | proportionality constant | 0.44 × 10^{−5} | - |
@@ -266,13 +266,13 @@ where, *N* is the total population size, *L* is the proportion of the population
 
 ### 3.3 Estimation of *ϕ*(*t*) and *ψ*(*t*)
 
-Due to the lack of availability of sector data, that is separate data incorporating the impacts of comorbidity and the ones without, we take an initial simplifying step by assuming that *ϕ*_j ≡ *ϕ* and *ψ*_j ≡ *ψ*, for *j* = 1, 2, ⋯, *N*. We use the data of vaccine-induced immunity from [35] and fit (least square fitting) the function *ϕ*(*t*) as follows (see Fig 2a and 2b)
+Due to the lack of availability of sector data, that is separate data incorporating the impacts of comorbidity and the ones without, we take an initial simplifying step by assuming that *ϕ*\_j ≡ *ϕ* and *ψ*\_j ≡ *ψ*, for *j* = 1, 2, ⋯, *N*. We use the data of vaccine-induced immunity from [35] and fit (least square fitting) the function *ϕ*(*t*) as follows (see Fig 2a and 2b)
 
 $$
 \begin{matrix}ϕ(t)=a_1e^{-(\frac{t-b_1}{c_1})^2},\end{matrix} \tag{21}
 $$
 
-where, *a*_1 = 0.9411 with 95% CI (0.8886, 0.9937), *b*_1 = 117.8 with 95% CI (113.5, 122), and *c*_1 = 92.44 with 95% CI (86.06, 98.82) (Fig 2a). The goodness of fit is as follows: SSE = 0.2807, R-square = 0.9308, Adjusted R-square = 0.9273 and RMSE = 0.08483.
+where, *a*\_1 = 0.9411 with 95% CI (0.8886, 0.9937), *b*\_1 = 117.8 with 95% CI (113.5, 122), and *c*\_1 = 92.44 with 95% CI (86.06, 98.82) (Fig 2a). The goodness of fit is as follows: SSE = 0.2807, R-square = 0.9308, Adjusted R-square = 0.9273 and RMSE = 0.08483.
 
 **Fig 2.** **Effectiveness of vaccine-induced immunity.** The effectiveness of vaccine-induced immunity *ϕ*(*t*) as a function of the days post-vaccination (data source- [35, 37]). The shaded regions represent the 95% confidence interval of the fitted function in the epidemiologically feasible region. (a) corresponds to the formula (21); (b) corresponds to the formula (22).
 
@@ -282,7 +282,7 @@ $$
 \begin{matrix}ϕ(t)=a_2t^{b_2}e^{-c_2t^{d_2}},\end{matrix} \tag{22}
 $$
 
-where, *a*_2 = 0.01152 with 95% CI (−.001766, 0.02481), *b*_2 = 1.023 with 95% CI (0.719, 1.328), *c*_2 = 5.01 × 10^{−6} with 95% CI (−1.398 × 10^{−5}, 2.4 × 10^{−5}), *d*_2 = 2.412 with 95% CI (1.747, 3.077) (Fig 2b). The goodness of fit is as follows: SSE = 0.2218, R-square = 0.9453, Adjusted R-square = 0.941 and RMSE = 0.0764. It must be noted that death due to natural causes versus death due to infection have two different timescales of operation; the former is way more protracted than the latter, an aspect that plays a major role in ascribing average values to death rates in comorbidity models.
+where, *a*\_2 = 0.01152 with 95% CI (−.001766, 0.02481), *b*\_2 = 1.023 with 95% CI (0.719, 1.328), *c*\_2 = 5.01 × 10^{−6} with 95% CI (−1.398 × 10^{−5}, 2.4 × 10^{−5}), *d*\_2 = 2.412 with 95% CI (1.747, 3.077) (Fig 2b). The goodness of fit is as follows: SSE = 0.2218, R-square = 0.9453, Adjusted R-square = 0.941 and RMSE = 0.0764. It must be noted that death due to natural causes versus death due to infection have two different timescales of operation; the former is way more protracted than the latter, an aspect that plays a major role in ascribing average values to death rates in comorbidity models.
 
 We observe that the stretched power law function (22) gives better fitting to the data as compared to the Gaussian function (21). To check the robustness of the choice of the stretched power law function (22) we compared the goodness of fit with other possible candidates such as the Gaussian function and, acquisition-fading function.
 
@@ -292,7 +292,7 @@ $$
 \begin{matrix}ψ(t)=a_3e^{-(\frac{t-b_3}{c_3})^2},\end{matrix} \tag{23}
 $$
 
-where, *a*_3 = 1.035 with 95% CI (0.8742, 1.195), *b*_3 = −206.6 with 95% CI (−704.3, 291) and *c*_3 = 1133 with 95% CI (500.3, 1765).
+where, *a*\_3 = 1.035 with 95% CI (0.8742, 1.195), *b*\_3 = −206.6 with 95% CI (−704.3, 291) and *c*\_3 = 1133 with 95% CI (500.3, 1765).
 
 **Fig 3.** **Effectiveness of infection-acquired immunity.** The effectiveness of infection-acquired immunity *ψ*(*t*) as a function of the days post recovery (data source- [35, 38]). The blue dots are the real data and the red curves are the functions fitted to the data. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text.
 
@@ -304,7 +304,7 @@ $$
 \begin{matrix}P(τ)=a_4e^{-(\frac{τ-b_4}{c_4})^2},\end{matrix} \tag{24}
 $$
 
-where, *a*_4 = 1.829 × 10^5 with 95% CI (1.805 × 10^5, 1.852 × 10^5), *b*_4 = 3.136 with 95% CI (3.073, 3.2) and *c*_4 = 1.294 with 95% CI (1.234, 1.353).
+where, *a*\_4 = 1.829 × 10^5 with 95% CI (1.805 × 10^5, 1.852 × 10^5), *b*\_4 = 3.136 with 95% CI (3.073, 3.2) and *c*\_4 = 1.294 with 95% CI (1.234, 1.353).
 
 **Fig 4.** **Viral load.** Viral load as a function of the days post infection. The blue dots are the real experimental data for Omicron variant taken from [39]. The red curve is the gamma function fitted to the blue dots. The shaded region represents the 95% confidence interval of the fitted function. The details of the fitted parameter values are given in the text.
 
@@ -322,13 +322,13 @@ $$
 \mathcal{F}_1(t)=\frac{0.85}{b_1^{a_1}Γ(a_1)}t^{a_1-1}e^{-\frac{t}{b_1}}+\frac{0.15}{d_1^{c_1}Γ(c_1)}t^{c_1-1}e^{-\frac{t}{d_1}}
 $$
 
-with estimated parameter values *a*_1 = 32.17136, *b*_1 = 0.2206, *c*_1 = 65.40545, *d*_1 = 0.210 (Fig 5a) and
+with estimated parameter values *a*\_1 = 32.17136, *b*\_1 = 0.2206, *c*\_1 = 65.40545, *d*\_1 = 0.210 (Fig 5a) and
 
 $$
 \mathcal{F}_2(t)=\frac{0.94}{b_2^{a_2}Γ(a_2)}t^{a_2-1}e^{-\frac{t}{b_2}}+\frac{0.06}{d_2^{c_2}Γ(c_2)}t^{c_2-1}e^{-\frac{t}{d_2}}
 $$
 
-with estimated parameter values *a*_2 = 36.02855, *b*_2 = 0.57511, *c*_2 = 140.11379, *d*_2 = 0.27636 (Fig 5b). *p*_0 is the survival probability which is assumed to be *p*_0 = 0.9975.
+with estimated parameter values *a*\_2 = 36.02855, *b*\_2 = 0.57511, *c*\_2 = 140.11379, *d*\_2 = 0.27636 (Fig 5b). *p*\_0 is the survival probability which is assumed to be *p*\_0 = 0.9975.
 
 **Fig 5.** **Time-distributed recovery and death rates.** Time-distributed rate functions of (a) recovery and (b) death as functions of days post the onset of infection. The red curves show the best fitted bimodal gamma distributions (Ref. [35]).
 
@@ -342,9 +342,9 @@ In this section, we study the influence of the existence of multiple strains on 
 
 **Fig 6.** **Plot of *I*(*t*) for different choice of *κ*.** The associated parameter values are chosen as estimated before and as in Table 1.
 
-To explain the sensitivity of the model parameters on the model outcome *I*(*t*), we randomly chose 20 values of *c*_3 (in formula (23)) within the interval [1033, 1233]. The outcome *I*(*t*) is shown in Fig 7. In this figure, the bold color curves correspond to *c*_3 = 1133, while the light color curves correspond to the 20 randomly chosen values of *c*_3. This simulation result demonstrates that the model outcome *I*(*t*) is sensitive to the model parameters, although the principal trend of the outcome remains largely unchanged. Another important observation is that the first epidemic peak is not sensitive to the parameter *c*_3. This is because, at the beginning of the epidemic, the acquired immunity function (as described in (23)) is not very influential, and as the epidemic progresses, this acquired immunity function causes variations in *I*(*t*). Similar sensitivity analyzes were performed for other parameters, but the main trend of the outcome remained nearly the same.
+To explain the sensitivity of the model parameters on the model outcome *I*(*t*), we randomly chose 20 values of *c*\_3 (in formula (23)) within the interval [1033, 1233]. The outcome *I*(*t*) is shown in Fig 7. In this figure, the bold color curves correspond to *c*\_3 = 1133, while the light color curves correspond to the 20 randomly chosen values of *c*\_3. This simulation result demonstrates that the model outcome *I*(*t*) is sensitive to the model parameters, although the principal trend of the outcome remains largely unchanged. Another important observation is that the first epidemic peak is not sensitive to the parameter *c*\_3. This is because, at the beginning of the epidemic, the acquired immunity function (as described in (23)) is not very influential, and as the epidemic progresses, this acquired immunity function causes variations in *I*(*t*). Similar sensitivity analyzes were performed for other parameters, but the main trend of the outcome remained nearly the same.
 
-**Fig 7.** **Plot of *I*(*t*) for different choice of *κ*.** (a) *κ* = 1; (b) *κ* = 2; (c) *κ* = 3. The bold colored curves correspond to *c*_3 = 1133 in formula (23). The light colored curves correspond to 20 randomly chosen values of *c*_3 in the interval [1033, 1233]. The other associated parameter values are chosen as estimated before and as in Table 1.
+**Fig 7.** **Plot of *I*(*t*) for different choice of *κ*.** (a) *κ* = 1; (b) *κ* = 2; (c) *κ* = 3. The bold colored curves correspond to *c*\_3 = 1133 in formula (23). The light colored curves correspond to 20 randomly chosen values of *c*\_3 in the interval [1033, 1233]. The other associated parameter values are chosen as estimated before and as in Table 1.
 
 ### 4.2 Effect of interval between successive vaccine doses: Hysteresis effect
 
@@ -400,7 +400,7 @@ In this work, we present a comprehensive immuno-epidemic model that integrates c
 
 We estimate the relevant time-distributed parameters with the help of available clinical and experimental data. Notably, our modeling results point to the substantial influence of coexisting multiple strains on both the frequency and height of epidemic outbreaks. Furthermore, we demonstrate that frequent vaccine administration may not be required and can potentially lead to a hysteresis effect on immunity levels, thus neutralizing the impact of vaccines in the longer run, sort of an anti-microbial effect. This finding challenges the conventional wisdom regarding the necessity of high-frequency vaccination strategies and indicates its negative consequence over a sustained period of administration.
 
-It is important to mention that, the Table 1 enlists parameter values (*N*, *V*_0, *L*, *k*, *c*, *α*, *κ*, *b*, *ϵ*) that are extracted from data modeling together with functions (*ϕ*(*t*), *ψ*(*t*), *P*(*τ*), *r*(*t*), *d*(*t*), *V*(*t*)) that have been implemented in contemporary references (all cited in the text, with the exception of *V*(*t*)). There are no known references to confirm the parameter values predicted. However, as the confidence intervals and supporting sensitivity analysis demonstrate, the model is sufficiently generic and robust against changes in parameter values, a prediction that awaits validation from future experiments.
+It is important to mention that, the Table 1 enlists parameter values (*N*, *V*\_0, *L*, *k*, *c*, *α*, *κ*, *b*, *ϵ*) that are extracted from data modeling together with functions (*ϕ*(*t*), *ψ*(*t*), *P*(*τ*), *r*(*t*), *d*(*t*), *V*(*t*)) that have been implemented in contemporary references (all cited in the text, with the exception of *V*(*t*)). There are no known references to confirm the parameter values predicted. However, as the confidence intervals and supporting sensitivity analysis demonstrate, the model is sufficiently generic and robust against changes in parameter values, a prediction that awaits validation from future experiments.
 
 A critical insight arising from our findings is the paramount importance of determining the optimal gap between two consecutive vaccine doses. We emphasize that this determination should be driven by a meticulous analysis of the evolving level of immunity within the population. To address this, we propose an optimal control strategy aimed at minimizing both the number of infections and the economic costs associated with vaccination efforts. This approach underscores the need for a tailored and strategic vaccination plan that considers the interplay of factors such as population immunity, vaccine efficacy against different strains, and the cost-effectiveness of each vaccination effort. In summary, our primary objective has been to contribute to the understanding of the optimal gap between two consecutive vaccinations. Our findings highlight the complexity of disease control strategies, advocating for a more nuanced and adaptable approach that accounts for the interplay of immunity dynamics, multiple strains, and vaccination frequency in shaping effective public health interventions.
 

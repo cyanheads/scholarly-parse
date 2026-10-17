@@ -149,6 +149,38 @@ describe('jatsInlineToMarkdown', () => {
     expect(gfmText(rendered)).toBe(stripInline(rendered));
   });
 
+  it.each([
+    [
+      'a similar <italic>K</italic><sub>M</sub> (<italic>k</italic><sub>–1</sub>/<italic>k</italic><sub>1</sub>) for OXA',
+      'a similar *K*\\_M (*k*\\_{–1}/*k*\\_1) for OXA',
+      ['emphasis:K', 'emphasis:k', 'emphasis:k'],
+    ],
+    [
+      'Values for a <sub>2</sub> and y<sub>ab</sub> here.',
+      'Values for a \\_2 and y\\_{ab} here.',
+      [],
+    ],
+    [
+      'math <inline-formula><tex-math>\\alpha _k</tex-math></inline-formula> then y<sub>ab</sub> here',
+      'math $\\alpha _k$ then y\\_{ab} here',
+      [],
+    ],
+  ])('escapes a subscript’s _ where it could pair as emphasis (#77): %j', (xml, written, spans) => {
+    const rendered = jatsInlineToMarkdown(`<p>${xml}</p>`);
+    expect(rendered).toBe(written);
+    expect(gfmSpans(rendered)).toEqual(spans);
+    expect(gfmText(rendered)).toBe(stripInline(rendered));
+    expect(stripInline(rendered)).toBe(written.replace(/\*|\\(?=_)/g, ''));
+  });
+
+  it('leaves a subscript’s _ between letters or digits as written (#77)', () => {
+    expect(
+      jatsInlineToMarkdown(
+        '<p>H<sub>2</sub>O, CO<sub>2</sub>, x<sub>i</sub> of <italic>a</italic> with <inline-formula><tex-math>y_{ab} _c</tex-math></inline-formula></p>',
+      ),
+    ).toBe('H_2O, CO_2, x_i of *a* with $y_{ab} _c$');
+  });
+
   it('returns input that is not well-formed as escaped text with the tags removed', () => {
     expect(jatsInlineToMarkdown('<p>Significant at p < 0.05 in <b>all</b> *arms*.</p>')).toBe(
       'Significant at p < 0.05 in all \\*arms\\*.',
@@ -171,7 +203,7 @@ describe('jatsInlineToMarkdown', () => {
   it.each([
     // cyanheads/pubmed-mcp-server#211: emphasis inside a script is plain text.
     ['<sup>-/<italic>y</italic></sup>', '^{-/y}'],
-    ['V<sub><italic>max</italic></sub>', 'V_{max}'],
+    ['V<sub><italic>max</italic></sub>', 'V\\_{max}'],
     // cyanheads/openalex-mcp-server#76: a decoded `&lt;` stays text, not a second entity.
     ['&amp;lt;', '\\&lt;'],
   ])('writes %j as %j', (inner, markdown) => {
@@ -184,7 +216,7 @@ describe('jatsInlineToMarkdown', () => {
   it('keeps a script that ends in a backslash before whitespace from escaping what follows', () => {
     for (const [inner, markdown] of [
       ['x<sup>\\ </sup>&lt;b&gt;', 'x^\\\\\\<b>'],
-      ['x<sub>a\\ </sub>&lt;b&gt;', 'x_{a\\\\}\\<b>'],
+      ['x<sub>a\\ </sub>&lt;b&gt;', 'x\\_{a\\\\}\\<b>'],
     ]) {
       const rendered = jatsInlineToMarkdown(`<p>${inner}</p>`);
       expect(rendered).toBe(markdown);
@@ -205,7 +237,7 @@ describe('jatsInlineToMarkdown', () => {
       '<p>a<sub><ext-link xlink:href="https://y.org"/></sub> b<sup>x<uri xlink:href="www.q.org"></uri></sup> ' +
         'c<sup><italic><ext-link xlink:href="javascript:alert(1)"><!--none--></ext-link></italic></sup></p>',
     );
-    expect(rendered).toBe('a_{<https://y.org>} b^{xwww.q.org} c^{javascript:alert(1)}');
+    expect(rendered).toBe('a\\_{<https://y.org>} b^{xwww.q.org} c^{javascript:alert(1)}');
     expect(gfmText(rendered)).toBe('a_{https://y.org} b^{xwww.q.org} c^{javascript:alert(1)}');
     expect(
       gfmFindings(rendered, { hrefs: ['https://y.org', 'www.q.org'], text: rendered }),
@@ -437,8 +469,8 @@ interface Fragment {
   raw: boolean;
   /** Every character a reader may see: {@link Fragment.text} and each unsafe link's target. */
   seen: string;
-  /** The character of a subscript that holds one, which the renderer writes after a `_`. */
-  subscript?: string;
+  /** The character of each subscript that holds one, which the renderer writes after a `_`. */
+  subscripts: string[];
   /** Every character outside markup, as a reader should see it. */
   text: string;
   xml: string;
@@ -462,22 +494,20 @@ const xmlEscape = (text: string) =>
 /**
  * One to four pieces of a JATS fragment — text, emphasis, code, a sub- or superscript, a
  * link, a comment, a processing instruction, a CDATA section, a heading, or text that only
- * looks like markup — nested up to three deep. At most one subscript is generated per
- * fragment: two can pair as emphasis (#77).
+ * looks like markup — nested up to three deep.
  */
 function fragment(random: Random, raw: boolean): Fragment {
-  /** The subscript's one character, or '' once a subscript of more is generated. */
-  let subscript: string | undefined;
+  const subscripts: string[] = [];
   // Raw text is read back by {@link rawText}, so text the XML holds as written is escaped.
   const literal = (text: string) => (raw ? xmlEscape(text) : text);
   const pieces = (depth: number): Fragment => {
-    const out: Fragment = { hrefs: [], raw, seen: '', text: '', xml: '' };
+    const out: Fragment = { hrefs: [], raw, seen: '', subscripts, text: '', xml: '' };
     const add = ({
       hrefs,
       seen,
       text,
       xml,
-    }: Omit<Fragment, 'raw' | 'seen'> & { seen?: string }) => {
+    }: Omit<Fragment, 'raw' | 'seen' | 'subscripts'> & { seen?: string }) => {
       out.hrefs.push(...hrefs);
       out.seen += seen ?? text;
       out.text += text;
@@ -496,11 +526,10 @@ function fragment(random: Random, raw: boolean): Fragment {
         // Code reads with its whitespace collapsed, and blank code reads as nothing.
         const text = literal(code.replace(/\s+/g, ' ').trim());
         add({ hrefs: [], text, xml: `<monospace>${xmlEscape(code)}</monospace>` });
-      } else if (kind === 4 && subscript === undefined) {
-        subscript = '';
+      } else if (kind === 4) {
         const inner = pieces(depth + 1);
         const [only, more] = [...(raw ? rawText(inner.text) : inner.text).trim()];
-        if (more === undefined) subscript = only ?? '';
+        if (only !== undefined && more === undefined) subscripts.push(only);
         add({ ...inner, xml: `<sub>${inner.xml}</sub>` });
       } else if (kind === 5) wrap('<sup>', '</sup>');
       else if (kind === 6) {
@@ -546,8 +575,7 @@ function fragment(random: Random, raw: boolean): Fragment {
     }
     return out;
   };
-  const generated = pieces(0);
-  return subscript ? { ...generated, subscript } : generated;
+  return pieces(0);
 }
 
 /** Letters and digits only. */
@@ -581,21 +609,16 @@ function rawText(text: string): string {
 }
 
 /**
- * True for a finding outside what the escaping bounds. A link a bare URL forms by running
- * into a sub- or superscript's notation (`https://a.co/x^{2}`), which `docs/design.md` names:
- * its destination holds the notation's start. And emphasis a subscript's `_` opens (#77):
- * its text starts with the subscript. The source never spells `^` or `{`, so either is the
- * renderer's; a one-character subscript is told by its character after a `_`.
+ * True for a finding outside what the escaping bounds: a link a bare URL forms by running
+ * into a sub- or superscript's notation (`https://a.co/x^{2}`), which `docs/design.md` names.
+ * Its destination holds the notation's start. The source never spells `^` or `{`, so either
+ * is the renderer's; a one-character subscript is told by its character after a `_`.
  */
-function outsideBound(finding: string, markdown: string, { subscript }: Fragment): boolean {
+function outsideBound(finding: string, { subscripts }: Fragment): boolean {
   const [kind = '', text = ''] = finding.split(/:(.*)/s);
-  const opensScript = (from: string) =>
-    from.startsWith('{') ||
-    (!!subscript &&
-      from.startsWith(subscript) &&
-      (markdown.includes(`_${subscript}`) || markdown.includes(`_\\${subscript}`)));
-  if (kind === 'link') return /[\^{]/.test(text) || (!!subscript && text.includes(`_${subscript}`));
-  return (kind === 'emphasis' || kind === 'strong') && opensScript(text);
+  return (
+    kind === 'link' && (/[\^{]/.test(text) || subscripts.some((char) => text.includes(`_${char}`)))
+  );
 }
 
 describe('jatsInlineToMarkdown on generated fragments', () => {
@@ -614,7 +637,7 @@ describe('jatsInlineToMarkdown on generated fragments', () => {
             text: source.raw ? `${source.xml} ${source.seen} ${rawText(source.seen)}` : text,
           },
           { textPassLinks: false },
-        ).filter((finding) => !outsideBound(finding, markdown, source));
+        ).filter((finding) => !outsideBound(finding, source));
         if (!keptInOrder(letters(text), kept))
           problems.push(`${JSON.stringify(markdown)} keeps ${kept} of ${letters(text)}`);
         return problems;

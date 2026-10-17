@@ -102,7 +102,7 @@ As a first step, an integrative review of the literature was performed to identi
 | High SpO_2 | LR | % of time with SpO_2 > 96% in first 3 days | <0.001 | yes | 22 |
 | Gestational age | LR | Gestational age at birth in weeks | <0.001 | no | 3, 5, 12–14 |
 | Volume expansion/high fluid intake | LR | ml/kg in first 3 days | <0.001 | no | 12,16 |
-| Increased arterial PaO_2 | EXP | Mean PaO _2 in first 3 days | <0.001 | no | 23 |
+| Increased arterial PaO_2 | EXP | Mean PaO \_2 in first 3 days | <0.001 | no | 23 |
 | Arterial pH | LR | Mean arterial pH in first 3 days | <0.001 | no | 14 |
 | Surfactant therapy | EXP | mg/kg in first 3 days | <0.001 | yes | - |
 | Heart rate | EXP | Mean heart rate in first 3 days | 0.001 | no | - |

@@ -8,6 +8,9 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parsePdf } from '../../../src/formats/pdf/index.js';
+import { layout } from '../../../src/formats/pdf/layout.js';
+import { loadPdf } from '../../../src/formats/pdf/load.js';
+import { DEFAULT_BUDGETS } from '../../../src/formats/pdf/parse.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
 import { toMarkdown } from '../../../src/render/markdown.js';
 import { toText } from '../../../src/render/text.js';
@@ -179,6 +182,68 @@ describe('parsePdf', () => {
     }
   });
 
+  describe('a running footer whose page number joins either half (#83)', () => {
+    /**
+     * Ten two-column pages with a footer in three parts: its centred page number falls
+     * left of the gutter on pages 1–8, where the right column starts at x 360, and right
+     * of it on pages 9–10, where it starts at x 306. `extra` adds runs to page 5.
+     */
+    function footerPaper(extra: TextSpec[] = []): Uint8Array {
+      return buildPdf({
+        pages: Array.from({ length: 10 }, (_, p): TextSpec[] => [
+          ...(p === 0
+            ? ([
+                { font: 'bold', size: 20, text: 'A study of running footers', x: 72, y: 740 },
+                { font: 'bold', size: 12, text: 'Introduction', x: 72, y: 715 },
+              ] satisfies TextSpec[])
+            : []),
+          ...Array.from({ length: 40 }, (_, i): TextSpec[] => [
+            {
+              size: 10,
+              text: `Left column text line ${i} of page ${p + 1} runs on.`,
+              x: 72,
+              y: 700 - 14 * i,
+            },
+            {
+              size: 10,
+              text: `Right column line ${i} of page ${p + 1} goes on.`,
+              x: p < 8 ? 360 : 306,
+              y: 700 - 14 * i,
+            },
+          ]).flat(),
+          { size: 8, text: 'Journal of Tests | www.example.org', x: 72, y: 30 },
+          { size: 8, text: String(p + 1), x: 296, y: 30 },
+          { size: 8, text: 'December 2021 | Volume 9 | Article 12', x: 420, y: 30 },
+          ...(p === 4 ? extra : []),
+        ]),
+      });
+    }
+
+    /** Each laid-out line in the pages' bottom margin, as `page text`. */
+    async function footerLines(bytes: Uint8Array): Promise<string[]> {
+      const loaded = await loadPdf(bytes, DEFAULT_BUDGETS);
+      if (!('pages' in loaded)) throw new Error(loaded.message);
+      return layout(loaded.pages)
+        .lines.filter((line) => line.y < 60)
+        .map((line) => `${line.page} ${line.text}`);
+    }
+
+    it('drops the footer on every page', async () => {
+      const paper = footerPaper();
+      expect(await footerLines(paper)).toEqual([]);
+      const markdown = toMarkdown(await parse(paper));
+      expect(markdown).toContain('Right column line 39 of page 10 goes on.');
+      expect(markdown).not.toContain('www.example.org');
+      expect(markdown).not.toContain('Volume 9');
+    });
+
+    it('keeps a margin line holding text beside a repeated cell', async () => {
+      expect(
+        await footerLines(footerPaper([{ size: 8, text: 'Footer words', x: 215, y: 30 }])),
+      ).toEqual(['5 Journal of Tests | www.example.org Footer words 5']);
+    });
+  });
+
   it('reads a captioned table with its rows, the bold first row as header', async () => {
     const table = (await parse(PAPER)).body[1]?.blocks.find((block) => block.type === 'table');
     expect(table).toMatchObject({
@@ -303,6 +368,131 @@ describe('parsePdf', () => {
     expect(second).toMatch(/^Right column line 1 .* right column line 8 of the second part$/);
   });
 
+  describe('a first-page margin column', () => {
+    const ABSTRACT_LINES = [
+      'Phase separation is the driving force behind formation of various biomolecular',
+      'condensates, which sub-compartmentalize certain cellular components in a',
+      'membraneless manner to orchestrate numerous biological processes. Many are',
+      'composed of proteins and RNAs. While the features and functions of proteins are',
+      'well studied, less attention was paid to the other essential component RNAs.',
+      'Here, we describe how RNA contributes to the biogenesis and dissolution of',
+      'condensates as a multivalence providing scaffold for proteins and RNA to undergo',
+      'phase separation in cells of many kinds and in many settings of interest.',
+    ];
+    const SIDEBAR = [
+      'Edited by:',
+      'Eiichiro Mori,',
+      'Nara Medical University, Japan',
+      'Reviewed by:',
+      'Dan Ohtan Wang,',
+      'RIKEN Center for Biosystems',
+      'Kensuke Ninomiya,',
+      'Osaka University, Japan',
+      '*Correspondence:',
+      'Xiaodong Cheng',
+      'Specialty section:',
+      'This article was submitted to',
+      'Cell Growth and Division, a',
+      'section of the journal',
+    ];
+    /** A second page of single-column prose, so the body size and frame are the paper's. */
+    const SECOND = paragraph(
+      Array.from(
+        { length: 40 },
+        () => 'The body goes on over a second page of running prose set wide.',
+      ),
+      { size: 9.5, y: 720 },
+    );
+
+    it('reads a sidebar beside the abstract apart, keeping the whole abstract and the first section', async () => {
+      const document = await parse(
+        buildPdf({
+          pages: [
+            [
+              {
+                font: 'bold',
+                size: 20,
+                text: 'Modulation of Phase Separation by RNA',
+                x: 190,
+                y: 720,
+              },
+              {
+                size: 10,
+                text: 'Yingfeng Su, Yasen Maimaitiyiming, Lingfang Wang',
+                x: 190,
+                y: 690,
+              },
+              ...paragraph(ABSTRACT_LINES, { leading: 14, x: 190, y: 640 }),
+              ...paragraph(SIDEBAR, { leading: 10, size: 7, x: 50, y: 626 }),
+              { font: 'bold', size: 12, text: 'INTRODUCTION', x: 190, y: 500 },
+              ...paragraph(
+                Array.from(
+                  { length: 12 },
+                  (_, i) =>
+                    `Line ${i + 1} of the introduction, set in the body size across the measure.`,
+                ),
+                { size: 9.5, x: 190, y: 480 },
+              ),
+            ],
+            SECOND,
+          ],
+        }),
+      );
+      expect(texts(document.abstracts[0]?.sections[0]?.blocks ?? [])).toEqual([
+        ABSTRACT_LINES.join(' '),
+      ]);
+      expect(outline(document.body)[0]).toBe('INTRODUCTION');
+      expect(toMarkdown(document)).not.toMatch(/Edited by|Reviewed by|submitted to|Ninomiya/);
+    });
+
+    it('keeps whole the rows of a small table whose first column ends near the left margin', async () => {
+      const prose = (count: number, y: number) =>
+        paragraph(
+          Array.from(
+            { length: count },
+            () =>
+              'Running prose of the paper set across the whole measure of a single column page.',
+          ),
+          { y },
+        );
+      const rows = Array.from({ length: 8 }, (_, i) => [
+        { size: 8, text: `Sample group ${i + 1}`, x: 72, y: 500 - i * 11 },
+        {
+          size: 8,
+          text: `${i + 1}.5 mg per litre of buffer at the start of the assay`,
+          x: 220,
+          y: 500 - i * 11,
+        },
+        { size: 8, text: `${i + 12}`, x: 480, y: 500 - i * 11 },
+      ]).flat();
+      const document = await parse(
+        buildPdf({
+          pages: [
+            [
+              { font: 'bold', size: 18, text: 'A Single Column Paper With A Table', x: 72, y: 720 },
+              { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 700 },
+              ...prose(12, 680),
+              { font: 'bold', size: 8, text: 'Table 1.', x: 72, y: 515 },
+              { size: 8, text: 'Concentrations by group', x: 106, y: 515 },
+              ...rows,
+              ...prose(10, 400),
+            ],
+            SECOND,
+          ],
+        }),
+      );
+      const table = document.body[0]?.blocks.find((block) => block.type === 'table');
+      expect(table).toMatchObject({ label: 'Table 1' });
+      expect(table && 'rows' in table ? table.rows : []).toEqual(
+        Array.from({ length: 8 }, (_, i) => [
+          `Sample group ${i + 1}`,
+          `${i + 1}.5 mg per litre of buffer at the start of the assay`,
+          `${i + 12}`,
+        ]),
+      );
+    });
+  });
+
   it('reads a figure’s panel labels as text, and a lettered subsection as a heading', async () => {
     const prose = 'Prose of the introduction runs across the page in ordinary body text here.';
     const body = (top: number, count: number): TextSpec[] =>
@@ -334,7 +524,53 @@ describe('parsePdf', () => {
     expect(outline(lettered.body)).toEqual(['Introduction', '(a) Background']);
   });
 
-  it('ends a reference list at end matter opened by a bold back-matter label', async () => {
+  it('reads a wrapped bold heading whole when a ligature in it is set in a regular font', async () => {
+    const body = (y: number) =>
+      paragraph(
+        [
+          'Body text of the section runs across the page in ordinary type here,',
+          'and it goes on for a second line of the same paragraph before it ends.',
+          'A third line closes the paragraph with a full stop at its end here.',
+        ],
+        { y },
+      );
+    // `Modi`, `fi`, `cation…` at their 12 pt Helvetica widths, as pdf.js reports a ligature
+    // drawn from a regular font; or the same text as one bold run.
+    const rest = 'cation of Page Layout Modulates Phase';
+    for (const opening of [
+      [{ font: 'bold', size: 12, text: `Modifi${rest}`, x: 72, y: 520 }],
+      [
+        { font: 'bold', size: 12, text: 'Modi', x: 72, y: 520 },
+        { size: 12, text: 'fi', x: 99.996, y: 520 },
+        { font: 'bold', size: 12, text: rest, x: 105.996, y: 520 },
+      ],
+    ] satisfies TextSpec[][]) {
+      const document = await parse(
+        buildPdf({
+          pages: [
+            [
+              { font: 'bold', size: 20, text: 'A study of layout inference', x: 72, y: 720 },
+              { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 680 },
+              ...body(664),
+              { font: 'bold', size: 12, text: 'Prior Work on Layout', x: 72, y: 610 },
+              ...body(596),
+              ...opening,
+              { font: 'bold', size: 12, text: 'Separation', x: 72, y: 506 },
+              ...body(494),
+            ],
+          ],
+        }),
+      );
+      expect(toMarkdown(document).match(/^#+ .*$/gm)).toEqual([
+        '# A study of layout inference',
+        '## 1 Introduction',
+        '## Prior Work on Layout',
+        '## Modification of Page Layout Modulates Phase Separation',
+      ]);
+    }
+  });
+
+  it('ends a reference list at end matter opened by a bold back-matter label, whole or split', async () => {
     const opening: TextSpec[] = [
       { font: 'bold', size: 20, text: 'A study of layout inference in papers', x: 72, y: 720 },
       { font: 'bold', size: 12, text: 'Introduction', x: 72, y: 680 },
@@ -364,8 +600,25 @@ describe('parsePdf', () => {
         },
         { size: 8, text: `doi:10.1016/j.jmb.2015.08.${i}`, x: 81, y: 680 - 31 * i },
       ]);
-    const endMatter: TextSpec[] = [
-      { font: 'bold', size: 8, text: 'Conflict of Interest:', x: 72, y: 500 },
+    /**
+     * A bold label, whole or as pdf.js reports a ligature or apostrophe set in a regular
+     * font: bold, regular, and bold runs abutting, each at its 8 pt Helvetica width.
+     */
+    const label = (
+      split: boolean,
+      y: number,
+      [head, joint, tail]: [string, string, string],
+      [headWidth, jointWidth]: [number, number],
+    ): TextSpec[] =>
+      split
+        ? [
+            { font: 'bold', size: 8, text: head, x: 72, y },
+            { size: 8, text: joint, x: 72 + headWidth, y },
+            { font: 'bold', size: 8, text: tail, x: 72 + headWidth + jointWidth, y },
+          ]
+        : [{ font: 'bold', size: 8, text: head + joint + tail, x: 72, y }];
+    const endMatter = (split: boolean): TextSpec[] => [
+      ...label(split, 500, ['Con', 'fl', 'ict of Interest:'], [15.552, 4]),
       {
         size: 8,
         text: 'The authors declare that the research was conducted in the',
@@ -373,7 +626,7 @@ describe('parsePdf', () => {
         y: 500,
       },
       { size: 8, text: 'absence of any commercial or financial relationships.', x: 72, y: 490 },
-      { font: 'bold', size: 8, text: "Publisher's Note:", x: 72, y: 476 },
+      ...label(split, 476, ['Publisher', "'", 's Note:'], [36.456, 1.528]),
       {
         size: 8,
         text: 'All claims expressed in this article are solely those of the',
@@ -393,7 +646,12 @@ describe('parsePdf', () => {
         y: 452,
       },
     ];
-    for (const numbered of [false, true]) {
+    for (const [numbered, split] of [
+      [false, false],
+      [true, false],
+      [false, true],
+      [true, true],
+    ] as const) {
       const document = await parse(
         buildPdf({
           pages: [
@@ -401,7 +659,7 @@ describe('parsePdf', () => {
             [
               { font: 'bold', size: 12, text: 'References', x: 72, y: 720 },
               ...list(numbered),
-              ...endMatter,
+              ...endMatter(split),
             ],
           ],
         }),
@@ -457,6 +715,62 @@ describe('parsePdf', () => {
       expect(document.references.at(-1)?.text).toMatch(
         /Third\. Journal 2022\. .*Fourth paper\. Journal 2023\.$/,
       );
+      expect(document.back).toEqual([]);
+    }
+  });
+
+  it('ends a bold label at regular text set a word space apart from it', async () => {
+    const opening = paragraph(
+      Array.from({ length: 8 }, (_, i) => `Line ${i + 1} of ordinary running text in the paper.`),
+      { y: 680 },
+    );
+    // Bold and regular 10 pt Helvetica runs at their widths: a regular run spaced from the
+    // bold on both sides, one abutting the bold before it but spaced from the bold after,
+    // and one spaced from the bold before it but abutting the bold after. Each ends the
+    // label before `Interest:`, so no line reads as end matter.
+    for (const runs of [
+      [
+        { font: 'bold', text: 'Conflict', x: 72 },
+        { text: 'of', x: 112 },
+        { font: 'bold', text: 'Interest:', x: 123.12 },
+        { text: 'Fourth paper. Journal 2023.', x: 165.35 },
+      ],
+      [
+        { font: 'bold', text: 'Con', x: 72 },
+        { text: 'fl', x: 91.44 },
+        { font: 'bold', text: 'ict of Interest:', x: 99.22 },
+        { text: 'Fourth paper. Journal 2023.', x: 168.12 },
+      ],
+      [
+        { font: 'bold', text: 'Conflict of', x: 72 },
+        { text: 'Interest', x: 124.22 },
+        { font: 'bold', text: ':', x: 157.57 },
+        { text: 'Fourth paper. Journal 2023.', x: 163.68 },
+      ],
+    ] as const) {
+      const document = await parse(
+        buildPdf({
+          pages: [
+            [
+              {
+                font: 'bold',
+                size: 20,
+                text: 'A study of layout inference in papers',
+                x: 72,
+                y: 740,
+              },
+              { font: 'bold', size: 12, text: 'Introduction', x: 72, y: 700 },
+              ...opening,
+              { font: 'bold', size: 12, text: 'References', x: 72, y: 560 },
+              { size: 10, text: '[1] Smith A. First. Journal 2020.', x: 72, y: 540 },
+              { size: 10, text: '[2] Jones B. Second. Journal 2021.', x: 72, y: 528 },
+              { size: 10, text: '[3] Brown C. Third. Journal 2022.', x: 72, y: 516 },
+              ...runs.map((run) => ({ ...run, size: 10, y: 504 })),
+            ],
+          ],
+        }),
+      );
+      expect(document.references.at(-1)?.text).toMatch(/Fourth paper\. Journal 2023\.$/);
       expect(document.back).toEqual([]);
     }
   });

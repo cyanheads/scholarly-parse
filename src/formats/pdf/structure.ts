@@ -13,7 +13,7 @@ import { escapeInline } from '../../render/escape.js';
 import { flow } from './blocks.js';
 import type { PdfContext } from './context.js';
 import { joinLines, lineMarkdown, noteLabel, trimCells } from './inline.js';
-import { byColumn, cellText, type Layout, type Line, linesSize } from './layout.js';
+import { byColumn, cellText, insideBoldWord, type Layout, type Line, linesSize } from './layout.js';
 import {
   ABSTRACT_HEADING,
   ABSTRACT_RUN_IN,
@@ -271,10 +271,15 @@ function unlabeledAbstract(front: Line[], bodySize: number): Line[] {
   return best && count(best) >= 50 ? best : [];
 }
 
-/** The bold runs opening a line that goes on in regular type, and the rest of the line. */
+/**
+ * The bold runs opening a line that goes on in regular type, and the rest of the line. A
+ * regular run inside a bold word (a ligature or apostrophe in another font) does not end it.
+ */
 function leadingLabel(line: Line): { label: string; rest: Line } | undefined {
   const [first = [], ...others] = line.cells;
-  const count = first.findIndex((run) => !run.bold && run.text.trim() !== '');
+  const count = first.findIndex(
+    (run, index) => !run.bold && run.text.trim() !== '' && !insideBoldWord(first, index),
+  );
   if (count <= 0) return;
   const cells = [first.slice(count), ...others];
   return {

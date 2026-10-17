@@ -1,0 +1,26 @@
+{
+  "why": "Frontiers 2021 review whose page 1 sets a 7 pt sidebar of editors, dates, and licence (x 45–159) beside the abstract and introduction (from x 176), with no gutter of its own on that page. Pins the first-page margin column: it is read apart from the page's other text and dropped with the front matter, so the whole abstract (its own superscripts, N^6 and m^6A, included) survives and INTRODUCTION opens the body. Its running footer's centred page number joins the footer's left half on some pages and its right half on others; compared cell by cell, the footer drops on every page, so the two-column reference list keeps its column edges and reads its 139 entries (Crossref lists 139) apart. The end matter after the last entry opens at bold labels that pdf.js splits around a regular-font ligature and apostrophe (`Con` · `fl` · `ict of Interest:`, `Publisher` · `’` · `s Note:`); each label reads whole, so the list ends at [139] and the end matter is back matter. A bold subsection heading whose `fi` ligature (or en dash) is set in a regular font stays a bold line, so `RNA m6A Modification Modulates Phase Separation` reads whole over its two lines. Its sibling headings opening `m^6A Acts as a “…”` still split: their curly quotes are regular and spaced from the bold on one side, and a line opening in lower case is never a heading; neither is asserted here.",
+  "abstractStartsWith": "Phase separation is the driving force behind formation of various biomolecular condensates",
+  "sectionTitles": [
+    "INTRODUCTION",
+    "RNA MODULATES THE FORMATION AND PROPERTIES OF BIOMOLECULAR CONDENSATES BY REGULATING PHASE SEPARATION",
+    "RNA m6A Modification Modulates Phase Separation",
+    "PERSPECTIVES AND CONCLUDING REMARKS",
+    "Conflict of Interest",
+    "Publisher’s Note"
+  ],
+  "references": 139,
+  "contains": [
+    "modulate phase separation and regulate the related biological processes.",
+    "## Conflict of Interest\n\nThe authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.",
+    "- [139] Zhou, K. I., Parisien, M., Dai, Q., Liu, N., Diatchenko, L., Sachleben, J. R., et al. (2016)."
+  ],
+  "notContains": [
+    "Edited by",
+    "Reviewed by",
+    "This article was submitted to",
+    "### Separation\n",
+    "www.frontiersin.org",
+    "Volume 9 | Article 786454"
+  ]
+}

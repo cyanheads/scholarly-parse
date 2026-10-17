@@ -14,6 +14,7 @@ import {
   escapeUrl,
   isSafeUrl,
   oddBackslashesBefore,
+  underscoresInert,
 } from './escape.js';
 import { charClass, type DelimiterRun, readInline, wordSide } from './read-inline.js';
 import {
@@ -23,6 +24,7 @@ import {
   ESCAPABLE,
   insertBackslashes,
   pairBrackets,
+  unescapedDollar,
   unpadCode,
 } from './scan.js';
 
@@ -269,6 +271,9 @@ const LINK_DESTINATION =
  *   explicit link to the URL as the source has it (`bareUrlReader`), unless it stands inside
  *   link text, where GFM links no bare URL.
  * - A `!` before a link is escaped, so the link does not read as an image.
+ * - A `_` that emphasis could open or close at, which only `subscript` leaves bare (`*k*_1`,
+ *   `a _2`, `y_{ab}`), is escaped ({@link escapeLiveUnderscores}); one with a letter or
+ *   digit on both sides (`H_2O`) stays, as in `escapeInline`.
  * - Two emphasis, strong, or strikethrough spans of one kind that touch, whose markers GFM
  *   reads as one run, join into one span ({@link joinTouchingSpans}): `**K****-step**`
  *   becomes `**K-step**`.
@@ -283,15 +288,72 @@ const LINK_DESTINATION =
  * joint or a repair can put a character GFM starts a bare URL after before a `www.`
  * (`x*-www.` becomes `x-*www.`), and the backslash before a `](` can meet the bare URL
  * that ends there (`https://a.co/x\](`), so the seams are read again wherever the text
- * changed. The text is read once, plus once more when it holds a `![`, up to four times
- * more when spans touch, up to four times more when a marker stands between punctuation
- * and a word, and once more after any change.
+ * changed. The text is read once, plus once more when it holds a `![`, once more when it
+ * holds a `_`, up to four times more when spans touch, up to four times more when a marker
+ * stands between punctuation and a word, and once more after any change.
  */
 export function joinInlineSeams(markdown: string): string {
   const joined = repairSeams(markdown);
   const imaged = joined.includes('![') ? escapeImageOpeners(joined) : joined;
-  const repaired = repairStuckMarkers(joinTouchingSpans(imaged));
+  const repaired = escapeLiveUnderscores(repairStuckMarkers(joinTouchingSpans(imaged)));
   return repaired !== markdown ? repairSeams(repaired) : repaired;
+}
+
+/**
+ * What the underscore pass reads past (an escape, a code span, an autolink, inline math, a
+ * link destination) or escapes: an `_`.
+ */
+const UNDERSCORE_SEAM = /[\\`<$\]_]/g;
+
+/**
+ * Markdown with a backslash before each `_` in a run CommonMark's flanking rules let open
+ * or close emphasis ({@link underscoresInert}), outside code spans, autolinks, link
+ * destinations, and inline math, which stay as written. Source text arrives with every such
+ * run escaped, and an escaped `_` is read past, so only a bare `_` that `subscript` writes
+ * is escaped: after an italic variable (`*k*_1`), a space, or punctuation it can open, and
+ * before a group (`y_{ab}`) it can close, pairing with any other `_` that can, a TeX one
+ * included. It runs after the marker repairs, which move a backslash escape whole and a
+ * bare `_` never, so a script's notation stays whole (`pKa*_2*` becomes `pKa_2`). Reads
+ * the text once.
+ */
+function escapeLiveUnderscores(markdown: string): string {
+  if (!markdown.includes('_')) return markdown;
+  const live: number[] = [];
+  const codeSpanEnd = codeSpanCloser(markdown);
+  let mathCloses = true;
+  const seam = new RegExp(UNDERSCORE_SEAM);
+  for (let found = seam.exec(markdown); found; found = seam.exec(markdown)) {
+    const start = found.index;
+    let end = start + 1;
+    switch (found[0]) {
+      case '\\':
+        if (ESCAPABLE.test(markdown.charAt(end))) end++;
+        break;
+      case '`':
+        end = codeSpanAt(markdown, start, codeSpanEnd).end;
+        break;
+      case '<':
+        end = autolinkAt(markdown, start)?.end ?? end;
+        break;
+      case '$': {
+        const close = mathCloses ? unescapedDollar(markdown, end) : -1;
+        if (close === -1) mathCloses = false;
+        if (close > end) end = close + 1;
+        break;
+      }
+      case ']':
+        if (markdown.charAt(end) !== '(') break;
+        LINK_DESTINATION.lastIndex = start + 2;
+        if (LINK_DESTINATION.test(markdown)) end = LINK_DESTINATION.lastIndex;
+        break;
+      default:
+        while (markdown.charAt(end) === '_') end++;
+        if (!underscoresInert(markdown, start, end))
+          for (let at = start; at < end; at++) live.push(at);
+    }
+    seam.lastIndex = end;
+  }
+  return insertBackslashes(markdown, live);
 }
 
 /** The seams of `markdown` repaired, as {@link joinInlineSeams} lists them, up to its image openers and stuck markers. */

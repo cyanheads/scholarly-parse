@@ -510,11 +510,12 @@ describe('joinInlineSeams', () => {
     // Emphasis over punctuation alone has nothing a marker can stand beside.
     ['lifespan*.* We', 'lifespan. We', []],
     ['x*(.)*y', 'x(.)y', []],
-    ['P(*a*_t*, . . .*)', 'P(*a*_t, . . .)', ['emphasis:a']],
+    // A subscript's `_` after a marker could open emphasis, so it is escaped (#77).
+    ['P(*a*_t*, . . .*)', 'P(*a*\\_t, . . .)', ['emphasis:a']],
     // GFM pairs `.*01` with the next `0*.`, whole, and the chain reaches every pair.
     [
       '−0*.*01, *α*_3 = 0*.*5, *α*_5 = −1*.*5',
-      '−0.01, *α*_3 = 0.5, *α*_5 = −1.5',
+      '−0.01, *α*\\_3 = 0.5, *α*\\_5 = −1.5',
       ['emphasis:α', 'emphasis:α'],
     ],
     // A formula alone is moved out whole, which leaves nothing emphasized.
@@ -529,7 +530,7 @@ describe('joinInlineSeams', () => {
     expect(joinInlineSeams(markdown)).toBe(joined);
     expect(gfmSpans(joined)).toEqual(spans);
     expect(gfmText(joined)).toBe(stripInline(joined));
-    const unmarked = (text: string) => text.replace(/(?<!\\)[*~]/g, '');
+    const unmarked = (text: string) => text.replace(/(?<!\\)[*~]/g, '').replace(/\\_/g, '_');
     expect(unmarked(joined)).toBe(unmarked(markdown));
   });
 
@@ -580,6 +581,39 @@ describe('joinInlineSeams', () => {
   ])('leaves runs GFM pairs whole as written, and a repair that pairs fewer: %j', (markdown) => {
     expect(joinInlineSeams(markdown)).toBe(markdown);
   });
+
+  it.each([
+    ['a _2 and y_{ab} here', 'a \\_2 and y\\_{ab} here'],
+    // A TeX `_` can open, so the `_` that could close it outside the formula is escaped.
+    ['$\\alpha _k$ then y_{ab} here', '$\\alpha _k$ then y\\_{ab} here'],
+    ['[a _2 and b_{c}](https://a.co) d', '[a \\_2 and b\\_{c}](https://a.co) d'],
+    ['x__{ab} and y_{c}', 'x\\_\\_{ab} and y\\_{c}'],
+    // After an escaped backslash, the `_` is bare.
+    ['a\\\\_2 b_{c}', 'a\\\\\\_2 b\\_{c}'],
+  ])('escapes a subscript’s _ that could open or close emphasis (#77): %j', (markdown, joined) => {
+    expect(joinInlineSeams(markdown)).toBe(joined);
+    expect(gfmSpans(joined)).toEqual([]);
+    expect(gfmText(joined)).toBe(stripInline(joined));
+    expect(joinInlineSeams(joined)).toBe(joined);
+  });
+
+  it('leaves a _ between letters or digits, an escaped one, and one in code, links, or math (#77)', () => {
+    for (const markdown of [
+      'H_2O, CO_2, x_i',
+      '`a _b_` and <https://a.co/_x_> and [l](https://a.co/_x_) and $a _b$ $c_ d$',
+      escapeInline('a _b c_ d'),
+    ]) {
+      expect(joinInlineSeams(markdown)).toBe(markdown);
+    }
+    expect(escapeInline('a _b c_ d')).toBe('a \\_b c\\_ d');
+  });
+
+  it.each(['_', ' _', '*k*_1 ', '$a _', '`_', '<https://a_', '](https://a_', '\\_', '[a_'])(
+    'escapes underscores in time linear in a run of %j (#77)',
+    async (run) => {
+      await expectLinear((n) => run.repeat(n), joinInlineSeams, { from: 250, to: 64_000 });
+    },
+  );
 
   it('leaves emphasis that already opens and closes as written', () => {
     for (const markdown of [

@@ -370,7 +370,7 @@ describe('inline markup', () => {
       paragraphOf(
         'x<sup>2</sup>, 10<sup>−5</sup>, CO<sub>2</sub>, IC<sub>50</sub>, 10<sup>5</sup>',
       ),
-    ).toBe('x^2, 10^{−5}, CO_2, IC_{50}, 10^5');
+    ).toBe('x^2, 10^{−5}, CO_2, IC\\_{50}, 10^5');
   });
 
   it('writes citation markers as printed numbers in brackets', () => {

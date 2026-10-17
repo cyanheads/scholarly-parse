@@ -58,15 +58,24 @@ export function escapeText(text: string): string {
     .replace(/\\$/, '\\\\')
     .replace(/[*`$~]/g, '\\$&')
     .replace(/_+/g, (run: string, at: number, whole: string) =>
-      ENDS_IN_LETTER_OR_DIGIT.test(whole.slice(Math.max(0, at - 2), at)) &&
-      STARTS_WITH_LETTER_OR_DIGIT.test(whole.slice(at + run.length, at + run.length + 2))
-        ? run
-        : run.replace(/_/g, '\\_'),
+      underscoresInert(whole, at, at + run.length) ? run : run.replace(/_/g, '\\_'),
     )
     .replace(/\]\(/g, '\\](')
     .replace(/<(?=[A-Za-z/!?]|$)/g, '\\<')
     .replace(/!$/, '\\!')
     .replace(/&(?=#?[A-Za-z0-9]+;|#?[A-Za-z0-9]*$)/g, '\\&');
+}
+
+/**
+ * True when the `_` run from `start` to `end` in `text` has a letter or digit on both
+ * sides, where CommonMark's flanking rules let it neither open nor close emphasis. Any
+ * other run may delimit emphasis, so {@link escapeText} and `joinInlineSeams` escape it.
+ */
+export function underscoresInert(text: string, start: number, end: number): boolean {
+  return (
+    ENDS_IN_LETTER_OR_DIGIT.test(text.slice(Math.max(0, start - 2), start)) &&
+    STARTS_WITH_LETTER_OR_DIGIT.test(text.slice(end, end + 2))
+  );
 }
 
 /** Where a bare URL can start. */

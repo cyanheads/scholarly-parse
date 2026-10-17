@@ -51,9 +51,7 @@ For whole genome sequencing, a total of 96 samples were selected from the 390 sa
 
 ### Sample preparation for WGS
 
-All the selected blood samples on FTA cards were processed using a
-
-lated genomic DNA were assessed by three different instruments - NanoDrop 1000 spectrophotometer (ThermoQIAamp® DNA Investigator-50 kit (CAT no: 56504; QIAGEN, Germany). The quality and the quantity of the iso- Fisher Scientific, USA), Qubit 4 fluorometer (Invitrogen, USA) and TapeStation 4200 (Agilent Technologies,
+All the selected blood samples on FTA cards were processed using a QIAamp® DNA Investigator-50 kit (CAT no: 56504; QIAGEN, Germany). The quality and the quantity of the isolated genomic DNA were assessed by three different instruments - NanoDrop 1000 spectrophotometer (Thermo Fisher Scientific, USA), Qubit 4 fluorometer (Invitrogen, USA) and TapeStation 4200 (Agilent Technologies,
 
 **Fig. 2.** Quality control metrics from FastQC analysis. (a) Per sequence quality scores and (b) per sequence GC content.
 
@@ -101,7 +99,7 @@ We observed an average of 1 SNP in every 57 base pairs in 10kb non-overlapping w
 
 ### Density of SNPs across chromosomes (10kb non-overlaping windows)
 
-*snpCount* ^{Chr19} 768.00 576.25 384.50 _{Chr23} 192.75 Chromosome length (Mb)
+*snpCount* ^{Chr19} 768.00 576.25 384.50 \_{Chr23} 192.75 Chromosome length (Mb)
 
 **Fig. 4.** Chromosome-wise SNP distribution heat map across the Bangladeshi native chicken genome based on more than 22 M identified SNPs. The x-axis represents the chromosome length (Mb) and the y-axis denotes chromosome number.
 

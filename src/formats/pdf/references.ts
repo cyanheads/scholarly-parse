@@ -27,7 +27,7 @@ export function references(lines: Line[], layout: Layout): Reference[] {
   let starts = numberedStarts(texts);
   if (starts.size < 3 && !isShortList(texts, starts)) {
     starts = indentStarts(texts);
-    if (starts.size < 3) starts = gapStarts(texts, layout);
+    if (starts.size < 2) starts = gapStarts(texts, layout);
   }
 
   const entries: Line[][] = [];
@@ -110,7 +110,9 @@ function isShortList(lines: Line[], starts: Set<Line>): boolean {
 /**
  * Entry starts marked by indentation: the lines at a column's left edge under a hanging
  * indent, or the indented lines where each entry's first line is indented instead.
- * Either way the starts are the smaller group, since most entries run over several lines.
+ * Either way the starts are the group holding the list's first line, which always opens
+ * an entry. Unless each group holds a fifth of the lines, indentation marks nothing: one
+ * indented line in a flush list is no hanging indent.
  */
 function indentStarts(lines: Line[]): Set<Line> {
   const atEdge = new Set<Line>();
@@ -122,11 +124,40 @@ function indentStarts(lines: Line[]): Set<Line> {
       else if (line.x <= edge + line.size * 3) indented.add(line);
     }
   }
-  const starts = indented.size < atEdge.size ? indented : atEdge;
-  return starts.size >= lines.length * 0.2 ? starts : new Set();
+  const floor = lines.length * 0.2;
+  if (indented.size < floor || atEdge.size < floor) return new Set();
+  // A start follows a line that ends an entry. The first line's group wins unless its other
+  // lines follow one less often than the other group's: a first entry set flush under a
+  // first-line indent.
+  const followsEnd = (group: Set<Line>) => {
+    let count = 0;
+    let follows = 0;
+    lines.forEach((line, i) => {
+      const previous = lines[i - 1];
+      if (!previous || !group.has(line)) return;
+      count++;
+      if (/[.)\d]$/.test(previous.text.trim())) follows++;
+    });
+    return count ? follows / count : undefined;
+  };
+  const [first, other] =
+    lines[0] && indented.has(lines[0]) ? [indented, atEdge] : [atEdge, indented];
+  const [own, rival] = [followsEnd(first), followsEnd(other)];
+  return own !== undefined && rival !== undefined && rival > own ? other : first;
 }
 
 function gapStarts(lines: Line[], layout: Layout): Set<Line> {
+  // The list's own leading when it is tighter than the body's: a list set smaller is led closer.
+  const gaps = lines
+    .flatMap((line, i) => {
+      const previous = lines[i - 1];
+      return previous && previous.page === line.page && previous.column === line.column
+        ? [previous.y - line.y]
+        : [];
+    })
+    .filter((gap) => gap > 0)
+    .sort((a, b) => a - b);
+  const leading = Math.min(layout.lineGap, gaps[Math.floor(gaps.length / 2)] ?? layout.lineGap);
   const starts = new Set<Line>();
   lines.forEach((line, i) => {
     const previous = lines[i - 1];
@@ -134,7 +165,7 @@ function gapStarts(lines: Line[], layout: Layout): Set<Line> {
       if (!previous || /[.)]$/.test(previous.text.trim())) starts.add(line);
       return;
     }
-    if (previous.y - line.y > Math.max(layout.lineGap, line.size * 1.15) * 1.3) starts.add(line);
+    if (previous.y - line.y > Math.max(leading, line.size * 1.15) * 1.3) starts.add(line);
   });
   return starts;
 }

@@ -48,7 +48,7 @@ In this section, we briefly describe the MT systems and the target languages we 
 
 MT systems We test six widely used MT models, representing the state of the art in both commercial and academic research: (1) Google Translate,^1 (2) Microsoft Translator,^2 (3) Amazon Translate,^3 (4) SYSTRAN,^4 (5) the model of Ott et al. (2018), which recently achieved the best performance on English-to-French translation on the WMT’14 test set, and (6) the model of Edunov et al. (2018), the WMT’18 winner on English-to-German translation. We query the online API for the first four commercial MT systems, while for the latter two academic models we use the pretrained models provided by the Fairseq a trained model for English to Ukrainian.
 
-**Table 2.** Performance of commercial MT systems on the WinoMT corpus on all tested languages, categorized by their family: Spanish, French, Italian, Russian, Ukrainian, Hebrew, Arabic, and German. *Acc* indicates overall gender accuracy (% of instances the translation had the correct gender), ∆_G denotes the difference in performance (F_1 score) between masculine and feminine scores, and ∆_S is the difference in performance (F_1 score) between pro-stereotypical and anti-stereotypical gender role assignments (higher numbers in the two latter metrics indicate stronger biases). Numbers in bold indicate best accuracy for the language across MT systems (row), and underlined numbers indicate best accuracy for the MT system across languages (column).^∗Amazon Translate does not have
+**Table 2.** Performance of commercial MT systems on the WinoMT corpus on all tested languages, categorized by their family: Spanish, French, Italian, Russian, Ukrainian, Hebrew, Arabic, and German. *Acc* indicates overall gender accuracy (% of instances the translation had the correct gender), ∆\_G denotes the difference in performance (F_1 score) between masculine and feminine scores, and ∆\_S is the difference in performance (F_1 score) between pro-stereotypical and anti-stereotypical gender role assignments (higher numbers in the two latter metrics indicate stronger biases). Numbers in bold indicate best accuracy for the language across MT systems (row), and underlined numbers indicate best accuracy for the MT system across languages (column).^∗Amazon Translate does not have
 
 |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -71,7 +71,7 @@ MT systems We test six widely used MT models, representing the state of the art 
 | *FR (Ott et al., 2018)* | 49.4 | 2.6 | 16.1 |
 | *DE (Edunov et al., 2018)* | 52.5 | 7.3 | 8.4 |
 
-toolkit.
+toolkit.^5
 
 ### Target languages and morphological analysis
 
@@ -83,7 +83,9 @@ Our main findings are presented in Tables 2 and 3. For each tested MT system and
 
 First, the overall system *Accuracy* is calculated by the percentage of instances in which the translation preserved the gender of the entity from the original English sentence. We find that most tested systems across eight tested languages perform quite poorly on this metric. The best performing model on each language often does not do much better than a random guess for the correct inflection. An exception to this rule is the translation accuracies on German, where three out of four systems acheive their best performance. This may be explained by German’s similarity to the English source language (Hawkins, 2015).
 
-In Table 2, ∆_G denotes the difference in performance (F_1 score) between male and female translations. Interestingly, all systems, except Microsoft Translator on German, perform signifi- 100 80 80 67 46 44 40 30 20 76 69 60 57 46 44 systems we tested display similar trends.
+In Table 2, ∆\_G denotes the difference in performance (F_1 score) between male and female translations. Interestingly, all systems, except Microsoft Translator on German, perform signifi- 100 80 80 67 46 44 40 30
+
+20 76 69 60 57 46 44 systems we tested display similar trends.
 
 **Figure 2.** Google Translate’s performance on gender translation on our tested languages. The performance on the stereotypical portion of WinoMT is consistently better than that on the non-stereotypical portion. The other MT
 
@@ -98,7 +100,7 @@ In Table 2, ∆_G denotes the difference in performance (F_1 score) between male
 
 cantly better on male roles, which may stem from these being more frequent in the training set.
 
-Perhaps most tellingly, ∆_S measures the difference in performance (F_1 score) between stereotypical and non-stereotypical gender role assignments, as defined by Zhao et al. (2018) who use statistics provided by the US Department of Labor.^6 This metric shows that all tested systems have a significant and consistently better performance when presented with pro-stereotypical assignments (e.g., a female nurse), while their performance deteriorates when translating antistereotypical roles (e.g., a male receptionist). For instance, Figure 2 depicts Google Translate absolute accuracies on stereotypical and nonstereotypical gender roles across all tested languages. Other tested systems show similar trends.
+Perhaps most tellingly, ∆\_S measures the difference in performance (F_1 score) between stereotypical and non-stereotypical gender role assignments, as defined by Zhao et al. (2018) who use statistics provided by the US Department of Labor.^6 This metric shows that all tested systems have a significant and consistently better performance when presented with pro-stereotypical assignments (e.g., a female nurse), while their performance deteriorates when translating antistereotypical roles (e.g., a male receptionist). For instance, Figure 2 depicts Google Translate absolute accuracies on stereotypical and nonstereotypical gender roles across all tested languages. Other tested systems show similar trends.
 
 ### 3.3 Fighting Bias with Bias
 

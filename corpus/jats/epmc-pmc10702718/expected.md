@@ -107,16 +107,16 @@ All presented notations and their definitions are defined in Table 2.
 | --- | --- |
 | *FL* | Set of files |
 | *Vr* | Set of virtual machines |
-| *V* _n | Number of available virtual machines |
-| *F* _n | Number of total files |
+| *V* \_n | Number of available virtual machines |
+| *F* \_n | Number of total files |
 | *i* | Index related to the file |
 | *j* | Index related to the virtual machine |
-| *F* _i | File number *i* |
-| *Vr* _j | Virtual machine number *j* |
-| *Sz* _i | Size of the file *F*_i |
-| *Tf* _i | The used space when the file *F*_i is executed |
-| *Ts* _j | The total used space in the virtual machine *Vr*_j |
-| *Ts* _{min} | The minimum used space ∀*Vr*_j, *j* = {1, …, *V*_n} |
+| *F* \_i | File number *i* |
+| *Vr* \_j | Virtual machine number *j* |
+| *Sz* \_i | Size of the file *F*\_i |
+| *Tf* \_i | The used space when the file *F*\_i is executed |
+| *Ts* \_j | The total used space in the virtual machine *Vr*\_j |
+| *Ts* \_{min} | The minimum used space ∀*Vr*\_j, *j* = {1, …, *V*\_n} |
 
 Several objective functions can be adopted to solve the studied problem. In this article, we adopt the objective function detailed in Eq. (1). Hereafter, *Gfv* denotes the gap of the used space between the different virtual machines. This gap will be the objective that must be minimized.
 
@@ -128,13 +128,13 @@ The objective is to find a schedule that can minimize *Gfv*. In these circumstan
 
 > Example 1
 >
-> In this example, we give a scenario that can be realized in a real circumstance. Suppose that, there are three virtual machines and nine files to be executed by these virtual machines. In this case, we have *V*_n = 3 and *F*_n = 9. The objective is to find a schedule that can give an acceptable solution to assign all these files to different virtual machines. Table 3, illustrates the sizes of the different files. Assume that we will choose the shortest size-based algorithm. This algorithm is based on the following: we sort all files according to the increasing order of their size and the scheduling will be done one by one on the virtual machine that has the minimum value of *Ts*_j. The result obtained by this algorithm is presented in Fig. 2. This Figure shows that in the virtual machine *Vr*_1 the files {2, 8, 9} are executed. However, in the virtual machine *Vr*_2 the files {5, 6, 7} are executed. Finally, in the virtual machine *Vr*_3 the files {1, 3, 4} are executed. Now, the calculation of the *Ts*_j is necessary to determine the total gap *Gfv*. As a result, the values of *Ts*_1, *Ts*_2, and *Ts*_3 are 28, 36, and 42, respectively. Consequently, $Gfv=∑_{j=1}^3(Ts_j−Ts_{min}=(28−28)+(36−28)+(42−28))=22$. For this schedule, the gap between the virtual machines is 22. The objective is to find another schedule that gives a better result which means a gap of less than 22. Applying the algorithm of the longest size that sorts the files according to the decreasing order of their size and the scheduling will be done one by one on the virtual machine that has the minimum value of *Ts*_j. The result obtained by this algorithm is presented in Fig. 3. This Figure shows that in the virtual machine *Vr*_1 the files {1, 2, 9} are executed. However, in the virtual machine *Vr*_2 the files {5, 6, 7} are executed. Finally, in the virtual machine *Vr*_3 the files {3, 4, 8} are executed. Now, the calculation of the *Ts*_j is necessary to determine the total gap *Gfv*. As a result, the values of *Ts*_1, *Ts*_2, and *Ts*_3 are 36, 36, and 34, respectively. Consequently, $Gfv=∑_{j=1}^3(Ts_j−Ts_{min}=(36−34)+(36−34)+(34−34))=4$. It is clear the first schedule presented in Fig. 1 gives a gap greater than the result obtained by schedule 2. The difference between these two schedules is 22 − 4 = 18. So, just by changing the sorting method between the first algorithm and the second one we gain 18 units of gap value.
+> In this example, we give a scenario that can be realized in a real circumstance. Suppose that, there are three virtual machines and nine files to be executed by these virtual machines. In this case, we have *V*\_n = 3 and *F*\_n = 9. The objective is to find a schedule that can give an acceptable solution to assign all these files to different virtual machines. Table 3, illustrates the sizes of the different files. Assume that we will choose the shortest size-based algorithm. This algorithm is based on the following: we sort all files according to the increasing order of their size and the scheduling will be done one by one on the virtual machine that has the minimum value of *Ts*\_j. The result obtained by this algorithm is presented in Fig. 2. This Figure shows that in the virtual machine *Vr*\_1 the files {2, 8, 9} are executed. However, in the virtual machine *Vr*\_2 the files {5, 6, 7} are executed. Finally, in the virtual machine *Vr*\_3 the files {1, 3, 4} are executed. Now, the calculation of the *Ts*\_j is necessary to determine the total gap *Gfv*. As a result, the values of *Ts*\_1, *Ts*\_2, and *Ts*\_3 are 28, 36, and 42, respectively. Consequently, $Gfv=∑_{j=1}^3(Ts_j−Ts_{min}=(28−28)+(36−28)+(42−28))=22$. For this schedule, the gap between the virtual machines is 22. The objective is to find another schedule that gives a better result which means a gap of less than 22. Applying the algorithm of the longest size that sorts the files according to the decreasing order of their size and the scheduling will be done one by one on the virtual machine that has the minimum value of *Ts*\_j. The result obtained by this algorithm is presented in Fig. 3. This Figure shows that in the virtual machine *Vr*\_1 the files {1, 2, 9} are executed. However, in the virtual machine *Vr*\_2 the files {5, 6, 7} are executed. Finally, in the virtual machine *Vr*\_3 the files {3, 4, 8} are executed. Now, the calculation of the *Ts*\_j is necessary to determine the total gap *Gfv*. As a result, the values of *Ts*\_1, *Ts*\_2, and *Ts*\_3 are 36, 36, and 34, respectively. Consequently, $Gfv=∑_{j=1}^3(Ts_j−Ts_{min}=(36−34)+(36−34)+(34−34))=4$. It is clear the first schedule presented in Fig. 1 gives a gap greater than the result obtained by schedule 2. The difference between these two schedules is 22 − 4 = 18. So, just by changing the sorting method between the first algorithm and the second one we gain 18 units of gap value.
 
 **Table 3.** **Nine files scenario with its different size.**
 
 | *i* | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| *Sz* _i | 21 | 11 | 12 | 8 | 19 | 5 | 12 | 13 | 4 |
+| *Sz* \_i | 21 | 11 | 12 | 8 | 19 | 5 | 12 | 13 | 4 |
 
 **Figure 2.** **Schedule 1 applying a shortest size-based algorithm for Example 1.**
 
@@ -146,13 +146,13 @@ In this section, we present and detail all the proposed algorithms. These algori
 
 ### New grouping method
 
-This method subdivides the files into three groups *G*_1, *G*_2, and *G*_3. At the start, these groups are empty. The number of files in *G*_1, *G*_2, and *G*_3 are denoted by *f*_1, *f*_2, and *f*_3, respectively. In the practice, $f_1=\frac{Fn}{3}$, $f_2=\frac{Fn}{3}$, and *f*_3 = *Fn* − *f*_1 − *f*_2. Consequently, *G*_1 = {*F*_1, …, *F*_{f1}}, *G*_2 = {*F*_{f1+1}, …, *F*_{f1+f2}}, and *G*_3 = {*F*_{f1+f2+1}, …, *F*_{Fn}}. It is clear that the groups *G*_1, *G*_2, and *G*_3 depend on the manner that initially the files are sorted. Therefore, the initial state of the set of files is very important to determine the groups. Ten algorithms are presented in this article based on the grouping method. Changing the way that we select files into groups and between groups is the core of the difference between the proposed algorithms. Figure 4 gives an example of the subdivision of the given set of files.
+This method subdivides the files into three groups *G*\_1, *G*\_2, and *G*\_3. At the start, these groups are empty. The number of files in *G*\_1, *G*\_2, and *G*\_3 are denoted by *f*\_1, *f*\_2, and *f*\_3, respectively. In the practice, $f_1=\frac{Fn}{3}$, $f_2=\frac{Fn}{3}$, and *f*\_3 = *Fn* − *f*\_1 − *f*\_2. Consequently, *G*\_1 = {*F*\_1, …, *F*\_{f1}}, *G*\_2 = {*F*\_{f1+1}, …, *F*\_{f1+f2}}, and *G*\_3 = {*F*\_{f1+f2+1}, …, *F*\_{Fn}}. It is clear that the groups *G*\_1, *G*\_2, and *G*\_3 depend on the manner that initially the files are sorted. Therefore, the initial state of the set of files is very important to determine the groups. Ten algorithms are presented in this article based on the grouping method. Changing the way that we select files into groups and between groups is the core of the difference between the proposed algorithms. Figure 4 gives an example of the subdivision of the given set of files.
 
 **Figure 4.** **Grouping of a set of files into three groups.**
 
 ### Longest file size algorithm (*LFS*)
 
-Firstly, the files are sorted according to the decreasing order of their size. The scheduling of the sorted files will be done one by one on the virtual machine that has the minimum value of *Tf*_i until all files finish their execution. The complexity of this algorithm is depending on the algorithm that sorts the files. The heap sort is adopted for this algorithm. Consequently, the complexity of this algorithm is *O*(*nlogn*). All these steps are described in Algorithm 2. Hereafter, we denoted by *DER*(*F*) the procedure that receives as input a list of numbers *F* and sorts these numbers in decreasing order. These numbers will be the sizes of the files that we want to sort them. The procedure *DER*(*F*) is based on the heap sort method. Hereafter, we denoted by *SCL*(*F*) the procedure that schedules the element *i* (∀*i*, 1 ≤ *i* ≤ *F*_n) of *F* on the virtual machine which has the minimum *Ts*_j. The instructions of *SCL*(*F*) are detailed in Algorithm 1.
+Firstly, the files are sorted according to the decreasing order of their size. The scheduling of the sorted files will be done one by one on the virtual machine that has the minimum value of *Tf*\_i until all files finish their execution. The complexity of this algorithm is depending on the algorithm that sorts the files. The heap sort is adopted for this algorithm. Consequently, the complexity of this algorithm is *O*(*nlogn*). All these steps are described in Algorithm 2. Hereafter, we denoted by *DER*(*F*) the procedure that receives as input a list of numbers *F* and sorts these numbers in decreasing order. These numbers will be the sizes of the files that we want to sort them. The procedure *DER*(*F*) is based on the heap sort method. Hereafter, we denoted by *SCL*(*F*) the procedure that schedules the element *i* (∀*i*, 1 ≤ *i* ≤ *F*\_n) of *F* on the virtual machine which has the minimum *Ts*\_j. The instructions of *SCL*(*F*) are detailed in Algorithm 1.
 
 ```
 _______________________ 
@@ -183,11 +183,11 @@ The content of the groups depends on the manner that the files are sorted initia
 - Second manner: Sort the files according to the increasing order of their size.
 - Third manner: Sort the files according to the decreasing order of their size.
 
-For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute a sequence of groups. The first sequence is *G*_1, *G*_2, and *G*_3 denoted as {*G*_1, *G*_2, *G*_3}. For this sequence, we schedule all files in *G*_1, next we schedule all files in *G*_2 and finally, we schedule all files in *G*_3. The second sequence is {*G*_1, *G*_3, *G*_2}. The third sequence is {*G*_2, *G*_1, *G*_3}. The fourth sequence is {*G*_2, *G*_3, *G*_1}. The fifth sequence is {*G*_3, *G*_1, *G*_2}. The last sequence is {*G*_3, *G*_2, *G*_1}. So, for each manner, six sequences are executed and the best solution is picked and returned.
+For each manner, firstly we create the groups *G*\_1, *G*\_2, and *G*\_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute a sequence of groups. The first sequence is *G*\_1, *G*\_2, and *G*\_3 denoted as {*G*\_1, *G*\_2, *G*\_3}. For this sequence, we schedule all files in *G*\_1, next we schedule all files in *G*\_2 and finally, we schedule all files in *G*\_3. The second sequence is {*G*\_1, *G*\_3, *G*\_2}. The third sequence is {*G*\_2, *G*\_1, *G*\_3}. The fourth sequence is {*G*\_2, *G*\_3, *G*\_1}. The fifth sequence is {*G*\_3, *G*\_1, *G*\_2}. The last sequence is {*G*\_3, *G*\_2, *G*\_1}. So, for each manner, six sequences are executed and the best solution is picked and returned.
 
 ### Third-grouped with minimum-load algorithm (*TGM*)
 
-The division into groups of files is adopted in this algorithm. Three groups are created by the same method described in the section ‘New grouping method’ with the three manners detailed in the same subsection. For each manner, a solution is calculated and the best solution is selected. The algorithm is designed in five steps. The first step is to apply the first manner and create the three groups *G*_1, *G*_2, and *G*_3. The second step is to calculate the load of each group. The load is the sum of all sizes of the files in the group. Indeed, the load of *G*_1 is denoted by *Lo*_1 and equal to $∑_{i=1}^{f_1}(Sz_i)$. The load of *G*_2 and *G*_3 are denoted by *Lo*_2 and *Lo*_3, respectively. So, we have $Lo_2=∑_{i=f_1+1}^{f_1+f_2}(Sz_i)$ and $Lo_3=∑_{i=f_1+f_2+1}^{F_n}(Sz_i)$. The third step is to choose the group which has the minimum load. This group will be denoted by *Gc*. The fourth step is to schedule the first file in *Gc*. We update loads of different groups and a new choice of a *Gc* will be determined and so on until the schedule of all the files. The total gap is calculated and denoted by *Gfv*_1. We restart step 1 with the second manner described in the above Subsection and the total gap for this solution is calculated and denoted by *Gfv*_2. Finally, for the fifth step, we restart, step 1 with the application of the third manner, and a new gap is calculated and denoted by *Gfv*_3. The best solution *Gfv* is calculated as given in Eq. (2).
+The division into groups of files is adopted in this algorithm. Three groups are created by the same method described in the section ‘New grouping method’ with the three manners detailed in the same subsection. For each manner, a solution is calculated and the best solution is selected. The algorithm is designed in five steps. The first step is to apply the first manner and create the three groups *G*\_1, *G*\_2, and *G*\_3. The second step is to calculate the load of each group. The load is the sum of all sizes of the files in the group. Indeed, the load of *G*\_1 is denoted by *Lo*\_1 and equal to $∑_{i=1}^{f_1}(Sz_i)$. The load of *G*\_2 and *G*\_3 are denoted by *Lo*\_2 and *Lo*\_3, respectively. So, we have $Lo_2=∑_{i=f_1+1}^{f_1+f_2}(Sz_i)$ and $Lo_3=∑_{i=f_1+f_2+1}^{F_n}(Sz_i)$. The third step is to choose the group which has the minimum load. This group will be denoted by *Gc*. The fourth step is to schedule the first file in *Gc*. We update loads of different groups and a new choice of a *Gc* will be determined and so on until the schedule of all the files. The total gap is calculated and denoted by *Gfv*\_1. We restart step 1 with the second manner described in the above Subsection and the total gap for this solution is calculated and denoted by *Gfv*\_2. Finally, for the fifth step, we restart, step 1 with the application of the third manner, and a new gap is calculated and denoted by *Gfv*\_3. The best solution *Gfv* is calculated as given in Eq. (2).
 
 $$
 Gfv=\underset{1≤k≤3}{min}(Gfv_k) \tag{2}
@@ -195,7 +195,7 @@ $$
 
 ### Third-grouped excluding-files with minimum-load algorithm (*TEM*)
 
-The first step of this algorithm is the select the *V*_n longest files. Each file will be scheduled in a distinguished virtual machine. Now, the *F*_n − *V*_n remaining files will be scheduled in the virtual machines according to *TGM*. We denoted by *EXL*(*F*) the function that returns a list that contains the *V*_n longest files among *F*. We denoted by *Rem*(*F*) the function that returns a list that contains the *F*_n − *V*_n remaining files after excluding the *V*_n longest files among *F*. Hereafter, we denoted by *IER*(*F*) the procedure that receives as input a list of numbers *F* and sorts these numbers in decreasing order. Hereafter, we denoted by *GrP*(*F*) the procedure that subdivided the listed files *F* into the three groups *G*_1, *G*_2, and *G*_3 described in the section ‘New grouping method’. The procedure *MG*() is responsible to return the group that has the maximum load. The procedure *SCLF*(*L*) is responsible to schedule the first element of *L* on the available virtual machine. All steps of the algorithm are described in the Algorithm 3.
+The first step of this algorithm is the select the *V*\_n longest files. Each file will be scheduled in a distinguished virtual machine. Now, the *F*\_n − *V*\_n remaining files will be scheduled in the virtual machines according to *TGM*. We denoted by *EXL*(*F*) the function that returns a list that contains the *V*\_n longest files among *F*. We denoted by *Rem*(*F*) the function that returns a list that contains the *F*\_n − *V*\_n remaining files after excluding the *V*\_n longest files among *F*. Hereafter, we denoted by *IER*(*F*) the procedure that receives as input a list of numbers *F* and sorts these numbers in decreasing order. Hereafter, we denoted by *GrP*(*F*) the procedure that subdivided the listed files *F* into the three groups *G*\_1, *G*\_2, and *G*\_3 described in the section ‘New grouping method’. The procedure *MG*() is responsible to return the group that has the maximum load. The procedure *SCLF*(*L*) is responsible to schedule the first element of *L* on the available virtual machine. All steps of the algorithm are described in the Algorithm 3.
 
 ```
 ________________________________________________________________________________________ 
@@ -227,7 +227,7 @@ Algorithm 3 Third-Grouped Excluding-Files with Minimum-Load Algorithm
 
 ### Third-grouped one-by-one algorithm (*TGO*)
 
-The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups. The first order is *G*_1, *G*_2, and *G*_3 and denoted by *Order*_1. This means that we schedule the first file from *G*_1, the first file from *G*_2, and the first file from *G*_3. For the fifth order, we schedule applying the same method, the first file from each group, following the order of the group, is scheduled. The second order is {*G*_1, *G*_3, *G*_2} and denoted by *Order*_2. The third order is {*G*_2, *G*_1, *G*_3} and denoted by *Order*_3. The fourth order is {*G*_2, *G*_3, *G*_1} and denoted by *Order*_4. The fifth order is {*G*_3, *G*_1, *G*_2} and denoted by *Order*_5. The last order is {*G*_3, *G*_2, *G*_1} and denoted by *Order*_6. So, for each manner, six orders are executed and the best solution is picked and returned. We denoted by *SCG*(*Order*_h) with *h* = {1, …, 6} the procedure that schedules the files following the order received as input until scheduling of all files.
+The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*\_1, *G*\_2, and *G*\_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups. The first order is *G*\_1, *G*\_2, and *G*\_3 and denoted by *Order*\_1. This means that we schedule the first file from *G*\_1, the first file from *G*\_2, and the first file from *G*\_3. For the fifth order, we schedule applying the same method, the first file from each group, following the order of the group, is scheduled. The second order is {*G*\_1, *G*\_3, *G*\_2} and denoted by *Order*\_2. The third order is {*G*\_2, *G*\_1, *G*\_3} and denoted by *Order*\_3. The fourth order is {*G*\_2, *G*\_3, *G*\_1} and denoted by *Order*\_4. The fifth order is {*G*\_3, *G*\_1, *G*\_2} and denoted by *Order*\_5. The last order is {*G*\_3, *G*\_2, *G*\_1} and denoted by *Order*\_6. So, for each manner, six orders are executed and the best solution is picked and returned. We denoted by *SCG*(*Order*\_h) with *h* = {1, …, 6} the procedure that schedules the files following the order received as input until scheduling of all files.
 
 ```
 ________________________________________________________________________________________ 
@@ -253,13 +253,13 @@ Algorithm 4 Third-Grouped One-by-one Algorithm (TGO)_______________________
 
 ### Three-files swap third-grouped algorithm (*TST*)
 
-The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first file *F*1 from *G*_1, the first file *F*2 from *G*_2, and the first file *F*3 from *G*_3. The swapping is as follows:
+The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*\_1, *G*\_2, and *G*\_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first file *F*1 from *G*\_1, the first file *F*2 from *G*\_2, and the first file *F*3 from *G*\_3. The swapping is as follows:
 
 - Restore a copy of *F*1
-- Apply a translation of the *f*_1 − 1 files to the left beginning with position 2 and ending with position *f*_1.
-- Move *F*2 at the end of *G*_1.
-- Move *F*3 at the front of *G*_2.
-- Move the stored copy of *F*1 at the front of *G*_3.
+- Apply a translation of the *f*\_1 − 1 files to the left beginning with position 2 and ending with position *f*\_1.
+- Move *F*2 at the end of *G*\_1.
+- Move *F*3 at the front of *G*\_2.
+- Move the stored copy of *F*1 at the front of *G*\_3.
 
 Now, after the swapping *TGO* described in the ‘Third-grouped one-by-one algorithm (*TGO*)’ on the new set of files obtained after swapping.
 
@@ -290,13 +290,13 @@ Algorithm 5 Three-files Swap Third-Grouped Algorithm (TST)________________
 
 ### On-tenth-files swap third-grouped algorithm (*OST*)
 
-The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*_1, *G*_2, and *G*_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first $\frac{F_n}{10}$ files from *G*_1, the first $\frac{F_n}{10}$ files from *G*_2, and the first $\frac{F_n}{10}$ files from *G*_3. The swapping is as follows:
+The determination of the three groups described above is adopted for this algorithm. These three groups will be created as described in the section ‘New grouping method’. The three manners as also applied. For each manner, firstly we create the groups *G*\_1, *G*\_2, and *G*\_3. After that, we constitute a permutation for these groups. There are six possibilities to constitute the order of groups as described in the section ‘Third-grouped one-by-one algorithm (*TGO*)’. So, for each manner, six orders are executed. For each order, a swap of three files is applied. These files are the first $\frac{F_n}{10}$ files from *G*\_1, the first $\frac{F_n}{10}$ files from *G*\_2, and the first $\frac{F_n}{10}$ files from *G*\_3. The swapping is as follows:
 
-- Restore a copy of the first $\frac{F_n}{10}$ files from *G*_1
-- Apply a translation of the *f*_1 − 10 files to the left beginning with position 11 and ending with position *f*_1.
-- Move the first $\frac{F_n}{10}$ files from *G*_2 at the end of *G*_1.
-- Move the first $\frac{F_n}{10}$ files from *G*_3 at the front of *G*_2.
-- Move the stored copy of the first $\frac{F_n}{10}$ files from *G*_1 at the front of *G*_3.
+- Restore a copy of the first $\frac{F_n}{10}$ files from *G*\_1
+- Apply a translation of the *f*\_1 − 10 files to the left beginning with position 11 and ending with position *f*\_1.
+- Move the first $\frac{F_n}{10}$ files from *G*\_2 at the end of *G*\_1.
+- Move the first $\frac{F_n}{10}$ files from *G*\_3 at the front of *G*\_2.
+- Move the stored copy of the first $\frac{F_n}{10}$ files from *G*\_1 at the front of *G*\_3.
 
 Now, after the swapping *TGO* described in the ‘Third-grouped one-by-one algorithm (*TGO*)’ on the new set of files obtained after swapping.
 
@@ -334,20 +334,20 @@ The performance of the proposed algorithms is measured and discussed in this sec
 
 ### Instances
 
-The tested instances are coded to be used by the proposed algorithms measuring the performance in terms of gap and time. These instances are depending on the manner that we generate the *Sz*_i values. Indeed, the generation of *Sz*_i is based on two distributions. The first one is the uniform distribution and is denoted by *UN*[.]. The second one is the normal distribution and is denoted by *NO*[.].
+The tested instances are coded to be used by the proposed algorithms measuring the performance in terms of gap and time. These instances are depending on the manner that we generate the *Sz*\_i values. Indeed, the generation of *Sz*\_i is based on two distributions. The first one is the uniform distribution and is denoted by *UN*[.]. The second one is the normal distribution and is denoted by *NO*[.].
 
 The generated classes are illustrated as follows:
 
-- *Class* 1: *Sz*_i in *UN*[25, 130].
-- *Class* 2: *Sz*_i in *UN*[110, 370].
-- *Class* 3: *Sz*_i in *NO*[220, 25].
-- *Class* 4: *Sz*_i in *NO*[330, 110].
+- *Class* 1: *Sz*\_i in *UN*[25, 130].
+- *Class* 2: *Sz*\_i in *UN*[110, 370].
+- *Class* 3: *Sz*\_i in *NO*[220, 25].
+- *Class* 4: *Sz*\_i in *NO*[330, 110].
 
 The choice of the number of virtual machines and the number of files that can be tested are presented in Table 4.
 
-**Table 4.** **Choice of (*F*_n, *V*_n).**
+**Table 4.** **Choice of (*F*\_n, *V*\_n).**
 
-| *F* _n | *V* _n |
+| *F* \_n | *V* \_n |
 | --- | --- |
 | 12,32,52 | 4,5,6 |
 | 60,160,260,360 | 4,6,8,11 |
@@ -386,11 +386,11 @@ Table 5 presents the overall results for all algorithms. This table shows that t
 
 #### Number of files discussion
 
-In this subsection, we discuss the variation of the average gap and time when the number of files changes. Table 6 presents the average gap *Gfv* of all algorithms according to the number of files *F*_n. This latter table shows that for the best algorithm, *BFO* the minimum average gap of 0.001 is reached when *F*_n = 60. The second minimum value of the average gap of 0.002 is obtained when *F*_n = 360. On the other hand, for *BFO*, the maximum average gap of 0.054 is obtained when *F*_n = 550.
+In this subsection, we discuss the variation of the average gap and time when the number of files changes. Table 6 presents the average gap *Gfv* of all algorithms according to the number of files *F*\_n. This latter table shows that for the best algorithm, *BFO* the minimum average gap of 0.001 is reached when *F*\_n = 60. The second minimum value of the average gap of 0.002 is obtained when *F*\_n = 360. On the other hand, for *BFO*, the maximum average gap of 0.054 is obtained when *F*\_n = 550.
 
-**Table 6.** **The average gap *Gfv* of all algorithms according to the number files *F*_n.**
+**Table 6.** **The average gap *Gfv* of all algorithms according to the number files *F*\_n.**
 
-| *F* _n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
+| *F* \_n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
 | --- | --- | --- | --- | --- | --- | --- |
 | 12 | 0.134 | 0.016 | 0.016 | 0.016 | 0.083 | **0.011** |
 | 32 | 0.355 | 0.063 | 0.252 | 0.022 | 0.259 | **0.020** |
@@ -405,11 +405,11 @@ In this subsection, we discuss the variation of the average gap and time when th
 
 **Notes.** Bold indicates the best results and the underline indicates the second-best results.
 
-Table 7 presents the average running time *Time* in seconds of all algorithms according to the number of files *F*_n. This latter table shows that the maximum average running time of 0.0048 is reached when *F*_n = 550 for algorithm *BFO*. While the minimum average running time of less than 0.0001 is reached four times for the *LFS* algorithm when *F*_n = {12, 32, 52, 60}.
+Table 7 presents the average running time *Time* in seconds of all algorithms according to the number of files *F*\_n. This latter table shows that the maximum average running time of 0.0048 is reached when *F*\_n = 550 for algorithm *BFO*. While the minimum average running time of less than 0.0001 is reached four times for the *LFS* algorithm when *F*\_n = {12, 32, 52, 60}.
 
-**Table 7.** **The running time *Time* of all algorithms according to the number files *F*_n.**
+**Table 7.** **The running time *Time* of all algorithms according to the number files *F*\_n.**
 
-| *F* _n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
+| *F* \_n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
 | --- | --- | --- | --- | --- | --- | --- |
 | 12 | **.** | 0.0001 | **.** | 0.0001 | 0.0002 | 0.0002 |
 | 32 | **.** | 0.0002 | 0.0001 | 0.0003 | 0.0002 | 0.0003 |
@@ -426,11 +426,11 @@ Table 7 presents the average running time *Time* in seconds of all algorithms ac
 
 #### Number of virtual machines discussion
 
-In this subsection, we discuss the variation of the average gap and time when the number of virtual machines changes. Table 8 presents the average gap *Gfv* of all algorithms according to the number of virtual machines *V*_n.
+In this subsection, we discuss the variation of the average gap and time when the number of virtual machines changes. Table 8 presents the average gap *Gfv* of all algorithms according to the number of virtual machines *V*\_n.
 
-**Table 8.** **The average gap *Gfv* of all algorithms according to the number of virtual machines *V*_n.**
+**Table 8.** **The average gap *Gfv* of all algorithms according to the number of virtual machines *V*\_n.**
 
-| *V* _n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
+| *V* \_n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | 0.324 | 0.031 | 0.424 | 0.007 | 0.259 | **0.000** |
 | 5 | 0.279 | 0.132 | 0.147 | 0.061 | 0.109 | **0.025** |
@@ -440,11 +440,11 @@ In this subsection, we discuss the variation of the average gap and time when th
 
 **Notes.** Bold indicates the best results and the underline indicates the second-best results.
 
-Table 9 presents the average time *Time* of all algorithms according to the number of virtual machines *V*_n.
+Table 9 presents the average time *Time* of all algorithms according to the number of virtual machines *V*\_n.
 
-**Table 9.** **The average time *Time* of all algorithms according to the number of virtual machines *V*_n.**
+**Table 9.** **The average time *Time* of all algorithms according to the number of virtual machines *V*\_n.**
 
-| *V* _n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
+| *V* \_n | *LFS* | *TGS* | *OST* | *BVT* | *BFI* | *BFO* |
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | **.** | 0.0003 | 0.0002 | 0.0006 | 0.0010 | 0.0008 |
 | 5 | **.** | 0.0002 | 0.0001 | 0.0003 | 0.0003 | 0.0003 |
@@ -486,11 +486,11 @@ Table 11 presents the average gap running time *Time* of all algorithms accordin
 
 #### Pair discussion
 
-In this subsection, we discuss the variation of the average gap when the pair of (*F*_n, *V*_n) changes.
+In this subsection, we discuss the variation of the average gap when the pair of (*F*\_n, *V*\_n) changes.
 
-Figure 5 presents a comparison between the best algorithm *BFO* and *BFI* according to the pair(*F*_n, *V*_n). This latter figure shows that the curve of *BFO* is always below the curve of *BFI* for all values of the pairs (*F*_n, *V*_n). This explains that *BFI* is the best algorithm. In addition, it is easy to see that the total number of the different pairs is 34.
+Figure 5 presents a comparison between the best algorithm *BFO* and *BFI* according to the pair(*F*\_n, *V*\_n). This latter figure shows that the curve of *BFO* is always below the curve of *BFI* for all values of the pairs (*F*\_n, *V*\_n). This explains that *BFI* is the best algorithm. In addition, it is easy to see that the total number of the different pairs is 34.
 
-**Figure 5.** **Comparison between the best algorithm *BFO* and *BFI* according to pair (*F*_n, *V*_n).**
+**Figure 5.** **Comparison between the best algorithm *BFO* and *BFI* according to pair (*F*\_n, *V*\_n).**
 
 #### Comparison to existing algorithms
 
@@ -508,11 +508,11 @@ Table 12 presents an overall comparison between the three existing best algorith
 
 **Notes.** Bold indicates the best results and the underline indicates the second-best results.
 
-Table 13 presents the comparison of the average gap *Gfv* values between the three existing best algorithms and the three best-proposed algorithms according to the number files *F*_n. This latter table shows that for the best algorithm, *BFO* the minimum average gap of 0.006 is reached when *F*_n = 12. The second minimum value of the average gap of 0.009 is obtained when *F*_n = 650. On the other hand, for *BFO*, the maximum average gap of 0.349 is obtained when *F*_n = 160. Seven times *BFO* reach the minimum average gap values when *F*_n = {12, 32, 60, 260, 360, 450, 650}.
+Table 13 presents the comparison of the average gap *Gfv* values between the three existing best algorithms and the three best-proposed algorithms according to the number files *F*\_n. This latter table shows that for the best algorithm, *BFO* the minimum average gap of 0.006 is reached when *F*\_n = 12. The second minimum value of the average gap of 0.009 is obtained when *F*\_n = 650. On the other hand, for *BFO*, the maximum average gap of 0.349 is obtained when *F*\_n = 160. Seven times *BFO* reach the minimum average gap values when *F*\_n = {12, 32, 60, 260, 360, 450, 650}.
 
-**Table 13.** **Comparison of the average gap *Gfv* values between the three existing best algorithms and the three best-proposed algorithms according to the number files *F*_n.**
+**Table 13.** **Comparison of the average gap *Gfv* values between the three existing best algorithms and the three best-proposed algorithms according to the number files *F*\_n.**
 
-| *F* _n | *NISA* | *SIDA* ^r | *SDIA* ^r | *TGS* | *BVT* | *BFO* |
+| *F* \_n | *NISA* | *SIDA* ^r | *SDIA* ^r | *TGS* | *BVT* | *BFO* |
 | --- | --- | --- | --- | --- | --- | --- |
 | 12 | 0.130 | 0.113 | 0.244 | 0.011 | 0.011 | **0.006** |
 | 32 | 0.399 | 0.269 | 0.365 | 0.118 | 0.078 | **0.077** |
