@@ -2,6 +2,10 @@
 
 All notable changes to this project. Each entry links to its full per-version file in [changelog/](changelog/).
 
+## [0.2.2](changelog/0.2.x/0.2.2.md) — 2026-10-17
+
+arXiv IDs read from reference links, `citation-alternatives`, and arXiv DOIs; a rowspan ends with its row group; HTTP error and arXiv no-paper pages no longer parse as documents; PDF layout and reference-list fixes.
+
 ## [0.2.1](changelog/0.2.x/0.2.1.md) — 2026-10-08 · 🛡️ Security
 
 Rendered Markdown never yields a live HTML node outside link text, checked against a GFM parser, with emphasis, JATS citation, XML well-formedness, and identifier fixes.
