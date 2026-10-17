@@ -50,7 +50,7 @@ import { parse } from 'scholarly-parse';
 
 const result = await parse(bytes, { baseUrl: url });
 if (!result.ok && result.error.reason === 'blocked') {
-  // a captcha or access-denied page arrived instead of the paper
+  // a captcha, access-denied, or HTTP error page arrived instead of the paper
 }
 ```
 
