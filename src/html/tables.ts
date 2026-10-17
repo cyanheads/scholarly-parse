@@ -8,6 +8,7 @@ import {
   buildGrid,
   type Grid,
   type GridBudget,
+  rowspanValue,
   type SourceRow,
   spanValue,
 } from '../model/table-grid.js';
@@ -29,6 +30,10 @@ function isHead(element: Element): boolean {
   return tagOf(element) === 'thead' || hasClass(element, 'ltx_thead');
 }
 
+function isFoot(element: Element): boolean {
+  return tagOf(element) === 'tfoot' || hasClass(element, 'ltx_tfoot');
+}
+
 /** A cell whose whole text is bold Markdown (`**Model**`, `**Active** **Params**`). */
 function isBoldText(text: string): boolean {
   return /^\*\*[^*]+\*\*(?:\s*\*\*[^*]+\*\*)*$/.test(text);
@@ -36,9 +41,12 @@ function isBoldText(text: string): boolean {
 
 /**
  * Read a table into a grid, charging the document's `budget`; `cellText` renders one
- * cell's content. With `boldHeaders`, a cell whose text is entirely bold counts as a
- * header cell, so a leading all-bold row becomes the header: LaTeX tables mark their
- * header row that way, with no `<th>`.
+ * cell's content. Its row groups are each section (`<thead>`, `<tbody>`, `<tfoot>`, or
+ * their `ltx_` classes), and each run of rows outside a section, a section nested in
+ * another included; footer sections come after the rest, in source order, as HTML shows
+ * them. With `boldHeaders`, a cell whose text is entirely bold counts as a header cell,
+ * so a leading all-bold row becomes the header: LaTeX tables mark their header row that
+ * way, with no `<th>`.
  */
 export function readHtmlTable(
   table: Element,
@@ -46,8 +54,10 @@ export function readHtmlTable(
   budget: GridBudget,
   options: { boldHeaders?: boolean } = {},
 ): Grid {
-  const rows: SourceRow[] = [];
-  const collect = (container: Element, inHead: boolean) => {
+  const groups: SourceRow[][] = [];
+  const feet: SourceRow[][] = [];
+  const collect = (container: Element, inHead: boolean, into: SourceRow[][]) => {
+    let rows: SourceRow[] | undefined;
     for (const child of childElements(container)) {
       if (isRow(child)) {
         const cells = childElements(child)
@@ -59,21 +69,26 @@ export function readHtmlTable(
               colspan: spanValue(cell.getAttribute('colspan')),
               header:
                 markedHeader || (options.boldHeaders === true && (text === '' || isBoldText(text))),
-              rowspan: spanValue(cell.getAttribute('rowspan')),
+              rowspan: rowspanValue(cell.getAttribute('rowspan')),
               text,
             };
           });
         // An all-empty row is not a header, however its cells are marked.
         if (cells.every((cell) => cell.text === '')) for (const cell of cells) cell.header = false;
+        if (!rows) {
+          rows = [];
+          into.push(rows);
+        }
         rows.push({ cells, inHead });
       } else if (
         SECTION_TAGS.has(tagOf(child)) ||
         SECTION_CLASSES.some((c) => hasClass(child, c))
       ) {
-        collect(child, inHead || isHead(child));
+        rows = undefined;
+        collect(child, inHead || isHead(child), isFoot(child) ? feet : into);
       }
     }
   };
-  collect(table, false);
-  return buildGrid(rows, budget);
+  collect(table, false, groups);
+  return buildGrid([...groups, ...feet], budget);
 }

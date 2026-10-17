@@ -6,6 +6,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
+  arxivFromDoi,
   arxivFromPageUrl,
   arxivFromUrl,
   arxivId,
@@ -84,6 +85,41 @@ describe('arxivFromUrl', () => {
     'https://arxiv.org/abs/2105.00001v0',
   ])('reads nothing from %j', (url) => {
     expect(arxivFromUrl(url)).toBeUndefined();
+  });
+});
+
+describe('arxivFromDoi (#76)', () => {
+  it.each([
+    ['10.48550/arXiv.2105.00001', '2105.00001'],
+    ['10.48550/arxiv.2105.00001', '2105.00001'],
+    ['10.48550/ARXIV.hep-th/9711200', 'hep-th/9711200'],
+    ['10.48550/arxiv.math/0309136', 'math/0309136'],
+    ['10.48550/arxiv.0704.0001', '0704.0001'],
+  ])('reads %j as %j', (doi, id) => {
+    expect(arxivFromDoi(doi)).toBe(id);
+  });
+
+  it.each([
+    undefined,
+    '',
+    '10.48550/arxiv.',
+    '10.48550/arXiv.1999.12345',
+    '10.48550/arXiv.notanid',
+    '10.48550/arxiv.2105.00001/extra',
+    '10.48550/zenodo.123',
+    '10.1103/physrevlett.74.2626',
+    '10.5555/arxiv.2105.00001',
+    'https://doi.org/10.48550/arXiv.2105.00001',
+  ])('reads nothing from %j', (doi) => {
+    expect(arxivFromDoi(doi)).toBeUndefined();
+  });
+
+  it('reads a long DOI in time linear in its length', async () => {
+    await expectLinear(
+      (n) => `10.48550/arxiv.${'1'.repeat(n)}`,
+      (doi) => arxivFromDoi(doi),
+      { from: 1_000, to: 64_000 },
+    );
   });
 });
 

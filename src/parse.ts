@@ -31,7 +31,8 @@ export interface AutoParseOptions extends ParseOptions {
 
 /**
  * Parse a document of any supported format. The format comes from the payload itself
- * (see `detect`); a challenge or access-denied page is HTML and fails as `blocked`.
+ * (see `detect`); a challenge, access-denied, or HTTP error page is HTML and fails as
+ * `blocked`, and arXiv's page for a paper with no HTML fails as `empty`.
  * PDF needs its bytes: PDF passed as a string fails as `wrong-format`.
  */
 export async function parse(

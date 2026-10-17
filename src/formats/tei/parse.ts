@@ -13,7 +13,7 @@
  * the body text, so they are reported as floats.
  * @module src/formats/tei/parse
  */
-import { normalizeArxiv } from '../../model/arxiv.js';
+import { arxivFromUrl, normalizeArxiv } from '../../model/arxiv.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
   Abstract,
@@ -654,20 +654,22 @@ function figureBlocks(figure: XmlNode, ctx: TeiContext): Block[] {
 }
 
 /**
- * A TEI `<table>`: `<row>`s of `<cell>`s, spans from `@cols` and `@rows`, headers from
- * `@role="label"`, on the document's table budget.
+ * A TEI `<table>`: `<row>`s of `<cell>`s in one row group, spans from `@cols` and
+ * `@rows`, headers from `@role="label"`, on the document's table budget.
  */
 function readTeiTable(table: XmlNode, ctx: TeiContext): Grid {
   return buildGrid(
-    findAll(table, 'row').map((row) => ({
-      cells: findAll(row, 'cell').map((cell) => ({
-        colspan: spanValue(attrOf(cell, 'cols')),
-        header: attrOf(cell, 'role') === 'label',
-        rowspan: spanValue(attrOf(cell, 'rows')),
-        text: inlineText(cell, ctx),
+    [
+      findAll(table, 'row').map((row) => ({
+        cells: findAll(row, 'cell').map((cell) => ({
+          colspan: spanValue(attrOf(cell, 'cols')),
+          header: attrOf(cell, 'role') === 'label',
+          rowspan: spanValue(attrOf(cell, 'rows')),
+          text: inlineText(cell, ctx),
+        })),
+        inHead: attrOf(row, 'role') === 'label',
       })),
-      inHead: attrOf(row, 'role') === 'label',
-    })),
+    ],
     ctx.gridBudget,
   );
 }
@@ -759,7 +761,10 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
     if (type && id && !ids.has(type)) ids.set(type, id);
   }
   const doi = ids.get('doi');
-  const url = attrOf(findAllDescendants(bibl, 'ptr')[0], 'target');
+  const targets = findAllDescendants(bibl, 'ptr').map((ptr) => attrOf(ptr, 'target'));
+  const url = targets[0];
+  // A typed `<idno>` first, then the ID an arxiv.org `<ptr>` names (#79).
+  const arxiv = ids.get('arxiv') ?? targets.map((target) => arxivFromUrl(target)).find(Boolean);
   const raw = plainText(findAll(bibl, 'note').find((n) => attrOf(n, 'type') === 'raw_reference'));
 
   const volume = escapeInline(scope('volume'));
@@ -778,7 +783,6 @@ function parseBiblStruct(bibl: XmlNode): Reference | undefined {
   const text = raw ? escapeInline(raw) : joinInlineSeams(built);
   if (!text) return;
   const id = attrOf(bibl, 'xml:id');
-  const arxiv = ids.get('arxiv');
   const pmid = ids.get('pmid');
   const pmcid = ids.get('pmcid');
   return {

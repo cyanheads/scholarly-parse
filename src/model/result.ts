@@ -1,9 +1,11 @@
 /**
  * @fileoverview The value every parser returns. Expected failures (malformed input,
- * the wrong format, an empty body, input over budget) are results, not exceptions;
+ * the wrong format, an empty body, a page standing in for the document, input over
+ * budget) are results, not exceptions;
  * a missing optional peer dependency is a setup error and throws.
  * @module src/model/result
  */
+import { arxivFromDoi } from './arxiv.js';
 import type { ScholarlyDocument } from './document.js';
 
 /** Why a parse produced no document. */
@@ -14,7 +16,10 @@ export type ParseFailureReason =
   | 'wrong-format'
   /** Parsed, but carried no article content. */
   | 'empty'
-  /** An interstitial rather than the document: a captcha, bot check, or login wall. */
+  /**
+   * A page standing in for the document: a captcha, bot check, or login wall, an
+   * access-denied or HTTP error page, or a redirect stub.
+   */
   | 'blocked'
   /** Larger than the configured input budget. */
   | 'too-large';
@@ -36,9 +41,29 @@ export interface ParseOptions {
   maxInputBytes?: number;
 }
 
-/** Build a successful result. */
+/**
+ * Build a successful result. An arXiv ID the article's identifiers or a reference leaves
+ * empty is filled from the arXiv DataCite DOI beside it (`10.48550/arXiv.2105.00001` →
+ * `2105.00001`), on copies, so the document passed in is never changed: every parser
+ * returns through here after setting the IDs its source types, prints, or links, so one
+ * of those always wins, and no other field changes.
+ */
 export function parsed(document: ScholarlyDocument): ParseResult {
-  return { document, ok: true };
+  const { identifiers } = document.metadata;
+  const filled = identifiers && withArxiv(identifiers);
+  const references = document.references.map(withArxiv);
+  const unchanged =
+    filled === identifiers && references.every((ref, at) => ref === document.references[at]);
+  if (unchanged) return { document, ok: true };
+  const metadata = filled ? { ...document.metadata, identifiers: filled } : document.metadata;
+  return { document: { ...document, metadata, references }, ok: true };
+}
+
+/** `holder`, or a copy with its empty `arxiv` set to the ID an arXiv DOI in `doi` names. */
+function withArxiv<T extends { arxiv?: string; doi?: string }>(holder: T): T {
+  if (holder.arxiv) return holder;
+  const arxiv = arxivFromDoi(holder.doi);
+  return arxiv ? { ...holder, arxiv } : holder;
 }
 
 /** Build a failed result. */

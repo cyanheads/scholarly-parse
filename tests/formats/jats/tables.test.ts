@@ -251,7 +251,7 @@ describe('table bodies (#111)', () => {
       '<table><tbody><tr><td><italic>NF1</italic><sup>a</sup></td><td>IC<sub>50</sub></td>' +
         '<td>p = 0.01*</td></tr></tbody></table>',
     );
-    expect(table.rows).toEqual([['*NF1*^a', 'IC_{50}', 'p = 0.01\\*']]);
+    expect(table.rows).toEqual([['*NF1*^a', 'IC\\_{50}', 'p = 0.01\\*']]);
   });
 
   it('spaces the paragraphs of a cell (#35)', () => {
@@ -366,12 +366,204 @@ describe('spans (#111)', () => {
     expect(table.rows[1]?.slice(1).every((cell) => cell === '')).toBe(true);
   });
 
-  it('reads a non-numeric, zero, or negative span as 1 rather than dropping the cell', () => {
+  it('reads a non-numeric, zero, or negative colspan, and a negative rowspan, as 1', () => {
     const table = onlyTable(
       '<table><tbody><tr><td colspan="0">a</td><td colspan="wide">b</td>' +
         '<td rowspan="-4">c</td></tr></tbody></table>',
     );
     expect(table.rows).toEqual([['a', 'b', 'c']]);
+  });
+});
+
+describe('row groups (#46)', () => {
+  it('carries a rowspan through the rows of its own group', () => {
+    const table = onlyTable(
+      '<table><thead><tr><th>H1</th><th>H2</th></tr></thead><tbody>' +
+        '<tr><td rowspan="2">A</td><td>B</td></tr><tr><td>C</td></tr></tbody></table>',
+    );
+    expect(table.headerRows).toBe(1);
+    expect(table.rows).toEqual([
+      ['H1', 'H2'],
+      ['A', 'B'],
+      ['A', 'C'],
+    ]);
+  });
+
+  it('carries a rowspan through a run of bare rows', () => {
+    const table = onlyTable(
+      '<table><tr><td rowspan="2">A</td><td>B</td></tr><tr><td>C</td></tr></table>',
+    );
+    expect(table.rows).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+    ]);
+  });
+
+  it('ends a rowspan longer than the table at its last row', () => {
+    const table = onlyTable(
+      '<table><tbody><tr><td rowspan="5">A</td><td>B</td></tr><tr><td>C</td></tr></tbody></table>',
+    );
+    expect(table.rows).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+    ]);
+  });
+
+  it('counts a row with no cells among the rows a rowspan covers', () => {
+    const table = onlyTable(
+      '<table><tbody><tr><td rowspan="3">A</td><td>B</td></tr><tr/>' +
+        '<tr><td>C</td></tr><tr><td>D</td><td>E</td></tr></tbody></table>',
+    );
+    expect(table.rows).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+      ['D', 'E'],
+    ]);
+  });
+
+  it('ends a head rowspan at the end of the head, so body cells keep their columns', () => {
+    const table = onlyTable(
+      '<table><thead><tr><th rowspan="2">Group</th><th>Mean</th></tr></thead><tbody>' +
+        '<tr><td>Control</td><td>1.2</td></tr><tr><td>Treated</td><td>3.4</td></tr></tbody></table>',
+    );
+    expect(table.headerRows).toBe(1);
+    expect(table.rows).toEqual([
+      ['Group', 'Mean'],
+      ['Control', '1.2'],
+      ['Treated', '3.4'],
+    ]);
+  });
+
+  it('ends a rowspan at the end of its tbody, before the next tbody or a tfoot', () => {
+    expect(
+      onlyTable(
+        '<table><tbody><tr><td rowspan="3">A</td><td>B</td></tr><tr><td>C</td></tr></tbody>' +
+          '<tbody><tr><td>D</td><td>E</td></tr></tbody></table>',
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+      ['D', 'E'],
+    ]);
+    expect(
+      onlyTable(
+        '<table><tbody><tr><td rowspan="2">A</td><td>B</td></tr></tbody>' +
+          '<tfoot><tr><td>F1</td><td>F2</td></tr></tfoot></table>',
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['F1', 'F2'],
+    ]);
+  });
+
+  it('ends a rowspan at the end of a run of bare rows, before the group after it', () => {
+    const table = onlyTable(
+      '<table><tr><td rowspan="0">A</td><td>B</td></tr><tr><td>C</td></tr>' +
+        '<tbody><tr><td>D</td><td>E</td></tr></tbody><tr><td>F</td><td>G</td></tr></table>',
+    );
+    expect(table.rows).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+      ['D', 'E'],
+      ['F', 'G'],
+    ]);
+  });
+
+  it('spans rowspan="0" to the last row of its group, and no further', () => {
+    expect(
+      onlyTable(
+        '<table><tbody><tr><td rowspan="0">A</td><td>B</td></tr><tr><td>C</td></tr>' +
+          '<tr/><tr><td>D</td></tr></tbody><tbody><tr><td>E</td><td>F</td></tr></tbody></table>',
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+      ['A', 'D'],
+      ['E', 'F'],
+    ]);
+    // A head rowspan="0" stays in the head.
+    const headed = onlyTable(
+      '<table><thead><tr><th rowspan="0">G</th><th>H</th></tr><tr><th>I</th></tr></thead>' +
+        '<tbody><tr><td>1</td><td>2</td></tr></tbody></table>',
+    );
+    expect(headed.headerRows).toBe(2);
+    expect(headed.rows).toEqual([
+      ['G', 'H'],
+      ['G', 'I'],
+      ['1', '2'],
+    ]);
+  });
+
+  it('keeps a tfoot written last at the end', () => {
+    expect(
+      onlyTable(
+        '<table><thead><tr><th>H1</th><th>H2</th></tr></thead><tbody><tr><td>B1</td><td>B2</td></tr></tbody>' +
+          '<tfoot><tr><td>F1</td><td>F2</td></tr></tfoot></table>',
+      ).rows,
+    ).toEqual([
+      ['H1', 'H2'],
+      ['B1', 'B2'],
+      ['F1', 'F2'],
+    ]);
+  });
+
+  it('puts the rows of a tfoot written before the tbody after every body row (#81)', () => {
+    expect(
+      onlyTable(
+        '<table><thead><tr><th>H1</th><th>H2</th></tr></thead><tfoot><tr><td>F1</td><td>F2</td></tr></tfoot>' +
+          '<tbody><tr><td>B1</td><td>B2</td></tr></tbody></table>',
+      ).rows,
+    ).toEqual([
+      ['H1', 'H2'],
+      ['B1', 'B2'],
+      ['F1', 'F2'],
+    ]);
+    // A footer of header cells no longer reads as a second header row.
+    const totals = onlyTable(
+      '<table><thead><tr><th>Arm</th><th>n</th></tr></thead><tfoot><tr><th>Total</th><th>9</th></tr></tfoot>' +
+        '<tbody><tr><td>A</td><td>4</td></tr></tbody><tbody><tr><td>B</td><td>5</td></tr></tbody></table>',
+    );
+    expect(totals.headerRows).toBe(1);
+    expect(totals.rows).toEqual([
+      ['Arm', 'n'],
+      ['A', '4'],
+      ['B', '5'],
+      ['Total', '9'],
+    ]);
+  });
+
+  it('keeps a footer rowspan="0" in the footer rows (#81)', () => {
+    expect(
+      onlyTable(
+        '<table><tfoot><tr><td rowspan="0">F</td><td>1</td></tr><tr><td>2</td></tr></tfoot>' +
+          '<tbody><tr><td>B1</td><td>B2</td></tr></tbody></table>',
+      ).rows,
+    ).toEqual([
+      ['B1', 'B2'],
+      ['F', '1'],
+      ['F', '2'],
+    ]);
+  });
+
+  it('reads a rowspan of "00" or " 0" as 0, and a negative or unparseable one as 1', () => {
+    for (const zero of ['00', ' 0']) {
+      expect(
+        onlyTable(
+          `<table><tr><td rowspan="${zero}">A</td><td>B</td></tr><tr><td>C</td></tr></table>`,
+        ).rows,
+      ).toEqual([
+        ['A', 'B'],
+        ['A', 'C'],
+      ]);
+    }
+    expect(
+      onlyTable(
+        '<table><tr><td rowspan="-1">A</td><td rowspan="x">B</td></tr><tr><td>C</td></tr></table>',
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['C', ''],
+    ]);
   });
 });
 

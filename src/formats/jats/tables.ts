@@ -12,6 +12,7 @@ import type { TableBlock, TableUnextractableReason } from '../../model/document.
 import {
   buildGrid,
   type Grid,
+  rowspanValue,
   type SourceRow,
   spanValue,
   tableName,
@@ -115,8 +116,10 @@ function classifyUnextractable(
 
 /**
  * Read an XHTML `<table>` into the shared grid, spans expanded and short rows padded, on
- * the document's table budget. Header rows are those in `<thead>`, plus any leading row
- * of only `<th>` cells in a table without a `<thead>`.
+ * the document's table budget. Its row groups are each `<thead>`, `<tbody>`, and
+ * `<tfoot>`, and each run of `<tr>`s outside them; a `<tfoot>`, which JATS writes before
+ * the body, comes after it, as HTML shows it. Header rows are those in `<thead>`, plus
+ * any leading row of only `<th>` cells in a table without a `<thead>`.
  */
 function readTable(table: XmlNode, ctx: JatsContext): Grid {
   const sourceRow = (tr: XmlNode, inHead: boolean): SourceRow => ({
@@ -127,20 +130,30 @@ function readTable(table: XmlNode, ctx: JatsContext): Grid {
         {
           colspan: spanValue(attrOf(cell, 'colspan')),
           header: tag === 'th',
-          rowspan: spanValue(attrOf(cell, 'rowspan')),
+          rowspan: rowspanValue(attrOf(cell, 'rowspan')),
           text: inlineText(cell, ctx),
         },
       ];
     }),
     inHead,
   });
-  const rows: SourceRow[] = [];
+  const groups: SourceRow[][] = [];
+  const feet: SourceRow[][] = [];
+  let bareRows: SourceRow[] | undefined;
   for (const child of childrenOf(table)) {
     const tag = tagNameOf(child);
-    if (tag === 'tr') rows.push(sourceRow(child, false));
-    else if (tag === 'thead' || tag === 'tbody' || tag === 'tfoot') {
-      for (const tr of findAll(child, 'tr')) rows.push(sourceRow(tr, tag === 'thead'));
+    if (tag === 'tr') {
+      if (!bareRows) {
+        bareRows = [];
+        groups.push(bareRows);
+      }
+      bareRows.push(sourceRow(child, false));
+    } else if (tag === 'thead' || tag === 'tbody' || tag === 'tfoot') {
+      bareRows = undefined;
+      (tag === 'tfoot' ? feet : groups).push(
+        findAll(child, 'tr').map((tr) => sourceRow(tr, tag === 'thead')),
+      );
     }
   }
-  return buildGrid(rows, ctx.gridBudget);
+  return buildGrid([...groups, ...feet], ctx.gridBudget);
 }

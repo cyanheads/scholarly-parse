@@ -3,7 +3,7 @@
  * rendered as readable text, and the identifiers and fields the markup names.
  * @module src/formats/jats/references
  */
-import { normalizeArxiv } from '../../model/arxiv.js';
+import { arxivFromUrl, normalizeArxiv } from '../../model/arxiv.js';
 import type { Reference } from '../../model/document.js';
 import { normalizeDoi } from '../../model/doi.js';
 import { normalizePmcid, normalizePmid } from '../../model/identifiers.js';
@@ -81,7 +81,8 @@ export function extractReferences(root: XmlNode): Reference[] {
 /**
  * One `<ref>`. The readable `<mixed-citation>` is preferred for the text, descending into
  * `<citation-alternatives>` when the forms sit there (#66); the structured
- * `<element-citation>` supplies fields when present.
+ * `<element-citation>` supplies fields when present, and the `<mixed-citation>` the
+ * identifiers it leaves empty (#80).
  */
 function parseReference(ref: XmlNode): Reference | undefined {
   const container = findOne(ref, 'citation-alternatives') ?? ref;
@@ -90,7 +91,7 @@ function parseReference(ref: XmlNode): Reference | undefined {
   const citation = citationMarkdown(mixed ?? element);
   if (!citation) return;
 
-  const fields = citationFields(element ?? mixed);
+  const fields = element ? citationFields(element, mixed) : citationFields(mixed);
   const id = attrOf(ref, 'id');
   // `[12]` and `12.` are both printed forms of the label `12`.
   const label =
@@ -187,8 +188,14 @@ function citationText(node: XmlNode, formulas: string[]): string {
  * `ext-link-type`s whose target is an identifier rather than a page: Europe PMC adds
  * empty `<ext-link ext-link-type="pmid" xlink:href="26023781"/>`s to a citation.
  */
-const ID_LINK_TYPES: ReadonlyMap<string, 'doi' | 'pmcid' | 'pmid'> = new Map(
-  Object.entries({ doi: 'doi', pmcid: 'pmcid', pmid: 'pmid', pubmed: 'pmid' } as const),
+const ID_LINK_TYPES: ReadonlyMap<string, keyof typeof NORMALIZE_ID> = new Map(
+  Object.entries({
+    arxiv: 'arxiv',
+    doi: 'doi',
+    pmcid: 'pmcid',
+    pmid: 'pmid',
+    pubmed: 'pmid',
+  } as const),
 );
 
 /** `pub-id-type`s naming an identifier a reference holds, and the field each fills. */
@@ -213,13 +220,17 @@ const NORMALIZE_ID = {
 /** A link target a reader can open. */
 const WEB_URL = /^(?:https?|ftp):\/\//i;
 
+/** A citation's identifiers, and the first link a reader can open. */
+type CitationIds = Partial<Record<keyof typeof NORMALIZE_ID | 'url', string | undefined>>;
+
 /**
- * Structured fields from a citation element. Each identifier is the first of its type, a
- * typed `<pub-id>` before a typed link, that holds one.
+ * The identifiers a citation element names. Each is the first of its type, a typed
+ * `<pub-id>` before a typed link, that holds one; an arXiv ID is then the one the first
+ * untyped arxiv.org link names (#75), and a DOI the one a doi.org link names. The URL is
+ * the first untyped link a reader can open.
  */
-function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> {
-  if (!citation) return {};
-  const ids: Partial<Record<keyof typeof NORMALIZE_ID, string>> = {};
+function citationIds(citation: XmlNode): CitationIds {
+  const ids: CitationIds = {};
   const keep = (field: keyof typeof NORMALIZE_ID | undefined, value: string) => {
     const id = field && value ? NORMALIZE_ID[field](value) : undefined;
     if (field && id) ids[field] ??= id;
@@ -234,9 +245,31 @@ function citationFields(citation: XmlNode | undefined): Omit<Reference, 'text'> 
     target: attrOf(link, 'xlink:href') ?? text(link),
   }));
   for (const { type, target } of links) keep(type, target);
-  const url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
-  const { arxiv, pmcid, pmid } = ids;
-  const doi = ids.doi ?? normalizeDoi(doiFromUrl(url));
+  for (const { type, target } of links) if (!type) ids.arxiv ??= arxivFromUrl(target);
+  ids.url = links.find(({ type, target }) => !type && WEB_URL.test(target))?.target;
+  ids.doi ??= normalizeDoi(doiFromUrl(ids.url));
+  return ids;
+}
+
+/** The fields {@link citationIds} reads. */
+const ID_FIELDS = ['arxiv', 'doi', 'pmcid', 'pmid', 'url'] as const;
+
+/**
+ * Structured fields from a citation element. An identifier it leaves empty comes from
+ * `alternative`, the `<mixed-citation>` beside it, when there is one (#80); the URL is kept
+ * only when no DOI is.
+ */
+function citationFields(
+  citation: XmlNode | undefined,
+  alternative?: XmlNode,
+): Omit<Reference, 'text'> {
+  if (!citation) return {};
+  const ids = citationIds(citation);
+  if (alternative) {
+    const more = citationIds(alternative);
+    for (const field of ID_FIELDS) ids[field] ??= more[field];
+  }
+  const { arxiv, doi, pmcid, pmid, url } = ids;
   const authors = findAllDescendants(citation, 'person-group')
     .filter((group) => (attrOf(group, 'person-group-type') ?? 'author') === 'author')
     .flatMap((group) => childrenOf(group).map(renderName).filter(Boolean));

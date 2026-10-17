@@ -341,6 +341,231 @@ describe('reference arXiv IDs (#65)', () => {
   });
 });
 
+describe('reference arXiv links (#75)', () => {
+  /** The identifier fields of a single `<ref>` whose `<mixed-citation>` holds `content`. */
+  const fieldsOf = (content: string) => {
+    const references = referencesOf(
+      `<ref-list><ref id="a"><mixed-citation>A. Work. ${content}</mixed-citation></ref></ref-list>`,
+    );
+    expect(references).toHaveLength(1);
+    const { arxiv, doi, url } = references[0] ?? {};
+    return { arxiv, doi, url };
+  };
+  const link = (href: string, type = 'uri') =>
+    `<ext-link ext-link-type="${type}" xlink:href="${href}">link</ext-link>`;
+
+  it('reads the ID an arxiv-typed link holds, and does not keep that link as the URL', () => {
+    expect(fieldsOf(link('2105.00001v2', 'arxiv'))).toEqual({
+      arxiv: '2105.00001v2',
+      doi: undefined,
+      url: undefined,
+    });
+    expect(fieldsOf(link('arXiv:math.GT/0309136', 'arXiv'))).toMatchObject({
+      arxiv: 'math/0309136',
+    });
+    expect(fieldsOf(link('https://arxiv.org/abs/2105.00001v3', 'arxiv'))).toEqual({
+      arxiv: '2105.00001v3',
+      doi: undefined,
+      url: undefined,
+    });
+  });
+
+  it('reads the ID an untyped arxiv.org link names, and keeps the link as the URL', () => {
+    expect(fieldsOf(link('https://arxiv.org/abs/hep-th/9711200'))).toEqual({
+      arxiv: 'hep-th/9711200',
+      doi: undefined,
+      url: 'https://arxiv.org/abs/hep-th/9711200',
+    });
+    expect(fieldsOf('<uri>https://arxiv.org/pdf/2105.00001v1.pdf</uri>')).toEqual({
+      arxiv: '2105.00001v1',
+      doi: undefined,
+      url: 'https://arxiv.org/pdf/2105.00001v1.pdf',
+    });
+    expect(
+      fieldsOf('<uri xlink:href="http://export.arxiv.org/abs/1706.03762">here</uri>'),
+    ).toMatchObject({ arxiv: '1706.03762' });
+  });
+
+  it('reads the ID from a link beside a DOI, where the link is not the URL', () => {
+    expect(
+      fieldsOf(
+        `${link('http://arxiv.org/abs/hep-ex/9503002')}<pub-id pub-id-type="doi">10.1103/PhysRevLett.74.2626</pub-id>`,
+      ),
+    ).toEqual({ arxiv: 'hep-ex/9503002', doi: '10.1103/physrevlett.74.2626', url: undefined });
+  });
+
+  it('takes a typed pub-id, then an arxiv-typed link, then an untyped link', () => {
+    const untyped = link('https://arxiv.org/abs/2105.00001v1');
+    const typed = link('2105.00001v2', 'arxiv');
+    const pubId = '<pub-id pub-id-type="arxiv">2105.00001v3</pub-id>';
+    expect(fieldsOf(`${untyped}${typed}${pubId}`).arxiv).toBe('2105.00001v3');
+    expect(fieldsOf(`${untyped}${typed}`).arxiv).toBe('2105.00001v2');
+    expect(fieldsOf(`${link('https://example.org/x')}${untyped}`)).toEqual({
+      arxiv: '2105.00001v1',
+      doi: undefined,
+      url: 'https://example.org/x',
+    });
+  });
+
+  it('reads no ID from a typed link that is not one or a link to another host', () => {
+    expect(fieldsOf(link('pending', 'arxiv'))).toEqual({
+      arxiv: undefined,
+      doi: undefined,
+      url: undefined,
+    });
+    expect(fieldsOf(link('https://example.org/abs/2105.00001'))).toEqual({
+      arxiv: undefined,
+      doi: undefined,
+      url: 'https://example.org/abs/2105.00001',
+    });
+    expect(fieldsOf(link('https://arxiv.org/list/hep-th/new')).arxiv).toBeUndefined();
+    expect(
+      fieldsOf(`${link('pending', 'arxiv')}${link('https://arxiv.org/abs/2105.00001')}`),
+    ).toEqual({ arxiv: '2105.00001', doi: undefined, url: 'https://arxiv.org/abs/2105.00001' });
+  });
+
+  it('reads the ID from an element-citation link, printing the citation as before', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><element-citation><article-title>A</article-title>' +
+        `${link('https://arxiv.org/abs/2105.00001')}</element-citation></ref></ref-list>`,
+    );
+    expect(reference).toMatchObject({
+      arxiv: '2105.00001',
+      url: 'https://arxiv.org/abs/2105.00001',
+    });
+    expect(reference?.text).toBe('A. link.');
+  });
+
+  it('reads a citation in time linear in its links', async () => {
+    const citation = (n: number) =>
+      referencesOf(
+        `<ref-list><ref id="a"><mixed-citation>A. ${link(`https://arxiv.org/abs/${'x/'.repeat(4)}1`).repeat(n)}${link('https://arxiv.org/abs/2105.00001')}</mixed-citation></ref></ref-list>`,
+      )[0];
+    expect(citation(2_000)?.arxiv).toBe('2105.00001');
+    await expectLinear((n) => n, citation, { from: 125, to: 2_000 });
+  });
+});
+
+describe('identifiers in citation-alternatives (#80)', () => {
+  /** The reference a `<ref>` holding `<citation-alternatives>` of `element` and `mixed` reads as. */
+  const alternatives = (element: string, mixed: string) =>
+    referencesOf(
+      '<ref-list><ref id="r1"><citation-alternatives>' +
+        `<element-citation>${element}</element-citation><mixed-citation>${mixed}</mixed-citation>` +
+        '</citation-alternatives></ref></ref-list>',
+    )[0];
+  const element =
+    '<person-group><name><surname>Doe</surname></name></person-group><article-title>P</article-title><year>2021</year>';
+
+  it('takes every field the element-citation sets from it, the text from the mixed-citation', () => {
+    expect(
+      alternatives(
+        `${element}<pub-id pub-id-type="doi">10.1000/a</pub-id><pub-id pub-id-type="pmid">111</pub-id>`,
+        'Doe. Q. 2020. <article-title>Q</article-title> ' +
+          '<pub-id pub-id-type="doi">10.1000/b</pub-id><pub-id pub-id-type="pmid">222</pub-id>',
+      ),
+    ).toEqual({
+      id: 'r1',
+      text: 'Doe. Q. 2020. Q DOI 10.1000/b PMID 222',
+      authors: ['Doe'],
+      title: 'P',
+      year: '2021',
+      doi: '10.1000/a',
+      pmid: '111',
+    });
+  });
+
+  it('fills an identifier the element-citation leaves empty from the mixed-citation', () => {
+    expect(
+      alternatives(
+        element,
+        'Doe. P. 2021. <ext-link ext-link-type="uri" xlink:href="https://arxiv.org/abs/2105.00001">arXiv</ext-link> ' +
+          '<ext-link ext-link-type="doi" xlink:href="10.1000/xyz">doi</ext-link>',
+      ),
+    ).toMatchObject({ doi: '10.1000/xyz', arxiv: '2105.00001', title: 'P' });
+    expect(
+      alternatives(
+        `${element}<pub-id pub-id-type="pmid">111</pub-id>`,
+        'Doe. P. <ext-link ext-link-type="pmcid" xlink:href="PMC123"/>' +
+          '<pub-id pub-id-type="arxiv">hep-th/9711200</pub-id><pub-id pub-id-type="pmid">222</pub-id>',
+      ),
+    ).toMatchObject({ pmid: '111', pmcid: 'PMC123', arxiv: 'hep-th/9711200' });
+  });
+
+  it('keeps a link as the URL only while no DOI is held, whichever form gives either', () => {
+    const link = (href: string) =>
+      `<ext-link ext-link-type="uri" xlink:href="${href}">link</ext-link>`;
+    const urlOf = (elementPart: string, mixedPart: string) => {
+      const reference = alternatives(`${element}${elementPart}`, `Doe. P. ${mixedPart}`);
+      return { doi: reference?.doi, url: reference?.url };
+    };
+    expect(urlOf('', link('https://example.org/data'))).toEqual({
+      doi: undefined,
+      url: 'https://example.org/data',
+    });
+    expect(urlOf(link('https://example.org/a'), link('https://example.org/b'))).toEqual({
+      doi: undefined,
+      url: 'https://example.org/a',
+    });
+    expect(
+      urlOf(link('https://example.org/a'), '<pub-id pub-id-type="doi">10.1000/xyz</pub-id>'),
+    ).toEqual({ doi: '10.1000/xyz', url: undefined });
+    expect(urlOf('', link('https://doi.org/10.1000/XYZ'))).toEqual({
+      doi: '10.1000/xyz',
+      url: undefined,
+    });
+  });
+
+  it('fills from a mixed-citation beside an element-citation without the wrapper too', () => {
+    const [reference] = referencesOf(
+      `<ref-list><ref id="r1"><element-citation>${element}</element-citation>` +
+        '<mixed-citation>Doe. P. <pub-id pub-id-type="doi">10.1000/xyz</pub-id></mixed-citation></ref></ref-list>',
+    );
+    expect(reference).toMatchObject({ doi: '10.1000/xyz', title: 'P' });
+  });
+
+  it('reads a reference with one form as before', () => {
+    expect(
+      referencesOf(
+        `<ref-list><ref id="r1"><citation-alternatives><element-citation>${element}</element-citation>` +
+          '</citation-alternatives></ref></ref-list>',
+      ),
+    ).toEqual([{ id: 'r1', text: 'Doe. P. 2021.', authors: ['Doe'], title: 'P', year: '2021' }]);
+  });
+});
+
+describe('arXiv IDs from arXiv DOIs (#76)', () => {
+  it('reads the article and reference arXiv IDs an arXiv DOI names', () => {
+    const document = parseArticle({
+      back:
+        '<ref-list><ref id="a"><mixed-citation>A. <pub-id pub-id-type="doi">10.48550/arXiv.2105.00001</pub-id></mixed-citation></ref>' +
+        '<ref id="b"><mixed-citation>B. <ext-link ext-link-type="uri" xlink:href="https://doi.org/10.48550/ARXIV.hep-th/9711200">link</ext-link></mixed-citation></ref>' +
+        '<ref id="c"><mixed-citation>C. <pub-id pub-id-type="doi">10.48550/arXiv.notanid</pub-id></mixed-citation></ref></ref-list>',
+      body: '<p>Body.</p>',
+      meta: '<article-id pub-id-type="doi">10.48550/arXiv.1706.03762</article-id><title-group><article-title>T</article-title></title-group>',
+    });
+    expect(document.metadata.identifiers).toEqual({
+      arxiv: '1706.03762',
+      doi: '10.48550/arxiv.1706.03762',
+    });
+    expect(toMarkdown(document)).toContain('arXiv: 1706.03762');
+    expect(document.references.map(({ arxiv, doi }) => ({ arxiv, doi }))).toEqual([
+      { arxiv: '2105.00001', doi: '10.48550/arxiv.2105.00001' },
+      { arxiv: 'hep-th/9711200', doi: '10.48550/arxiv.hep-th/9711200' },
+      { arxiv: undefined, doi: '10.48550/arxiv.notanid' },
+    ]);
+  });
+
+  it('keeps the ID a link names over the one the DOI beside it names', () => {
+    const [reference] = referencesOf(
+      '<ref-list><ref id="a"><mixed-citation>A. <pub-id pub-id-type="doi">10.48550/arXiv.2105.00001</pub-id>' +
+        '<ext-link ext-link-type="uri" xlink:href="https://arxiv.org/abs/2105.00001v3">link</ext-link></mixed-citation></ref></ref-list>',
+    );
+    expect(reference).toMatchObject({ arxiv: '2105.00001v3', doi: '10.48550/arxiv.2105.00001' });
+    expect(reference).not.toHaveProperty('url');
+  });
+});
+
 describe('mixed-citation adjacency (#115, #123, #124)', () => {
   it('separates and labels two adjacent zero-gap pub-ids (#115)', () => {
     // PMC11391094 ref C37: the literal `doi:` prefix must not be labeled twice, and the

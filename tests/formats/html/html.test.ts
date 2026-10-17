@@ -8,7 +8,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { parseHtml } from '../../../src/formats/html/index.js';
-import { interstitialReason } from '../../../src/html/interstitial.js';
+import { standInFailure } from '../../../src/html/interstitial.js';
 import type { Block, ScholarlyDocument, Section } from '../../../src/model/document.js';
 import { toMarkdown, toSections, toText } from '../../../src/render/index.js';
 import { expectLinear } from '../../linear.js';
@@ -113,6 +113,79 @@ describe('interstitials', () => {
       ),
     );
     expect(document.body[0]?.title).toBe('Introduction');
+  });
+
+  describe('error pages (#64)', () => {
+    const nginx = (status: string) =>
+      `<html><head><title>${status}</title></head><body><center><h1>${status}</h1></center><hr><center>nginx</center></body></html>`;
+    const apache404 =
+      '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\n<p>The requested URL was not found on this server.</p>\n</body></html>';
+    const outcome = async (html: string) => {
+      const result = await parseHtml(html);
+      return result.ok ? `ok: ${result.document.metadata.title}` : result.error;
+    };
+
+    it('fails arXiv’s page for a paper with no HTML as empty, as parseLatexml does', async () => {
+      expect(
+        await outcome(`<!DOCTYPE html><html lang="en"><head><title> | arXiv e-print repository</title></head>
+          <body><header><a href="/">arXiv</a></header><main><h1>No HTML for '2508.18163v1'</h1>
+          <p>HTML is not available for the source.</p></main></body></html>`),
+      ).toEqual({
+        message: 'The page reports that no HTML conversion of the paper is available',
+        reason: 'empty',
+      });
+    });
+
+    it.each([
+      ['an ID it has no paper under', "<h1>No document for '2512.99999'</h1>"],
+      [
+        'a withdrawn version',
+        '<h1>This version of 2610.10459v2 has been withdrawn and is unavailable</h1>',
+      ],
+    ])('fails arXiv’s page for %s as empty', async (_name, heading) => {
+      expect(
+        await outcome(`<!DOCTYPE html><html lang="en"><head><title> | arXiv e-print repository</title></head>
+          <body><header><a href="/">arXiv</a></header><main>${heading}</main></body></html>`),
+      ).toEqual({
+        message: 'The page reports that arXiv has no such paper or version',
+        reason: 'empty',
+      });
+    });
+
+    it.each([
+      ['an nginx 502', nginx('502 Bad Gateway'), '502'],
+      ['an nginx 503', nginx('503 Service Temporarily Unavailable'), '503'],
+      ['an Apache 404, its code in the title alone', apache404, '404'],
+    ])('reports %s as blocked', async (_name, html, code) => {
+      expect(await outcome(html)).toEqual({
+        message: `The page is an HTTP ${code} error page, not the document`,
+        reason: 'blocked',
+      });
+    });
+
+    it('reads a page as a paper when its error-like title is not a status line alone', async () => {
+      const prose = `<p>${'We measure how often links cited in papers stop resolving over a decade. '.repeat(4)}</p>`;
+      const titled = (title: string, extra = '') =>
+        `<html><head>${extra}<title>${title}</title></head><body><article><h1>${title}</h1>${prose}</article></body></html>`;
+      const linkRot = '404 Not Found: Link Rot in Scholarly References';
+      expect(
+        await outcome(titled(linkRot, `<meta name="citation_title" content="${linkRot}">`)),
+      ).toBe(`ok: ${linkRot}`);
+      expect(await outcome(titled(linkRot))).toBe(`ok: ${linkRot}`);
+      expect(await outcome(titled('Not Found'))).toBe('ok: Not Found');
+      // A heading that opens with a number is no status line unless a reason phrase follows.
+      expect(await outcome(titled('500 Years of Printing'))).toBe('ok: 500 Years of Printing');
+      expect(await outcome(titled('404 Maps of the Coast'))).toBe('ok: 404 Maps of the Coast');
+      // The phrases arXiv uses count only in the title or a top heading.
+      for (const elsewhere of ['<p>No HTML for us.</p>', '<h2>No HTML for us.</h2>'])
+        expect(await outcome(titled('Our pipeline').replace('</h1>', `</h1>${elsewhere}`))).toBe(
+          'ok: Our pipeline',
+        );
+      // A page with more text than a stand-in holds is a page of its own.
+      expect(
+        await outcome(nginx('404 Not Found').replace('<hr>', `<p>${'Words. '.repeat(500)}</p>`)),
+      ).toBe('ok: 404 Not Found');
+    });
   });
 });
 
@@ -412,6 +485,23 @@ describe('outline', () => {
         ['Conclusion', [{ text: 'So.', type: 'paragraph' }]],
       ]);
     }
+  });
+
+  it('spends no section ID or warning on bold-labelled parts beside an unlabelled one (#54)', async () => {
+    const formula = '<span class="inline-formula"><img src="https://example.org/f1.gif"></span>';
+    const document = await parse(
+      page(`<h2>Abstract</h2><div class="abstract-content">
+        <div><b>Background</b><p>Why. ${formula}</p></div>
+        <div><b>Methods</b><p>How.</p></div>
+        <div><p>So.</p></div></div>
+        <h2>Introduction</h2><p>${PROSE}</p><h2>Discussion</h2><p>Talk.</p>`),
+    );
+    expect(document.abstracts[0]?.sections.map((s) => [s.id, s.title])).toEqual([
+      ['abstract-1-1', undefined],
+    ]);
+    expect(document.body.map((s) => s.id)).toEqual(['s2', 's3']);
+    const warnings = document.diagnostics.warnings.filter((w) => w.code === 'math-without-tex');
+    expect(warnings).toHaveLength(1);
   });
 
   it('skips page furniture inside the article region', async () => {
@@ -775,6 +865,128 @@ describe('figures and tables', () => {
   });
 });
 
+describe('table row groups (#46)', () => {
+  /** The rows and header row count of the one table on a page whose results hold `table`. */
+  async function readTable(table: string) {
+    const document = await parse(page(`<h2>Results</h2><p>${PROSE}</p>${table}`));
+    const found = blocks(document.body).filter((block) => block.type === 'table');
+    expect(found).toHaveLength(1);
+    const [block] = found;
+    return block?.type === 'table' ? { headerRows: block.headerRows, rows: block.rows } : {};
+  }
+
+  it('carries a rowspan through its own group, a run of bare rows, and a row with no cells', async () => {
+    expect(
+      await readTable(
+        '<table><thead><tr><th>H1</th><th>H2</th></tr></thead><tbody>' +
+          '<tr><td rowspan="3">A</td><td>B</td></tr><tr></tr><tr><td>C</td></tr></tbody></table>',
+      ),
+    ).toEqual({
+      headerRows: 1,
+      rows: [
+        ['H1', 'H2'],
+        ['A', 'B'],
+        ['A', 'C'],
+      ],
+    });
+    expect(
+      (
+        await readTable(
+          '<table><tr><td rowspan="5">A</td><td>B</td></tr><tr><td>C</td></tr></table>',
+        )
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+    ]);
+  });
+
+  it('ends a head rowspan at the end of the head', async () => {
+    expect(
+      await readTable(
+        '<table><thead><tr><th rowspan="2">Group</th><th>Mean</th></tr></thead><tbody>' +
+          '<tr><td>Control</td><td>1.2</td></tr><tr><td>Treated</td><td>3.4</td></tr></tbody></table>',
+      ),
+    ).toEqual({
+      headerRows: 1,
+      rows: [
+        ['Group', 'Mean'],
+        ['Control', '1.2'],
+        ['Treated', '3.4'],
+      ],
+    });
+  });
+
+  it('ends rowspan="3" and rowspan="0" at the end of their group', async () => {
+    const twoBodies = (span: string) =>
+      `<table><tbody><tr><td rowspan="${span}">A</td><td>B</td></tr><tr><td>C</td></tr></tbody>` +
+      '<tbody><tr><td>D</td><td>E</td></tr></tbody></table>';
+    for (const span of ['3', '0']) {
+      expect((await readTable(twoBodies(span))).rows).toEqual([
+        ['A', 'B'],
+        ['A', 'C'],
+        ['D', 'E'],
+      ]);
+    }
+    // A run of bare rows is a group of its own.
+    expect(
+      (
+        await readTable(
+          '<table><tr><td rowspan="0">A</td><td>B</td></tr><tr><td>C</td></tr>' +
+            '<tbody><tr><td>D</td><td>E</td></tr></tbody></table>',
+        )
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['A', 'C'],
+      ['D', 'E'],
+    ]);
+  });
+
+  it('keeps colspan="0" one column wide', async () => {
+    expect(
+      (
+        await readTable(
+          '<table><tr><td colspan="0">A</td><td>B</td></tr><tr><td>C</td><td>D</td></tr></table>',
+        )
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);
+  });
+
+  it('puts the rows of every tfoot after every body row, a tfoot already last included (#81)', async () => {
+    const table = (...groups: string[]) => `<table>${groups.join('')}</table>`;
+    const head = '<thead><tr><th>H1</th><th>H2</th></tr></thead>';
+    const body = (text: string) => `<tbody><tr><td>${text}1</td><td>${text}2</td></tr></tbody>`;
+    const foot = (text: string) => `<tfoot><tr><td>${text}1</td><td>${text}2</td></tr></tfoot>`;
+    expect(await readTable(table(head, body('B'), foot('F')))).toEqual({
+      headerRows: 1,
+      rows: [
+        ['H1', 'H2'],
+        ['B1', 'B2'],
+        ['F1', 'F2'],
+      ],
+    });
+    expect(await readTable(table(head, foot('F'), body('B'), body('C')))).toEqual({
+      headerRows: 1,
+      rows: [
+        ['H1', 'H2'],
+        ['B1', 'B2'],
+        ['C1', 'C2'],
+        ['F1', 'F2'],
+      ],
+    });
+    // Two footers keep their order after the body.
+    expect((await readTable(table(foot('F'), body('B'), foot('G')))).rows).toEqual([
+      ['B1', 'B2'],
+      ['F1', 'F2'],
+      ['G1', 'G2'],
+    ]);
+  });
+});
+
 describe('references', () => {
   it('keeps each entry’s label and text, strips lookup links, and mines them for identifiers', async () => {
     const document = await parse(
@@ -953,10 +1165,14 @@ describe('long unclosed runs', () => {
     ['<meta', '<html><body>', ''],
     [' http-equiv=refresh', '<meta http-equiv=refresh', '>'],
     ['<script', '<p>', ''],
+    // Tags with no text between them stay under the visible-text bound, so the headings are read.
+    ['<title>', '', ''],
+    ['<h1 id=a>', '<html><body>', ''],
+    ['<title></h1>', '', ''],
   ])('checks a page for an interstitial in time linear in a run of %j', async (run, lead, end) => {
     // Up to 480,000 characters, inside the 512 KiB an interstitial is read to.
     const to = 4 ** 4 * Math.floor(480_000 / run.length / 4 ** 4);
-    await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, interstitialReason, {
+    await expectLinear((n) => `${lead}${run.repeat(n)}${end}`, standInFailure, {
       from: to / 4 ** 4,
       to,
     });
@@ -1053,6 +1269,35 @@ describe('long unclosed runs', () => {
   ])('reads the DOI in reference text %j without what closes it', async (text, doi) => {
     const document = await reference(`Roe R. A work. ${text}`);
     expect(document.references[0]?.doi).toBe(doi);
+  });
+
+  it('reads the arXiv IDs an arXiv DOI names in the front matter and references (#76)', async () => {
+    const document = await parse(
+      page(
+        `<h2>Introduction</h2><p>${PROSE}</p><h2>References</h2><ol class="references">` +
+          '<li id="r1">Roe R. A work. <a href="https://doi.org/10.48550/arXiv.2105.00001">doi</a></li>' +
+          '<li id="r2">Roe R. Another. doi:10.48550/arXiv.2105.00001 ' +
+          '<a href="https://arxiv.org/abs/2105.00001v3">arXiv</a></li></ol>',
+      ).replace('doi:10.1234/ABC.5', '10.48550/arXiv.1706.03762'),
+    );
+    expect(document.metadata.identifiers).toEqual({
+      arxiv: '1706.03762',
+      doi: '10.48550/arxiv.1706.03762',
+    });
+    expect(document.references.map(({ arxiv, doi }) => ({ arxiv, doi }))).toEqual([
+      { arxiv: '2105.00001', doi: '10.48550/arxiv.2105.00001' },
+      { arxiv: '2105.00001v3', doi: '10.48550/arxiv.2105.00001' },
+    ]);
+    const tagged = await parse(
+      page(
+        `<h2>Introduction</h2><p>${PROSE}</p>`,
+        '<meta name="citation_reference" content="citation_title=A cited work;citation_doi=10.48550/arXiv.hep-th/9711200">',
+      ),
+    );
+    expect(tagged.references[0]).toMatchObject({
+      arxiv: 'hep-th/9711200',
+      doi: '10.48550/arxiv.hep-th/9711200',
+    });
   });
 
   it('reads preformatted text in time linear in a run of spaces inside it', async () => {

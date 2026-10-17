@@ -18,7 +18,7 @@ import {
   textOfElement,
   truncatedNestingMessage,
 } from '../../html/dom.js';
-import { interstitialReason } from '../../html/interstitial.js';
+import { standInFailure } from '../../html/interstitial.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
   Abstract,
@@ -78,8 +78,8 @@ async function readHtml(input: string | Uint8Array, options: HtmlOptions): Promi
   if (!/<(?:html|body|head|meta|div|p|article)[\s>]/i.test(source)) {
     return failed('wrong-format', 'Not an HTML page: no html, head, or body markup');
   }
-  const blocked = interstitialReason(source);
-  if (blocked) return failed('blocked', blocked);
+  const standIn = standInFailure(source);
+  if (standIn) return failed(standIn.reason, standIn.message);
 
   const { document, droppedTags } = await loadBoundedDocument(source);
   const ctx: HtmlContext = {
@@ -612,7 +612,8 @@ function partSiblings(nodes: Node[]): Node[] {
 /**
  * Sibling blocks each led by a bold label, as titled sections, the `m`th one's ID
  * `partId(m)` unless it has its own; undefined unless there are two or more and nothing
- * else.
+ * else. Every sibling's label is checked before any part is read, since reading one
+ * issues its ID and counts its warnings.
  */
 function labelledParts(
   nodes: Node[],
@@ -623,22 +624,19 @@ function labelledParts(
     const label = isElement(node) ? partLabel(node) : undefined;
     return label && isElement(node) ? { element: node, label } : undefined;
   });
-  if (parts.length < 2) return;
-  const sections: Section[] = [];
-  for (const part of parts) {
-    if (!part) return;
+  if (parts.length < 2 || !parts.every((part) => part !== undefined)) return;
+  return parts.map((part, index) => {
     const content = childNodes(part.element).filter((node) => node !== part.label);
     const title = inlineText(part.label, ctx).replace(/[:.]\s*$/, '');
     const sourceId = part.element.getAttribute('id') ?? undefined;
-    sections.push({
+    return {
       blocks: flowBlocks(content, ctx),
-      id: issueId(ctx.sectionIds, sourceId, partId(sections.length + 1)),
+      id: issueId(ctx.sectionIds, sourceId, partId(index + 1)),
       kind: 'body',
       sections: [],
       ...(title && { title }),
-    });
-  }
-  return sections;
+    };
+  });
 }
 
 /** The element a heading opens: its parent, when nothing with text comes before the heading in it. */

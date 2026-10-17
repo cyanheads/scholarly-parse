@@ -10,8 +10,8 @@ const SNIFF_CHARS = 64 * 1024;
 
 /**
  * The format of `input`, or undefined when it is none this package reads. Bytes are read
- * by their byte-order mark, else as Latin-1. A challenge or access-denied page is `html`;
- * the HTML parser reports it as `blocked`.
+ * by their byte-order mark, else as Latin-1. A challenge, access-denied, or HTTP error
+ * page is `html`; the HTML parser reports it as `blocked`.
  */
 export function detect(input: string | Uint8Array): SourceFormat | undefined {
   const head = typeof input === 'string' ? input.slice(0, SNIFF_CHARS) : opening(input);

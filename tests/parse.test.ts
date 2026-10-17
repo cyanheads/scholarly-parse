@@ -154,6 +154,28 @@ describe('parse', () => {
     }
   });
 
+  it('fails a page standing in for the paper as parseLatexml and parseHtml do (#64)', async () => {
+    const arxiv = `<html><head><title> | arXiv e-print repository</title></head><body>
+      <h1>No HTML for '2508.18163v1'</h1><p>HTML is not available for the source.</p></body></html>`;
+    const noConversion = {
+      error: {
+        message: 'The page reports that no HTML conversion of the paper is available',
+        reason: 'empty',
+      },
+      ok: false,
+    };
+    expect(await parse(arxiv)).toEqual(noConversion);
+    expect(await parseLatexml(arxiv)).toEqual(noConversion);
+    expect(
+      await parse(
+        '<html><head><title>502 Bad Gateway</title></head><body><center><h1>502 Bad Gateway</h1></center><hr><center>nginx</center></body></html>',
+      ),
+    ).toEqual({
+      error: { message: 'The page is an HTTP 502 error page, not the document', reason: 'blocked' },
+      ok: false,
+    });
+  });
+
   it('fails as malformed where a document breaks a parser, rather than throwing', async () => {
     const reason = async (input: string | Uint8Array) => {
       const result = await parse(input);

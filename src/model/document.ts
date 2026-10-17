@@ -48,7 +48,9 @@ export interface Author {
 export interface Identifiers {
   /**
    * arXiv ID without an `arXiv:` label or an old-style ID's subject class
-   * (`math.GT/0309136` → `math/0309136`), version kept when the source prints one.
+   * (`math.GT/0309136` → `math/0309136`), version kept when the source prints one. With no
+   * ID of its own, the one an arXiv DataCite DOI in `doi` names (`10.48550/arxiv.2105.00001`
+   * → `2105.00001`).
    */
   arxiv?: string;
   /** Lowercased DOI without a resolver prefix. */
@@ -283,7 +285,11 @@ export interface Reference {
    * arXiv ID without the `arXiv:` prefix, version kept when the entry prints one
    * (`2105.00001v2`). LaTeXML, HTML, and PDF references read it from an `arXiv` label, an
    * arxiv.org `/abs/` or `/pdf/` link, or a bare old-style ID, dropping an old-style ID's
-   * subject class (`math.GT/0309136` → `math/0309136`).
+   * subject class (`math.GT/0309136` → `math/0309136`). JATS and TEI references read it
+   * from a typed field (`pub-id-type` or `ext-link-type` `arxiv`, `<idno type="arXiv">`),
+   * else an arxiv.org link (`<ext-link>`, `<uri>`, `<ptr target>`). A reference with no ID
+   * of its own takes the one an arXiv DataCite DOI in `doi` names
+   * (`10.48550/arxiv.hep-th/9711200` → `hep-th/9711200`).
    */
   arxiv?: string;
   /** Author names as printed. */

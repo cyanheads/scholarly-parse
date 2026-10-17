@@ -38,7 +38,7 @@ import { join } from 'node:path';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
 import { XMLParser } from 'fast-xml-parser';
-import { interstitialReason } from '../../src/html/interstitial.js';
+import { standInFailure } from '../../src/html/interstitial.js';
 import { FEATURES } from '../../tests/corpus/features.js';
 import {
   CORPUS_DIR,
@@ -670,8 +670,8 @@ function assertNotChallenge(result: HttpResult): void {
   if ([401, 403, 429, 503].includes(result.status)) {
     fail(`${result.url} answered HTTP ${result.status} — blocked; skip this source`);
   }
-  const reason = interstitialReason(decode(result.bytes));
-  if (reason) fail(`${result.url}: ${reason} — skip this source`);
+  const standIn = standInFailure(decode(result.bytes));
+  if (standIn) fail(`${result.url}: ${standIn.message} — skip this source`);
 }
 
 /**

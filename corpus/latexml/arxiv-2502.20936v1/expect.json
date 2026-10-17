@@ -1,5 +1,5 @@
 {
-  "why": "An acmart paper with spanning header cells: Table 3's dataset names each span six columns and repeat across them, and Table 4's two-line header cells are nested tabulars read as the cell's text, not as tables. Figure 3 is a figure float whose two subfigure panels each hold a tabular: its caption heads the two panel tables (a) and (b), and it counts as no figure. 2 figures: Figures 1 and 2. 1 formula, numbered. 34 references, 14 footnotes (the page's other ltx_note is the license notice). 10 tables, one per top-level tabular, including the one set as an uncaptioned panel beside Figure 2's plot (example questions per question type), which follows the figure.",
+  "why": "An acmart paper with spanning header cells: Table 3's dataset names each span six columns and repeat across them, and Table 4's two-line header cells are nested tabulars read as the cell's text, not as tables. Figure 3 is a figure float whose two subfigure panels each hold a tabular: its caption heads the two panel tables (a) and (b), and it counts as no figure. 2 figures: Figures 1 and 2. 1 formula, numbered. 34 references, 9 with an arXiv ID: 7 of them name it only by its arXiv DOI (#76). 14 footnotes (the page's other ltx_note is the license notice). 10 tables, one per top-level tabular, including the one set as an uncaptioned panel beside Figure 2's plot (example questions per question type), which follows the figure.",
   "title": "WebFAQ: A Multilingual Collection of Natural Q&A Datasets for Dense Retrieval",
   "quality": "structured",
   "abstractKinds": ["main"],
@@ -30,6 +30,7 @@
   "figures": 2,
   "formulas": 1,
   "references": 34,
+  "referenceIdentifiers": { "arxiv": 9 },
   "contains": [
     "arXiv: 2502.20936v1",
     "|  | WebFAQ | WebFAQ | WebFAQ | WebFAQ | WebFAQ | WebFAQ |  | MIRACL (Hard Negatives) |",

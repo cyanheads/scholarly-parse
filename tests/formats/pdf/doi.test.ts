@@ -193,4 +193,18 @@ describe('PDF DOIs', () => {
     expect((await firstReference(build(80_000))).doi).toBe(`10.1234/${suffix(80_000)}`);
     await expectLinear(build, parsePdf, { from: 20_000, to: 80_000 });
   });
+
+  it('reads the first-page and reference arXiv IDs an arXiv DOI names (#76)', async () => {
+    const { metadata } = await parse(
+      firstPage({ text: '10.48550/arXiv.2105.00001', x: 95, y: 500 }),
+    );
+    expect(metadata.identifiers).toMatchObject({
+      arxiv: '2105.00001',
+      doi: '10.48550/arxiv.2105.00001',
+    });
+    const reference = await firstReference(
+      referenceList({ text: 'https://doi.org/10.48550/arXiv.1706.03762', x: 250, y: 485 }),
+    );
+    expect(reference).toMatchObject({ arxiv: '1706.03762', doi: '10.48550/arxiv.1706.03762' });
+  });
 });

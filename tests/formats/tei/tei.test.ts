@@ -921,6 +921,100 @@ describe('arXiv values (#65)', () => {
   });
 });
 
+describe('reference arXiv links (#79)', () => {
+  /** The reference a `<biblStruct>` holding `inner` after its `<analytic>` and `<monogr>` reads as. */
+  const reference = (inner: string) =>
+    parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl><biblStruct xml:id="b0"><analytic><title level="a">A paper</title></analytic>
+          <monogr><imprint><date when="2021"/></imprint></monogr>${inner}</biblStruct></listBibl></div>`,
+      ),
+    ).references[0];
+  const fieldsOf = (inner: string) => {
+    const { arxiv, doi, url } = reference(inner) ?? {};
+    return { arxiv, doi, url };
+  };
+
+  it('reads the ID an arxiv.org ptr names, and keeps the link as the URL', () => {
+    expect(reference('<ptr target="https://arxiv.org/abs/2105.00001"/>')).toEqual({
+      id: 'b0',
+      text: '(2021). A paper.',
+      title: 'A paper',
+      year: '2021',
+      arxiv: '2105.00001',
+      url: 'https://arxiv.org/abs/2105.00001',
+    });
+    expect(fieldsOf('<ptr target="http://arxiv.org/pdf/hep-th/9711200v2.pdf"/>')).toEqual({
+      arxiv: 'hep-th/9711200v2',
+      doi: undefined,
+      url: 'http://arxiv.org/pdf/hep-th/9711200v2.pdf',
+    });
+  });
+
+  it('reads the ID from any ptr, the URL staying the first', () => {
+    expect(
+      fieldsOf(
+        '<ptr target="https://example.org/paper"/><ptr target="https://arxiv.org/abs/2105.00001v3"/>',
+      ),
+    ).toEqual({ arxiv: '2105.00001v3', doi: undefined, url: 'https://example.org/paper' });
+  });
+
+  it('reads the ID beside a DOI, where the link is not the URL', () => {
+    expect(
+      fieldsOf(
+        '<idno type="DOI">10.1000/XYZ</idno><ptr target="https://arxiv.org/abs/2105.00001"/>',
+      ),
+    ).toEqual({ arxiv: '2105.00001', doi: '10.1000/xyz', url: undefined });
+  });
+
+  it('keeps a typed idno ID over the one a ptr names', () => {
+    expect(
+      fieldsOf(
+        '<idno type="arXiv">arXiv:2105.00001v1</idno><ptr target="https://arxiv.org/abs/2105.00001v3"/>',
+      ).arxiv,
+    ).toBe('2105.00001v1');
+    expect(
+      fieldsOf('<idno type="arXiv">pending</idno><ptr target="https://arxiv.org/abs/2105.00001"/>')
+        .arxiv,
+    ).toBe('2105.00001');
+  });
+
+  it('reads the header and reference arXiv IDs an arXiv DOI names (#76)', () => {
+    const document = parse(
+      tei(
+        div('1', 'Introduction', 'a'),
+        `<div type="references"><listBibl><biblStruct xml:id="b0"><analytic><title level="a">A</title>
+          <idno type="DOI">10.48550/arXiv.hep-th/9711200</idno></analytic></biblStruct></listBibl></div>`,
+        HEADER.replace('10.1234/ABC', '10.48550/arXiv.2105.00001'),
+      ),
+    );
+    expect(document.metadata.identifiers).toEqual({
+      arxiv: '2105.00001',
+      doi: '10.48550/arxiv.2105.00001',
+    });
+    expect(document.references[0]).toMatchObject({
+      arxiv: 'hep-th/9711200',
+      doi: '10.48550/arxiv.hep-th/9711200',
+    });
+    expect(
+      fieldsOf(
+        '<idno type="DOI">10.48550/arXiv.2105.00001</idno><ptr target="https://arxiv.org/abs/2105.00001v3"/>',
+      ).arxiv,
+    ).toBe('2105.00001v3');
+  });
+
+  it('reads no ID from a ptr to another host or to no paper', () => {
+    expect(fieldsOf('<ptr target="https://example.org/abs/2105.00001"/>')).toEqual({
+      arxiv: undefined,
+      doi: undefined,
+      url: 'https://example.org/abs/2105.00001',
+    });
+    expect(fieldsOf('<ptr target="https://arxiv.org/list/hep-th/new"/>').arxiv).toBeUndefined();
+    expect(fieldsOf('<ptr/>')).toEqual({ arxiv: undefined, doi: undefined, url: undefined });
+  });
+});
+
 describe('document-sized lists', () => {
   /** V8 rejects a call spreading ~120,000 arguments, so each case runs past that on Node. */
   it('joins a heading-less div of 200,000 paragraphs to the section before it', () => {
@@ -956,6 +1050,29 @@ describe('the table budget', () => {
     expect(
       document.diagnostics.warnings.filter((warning) => warning.code === 'truncated-input'),
     ).toMatchObject([{ message: expect.stringMatching(/^Table 1 /), where: 'tab_0' }]);
+  });
+});
+
+describe('table spans', () => {
+  it('carries @rows past a label row, and reads @rows="0" as 1', () => {
+    const document = parse(
+      tei(
+        `${div('1', 'Results', 'a')}<figure xml:id="tab_0" type="table"><head>Table 1</head><table>` +
+          '<row role="label"><cell rows="2">G</cell><cell>S</cell></row><row><cell>1</cell></row>' +
+          '<row><cell rows="0">A</cell><cell>B</cell></row><row><cell>C</cell></row></table></figure>',
+      ),
+    );
+    expect(document.floats).toMatchObject([
+      {
+        headerRows: 1,
+        rows: [
+          ['G', 'S'],
+          ['G', '1'],
+          ['A', 'B'],
+          ['C', ''],
+        ],
+      },
+    ]);
   });
 });
 

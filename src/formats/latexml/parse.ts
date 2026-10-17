@@ -17,6 +17,7 @@ import {
   textOfElement,
   truncatedNestingMessage,
 } from '../../html/dom.js';
+import { CONVERSION_FAILED, NO_CONVERSION } from '../../html/interstitial.js';
 import { arxivFromPageUrl, arxivFromUrl, arxivId, arxivInText } from '../../model/arxiv.js';
 import { createDiagnostics } from '../../model/diagnostics.js';
 import type {
@@ -61,10 +62,6 @@ export interface LatexmlOptions extends ParseOptions {
 
 const DEFAULT_MAX_INPUT_BYTES = 32 * 1024 * 1024;
 
-/** Messages arXiv shows in place of a paper it could not convert. */
-const CONVERSION_FAILED =
-  /No HTML for|HTML is not available|Conversion to HTML had a Fatal error|conversion failed/i;
-
 /** Parse a LaTeXML HTML page. Requires the optional `linkedom` peer. */
 export function parseLatexml(
   input: string | Uint8Array,
@@ -82,8 +79,10 @@ async function readLatexml(
     return failed('too-large', `Input exceeds the ${maxBytes}-byte budget`);
   const source = decodeText(input);
   if (!/ltx_document|LaTeXML/.test(source)) {
+    // The caller expects an arXiv conversion, so arXiv's message anywhere on a page without
+    // LaTeXML markup means it has none; `parseHtml` needs the message as the page's heading.
     return CONVERSION_FAILED.test(source)
-      ? failed('empty', 'The page reports that no HTML conversion of the paper is available')
+      ? failed('empty', NO_CONVERSION)
       : failed('wrong-format', 'Not a LaTeXML page: no ltx_document element');
   }
 

@@ -1,12 +1,13 @@
 /**
  * @fileoverview Source table rows → a rectangular grid of cell text with `colspan` and
- * `rowspan` expanded. Every format's table reader maps its markup into `SourceRow`s and
- * lets this build the grid, so span handling is written once.
+ * `rowspan` expanded. Every format's table reader maps its markup into row groups of
+ * `SourceRow`s and lets this build the grid, so span handling is written once.
  *
  * A cell covering N columns fills N entries and one covering M rows fills its column in
  * the M−1 rows below, repeating its text: the value belongs to each position it covers,
  * and keeping the source cell count would put values under the wrong headers.
- * (pubmed-mcp-server#111)
+ * (pubmed-mcp-server#111) As in HTML, a rowspan never reaches past its row group, and a
+ * rowspan of 0 covers the rest of the group.
  *
  * The grids of one document draw on one {@link GridBudget}: what the tables of a document
  * may repeat and hold is capped where the grid is built, where a parser can still record
@@ -72,6 +73,7 @@ export interface Grid {
 export interface SourceCell {
   colspan: number;
   header: boolean;
+  /** Rows the cell covers, its own included; 0 covers the rest of its row group. */
   rowspan: number;
   text: string;
 }
@@ -90,14 +92,25 @@ export function spanValue(raw: string | null | undefined): number {
 }
 
 /**
- * Build the grid, charging the document's `budget`. Header rows are head rows plus any
- * leading row made only of header cells; a row the source left short is padded so cells
- * never shift under the wrong column. Rows are kept in order while the grid, padded to
- * its widest row so far, fits the cells left.
+ * A `rowspan` attribute value: 0, read as HTML reads a non-negative integer, spans the
+ * rest of the row group; anything else is a {@link spanValue}.
  */
-export function buildGrid(sourceRows: SourceRow[], budget: GridBudget): Grid {
+export function rowspanValue(raw: string | null | undefined): number {
+  return Number.parseInt(raw ?? '', 10) === 0 ? 0 : spanValue(raw);
+}
+
+/**
+ * Build the grid from a table's row groups, in the order they are shown, charging the
+ * document's `budget`. A rowspan ends with its group. Header rows are head rows plus any
+ * leading row made only of header cells; a row the source left short is padded so cells
+ * never shift under the wrong column, and a row with no cells only counts among the rows
+ * a rowspan covers. Rows are kept in order while the grid, padded to its widest row so
+ * far, fits the cells left.
+ */
+export function buildGrid(groups: SourceRow[][], budget: GridBudget): Grid {
   const parsed: { cells: string[]; header: boolean }[] = [];
-  const carried: ({ remaining: number; value: string } | undefined)[] = [];
+  /** Per column, the cell a rowspan carries down into it and the row of its group it ends before. */
+  let carried: ({ end: number; value: string } | undefined)[] = [];
   let truncated = false;
 
   /** A spanned cell's text for one more position it covers, while the budget lasts. */
@@ -110,43 +123,52 @@ export function buildGrid(sourceRows: SourceRow[], budget: GridBudget): Grid {
     return text;
   };
 
-  const drainCarried = (row: string[], col: number): number => {
+  /** Whether a rowspan covers column `col` at row `r` of the group. */
+  const covered = (col: number, r: number): boolean => (carried[col]?.end ?? 0) > r;
+
+  /** Fill `row` with the carried cells from `col` on, up to the first column none covers. */
+  const drainCarried = (row: string[], col: number, r: number): number => {
     let at = col;
     while (at < MAX_TABLE_COLUMNS) {
       const carry = carried[at];
-      if (!carry) return at;
+      if (!carry || carry.end <= r) return at;
       row[at] = copy(carry.value);
-      carry.remaining -= 1;
-      if (carry.remaining <= 0) carried[at] = undefined;
       at += 1;
     }
     return at;
   };
 
   let width = 0;
-  for (const source of sourceRows) {
-    const row: string[] = [];
-    let col = 0;
-    for (const cell of source.cells) {
-      col = drainCarried(row, col);
-      const span = Math.min(cell.colspan, MAX_TABLE_COLUMNS - col);
-      for (let i = 0; i < span; i++) {
-        row[col] = i === 0 ? cell.text : copy(cell.text);
-        if (cell.rowspan > 1) carried[col] = { remaining: cell.rowspan - 1, value: cell.text };
-        col += 1;
+  build: for (const group of groups) {
+    carried = [];
+    let r = -1;
+    for (const source of group) {
+      r += 1;
+      // Nothing is carried into a row with no cells: it would be dropped.
+      if (source.cells.length === 0) continue;
+      const row: string[] = [];
+      let col = 0;
+      for (const cell of source.cells) {
+        col = drainCarried(row, col, r);
+        const span = Math.min(cell.colspan, MAX_TABLE_COLUMNS - col);
+        const end = cell.rowspan === 0 ? Number.POSITIVE_INFINITY : r + cell.rowspan;
+        for (let i = 0; i < span; i++) {
+          row[col] = i === 0 ? cell.text : copy(cell.text);
+          if (cell.rowspan !== 1) carried[col] = { end, value: cell.text };
+          col += 1;
+        }
       }
+      const rightmost = carried.findLastIndex((_, at) => covered(at, r));
+      while (col <= rightmost) col = covered(col, r) ? drainCarried(row, col, r) : col + 1;
+      const widest = Math.max(width, row.length);
+      if ((parsed.length + 1) * widest > budget.cells) {
+        truncated = true;
+        break build;
+      }
+      width = widest;
+      for (let i = 0; i < row.length; i++) row[i] ??= '';
+      parsed.push({ cells: row, header: source.inHead || source.cells.every((c) => c.header) });
     }
-    const rightmost = carried.findLastIndex(Boolean);
-    while (col <= rightmost) col = carried[col] ? drainCarried(row, col) : col + 1;
-    if (source.cells.length === 0) continue;
-    const widest = Math.max(width, row.length);
-    if ((parsed.length + 1) * widest > budget.cells) {
-      truncated = true;
-      break;
-    }
-    width = widest;
-    for (let i = 0; i < row.length; i++) row[i] ??= '';
-    parsed.push({ cells: row, header: source.inHead || source.cells.every((c) => c.header) });
   }
 
   budget.cells -= parsed.length * width;

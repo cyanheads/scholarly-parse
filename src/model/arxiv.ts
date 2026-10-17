@@ -4,9 +4,11 @@
  * old-style ID may carry (`math.GT/0309136` → `math/0309136`), with any version the
  * source prints kept (`2105.00001v2`). One grammar serves every format: the LaTeXML,
  * HTML, and PDF references read the ID an `arXiv` label, an arxiv.org link, or an
- * old-style form in an entry's text gives, the LaTeXML watermark and page URL read the
- * paper's own ID here, and a field the source types as an arXiv ID (JATS `pub-id-type`
- * `arxiv`, TEI `<idno type="arXiv">`, HTML `citation_arxiv_id`) is read here too.
+ * old-style form in an entry's text gives, the JATS and TEI references the ID an arxiv.org
+ * link names, the LaTeXML watermark and page URL read the paper's own ID here, and a field
+ * the source types as an arXiv ID (JATS `pub-id-type` or `ext-link-type` `arxiv`, TEI
+ * `<idno type="arXiv">`, HTML `citation_arxiv_id`) is read here too. An arXiv DataCite
+ * DOI (`10.48550/arXiv.2105.00001`) names the ID that fills one still empty.
  * @module src/model/arxiv
  */
 
@@ -142,6 +144,20 @@ export function arxivFromUrl(url: string | undefined): string | undefined {
 export function normalizeArxiv(value: string | undefined): string | undefined {
   const [, body = ''] = FIELD.exec(value?.trim() ?? '') ?? [];
   return arxivId(body) ?? arxivFromUrl(body);
+}
+
+/** The prefix of the DataCite DOI arXiv registers for every paper, lowercased. */
+const ARXIV_DOI = '10.48550/arxiv.';
+
+/**
+ * The arXiv ID an arXiv DataCite DOI names: what follows `10.48550/arXiv.`, in any case,
+ * read as {@link arxivId} reads one (`10.48550/arXiv.2105.00001` → `2105.00001`,
+ * `10.48550/arxiv.hep-th/9711200` → `hep-th/9711200`). Any other DOI names none.
+ */
+export function arxivFromDoi(doi: string | undefined): string | undefined {
+  return doi?.slice(0, ARXIV_DOI.length).toLowerCase() === ARXIV_DOI
+    ? arxivId(doi.slice(ARXIV_DOI.length))
+    : undefined;
 }
 
 /**

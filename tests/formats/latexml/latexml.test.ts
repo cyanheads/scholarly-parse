@@ -35,6 +35,51 @@ function blocks(sections: Section[]): Block[] {
   return sections.flatMap((section) => [...section.blocks, ...blocks(section.sections)]);
 }
 
+describe('pages that are not a conversion', () => {
+  it('fails arXiv’s page for a paper with no HTML as empty', async () => {
+    const result = await parseLatexml(
+      `<!DOCTYPE html><html lang="en"><head><title> | arXiv e-print repository</title></head>
+      <body><header><a href="/">arXiv</a></header><main><h1>No HTML for '2508.18163v1'</h1>
+      <p>HTML is not available for the source.</p></main></body></html>`,
+    );
+    expect(result).toEqual({
+      error: {
+        message: 'The page reports that no HTML conversion of the paper is available',
+        reason: 'empty',
+      },
+      ok: false,
+    });
+  });
+
+  it.each([
+    ['in a paragraph', '<p>No HTML for this paper.</p>'],
+    ['in a subheading', "<h2>No HTML for '2508.18163v1'</h2>"],
+    ['in a heading with markup', "<h1><span>No HTML for</span> '2508.18163v1'</h1>"],
+    [
+      'on a long page',
+      `<h1>Conversion to HTML had a Fatal error</h1><p>${'log line '.repeat(500)}</p>`,
+    ],
+  ])('fails a page reporting a failed conversion %s as empty', async (_where, body) => {
+    const result = await parseLatexml(
+      `<html><head><title>arXiv</title></head><body>${body}</body></html>`,
+    );
+    expect(result).toEqual({
+      error: {
+        message: 'The page reports that no HTML conversion of the paper is available',
+        reason: 'empty',
+      },
+      ok: false,
+    });
+  });
+
+  it('fails any other page without LaTeXML markup as wrong-format', async () => {
+    const result = await parseLatexml(
+      '<html><head><title>502 Bad Gateway</title></head><body><h1>502 Bad Gateway</h1></body></html>',
+    );
+    expect(result).toMatchObject({ error: { reason: 'wrong-format' }, ok: false });
+  });
+});
+
 describe('abstract', () => {
   it('reads a leading unnumbered section titled Abstract as the abstract', async () => {
     // `\subsection*{Abstract}` in place of the abstract environment.
@@ -236,6 +281,63 @@ describe('sections and floats', () => {
     );
     expect(blocks(document.body)).toEqual([
       { text: 'Input: mesh $\\mathcal{M}$\n  return x', type: 'code' },
+    ]);
+  });
+});
+
+describe('tabular row groups (#46)', () => {
+  const td = (text: string, attrs = '') => `<span class="ltx_td"${attrs}>${text}</span>`;
+  const tr = (...cells: string[]) => `<span class="ltx_tr">${cells.join('')}</span>`;
+  const group = (kind: string, ...rows: string[]) =>
+    `<span class="ltx_${kind}">${rows.join('')}</span>`;
+
+  /** The one table of a page whose float holds a span tabular of `content`. */
+  async function readTabular(content: string) {
+    const document = await parse(
+      page(`<figure id="T1" class="ltx_table"><span class="ltx_tabular">${content}</span>
+        <figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Runs.</figcaption></figure>`),
+    );
+    const [table] = blocks(document.body).filter((block) => block.type === 'table');
+    return table?.type === 'table' ? { headerRows: table.headerRows, rows: table.rows } : {};
+  }
+
+  it('ends a rowspan at the end of its ltx_thead or ltx_tbody, nested ones included', async () => {
+    expect(
+      await readTabular(
+        group('thead', tr(td('Model', ' rowspan="2"'), td('Score'))) +
+          group(
+            'tbody',
+            tr(td('A', ' rowspan="0"'), td('1')),
+            group('tbody', tr(td('B', ' rowspan="2"'), td('2'))),
+            tr(td('C'), td('3')),
+          ),
+      ),
+    ).toEqual({
+      headerRows: 1,
+      rows: [
+        ['Model', 'Score'],
+        ['A', '1'],
+        ['B', '2'],
+        ['C', '3'],
+      ],
+    });
+  });
+
+  it('puts the rows of an ltx_tfoot after every body row, a nested one included (#81)', async () => {
+    expect(
+      (
+        await readTabular(
+          group('tfoot', tr(td('F', ' rowspan="0"'), td('1')), tr(td('2'))) +
+            group('tbody', tr(td('A'), td('B')), group('tfoot', tr(td('G'), td('3')))) +
+            group('tbody', tr(td('C'), td('D'))),
+        )
+      ).rows,
+    ).toEqual([
+      ['A', 'B'],
+      ['C', 'D'],
+      ['F', '1'],
+      ['F', '2'],
+      ['G', '3'],
     ]);
   });
 });
@@ -555,6 +657,20 @@ describe('reference arXiv IDs (#65)', () => {
     `E. Author. ${link('https://example.org/abs/2105.00001')}.`,
   ])('reads no arXiv ID in %j', async (entry) => {
     expect((await reference(entry))?.arxiv).toBeUndefined();
+  });
+
+  it('reads the arXiv ID an arXiv DOI names, after one the entry prints or links (#76)', async () => {
+    expect(
+      await reference(`A. Author. A paper. ${link('https://doi.org/10.48550/ARXIV.2105.00001')}.`),
+    ).toMatchObject({ arxiv: '2105.00001', doi: '10.48550/arxiv.2105.00001' });
+    expect(
+      await reference(
+        `A. Author. A paper. ${link('https://doi.org/10.48550/arXiv.2105.00001')} ${link('https://arxiv.org/abs/2105.00001v3')}.`,
+      ),
+    ).toMatchObject({ arxiv: '2105.00001v3' });
+    expect(
+      (await reference(`A. Author. ${link('https://doi.org/10.48550/zenodo.123')}.`))?.arxiv,
+    ).toBeUndefined();
   });
 
   it('reads no ID from a back-link to the citing paper itself', async () => {
