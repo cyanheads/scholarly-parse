@@ -4,7 +4,7 @@ description: >
   Add a source format to scholarly-parse end to end: corpus fixtures first, then a parser under `src/formats/<format>/` built on the shared XML, HTML, and model helpers, wired into `SourceFormat`, `detect`, `parse`, the package `exports`, the corpus harness, and `add.ts`, with bounds on untrusted input, an optional peer for any new engine, unit tests, docs, and a security pass. Use when asked to add or support a format no existing parser reads (Elsevier full-text XML, with its own `ce:` schema), or to split a format out of an existing parser.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -67,8 +67,8 @@ Reuse the shared layers rather than re-deriving them:
 | Need | Use |
 |:---|:---|
 | XML | `parseOrderedXml` and the tree helpers in `src/xml/ordered.ts`: well-formedness check, entity caps, depth-limited search |
-| HTML | `loadDocument` and the node helpers in `src/html/dom.ts` (lazy `linkedom`), `readHtmlTable` in `src/html/tables.ts`, `interstitialReason` in `src/html/interstitial.ts` for challenge pages |
-| Tables | `buildGrid` and `spanValue` in `src/model/table-grid.ts`: spans expanded, width capped |
+| HTML | `loadDocument` and the node helpers in `src/html/dom.ts` (lazy `linkedom`), `readHtmlTable` in `src/html/tables.ts`, `standInFailure` in `src/html/interstitial.ts` for challenge, HTTP error, and arXiv no-HTML pages |
+| Tables | `buildGrid` over row groups, `spanValue`, and `rowspanValue` in `src/model/table-grid.ts`: spans expanded and ended with their group, width capped |
 | Sections | `issueId` (`src/model/section-ids.ts`) for unique IDs; `kindFromTitle` and `splitSectionNumber` (`src/model/section-kinds.ts`) for back matter and numbering |
 | Inline Markdown | `escapeInline` (`src/render/escape.ts`) on every source text run, and `emphasis`, `link`, `inlineMath`, `inlineCode` from `src/render/inline.ts` |
 
