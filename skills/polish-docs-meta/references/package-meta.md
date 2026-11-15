@@ -22,7 +22,7 @@ What each field should hold for `scholarly-parse`. Check each one; fix what's mi
 | Field | Should be | Why |
 |:------|:----------|:----|
 | `type` | `"module"` | ESM only |
-| `exports` | `"."` plus one entry per format subpath that exists (`"./jats"`, `"./tei"`, `"./latexml"`, `"./html"`, `"./pdf"`), each with `types`, `import`, and `default` pointing into `dist/`, plus `"./package.json"` | One subpath per format, so an application loads only what it parses. `publint --strict` and `attw --profile esm-only` in devcheck verify the map resolves. |
+| `exports` | `"."` plus one entry per format subpath that exists (`"./jats"`, `"./tei"`, `"./latexml"`, `"./html"`, `"./pdf"`), each with `types`, `import`, and `default` pointing into `dist/`, plus `"./package.json"` | One subpath per format, so an application loads only what it parses. `publint --strict` and `attw --profile esm-only` in devcheck verify the map resolves, and `test:package` imports every entry from the installed tarball on Node, Bun, and `workerd`. |
 | `main`, `types`, `module` | absent | `exports` is the entry point; ESM-only needs no fallbacks |
 | `sideEffects` | `false` | Lets bundlers drop unused formats |
 | `files` | `["dist/", "changelog/", "CHANGELOG.md"]` | Never `corpus/`, `tests/`, `scripts/`, or `.env` — third-party documents stay in the repository, not the tarball. `README.md`, `LICENSE`, and `package.json` ship regardless. |

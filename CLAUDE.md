@@ -6,21 +6,24 @@ A TypeScript library that parses scholarly papers — JATS XML, Grobid TEI, arXi
 
 ## Stack & gate
 
-TypeScript strict ESM (`tsc` 7), Bun for development, Biome for lint and format, Vitest for tests.
+TypeScript strict ESM (`tsc` 7), Bun for development, Biome for lint and format, Vitest for tests, `workerd` for the Workers smoke. The gate needs Node.js ≥22 on `PATH` beside Bun.
 
 ```sh
 bun install
 bun run devcheck   # the gate — green before declaring any work complete, and before every commit
 ```
 
-`bun run devcheck` (`scripts/devcheck.ts`) runs Biome with `--write --error-on-warnings`, typecheck, a clean build, the full test suite including the corpus, the changelog check, `publint`, `attw` (ESM-only profile), the skill-symlink check, and `bun audit` at high severity. Warnings are failures. Run it raw: Biome auto-fixes formatting, so filtering its output hides what it changed.
+`bun run devcheck` (`scripts/devcheck.ts`) runs Biome with `--write --error-on-warnings`, typecheck, a clean build, the full test suite including the corpus on Bun and then on Node, the changelog and attribution checks, `publint`, `attw` (ESM-only profile), `test:package`, the skill-symlink check, and `bun audit` at high severity. Warnings are failures. Run it raw: Biome auto-fixes formatting, so filtering its output hides what it changed.
+
+The two test lanes run one after the other, since the linear-time tests measure wall-clock time. Under `bun run`, `bunfig.toml`'s `[run] bun = true` puts Bun's `node` shim first on `PATH`, so a bare `node` there is Bun: the Node lane runs the binary `scripts/node-binary.ts` finds past it, and `tests/runtime.ts` fails any lane that lands on the other runtime.
 
 ## Running it
 
 | Command | Does |
 |:---|:---|
-| `bun run test` | Every unit and corpus test |
+| `bun run test` | Every unit and corpus test, on Bun (`bunx vitest run` typed in a shell runs them on Node) |
 | `bun run test:corpus` | Only the corpus suite: every fixture through its parser, assertions, invariants, snapshots |
+| `bun run test:package` | Build, pack, install the tarball and the optional peers into a temp app, and parse one fixture per format through each subpath and `parse()` on Node, Bun, and `workerd`, against its `expected.md` |
 | `bun run corpus:snapshot` | Rewrite `expected.md` snapshots — review every diff before committing |
 | `bun run corpus:sample` | Wild sampling: fetch fresh openly licensed documents, run invariants, report failure classes (network; see `.env.example`) |
 | `bun run corpus:agreement` | Cross-format agreement: each rosetta work's formats measured against its JATS parse |
@@ -44,6 +47,7 @@ Bytes or text in → a format parser → `ScholarlyDocument` → a renderer. Not
 | `corpus/<format>/<id>/` | Fixture documents with `meta.json`, `expect.json`, `expected.md` |
 | `tests/corpus/` | The corpus runner, invariants, and the `features` vocabulary |
 | `scripts/corpus/` | Corpus collection, wild sampling, attribution generation |
+| `scripts/test-package.ts`, `scripts/test-package/` | The packed-package smoke (`test:package`): the shared smoke, its Node and Bun entry, and its `workerd` entry and config |
 
 ## The rules that matter
 

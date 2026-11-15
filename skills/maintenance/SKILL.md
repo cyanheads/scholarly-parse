@@ -4,7 +4,7 @@ description: >
   Update scholarly-parse's dependencies and verify the result — `bun update --latest` under the `minimumReleaseAge` guard, a changelog read per updated package cross-referenced against the code, adoption of what the updates require, `bun run devcheck` with the full corpus suite, advisory triage, and every version arrow recorded for the release's changelog. Supports two entry modes: run the whole flow, or review updates already applied. Use when asked to update deps, run maintenance, or clear an audit advisory.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -62,6 +62,7 @@ Read these closer than the rest:
 - **`fast-xml-parser`** — the one required dependency, and it parses untrusted XML. Look for changes to entity handling, option names, and defaults: a renamed option or flipped default can silently remove the entity caps in the shared config under `src/xml/`. After updating, re-run the entity probes from `skills/security-pass/SKILL.md` Axis 1.
 - **Optional peers** (`linkedom`, `unpdf`) — third-party engines on the untrusted-input path. When `package.json` declares them as peers, a major bump of the development copy means deciding whether the `peerDependencies` range moves too; a range change is consumer-facing and gets its own changelog line, and dropping a major a consumer may have installed is `breaking: true`. For `unpdf`, check which pdf.js build it bundles (security-pass Axis 7).
 - **Toolchain** — `typescript`, `@biomejs/biome`, `vitest`, `publint`, `@arethetypeswrong/cli`. A Biome bump may need `bunx biome migrate --write`, which also moves the `$schema` version in `biome.json`. A TypeScript bump moves the TypeScript badge in `README.md`, which pins the range. A Bun upgrade moves `packageManager` and `@types/bun` together.
+- **`workerd`** — the Workers runtime for `test:package`, pinned exact (no `^`). It publishes daily, so the newest release the `minimumReleaseAge` window lets through is about three days old; keep the pin exact when it moves. Move `compatibilityDate` in `scripts/test-package/workerd.capnp` to the new binary's date (`bunx workerd --version` prints it): a binary refuses a config dated after its own, and a stale date smoke-tests an older Workers. Its one install script, `node install.js`, links the platform binary from `@cloudflare/workerd-<platform>`; a new install script, a publisher other than GitHub Actions on `cloudflare/workerd`, or a release without npm provenance (`npm view workerd@<version> dist.attestations`) is a supply-chain hold.
 
 ### 4. Adopt the changes
 
@@ -81,7 +82,7 @@ The package rules still bind: nothing an update suggests may add a `node:` impor
 bun run devcheck
 ```
 
-It rebuilds from clean, runs the full test suite with every corpus fixture, and audits at high severity — so no separate build, test, or audit step is needed. For quick iteration on a parse change, `bun run test:corpus` runs the corpus suite alone.
+It rebuilds from clean, runs the full test suite with every corpus fixture on Bun and on Node, runs the packed package on Node, Bun, and `workerd` (`test:package`), and audits at high severity — so no separate build, test, or audit step is needed. For quick iteration on a parse change, `bun run test:corpus` runs the corpus suite alone.
 
 **Corpus diffs are behavior changes.** An engine update (`fast-xml-parser`, a peer) can change parse output, which surfaces as failing assertions or `expected.md` snapshot diffs. Read each one:
 
@@ -121,7 +122,7 @@ A concise numbered summary:
 
 - [ ] Update applied with `bun update --latest` (Mode A) or already applied (Mode B); `minimumReleaseAge` and the scanner untouched
 - [ ] Every updated package's changes read and cross-referenced against `src/`, `scripts/`, `tests/`
-- [ ] `fast-xml-parser` changes checked against the entity caps; peers' ranges and bundled engines reviewed; toolchain follow-ups done (Biome migrate, README TypeScript badge, Bun pin)
+- [ ] `fast-xml-parser` changes checked against the entity caps; peers' ranges and bundled engines reviewed; toolchain follow-ups done (Biome migrate, README TypeScript badge, Bun pin, `workerd` exact pin and `compatibilityDate`)
 - [ ] Breaking changes and deprecations handled; third-party adoption decisions recorded
 - [ ] `bun run devcheck` passes — corpus included, snapshot diffs reviewed, none blessed
 - [ ] Advisories triaged surgically; none ignored

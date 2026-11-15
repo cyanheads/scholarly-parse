@@ -4,7 +4,7 @@ description: >
   Bring scholarly-parse's documentation and package metadata in line with the code — the library README (API by subpath, formats table, install, short usage examples, the corpus-licensing note), CLAUDE.md, docs/design.md, package.json metadata, CITATION.cff, the corpus docs, the issue forms, and the one description string shared by package.json, the README tagline, CITATION.cff, and the GitHub repo. Use before a release, after adding or changing a format, export, or model field, or when asked to polish the docs or prep the README. Safe at any stage — each step checks current state and only acts on what still needs work.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -48,6 +48,8 @@ Read `references/readme.md` for the library README structure and conventions, th
 
 **Only document what exists.** A subpath absent from `package.json` `exports` is not documented as usable. Planned formats belong in `docs/design.md`, not in the install or usage sections.
 
+**Only claim the runtimes the gate runs.** The supported runtimes in the README, `CLAUDE.md`, and `docs/design.md` are the ones `scripts/test-package.ts` runs the packed package on (Node, Bun, `workerd` for Workers); a runtime added to the claim gets a run there first.
+
 ### 3. The description string
 
 `package.json` `description` is the canonical source. Four surfaces carry it verbatim:
@@ -70,7 +72,7 @@ When it changes, write it in `package.json` first, then propagate: edit the READ
 
 - **Architecture table** — every path exists; every `src/` directory that exists is listed with its role
 - **Running it table** — matches `package.json` `scripts`: added scripts present, renamed or removed ones gone
-- **Stack & gate** — the devcheck description matches the steps in `scripts/devcheck.ts`
+- **Stack & gate** — the devcheck description matches the steps in `scripts/devcheck.ts`, in order, test lanes and `test:package` included
 - **Skills and Triggers tables** — match `bun run list-skills`: every listed skill exists, every skill in `skills/` is listed, each row's wording matches what the skill does now
 - **The rules that matter** — each rule is still true of the code (the peers named are the peers loaded, the bounds named are the bounds checked)
 - **Where things live** and **Generated files** — paths and generator scripts current

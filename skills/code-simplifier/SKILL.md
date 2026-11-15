@@ -4,7 +4,7 @@ description: >
   Cleanup pass that edits the working tree — over a session's uncommitted changes, or a named path or the whole of scholarly-parse. Reads `git diff` (or the named target) and simplifies, consolidates, and aligns code with the rest of the codebase — modern TypeScript, less complexity and slop, duplicated logic consolidated, efficiency issues caught — without breaking the rules a parser of untrusted documents depends on: parse only, results not throws, lazy optional peers, bounded input, the model as contract. Not a bug hunt: defects are reported, not fixed. Use after a substantive working session, or when asked to clean up, simplify, reduce slop, consolidate, modernize, tighten up, or de-slop.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -32,7 +32,7 @@ Before any edit:
 1. **Read the full files** containing changes — imports, surrounding logic, module structure — not just the hunks.
 2. **Survey adjacent code.** Shared XML configuration and ordered-tree helpers live in `src/xml/`; the model and `ParseResult` in `src/model/`; renderers in `src/render/`. Know what exists before deciding something is missing.
 3. **Read the rules that bind.** `CLAUDE.md` § The rules that matter, and the scholarly-parse section below.
-4. **Run the gate once before editing** for a baseline: `bun run devcheck` (it runs Biome, typecheck, a clean build, and the full test suite, corpus included). For fast iteration inside the pass, `bun run test` or `bun run test:corpus` — never bare `bun test`, which bypasses the script and runs Bun's own runner instead of Vitest. If the gate is already red, say so in the summary and don't attribute the failure to your changes.
+4. **Run the gate once before editing** for a baseline: `bun run devcheck` (it runs Biome, typecheck, a clean build, the full test suite on Bun and on Node, corpus included, and the packed-package smoke on Node, Bun, and `workerd`). For fast iteration inside the pass, `bun run test` or `bun run test:corpus` — never bare `bun test`, which bypasses the script and runs Bun's own runner instead of Vitest. If the gate is already red, say so in the summary and don't attribute the failure to your changes.
 
 ### Phase 3: Review
 

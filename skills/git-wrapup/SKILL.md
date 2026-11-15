@@ -4,7 +4,7 @@ description: >
   Land working-tree changes as a release of scholarly-parse — a stack of logical commits on a `release/<version>` branch, the work grouped by concern and topped by `chore(release): <version> — <theme>` (version bump, changelog entry, regenerated artifacts) — then push the branch and open the release PR. Stops at "PR open": no tag, no merge, no publish. `release-pr-review` reviews the PR next, then `release-and-publish` merges, tags, and ships.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -39,7 +39,7 @@ Every item must be true before starting. Committing means releasing — a commit
 - [ ] **Changes exist** — uncommitted files, or commits since the last tag
 - [ ] **Work is complete** — no half-finished parser, no "I'll add the fixture later", no TODO placeholders. The diff is a shippable unit.
 - [ ] **Code simplified** — if the diff spans more than ~50 changed lines or touches 3+ source files, `skills/code-simplifier/SKILL.md` has been run across it
-- [ ] **`bun run devcheck` is clean.** It runs Biome with `--error-on-warnings`, typecheck, a clean build, the full test suite (unit and corpus), the changelog and attribution checks, `publint`, `attw`, the skill-link check, and `bun audit` at high severity — so there is no separate build or test gate. A lint warning fails the step; Biome's `info`-level suggestions ("Skipped N suggested fixes") print with the step still passing and are not a block. A high or critical advisory fails the audit step, direct or transitive — triage it with `skills/maintenance/SKILL.md` § Advisory triage. Pre-existing failures in untouched code count: fix them behavior-preserving, or get the maintainer's explicit waiver in their own words. When the correct fix crosses a minor bump, the version yields, not the gate. Never force the gate green — no `overrides` pin in place of triage, no `biome-ignore` or rule change to silence a lint, no skipped test, no blessed snapshot. Read the output raw: Biome auto-fixes formatting as it runs, and filtering hides what it changed.
+- [ ] **`bun run devcheck` is clean.** It runs Biome with `--error-on-warnings`, typecheck, a clean build, the full test suite (unit and corpus) on Bun and then on Node, the changelog and attribution checks, `publint`, `attw`, `test:package` (the packed package installed into a temp app and run on Node, Bun, and `workerd`), the skill-link check, and `bun audit` at high severity — so there is no separate build or test gate. A lint warning fails the step; Biome's `info`-level suggestions ("Skipped N suggested fixes") print with the step still passing and are not a block. A high or critical advisory fails the audit step, direct or transitive — triage it with `skills/maintenance/SKILL.md` § Advisory triage. Pre-existing failures in untouched code count: fix them behavior-preserving, or get the maintainer's explicit waiver in their own words. When the correct fix crosses a minor bump, the version yields, not the gate. Never force the gate green — no `overrides` pin in place of triage, no `biome-ignore` or rule change to silence a lint, no skipped test, no blessed snapshot. Read the output raw: Biome auto-fixes formatting as it runs, and filtering hides what it changed.
 - [ ] **Bug fixes start as fixtures** — each fix is reproduced in `corpus/` (or a unit test when no openly licensed document shows it), seen failing, then fixed
 - [ ] **Snapshots reviewed** — every `expected.md` diff read, and kept only where it is an improvement. `bun run corpus:snapshot` rewrites them; it never blesses them.
 - [ ] **Fixtures are clean** — openly licensed per `corpus/README.md`, sources byte-for-byte, `corpus/ATTRIBUTION.md` regenerated
@@ -115,7 +115,7 @@ git commit --only <paths-for-this-concern> -m "<subject>" -m "<body>"
 
 **The file is the atomic boundary:** never split one file's working-tree changes across commits — not with `git add -p`, not with `git apply --cached`, not by editing the file between commits. A file serving two concerns ships whole in the commit of its dominant concern; a later commit touches it again only for changes made after the first commit (the step 4 version bump).
 
-**Every commit builds and passes its tests on its own.** When a concern changes a contract — a model type in `src/model/document.ts`, a shared helper in `src/xml/`, a renderer's output — the files that consume it and their tests ride in the same commit. Check each work commit's tree before pushing: extract it through a throwaway index, `GIT_INDEX_FILE=<scratch>/index git read-tree <sha> && GIT_INDEX_FILE=<scratch>/index git checkout-index -a --prefix=<scratch>/tree/` (never `git stash`, and not `git archive`, whose `export-ignore` rules drop `tests/`, `corpus/`, and the configs), symlink `node_modules` into it, run `bun run typecheck` and `bun run test` there, and merge groups whose tree fails.
+**Every commit builds and passes its tests on its own.** When a concern changes a contract — a model type in `src/model/document.ts`, a shared helper in `src/xml/`, a renderer's output — the files that consume it and their tests ride in the same commit. Check each group's tree BEFORE its `git commit`, since a failing commit can only be repaired by rewriting history: write the commit groups down first, then for each group build the tree it would commit through a throwaway index, `GIT_INDEX_FILE=<scratch>/index git read-tree HEAD && GIT_INDEX_FILE=<scratch>/index git add -A -- <paths-for-this-concern> && GIT_INDEX_FILE=<scratch>/index git checkout-index -a --prefix=<scratch>/tree/` (a fresh `<scratch>` per group; never `git stash`, and not `git archive`, whose `export-ignore` rules drop `tests/`, `corpus/`, and the configs), symlink `node_modules` into it, and run `bun run typecheck` and `bun run test` there. A group whose tree fails merges with the group it depends on, and the check reruns, all before anything is committed. A test file asserting several concerns' behaviour joins them into one group.
 
 **A dependency bump lands before the commits that use it.** When a later commit uses something the new versions introduce, `chore(deps)` is the first work commit, so every commit above it compiles against the versions it was written for.
 
@@ -253,7 +253,7 @@ The body is the release digest: the `## Changes` bullets and changelog link the 
 
 ## Gates
 
-- `bun run devcheck` — clean, <N> tests passed (unit + corpus)
+- `bun run devcheck` — clean, <N> tests passed on Bun and on Node (unit + corpus), packed package on Node, Bun, and `workerd`
 
 [CHANGELOG v<version>](https://github.com/cyanheads/scholarly-parse/blob/main/changelog/<major.minor>.x/<version>.md)
 ```

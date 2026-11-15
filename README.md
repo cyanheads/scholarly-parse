@@ -28,9 +28,9 @@ The JATS and TEI parsers need nothing more. The others load an optional peer on 
 | Format | Also install |
 |:---|:---|
 | `scholarly-parse/latexml`, `scholarly-parse/html` | `linkedom` |
-| `scholarly-parse/pdf` | `unpdf` |
+| `scholarly-parse/pdf` | `unpdf` (1.8 or later; unpdf 2 needs Node ≥24, so on Node 22 install `unpdf@1`) |
 
-Runs on Bun, Node ≥22, and Cloudflare Workers. ESM only.
+Runs on Bun, Node ≥22, and Cloudflare Workers. Before each release, the packed package is installed and run on all three (Workers through `workerd`). ESM only.
 
 ## Usage
 

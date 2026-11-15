@@ -3,11 +3,14 @@
  * @fileoverview Local gate — run before declaring any work complete and before every
  * commit. Sequential steps, loud output, non-zero exit on any failure. Warnings are
  * failures: Biome runs with `--error-on-warnings`, so a green run means zero
- * diagnostics. Biome also auto-fixes formatting, so read the output raw.
+ * diagnostics. Biome also auto-fixes formatting, so read the output raw. The suite runs
+ * once on Bun and once on Node, one lane after the other (the linear-time tests are
+ * wall-clock); `tests/runtime.ts` fails a lane that lands on the other runtime.
  * @module scripts/devcheck
  */
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readlinkSync } from 'node:fs';
+import { nodeBinary } from './node-binary.js';
 
 interface StepResult {
   detail?: string;
@@ -19,8 +22,8 @@ interface Step {
   run: () => StepResult;
 }
 
-function shell(command: string, args: string[]): StepResult {
-  const result = spawnSync(command, args, { stdio: 'inherit' });
+function shell(command: string, args: string[], env: Record<string, string> = {}): StepResult {
+  const result = spawnSync(command, args, { env: { ...process.env, ...env }, stdio: 'inherit' });
   return { ok: result.status === 0 };
 }
 
@@ -42,8 +45,19 @@ const steps: Step[] = [
     run: () => shell('bun', ['run', 'rebuild']),
   },
   {
-    name: 'Tests (unit + corpus)',
-    run: () => shell('bunx', ['vitest', 'run']),
+    name: 'Tests on Bun (unit + corpus)',
+    run: () => shell('bunx', ['--bun', 'vitest', 'run'], { SCHOLARLY_PARSE_TEST_RUNTIME: 'bun' }),
+  },
+  {
+    name: 'Tests on Node (unit + corpus)',
+    run: () => {
+      const node = nodeBinary();
+      return node === undefined
+        ? { detail: 'no Node.js binary on PATH past the Bun shim', ok: false }
+        : shell(node, ['node_modules/.bin/vitest', 'run'], {
+            SCHOLARLY_PARSE_TEST_RUNTIME: 'node',
+          });
+    },
   },
   {
     name: 'Changelog carries the current version and CHANGELOG.md is in sync',
@@ -63,6 +77,10 @@ const steps: Step[] = [
   {
     name: 'Package types resolve (attw, ESM only)',
     run: () => shell('bunx', ['attw', '--pack', '.', '--profile', 'esm-only']),
+  },
+  {
+    name: 'Packed package runs (Node, Bun, workerd)',
+    run: () => shell('bun', ['run', 'scripts/test-package.ts']),
   },
   {
     name: 'Skill links (.claude/skills and .agents/skills → skills/)',
