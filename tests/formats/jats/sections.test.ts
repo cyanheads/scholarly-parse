@@ -278,6 +278,25 @@ describe('lists, quotes, and boxes (#130)', () => {
     expect(markdown).toContain('\n  - **CV** — coefficient');
   });
 
+  it('sets a list nested in a list item’s paragraph on its own lines, the prose after it kept', () => {
+    const document = parseBody(
+      '<p>Intro<list list-type="bullet"><list-item><p>Outer item<list list-type="bullet">' +
+        '<list-item><p>Nested one</p></list-item><list-item><p>Nested two</p></list-item></list>' +
+        ' and prose after the list.</p></list-item></list>Closing prose.</p>',
+    );
+    const [outer] = blocksOfType(document, 'list');
+    expect(outer?.items).toEqual([
+      [
+        p('Outer item'),
+        { items: [[p('Nested one')], [p('Nested two')]], ordered: false, type: 'list' },
+        p('and prose after the list.'),
+      ],
+    ]);
+    expect(toMarkdown(document)).toContain(
+      'Intro\n\n- Outer item\n\n  - Nested one\n  - Nested two\n\n  and prose after the list.\n\nClosing prose.',
+    );
+  });
+
   it('quotes a disp-quote and trails its attribution (#130)', () => {
     const document = parseBody(
       '<sec><title>Discussion</title><disp-quote><p>First quoted paragraph.</p>' +

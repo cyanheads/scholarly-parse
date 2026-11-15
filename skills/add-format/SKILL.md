@@ -4,7 +4,7 @@ description: >
   Add a source format to scholarly-parse end to end: corpus fixtures first, then a parser under `src/formats/<format>/` built on the shared XML, HTML, and model helpers, wired into `SourceFormat`, `detect`, `parse`, the package `exports`, the corpus harness, and `add.ts`, with bounds on untrusted input, an optional peer for any new engine, unit tests, docs, and a security pass. Use when asked to add or support a format no existing parser reads (Elsevier full-text XML, with its own `ce:` schema), or to split a format out of an existing parser.
 metadata:
   author: cyanheads
-  version: "1.2"
+  version: "1.3"
   type: workflow
 ---
 
@@ -84,7 +84,7 @@ A new engine goes into `peerDependencies` with `peerDependenciesMeta.<name>.opti
 | `package.json` | An `exports` entry `./<format>` with `types`, `import`, and `default` under `dist/formats/<format>/`; the `description` and `keywords` when the format is a headline one |
 | `tests/corpus/parsers.ts` | The format's parser in `PARSERS` |
 | `tests/corpus/corpus.test.ts` | The format in `TEXT_FORMATS` when the source is text |
-| `tests/corpus/invariants.ts` | Source counts the model must match, when the format marks tables, figures, or references countably (the JATS block is the example) |
+| `tests/corpus/invariants.ts` | A `<format>Problems` function, called from `checkInvariants` for the format, with the source counts the model must match when the format marks tables, figures, or references countably (`teiProblems` is the smallest example); its hand-broken case in `corpus.test.ts`'s `checkInvariants on a broken document` block. The Markdown and `toText` checks already run on every format |
 
 ### 5. Test
 

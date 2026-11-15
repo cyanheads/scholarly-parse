@@ -4,7 +4,7 @@ description: >
   Run a wild-sampling round for scholarly-parse with `scripts/corpus/sample.ts`: draw fresh openly licensed documents from Europe PMC (JATS), arXiv (LaTeXML), and OpenAlex (Grobid TEI, and open-access PDFs and publisher pages), parse each, check the corpus invariants, and read the report of failure classes. Then triage every class against the source, turn each real one into a fixture and a fix through the add-fixture skill, and repeat with new seeds until a round finds no new class. Use when asked to sample, run the wild sampling, find new failures, or measure how a format holds up on documents outside the corpus.
 metadata:
   author: cyanheads
-  version: "1.2"
+  version: "1.3"
   type: workflow
 ---
 
@@ -54,7 +54,7 @@ The table at the top gives, per source: drawn, parsed, unavailable (arXiv could 
 |:---|:---|:---|
 | `threw:` | The parser threw instead of returning a `ParseResult` | Always a bug: the contract is broken |
 | `failed:` | A failed result (`malformed`, `wrong-format`, `empty`, …) | A bug unless the source really is broken; check it |
-| `invariant:` | A `tests/corpus/invariants.ts` check broke: a leaked tag or entity, a count below the source's, an empty heading | A bug, or a false positive in the invariant itself |
+| `invariant:` | A `tests/corpus/invariants.ts` check broke: a leaked tag or entity, a table, figure, supplement, or reference count off the source's, an empty heading, markup left in `toText`, a table row off its header's width or a fence left open, JATS text fused across a boundary | A bug, or a false positive in the invariant itself |
 | `slow:` | A parse took over 5 s | A performance bug, or an input near the size budget |
 | `unhandled:` | An element reached `diagnostics.unhandled`: no handler covers it | Needs handling, or a deliberate drop that stops reporting it |
 | `warning:` | A coded warning (`table-unextractable`, `no-abstract`, `math-without-tex`, …) | Often correct; confirm against the source |

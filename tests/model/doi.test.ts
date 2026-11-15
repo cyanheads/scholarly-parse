@@ -26,6 +26,12 @@ describe('normalizeDoi', () => {
     expect(normalizeDoi('10.1002/(SICI)1097-4636(199907)')).toBe('10.1002/(sici)1097-4636(199907)');
   });
 
+  it('keeps the angle brackets and punctuation of a full SICI DOI, lowercased', () => {
+    expect(normalizeDoi('10.1002/(SICI)1097-4636(199907)47:4<466::AID-JBM3>3.0.CO;2-I')).toBe(
+      '10.1002/(sici)1097-4636(199907)47:4<466::aid-jbm3>3.0.co;2-i',
+    );
+  });
+
   it('reads nothing from a value that is not a DOI (#38)', () => {
     for (const value of [
       undefined,

@@ -1,9 +1,9 @@
 /**
- * @fileoverview The shared XML reader's text handling: character references to code
- * points a document cannot hold read as U+FFFD, a `<?CDATA …?>` instruction reads as the
- * CDATA section it stands for while every other instruction is ignored, the expansion cap
- * counts only entities a DOCTYPE declares, and all of it holds through the JATS and TEI
- * parsers.
+ * @fileoverview The shared XML reader's text handling: text and attribute values that read
+ * as numbers stay as written, character references to code points a document cannot hold
+ * read as U+FFFD, a `<?CDATA …?>` instruction reads as the CDATA section it stands for
+ * while every other instruction is ignored, the expansion cap counts only entities a
+ * DOCTYPE declares, and all of it holds through the JATS and TEI parsers.
  * @module tests/xml/ordered.test
  */
 import { describe, expect, it } from 'vitest';
@@ -35,6 +35,27 @@ function paragraph(result: ParseResult): string | undefined {
   const [block] = result.document.body[0]?.blocks ?? [];
   return block?.type === 'paragraph' ? block.text : undefined;
 }
+
+describe('values that read as numbers', () => {
+  it('keeps text and attribute values as written, through the JATS and TEI parsers', () => {
+    expect(parseOrderedXml('<a n="1e5">007<b>1.10</b></a>')).toEqual({
+      nodes: [{ ':@': { '@_n': '1e5' }, a: [{ '#text': '007' }, { b: [{ '#text': '1.10' }] }] }],
+    });
+    for (const value of ['1984', '007', '1.10', '1e5']) {
+      expect(paragraph(parseJats(article(value)))).toBe(value);
+      expect(paragraph(parseTei(tei(value)))).toBe(value);
+    }
+    const result = parseTei(
+      '<TEI><teiHeader><fileDesc><titleStmt><title>T</title></titleStmt></fileDesc></teiHeader>' +
+        '<text><body><div><head>S</head><p>Body.</p></div></body><back><div type="references">' +
+        '<listBibl><biblStruct xml:id="b0"><monogr><title level="j">J</title><imprint>' +
+        '<biblScope unit="volume">007</biblScope><biblScope unit="page" from="1e5" to="2e5"/>' +
+        '<date type="published" when="2000"/></imprint></monogr></biblStruct></listBibl></div>' +
+        '</back></text></TEI>',
+    );
+    expect(result.ok && result.document.references[0]?.text).toBe('(2000). *J* 007:1e5–2e5.');
+  });
+});
 
 describe('character references', () => {
   it('reads a reference to NUL, a surrogate, or a code point past U+10FFFF as U+FFFD', () => {

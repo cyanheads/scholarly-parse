@@ -28,6 +28,14 @@ describe('reference forms', () => {
     expect(references).toEqual([{ id: 'ref1', label: '1', text: 'Smith J et al. Nature 2024.' }]);
   });
 
+  it('reads a bracketed label as the number it prints', () => {
+    const references = referencesOf(
+      '<ref-list><ref id="ref19"><label>[19]</label>' +
+        '<mixed-citation>Smith J. Nature 2024.</mixed-citation></ref></ref-list>',
+    );
+    expect(references).toEqual([{ id: 'ref19', label: '19', text: 'Smith J. Nature 2024.' }]);
+  });
+
   it('falls back to an element-citation', () => {
     const references = referencesOf(
       '<ref-list><ref><element-citation>Citation text here.</element-citation></ref></ref-list>',

@@ -508,6 +508,25 @@ describe('text split across spans', () => {
   });
 });
 
+describe('author names', () => {
+  it('splits names listed in one personname, and keeps a surname-first name whole', async () => {
+    const authorsOf = async (names: string) =>
+      (
+        await parse(
+          page(
+            `<div class="ltx_authors"><span class="ltx_creator ltx_role_author"><span class="ltx_personname">${names}</span></span></div>`,
+          ),
+        )
+      ).metadata.authors;
+    expect(await authorsOf('Alice Smith, Bob Jones and Carol White')).toEqual([
+      { name: 'Alice Smith' },
+      { name: 'Bob Jones' },
+      { name: 'Carol White' },
+    ]);
+    expect(await authorsOf('Smith, J.')).toEqual([{ name: 'Smith, J.' }]);
+  });
+});
+
 describe('front matter at document size', () => {
   /** One author with `n` affiliation lines, each distinct, or all the same. */
   const affiliated = (n: number, distinct = true) =>
