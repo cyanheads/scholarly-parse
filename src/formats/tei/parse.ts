@@ -303,7 +303,9 @@ function extractMetadata(
 
 /**
  * The abstract in the header, one section per `<div>`. Its parts are numbered
- * `abstract-1-<m>`: `abstract-1` names the abstract itself in `toSections`.
+ * `abstract-1-<m>`: `abstract-1` names the abstract itself in `toSections`. Grobid can
+ * write a whole abstract as a `<head>` with nothing after it; when every part holds only
+ * its heading, the headings are the abstract's text.
  */
 function extractAbstracts(header: XmlNode | undefined, ctx: TeiContext): Abstract[] {
   const abstract = findOne(findOne(header, 'profiledesc'), 'abstract');
@@ -313,7 +315,14 @@ function extractAbstracts(header: XmlNode | undefined, ctx: TeiContext): Abstrac
     const section = divSection(div, ctx, 'body', `abstract-1-${i + 1}`);
     return section ? [section] : [];
   });
-  return sections.length > 0 ? [{ kind: 'main', sections }] : [];
+  if (sections.length > 0) return [{ kind: 'main', sections }];
+  const blocks: Block[] = divs.flatMap((div) => {
+    const text = inlineText(findOne(div, 'head'), ctx);
+    return text ? [{ text, type: 'paragraph' as const }] : [];
+  });
+  if (blocks.length === 0) return [];
+  const id = issueId(ctx.sectionIds, undefined, 'abstract-1-1');
+  return [{ kind: 'main', sections: [{ blocks, id, kind: 'body', sections: [] }] }];
 }
 
 // ─── Body ───────────────────────────────────────────────────────────────────

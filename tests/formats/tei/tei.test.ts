@@ -178,6 +178,53 @@ describe('abstract part IDs (#24)', () => {
   });
 });
 
+describe('an abstract Grobid writes as a heading', () => {
+  const withAbstract = (abstract: string) =>
+    parse(
+      tei(
+        div('1', 'Introduction', 'Text.'),
+        '',
+        HEADER.replace(/<abstract>.*<\/abstract>/, abstract),
+      ),
+    );
+
+  it('reads the heading as the abstract when no part holds anything else', () => {
+    const document = withAbstract(
+      '<abstract><div><head>This article analyses the accounting system of a large railway network.</head></div></abstract>',
+    );
+    expect(document.abstracts).toEqual([
+      {
+        kind: 'main',
+        sections: [
+          {
+            blocks: [
+              {
+                text: 'This article analyses the accounting system of a large railway network.',
+                type: 'paragraph',
+              },
+            ],
+            id: 'abstract-1-1',
+            kind: 'body',
+            sections: [],
+          },
+        ],
+      },
+    ]);
+    expect(document.diagnostics.warnings.map((warning) => warning.code)).not.toContain(
+      'no-abstract',
+    );
+  });
+
+  it('keeps a part’s heading as its title when any part has text', () => {
+    const document = withAbstract(
+      '<abstract><div><head>Background</head></div><div><head>Methods</head><p>We did this.</p></div></abstract>',
+    );
+    expect(document.abstracts[0]?.sections).toMatchObject([
+      { blocks: [{ text: 'We did this.' }], title: 'Methods' },
+    ]);
+  });
+});
+
 describe('affiliations', () => {
   /** A header whose authors each list the affiliations given, by name. */
   const withAuthors = (authors: string[][]) =>
