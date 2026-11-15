@@ -6,10 +6,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Secondary labels.** `enhancement` is applied automatically — also add any of these in the sidebar if they apply:
+        **Secondary labels.** `enhancement` is applied automatically — also add one or more of the following in the sidebar if they apply:
         - `performance` — improves memory, CPU, or latency
+        - `security` — hardens the parsers against crafted input
         - `breaking-change` — changes the public API or model
-        - `surplus-token-idea` — worth exploring when time allows
+        - `surplus-token-idea` — worth exploring when token budget allows
 
   - type: textarea
     id: use-case
@@ -31,5 +32,14 @@ body:
     id: alternatives
     attributes:
       label: Alternatives considered
+      description: What you tried or considered instead, and why it fell short.
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Only what the reader needs to act — related issues, prior art, a link.
     validations:
       required: false
