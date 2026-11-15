@@ -556,6 +556,19 @@ describe('outline', () => {
     );
     expect(JSON.stringify(document)).not.toMatch(/accesses|Another paper|Share/);
   });
+
+  it('skips a back-to-top link by its whole words, not by letters inside other words', async () => {
+    const document = await parse(
+      page(`
+        <h2>Introduction</h2><p>${PROSE}</p>
+        <div class="pane-highwire-back-to-top"><a href="#top">Back to top</a></div>
+        <p id="backToTop"><a href="#top">Return up</a></p>
+        <div class="feedback-to-topics"><p>Reader feedback shaped these topics.</p></div>`),
+    );
+    const text = JSON.stringify(document);
+    expect(text).not.toMatch(/Back to top|Return up/);
+    expect(text).toContain('Reader feedback shaped these topics.');
+  });
 });
 
 describe('landing pages', () => {

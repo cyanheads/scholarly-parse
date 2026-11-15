@@ -156,6 +156,7 @@ export function isFurniture(element: Element): boolean {
     ...nameTokens(element.getAttribute('id')),
   ];
   return (
-    tokens.some((token) => FURNITURE_TOKENS.has(token)) || tokens.join(' ').includes('back to top')
+    tokens.some((token) => FURNITURE_TOKENS.has(token)) ||
+    ` ${tokens.join(' ')} `.includes(' back to top ')
   );
 }
