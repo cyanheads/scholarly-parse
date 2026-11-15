@@ -4,7 +4,7 @@ description: >
   Review pass on an open scholarly-parse release PR (`release/<version>` → `main`) — the step between `git-wrapup` and `release-and-publish`, run on Opus. Reads the PR's commit range through the `code-simplifier` lens plus a correctness and release review (corpus snapshots, fixture licensing, the model contract, changelog vs diff), verifies whatever an automated reviewer or code scanning left on the PR, lands fixes as ordinary commits on top of the release branch and pushes it, keeps the PR body in sync with what ships, and leaves one summary comment. The only role that both edits and commits — it never rewrites pushed history, tags, merges, touches `main`, or publishes.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -20,7 +20,7 @@ Not for: PRs from outside contributors (those get a human reply, not a commit on
 - The PR is open, and its head SHA equals local HEAD
 - No tag `v<version>` exists — tagging is `release-and-publish`'s job, after this pass
 
-Verify all three in step 1; halt on any mismatch.
+Verify all three in step 1; halt on any mismatch. The one exception to a clean tree: uncommitted work the caller explicitly hands over to ship in this release. Verify it against its description, commit it first as ordinary commits on top of the stack (step 5's conventions), add it to the changelog entry, and review it with the rest of the range. Any other uncommitted change is a halt.
 
 ## Steps
 
@@ -38,7 +38,9 @@ Read `skills/code-simplifier/SKILL.md` in full. Read this version's changelog en
 
 ### 2. Establish the review range
 
-The range is `main...HEAD` — every commit in the PR. `code-simplifier`'s Phase 1 looks at the uncommitted diff and, finding none, falls back to the last commit; override that here: the diff under review is `git diff main...HEAD`, and new files are the ones `git diff main...HEAD --name-status` marks `A`. The rest of the simplifier procedure applies as written: read the full files, survey adjacent code, run `bun run devcheck` once for a baseline.
+The range is `main...HEAD` — every commit in the PR. `code-simplifier`'s Phase 1 looks at the uncommitted diff and, finding none, falls back to the last commit; override that here: the diff under review is `git diff main...HEAD`, and new files are the ones `git diff main...HEAD --name-status` marks `A`. The rest of the simplifier procedure applies as written: read the full files, survey adjacent code, run `bun run devcheck` once for a baseline. A red baseline is a finding to fix in this pass, not to note and move past.
+
+**A simplifier pass the caller already ran.** When the brief states that `code-simplifier` ran over this release's tree before the PR opened and that `bun run devcheck` passed after it (the PR body's `## Gates`), skip the simplifier lens, the baseline run, and reading `code-simplifier` in step 1. The release lens still covers every commit in the range, and a fix this pass lands still reruns the gate in step 5.
 
 ### 3. Review
 
@@ -48,7 +50,7 @@ Two lenses over the range. Skip a dimension that doesn't apply; none of this is 
 
 **Release lens** — what the standalone simplifier pass leaves alone is in scope here, because this is the last stop before the version ships:
 
-- **Correctness.** A real defect gets fixed, not reported. Trace the failure path; the fix needs a fixture or unit test that fails without it.
+- **Correctness.** A real defect gets fixed, not reported. Trace the failure path; the fix needs a fixture or unit test that fails without it. When the release or a fix changes a contract — a `ParseResult` reason, a warning code, a model field's meaning, a helper's return shape — find every consumer keyed on it (renderers, other formats, tests) and confirm each still holds. Read the combined diff's seams as well as each commit: two commits that are each right on their own can disagree where they meet.
 - **Over-engineering.** Abstractions with one caller, options nothing sets, flexibility for a hypothetical. Cut what doesn't earn its place — but depth limits, `maxInputBytes` checks, and entity caps are required bounds, never over-engineering.
 - **Tests that cannot fail.** A test that never went red, an assertion on a value the test itself constructed, a `toBeDefined()` where a shape was meant. Tighten or replace.
 - **Snapshots.** Every `expected.md` change in the range is read as output: each must be an improvement a reader of the Markdown would agree with. A snapshot that regressed and was re-blessed is a defect.
@@ -56,9 +58,9 @@ Two lenses over the range. Skip a dimension that doesn't apply; none of this is 
 - **The contract.** A changed field in `src/model/document.ts`, a changed export from a subpath `index.ts`, or a changed `ParseResult` reason is public API. A rename or removal is `breaking: true` in the changelog, and the version bump matches.
 - **Parse-only rules.** No `node:` imports, fetches, or filesystem access under `src/`; optional peers (`linkedom`, `unpdf`) imported only on first use inside their format; expected failures returned as `{ ok: false, error }`, never thrown.
 - **Changelog vs diff.** Every claim in the entry and its `summary:` exists in the diff — a path, an identifier, a field, a mechanism. A claim the diff doesn't support is fixed in the changelog, never argued for. A change in the diff the changelog omits gets a bullet. `## Dependencies` lists every arrow `bun.lock` moved.
-- **PR body vs changelog.** The body's theme line is the entry's `summary:`; its `## Changes` bullets are the entry at headline granularity under the tag rules (`release-and-publish` step 4) — nothing in the entry silently missing, nothing in the body the entry lacks. Those bullets and the changelog link become the tag body verbatim, so review them to that standard: flat bullets, one grouped minor bullet, deps one line, backlinks, no closing keywords, no marketing adjectives, changelog link last. The tag's subject is not lifted from this body — it is written fresh at release.
+- **PR body vs changelog.** The body's theme line is the entry's `summary:`; its `## Changes` bullets are the entry at headline granularity under the tag rules (`release-and-publish` step 4) — nothing in the entry silently missing, nothing in the body the entry lacks. Those bullets and the changelog link become the tag body verbatim, so review them to that standard: flat bullets, one grouped minor bullet, deps one line, backlinks, outside reporters thanked on their own bullets (`git-wrapup` step 5), no closing keywords, no marketing adjectives, changelog link last. The tag's subject is not lifted from this body — it is written fresh at release.
 - **Version.** `package.json` `version` and the README `Version-<x.y.z>-` badge agree; `grep -rnF "<version>" . --exclude-dir={node_modules,.git,dist,changelog,corpus} --exclude=bun.lock` shows nothing stale.
-- **Stack shape.** Every commit carries a one- or two-line body, no closing keywords anywhere, the release commit is on top and carries only release artifacts.
+- **Stack shape.** Every commit carries a one- or two-line body, no closing keywords anywhere, the release commit sits above every work commit — only review commits follow it — and carries only release artifacts.
 
 ### 4. Take in the automated review
 
@@ -147,15 +149,15 @@ Then report to the caller: PR number, new head SHA, whether the body changed, th
 
 ## Checklist
 
-- [ ] On `release/<version>`, tree clean, PR open, PR head == local HEAD, no `v<version>` tag
-- [ ] `code-simplifier` read; review range is `main...HEAD`, full files read, `devcheck` baseline run
+- [ ] On `release/<version>`, tree clean (or caller-handed work committed first and added to the changelog), PR open, PR head == local HEAD, no `v<version>` tag
+- [ ] `code-simplifier` read; review range is `main...HEAD`, full files read, `devcheck` baseline run and any red fixed — or both skipped because the brief records a simplifier pass and a green gate after it
 - [ ] Simplifier lens and release lens applied; correctness bugs fixed with a failing-first fixture or test
 - [ ] Snapshot changes read as output, fixtures' licenses and attribution confirmed, contract changes flagged `breaking`
 - [ ] Automated reviewer's comments verified; each taken or declined with the reason; code-scanning alerts settled
 - [ ] Changelog entry and `summary:` reconciled to the diff; version consistent in `package.json` and the README badge
 - [ ] Fixes landed as ordinary commits by pathspec; nothing already pushed rewritten
 - [ ] `bun run devcheck` green before `git push origin release/<version>`
-- [ ] PR body reviewed as the future tag; synced only where what ships changed; `## Gates` refreshed if the gate re-ran
+- [ ] PR body reviewed as the future tag, outside reporters thanked; synced only where what ships changed; `## Gates` refreshed if the gate re-ran
 - [ ] Out-of-scope findings filed
 - [ ] One summary comment on the PR; report to the caller with the new head SHA
 - [ ] Nothing tagged, nothing merged, `main` untouched

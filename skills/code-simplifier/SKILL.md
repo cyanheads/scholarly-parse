@@ -4,7 +4,7 @@ description: >
   Cleanup pass that edits the working tree — over a session's uncommitted changes, or a named path or the whole of scholarly-parse. Reads `git diff` (or the named target) and simplifies, consolidates, and aligns code with the rest of the codebase — modern TypeScript, less complexity and slop, duplicated logic consolidated, efficiency issues caught — without breaking the rules a parser of untrusted documents depends on: parse only, results not throws, lazy optional peers, bounded input, the model as contract. Not a bug hunt: defects are reported, not fixed. Use after a substantive working session, or when asked to clean up, simplify, reduce slop, consolidate, modernize, tighten up, or de-slop.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -23,6 +23,7 @@ Cleanup pass over a session's changes or a named target. Reviews the code in sco
 Two scopes; the caller's wording picks one, and the diff is the default.
 
 - **Diff** (nothing named): `git status` for the shape of the tree, then `git diff HEAD` for every uncommitted change, staged and unstaged. Untracked files never appear in the diff — list them with `git ls-files --others --exclude-standard` and read them directly. If the diff is empty and nothing is untracked, review the last commit (`git diff HEAD~1 HEAD`); if that is empty too, say the tree is clean and stop. Don't go hunting for files to improve.
+  - **The tree may hold more than one writer's work.** When the caller names the files this session touched, scope to those. Otherwise, changes you don't recognize that were modified in the last few minutes (check mtimes) are another writer's work in progress: leave them out and list them in the summary.
 - **Target** (a named path, module, or "the whole codebase"): the named files are the scope, whatever their git state. Work one module at a time — `src/model/`, `src/xml/`, one `src/formats/<format>/`, `src/detect/`, `src/render/` — and re-run the gate after each, so a large scan never becomes one unverifiable diff. Take the target as named; don't narrow it by commit history.
 
 ### Phase 2: Understand the surrounding codebase
@@ -30,9 +31,8 @@ Two scopes; the caller's wording picks one, and the diff is the default.
 Before any edit:
 
 1. **Read the full files** containing changes — imports, surrounding logic, module structure — not just the hunks.
-2. **Survey adjacent code.** Shared XML configuration and ordered-tree helpers live in `src/xml/`; the model and `ParseResult` in `src/model/`; renderers in `src/render/`. Know what exists before deciding something is missing.
-3. **Read the rules that bind.** `CLAUDE.md` § The rules that matter, and the scholarly-parse section below.
-4. **Run the gate once before editing** for a baseline: `bun run devcheck` (it runs Biome, typecheck, a clean build, the full test suite on Bun and on Node, corpus included, and the packed-package smoke on Node, Bun, and `workerd`). For fast iteration inside the pass, `bun run test` or `bun run test:corpus` — never bare `bun test`, which bypasses the script and runs Bun's own runner instead of Vitest. If the gate is already red, say so in the summary and don't attribute the failure to your changes.
+2. **Read the rules that bind, then survey adjacent code.** `CLAUDE.md` § The rules that matter and the scholarly-parse section below outrank whatever the nearest file happens to do. Then the shared code: XML configuration and ordered-tree helpers live in `src/xml/`, the model and `ParseResult` in `src/model/`, renderers in `src/render/`. Know what exists before deciding something is missing.
+3. **Run the gate once before editing** for a baseline: `bun run devcheck` (it runs Biome, typecheck, a clean build, the full test suite on Bun and on Node, corpus included, and the packed-package smoke on Node, Bun, and `workerd`). For fast iteration inside the pass, `bun run test` or `bun run test:corpus` — never bare `bun test`, which bypasses the script and runs Bun's own runner instead of Vitest. If the gate is already red, say so in the summary and don't attribute the failure to your changes.
 
 ### Phase 3: Review
 
@@ -114,6 +114,9 @@ Check `tsconfig.json` `target` and `lib` before applying a version-gated row —
 | `arr.filter(x => x !== null) as T[]` | `arr.filter(x => x != null)` | TS infers the type predicate — no cast |
 | `import { foo } from './index.js'` (a module importing through its own barrel) | `import { foo } from './foo.js'` | Inside a module, import siblings directly; routing through the module's own barrel invites cycles (`noImportCycles` is on). Across modules, the public barrel is right |
 | `import { readFile } from 'fs/promises'` | `import { readFile } from 'node:fs/promises'` | `node:` protocol — `scripts/` and `tests/` only; `src/` imports no Node modules |
+| `path.dirname(fileURLToPath(import.meta.url))` | `import.meta.dirname` | Node 20.11+ and Bun — also `import.meta.filename`; `scripts/` and `tests/` only |
+| `Object.prototype.hasOwnProperty.call(obj, key)` | `Object.hasOwn(obj, key)` | ES2022 — also correct on null-prototype objects |
+| `s.replace(/foo/g, 'bar')` with a literal pattern | `s.replaceAll('foo', 'bar')` | ES2021 — no regex escaping for a literal match |
 | `const a = await x(); const b = await y();` (independent) | `const [a, b] = await Promise.all([x(), y()])` | Parallel when truly independent |
 | `value \|\| fallback` | `value ?? fallback` | `\|\|` also swallows `0`, `''`, and `false` |
 | `obj.x !== undefined ? obj.x : fallback` | `obj.x ?? fallback` | Equivalent only when `null` should take the fallback too |

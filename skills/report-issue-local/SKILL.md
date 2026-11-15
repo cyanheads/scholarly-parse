@@ -4,7 +4,7 @@ description: >
   File a bug or feature request against cyanheads/scholarly-parse — a document that parses wrong, a parser that fails on valid input, a detection or rendering defect, a missing format, flavor, model field, or renderer option. Covers the dedup search, triage to the right format or area, the issue forms field for field, titles, labels, word budgets, and security findings in maintainer audits versus private contributor disclosures.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -26,12 +26,13 @@ Working in this repo, a doc error you can fix in the tree is a two-minute edit, 
 gh issue list -R cyanheads/scholarly-parse --search "<element name, error reason, or keyword>" --state all
 
 # Assess a close match before commenting — is it already linked to a fix?
-gh issue view <number> -R cyanheads/scholarly-parse --comments
+gh issue view <number> -R cyanheads/scholarly-parse              # body
+gh issue view <number> -R cyanheads/scholarly-parse --comments   # thread only — without a TTY it prints no body
 gh api 'repos/cyanheads/scholarly-parse/issues/<number>/timeline' --paginate \
   --jq '.[] | select(.event=="cross-referenced") | .source.issue | "\(.repository.full_name)#\(.number) — \(.title)"'
 ```
 
-2. **Reproduce on the exact document.** Record the identifier (DOI, PMC ID, arXiv ID, or a public URL to the exact file), the parser and options called, the package version, and the runtime. A parse bug without its input can't be reproduced.
+2. **Reproduce on the exact document.** Record the identifier (DOI, PMC ID, arXiv ID, or a public URL to the exact file), the parser and options called, the installed package version, the runtime and its version, and for PDF or HTML the installed `unpdf` or `linkedom`. A parse bug without its input can't be reproduced.
 
 3. **Read the diagnostics.** `document.diagnostics` carries the `quality` level, coded warnings, and unhandled source elements with counts — they often name the cause. On `{ ok: false }`, note the `error.reason`.
 
@@ -92,7 +93,7 @@ Non-interactive: the body's headings are the Bug Report form's fields, in order.
 | Format detection | `detect` |
 | Markdown / text rendering | `render` |
 
-**Runtime** is one of `Bun`, `Node.js`, `Cloudflare Workers`, `Other`. **Description** is two or three sentences. **Actual output** is the relevant slice of the Markdown or the document field, verbatim, in a `markdown` fence (the form renders it as one). Add **Additional context** only when it changes the fix — a workaround, a related issue, the one detail that matters.
+**Environment** is the form's one-row table: the installed scholarly-parse version from `node_modules/scholarly-parse/package.json` (not the `^` range), the runtime with its version (Bun, Node.js, or Cloudflare Workers), the installed peer (`unpdf` for PDF, `linkedom` for LaTeXML and publisher HTML; blank for JATS and TEI), and the OS. **Description** is two or three sentences. **Actual output** is the relevant slice of the Markdown or the document field, verbatim, in a `markdown` fence (the form renders it as one). Add **Additional context** only when it changes the fix — a workaround, a related issue, the one detail that matters.
 
 ````bash
 gh issue create -R cyanheads/scholarly-parse \
@@ -100,17 +101,15 @@ gh issue create -R cyanheads/scholarly-parse \
   --label "bug" \
   --assignee cyanheads \
   --body "$(cat <<'ISSUE'
-### scholarly-parse version
+### Environment
 
-0.x.y
+| scholarly-parse | Runtime | Peer | OS |
+|---|---|---|---|
+| 0.x.y | Bun 1.4.x | | macOS 15.x |
 
 ### Source format
 
 JATS XML
-
-### Runtime
-
-Bun
 
 ### Document
 
@@ -139,7 +138,7 @@ A bug with no source document — the corpus runner, a script under `scripts/` �
 
 Interactive: `gh issue create -R cyanheads/scholarly-parse --template "Feature Request" --web`.
 
-Non-interactive: the headings are the Feature Request form's fields, in order — **Use case** and **Proposed behavior** are required, **Alternatives considered** is optional. Nothing else by default: a `Scope`, `Design`, or `Depends on` block is added only when the reader cannot act without it, and stays to a few lines.
+Non-interactive: read `.github/ISSUE_TEMPLATE/feature_request.yml` and match its field labels and order — **Use case** and **Proposed behavior** are required, **Alternatives considered** and **Additional context** are optional. Include an optional section only when it changes what the reader does. Nothing else by default: a scope boundary or a `Depends on: #N` line goes in Additional context, and only when the reader cannot act without it.
 
 ````bash
 gh issue create -R cyanheads/scholarly-parse \
@@ -161,7 +160,11 @@ What the parser or renderer should do. Link an example document (DOI, arXiv ID, 
 
 ### Alternatives considered
 
-What you tried or evaluated instead, and why it didn't fit.
+What you tried or considered instead, and why it fell short.
+
+### Additional context
+
+Only what the reader needs to act — related issues, prior art, a link. Omit the section when it adds nothing.
 ISSUE
 )"
 ````
@@ -199,17 +202,9 @@ Every issue gets exactly one primary label and the `cyanheads` assignee — the 
 | `performance` | Memory, CPU, or latency |
 | `security` | A security defect or hardening against crafted input; disclosure routing follows § Security reports |
 | `breaking-change` | The fix or feature changes the public API or model |
-| `surplus-token-idea` | Worth exploring when time allows |
+| `surplus-token-idea` | Worth exploring when token budget allows |
 
-Combine with repeated flags: `--label "bug" --label "regression"`. If a secondary label doesn't exist yet (`label not found`), create it once:
-
-```bash
-gh label create regression --color e99695 --description "Worked before, broken after an update" -R cyanheads/scholarly-parse
-gh label create performance --color 5319e7 --description "Memory, CPU, or latency" -R cyanheads/scholarly-parse
-gh label create security --color b60205 --description "Hardening against crafted input" -R cyanheads/scholarly-parse
-gh label create breaking-change --color d93f0b --description "Changes the public API or model" -R cyanheads/scholarly-parse
-gh label create surplus-token-idea --color FF10F0 --description "Worth exploring when time allows" -R cyanheads/scholarly-parse
-```
+Combine with repeated flags: `--label "bug" --label "regression"`. The repo carries every label above, plus `duplicate`; a `label not found` error is a typo, not a label to create.
 
 ## Attaching large output
 
@@ -222,7 +217,8 @@ gh issue comment <number> -R cyanheads/scholarly-parse --body-file <scratch>/ful
 ## Following up
 
 ```bash
-gh issue view <number> -R cyanheads/scholarly-parse --comments
+gh issue view <number> -R cyanheads/scholarly-parse              # body
+gh issue view <number> -R cyanheads/scholarly-parse --comments   # thread only
 gh issue comment <number> -R cyanheads/scholarly-parse --body-file <scratch>/findings.md
 gh issue list -R cyanheads/scholarly-parse --author @me
 ```
@@ -232,12 +228,12 @@ Closing is a deliberate step after the fix ships, with a comment naming the rele
 ## Checklist
 
 - [ ] Searched existing issues — no duplicate; close matches commented instead
-- [ ] Reproduced on the exact document; version, runtime, parser, and `diagnostics` noted
+- [ ] Reproduced on the exact document; installed version, runtime, peer, parser, and `diagnostics` noted
 - [ ] Triaged to a format or area; dependency faults filed upstream
 - [ ] Security findings filed in the maintainer's requested queue; private contributor disclosures protected; no unrequested advisory
 - [ ] Secrets redacted
 - [ ] Title is `type(scope): description` with a scope from the list
 - [ ] One primary label, `--assignee cyanheads`
-- [ ] Bug: every required Bug Report field present, in form order — version, source format, runtime, document, description, actual output, expected output
-- [ ] Feature: `Use case` and `Proposed behavior` present, `Alternatives considered` third when used
+- [ ] Bug: every required Bug Report field present, in form order — Environment table, source format, document, description, actual output, expected output
+- [ ] Feature: `Use case` and `Proposed behavior` present; `Alternatives considered` and `Additional context` follow in form order, each only when it earns its place
 - [ ] Inside the budget — ~150 words for a bug, ~250 for a feature, code and verbatim output excluded

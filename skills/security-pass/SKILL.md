@@ -4,7 +4,7 @@ description: >
   Review scholarly-parse's parsers against hostile documents: XML entity expansion and external entities, recursion depth on deeply nested input, input size and amplification budgets, regex backtracking on attacker-controlled text, prototype pollution through element or attribute names used as object keys, raw HTML or `javascript:` links surviving into rendered Markdown, PDF resource exhaustion, and lazy loading of optional peers. Builds a map and a set of hostile probe inputs, walks eight axes, reports grouped findings with a numbered options list, then fixes what's picked and files the rest. Use before a release, after adding or changing a format, or when asked for a security review, audit, hardening pass, or to fuzz the parsers.
 metadata:
   author: cyanheads
-  version: "1.4"
+  version: "1.5"
   type: audit
 ---
 
@@ -49,6 +49,8 @@ Note: which formats exist and which are async, the entity options in the shared 
 Track one task per axis and mark each done as you go.
 
 **Build the probe set now, so results are ready when you reach the axes.** In a scratch directory outside the repository, write a script that generates hostile inputs (the table below) and runs each through every parser that exists, importing from `src/` or the built `dist/`. For each probe, record whether a `ParseResult` came back or something threw, the wall time under a hard timeout, the heap growth (`process.memoryUsage().heapUsed` before and after), and whether `Object.prototype` gained keys. Probes are synthetic, so they never enter `corpus/` — a fixed finding lands as a unit test (step 5).
+
+**Verify each probe reaches the code it targets.** A probe the well-formedness check, `detect()`, or the `maxInputBytes` check rejects first tests that rejection, not the walker, cap, or regex it was written for — a 100,000-deep `<sec>` chain the generator left unclosed comes back `malformed` without ever reaching the section walker's depth limit. Record each probe's `ok` and `error.reason`; where a probe stops early, add a bounded valid seed that passes the early checks — the hostile construct inside a well-formed document of the right format, under the size limit. Report generated probes and probes that reached the parser's walk separately.
 
 | Axis | Probe inputs |
 |:---|:---|
@@ -255,7 +257,7 @@ End with:
 
 - [ ] Scope confirmed
 - [ ] Map built: formats, XML config, walkers, keyed tables, regex sites, peers
-- [ ] Probe set built and run; every probe's result, time, and heap recorded
+- [ ] Probe set built and run; every probe's result (`ok` / `error.reason`), time, and heap recorded; probes stopped by an early check backed by valid seeds; generated and reached counts reported separately
 - [ ] Axis 1 — entity caps in the shared config; external entities never resolved; one XML configuration
 - [ ] Axis 2 — every recursive walker depth-limited; the engine doesn't overflow first
 - [ ] Axis 3 — `maxInputBytes` first in every parser; spans and document-supplied counts capped

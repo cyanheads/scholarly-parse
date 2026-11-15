@@ -4,7 +4,7 @@ description: >
   Land working-tree changes as a release of scholarly-parse — a stack of logical commits on a `release/<version>` branch, the work grouped by concern and topped by `chore(release): <version> — <theme>` (version bump, changelog entry, regenerated artifacts) — then push the branch and open the release PR. Stops at "PR open": no tag, no merge, no publish. `release-pr-review` reviews the PR next, then `release-and-publish` merges, tags, and ships.
 metadata:
   author: cyanheads
-  version: "1.1"
+  version: "1.2"
   type: workflow
 ---
 
@@ -54,6 +54,7 @@ If any gate is red, fix it before starting. Step 7 re-runs the gate, but the wor
 ### 1. Review the diff
 
 ```bash
+git branch --show-current                  # empty output = detached HEAD
 git status
 git describe --tags --abbrev=0             # latest tag; errors when none exists yet
 git log v<latest-tag>..HEAD --oneline      # commits since it (no tag yet: git log --oneline)
@@ -62,13 +63,19 @@ git diff HEAD                              # the content
 git ls-files --others --exclude-standard   # new files, which never appear in a diff
 ```
 
+**Check the branch first.** Empty output from `git branch --show-current` is a detached HEAD: halt. Start on `main`, or on `release/<version>` when the caller pinned the version and already created that branch.
+
 Diff against `HEAD`, not the index: plain `git diff` omits staged changes, so a group staged before wrapup began shows up only as a line in `git status`. Whatever is staged ships, and gets grouped in step 3 like everything else.
+
+**Read every untracked file in full.** New files ship through `git add` like any other change, but no diff shows their content, and `git status` collapses a new directory to one line.
+
+**Ship only finished work no one is still writing.** Uncommitted changes outside the work being wrapped are candidates, not automatic exclusions: git records no author for them, so judge each from the evidence. A complete, safe change idle for hours folds in as its own commit. A change this run didn't make, modified in the last few minutes (check mtimes) or visibly half-done, may belong to a session still writing it: leave it uncommitted and report it. Anything unsafe or secret-bearing stays out regardless.
 
 If the tree is clean and there are no commits since the last tag, halt — nothing to wrap up.
 
 ### 2. Settle the version, then create its branch
 
-Read `version` from `package.json`. When the caller's brief pins a version, use it. Otherwise:
+Read `version` from `package.json`. The version is the caller's to set, not this skill's to pick: **a version pinned in the caller's brief is binding** — use it as given. Otherwise:
 
 - **Unreleased current version.** No `v<version>` tag exists and `npm view scholarly-parse@<version> version` finds nothing → the current version has not shipped. Release at it, without a bump; its changelog entry already exists and is rewritten in step 5 to cover what ships.
 - **Otherwise bump:**
@@ -79,16 +86,18 @@ Read `version` from `package.json`. When the caller's brief pins a version, use 
 | **minor** | A new format or subpath, a new export or option, a new model field, a new warning code or error reason, output changes a consumer would notice |
 | **major** | Removed or renamed exports or model fields, changed signatures or result shapes |
 
-Default to **patch** unless the diff clearly warrants more. Before 1.0.0, a breaking change takes a minor bump with `breaking: true` in the changelog — 1.0.0 is the maintainer's call.
+When the diff doesn't clearly settle which row applies, ask the caller rather than picking. Before 1.0.0, a breaking change takes a minor bump with `breaking: true` in the changelog — 1.0.0 is the maintainer's call.
 
-Create the branch now, before step 3 — step 3 opens by committing:
+Create the branch now, before step 3 — step 3 opens by committing. If the caller already created it, verify its name and skip the switch. First check that no earlier run claimed the version:
 
 ```bash
-git branch --show-current                 # must print main
-git switch -c release/<version>           # uncommitted work rides along
+git ls-remote --heads origin release/<version>   # must print nothing
+gh pr list --head release/<version> --state all  # must print nothing
+git branch --show-current                        # must print main
+git switch -c release/<version>                  # uncommitted work rides along
 ```
 
-If `git branch --no-merged main --list 'release/*'` prints a branch, a prior release PR never merged — halt and report it rather than stacking a second release on top. A `release/*` branch already merged into `main` is a leftover: delete it with `git branch -d` and continue.
+A remote hit means an abandoned run already claimed this version: halt and report the branch and PR, never push past it. If `git branch --no-merged main --list 'release/*'` prints a branch, a prior release PR never merged — halt and report it rather than stacking a second release on top. A `release/*` branch already merged into `main` is a leftover: delete it with `git branch -d` and continue.
 
 ### 3. Commit the work — one commit per concern
 
@@ -115,7 +124,7 @@ git commit --only <paths-for-this-concern> -m "<subject>" -m "<body>"
 
 **The file is the atomic boundary:** never split one file's working-tree changes across commits — not with `git add -p`, not with `git apply --cached`, not by editing the file between commits. A file serving two concerns ships whole in the commit of its dominant concern; a later commit touches it again only for changes made after the first commit (the step 4 version bump).
 
-**Every commit builds and passes its tests on its own.** When a concern changes a contract — a model type in `src/model/document.ts`, a shared helper in `src/xml/`, a renderer's output — the files that consume it and their tests ride in the same commit. Check each group's tree BEFORE its `git commit`, since a failing commit can only be repaired by rewriting history: write the commit groups down first, then for each group build the tree it would commit through a throwaway index, `GIT_INDEX_FILE=<scratch>/index git read-tree HEAD && GIT_INDEX_FILE=<scratch>/index git add -A -- <paths-for-this-concern> && GIT_INDEX_FILE=<scratch>/index git checkout-index -a --prefix=<scratch>/tree/` (a fresh `<scratch>` per group; never `git stash`, and not `git archive`, whose `export-ignore` rules drop `tests/`, `corpus/`, and the configs), symlink `node_modules` into it, and run `bun run typecheck` and `bun run test` there. A group whose tree fails merges with the group it depends on, and the check reruns, all before anything is committed. A test file asserting several concerns' behaviour joins them into one group.
+**Every commit builds and passes its tests on its own.** When a concern changes a contract — a model type in `src/model/document.ts`, a shared helper in `src/xml/`, a renderer's output — the files that consume it and their tests ride in the same commit. Check each group's tree BEFORE its `git commit`, since a failing commit can only be repaired by rewriting history: write the commit groups down first, then for each group build the tree it would commit through a throwaway index, `GIT_INDEX_FILE=<scratch>/index git read-tree HEAD && GIT_INDEX_FILE=<scratch>/index git add -A -- <paths-for-this-concern> && GIT_INDEX_FILE=<scratch>/index git checkout-index -a --prefix=<scratch>/tree/` (a fresh `<scratch>` per group; never `git stash`, and not `git archive`, whose `export-ignore` rules drop `tests/`, `corpus/`, and the configs), symlink `node_modules` into it, and run `bun run typecheck` and `bun run test` there — that pair only. Never the Node lane, `test:package`, or the full `devcheck` per commit: the finished tree passed them before wrapup, step 7 runs them again, and repeating them per snapshot multiplies the slowest gate by the commit count. Wait for both commands to finish; a running gate is not a pass. A group whose tree fails merges with the group it depends on, and the check reruns, all before anything is committed. A test file asserting several concerns' behaviour joins them into one group.
 
 **A dependency bump lands before the commits that use it.** When a later commit uses something the new versions introduce, `chore(deps)` is the first work commit, so every commit above it compiles against the versions it was written for.
 
@@ -150,7 +159,7 @@ A body is too long the moment it enumerates files or symbols touched (that is `g
 
 **Right-size it.** A single-concern change is one work commit with the release commit on top. Only when the version bump is the whole change (a republish, a metadata-only patch) is there no work commit. The failure to prevent is the inverse: a multi-concern change crammed into one commit beside the release artifacts.
 
-When every concern is committed, `git status` is clean — confirm it before step 4, so everything steps 4–6 touch is a release artifact.
+When every concern is committed, `git status` is clean apart from changes step 1 left out and reported — confirm it before step 4, so everything steps 4–6 touch is a release artifact.
 
 ### 4. Bump the version
 
@@ -191,6 +200,8 @@ H1 is `# <version> — YYYY-MM-DD`, with a concrete date — never `[Unreleased]
 
 **Tone:** terse, fact-dense. A bullet is **symbol** + what changed + at most one consumer-facing caveat; one sentence by default, two max — past ~40 words it is wrong. The linked issue carries the why and the diff the how. Cut history narration, design-rationale defense, "X unchanged" clauses, and edge-case inventories. **Verified ≠ included** — the diff-is-truth rule bounds what you may claim, never how much you write. Model length on the authoring guide in `changelog/template.md`, never on the previous entry. `agent-notes` carries adoption steps only.
 
+**Credit outside reporters.** For every issue or PR the release addresses, read who opened it: `gh api repos/cyanheads/scholarly-parse/issues/<N> --jq '[.user.login, .user.type, .author_association] | @tsv'` (the endpoint serves PRs too). An `author_association` of `NONE`, `CONTRIBUTOR`, `FIRST_TIMER`, or `FIRST_TIME_CONTRIBUTOR` on a `User` (not a `Bot`) is an outside reporter: that bullet's issue link ends with a thanks, profile linked by full URL — `([#38](https://github.com/cyanheads/scholarly-parse/issues/38), thanks [@octocat](https://github.com/octocat)!)`. `OWNER`, `MEMBER`, and `COLLABORATOR` get none. The PR body's `## Changes` (step 9) and the tag carry the same credit.
+
 **Re-read the entry after writing it, then sweep for harness markup:** `grep -rlF -e '</invoke>' -e '</content>' changelog/` must print nothing. A hit in an older entry is deleted in this release's commit — `changelog/` is in `package.json` `files`, so every entry ships in every tarball, and `changelog:check` cannot catch a stray trailing tag.
 
 ### 6. Regenerate derived artifacts
@@ -209,7 +220,7 @@ All three are idempotent. Never hand-edit their outputs.
 bun run devcheck
 ```
 
-**If it fails, halt.** The work is already committed, so the fix is a new commit on top under step 3's conventions — never `git commit --amend`, rebase, reset, or any other rewrite. Land it, then re-run. The same holds when the gate passes but leaves the tree dirty: Biome's auto-fix to a file committed in step 3 is a follow-up commit of its own, not something to fold into the release commit.
+**If it fails, halt.** Halting means reporting back with the failing output: a failure that isn't a Biome auto-fix (a red or intermittent test, a type error, an audit advisory) is the caller's to diagnose and fix — don't investigate it, add debug files, or edit source or tests to chase it. The work is already committed, so the fix is a new commit on top under step 3's conventions — never `git commit --amend`, rebase, reset, or any other rewrite. Land it, then re-run. The same holds when the gate passes but leaves the tree dirty: Biome's auto-fix to a file committed in step 3 is a follow-up commit of its own, not something to fold into the release commit.
 
 Only the version bump, the changelog entry, and the regenerated artifacts may be uncommitted when this step goes green.
 
@@ -261,6 +272,7 @@ The body is the release digest: the `## Changes` bullets and changelog link the 
 **Rules:**
 
 - **`## Changes` follows the tag rules exactly** (`release-and-publish` step 4): flat bullets, never Keep-a-Changelog headers; complete at headline granularity — notable changes get their own bullet, minor items share ONE grouped bullet; deps one line, naming only what earns it; no narrative, no marketing adjectives.
+- **Outside reporters** (step 5) are thanked as `(#N, thanks @user!)`, a bare `@user`, on a bullet of their own — never inside the grouped minor line.
 - **Every claim traces to the diff and to the changelog entry** — the body derives from the entry written in step 5.
 - **`## Gates` is the only release surface that carries gate results.** It never enters the tag.
 - **Issue references are bare `(#N)`** — never `Closes #N`; the merge would close the issue before its close-out comment.
@@ -273,13 +285,13 @@ The body is the release digest: the `## Changes` bullets and changelog link the 
 
 ```bash
 git log --oneline -8                 # work commits, release commit on top
-git status                           # clean
+git status                           # clean, apart from step 1's reported exclusions
 git tag --points-at HEAD             # nothing — tagging is release-and-publish's job
 git branch --show-current            # release/<version>
 gh pr view --json number,url,state   # OPEN
 ```
 
-If the tree isn't clean or the release commit isn't at HEAD, investigate before reporting.
+If the tree holds anything beyond those exclusions, or the release commit isn't at HEAD, investigate before reporting.
 
 ## Constraints
 
@@ -291,17 +303,19 @@ If the tree isn't clean or the release commit isn't at HEAD, investigate before 
 
 ## Checklist
 
-- [ ] Diff reviewed end to end, untracked files included, before the first commit
-- [ ] Version settled (pinned by the caller, unreleased current version, or bumped by the table); `release/<version>` created before the first commit
+- [ ] Started on `main` or the caller-created `release/<version>`, not a detached HEAD; no `release/<version>` branch or PR on the remote
+- [ ] Diff and every untracked file read end to end before the first commit; unfinished changes this run didn't make left uncommitted and reported
+- [ ] Version settled (pinned by the caller, unreleased current version, or bumped by the table — asked when the row was unclear); `release/<version>` created before the first commit
+- [ ] Each work group's tree passed `bun run typecheck` and `bun run test` before its commit; no full-gate lane per commit
 - [ ] Work committed before the version bump; a version-bearing file a work concern touches ships whole in that concern's commit
 - [ ] Parse fixes carry their fixtures, reviewed snapshots, and attribution in the same commit
 - [ ] Version bumped where declared — verify by command: `v=$(jq -r .version package.json); grep -c "Version-$v-" README.md` prints `1` (escape `-` as `--` for a prerelease)
-- [ ] Changelog authored at `changelog/<major.minor>.x/<version>.md` — `summary:` last and derived from the body, `breaking`/`security` set correctly, `## Dependencies` carries every arrow; harness-markup sweep clean
+- [ ] Changelog authored at `changelog/<major.minor>.x/<version>.md` — `summary:` last and derived from the body, `breaking`/`security` set correctly, `## Dependencies` carries every arrow; every issue or PR from an outside reporter thanked on its bullet; harness-markup sweep clean
 - [ ] `CHANGELOG.md`, `docs/tree.md`, and `corpus/ATTRIBUTION.md` regenerated by their scripts
-- [ ] `bun run devcheck` clean
+- [ ] `bun run devcheck` clean — or halted with the failing output reported, nothing chased
 - [ ] Work grouped into logical commits; release artifacts committed separately on top, subject leading with the version
 - [ ] `chore(deps)` first whenever a later commit uses what the new versions introduce
 - [ ] A gate failure after the work was committed landed as a new commit — nothing amended or rewritten
 - [ ] Every commit carries a one- or two-line body; no closing keywords anywhere
 - [ ] Branch pushed, PR open — title = release commit subject; body = theme, `## Changes` in tag rules, `## Gates`, changelog link last (via `--body-file`)
-- [ ] Tree clean, no tag at HEAD, `main` untouched
+- [ ] Tree clean apart from step 1's reported exclusions, no tag at HEAD, `main` untouched

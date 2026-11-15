@@ -4,7 +4,7 @@ description: >
   Ship a reviewed scholarly-parse release. Runs the gate, fast-forwards `main` to the reviewed `release/<version>` branch, creates the annotated tag, pushes `main` and the tag, then stops and asks the maintainer before publishing to npm — `bun publish` runs only on their explicit word — and creates the GitHub Release with `bun run release:github`. Assumes `git-wrapup` and the `release-pr-review` pass are done. Retries transient network failures; halts with a partial-state report otherwise, and resumes cleanly on re-invocation.
 metadata:
   author: cyanheads
-  version: "1.0"
+  version: "1.1"
   type: workflow
 ---
 
@@ -128,6 +128,7 @@ Format — a **headline digest**, never a changelog mirror:
 - **Deps: one line max**, naming only what earns it (`fast-xml-parser`, a major); per-package arrows live in the changelog
 - **No gates line**, no narrative preamble, no marketing adjectives
 - **Issue backlinks** as `(#N)` in the relevant bullets
+- **Outside-reporter credit:** a bullet whose issue or PR came from outside the project carries the thanks the changelog entry gives it, as `(#N, thanks @user!)` — a bare `@user`, which the GitHub Release links. A credited change always gets its own bullet, never a place in the grouped minor line (`git-wrapup` step 5 says how to tell an outside reporter)
 - **Changelog link is the final line**, with a blank line above it
 
 Verify:
@@ -212,7 +213,7 @@ If a check fails, halt and report which destination is unreachable.
 - [ ] Preconditions met: tree clean, on `release/<version>`, release commit in the stack with only review commits above, PR head == local HEAD, review pass confirmed finished
 - [ ] `bun run devcheck` passes
 - [ ] `git merge --ff-only` onto `main` locally — never the GitHub merge button; HEAD equals the PR's `headRefOid`
-- [ ] Annotated tag `v<version>` on HEAD with `--cleanup=whitespace`: a fresh ~60-character subject without the version, the PR's `## Changes` bullets verbatim, changelog link last with ` · release PR #<N>`; signature parses
+- [ ] Annotated tag `v<version>` on HEAD with `--cleanup=whitespace`: a fresh ~60-character subject without the version, the PR's `## Changes` bullets verbatim, outside reporters thanked on their own bullets, changelog link last with ` · release PR #<N>`; signature parses
 - [ ] `main` pushed, then the tag; PR reports `MERGED`; remote and local `release/<version>` deleted
 - [ ] `bun publish --dry-run` file list checked; the maintainer asked; `bun publish` run only on their word for this version
 - [ ] `bun run release:github` succeeds, after the npm publish
