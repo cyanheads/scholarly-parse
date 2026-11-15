@@ -178,6 +178,40 @@ describe('PDF tables', () => {
     ]);
   });
 
+  it('leaves running text set close under a table in its own size out of the table', async () => {
+    // The paragraph opens 18 points under the last row, within 1.6 of its 12-point line gaps.
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            ...OPENING,
+            { font: 'bold', size: 10, text: 'Table 1.', x: 72, y: 500 },
+            { text: 'Measured values by group', x: 113, y: 500 },
+            { text: 'Group', x: 72, y: 486 },
+            { text: 'Mean', x: 250, y: 486 },
+            { text: 'Alpha', x: 72, y: 474 },
+            { text: '1.5', x: 250, y: 474 },
+            ...paragraph(
+              [
+                'Running text of the paper goes on under the table,',
+                'its second line set under the first at the same gap.',
+              ],
+              { y: 456 },
+            ),
+          ],
+        ],
+      }),
+    );
+    expect(tablesOf(document.body)[0]?.rows).toEqual([
+      ['Group', 'Mean'],
+      ['Alpha', '1.5'],
+    ]);
+    expect(document.body.flatMap((section) => section.blocks)).toContainEqual({
+      text: 'Running text of the paper goes on under the table, its second line set under the first at the same gap.',
+      type: 'paragraph',
+    });
+  });
+
   it('draws every table of a document from one grid budget, and says where it ran out', async () => {
     const first = staircase('Table 1', 1_000);
     const second = staircase('Table 2', 1_000);

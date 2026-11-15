@@ -26,7 +26,7 @@ export function flow(
   textSize = layout.bodySize,
 ): Block[] {
   const { lineGap } = layout;
-  const tables = tableRows(lines, lineGap);
+  const tables = tableRows(lines, lineGap, textSize);
   const blocks: Block[] = [];
   let paragraph: string[] = [];
   let previous: Line | undefined;
@@ -197,16 +197,20 @@ function columnOf(spans: [number, number][], left: number, right: number): numbe
 /**
  * Each table caption's rows: the lines of several cells after it, with the lines of one
  * cell among them ({@link continuesTable}), or, for a caption set below its table, the
- * lines of several cells right before it on the same page.
+ * lines of several cells right before it on the same page. A line of one cell after the
+ * last of several stays only when set smaller than the running text (`textSize`): one in
+ * the running text's size is that text going on under the table.
  */
 function tableRows(
   lines: Line[],
   lineGap: number,
+  textSize: number,
 ): { claimed: Set<Line>; rows: Map<Line, Line[]> } {
   const claimed = new Set<Line>();
   const rows = new Map<Line, Line[]>();
   const multiCell = (line: Line | undefined): line is Line =>
     !!line && line.cells.length > 1 && !claimed.has(line);
+  const runningText = (line: Line) => line.cells.length === 1 && line.size >= textSize - 0.3;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i] as Line;
     if (!isCaptionStart(line) || !TABLE_LABEL.test(CAPTION_START.exec(line.text)?.[1] ?? ''))
@@ -222,6 +226,7 @@ function tableRows(
       j++
     )
       found.push(lines[j] as Line);
+    while (found.length > 0 && runningText(found.at(-1) as Line)) found.pop();
     if (found.length === 0) {
       for (let j = i - 1; multiCell(lines[j]) && lines[j]?.page === line.page; j--)
         found.unshift(lines[j] as Line);
