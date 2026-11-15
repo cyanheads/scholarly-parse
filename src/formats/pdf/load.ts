@@ -169,7 +169,9 @@ export async function loadPdf(
   let document: PdfjsDocument;
   try {
     // pdf.js takes ownership of the buffer it is given; a copy leaves the caller's intact.
-    document = await getDocumentProxy(bytes.slice(), { verbosity: 0 });
+    // From pdf.js 6 a font's PostScript name, which marks bold, italic, and math runs, reaches
+    // `commonObjs` only with `fontExtraProperties`.
+    document = await getDocumentProxy(bytes.slice(), { fontExtraProperties: true, verbosity: 0 });
   } catch (error) {
     const name = (error as { name?: string }).name ?? '';
     if (name === 'PasswordException')
