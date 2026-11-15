@@ -105,6 +105,7 @@
     "format": "biome check --write .",
     "test": "vitest run",
     "test:corpus": "vitest run tests/corpus",
+    "test:package": "bun run build && bun run scripts/test-package.ts",
     "corpus:snapshot": "SCHOLARLY_PARSE_UPDATE_SNAPSHOTS=1 vitest run tests/corpus",
     "corpus:sample": "bun run scripts/corpus/sample.ts",
     "corpus:agreement": "bun run scripts/corpus/agreement.ts",
@@ -119,23 +120,24 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@biomejs/biome": "^2.5.15",
+    "@biomejs/biome": "^2.6.7",
     "@socketsecurity/bun-security-scanner": "^1.1.3",
-    "@types/bun": "^1.4.3",
-    "@types/node": "^26.6.5",
-    "ignore": "^7.0.12",
-    "linkedom": "^0.18.13",
+    "@types/bun": "^1.4.4",
+    "@types/node": "^26.6.6",
+    "ignore": "^7.0.14",
+    "linkedom": "^0.18.15",
     "mdast-util-from-markdown": "^2.1.0",
     "mdast-util-gfm": "^3.1.0",
     "micromark": "^4.0.3",
     "micromark-extension-gfm": "^3.0.0",
     "publint": "^0.3.25",
     "typescript": "^7.0.2",
-    "unpdf": "^1.8.1",
-    "vitest": "^5.0.4",
+    "unpdf": "^2.1.0",
+    "vitest": "^5.1.0",
+    "workerd": "1.20261112.1",
     "zod": "^4.6.7"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.11.2"
+    "fast-xml-parser": "^5.12.0"
   }
 }
