@@ -1,6 +1,6 @@
 # scholarly-parse - Directory Structure
 
-Generated on: 2026-10-08 15:34:23
+Generated on: 2026-11-15 14:30:01
 
 ```text
 scholarly-parse/
@@ -40,10 +40,17 @@ scholarly-parse/
 │   │   ├── attribution.ts
 │   │   ├── http.ts
 │   │   └── sample.ts
+│   ├── test-package/
+│   │   ├── cli.mjs
+│   │   ├── smoke.mjs
+│   │   ├── worker.mjs
+│   │   └── workerd.capnp
 │   ├── build-changelog.ts
 │   ├── devcheck.ts
 │   ├── list-skills.ts
+│   ├── node-binary.ts
 │   ├── release-github.ts
+│   ├── test-package.ts
 │   └── tree.ts
 ├── skills/
 │   ├── add-fixture/
@@ -102,6 +109,7 @@ scholarly-parse/
 │   │   ├── pdf/
 │   │   │   ├── blocks.ts
 │   │   │   ├── context.ts
+│   │   │   ├── float-labels.ts
 │   │   │   ├── index.ts
 │   │   │   ├── inline.ts
 │   │   │   ├── layout.ts
@@ -206,7 +214,8 @@ scholarly-parse/
 │   ├── linear.test.ts
 │   ├── linear.ts
 │   ├── parse.test.ts
-│   └── property.ts
+│   ├── property.ts
+│   └── runtime.ts
 ├── .env.example
 ├── .gitattributes
 ├── .gitignore

@@ -2,6 +2,10 @@
 
 All notable changes to this project. Each entry links to its full per-version file in [changelog/](changelog/).
 
+## [0.2.3](changelog/0.2.x/0.2.3.md) — 2026-11-15
+
+PDF parsing reads font names under pdf.js 6 and fixes captions in other languages, tables across columns, title superscripts, and wrapped headings; HTML error pages with inline markup are blocked; TEI heading-only abstracts and JATS collaboration affiliations are read.
+
 ## [0.2.2](changelog/0.2.x/0.2.2.md) — 2026-10-17
 
 arXiv IDs read from reference links, `citation-alternatives`, and arXiv DOIs; a rowspan ends with its row group; HTTP error and arXiv no-paper pages no longer parse as documents; PDF layout and reference-list fixes.
