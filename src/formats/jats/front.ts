@@ -31,6 +31,7 @@ import {
   tagNameOf,
   textOf,
   type XmlNode,
+  type XmlNodeList,
 } from '../../xml/ordered.js';
 import { flowBlocks, parseSection } from './blocks.js';
 import type { JatsContext } from './context.js';
@@ -79,8 +80,9 @@ export function extractMetadata(
 
 /**
  * Authors across every `<contrib-group>`, and the affiliations they point to. An `<aff>`
- * may sit in `<article-meta>`, in a `<contrib-group>`, or inside a `<contrib>`; each is
- * listed once, and an author's `<xref ref-type="aff">` resolves to its index.
+ * may sit in `<article-meta>`, in a `<contrib-group>`, or inside a `<contrib>` or its
+ * `<collab>`; each is listed once, and an author's `<xref ref-type="aff">` resolves to its
+ * index.
  */
 function extractContributors(articleMeta: XmlNode | undefined): {
   affiliations: string[];
@@ -115,14 +117,26 @@ function extractContributors(articleMeta: XmlNode | undefined): {
   return { affiliations, authors };
 }
 
+/** Elements of a `<collab>` that describe the group rather than spell its name. */
+const COLLAB_PARTS: ReadonlySet<string> = new Set(['aff', 'contrib-group', 'email', 'fn', 'xref']);
+
+/**
+ * The children that describe a contributor: its own, then its `<collab>`'s, since JATS
+ * lets a group carry its affiliation links, affiliations, notes, and email inside it.
+ */
+function contributorParts(contrib: XmlNode): XmlNodeList {
+  return [...childrenOf(contrib), ...childrenOf(findOne(contrib, 'collab'))];
+}
+
 function parseContributor(
   contrib: XmlNode,
   affIndex: Map<string, number>,
   nodeIndex: Map<XmlNode, number>,
 ): Author | undefined {
+  const parts = contributorParts(contrib);
   const affiliations = new Set<number>();
   let corresponding = attrOf(contrib, 'corresp') === 'yes';
-  for (const xref of findAll(contrib, 'xref')) {
+  for (const xref of findAll(parts, 'xref')) {
     const refType = attrOf(xref, 'ref-type');
     if (refType === 'corresp') corresponding = true;
     if (refType !== 'aff') continue;
@@ -131,7 +145,7 @@ function parseContributor(
       if (index !== undefined) affiliations.add(index);
     }
   }
-  for (const aff of findAll(contrib, 'aff')) {
+  for (const aff of findAll(parts, 'aff')) {
     const index = nodeIndex.get(aff);
     if (index !== undefined) affiliations.add(index);
   }
@@ -140,7 +154,7 @@ function parseContributor(
     .filter((id) => attrOf(id, 'contrib-id-type')?.toLowerCase() === 'orcid')
     .map((id) => normalizeOrcid(text(id)))
     .find(Boolean);
-  const email = text(findOne(contrib, 'email')) || undefined;
+  const email = text(findOne(parts, 'email')) || undefined;
   const extras = {
     ...(affiliations.size > 0 && { affiliations: [...affiliations].sort((a, b) => a - b) }),
     ...(corresponding && { corresponding: true }),
@@ -159,7 +173,7 @@ function contributorName(
 ): Pick<Author, 'collective' | 'family' | 'given' | 'name'> | undefined {
   const collab = findOne(contrib, 'collab');
   if (collab) {
-    const name = text(childrenOf(collab).filter((c) => tagNameOf(c) !== 'contrib-group'));
+    const name = text(collab, COLLAB_PARTS);
     return name ? { collective: name, name } : undefined;
   }
   const nameNode =
@@ -211,7 +225,7 @@ export function noteOwners(articleMeta: XmlNode | undefined): Map<string, string
       const type = attrOf(contrib, 'contrib-type');
       const name = (!type || type === 'author') && contributorName(contrib)?.name;
       if (!name) continue;
-      for (const xref of findAll(contrib, 'xref')) {
+      for (const xref of findAll(contributorParts(contrib), 'xref')) {
         if (attrOf(xref, 'ref-type') !== 'fn') continue;
         for (const rid of (attrOf(xref, 'rid') ?? '').split(/\s+/).filter(Boolean)) {
           const names = owners.get(rid);

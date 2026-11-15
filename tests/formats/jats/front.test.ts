@@ -211,6 +211,19 @@ describe('article metadata', () => {
     expect(result).toMatchObject({ error: { reason: 'empty' }, ok: false });
   });
 
+  it('fails a prolog with no root, and an articleset holding only an error, as wrong-format', () => {
+    // PMC EFetch's answers when its backend drops the body, and for an unknown PMC ID.
+    const prolog =
+      '<?xml version="1.0"  ?><!DOCTYPE pmc-articleset PUBLIC "-//NLM//DTD ARTICLE SET 2.0//EN" ' +
+      '"https://dtd.nlm.nih.gov/ncbi/pmc/articleset/nlm-articleset-2.0.dtd">';
+    for (const xml of [
+      prolog,
+      `${prolog}<pmc-articleset><error id="PMC99999999">The following PMCID is not available</error></pmc-articleset>`,
+    ]) {
+      expect(parseJats(xml)).toMatchObject({ error: { reason: 'wrong-format' }, ok: false });
+    }
+  });
+
   it('warns when the title, abstract, or body is missing', () => {
     const { diagnostics } = parseArticle({ meta: '<abstract><p>Only an abstract.</p></abstract>' });
     expect(diagnostics.warnings.map((w) => w.code)).toEqual(['no-title', 'no-body']);
@@ -239,6 +252,51 @@ describe('authors', () => {
       '<contrib contrib-type="author"><collab>COVID-19 Study Group</collab></contrib>',
     );
     expect(authors).toEqual([{ collective: 'COVID-19 Study Group', name: 'COVID-19 Study Group' }]);
+  });
+
+  it('reads the links, affiliations, and email inside a <collab> as the group’s own', () => {
+    // JATS 1.3 lets a <collab> hold its own xref, aff, fn, email, and member contrib-group.
+    const document = parseArticle({
+      back: '<fn-group><title>Author contributions</title><fn id="con1"><p>Analysis.</p></fn></fn-group>',
+      body: '<p>Body.</p>',
+      meta:
+        `${TITLE}<contrib-group>` +
+        '<contrib contrib-type="author"><collab>Study Group<xref ref-type="aff" rid="a1">1</xref>' +
+        '<xref ref-type="corresp" rid="c1">*</xref><xref ref-type="fn" rid="con1"/></collab></contrib>' +
+        '<contrib contrib-type="author"><collab>Trial Consortium<aff>Univ Y</aff>' +
+        '<email>trial@example.org</email><fn><p>Members are listed in the appendix.</p></fn>' +
+        '<contrib-group><contrib><name><surname>Doe</surname></name></contrib></contrib-group>' +
+        '</collab></contrib></contrib-group><aff id="a1"><label>1</label>Univ X</aff>',
+    });
+    const { metadata } = document;
+    expect(toMarkdown(document)).toContain('**Study Group:** Analysis.');
+    expect(metadata.affiliations).toEqual(['Univ Y', 'Univ X']);
+    expect(metadata.authors).toEqual([
+      {
+        affiliations: [1],
+        collective: 'Study Group',
+        corresponding: true,
+        name: 'Study Group',
+      },
+      {
+        affiliations: [0],
+        collective: 'Trial Consortium',
+        email: 'trial@example.org',
+        name: 'Trial Consortium',
+      },
+    ]);
+  });
+
+  it('links the affiliation an <xref> beside a <collab> points to', () => {
+    const metadata = metadataOf(
+      `${TITLE}<contrib-group><contrib contrib-type="author"><collab>Study Group</collab>` +
+        '<xref ref-type="aff" rid="a1">1</xref></contrib></contrib-group>' +
+        '<aff id="a1"><label>1</label>Univ X</aff>',
+    );
+    expect(metadata.authors).toEqual([
+      { affiliations: [0], collective: 'Study Group', name: 'Study Group' },
+    ]);
+    expect(metadata.affiliations).toEqual(['Univ X']);
   });
 
   it('skips contributors who are not authors', () => {
@@ -331,6 +389,29 @@ describe('abstracts', () => {
     ]);
     expect(toMarkdown(document)).toContain(
       '## Abstract\n\n### Background\n\nFirst paragraph.\n\nSecond paragraph.\n\nUntitled section prose.',
+    );
+  });
+
+  it('keeps a <p> beside a <sec> in order, and each bullet-led <p> its own paragraph', () => {
+    const document = parseArticle({
+      meta:
+        TITLE +
+        '<abstract><p>Lead paragraph.</p><sec><title>Methods</title><p>Method text.</p></sec>' +
+        '<p>Trailing paragraph.</p></abstract>' +
+        '<abstract abstract-type="key-points"><p>• First point.</p><p>• Second point.</p></abstract>',
+    });
+    const [main, points] = document.abstracts;
+    expect(main?.sections.map((s) => [s.title, s.blocks])).toEqual([
+      [undefined, [{ text: 'Lead paragraph.', type: 'paragraph' }]],
+      ['Methods', [{ text: 'Method text.', type: 'paragraph' }]],
+      [undefined, [{ text: 'Trailing paragraph.', type: 'paragraph' }]],
+    ]);
+    expect(points?.sections[0]?.blocks).toEqual([
+      { text: '• First point.', type: 'paragraph' },
+      { text: '• Second point.', type: 'paragraph' },
+    ]);
+    expect(toMarkdown(document)).toContain(
+      'Lead paragraph.\n\n### Methods\n\nMethod text.\n\nTrailing paragraph.',
     );
   });
 
