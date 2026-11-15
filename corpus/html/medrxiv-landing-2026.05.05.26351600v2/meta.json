@@ -1,0 +1,23 @@
+{
+  "id": "medrxiv-landing-2026.05.05.26351600v2",
+  "format": "html",
+  "flavor": "medrxiv.org",
+  "title": "Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology",
+  "identifiers": {
+    "doi": "10.64898/2026.05.05.26351600"
+  },
+  "url": "https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2",
+  "retrieved": "2026-11-15",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Vo JN, Wu YM, Wang R, Pham T, Cao X, Yeung S, et al. Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology. medRxiv. 2026. doi:10.64898/2026.05.05.26351600",
+  "features": [
+    "no-body",
+    "preprint",
+    "page-furniture"
+  ],
+  "regression": "cyanheads/scholarly-parse#30",
+  "notes": "medRxiv's abstract view of the work whose full text is medrxiv-2026.05.05.26351600v2: front matter, the abstract, and 68 citation_reference tags, but no article text."
+}

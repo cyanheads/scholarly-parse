@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML">
+  <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# book: http://ogp.me/ns/book#" >
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="alternate" type="application/pdf" title="Full Text (PDF)" href="/content/10.64898/2026.05.05.26351600v2.full.pdf" />
+<link rel="alternate" type="text/plain" title="Full Text (Plain)" href="/content/10.64898/2026.05.05.26351600v2.full.txt" />
+<link rel="alternate" type="application/vnd.ms-powerpoint" title="Powerpoint" href="/content/10.64898/2026.05.05.26351600v2.ppt" />
+<meta name="citation_funding_source" content="citation_funder_id=https://ror.org/040gcmg81;citation_grant_number=P50 - CA186786;citation_grant_number=U2C - CA271854;citation_grant_number=R35 - CA231996;" />
+<meta name="citation_funding_source" content="citation_funder_id=https://ror.org/006w34k90;citation_grant_number=HHMI_Chinnaiyan A;" />
+<meta name="type" content="article" />
+<meta name="category" content="article" />
+<meta name="HW.identifier" content="/medrxiv/early/2026/09/01/2026.05.05.26351600.atom" />
+<meta name="HW.pisa" content="medrxiv;2026.05.05.26351600v2" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="en" />
+<meta name="DC.Title" content="Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology" />
+<meta name="DC.Identifier" content="10.64898/2026.05.05.26351600" />
+<meta name="DC.Date" content="2026-09-01" />
+<meta name="DC.Publisher" content="Cold Spring Harbor Laboratory Press" />
+<meta name="DC.Rights" content="© 2026, Posted by openRxiv. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/" />
+<meta name="DC.AccessRights" content="restricted" />
+<meta name="DC.Description" content="Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele ( cis ) or opposing alleles ( trans ), a distinction with direct therapeutic consequences: trans configurations confirm biallelic tumor suppressor inactivation, whereas cis configurations generate compound oncogenic alleles with enhanced activity. Among 768 patients with prostate, breast, or ovarian cancers, we used mutational signatures to nominate cryptic genomic instability cases lacking a causative biallelic event on short-read sequencing. Long-read nanopore sequencing resolved 32 of 46 cryptic cases (69.6%) through methylation detection, long insertion resolution, and structural variant characterization, confirming trans inactivation in every resolved tumor suppressor case. Analysis of 4,496 MiOncoSeq samples identified 17,519 multi-hit gene pairs, 78.7% of which exceeded the 500 bp short-read phasing limit, and long-read phasing revealed recurrent compound cis alleles in NOTCH1 , PIK3CA , PDGFRB , and KIT . Haplotype phasing addresses an overlooked gap in cancer variant interpretation and warrants integration into precision oncology.
+
+Statement of Significance Short-read sequencing cannot resolve whether co-occurring variants within a cancer gene are cis or trans , a distinction critical for clinical interpretation. Long-read nanopore sequencing addresses this gap through haplotype phasing, methylation detection, and structural variant resolution, confirming biallelic tumor suppressor inactivation and revealing compound cis oncogenic alleles with enhanced activity.
+
+### Competing Interest Statement
+
+The authors have declared no competing interest.
+
+### Author Declarations
+
+I confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.
+
+Yes
+
+The details of the IRB/oversight body that provided approval or exemption for the research described are given below:
+
+This study undertook a retrospective analysis of patients who participated in the MiOncoSeq precision oncology program at the University of Michigan Rogel Cancer Center between January 2010 and December 2024. Patient samples, including fresh-frozen tumor tissue, matched blood, and buccal DNA, were collected following written informed consent under protocols approved by the University of Michigan Institutional Review Board (Michigan Oncology Sequencing Protocol, MiOncoSeq and PEDS_MiOncoSeq; IRB HUM00046018, HUM00067928, HUM00056496).
+
+I confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.
+
+Yes
+
+I understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).
+
+Yes
+
+I have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.
+
+Yes
+
+Deidentified nanopore sequencing data supporting the conclusions of this study are available in the database of Genotypes and Phenotypes (dbGaP) under accession number phs000673. Novel pathogenic germline variants identified in this study are being submitted to ClinVar. Additional supporting data are available from the corresponding authors upon reasonable request.
+
+National Cancer Institute, https://ror.org/040gcmg81, P50 - CA186786, U2C - CA271854, R35 - CA231996
+
+Howard Hughes Medical Institute, https://ror.org/006w34k90, HHMI_Chinnaiyan A" />
+<meta name="DC.Contributor" content="Josh N. Vo" />
+<meta name="DC.Contributor" content="Yi-Mi Wu" />
+<meta name="DC.Contributor" content="Rui Wang" />
+<meta name="DC.Contributor" content="Tiffany Pham" />
+<meta name="DC.Contributor" content="Xuhong Cao" />
+<meta name="DC.Contributor" content="Sophie Yeung" />
+<meta name="DC.Contributor" content="Mingyu Park" />
+<meta name="DC.Contributor" content="Yelena Kleyman-Smith" />
+<meta name="DC.Contributor" content="Guo Ci Teo" />
+<meta name="DC.Contributor" content="Alyssa J. Wu" />
+<meta name="DC.Contributor" content="Anne Li" />
+<meta name="DC.Contributor" content="Jamie C. Estill" />
+<meta name="DC.Contributor" content="Lakshmi P. Kunju" />
+<meta name="DC.Contributor" content="Chen Yang" />
+<meta name="DC.Contributor" content="Dan R. Robinson" />
+<meta name="DC.Contributor" content="Arul M. Chinnaiyan" />
+<meta name="article:published_time" content="2026-09-01" />
+<meta name="citation_title" content="Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology" />
+<meta name="citation_abstract" lang="en" content="&lt;h3&gt;Abstract&lt;/h3&gt;
+&lt;p&gt;Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele (&lt;i&gt;cis&lt;/i&gt;) or opposing alleles (&lt;i&gt;trans&lt;/i&gt;), a distinction with direct therapeutic consequences: &lt;i&gt;trans&lt;/i&gt; configurations confirm biallelic tumor suppressor inactivation, whereas &lt;i&gt;cis&lt;/i&gt; configurations generate compound oncogenic alleles with enhanced activity. Among 768 patients with prostate, breast, or ovarian cancers, we used mutational signatures to nominate cryptic genomic instability cases lacking a causative biallelic event on short-read sequencing. Long-read nanopore sequencing resolved 32 of 46 cryptic cases (69.6%) through methylation detection, long insertion resolution, and structural variant characterization, confirming &lt;i&gt;trans&lt;/i&gt; inactivation in every resolved tumor suppressor case. Analysis of 4,496 MiOncoSeq samples identified 17,519 multi-hit gene pairs, 78.7% of which exceeded the 500 bp short-read phasing limit, and long-read phasing revealed recurrent compound &lt;i&gt;cis&lt;/i&gt; alleles in &lt;i&gt;NOTCH1&lt;/i&gt;, &lt;i&gt;PIK3CA&lt;/i&gt;, &lt;i&gt;PDGFRB&lt;/i&gt;, and &lt;i&gt;KIT&lt;/i&gt;. Haplotype phasing addresses an overlooked gap in cancer variant interpretation and warrants integration into precision oncology.&lt;/p&gt;&lt;h3&gt;Statement of Significance&lt;/h3&gt;
+&lt;p&gt;Short-read sequencing cannot resolve whether co-occurring variants within a cancer gene are &lt;i&gt;cis&lt;/i&gt; or &lt;i&gt;trans&lt;/i&gt;, a distinction critical for clinical interpretation. Long-read nanopore sequencing addresses this gap through haplotype phasing, methylation detection, and structural variant resolution, confirming biallelic tumor suppressor inactivation and revealing compound &lt;i&gt;cis&lt;/i&gt; oncogenic alleles with enhanced activity.&lt;/p&gt;" />
+<meta name="citation_journal_title" content="medRxiv" />
+<meta name="citation_publisher" content="Cold Spring Harbor Laboratory Press" />
+<meta name="citation_publication_date" content="2026/01/01" />
+<meta name="citation_mjid" content="medrxiv;2026.05.05.26351600v2" />
+<meta name="citation_id" content="2026.05.05.26351600v2" />
+<meta name="citation_public_url" content="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" />
+<meta name="citation_abstract_html_url" content="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2.abstract" />
+<meta name="citation_full_html_url" content="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2.full" />
+<meta name="citation_pdf_url" content="https://www.medrxiv.org/content/medrxiv/early/2026/09/01/2026.05.05.26351600.full.pdf" />
+<meta name="citation_issn" content="3067-2007" />
+<meta name="citation_doi" content="10.64898/2026.05.05.26351600" />
+<meta name="citation_num_pages" content="56" />
+<meta name="citation_article_type" content="Article" />
+<meta name="citation_firstpage" content="2026.05.05.26351600" />
+<meta name="citation_author" content="Josh N. Vo" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Yi-Mi Wu" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Rui Wang" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Tiffany Pham" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Xuhong Cao" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Sophie Yeung" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Mingyu Park" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Yelena Kleyman-Smith" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Guo Ci Teo" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Alyssa J. Wu" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author" content="Anne Li" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author" content="Jamie C. Estill" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author" content="Lakshmi P. Kunju" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author" content="Chen Yang" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author" content="Dan R. Robinson" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author_email" content="danrobi{at}med.umich.edu" />
+<meta name="citation_author_email" content="arul{at}med.umich.edu" />
+<meta name="citation_author" content="Arul M. Chinnaiyan" />
+<meta name="citation_author_institution" content="Michigan Center for Translational Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Pathology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Rogel Cancer Center, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Department of Urology, University of Michigan Medical School" />
+<meta name="citation_author_institution" content="Howard Hughes Medical Institute" />
+<meta name="citation_author_email" content="danrobi{at}med.umich.edu" />
+<meta name="citation_author_email" content="arul{at}med.umich.edu" />
+<meta name="citation_author_orcid" content="http://orcid.org/0000-0001-9282-3415" />
+<meta name="citation_reference" content="Nangalia J, Campbell PJ. Genome Sequencing during a Patient’s Journey through Cancer. N Engl J Med. 2019 Nov 28;381(22):2145–56." />
+<meta name="citation_reference" content="Cobain EF, Wu Y-M, Vats P, Chugh R, Worden F, Smith DC, et al. Assessment of clinical benefit of integrative genomic profiling in advanced solid tumors. JAMA Oncol. 2021 Apr 1;7(4):525–33." />
+<meta name="citation_reference" content="van Belzen IAEM, Schönhuth A, Kemmeren P, Hehir-Kwa JY. Structural variant detection in cancer genomes: computational challenges and perspectives for precision oncology. NPJ Precis Oncol. 2021 Mar 2;5(1):15." />
+<meta name="citation_reference" content="Kosugi S, Terao C. Comparative evaluation of SNVs, indels, and structural variations detected with short- and long-read sequencing data. Hum Genome Var. 2024 Apr 17;11(1):18." />
+<meta name="citation_reference" content="Lionel AC, Costain G, Monfared N, Walker S, Reuter MS, Hosseini SM, et al. Improved diagnostic yield compared with targeted gene sequencing panels suggests a role for whole- genome sequencing as a first-tier genetic test. Genet Med. 2018 Apr;20(4):435–43." />
+<meta name="citation_reference" content="Kolmogorov M, Billingsley KJ, Mastoras M, Meredith M, Monlong J, Lorig-Roach R, et al. Scalable Nanopore sequencing of human genomes provides a comprehensive view of haplotype-resolved variation and methylation. Nat Methods. 2023 Oct;20(10):1483–92." />
+<meta name="citation_reference" content="Knudson AG Jr. Mutation and cancer: statistical study of retinoblastoma. Proc Natl Acad Sci U S A. 1971 Apr;68(4):820–3." />
+<meta name="citation_reference" content="Lord CJ, Ashworth A. BRCAness revisited. Nat Rev Cancer. 2016 Feb;16(2):110–20." />
+<meta name="citation_reference" content="Gorelick AN, Sánchez-Rivera FJ, Cai Y, Bielski CM, Biederstedt E, Jonsson P, et al. Phase and context shape the function of composite oncogenic mutations. Nature. 2020 June;582(7810):100–3." />
+<meta name="citation_reference" content="Tewhey R, Bansal V, Torkamani A, Topol EJ, Schork NJ. The importance of phase information for human genomics. Nat Rev Genet. 2011 Mar;12(3):215–23." />
+<meta name="citation_reference" content="Irminger-Finger I, Ratajska M, Pilyugin M. New concepts on BARD1: Regulator of BRCA pathways and beyond. Int J Biochem Cell Biol. 2016 Mar;72:1–17." />
+<meta name="citation_reference" content="Jaganathan K, Kyriazopoulou Panagiotopoulou S, McRae JF, Darbandi SF, Knowles D, Li YI, et al. Predicting splicing from primary sequence with deep learning. Cell. 2019 Jan 24;176(3):535–548.e24." />
+<meta name="citation_reference" content="Davies H, Glodzik D, Morganella S, Yates LR, Staaf J, Zou X, et al. HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures. Nat Med. 2017 Apr;23(4):517–25." />
+<meta name="citation_reference" content="Degasperi A, Zou X, Amarante TD, Martinez-Martinez A, Koh GCC, Dias JML, et al. Substitution mutational signatures in whole-genome-sequenced cancers in the UK population. Science. 2022 Apr 22;376(6591):abl9283." />
+<meta name="citation_reference" content="Nik-Zainal S, Davies H, Staaf J, Ramakrishna M, Glodzik D, Zou X, et al. Landscape of somatic mutations in 560 breast cancer whole-genome sequences. Nature. 2016 Jun 2;534(7605):47–54." />
+<meta name="citation_reference" content="Lambert S, Lopez BS. Characterization of mammalian RAD51 double strand break repair using non-lethal dominant-negative forms. EMBO J. 2000 Jun 15;19(12):3090–9." />
+<meta name="citation_reference" content="Brookman KW, Lamerdin JE, Thelen MP, Hwang M, Reardon JT, Sancar A, et al. ERCC4 (XPF) encodes a human nucleotide excision repair protein with eukaryotic recombination homologs. Mol Cell Biol. 1996 Nov;16(11):6553–62." />
+<meta name="citation_reference" content="Rawal Y, Jia L, Meir A, Zhou S, Kaur H, Ruben EA, et al. Structural insights into BCDX2 complex function in homologous recombination. Nature. 2023 Jul 21;619(7970):640–9." />
+<meta name="citation_reference" content="Evans DG, Burghel G, Schlecht H, Sachdeva A, Hudson A, Parikh O, et al. UK-based clinical testing programme for somatic and germline BRCA1/2, ATM and CDK12 mutations in prostate cancer: first results. BMJ Oncol. 2025 Feb 24;4(1):e000592." />
+<meta name="citation_reference" content="Feusier J, Witherspoon DJ, Scott Watkins W, Goubert C, Sasani TA, Jorde LB. Discovery of rare, diagnostic AluYb8/9 elements in diverse human populations. Mob DNA. 2017 Jul 27;8(1):9." />
+<meta name="citation_reference" content="Saito Y, Koya J, Araki M, Kogure Y, Shingaki S, Tabata M, et al. Landscape and function of multiple mutations within individual oncogenes. Nature. 2020 June;582(7810):95–9." />
+<meta name="citation_reference" content="Kopan R, Ilagan MXG. The canonical Notch signaling pathway: unfolding the activation mechanism. Cell. 2009;137:216–233." />
+<meta name="citation_reference" content="Cancer Genome Atlas Network. Comprehensive molecular portraits of human breast tumours. Nature. 2012 Oct 4;490(7418):61–70." />
+<meta name="citation_reference" content="André F, Ciruelos E, Rubovszky G, et al. Alpelisib for PIK3CA-mutated, hormone receptor-positive advanced breast cancer. N Engl J Med. 2019;380:1929–1940." />
+<meta name="citation_reference" content="Vasan N, Razavi P, Johnson JL, Shao H, Shah H, Antoine A, et al. Double PIK3CA mutations in cis increase oncogenicity and sensitivity to PI3Kα inhibitors. Science. 2019 Nov 8;366(6466):714–23." />
+<meta name="citation_reference" content="Weinstein IB, Joe A. Oncogene addiction. Cancer Res. 2008 May 1;68(9):3077–80; discussion 3080." />
+<meta name="citation_reference" content="​Demirci H, Vo JN, Wu Y-M, Elner V, Chinnaiyan AM, Robinson D, et al. Next-generation sequencing-based molecular profiling of conjunctival squamous cell carcinoma and its potential application for therapy. Ophthalmol Sci. 2025 Sept;5(5):100801." />
+<meta name="citation_reference" content="Heldin C-H, Lennartsson J. Structural and functional properties of platelet-derived growth factor and stem cell factor receptors. Cold Spring Harb Perspect Biol. 2013 Aug 1;5(8):a009100." />
+<meta name="citation_reference" content="Cheung YH, Gayden T, Campeau PM, LeDuc CA, Russo D, Nguyen V-H, et al. A recurrent PDGFRB mutation causes familial infantile myofibromatosis. Am J Hum Genet. 2013 Jun 6;92(6):996–1000." />
+<meta name="citation_reference" content="Heinrich MC, Corless CL, Demetri GD, Blanke CD, von Mehren M, Joensuu H, et al. Kinase mutations and imatinib response in patients with metastatic gastrointestinal stromal tumor. J Clin Oncol. 2003 Dec 1;21(23):4342–9." />
+<meta name="citation_reference" content="Gounder MM, Maki RG. Molecular basis for primary and secondary tyrosine kinase inhibitor resistance in gastrointestinal stromal tumor. Cancer Chemother Pharmacol. 2011 Jan;67 Suppl 1(S1):S25-43." />
+<meta name="citation_reference" content="Zhao Q, Zhang C, Qi C, Yang J, Chen Y, Ge S, et al. Preclinical model-based evaluation of Imatinib resistance induced by KIT mutations and its overcoming strategies in gastrointestinal stromal tumor (GIST). Am J Transl Res. 2021 Dec 15;13(12):13608–24." />
+<meta name="citation_reference" content="O’Neill K, Pleasance E, Fan J, Akbari V, Chang G, Dixon K, et al. Long-read sequencing of an advanced cancer cohort resolves rearrangements, unravels haplotypes, and reveals methylation landscapes. Cell Genom. 2024 Nov 13;4(11):100674." />
+<meta name="citation_reference" content="Gorzynski JE, Goenka SD, Shafin K, Jensen TD, Fisk DG, Grove ME, et al. Ultrarapid Nanopore Genome Sequencing in a Critical Care Setting. N Engl J Med. 2022 Feb 17;386(7):700–2." />
+<meta name="citation_reference" content="Goenka SD, Gorzynski JE, Shafin K, Fisk DG, Pesout T, Jensen TD, et al. Accelerated identification of disease-causing variants with ultra-rapid nanopore genome sequencing. Nat Biotechnol. 2022 Jul 28;40(7):1035–41." />
+<meta name="citation_reference" content="Li MM, Datto M, Duncavage EJ, Kulkarni S, Lindeman NI, Roy S, et al. Standards and guidelines for the interpretation and reporting of sequence variants in cancer: A joint consensus recommendation of the Association for Molecular Pathology, American Society of Clinical Oncology, and College of American Pathologists. J Mol Diagn. 2017 Jan;19(1):4–23." />
+<meta name="citation_reference" content="van de Haar J, Roepman P, Andre F, Balmaña J, Castro E, Chakravarty D, et al. ESMO Recommendations on clinical reporting of genomic test results for solid cancers. Ann Oncol. 2024 Nov;35(11):954–67." />
+<meta name="citation_reference" content="Robinson D, Van Allen EM, Wu Y-M, Schultz N, Lonigro RJ, Mosquera J-M, et al. Integrative clinical genomics of advanced prostate cancer. Cell. 2015 May 21;161(5):1215–28." />
+<meta name="citation_reference" content="Mody RJ, Wu Y-M, Lonigro RJ, Cao X, Roychowdhury S, Vats P, et al. Integrative Clinical Sequencing in the Management of Refractory or Relapsed Cancer in Youth. JAMA. 2015 Sep 1;314(9):913–25." />
+<meta name="citation_reference" content="Robinson DR, Wu Y-M, Lonigro RJ, Vats P, Cobain E, Everett J, et al. Integrative clinical genomics of metastatic cancer. Nature. 2017 Aug 17;548(7667):297–303." />
+<meta name="citation_reference" content="Van der Auwera GA, Carneiro M, Hartl C, Poplin R, del Angel G, Levy-Moonshine A, Jordan T, Shakir K, Roazen D, Thibault J, Banks E, Garimella K, Altshuler D, Gabriel S, DePristo M. From FastQ Data to High-Confidence Variant Calls: The Genome Analysis Toolkit Best Practices Pipeline. Curr Protoc Bioinformatics. 2013;43:11.10.1-11.10.33." />
+<meta name="citation_reference" content="Ye K, Schulz MH, Long Q, Apweiler R, Ning Z. Pindel: a pattern growth approach to detect break points of large deletions and medium sized insertions from paired-end short reads. Bioinformatics. 2009 Nov 1;25(21):2865–71." />
+<meta name="citation_reference" content="Dobin A, Davis CA, Schlesinger F, Drenkow J, Zaleski C, Jha S, et al. STAR: ultrafast universal RNA-seq aligner. Bioinformatics. 2013 Jan 1;29(1):15–21." />
+<meta name="citation_reference" content="Uhrig S, Ellermann J, Walther T, Burkhardt P, Fröhlich M, Hutter B, et al. Accurate and efficient detection of gene fusions from RNA sequencing data. Genome Res. 2021 Mar;31(3):448–60." />
+<meta name="citation_reference" content="Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MA, Bender D, et al. PLINK: a tool set for whole-genome association and population-based linkage analyses. Am J Hum Genet. 2007 Sep;81(3):559–75. doi:10.1086/519795." />
+<meta name="citation_reference" content="Alexander DH, Novembre J, Lange K. Fast model-based estimation of ancestry in unrelated individuals. Genome Res. 2009 Sep;19(9):1655–64." />
+<meta name="citation_reference" content="1000 Genomes Project Consortium, Auton A, Brooks LD, Durbin RM, Garrison EP, Kang HM, et al. A global reference for human genetic variation. Nature. 2015 Oct 1;526(7571):68–74." />
+<meta name="citation_reference" content="Li H. Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics. 2018 Sep 15;34(18):3094–100." />
+<meta name="citation_reference" content="Zheng Z, Li S, Su J, Leung AW-S, Lam T-W, Luo R. Symphonizing pileup and full- alignment for deep learning-based long-read variant calling. Nat Comput Sci. 2022 Dec;2(12):797–803." />
+<meta name="citation_reference" content="Keskus AG, Bryant A, Ahmad T, Yoo B, Aganezov S, Goretsky A, et al. Severus detects somatic structural variation and complex rearrangements in cancer genomes using long- read sequencing. Nat Biotechnol. 2026 Feb;44(2):247–57." />
+<meta name="citation_reference" content="Cingolani P, Platts A, Wang LL, Coon M, Nguyen T, Wang L, et al. A program for annotating and predicting the effects of single nucleotide polymorphisms, SnpEff: SNPs in the genome of Drosophila melanogaster strain w1118; iso-2; iso-3. Fly . 2012 Apr;6(2):80– 92." />
+<meta name="citation_reference" content="McLaren W, Gil L, Hunt SE, Riat HS, Ritchie GRS, Thormann A, et al. The Ensembl Variant Effect Predictor. Genome Biol. 2016 Jun 6;17(1):122." />
+<meta name="citation_reference" content="Díaz-Gay M, Vangara R, Barnes M, Wang X, Islam SMA, Vermes I, et al. Assigning mutational signatures to individual samples and individual somatic mutations with SigProfilerAssignment. Bioinformatics. 2023 Dec;39(12):btad756. doi:10.1093/bioinformatics/btad756." />
+<meta name="citation_reference" content="Sztupinszki Z, Diossy M, Krzystanek M, Reiniger L, Csabai I, Favero F, et al. Migrating the SNP array-based homologous recombination deficiency measures to next generation sequencing data of breast cancer. NPJ Breast Cancer. 2018 Jul 2;4(1):16." />
+<meta name="citation_reference" content="Timms KM, Abkevich V, Hughes E, Neff C, Reid J, Morris B, et al. Association of BRCA1/2 defects with genomic scores predictive of DNA damage repair deficiency among breast cancer subtypes. Breast Cancer Res. 2014 Dec 5;16(6):475." />
+<meta name="citation_reference" content="Niu B, Ye K, Zhang Q, Lu C, Xie M, McLellan MD, et al. MSIsensor: microsatellite instability detection using paired tumor-normal sequence data. Bioinformatics. 2014 Apr 1;30(7):1015–6." />
+<meta name="citation_reference" content="Latham A, Srinivasan P, Kemel Y, Shia J, Bandlamudi C, Mandelker D, et al. Microsatellite instability is associated with the presence of Lynch syndrome pan-cancer. J Clin Oncol. 2019 Feb 1;37(4):286–95." />
+<meta name="citation_reference" content="Telli ML, Timms KM, Reid J, Hennessy B, Mills GB, Jensen KC, et al. Homologous recombination deficiency (HRD) score predicts response to platinum-containing neoadjuvant chemotherapy in patients with triple-negative breast cancer. Clin Cancer Res. 2016 Aug 1;22(15):3764–73." />
+<meta name="citation_reference" content="Wu Y-M, Cieślik M, Lonigro RJ, Vats P, Reimers MA, Cao X, et al. Inactivation of CDK12 Delineates a Distinct Immunogenic Class of Advanced Prostate Cancer. Cell. 2018 Jun 14;173(7):1770–1782.e14." />
+<meta name="citation_reference" content="Alexandrov LB, Kim J, Haradhvala NJ, Huang MN, Tian Ng AW, Wu Y, et al. The repertoire of mutational signatures in human cancer. Nature. 2020 Feb;578(7793):94–101." />
+<meta name="citation_reference" content="Islam SMA, Díaz-Gay M, Wu Y, Barnes M, Vangara R, Bergstrom EN, et al. Uncovering novel mutational signatures by de novo extraction with SigProfilerExtractor. Cell Genom. 2022 Nov 9;2(11):None." />
+<meta name="citation_reference" content="Ceccaldi R, Rondinelli B, D’Andrea AD. Repair pathway choices and consequences at the double-strand break. Trends Cell Biol. 2016 Jan;26(1):52–64." />
+<meta name="citation_reference" content="Robinson JT, Thorvaldsdóttir H, Winckler W, Guttman M, Lander ES, Getz G, et al. Integrative genomics viewer. Nat Biotechnol. 2011 Jan 1;29(1):24–6." />
+<meta name="citation_reference" content="Buels R, Yao E, Diesh CM, Hayes RD, Munoz-Torres M, Helt G, et al. JBrowse: a dynamic web platform for genome visualization and analysis. Genome Biol. 2016 Apr 12;17(1):66." />
+<meta name="citation_reference" content="Cheetham SW, Kindlova M, Ewing AD. Methylartist: tools for visualizing modified bases from nanopore sequence data. Bioinformatics. 2022 May 26;38(11):3109–12." />
+<meta name="citation_reference" content="Nattestad M, Aboukhalil R, Chin C-S, Schatz MC. Ribbon: intuitive visualization for complex genomic variation. Bioinformatics. 2021 Apr 20;37(3):413–5." />
+<meta name="citation_reference" content="Wickham H. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York. 2016." />
+<meta name="citation_reference" content="Gu Z, Eils R, Schlesner M. Complex heatmaps reveal patterns and correlations in multidimensional genomic data. Bioinformatics. 2016 Sep 15;32(18):2847–9." />
+<meta name="twitter:title" content="Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology" />
+<meta name="twitter:site" content="{at}medrxivpreprint" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://www.medrxiv.org/sites/default/files/images/medrxiv_logo_homepage7-5-small-test-up.png" />
+<meta name="twitter:description" content="Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele ( cis ) or opposing alleles ( trans ), a distinction with direct therapeutic consequences: trans configurations confirm biallelic tumor suppressor inactivation, whereas cis configurations generate compound oncogenic alleles with enhanced activity. Among 768 patients with prostate, breast, or ovarian cancers, we used mutational signatures to nominate cryptic genomic instability cases lacking a causative biallelic event on short-read sequencing. Long-read nanopore sequencing resolved 32 of 46 cryptic cases (69.6%) through methylation detection, long insertion resolution, and structural variant characterization, confirming trans inactivation in every resolved tumor suppressor case. Analysis of 4,496 MiOncoSeq samples identified 17,519 multi-hit gene pairs, 78.7% of which exceeded the 500 bp short-read phasing limit, and long-read phasing revealed recurrent compound cis alleles in NOTCH1 , PIK3CA , PDGFRB , and KIT . Haplotype phasing addresses an overlooked gap in cancer variant interpretation and warrants integration into precision oncology.
+
+Statement of Significance Short-read sequencing cannot resolve whether co-occurring variants within a cancer gene are cis or trans , a distinction critical for clinical interpretation. Long-read nanopore sequencing addresses this gap through haplotype phasing, methylation detection, and structural variant resolution, confirming biallelic tumor suppressor inactivation and revealing compound cis oncogenic alleles with enhanced activity.
+
+### Competing Interest Statement
+
+The authors have declared no competing interest.
+
+### Author Declarations
+
+I confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.
+
+Yes
+
+The details of the IRB/oversight body that provided approval or exemption for the research described are given below:
+
+This study undertook a retrospective analysis of patients who participated in the MiOncoSeq precision oncology program at the University of Michigan Rogel Cancer Center between January 2010 and December 2024. Patient samples, including fresh-frozen tumor tissue, matched blood, and buccal DNA, were collected following written informed consent under protocols approved by the University of Michigan Institutional Review Board (Michigan Oncology Sequencing Protocol, MiOncoSeq and PEDS_MiOncoSeq; IRB HUM00046018, HUM00067928, HUM00056496).
+
+I confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.
+
+Yes
+
+I understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).
+
+Yes
+
+I have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.
+
+Yes
+
+Deidentified nanopore sequencing data supporting the conclusions of this study are available in the database of Genotypes and Phenotypes (dbGaP) under accession number phs000673. Novel pathogenic germline variants identified in this study are being submitted to ClinVar. Additional supporting data are available from the corresponding authors upon reasonable request.
+
+National Cancer Institute, https://ror.org/040gcmg81, P50 - CA186786, U2C - CA271854, R35 - CA231996
+
+Howard Hughes Medical Institute, https://ror.org/006w34k90, HHMI_Chinnaiyan A" />
+<meta name="og-title" property="og:title" content="Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology" />
+<meta name="og-url" property="og:url" content="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" />
+<meta name="og-site-name" property="og:site_name" content="medRxiv" />
+<meta name="og-description" property="og:description" content="Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele ( cis ) or opposing alleles ( trans ), a distinction with direct therapeutic consequences: trans configurations confirm biallelic tumor suppressor inactivation, whereas cis configurations generate compound oncogenic alleles with enhanced activity. Among 768 patients with prostate, breast, or ovarian cancers, we used mutational signatures to nominate cryptic genomic instability cases lacking a causative biallelic event on short-read sequencing. Long-read nanopore sequencing resolved 32 of 46 cryptic cases (69.6%) through methylation detection, long insertion resolution, and structural variant characterization, confirming trans inactivation in every resolved tumor suppressor case. Analysis of 4,496 MiOncoSeq samples identified 17,519 multi-hit gene pairs, 78.7% of which exceeded the 500 bp short-read phasing limit, and long-read phasing revealed recurrent compound cis alleles in NOTCH1 , PIK3CA , PDGFRB , and KIT . Haplotype phasing addresses an overlooked gap in cancer variant interpretation and warrants integration into precision oncology.
+
+Statement of Significance Short-read sequencing cannot resolve whether co-occurring variants within a cancer gene are cis or trans , a distinction critical for clinical interpretation. Long-read nanopore sequencing addresses this gap through haplotype phasing, methylation detection, and structural variant resolution, confirming biallelic tumor suppressor inactivation and revealing compound cis oncogenic alleles with enhanced activity.
+
+### Competing Interest Statement
+
+The authors have declared no competing interest.
+
+### Author Declarations
+
+I confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.
+
+Yes
+
+The details of the IRB/oversight body that provided approval or exemption for the research described are given below:
+
+This study undertook a retrospective analysis of patients who participated in the MiOncoSeq precision oncology program at the University of Michigan Rogel Cancer Center between January 2010 and December 2024. Patient samples, including fresh-frozen tumor tissue, matched blood, and buccal DNA, were collected following written informed consent under protocols approved by the University of Michigan Institutional Review Board (Michigan Oncology Sequencing Protocol, MiOncoSeq and PEDS_MiOncoSeq; IRB HUM00046018, HUM00067928, HUM00056496).
+
+I confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.
+
+Yes
+
+I understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).
+
+Yes
+
+I have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.
+
+Yes
+
+Deidentified nanopore sequencing data supporting the conclusions of this study are available in the database of Genotypes and Phenotypes (dbGaP) under accession number phs000673. Novel pathogenic germline variants identified in this study are being submitted to ClinVar. Additional supporting data are available from the corresponding authors upon reasonable request.
+
+National Cancer Institute, https://ror.org/040gcmg81, P50 - CA186786, U2C - CA271854, R35 - CA231996
+
+Howard Hughes Medical Institute, https://ror.org/006w34k90, HHMI_Chinnaiyan A" />
+<meta name="og-type" property="og:type" content="article" />
+<meta name="og-image" property="og:image" content="https://www.medrxiv.org/sites/default/files/images/medrxiv_logo_homepage7-5-small-test-up.png" />
+<meta name="citation_date" content="2026-09-01" />
+<meta name="citation_submitter_name" content="Arul M Chinnaiyan" />
+<meta name="citation_submitter_email" content="arul{at}med.umich.edu" />
+<meta name="citation_submitter_id" content="82231" />
+<meta name="citation_submitter_institution" content="University of Michigan" />
+<meta name="citation_submitter_orcid" content="0000-0001-9282-3415" />
+<link rel="shortcut icon" href="https://www.medrxiv.org/sites/default/files/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google-site-verification" content="ErtVBPBHtC1ayPFdq6aZ312gERJ6yEqQRJvsU-pXy-U" />
+<meta name="description" content="medRxiv - the preprint server for biology, operated by openRxiv, a nonprofit organization dedicated to advancing scientific communication" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" />
+<link rel="shortlink" href="https://www.medrxiv.org/node/1289772" />
+    <title>Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology | medRxiv</title>  
+    <link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_6khU6H18S5e7OUDFpDgXcCE-LgOpIvhpqaj2iIdc4RI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_IkLyK6v4kajhoPSNF-AGjx5-8hWuSjFxUuyQ5l8ldS0.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_BTbypzlNYVbptuza8qzKwXCnB4TjuEzUY43Cz2FsXVA.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/all/modules/highwire/highwire/highwire.style.highwire.css?tohvgu" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_KpIZncueDmB5MSq0mIeT3yaWypu1MY-q9mOv-hSA_x4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_WlQSJCoobh281bFPRj8oYo6DITitbbkOwUoy20yt0ZA.css" media="all" />
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+.panels-flexible-new .panels-flexible-region {
+  padding: 0;
+}
+
+.panels-flexible-new .panels-flexible-region-inside {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.panels-flexible-new .panels-flexible-region-inside-first {
+  padding-left: 0;
+}
+
+.panels-flexible-new .panels-flexible-region-inside-last {
+  padding-right: 0;
+}
+
+.panels-flexible-new .panels-flexible-column {
+  padding: 0;
+}
+
+.panels-flexible-new .panels-flexible-column-inside {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.panels-flexible-new .panels-flexible-column-inside-first {
+  padding-left: 0;
+}
+
+.panels-flexible-new .panels-flexible-column-inside-last {
+  padding-right: 0;
+}
+
+.panels-flexible-new .panels-flexible-row {
+  padding: 0 0 0.5em 0;
+  margin: 0;
+}
+
+.panels-flexible-new .panels-flexible-row-last {
+  padding-bottom: 0;
+}
+
+.panels-flexible-column-new-main {
+  float: left;
+  width: 99.0000%;
+}
+
+.panels-flexible-new-inside {
+  padding-right: 0px;
+}
+
+.panels-flexible-new {
+  width: auto;
+}
+
+.panels-flexible-region-new-center {
+  float: left;
+  width: 99.0000%;
+}
+
+.panels-flexible-row-new-main-row-inside {
+  padding-right: 0px;
+}
+
+
+/*]]>*/-->
+</style>
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_T39Su5PGJ5h7t-Tfc1z3rY8cT2Wsbe4Ak27_6G8Jx68.css" media="all" />
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+#sliding-popup.sliding-popup-bottom,#sliding-popup.sliding-popup-bottom .eu-cookie-withdraw-banner,.eu-cookie-withdraw-tab{background:#808080;}#sliding-popup.sliding-popup-bottom.eu-cookie-withdraw-wrapper{background:transparent}#sliding-popup .popup-content #popup-text h1,#sliding-popup .popup-content #popup-text h2,#sliding-popup .popup-content #popup-text h3,#sliding-popup .popup-content #popup-text p,.eu-cookie-compliance-secondary-button,.eu-cookie-withdraw-tab{color:#ffffff !important;}.eu-cookie-withdraw-tab{border-color:#ffffff;}.eu-cookie-compliance-more-button{color:#ffffff !important;}
+
+/*]]>*/-->
+</style>
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU.css" media="all" />
+
+<!--[if lte IE 7]>
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_h6bj8_X8cU-XjbPX4TNPt0JYXFqUsObkSpuQOJVofyI.css" media="all" />
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_mWaPT4FeOYKOYUaYAC_LzgJdLQB5ym6mbBP--2NayfY.css" media="all" />
+
+<!--[if (lt IE 9)&(!IEMobile)]>
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_LdF_SYvm0FycHY0P363UyWp6s2vXizxl8GefnDtBwAE.css" media="all" />
+<![endif]-->
+
+<!--[if gte IE 9]><!-->
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_07yLOeqkJbzQPnnZy3S6AtH0zedduC9PB6sHotCN2vw.css" media="all" />
+<!--<![endif]-->
+<link type="text/css" rel="stylesheet" href="https://www.medrxiv.org/sites/default/files/css/css_L5tg1oH219U4qEzbaA-2bnkmUJJVrFya50HcbI2Brng.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://d33xdlntwy0kbs.cloudfront.net/cshl_custom_medrxiv.css" media="all" />
+    <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+/*!
+ * yepnope1.5.4
+ * (c) WTFPL, GPLv2
+ */
+(function(a,b,c){function d(a){return"[object Function]"==o.call(a)}function e(a){return"string"==typeof a}function f(){}function g(a){return!a||"loaded"==a||"complete"==a||"uninitialized"==a}function h(){var a=p.shift();q=1,a?a.t?m(function(){("c"==a.t?B.injectCss:B.injectJs)(a.s,0,a.a,a.x,a.e,1)},0):(a(),h()):q=0}function i(a,c,d,e,f,i,j){function k(b){if(!o&&g(l.readyState)&&(u.r=o=1,!q&&h(),l.onload=l.onreadystatechange=null,b)){"img"!=a&&m(function(){t.removeChild(l)},50);for(var d in y[c])y[c].hasOwnProperty(d)&&y[c][d].onload()}}var j=j||B.errorTimeout,l=b.createElement(a),o=0,r=0,u={t:d,s:c,e:f,a:i,x:j};1===y[c]&&(r=1,y[c]=[]),"object"==a?l.data=c:(l.src=c,l.type=a),l.width=l.height="0",l.onerror=l.onload=l.onreadystatechange=function(){k.call(this,r)},p.splice(e,0,u),"img"!=a&&(r||2===y[c]?(t.insertBefore(l,s?null:n),m(k,j)):y[c].push(l))}function j(a,b,c,d,f){return q=0,b=b||"j",e(a)?i("c"==b?v:u,a,b,this.i++,c,d,f):(p.splice(this.i++,0,a),1==p.length&&h()),this}function k(){var a=B;return a.loader={load:j,i:0},a}var l=b.documentElement,m=a.setTimeout,n=b.getElementsByTagName("script")[0],o={}.toString,p=[],q=0,r="MozAppearance"in l.style,s=r&&!!b.createRange().compareNode,t=s?l:n.parentNode,l=a.opera&&"[object Opera]"==o.call(a.opera),l=!!b.attachEvent&&!l,u=r?"object":l?"script":"img",v=l?"script":u,w=Array.isArray||function(a){return"[object Array]"==o.call(a)},x=[],y={},z={timeout:function(a,b){return b.length&&(a.timeout=b[0]),a}},A,B;B=function(a){function b(a){var a=a.split("!"),b=x.length,c=a.pop(),d=a.length,c={url:c,origUrl:c,prefixes:a},e,f,g;for(f=0;f<d;f++)g=a[f].split("="),(e=z[g.shift()])&&(c=e(c,g));for(f=0;f<b;f++)c=x[f](c);return c}function g(a,e,f,g,h){var i=b(a),j=i.autoCallback;i.url.split(".").pop().split("?").shift(),i.bypass||(e&&(e=d(e)?e:e[a]||e[g]||e[a.split("/").pop().split("?")[0]]),i.instead?i.instead(a,e,f,g,h):(y[i.url]?i.noexec=!0:y[i.url]=1,f.load(i.url,i.forceCSS||!i.forceJS&&"css"==i.url.split(".").pop().split("?").shift()?"c":c,i.noexec,i.attrs,i.timeout),(d(e)||d(j))&&f.load(function(){k(),e&&e(i.origUrl,h,g),j&&j(i.origUrl,h,g),y[i.url]=2})))}function h(a,b){function c(a,c){if(a){if(e(a))c||(j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}),g(a,j,b,0,h);else if(Object(a)===a)for(n in m=function(){var b=0,c;for(c in a)a.hasOwnProperty(c)&&b++;return b}(),a)a.hasOwnProperty(n)&&(!c&&!--m&&(d(j)?j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}:j[n]=function(a){return function(){var b=[].slice.call(arguments);a&&a.apply(this,b),l()}}(k[n])),g(a[n],j,b,n,h))}else!c&&l()}var h=!!a.test,i=a.load||a.both,j=a.callback||f,k=j,l=a.complete||f,m,n;c(h?a.yep:a.nope,!!i),i&&c(i)}var i,j,l=this.yepnope.loader;if(e(a))g(a,0,l,0);else if(w(a))for(i=0;i<a.length;i++)j=a[i],e(j)?g(j,0,l,0):w(j)?B(j):Object(j)===j&&h(j,l);else Object(a)===a&&h(a,l)},B.addPrefix=function(a,b){z[a]=b},B.addFilter=function(a){x.push(a)},B.errorTimeout=1e4,null==b.readyState&&b.addEventListener&&(b.readyState="loading",b.addEventListener("DOMContentLoaded",A=function(){b.removeEventListener("DOMContentLoaded",A,0),b.readyState="complete"},0)),a.yepnope=k(),a.yepnope.executeStack=h,a.yepnope.injectJs=function(a,c,d,e,i,j){var k=b.createElement("script"),l,o,e=e||B.errorTimeout;k.src=a;for(o in d)k.setAttribute(o,d[o]);c=j?h:c||f,k.onreadystatechange=k.onload=function(){!l&&g(k.readyState)&&(l=1,c(),k.onload=k.onreadystatechange=null)},m(function(){l||(l=1,c(1))},e),i?k.onload():n.parentNode.insertBefore(k,n)},a.yepnope.injectCss=function(a,c,d,e,g,i){var e=b.createElement("link"),j,c=i?h:c||f;e.href=a,e.rel="stylesheet",e.type="text/css";for(j in d)e.setAttribute(j,d[j]);g||(n.parentNode.insertBefore(e,n),m(c,0))}})(this,document);
+
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/all/libraries/modernizr/modernizr.min.js?tohvgu"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+yepnope({
+  test: Modernizr.matchmedia,
+  nope: '/sites/all/libraries/media-match/media.match.min.js'
+});
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_zGKjZ-O2vXo9JDp7xdHgCtFsgTHaDKNQe5t9dAwmB0c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _prum=[['id', '52e95df3abe53d2e33000000'], ['mark', 'firstbyte',
+      (new Date()).getTime()]]; (function() {
+      var s=document.getElementsByTagName('script')[0],
+      p=document.createElement('script');
+      p.async='async'; p.src='//rum-static.pingdom.net/prum.min.js';s.parentNode.insertBefore(p,s);})();
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_kDq7rHnU5nexyXM0Pum2UCz9RajMJbH8rXq_ytSRYbs.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_BX0ulZUmdIL7T26qOQaxEnbYjdVXv4bAMhhtyJ1qDNE.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_UmRrB-UFXjB2M0TNTJX1OHPY4ihdRnHXrGuavXlhuNI.js"></script>
+<script type="text/javascript" src="https://scholar.google.com/scholar_js/casa.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_D-eO96EHlBdAMfX70iF7rRmRokKJRvhXr1DUJbwJbW8.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_zsXNrZQCJB363epoGdzbQRET60K8jw76G8HZpkxOOvM.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+if(typeof window.MathJax === "undefined") window.MathJax = { menuSettings: { zoom: "Click" } };
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_hkuECaNUSDFlkmB-xLUQN6jT3KWKuigaamtoslB1D78.js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en&amp;render=explicit&amp;onload=drupalRecaptchaOnload"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_YHjsaEqc9JnGWDwQ4cf9mKhfKjxwlgwSQSpFjCkk4r8.js"></script>
+<script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-0K57TCX5BY"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "G-0K57TCX5BY", {"groups":"default","anonymize_ip":true});
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_JiWR4UoYrTJY8nHsIcL-J1r1Hd9omRHjriRMbjM-3ms.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_tVJbC-nIY95Gw3J-__nHSayB8tJCXnB9DXlBbggauB8.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_S1NLdHdtelRpbvp4r0uAmyOOJTDwZJ8jOECdvLqSxlg.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","setHasJsCookie":0,"ajaxPageState":{"theme":"jcore_1","theme_token":"h09q7w3pLqT_Qj6KEbDCL539kMOCsgvovnYvfXHSqYo","js":{"sites\/all\/libraries\/enquire.js\/enquire.min.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/js\/highwire_panels_ajax_tab.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/highwire_markup_process\/js\/highwire_openurl.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/highwire_markup_process\/js\/highwire_google_scholar_sprinkle.js":1,"0":1,"1":1,"https:\/\/d33xdlntwy0kbs.cloudfront.net\/cshl_custom_medrxiv.js":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/js\/eu_cookie_compliance.js":1,"sites\/default\/modules\/jnl_biorxiv_styles\/js\/adv-search-collection-toggle.js":1,"2":1,"sites\/all\/libraries\/modernizr\/modernizr.min.js":1,"3":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.8\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"4":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.core.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.widget.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.button.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.mouse.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.draggable.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.position.min.js":1,"misc\/ui\/jquery.ui.position-1.13.0-backport.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.resizable.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.dialog.min.js":1,"misc\/ui\/jquery.ui.dialog-1.13.0-backport.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.tooltip.min.js":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/js\/jquery.cookie-1.4.1.min.js":1,"misc\/form-single-submit.js":1,"sites\/all\/modules\/highwire\/highwire\/js\/highwire.equal-heights.js":1,"sites\/all\/modules\/highwire\/highwire\/js\/highwire.panels-ajax-tab.js":1,"sites\/default\/modules\/jnl_biorxiv_styles\/js\/biorxiv-scripts.js":1,"sites\/all\/libraries\/colorbox\/jquery.colorbox-min.js":1,"sites\/all\/modules\/contrib\/colorbox\/js\/colorbox.js":1,"sites\/all\/modules\/contrib\/colorbox\/styles\/default\/colorbox_style.js":1,"https:\/\/scholar.google.com\/scholar_js\/casa.js":1,"sites\/all\/modules\/highwire\/highwire\/highwire_log\/highwire_log.js":1,"sites\/all\/modules\/highwire\/highwire\/highwire_nps_survey\/js\/nps_survey.js":1,"\/\/cdn.jsdelivr.net\/qtip2\/2.2.1\/jquery.qtip.min.js":1,"sites\/all\/modules\/highwire\/highwire\/js\/highwire.article-citation-author-tooltip.js":1,"sites\/all\/modules\/contrib\/panels_ajax_tab\/js\/panels_ajax_tab.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/highwire_markup_process\/js\/highwire_article_reference_popup.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/highwire_markup_process\/js\/highwire_at_symbol.js":1,"5":1,"sites\/all\/modules\/contrib\/captcha\/captcha.js":1,"misc\/textarea.js":1,"sites\/all\/modules\/contrib\/recaptcha\/js\/recaptcha.js":1,"https:\/\/www.google.com\/recaptcha\/api.js?hl=en\u0026render=explicit\u0026onload=drupalRecaptchaOnload":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/js\/highwire_share_dialog.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/js\/clipboard.min.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/js\/highwire_clipboard.js":1,"sites\/all\/modules\/highwire\/highwire\/highwire_citation\/plugins\/content_types\/js\/highwire_citation_export.js":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/js\/minipanel_dialog_link.js":1,"sites\/all\/modules\/contrib\/service_links\/js\/twitter_button.js":1,"sites\/all\/modules\/contrib\/service_links\/js\/facebook_like.js":1,"sites\/all\/modules\/contrib\/service_links\/js\/google_plus_one.js":1,"sites\/all\/modules\/highwire\/highwire\/js\/highwire.highwire-list-expand.js":1,"sites\/all\/modules\/contrib\/google_analytics\/googleanalytics.js":1,"https:\/\/www.googletagmanager.com\/gtag\/js?id=G-0K57TCX5BY":1,"6":1,"sites\/all\/modules\/highwire\/highwire\/js\/highwire.gtranslate.js":1,"sites\/all\/themes\/highwire\/jcore_1\/js\/hw_at_email_symbol.js":1,"sites\/all\/themes\/highwire\/jcore_1\/js\/theme-scripts.js":1,"sites\/all\/themes\/contrib\/omega\/omega\/js\/jquery.formalize.js":1,"sites\/all\/themes\/contrib\/omega\/omega\/js\/omega-mediaqueries.js":1,"sites\/all\/themes\/contrib\/omega\/omega\/js\/omega-equalheights.js":1,"sites\/all\/modules\/highwire\/highwire\/highwire_responsive\/js\/highwire-mediaqueries.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.button.css":1,"misc\/ui\/jquery.ui.resizable.css":1,"misc\/ui\/jquery.ui.dialog.css":1,"misc\/ui\/jquery.ui.tooltip.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_draw\/css\/highwire-draw.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_folders\/highwire_folders.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_responsive\/css\/highwire-responsive.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_saved_searches\/highwire_saved_searches.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_user\/highwire_user.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"modules\/forum\/forum.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contrib\/colorbox\/styles\/default\/colorbox_style.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire.style.highwire.css":1,"sites\/all\/modules\/highwire\/highwire\/css\/nlm-elements.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/default\/modules\/biorxiv\/css\/biorxiv.css":1,"public:\/\/ctools\/css\/263bfdb18936424f0ade19d6bd885f37.css":1,"\/\/cdn.jsdelivr.net\/qtip2\/2.2.1\/jquery.qtip.min.css":1,"sites\/all\/modules\/contrib\/panels_ajax_tab\/css\/panels_ajax_tab.css":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/css\/highwire_corrections.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire.style.markup.css":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/layouts\/highwire_2col_stacked\/highwire-2col-stacked.css":1,"sites\/all\/modules\/contrib\/forward\/forward.css":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/css\/highwire_share_link.css":1,"sites\/all\/modules\/highwire\/highwire\/plugins\/content_types\/css\/highwire_copy_permalink.css":1,"sites\/all\/modules\/contrib\/panels\/plugins\/layouts\/flexible\/flexible.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_collection\/css\/highwire_subject_collection.css":1,"sites\/all\/modules\/highwire\/highwire\/css\/highwire.highwire-list-expand.css":1,"0":1,"sites\/all\/modules\/contrib\/panels\/plugins\/layouts\/onecol\/onecol.css":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/css\/eu_cookie_compliance.css":1,"sites\/all\/modules\/highwire\/highwire\/css\/highwire.gtranslate.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_theme_tools\/css\/font-hwicons.css":1,"sites\/all\/modules\/highwire\/highwire\/highwire_theme_tools\/css\/font-hwicons-glyphs.css":1,"1":1,"sites\/all\/themes\/highwire\/jcore_1\/eu_cookie_compliance.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/font-awesome-ie7.css":1,"https:\/\/cdn.jsdelivr.net\/npm\/@fortawesome\/fontawesome-free@6.7.2\/css\/all.min.css":1,"sites\/all\/themes\/contrib\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/contrib\/omega\/alpha\/css\/alpha-mobile.css":1,"sites\/all\/themes\/contrib\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/contrib\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/contrib\/omega\/omega\/css\/omega-text.css":1,"sites\/all\/themes\/contrib\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/contrib\/omega\/omega\/css\/omega-menu.css":1,"sites\/all\/themes\/contrib\/omega\/omega\/css\/omega-forms.css":1,"sites\/all\/modules\/highwire\/highwire\/css\/highwire-forms.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/mobile-reset.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/font-awesome.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/forms.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/global.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/jquery-ui-elements.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/text.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/colors.css.less":1,"ie::normal::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default.css":1,"ie::normal::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default-normal.css":1,"ie::normal::sites\/all\/themes\/highwire\/jcore_1\/css\/grid\/jcore_default\/normal\/jcore-default-normal-30.css":1,"narrow::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default.css":1,"narrow::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default-narrow.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/grid\/jcore_default\/narrow\/jcore-default-narrow-30.css":1,"normal::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default.css":1,"normal::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default-normal.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/grid\/jcore_default\/normal\/jcore-default-normal-30.css":1,"wide::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default.css":1,"wide::sites\/all\/themes\/highwire\/jcore_1\/css\/jcore-1-jcore-default-wide.css":1,"sites\/all\/themes\/highwire\/jcore_1\/css\/grid\/jcore_default\/wide\/jcore-default-wide-30.css":1,"sites\/default\/modules\/jnl_biorxiv_styles\/css\/biorxiv-styles.css.less":1,"https:\/\/d33xdlntwy0kbs.cloudfront.net\/cshl_custom_medrxiv.css":1}},"colorbox":{"opacity":"0.85","current":"{current} of {total}","previous":"\u00ab Prev","next":"Next \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"highwire":{"markup":[{"requested":"short-text","variant":"abstract","view":"abstract","pisa":"medrxiv;2026.05.05.26351600v2"},{"requested":"short-text","variant":"abstract","view":"abstract","pisa":"medrxiv;2026.05.05.26351600v2"},{"requested":"abstract","variant":"abstract","view":"abstract","pisa":"medrxiv;2026.05.05.26351600v2"}],"nid":"1289772","apath":"\/medrxiv\/early\/2026\/09\/01\/2026.05.05.26351600.atom","pisa":"medrxiv;2026.05.05.26351600v2","ac":{"\/medrxiv\/early\/2026\/09\/01\/2026.05.05.26351600.atom":{"access":{"full":true},"pisa_id":"","apath":"\/medrxiv\/early\/2026\/09\/01\/2026.05.05.26351600.atom","jcode":"medrxiv"},"medrxiv;2026.05.05.26351600v2":{"access":{"full":true},"pisa_id":"medrxiv;2026.05.05.26351600v2","apath":"","jcode":"medrxiv"}},"processed":["highwire_math"],"modal_window_width":"560","share_modal_width":"560","share_modal_title":"Share this Article"},"jcarousel":{"ajaxPath":"\/jcarousel\/ajax\/views"},"instances":"{\u0022highwire_abstract_tooltip\u0022:{\u0022content\u0022:{\u0022text\u0022:\u0022\u0022},\u0022style\u0022:{\u0022tip\u0022:{\u0022width\u0022:20,\u0022height\u0022:20,\u0022border\u0022:1,\u0022offset\u0022:0,\u0022corner\u0022:true},\u0022classes\u0022:\u0022qtip-custom hw-tooltip hw-abstract-tooltip qtip-shadow qtip-rounded\u0022,\u0022classes_custom\u0022:\u0022hw-tooltip hw-abstract-tooltip\u0022},\u0022position\u0022:{\u0022at\u0022:\u0022right center\u0022,\u0022my\u0022:\u0022left center\u0022,\u0022viewport\u0022:true,\u0022adjust\u0022:{\u0022method\u0022:\u0022shift\u0022}},\u0022show\u0022:{\u0022event\u0022:\u0022mouseenter click \u0022,\u0022solo\u0022:true},\u0022hide\u0022:{\u0022event\u0022:\u0022mouseleave \u0022,\u0022fixed\u0022:1,\u0022delay\u0022:\u0022100\u0022}},\u0022highwire_author_tooltip\u0022:{\u0022content\u0022:{\u0022text\u0022:\u0022\u0022},\u0022style\u0022:{\u0022tip\u0022:{\u0022width\u0022:15,\u0022height\u0022:15,\u0022border\u0022:1,\u0022offset\u0022:0,\u0022corner\u0022:true},\u0022classes\u0022:\u0022qtip-custom hw-tooltip hw-author-tooltip qtip-shadow qtip-rounded\u0022,\u0022classes_custom\u0022:\u0022hw-tooltip hw-author-tooltip\u0022},\u0022position\u0022:{\u0022at\u0022:\u0022top center\u0022,\u0022my\u0022:\u0022bottom center\u0022,\u0022viewport\u0022:true,\u0022adjust\u0022:{\u0022method\u0022:\u0022\u0022}},\u0022show\u0022:{\u0022event\u0022:\u0022mouseenter \u0022,\u0022solo\u0022:true},\u0022hide\u0022:{\u0022event\u0022:\u0022mouseleave \u0022,\u0022fixed\u0022:1,\u0022delay\u0022:\u0022100\u0022}},\u0022highwire_reflinks_tooltip\u0022:{\u0022content\u0022:{\u0022text\u0022:\u0022\u0022},\u0022style\u0022:{\u0022tip\u0022:{\u0022width\u0022:15,\u0022height\u0022:15,\u0022border\u0022:1,\u0022mimic\u0022:\u0022top center\u0022,\u0022offset\u0022:0,\u0022corner\u0022:true},\u0022classes\u0022:\u0022qtip-custom hw-tooltip hw-ref-link-tooltip qtip-shadow qtip-rounded\u0022,\u0022classes_custom\u0022:\u0022hw-tooltip hw-ref-link-tooltip\u0022},\u0022position\u0022:{\u0022at\u0022:\u0022bottom left\u0022,\u0022my\u0022:\u0022top left\u0022,\u0022viewport\u0022:true,\u0022adjust\u0022:{\u0022method\u0022:\u0022flip\u0022}},\u0022show\u0022:{\u0022event\u0022:\u0022mouseenter \u0022,\u0022solo\u0022:true},\u0022hide\u0022:{\u0022event\u0022:\u0022mouseleave \u0022,\u0022fixed\u0022:1,\u0022delay\u0022:\u0022100\u0022}}}","qtipDebug":"{\u0022leaveElement\u0022:0}","panel_ajax_tab":{"path":"sites\/all\/modules\/contrib\/panels_ajax_tab"},"panels_ajax_pane":{"new-28877068-b9cb-4641-830b-b6b4638c98bb":"{\u0022encrypted\u0022:\u0022{\\\u0022encrypted\\\u0022:\\\u0022FLNhgyjMrgT2k20os3ZhcTS01mN5zeJnzHe39Mi4Rye0q725QiUK\\\\\\\/ZTIWMAoXp1acMR\\\\\\\/\\\\\\\/ELJkOgzlaIZeuxskmajDAf7bzEGOv5djOmlLsfW5+4yb\\\\\\\/aKh+a9CjHg4CLPq81s3jPxyDIt+GJ5bqVmJ7lY30h7sjY9wg49lLKDvk02zUz9460QpkeXqlFMU2mXxcFt\\\\\\\/SyF+DKzOv4hvTLGX\\\\\\\/kQe8KYsQgFtBGMD25TqnH837acQTRK9QtcgMKEAg44N4oPe+RdVVGfXVvfv+k7R+PfuE0S6dUk78RV5q4gPbcX6iwNj5liEYwtG1axEiJwLW9gbiTYcWaiq4dk3AlhPC3DOmW0pcjL0ymtfPuuNZVZRAOHASc0XPkSl0wRB7RzPhf5atghPM1kclQ8jr96fILpqckYbruscar8m0MVh+JFU29g80CvUAJ3r47YWEpNHn\\\\\\\/glmruFce821DgpA4CgfZBAZ9Ypkry5iorZBE+Z5iVlqfg1Vir2apni6VmnqIffVugUsCIsd9EJLk8a5efrbC6LVUaG4lg9QXwRqpZKIf7VXRhgWO5anxuLrSI5F3J+W03zSdOs8SzM2Ylwnpqj08Rxcrg7jqYkR59CbQ1SdagQ0x4OZscgztjrmeklDw7Mgo1eakPHWzfv95bX8mvqqIwlUAdQGhsXNGCrWnEy6+q2YNSFSY\\\\\\\/+CWpp3SlZtj2j7mVIRHapEOaFWNW7KY3AlEM1KR4i8T7A4J6+\\\\\\\/711CFA77NaCOcvSheqFdMOyYswaKMOHIlyipWHtZNAguH6yH5MMqgcgexIRILAC1xQi5Djl9uQyoI3kTSxcrRWnbQyQwAp+5nDDFUF1vB9lHYR5jdDOlfk4ERCP8FDdGGyxTSAqQmm7uaI4OB+PFRozxlGvIZr+pEfJtltTZgNkVBEqhcuB9VrwVJbEHfM92JZJP90XOeyMfIXEVOnm3LxBkw9qKMdNMLrnbPtiO67qN74M6p+xwGY6ONy3vLCkJqUSWZtjG0E9xvbtKzCC1o0GQzm6u4Rs3L1d77JEu+EH7N520xq+91J4lwrj+Nr7KHn+XswFph2\\\\\\\/bo7qAMp\\\\\\\/hyBWZTasd1NnpsO09bdJirkF0Py3s12RamEiKz3v4EzSJjwfyU+5VodxEaq5aU9vFeaHnUdwnaWvcxFT14slXdavl84WfWVFzAHgQOELI8y4uFmx5H88mnaOp3Y5tz\\\\\\\/ZitZtdZcQ69zFyfCd9ASc3VNSnG5zsJiQdEHkiwdhLZ6+gb+Xy1T4RpYovAQFO6SPHye0ait12WZrMbEjpPMcHDV+YebIbfKi7srAOebFDKUwPg3RplJiHqgp5FsBbGD+5SNCLj+\\\u0022,\\\u0022iv\\\u0022:\\\u0022SY36INXcfrRNy8Efwfv8qg==\\\u0022,\\\u0022salt\\\u0022:\\\u00228d5dcd1194eaf3f5060249ad66093448\\\u0022}\u0022,\u0022hmac\u0022:\u0022b154be1026a1086af3718d89fc597e90925f2ec538bccae459008bb6f2d53e74\u0022}"},"urlIsAjaxTrusted":{"\/content\/10.64898\/2026.05.05.26351600v2":true},"ws_fl":{"width":100,"height":21},"ws_gpo":{"size":"","annotation":"","lang":"","callback":"","width":300},"color":{"logo":"https:\/\/www.medrxiv.org\/sites\/default\/files\/medrxiv_inner_logo.png"},"highwire_list_expand":{"is_collapsed":"1"},"highwireResponsive":{"enquire_enabled":1,"breakpoints_configured":1,"breakpoints":{"zero":"all and (min-width: 0px)","xsmall":"all and (min-width: 380px)","narrow":"all and (min-width: 768px) and (min-device-width: 768px), (max-device-width: 800px) and (min-width: 768px) and (orientation:landscape)","normal":"all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)","wide":"all and (min-width: 1220px)"}},"eu_cookie_compliance":{"popup_enabled":1,"popup_agreed_enabled":0,"popup_hide_agreed":0,"popup_clicking_confirmation":1,"popup_scrolling_confirmation":false,"popup_html_info":"\u003Cdiv\u003E\n  \u003Cdiv class=\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Cp\u003EWe use cookies on this site to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies.\u003C\/p\u003E\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 role=\u0022dialog\u0022 aria-labelledby=\u0022Continue\u0022\n        class=\u0022agree-button eu-cookie-compliance-default-button\u0022\u003EContinue\u003C\/button\u003E\n                  \u003Cbutton type=\u0022button\u0022 role=\u0022dialog\u0022 aria-labelledby=\u0022Find out more\u0022\n        class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EFind out more\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","use_mobile_message":false,"mobile_popup_html_info":"\u003Cdiv\u003E\n  \u003Cdiv class=\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n          \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 role=\u0022dialog\u0022 aria-labelledby=\u0022Continue\u0022\n        class=\u0022agree-button eu-cookie-compliance-default-button\u0022\u003EContinue\u003C\/button\u003E\n                  \u003Cbutton type=\u0022button\u0022 role=\u0022dialog\u0022 aria-labelledby=\u0022Find out more\u0022\n        class=\u0022find-more-button eu-cookie-compliance-more-button\u0022\u003EFind out more\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","mobile_breakpoint":"768","popup_html_agreed":"\u003Cdiv\u003E\n  \u003Cdiv class=\u0022popup-content agreed\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Ch2\u003EThank you for accepting cookies\u003C\/h2\u003E\u003Cp\u003EYou can now hide this message or find out more about cookies.\u003C\/p\u003E    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022hide-popup-button eu-cookie-compliance-hide-button\u0022\u003EHide\u003C\/button\u003E\n              \u003Cbutton type=\u0022button\u0022 class=\u0022find-more-button eu-cookie-compliance-more-button-thank-you\u0022 \u003EMore info\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","popup_use_bare_css":false,"popup_height":"auto","popup_width":"100%","popup_delay":1000,"popup_link":"\/help\/cookie-policy","popup_link_new_window":1,"popup_position":null,"popup_language":"en","store_consent":false,"better_support_for_screen_readers":0,"reload_page":0,"domain":"","popup_eu_only_js":0,"cookie_lifetime":"365","cookie_session":false,"disagree_do_not_show_popup":0,"method":"default","whitelisted_cookies":"","withdraw_markup":"\u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-tab\u0022\u003EPrivacy settings\u003C\/button\u003E\n\u003Cdiv class=\u0022eu-cookie-withdraw-banner\u0022\u003E\n  \u003Cdiv class=\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Cp\u003E\u0026lt;h2\u0026gt;We use cookies on this site to enhance your user experience\u0026lt;\/h2\u0026gt;\u0026lt;p\u0026gt;You have given your consent for us to set cookies.\u0026lt;\/p\u0026gt;\u003C\/p\u003E\n    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022eu-cookie-withdraw-button\u0022\u003EWithdraw consent\u003C\/button\u003E\n    \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E\n","withdraw_enabled":false},"googleanalytics":{"account":["G-0K57TCX5BY"],"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":1},"jnl_biorxiv_styles":{"defaultJCode":"medrxiv"},"omega":{"layouts":{"primary":"normal","order":["narrow","normal","wide"],"queries":{"narrow":"all and (min-width: 768px) and (min-device-width: 768px), (max-device-width: 800px) and (min-width: 768px) and (orientation:landscape)","normal":"all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)","wide":"all and (min-width: 1220px)"}}}});
+//--><!]]>
+</script>
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body class="html not-front not-logged-in page-node page-node- page-node-1289772 node-type-highwire-article context-content hw-default-jcode-medrxiv hw-article-type-article">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P4HH5NV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script type="text/javascript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0];var j=d.createElement(s);var dl=l!='dataLayer'?'&l='+l:'';j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;j.type='text/javascript';j.async=true;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P4HH5NV');</script>
+<!-- End Google Tag Manager -->
+    <div id="skip-link">
+      <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+    </div>
+        <div class="page clearfix page-box-shadows footer-borders panels-page panels-layout-jcore_2col" id="page">
+      <header id="section-header" class="section section-header">
+    
+  <div id="zone-branding" class="zone zone-branding clearfix print-display-block container-30">
+    <div class="grid-15 prefix-1 region region-branding print-display-block" id="region-branding">
+  <div class="region-inner region-branding-inner">
+        <div class="branding-data clearfix">
+            <div class="logo-img">
+        <a href="/" rel="home" class="" data-icon-position="" data-hide-link-title="0"><img alt="medRxiv" src="https://www.medrxiv.org/sites/default/files/medrxiv_inner_logo.png" /></a>      </div>
+                </div>
+          </div>
+</div><div class="grid-11 suffix-1 region region-branding-second print-hidden" id="region-branding-second">
+  <div class="region-inner region-branding-second-inner">
+    <div class="block block-system block-menu block-main-menu block-system-main-menu odd block-without-title" id="block-system-main-menu">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <nav class="menubar-nav"><ul class="menu" role="menu"><li class="first leaf" role="menuitem"><a href="/" title="" class="" data-icon-position="" data-hide-link-title="0">Home</a></li>
+<li class="leaf" role="menuitem"><a href="/content/about-medrxiv" class="" data-icon-position="" data-hide-link-title="0">About</a></li>
+<li class="leaf" role="menuitem"><a href="/submit-a-manuscript" class="" data-icon-position="" data-hide-link-title="0">Submit</a></li>
+<li class="last leaf" role="menuitem"><a href="/content/alertsrss" title="" class="" data-icon-position="" data-hide-link-title="0">ALERTS / RSS</a></li>
+</ul></nav>    </div>
+  </div>
+</div><div class="block block-panels-mini block-biorxiv-search-box block-panels-mini-biorxiv-search-box even block-without-title" id="block-panels-mini-biorxiv-search-box">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="panel-display panel-1col clearfix" id="mini-panel-biorxiv_search_box">
+  <div class="panel-panel panel-col">
+    <div><div class="panel-pane pane-highwire-seach-quicksearch" >
+  
+      
+  
+  <div class="pane-content">
+    <form class="highwire-quicksearch button-style-mini button-style-mini" action="/content/10.64898/2026.05.05.26351600v2" method="post" id="highwire-search-quicksearch-form-0" accept-charset="UTF-8"><div><div class="form-item form-item-label-invisible form-type-textfield form-item-keywords">
+  <label class="element-invisible" for="search_rightsidebar_keywords_1166458755">Search for this keyword </label>
+ <input placeholder="Search" type="text" id="search_rightsidebar_keywords_1166458755" name="keywords" value="" size="60" maxlength="128" class="form-text" />
+</div>
+<div class="button-wrapper button-mini"><span class="icon-search"></span><input data-icon-only="1" data-font-icon="icon-search" data-icon-position="after" type="submit" id="search_rightsidebar_submit_1528239523" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-FYZa-Vv0ArzxXjyBz99LUfNdqC9rrPL8DHetY6lFdJI" />
+<input type="hidden" name="form_id" value="highwire_search_quicksearch_form_0" />
+</div></form>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-custom pane-2 advanced-search-link" >
+  
+      
+  
+  <div class="pane-content">
+    <a href="/search">Advanced Search</a>  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+  
+  <div id="zone-header" class="zone zone-header clearfix container-30">
+  	      </div>
+</header>    
+      <section id="section-content" class="section section-content">
+    
+  <div id="zone-content" class="zone zone-content clearfix container-30">    
+        
+    <div class="grid-28 suffix-1 prefix-1 region region-content" id="region-content">
+  <div class="region-inner region-content-inner">
+    <a id="main-content"></a>
+                        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="panel-display panels-960-layout jcore-2col-layout" >
+	  
+  <div class="panel-row-wrapper clearfix">
+		
+		<div class="main-content-wrapper grid-17 suffix-1 alpha">
+			<div class="panel-panel panel-region-content">
+			  <div class="inside"><div class="panel-pane pane-highwire-article-citation" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="highwire-article-citation highwire-citation-type-highwire-article node1289772" data-node-nid="1289772" id="node-1289772--21823496763" data-pisa="medrxiv;2026.05.05.26351600v2" data-pisa-master="medrxiv;2026.05.05.26351600" data-apath="/medrxiv/early/2026/09/01/2026.05.05.26351600.atom" data-hw-author-tooltip-instance=""><div  class="highwire-cite highwire-cite-highwire-article highwire-citation-medrxiv-article-top clearfix has-author-tooltip" >
+
+  
+      <h1 class="highwire-cite-title" id="page-title">Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology</h1>  
+      <div  class="highwire-cite-authors" ><span  class="highwire-citation-authors"><span class="highwire-citation-author first" data-delta="0"><span class="nlm-given-names">Josh N.</span> <span class="nlm-surname">Vo</span></span>, <span class="highwire-citation-author" data-delta="1"><span class="nlm-given-names">Yi-Mi</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="2"><span class="nlm-given-names">Rui</span> <span class="nlm-surname">Wang</span></span>, <span class="highwire-citation-author" data-delta="3"><span class="nlm-given-names">Tiffany</span> <span class="nlm-surname">Pham</span></span>, <span class="highwire-citation-author" data-delta="4"><span class="nlm-given-names">Xuhong</span> <span class="nlm-surname">Cao</span></span>, <span class="highwire-citation-author" data-delta="5"><span class="nlm-given-names">Sophie</span> <span class="nlm-surname">Yeung</span></span>, <span class="highwire-citation-author" data-delta="6"><span class="nlm-given-names">Mingyu</span> <span class="nlm-surname">Park</span></span>, <span class="highwire-citation-author" data-delta="7"><span class="nlm-given-names">Yelena</span> <span class="nlm-surname">Kleyman-Smith</span></span>, <span class="highwire-citation-author" data-delta="8"><span class="nlm-given-names">Guo Ci</span> <span class="nlm-surname">Teo</span></span>, <span class="highwire-citation-author" data-delta="9"><span class="nlm-given-names">Alyssa J.</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="10"><span class="nlm-given-names">Anne</span> <span class="nlm-surname">Li</span></span>, <span class="highwire-citation-author" data-delta="11"><span class="nlm-given-names">Jamie C.</span> <span class="nlm-surname">Estill</span></span>, <span class="highwire-citation-author" data-delta="12"><span class="nlm-given-names">Lakshmi P.</span> <span class="nlm-surname">Kunju</span></span>, <span class="highwire-citation-author" data-delta="13"><span class="nlm-given-names">Chen</span> <span class="nlm-surname">Yang</span></span>, <span class="highwire-citation-author" data-delta="14"><span class="nlm-given-names">Dan R.</span> <span class="nlm-surname">Robinson</span></span>, <span class="highwire-citation-author hw-author-orcid-logo-wrapper" data-delta="15"><a href="http://orcid.org/0000-0001-9282-3415" target="_blank" class="hw-author-orcid-logo link-icon-only link-icon"><span class="hw-icon-orcid hw-icon-color-orcid"></span> <span class="title element-invisible">View ORCID Profile</span></a><span class="nlm-given-names">Arul M.</span> <span class="nlm-surname">Chinnaiyan</span></span></span></div>
+  
+      <div  class="highwire-cite-metadata" ><span  class="highwire-cite-metadata-doi highwire-cite-metadata"><span class="label">doi:</span> https://doi.org/10.64898/2026.05.05.26351600 </span></div>
+  
+  
+  
+</div>
+<div id="hw-article-author-popups-node-1289772--21823496763" style="display: none;"><div class="author-tooltip-0"><div class="author-tooltip-name">Josh N. Vo </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Josh%2BN.%2BVo%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Vo%20JN&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AJosh%2BN.%2BVo%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-1"><div class="author-tooltip-name">Yi-Mi Wu </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Yi-Mi%2BWu%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Wu%20Y&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AYi-Mi%2BWu%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-2"><div class="author-tooltip-name">Rui Wang </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Rui%2BWang%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Wang%20R&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3ARui%2BWang%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-3"><div class="author-tooltip-name">Tiffany Pham </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Tiffany%2BPham%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Pham%20T&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3ATiffany%2BPham%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-4"><div class="author-tooltip-name">Xuhong Cao </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Xuhong%2BCao%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Cao%20X&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AXuhong%2BCao%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-5"><div class="author-tooltip-name">Sophie Yeung </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Sophie%2BYeung%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Yeung%20S&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3ASophie%2BYeung%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-6"><div class="author-tooltip-name">Mingyu Park </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Mingyu%2BPark%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Park%20M&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AMingyu%2BPark%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-7"><div class="author-tooltip-name">Yelena Kleyman-Smith </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Yelena%2BKleyman-Smith%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Kleyman-Smith%20Y&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AYelena%2BKleyman-Smith%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-8"><div class="author-tooltip-name">Guo Ci Teo </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Guo%2BCi%2BTeo%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Teo%20GC&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AGuo%2BCi%2BTeo%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-9"><div class="author-tooltip-name">Alyssa J. Wu </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Alyssa%2BJ.%2BWu%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Wu%20AJ&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AAlyssa%2BJ.%2BWu%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-10"><div class="author-tooltip-name">Anne Li </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Anne%2BLi%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Li%20A&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AAnne%2BLi%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-11"><div class="author-tooltip-name">Jamie C. Estill </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Jamie%2BC.%2BEstill%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Estill%20JC&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AJamie%2BC.%2BEstill%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-12"><div class="author-tooltip-name">Lakshmi P. Kunju </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Lakshmi%2BP.%2BKunju%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Kunju%20LP&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3ALakshmi%2BP.%2BKunju%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-13"><div class="author-tooltip-name">Chen Yang </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Chen%2BYang%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Yang%20C&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link last"><a href="/search/author1%3AChen%2BYang%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li></ul></div><div class="author-tooltip-14"><div class="author-tooltip-name">Dan R. Robinson </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Dan%2BR.%2BRobinson%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Robinson%20DR&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link"><a href="/search/author1%3ADan%2BR.%2BRobinson%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li><li class="author-corresp-email-link last"><span>For correspondence: 
+<a href="/cdn-cgi/l/email-protection#99fdf8f7ebf6fbf0e2f8ede4f4fcfdb7ecf4f0faf1b7fcfdec" class="" data-icon-position="" data-hide-link-title="0">danrobi{at}med.umich.edu</a>
+<a href="/cdn-cgi/l/email-protection#88e9fafde4f3e9fcf5e5edeca6fde5e1ebe0a6edecfd" class="" data-icon-position="" data-hide-link-title="0">arul{at}med.umich.edu</a></span></li></ul></div><div class="author-tooltip-15"><div class="author-tooltip-name">Arul M. Chinnaiyan </div><div class="author-tooltip-affiliation"><span class="author-tooltip-text"><div class='author-affiliation'><span class='nlm-sup'>1</span><span class='nlm-institution'>Michigan Center for Translational Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>2</span><span class='nlm-institution'>Department of Pathology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>3</span><span class='nlm-institution'>Rogel Cancer Center, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>4</span><span class='nlm-institution'>Department of Urology, University of Michigan Medical School</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div><div class='author-affiliation'><span class='nlm-sup'>5</span><span class='nlm-institution'>Howard Hughes Medical Institute</span>, Ann Arbor, Michigan, <span class='nlm-country'>USA</span></div></span></div><ul class="author-tooltip-find-more"><li class="author-tooltip-gs-link first"><a href="/lookup/google-scholar?link_type=googlescholar&amp;gs_type=author&amp;author%5B0%5D=Arul%2BM.%2BChinnaiyan%2B" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on Google Scholar</a></li><li class="author-tooltip-pubmed-link"><a href="/lookup/external-ref?access_num=Chinnaiyan%20AM&amp;link_type=AUTHORSEARCH" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">Find this author on PubMed</a></li><li class="author-site-search-link"><a href="/search/author1%3AArul%2BM.%2BChinnaiyan%2B" rel="nofollow" class="" data-icon-position="" data-hide-link-title="0">Search for this author on this site</a></li><li class="author-orcid-link"><a href="http://orcid.org/0000-0001-9282-3415" target="_blank" title="Open in new tab" class="" data-icon-position="" data-hide-link-title="0">ORCID record for Arul M. Chinnaiyan</a></li><li class="author-corresp-email-link last"><span>For correspondence: 
+<a href="/cdn-cgi/l/email-protection#92f6f3fce0fdf0fbe9f3e6effff7f6bce7fffbf1fabcf7f6e7" class="" data-icon-position="" data-hide-link-title="0">danrobi{at}med.umich.edu</a>
+<a href="/cdn-cgi/l/email-protection#9afbe8eff6e1fbeee7f7fffeb4eff7f3f9f2b4fffeef" class="" data-icon-position="" data-hide-link-title="0">arul{at}med.umich.edu</a></span></li></ul></div></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-panel-tabs pane-panels-ajax-tab-tabs" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="item-list"><ul class="tabs inline panels-ajax-tab"><li class="first"><a href="/content/10.64898/2026.05.05.26351600v2" class="panels-ajax-tab-tab" data-panel-name="biorxiv_tab_art" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="" data-url-enabled="1">Abstract</a><a href="/panels_ajax_tab/biorxiv_tab_art/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li><a href="/content/10.64898/2026.05.05.26351600v2.full-text" class="panels-ajax-tab-tab" data-panel-name="article_tab_full_text" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="full-text" data-url-enabled="1">Full Text</a><a href="/panels_ajax_tab/article_tab_full_text/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li><a href="/content/10.64898/2026.05.05.26351600v2.article-info" class="panels-ajax-tab-tab" data-panel-name="biorxiv_tab_info" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="article-info" data-url-enabled="1">Info/History</a><a href="/panels_ajax_tab/biorxiv_tab_info/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li><a href="/content/10.64898/2026.05.05.26351600v2.article-metrics" class="panels-ajax-tab-tab" data-panel-name="article_tab_metrics" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="article-metrics" data-url-enabled="1">Metrics</a><a href="/panels_ajax_tab/article_tab_metrics/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li><a href="/content/10.64898/2026.05.05.26351600v2.supplementary-material" class="panels-ajax-tab-tab" data-panel-name="biorxiv_tab_data" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="supplementary-material" data-url-enabled="1">Supplementary material</a><a href="/panels_ajax_tab/biorxiv_tab_data/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li><a href="/content/10.64898/2026.05.05.26351600v2.external-links" class="panels-ajax-tab-tab" data-panel-name="article_tab_data_code" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="external-links" data-url-enabled="1">Data/Code</a><a href="/panels_ajax_tab/article_tab_data_code/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li><li class="last"><a href="/content/10.64898/2026.05.05.26351600v2.full.pdf+html" class="panels-ajax-tab-tab" data-panel-name="biorxiv_tab_pdf" data-target-id="highwire_article_tabs" data-entity-context="node:1289772" data-trigger="full.pdf+html" data-url-enabled="1"><i class="icon-file-alt"></i> Preview PDF</a><a href="/panels_ajax_tab/biorxiv_tab_pdf/node:1289772/1" rel="nofollow" style="display:none" class="js-crawler-link"></a></li></ul></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-panel-tabs-container" >
+  
+      
+  
+  <div class="pane-content">
+    <div data-panels-ajax-tab-preloaded="biorxiv_tab_art" id="panels-ajax-tab-container-highwire_article_tabs" class="panels-ajax-tab-container"><div class="panels-ajax-tab-loading" style ="display:none"><img class="loading" src="https://www.medrxiv.org/sites/all/modules/contrib/panels_ajax_tab/images/loading.gif" alt="Loading" title="Loading" /></div><div class="panels-ajax-tab-wrap-biorxiv_tab_art"><div class="panel-display panel-1col clearfix" >
+  <div class="panel-panel panel-col">
+    <div><div class="panel-pane pane-highwire-markup" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="highwire-markup"><div xmlns="http://www.w3.org/1999/xhtml" data-highwire-cite-ref-tooltip-instance="highwire_reflinks_tooltip" class="content-block-markup" xmlns:xhtml="http://www.w3.org/1999/xhtml"><div class="article abstract-view "><span class="highwire-journal-article-marker-start"></span><div class="section abstract" id="abstract-1"><h2 class="">Abstract</h2><p id="p-3">Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele (<em>cis</em>) or opposing alleles (<em>trans</em>), a distinction with direct therapeutic consequences: <em>trans</em> configurations confirm biallelic tumor suppressor inactivation, whereas <em>cis</em> configurations generate compound oncogenic alleles with enhanced activity. Among 768 patients with prostate, breast, or ovarian cancers, we used mutational signatures to nominate cryptic genomic instability cases lacking a causative biallelic event on short-read sequencing. Long-read nanopore sequencing resolved 32 of 46 cryptic cases (69.6%) through methylation detection, long insertion resolution, and structural variant characterization, confirming <em>trans</em> inactivation in every resolved tumor suppressor case. Analysis of 4,496 MiOncoSeq samples identified 17,519 multi-hit gene pairs, 78.7% of which exceeded the 500 bp short-read phasing limit, and long-read phasing revealed recurrent compound <em>cis</em> alleles in <em>NOTCH1</em>, <em>PIK3CA</em>, <em>PDGFRB</em>, and <em>KIT</em>. Haplotype phasing addresses an overlooked gap in cancer variant interpretation and warrants integration into precision oncology.</p><div id="sec-1" class="subsection"><p id="p-4"><strong>Statement of Significance</strong> Short-read sequencing cannot resolve whether co-occurring variants within a cancer gene are <em>cis</em> or <em>trans</em>, a distinction critical for clinical interpretation. Long-read nanopore sequencing addresses this gap through haplotype phasing, methylation detection, and structural variant resolution, confirming biallelic tumor suppressor inactivation and revealing compound <em>cis</em> oncogenic alleles with enhanced activity.</p></div></div><h3>Competing Interest Statement</h3><p id="p-5">The authors have declared no competing interest.</p><h3>Author Declarations</h3><p id="p-6">I confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.</p><p id="p-7">Yes</p><p id="p-8">The details of the IRB/oversight body that provided approval or exemption for the research described are given below:</p><p id="p-9">This study undertook a retrospective analysis of patients who participated in the MiOncoSeq precision oncology program at the University of Michigan Rogel Cancer Center between January 2010 and December 2024. Patient samples, including fresh-frozen tumor tissue, matched blood, and buccal DNA, were collected following written informed consent under protocols approved by the University of Michigan Institutional Review Board (Michigan Oncology Sequencing Protocol, MiOncoSeq and PEDS_MiOncoSeq; IRB HUM00046018, HUM00067928, HUM00056496).</p><p id="p-10">I confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.</p><p id="p-11">Yes</p><p id="p-12">I understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).</p><p id="p-13">Yes</p><p id="p-14">I have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.</p><p id="p-15">Yes</p><div class="section fn-group" id="fn-group-1"><h2>Footnotes</h2><ul><li class="fn" id="fn-1"><p id="p-1"><a class="rev-xref" href="#xref-fn-1-1">↵</a><span class="fn-label">*</span> Co-first authors</p></li><li class="fn-update fn-group-summary-of-updates" id="fn-2"><p id="p-16">Creation of Main Figure 3; Supplementary Figures and Tables updated.</p></li></ul></div><div class="section data-availability" id="sec-26"><h2 class="">Data Availability</h2><p id="p-104">Deidentified nanopore sequencing data supporting the conclusions of this study are available in the database of Genotypes and Phenotypes (dbGaP) under accession number phs000673. Novel pathogenic germline variants identified in this study are being submitted to ClinVar. Additional supporting data are available from the corresponding authors upon reasonable request.</p></div><div class="funding-group"><h2>Funder Information Declared</h2><div class="award-group" id="award-group-1"><span class="funding-source">National Cancer Institute, <span class="institution-wrap"><span class="institution-id">https://ror.org/040gcmg81</span></span></span><span class="award-id" id="award-id-1">, P50 - CA186786</span><span class="award-id" id="award-id-2">, U2C - CA271854</span><span class="award-id" id="award-id-3">, R35 - CA231996</span></div><div class="award-group" id="award-group-2"><span class="funding-source">Howard Hughes Medical Institute, <span class="institution-wrap"><span class="institution-id">https://ror.org/006w34k90</span></span></span><span class="award-id" id="award-id-4">, HHMI_Chinnaiyan A</span></div></div><span class="highwire-journal-article-marker-end"></span></div><span class="related-urls"></span></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-biorxiv-copyright" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="field field-name-field-highwire-copyright field-type-text field-label-inline clearfix"><div class="field-label">Copyright&nbsp;</div><div class="field-items"><div class="field-item even">The copyright holder for this preprint is the author/funder, who has granted medRxiv a license to display the preprint in perpetuity.<span class="license-type"> It is made available under a <a href="http://creativecommons.org/licenses/by/4.0/" class="" data-icon-position="" data-hide-link-title="0">CC-BY 4.0 International license</a>.</span></div></div></div>  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>
+</div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-back-to-top" >
+  
+      
+  
+  <div class="pane-content">
+    <a href="#page" class="back-to-top" data-icon-position="" data-hide-link-title="0"><span class="icon-chevron-up"></span> Back to top</a>  </div>
+
+  
+  </div>
+</div>
+			</div>
+		</div>
+		
+		<div class="sidebar-right-wrapper grid-10 omega">
+			<div class="panel-panel panel-region-sidebar-right">
+			  <div class="inside"><div class="panel-pane pane-highwire-node-pager" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="pager highwire-pager pager-mini clearfix highwire-node-pager highwire-article-pager"><span class="pager-prev"><a href="/content/10.64898/2026.08.27.26361540v1" title="PCGS: biomarker and risk group identification for Pediatric Cancers via explainable Graph neural networks with Shapley values" rel="prev" class="pager-link-prev link-icon"><span class="icon-circle-arrow-left"></span> <span class="title">Previous</span></a></span><span class="pager-next"><a href="/content/10.1101/2025.03.28.25324751v1" title="WITHDRAWN: Multiple and novel molecular mechanisms in TUBA1A-related tubulinopathy: insights from deep clinical and neuroradiological phenotyping" rel="next" class="pager-link-next link-icon-right link-icon"><span class="title">Next</span> <span class="icon-circle-arrow-right"></span></a></span></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-custom pane-1" >
+  
+      
+  
+  <div class="pane-content">
+    Posted&nbsp;September 01, 2026.  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-panels-mini pane-biorxiv-art-tools" >
+  
+      
+  
+  <div class="pane-content">
+    <div id="mini-panel-biorxiv_art_tools" class="highwire-2col-stacked panel-display">
+	  
+  <div class="panel-row-wrapper clearfix">
+		<div class="content-left-wrapper content-column">
+          <div class="panel-panel panel-region-content-left">
+            <div class="inside"><div class="panel-pane pane-highwire-variant-link" >
+  
+      
+  
+  <div class="pane-content">
+    <a href="/content/10.64898/2026.05.05.26351600v2.full.pdf" target="_self" class="article-dl-pdf-link link-icon"><span class="icon-external-link-sign"></span> <span class="title">Download PDF</span></a>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-biorxiv-supplementary-fragment" >
+  
+      
+  
+  <div class="pane-content">
+    <p><a href="/content/10.64898/2026.05.05.26351600v2.supplementary-material"><i class="icon-file"></i>Supplementary Material </a></p>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-variant-link" >
+  
+      
+  
+  <div class="pane-content">
+    <a href="/content/early/2026/09/01/2026.05.05.26351600.external-links" target="_self" class="link-icon"><span class="icon-file"></span> <span class="title">Data/Code</span></a>  </div>
+
+  
+  </div>
+</div>
+          </div>
+        </div>
+        
+        <div class="content-right-wrapper content-column">
+          <div class="panel-panel panel-region-content-right">
+            <div class="inside"><div class="panel-pane pane-minipanel-dialog-link pane-biorxiv-art-email" >
+  
+      
+  
+  <div class="pane-content">
+    <div class='minipanel-dialog-wrapper'><div class='minipanel-dialog-link-link'><a href="/" oncontextmenu="javascript: return false;" class="minipanel-dialog-link-trigger" title="Email this Article" data-icon-position="" data-hide-link-title="0"><i class = 'icon-envelope'></i> Email</a></div><div class='minipanel-dialog-link-mini' style='display:none'><div class="panel-display panel-1col clearfix" id="mini-panel-biorxiv_art_email">
+  <div class="panel-panel panel-col">
+    <div><div class="panel-pane pane-block pane-forward-form pane-forward" >
+  
+      
+  
+  <div class="pane-content">
+    <form action="/content/10.64898/2026.05.05.26351600v2" method="post" id="forward-form" accept-charset="UTF-8"><div><div id="edit-instructions" class="form-item form-item-label-before form-type-item">
+ <p>Thank you for your interest in spreading the word about medRxiv.</p><p>NOTE: Your email address is requested solely to identify you as the sender of this article.</p>
+</div>
+<div class="form-item form-item-label-before form-type-textfield form-item-email">
+  <label for="edit-email">Your Email <span class="form-required" title="This field is required.">*</span></label>
+ <input type="text" id="edit-email" name="email" value="" size="58" maxlength="256" class="form-text required" />
+</div>
+<div class="form-item form-item-label-before form-type-textfield form-item-name">
+  <label for="edit-name">Your Name <span class="form-required" title="This field is required.">*</span></label>
+ <input type="text" id="edit-name" name="name" value="" size="58" maxlength="256" class="form-text required" />
+</div>
+<div class="form-item form-item-label-before form-type-textarea form-item-recipients">
+  <label for="edit-recipients">Send To <span class="form-required" title="This field is required.">*</span></label>
+ <div class="form-textarea-wrapper resizable"><textarea id="edit-recipients" name="recipients" cols="50" rows="5" class="form-textarea required"></textarea></div>
+<div class="description">Enter multiple addresses on separate lines or separate them with commas.</div>
+</div>
+<div id="edit-page" class="form-item form-item-label-before form-type-item">
+  <label for="edit-page">You are going to email the following </label>
+ <a href="/content/10.64898/2026.05.05.26351600v2" class="active" data-icon-position="" data-hide-link-title="0">Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology</a>
+</div>
+<div id="edit-subject" class="form-item form-item-label-before form-type-item">
+  <label for="edit-subject">Message Subject </label>
+ (Your Name) has forwarded a page to you from medRxiv
+</div>
+<div id="edit-body" class="form-item form-item-label-before form-type-item">
+  <label for="edit-body">Message Body </label>
+ (Your Name) thought you would like to see this page from the medRxiv website.
+</div>
+<div class="form-item form-item-label-before form-type-textarea form-item-message">
+  <label for="edit-message--2">Your Personal Message </label>
+ <div class="form-textarea-wrapper resizable"><textarea id="edit-message--2" name="message" cols="50" rows="10" class="form-textarea"></textarea></div>
+</div>
+<input type="hidden" name="path" value="node/1289772" />
+<input type="hidden" name="path_cid" value="" />
+<input type="hidden" name="forward_footer" value=" " />
+<input type="hidden" name="form_build_id" value="form-O2QnizLorQ0E00nAGf1JEAyxatfHBXBW4JmD-vEY2hs" />
+<input type="hidden" name="form_id" value="forward_form" />
+<fieldset class="captcha form-wrapper"><legend><span class="fieldset-legend">CAPTCHA</span></legend><div class="fieldset-wrapper"><div class="fieldset-description">This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.</div><input type="hidden" name="captcha_sid" value="645738864" />
+<input type="hidden" name="captcha_token" value="a17da58ec1082d19981de852d63c236b" />
+<input type="hidden" name="captcha_response" value="Google no captcha" />
+<div class="g-recaptcha" data-sitekey="6Lee5DUtAAAAAJoGlg8lbjlp4F4ASvO-EpADvZTN" data-theme="light" data-type="image"></div></div></fieldset>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Send Message" class="form-submit" /></div></div></form>  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>
+</div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-share-link highwire_clipboard_link_ajax"  id="shareit">
+  
+      
+  
+  <div class="pane-content">
+    <a href="/" class="link-icon"><span class="icon-share-alt"></span> <span class="title">Share</span></a>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-panels-mini pane-biorxiv-share highwire_clipboard_form_ajax_shareit" >
+  
+      
+  
+  <div class="pane-content">
+    
+<div class="panel-display omega-12-onecol" id="mini-panel-biorxiv_share">
+
+		  <div class="panel-panel grid-12 panel-region-preface">
+		  <div class="inside"><div class="panel-pane pane-highwire-article-citation" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="highwire-article-citation highwire-citation-type-highwire-article node1289772--3" data-node-nid="1289772" id="node-1289772--4950828125" data-pisa="medrxiv;2026.05.05.26351600v2" data-pisa-master="medrxiv;2026.05.05.26351600" data-seqnum="1289772" data-apath="/medrxiv/early/2026/09/01/2026.05.05.26351600.atom"><div  class="highwire-cite highwire-cite-highwire-article highwire-citation-biorxiv-article-pap-list clearfix" >
+
+      <div class="highwire-cite-title" >
+      <div class="highwire-cite-title">Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology</div>    </div>
+  
+      <div  class="highwire-cite-authors" ><span  class="highwire-citation-authors"><span class="highwire-citation-author first" data-delta="0"><span class="nlm-given-names">Josh N.</span> <span class="nlm-surname">Vo</span></span>, <span class="highwire-citation-author" data-delta="1"><span class="nlm-given-names">Yi-Mi</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="2"><span class="nlm-given-names">Rui</span> <span class="nlm-surname">Wang</span></span>, <span class="highwire-citation-author" data-delta="3"><span class="nlm-given-names">Tiffany</span> <span class="nlm-surname">Pham</span></span>, <span class="highwire-citation-author" data-delta="4"><span class="nlm-given-names">Xuhong</span> <span class="nlm-surname">Cao</span></span>, <span class="highwire-citation-author" data-delta="5"><span class="nlm-given-names">Sophie</span> <span class="nlm-surname">Yeung</span></span>, <span class="highwire-citation-author" data-delta="6"><span class="nlm-given-names">Mingyu</span> <span class="nlm-surname">Park</span></span>, <span class="highwire-citation-author" data-delta="7"><span class="nlm-given-names">Yelena</span> <span class="nlm-surname">Kleyman-Smith</span></span>, <span class="highwire-citation-author" data-delta="8"><span class="nlm-given-names">Guo Ci</span> <span class="nlm-surname">Teo</span></span>, <span class="highwire-citation-author" data-delta="9"><span class="nlm-given-names">Alyssa J.</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="10"><span class="nlm-given-names">Anne</span> <span class="nlm-surname">Li</span></span>, <span class="highwire-citation-author" data-delta="11"><span class="nlm-given-names">Jamie C.</span> <span class="nlm-surname">Estill</span></span>, <span class="highwire-citation-author" data-delta="12"><span class="nlm-given-names">Lakshmi P.</span> <span class="nlm-surname">Kunju</span></span>, <span class="highwire-citation-author" data-delta="13"><span class="nlm-given-names">Chen</span> <span class="nlm-surname">Yang</span></span>, <span class="highwire-citation-author" data-delta="14"><span class="nlm-given-names">Dan R.</span> <span class="nlm-surname">Robinson</span></span>, <span class="highwire-citation-author" data-delta="15"><span class="nlm-given-names">Arul M.</span> <span class="nlm-surname">Chinnaiyan</span></span></span></div>
+  
+      <div  class="highwire-cite-metadata" ><span  class="highwire-cite-metadata-journal highwire-cite-metadata">medRxiv </span><span  class="highwire-cite-metadata-pages highwire-cite-metadata">2026.05.05.26351600; </span><span  class="highwire-cite-metadata-doi highwire-cite-metadata"><span class="doi_label">doi:</span> https://doi.org/10.64898/2026.05.05.26351600 </span></div>
+  
+  
+  </div>
+</div>  </div>
+
+  
+  </div>
+</div>
+	  </div>
+	
+  <div class="panel-panel grid-12 panel-region-content">
+  	<div class="inside"><div class="panel-pane pane-highwire-article-clipboard-copy" >
+  
+      
+  
+  <div class="pane-content">
+    <div class = "clipboard-copy">
+  <span class="label-url">
+    <label for="dynamic">Share This Article:</label>
+  </span>
+  <span class="input-text-url">
+    <input type="text" id="dynamic" value="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" size="50"/>
+  </span>
+  <span class="copy-button button">
+    <button id="copy-dynamic" class="clipboardjs-button" data-clipboard-target="#dynamic" data-clipboard-alert-style="tooltip" data-clipboard-alert-text="Copied!">Copy</button>
+  </span>
+</div>
+  </div>
+
+  
+  </div>
+</div>
+  </div>
+	
+		  <div class="panel-panel grid-12 panel-region-postscript">
+	    <div class="inside"><div class="panel-pane pane-service-links text-center" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="service-links"><a href="http://twitter.com/share?url=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;text=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology" id="twitter" title="Share this on Twitter" class="service-links-twitter" rel="nofollow" data-icon-position="" data-hide-link-title="0"><img src="https://www.medrxiv.org/sites/all/modules/highwire/highwire/images/twitter.png" alt="Twitter logo" /></a> <a href="http://www.facebook.com/sharer.php?u=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;t=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology" id="facebook" title="Share on Facebook" class="service-links-facebook" rel="nofollow" data-icon-position="" data-hide-link-title="0"><img src="https://www.medrxiv.org/sites/all/modules/highwire/highwire/images/fb-blue.png" alt="Facebook logo" /></a> <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;title=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology&amp;summary=&amp;source=medRxiv" id="linkedin" title="Publish this post to LinkedIn" class="service-links-linkedin" rel="nofollow" data-icon-position="" data-hide-link-title="0"><img src="https://www.medrxiv.org/sites/all/modules/highwire/highwire/images/linkedin-32px.png" alt="LinkedIn logo" /></a> <a href="http://www.mendeley.com/import/?url=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;title=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology" id="mendeley" title="Share on Mendeley" class="service-links-mendeley" rel="nofollow" data-icon-position="" data-hide-link-title="0"><img src="https://www.medrxiv.org/sites/all/modules/highwire/highwire/images/mendeley.png" alt="Mendeley logo" /></a></div>  </div>
+
+  
+  </div>
+</div>
+	  </div>
+	
+</div>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-minipanel-dialog-link pane-biorxiv-cite-tool" >
+  
+      
+  
+  <div class="pane-content">
+    <div class='minipanel-dialog-wrapper'><div class='minipanel-dialog-link-link'><a href="/" oncontextmenu="javascript: return false;" class="minipanel-dialog-link-trigger link-icon" title="Citation Tools"><span class="icon-globe"></span> <span class="title">Citation Tools</span></a></div><div class='minipanel-dialog-link-mini' style='display:none'><div class="panel-display panel-1col clearfix" id="mini-panel-biorxiv_cite_tool">
+  <div class="panel-panel panel-col">
+    <div><div class="panel-pane pane-highwire-citation-export" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="highwire-citation-export">  
+  <div class="highwire-citation-info">
+      <div class="highwire-article-citation highwire-citation-type-highwire-article cite-tool-node1289772--5" data-node-nid="1289772" id="citation-node-1289772--6857402013" data-pisa="medrxiv;2026.05.05.26351600v2" data-pisa-master="medrxiv;2026.05.05.26351600" data-seqnum="1289772" data-apath="/medrxiv/early/2026/09/01/2026.05.05.26351600.atom"><div  class="highwire-cite highwire-cite-highwire-article highwire-citation-biorxiv-article-pap-list clearfix" >
+
+      <div class="highwire-cite-title" >
+      <div class="highwire-cite-title">Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology</div>    </div>
+  
+      <div  class="highwire-cite-authors" ><span  class="highwire-citation-authors"><span class="highwire-citation-author first" data-delta="0"><span class="nlm-given-names">Josh N.</span> <span class="nlm-surname">Vo</span></span>, <span class="highwire-citation-author" data-delta="1"><span class="nlm-given-names">Yi-Mi</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="2"><span class="nlm-given-names">Rui</span> <span class="nlm-surname">Wang</span></span>, <span class="highwire-citation-author" data-delta="3"><span class="nlm-given-names">Tiffany</span> <span class="nlm-surname">Pham</span></span>, <span class="highwire-citation-author" data-delta="4"><span class="nlm-given-names">Xuhong</span> <span class="nlm-surname">Cao</span></span>, <span class="highwire-citation-author" data-delta="5"><span class="nlm-given-names">Sophie</span> <span class="nlm-surname">Yeung</span></span>, <span class="highwire-citation-author" data-delta="6"><span class="nlm-given-names">Mingyu</span> <span class="nlm-surname">Park</span></span>, <span class="highwire-citation-author" data-delta="7"><span class="nlm-given-names">Yelena</span> <span class="nlm-surname">Kleyman-Smith</span></span>, <span class="highwire-citation-author" data-delta="8"><span class="nlm-given-names">Guo Ci</span> <span class="nlm-surname">Teo</span></span>, <span class="highwire-citation-author" data-delta="9"><span class="nlm-given-names">Alyssa J.</span> <span class="nlm-surname">Wu</span></span>, <span class="highwire-citation-author" data-delta="10"><span class="nlm-given-names">Anne</span> <span class="nlm-surname">Li</span></span>, <span class="highwire-citation-author" data-delta="11"><span class="nlm-given-names">Jamie C.</span> <span class="nlm-surname">Estill</span></span>, <span class="highwire-citation-author" data-delta="12"><span class="nlm-given-names">Lakshmi P.</span> <span class="nlm-surname">Kunju</span></span>, <span class="highwire-citation-author" data-delta="13"><span class="nlm-given-names">Chen</span> <span class="nlm-surname">Yang</span></span>, <span class="highwire-citation-author" data-delta="14"><span class="nlm-given-names">Dan R.</span> <span class="nlm-surname">Robinson</span></span>, <span class="highwire-citation-author" data-delta="15"><span class="nlm-given-names">Arul M.</span> <span class="nlm-surname">Chinnaiyan</span></span></span></div>
+  
+      <div  class="highwire-cite-metadata" ><span  class="highwire-cite-metadata-journal highwire-cite-metadata">medRxiv </span><span  class="highwire-cite-metadata-pages highwire-cite-metadata">2026.05.05.26351600; </span><span  class="highwire-cite-metadata-doi highwire-cite-metadata"><span class="doi_label">doi:</span> https://doi.org/10.64898/2026.05.05.26351600 </span></div>
+  
+  
+  </div>
+</div>  </div>
+  <div class="highwire-citation-formats">
+  	      <h2>Citation Manager Formats</h2>
+        <div class="highwire-citation-formats-links">
+      <span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.spage=&amp;rft.epage=&amp;rft.atitle=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology&amp;rft.volume=&amp;rft.issue=&amp;rft.date=2026-01-01%2000%3A00%3A00&amp;rft.stitle=&amp;rft.jtitle=medRxiv&amp;rft.au=Vo%2C+Josh+N.&amp;rft.au=Wu%2C+Yi-Mi&amp;rft.au=Wang%2C+Rui&amp;rft.au=Pham%2C+Tiffany&amp;rft.au=Cao%2C+Xuhong&amp;rft.au=Yeung%2C+Sophie&amp;rft.au=Park%2C+Mingyu&amp;rft.au=Kleyman-Smith%2C+Yelena&amp;rft.au=Teo%2C+Guo+Ci&amp;rft.au=Wu%2C+Alyssa+J.&amp;rft.au=Li%2C+Anne&amp;rft.au=Estill%2C+Jamie+C.&amp;rft.au=Kunju%2C+Lakshmi+P.&amp;rft.au=Yang%2C+Chen&amp;rft.au=Robinson%2C+Dan+R.&amp;rft.au=Chinnaiyan%2C+Arul+M."></span><ul class="hw-citation-links inline button button-alt button-grid clearfix"><li class="bibtext first"><a href="/highwire/citation/1289772/bibtext" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">BibTeX</a></li><li class="bookends"><a href="/highwire/citation/1289772/bookends" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Bookends</a></li><li class="easybib"><a href="/highwire/citation/1289772/easybib" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">EasyBib</a></li><li class="endnote-tagged"><a href="/highwire/citation/1289772/endnote-tagged" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">EndNote (tagged)</a></li><li class="endnote-8-xml"><a href="/highwire/citation/1289772/endnote-8-xml" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">EndNote 8 (xml)</a></li><li class="medlars"><a href="/highwire/citation/1289772/medlars" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Medlars</a></li><li class="mendeley"><a href="/highwire/citation/1289772/mendeley" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Mendeley</a></li><li class="papers"><a href="/highwire/citation/1289772/papers" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Papers</a></li><li class="refworks-tagged"><a href="/highwire/citation/1289772/refworks-tagged" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">RefWorks Tagged</a></li><li class="reference-manager"><a href="/highwire/citation/1289772/reference-manager" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Ref Manager</a></li><li class="ris"><a href="/highwire/citation/1289772/ris" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">RIS</a></li><li class="zotero last"><a href="/highwire/citation/1289772/zotero" class="hw-download-citation-link" data-icon-position="" data-hide-link-title="0">Zotero</a></li></ul>    </div>
+  </div>
+</div>
+  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>
+</div></div>  </div>
+
+  
+  </div>
+</div>
+          </div>
+        </div>
+	</div> <!-- /.panel-row-wrapper -->	
+	
+	</div>
+
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-service-links" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="service-links"><div class="item-list"><ul><li class="first"><a href="http://twitter.com/share?url=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;count=horizontal&amp;via=&amp;text=Long-Read%20Haplotype%20Phasing%20Resolves%20Allelic%20Configuration%20as%20a%20Missing%20Layer%20of%20Precision%20Oncology&amp;counturl=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" class="twitter-share-button service-links-twitter-widget" id="twitter_widget" title="Tweet This" rel="nofollow" data-icon-position="" data-hide-link-title="0"><span class="element-invisible">Tweet Widget</span></a></li><li><a href="http://www.facebook.com/plugins/like.php?href=https%3A//www.medrxiv.org/content/10.64898/2026.05.05.26351600v2&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;width=100&amp;height=21&amp;font=&amp;locale=" id="facebook_like" title="I Like it" class="service-links-facebook-like" rel="nofollow" data-icon-position="" data-hide-link-title="0"><span class="element-invisible">Facebook Like</span></a></li><li class="last"><a href="https://www.medrxiv.org/content/10.64898/2026.05.05.26351600v2" id="google_plus_one" title="Plus it" class="service-links-google-plus-one" rel="nofollow" data-icon-position="" data-hide-link-title="0"><span class="element-invisible">Google Plus One</span></a></li></ul></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-article-collections" >
+  
+        <h2 class="pane-title">Subject Area</h2>
+    
+  
+  <div class="pane-content">
+    <div class="highwire-list-wrapper highwire-article-collections"><div class="highwire-list"><ul class="highwire-article-collection-term-list"><li class="first last odd"><span class="highwire-article-collection-term"><a href="/collection/oncology" class="highlight" data-icon-position="" data-hide-link-title="0">Oncology<i class="icon-caret-right"></i>
+</a></span></li></ul></div></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-panels-mini pane-biorxiv-subject-collections block-style-col2" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="panel-flexible panels-flexible-new clearfix" id="mini-panel-biorxiv_subject_collections">
+<div class="panel-flexible-inside panels-flexible-new-inside">
+<div class="panels-flexible-region panels-flexible-region-new-center panels-flexible-region-first panels-flexible-region-last">
+  <div class="inside panels-flexible-region-inside panels-flexible-region-new-center-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+<div class="panel-pane pane-snippet" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="snippet biorxiv-subject-areas-table-title" id="biorxiv-subject-areas-table-title">
+  
+      
+  <div class="snippet-content">
+    <b>Subject Areas</b>  </div>
+
+</div>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-snippet" >
+  
+      
+  
+  <div class="pane-content">
+    <div class="snippet biorxiv-subject-areas-view-papers" id="biorxiv-subject-areas-view-papers">
+  
+      
+  <div class="snippet-content">
+    <a href="/content/early/recent"><strong>All Articles</strong></a>  </div>
+
+</div>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-highwire-subject-collections" >
+  
+      
+  
+  <div class="pane-content">
+    <ul id="collection" class="collection highwire-list-expand"><li class="outer collection depth-2  child first"><div class = "data-wrapper"><a href="/collection/addiction-medicine" class="" data-icon-position="" data-hide-link-title="0">Addiction Medicine</a> <span class = "article-count">(639)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/allergy-and-immunology" class="" data-icon-position="" data-hide-link-title="0">Allergy and Immunology</a> <span class = "article-count">(922)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/anesthesia" class="" data-icon-position="" data-hide-link-title="0">Anesthesia</a> <span class = "article-count">(354)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/cardiovascular-medicine" class="" data-icon-position="" data-hide-link-title="0">Cardiovascular Medicine</a> <span class = "article-count">(5033)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/dentistry-and-oral-medicine" class="" data-icon-position="" data-hide-link-title="0">Dentistry and Oral Medicine</a> <span class = "article-count">(496)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/dermatology" class="" data-icon-position="" data-hide-link-title="0">Dermatology</a> <span class = "article-count">(430)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/emergency-medicine" class="" data-icon-position="" data-hide-link-title="0">Emergency Medicine</a> <span class = "article-count">(680)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/endocrinology-including-diabetes-mellitus-and-metabolic-disease" class="" data-icon-position="" data-hide-link-title="0">Endocrinology (including Diabetes Mellitus and Metabolic Disease)</a> <span class = "article-count">(1700)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/epidemiology" class="" data-icon-position="" data-hide-link-title="0">Epidemiology</a> <span class = "article-count">(16300)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/forensic-medicine" class="" data-icon-position="" data-hide-link-title="0">Forensic Medicine</a> <span class = "article-count">(36)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/gastroenterology" class="" data-icon-position="" data-hide-link-title="0">Gastroenterology</a> <span class = "article-count">(1243)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/genetic-and-genomic-medicine" class="" data-icon-position="" data-hide-link-title="0">Genetic and Genomic Medicine</a> <span class = "article-count">(7306)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/geriatric-medicine" class="" data-icon-position="" data-hide-link-title="0">Geriatric Medicine</a> <span class = "article-count">(756)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/health-economics" class="" data-icon-position="" data-hide-link-title="0">Health Economics</a> <span class = "article-count">(1095)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/health-informatics" class="" data-icon-position="" data-hide-link-title="0">Health Informatics</a> <span class = "article-count">(5320)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/health-policy" class="" data-icon-position="" data-hide-link-title="0">Health Policy</a> <span class = "article-count">(1476)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/health-systems-and-quality-improvement" class="" data-icon-position="" data-hide-link-title="0">Health Systems and Quality Improvement</a> <span class = "article-count">(1839)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/hematology" class="" data-icon-position="" data-hide-link-title="0">Hematology</a> <span class = "article-count">(599)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/hiv-aids" class="" data-icon-position="" data-hide-link-title="0">HIV/AIDS</a> <span class = "article-count">(1384)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/infectious_diseases" class="" data-icon-position="" data-hide-link-title="0">Infectious Diseases (except HIV/AIDS)</a> <span class = "article-count">(16513)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/intensive-care-and-critical-care-medicine" class="" data-icon-position="" data-hide-link-title="0">Intensive Care and Critical Care Medicine</a> <span class = "article-count">(1204)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/medical-education" class="" data-icon-position="" data-hide-link-title="0">Medical Education</a> <span class = "article-count">(701)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/medical-ethics" class="" data-icon-position="" data-hide-link-title="0">Medical Ethics</a> <span class = "article-count">(157)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/nephrology" class="" data-icon-position="" data-hide-link-title="0">Nephrology</a> <span class = "article-count">(755)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/neurology" class="" data-icon-position="" data-hide-link-title="0">Neurology</a> <span class = "article-count">(7631)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/nursing" class="" data-icon-position="" data-hide-link-title="0">Nursing</a> <span class = "article-count">(380)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/nutrition" class="" data-icon-position="" data-hide-link-title="0">Nutrition</a> <span class = "article-count">(1135)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/obstetrics-and-gynecology" class="" data-icon-position="" data-hide-link-title="0">Obstetrics and Gynecology</a> <span class = "article-count">(1298)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/occupational-and-environmental-health" class="" data-icon-position="" data-hide-link-title="0">Occupational and Environmental Health</a> <span class = "article-count">(1044)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/oncology" class="" data-icon-position="" data-hide-link-title="0">Oncology</a> <span class = "article-count">(3754)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/ophthalmology" class="" data-icon-position="" data-hide-link-title="0">Ophthalmology</a> <span class = "article-count">(1100)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/orthopedics" class="" data-icon-position="" data-hide-link-title="0">Orthopedics</a> <span class = "article-count">(411)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/otolaryngology" class="" data-icon-position="" data-hide-link-title="0">Otolaryngology</a> <span class = "article-count">(469)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/pain-medicine" class="" data-icon-position="" data-hide-link-title="0">Pain Medicine</a> <span class = "article-count">(506)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/palliative-medicine" class="" data-icon-position="" data-hide-link-title="0">Palliative Medicine</a> <span class = "article-count">(144)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/pathology" class="" data-icon-position="" data-hide-link-title="0">Pathology</a> <span class = "article-count">(722)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/pediatrics" class="" data-icon-position="" data-hide-link-title="0">Pediatrics</a> <span class = "article-count">(1866)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/pharmacology-and-therapeutics" class="" data-icon-position="" data-hide-link-title="0">Pharmacology and Therapeutics</a> <span class = "article-count">(758)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/primary-care-research" class="" data-icon-position="" data-hide-link-title="0">Primary Care Research</a> <span class = "article-count">(789)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/psychiatry-and-clinical-psychology" class="" data-icon-position="" data-hide-link-title="0">Psychiatry and Clinical Psychology</a> <span class = "article-count">(6161)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/public-and-global-health" class="" data-icon-position="" data-hide-link-title="0">Public and Global Health</a> <span class = "article-count">(10025)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/radiology-and-imaging" class="" data-icon-position="" data-hide-link-title="0">Radiology and Imaging</a> <span class = "article-count">(2546)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/rehabilitation-medicine-and-physical-therapy" class="" data-icon-position="" data-hide-link-title="0">Rehabilitation Medicine and Physical Therapy</a> <span class = "article-count">(1529)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/respiratory-medicine" class="" data-icon-position="" data-hide-link-title="0">Respiratory Medicine</a> <span class = "article-count">(1275)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/rheumatology" class="" data-icon-position="" data-hide-link-title="0">Rheumatology</a> <span class = "article-count">(663)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/sexual-and-reproductive-health" class="" data-icon-position="" data-hide-link-title="0">Sexual and Reproductive Health</a> <span class = "article-count">(807)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/sports-medicine" class="" data-icon-position="" data-hide-link-title="0">Sports Medicine</a> <span class = "article-count">(601)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/surgery" class="" data-icon-position="" data-hide-link-title="0">Surgery</a> <span class = "article-count">(806)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/toxicology" class="" data-icon-position="" data-hide-link-title="0">Toxicology</a> <span class = "article-count">(109)</span></div></li>
+<li class="outer collection depth-2  child"><div class = "data-wrapper"><a href="/collection/transplantation" class="" data-icon-position="" data-hide-link-title="0">Transplantation</a> <span class = "article-count">(320)</span></div></li>
+<li class="outer collection depth-2  child last"><div class = "data-wrapper"><a href="/collection/urology" class="" data-icon-position="" data-hide-link-title="0">Urology</a> <span class = "article-count">(309)</span></div></li>
+</ul>  </div>
+
+  
+  </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+
+  
+  </div>
+</div>
+			</div>
+		</div>
+	
+	</div> <!-- /.panel-row-wrapper -->	
+	
+	</div>
+
+    </div>
+  </div>
+</div>      </div>
+</div>  </div>
+</section>    
+  
+  </div>    <div class="region region-page-bottom" id="region-page-bottom">
+  <div class="region-inner region-page-bottom-inner">
+      </div>
+</div><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_C8MjDfCrOw9v2YeUdGb4IqObpP7qnrS0rkSMku4sC4c.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_XAw_CRK0-f9CvrNzsjsghFkViP1lB_yK0xB4EHqV77U.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function euCookieComplianceLoadScripts() {}
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var eu_cookie_compliance_cookie_name = "";
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://d33xdlntwy0kbs.cloudfront.net/cshl_custom_medrxiv.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_2lJC5gTZ8B3-P19n2LPEd0viiCEmLJ5gcIAFYex1r0U.js"></script>
+<script type="text/javascript" src="https://www.medrxiv.org/sites/default/files/js/js_E7ZzhCXa6OBjxexIONUQCrKayJSMB8poN5FccOWSPFw.js"></script>
+  <script>window.__CF$cv$params={r:'a5ae96d95f85f701',t:'MTc5NDc0OTIwMw==',u:'01a1df6383e9765ab10cdfaa6abf00ab',ut:'BGrutPLE_7YikSPpYTg5MWm3do048syWiGLVEqtvuOw-1794749203-1.2.1.1-wja8J96k14SdgU8olBeDjtiVrbym1FoFvDS43Q_C.JpaQCHO6vxH5pmOqVIsvRGy4.oaWv1F.tBN6hZ6XxIql1LuE05IVWCRTcPlyfnqVAY',i:60};(function(){if(!document.body)return;var l=window.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/precursor/main.js?ray=a5ae96d95f85f701',s=document.createElement('script');s.src=o?new URL(u,o).href:u;document.head.appendChild(s);})();</script></body>
+</html>

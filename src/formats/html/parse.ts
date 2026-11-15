@@ -420,7 +420,9 @@ function classify(outline: Outline, hasTitleHeading: boolean, ctx: HtmlContext):
   let seenAbstract = false;
   let seenBody = false;
   let afterReferences = false;
-  for (const raw of outline.sections.slice(outline.beforeTitle)) {
+  const queue = outline.sections.slice(outline.beforeTitle);
+  for (let at = 0; at < queue.length; at++) {
+    const raw = queue[at] as RawSection;
     const title = plainTitle(raw);
     // With an abstract heading on the page, headings ahead of it belong to the byline (author names, article type).
     if (hasAbstractHeading && !seenAbstract && !abstractKind(title)) continue;
@@ -458,7 +460,8 @@ function classify(outline: Outline, hasTitleHeading: boolean, ctx: HtmlContext):
       seenAbstract = true;
       const main =
         abstract === 'main' && result.abstracts.some((a) => a.kind === 'main') ? 'other' : abstract;
-      const sections = abstractSections(abstractScope(raw), result.abstracts.length + 1, ctx);
+      const { after, scope } = abstractScope(raw);
+      const sections = abstractSections(scope, result.abstracts.length + 1, ctx);
       if (sections.length > 0) {
         result.abstracts.push({
           kind: main,
@@ -466,6 +469,7 @@ function classify(outline: Outline, hasTitleHeading: boolean, ctx: HtmlContext):
           ...(!/^abstract$/i.test(title) && { title: inlineText(raw.heading, ctx) || title }),
         });
       }
+      queue.splice(at + 1, 0, ...after);
       continue;
     }
     const section = convert(raw, kind ?? 'body', ctx);
@@ -546,12 +550,22 @@ function allNodes(raw: RawSection): Node[] {
 /**
  * An abstract ends with its own container when the heading opens one (`<div class=
  * "abstract"><h2>Abstract</h2>…</div>`): the article information a page sets after
- * that container, before the next heading, is not part of the abstract.
+ * that container, before the next heading, is not part of the abstract, and a lower
+ * heading after it opens a section of the page's own (`after`), as the declarations a
+ * bioRxiv or medRxiv landing page sets as `<h3>`s after the abstract's `<div>`.
  */
-function abstractScope(raw: RawSection): RawSection {
+function abstractScope(raw: RawSection): { after: RawSection[]; scope: RawSection } {
   const container = openedContainer(raw.heading);
-  if (!container) return raw;
-  return { ...raw, nodes: raw.nodes.filter((node) => container.contains(node)) };
+  if (!container) return { after: [], scope: raw };
+  const inside = (sub: RawSection) => container.contains(sub.heading);
+  return {
+    after: raw.sections.filter((sub) => !inside(sub)),
+    scope: {
+      ...raw,
+      nodes: raw.nodes.filter((node) => container.contains(node)),
+      sections: raw.sections.filter(inside),
+    },
+  };
 }
 
 /**

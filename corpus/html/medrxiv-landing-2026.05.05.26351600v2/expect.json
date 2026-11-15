@@ -1,0 +1,24 @@
+{
+  "why": "#30: medRxiv's abstract view of the work whose full text is medrxiv-2026.05.05.26351600v2. Pins a landing page as front matter, the abstract, and back matter with a no-body warning: the competing-interest and author-declaration <h3>s set after the abstract's <div> read as declarations, not as parts of the abstract, and the back-to-top pane is furniture. The page has no reference list in its body; its 68 references are its 68 citation_reference tags.",
+  "title": "Long-Read Haplotype Phasing Resolves Allelic Configuration as a Missing Layer of Precision Oncology",
+  "quality": "partial",
+  "abstractKinds": ["main"],
+  "abstractStartsWith": "Short-read sequencing cannot determine whether co-occurring variants within a cancer gene lie on the same allele (*cis*) or opposing alleles",
+  "sectionTitles": [
+    "Competing Interest Statement",
+    "Author Declarations",
+    "Footnotes",
+    "Data Availability",
+    "Funder Information Declared"
+  ],
+  "tables": 0,
+  "figures": 0,
+  "references": 68,
+  "warnings": ["no-body", "structure-inferred"],
+  "contains": [
+    "**Statement of Significance** Short-read sequencing cannot resolve",
+    "with enhanced activity.\n\n## Competing Interest Statement\n\nThe authors have declared no competing interest.",
+    "- [68] Gu Z, Eils R, Schlesner M. Complex heatmaps reveal patterns and correlations"
+  ],
+  "notContains": ["### Competing Interest Statement", "Back to top"]
+}

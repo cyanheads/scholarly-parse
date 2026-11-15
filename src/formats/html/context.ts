@@ -139,7 +139,10 @@ export function nameTokens(value: string | null): string[] {
     .map((token) => token.toLowerCase());
 }
 
-/** True for an element that is page furniture and never article content. */
+/**
+ * True for an element that is page furniture and never article content, a "back to top"
+ * link (`pane-highwire-back-to-top`, `backToTop`) among them.
+ */
 export function isFurniture(element: Element): boolean {
   if (FURNITURE_TAGS.has(tagOf(element))) return true;
   const role = element.getAttribute('role');
@@ -148,8 +151,11 @@ export function isFurniture(element: Element): boolean {
   if (/display\s*:\s*none|visibility\s*:\s*hidden/i.test(element.getAttribute('style') ?? ''))
     return true;
   if (element.classList.contains('hidden')) return true;
-  return [
+  const tokens = [
     ...nameTokens(element.getAttribute('class')),
     ...nameTokens(element.getAttribute('id')),
-  ].some((token) => FURNITURE_TOKENS.has(token));
+  ];
+  return (
+    tokens.some((token) => FURNITURE_TOKENS.has(token)) || tokens.join(' ').includes('back to top')
+  );
 }
