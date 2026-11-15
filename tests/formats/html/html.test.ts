@@ -156,6 +156,31 @@ describe('interstitials', () => {
       ['an nginx 502', nginx('502 Bad Gateway'), '502'],
       ['an nginx 503', nginx('503 Service Temporarily Unavailable'), '503'],
       ['an Apache 404, its code in the title alone', apache404, '404'],
+      [
+        'a status line split by inline markup (#87)',
+        '<html><head><title>Error</title></head><body><h1><span>404</span> Not Found</h1></body></html>',
+        '404',
+      ],
+      [
+        'a status line set in bold under a title of its own',
+        '<html><head><title>Oops</title></head><body><h1><b>503</b> Service Unavailable</h1></body></html>',
+        '503',
+      ],
+      [
+        'an IIS 404 (#87)',
+        '<html><head><title>404 - File or directory not found.</title></head><body><div id="header"><h1>Server Error</h1></div><h2>404 - File or directory not found.</h2></body></html>',
+        '404',
+      ],
+      ['an IIS 500', nginx('500 - Internal server error.'), '500'],
+      ['an IIS 403', nginx('403 - Forbidden: Access is denied.'), '403'],
+      ['a status line with a no-break space', nginx('404&nbsp;Not Found'), '404'],
+      ['a status line closed by a period', nginx('404 Not Found.'), '404'],
+      ['a Tomcat 404', nginx('HTTP Status 404 – Not Found'), '404'],
+      [
+        'a Jetty 404',
+        '<html><head><title>Error 404 Not Found</title></head><body><h2>HTTP ERROR 404 Not Found</h2></body></html>',
+        '404',
+      ],
     ])('reports %s as blocked', async (_name, html, code) => {
       expect(await outcome(html)).toEqual({
         message: `The page is an HTTP ${code} error page, not the document`,
@@ -176,6 +201,23 @@ describe('interstitials', () => {
       // A heading that opens with a number is no status line unless a reason phrase follows.
       expect(await outcome(titled('500 Years of Printing'))).toBe('ok: 500 Years of Printing');
       expect(await outcome(titled('404 Maps of the Coast'))).toBe('ok: 404 Maps of the Coast');
+      expect(await outcome(titled('404 Reasons Cells Fail'))).toBe('ok: 404 Reasons Cells Fail');
+      // An IIS-style dash counts only before a sentence its period closes.
+      expect(await outcome(titled('404 - A Study of Link Rot'))).toBe(
+        'ok: 404 - A Study of Link Rot',
+      );
+      // Inline markup is read through, so a title of more than a status line stays a title.
+      expect(
+        await outcome(
+          titled(linkRot).replace(`<h1>${linkRot}`, `<h1><span>404</span>${linkRot.slice(3)}`),
+        ),
+      ).toBe(`ok: ${linkRot}`);
+      // A heading holding a block element is not read as a status line.
+      expect(
+        await outcome(
+          '<html><head><title>Lab notes</title></head><body><h1><div>404</div> Not Found</h1><p>Our notes on the missing page.</p></body></html>',
+        ),
+      ).not.toMatchObject({ reason: 'blocked' });
       // The phrases arXiv uses count only in the title or a top heading.
       for (const elsewhere of ['<p>No HTML for us.</p>', '<h2>No HTML for us.</h2>'])
         expect(await outcome(titled('Our pipeline').replace('</h1>', `</h1>${elsewhere}`))).toBe(
@@ -1169,6 +1211,9 @@ describe('long unclosed runs', () => {
     ['<title>', '', ''],
     ['<h1 id=a>', '<html><body>', ''],
     ['<title></h1>', '', ''],
+    ['<h1><span>', '<html><body>', ''],
+    ['<title><b>', '', ''],
+    ['<span>', '<html><body><h1>', ''],
   ])('checks a page for an interstitial in time linear in a run of %j', async (run, lead, end) => {
     // Up to 480,000 characters, inside the 512 KiB an interstitial is read to.
     const to = 4 ** 4 * Math.floor(480_000 / run.length / 4 ** 4);

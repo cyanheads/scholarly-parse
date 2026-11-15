@@ -51,10 +51,23 @@ const META_TAG = /<meta\b[^<>]*/gi;
 const REFRESH_TARGET = /content=["']?\s*\d+\s*;\s*url=\s*['"]?([^'">\s]+)/i;
 
 /**
- * Each `<title>` and `<h1>` holding text alone, its text in group 2. The text stops at
- * the next `<`, and so does the tag, so each try reads no further than the next tag.
+ * Each `<title>` and `<h1>` holding text and at most 64 inline tags alone (`<h1><span>404</span>
+ * Not Found</h1>`), its content in group 2. The content stops at any other tag, and the
+ * opening tag at the next `<`, so each try reads no further than the next such tag. The
+ * bound keeps a run of inline tags from repeating the group past where JavaScriptCore's
+ * regex JIT hands the match to its interpreter, which takes about 50 times as long.
  */
-const HEADING = /<(title|h1)\b[^<>]*>([^<]*)<\/\1\s*>/gi;
+const HEADING =
+  /<(title|h1)\b[^<>]*>([^<]*(?:<\/?(?:a|b|code|em|font|i|small|span|strong|u)\b[^<>]*>[^<]*){0,64})<\/\1\s*>/gi;
+
+/** A heading's text: its inline tags removed, a no-break space read as a space, whitespace collapsed. */
+function headingText(content: string): string {
+  return content
+    .replace(/<[^<>]*>/g, '')
+    .replace(/&(?:nbsp|#160|#xa0);/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
 /** Messages arXiv shows in place of a paper it could not convert. */
 export const CONVERSION_FAILED =
@@ -67,12 +80,14 @@ export const NO_CONVERSION = 'The page reports that no HTML conversion of the pa
 const NO_PAPER = /^No document for |^This version of .+ has been withdrawn/;
 
 /**
- * An HTTP status line as a whole heading: a 4xx or 5xx code and a reason phrase servers
- * send for one (RFC 9110's, and the variants nginx and Apache write), so a heading such as
- * `500 Years of Printing` is not one.
+ * An HTTP status line as a whole heading: a 4xx or 5xx code, after Tomcat's `HTTP Status `
+ * or Jetty's `Error ` where those servers write one, and a reason phrase servers send for
+ * it (RFC 9110's, and the variants nginx and Apache write, optionally closed by a period),
+ * or IIS's ` - ` and a sentence (`404 - File or directory not found.`). A heading such as
+ * `500 Years of Printing` is not one, nor is `404 - A Study of Link Rot`, which no period closes.
  */
 const HTTP_ERROR =
-  /^([45]\d\d) (?:Bad Request|Unauthorized|Payment Required|Forbidden|Not Found|Method Not Allowed|Not Acceptable|Proxy Authentication Required|Request Time-?out|Conflict|Gone|Length Required|Precondition Failed|(?:Request Entity|Payload|Content) Too Large|(?:Request-)?URI Too (?:Long|Large)|Unsupported Media Type|(?:Requested )?Range Not Satisfiable|Expectation Failed|I['’]m a teapot|Misdirected Request|Unprocessable (?:Entity|Content)|Locked|Failed Dependency|Too Early|Upgrade Required|Precondition Required|Too Many Requests|Request Header (?:Fields|Or Cookie) Too Large|Unavailable For Legal Reasons|Client Closed Request|Internal Server Error|Not Implemented|Bad Gateway|Service (?:Temporarily )?Unavailable|Gateway Time-?out|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)$/i;
+  /^(?:HTTP Status |Error )?([45]\d\d)(?: - [^<>]{1,78}\.|(?: | – )(?:Bad Request|Unauthorized|Payment Required|Forbidden|Not Found|Method Not Allowed|Not Acceptable|Proxy Authentication Required|Request Time-?out|Conflict|Gone|Length Required|Precondition Failed|(?:Request Entity|Payload|Content) Too Large|(?:Request-)?URI Too (?:Long|Large)|Unsupported Media Type|(?:Requested )?Range Not Satisfiable|Expectation Failed|I['’]m a teapot|Misdirected Request|Unprocessable (?:Entity|Content)|Locked|Failed Dependency|Too Early|Upgrade Required|Precondition Required|Too Many Requests|Request Header (?:Fields|Or Cookie) Too Large|Unavailable For Legal Reasons|Client Closed Request|Internal Server Error|Not Implemented|Bad Gateway|Service (?:Temporarily )?Unavailable|Gateway Time-?out|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)\.?)$/i;
 
 /**
  * The failure a page standing in for the document reports, or undefined for a real page.
@@ -81,17 +96,15 @@ const HTTP_ERROR =
  * challenge, access-denied, or HTTP error page, or a redirect stub, is `blocked`. A page
  * carrying scholarly citation metadata or substantial text never
  * stands in, so a bot-protection script loaded by a real article does not trip this;
- * arXiv's phrases count only inside a `<title>` or `<h1>` that holds text alone, a
- * status line only as the whole of one.
+ * arXiv's phrases count only inside a `<title>` or `<h1>` that holds text and inline
+ * markup alone, a status line only as the whole of one.
  */
 export function standInFailure(html: string): ParseFailure | undefined {
   if (html.length > MAX_INTERSTITIAL_CHARS) return;
   const metaTags = html.match(META_TAG) ?? [];
   if (metaTags.some((tag) => /name=["']citation_title["']/i.test(tag))) return;
   if (visibleText(html).length > MAX_INTERSTITIAL_TEXT) return;
-  const headings = Array.from(html.matchAll(HEADING), (match) =>
-    (match[2] ?? '').replace(/\s+/g, ' ').trim(),
-  );
+  const headings = Array.from(html.matchAll(HEADING), (match) => headingText(match[2] ?? ''));
   if (headings.some((heading) => CONVERSION_FAILED.test(heading)))
     return { message: NO_CONVERSION, reason: 'empty' };
   if (headings.some((heading) => NO_PAPER.test(heading)))
