@@ -51,6 +51,7 @@ bun run scripts/corpus/add.ts <kind> <identifier> --dry-run
 |:---|:---|:---|
 | `epmc <PMCID\|PPRID>` | Europe PMC `fullTextXML` | `jats/`, flavor `europepmc` |
 | `pmc <PMCID>` | NCBI E-utilities `efetch db=pmc` | `jats/`, flavor `pmc` |
+| `pmc-oai <PMCID>` | PMC OAI-PMH `GetRecord`, `metadataPrefix=pmc` (the JATS in its envelope) | `jats/`, flavor `pmc` |
 | `arxiv <id-with-version>` | `arxiv.org/html/<id>` | `latexml/`, flavor `arxiv` |
 | `ar5iv <id>` | `ar5iv.labs.arxiv.org/html/<id>` | `latexml/`, flavor `ar5iv` |
 | `pdf <url> --doi <doi>` | a publisher PDF (`--arxiv <id>` for an arXiv PDF) | `pdf/` |

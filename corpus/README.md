@@ -36,7 +36,7 @@ corpus/<format>/<fixture-id>/
 
 ## Adding a fixture
 
-`bun run scripts/corpus/add.ts <kind> <identifier> [--features a,b] [--regression cyanheads/<repo>#N] [--id <fixture-id>] [--notes "…"]` fetches one document, confirms its license from its own metadata, writes `source.*` and `meta.json`, and regenerates `ATTRIBUTION.md`. A license outside the allowlist exits non-zero and writes nothing. Kinds are `epmc` and `pmc` (JATS), `arxiv` and `ar5iv` (LaTeXML), `pdf` and `html` with `--doi`, and `grobid`, which runs a PDF fixture through a local Grobid server. `--dry-run` verifies without writing. The script's header documents each kind and where its license comes from.
+`bun run scripts/corpus/add.ts <kind> <identifier> [--features a,b] [--regression cyanheads/<repo>#N] [--id <fixture-id>] [--notes "…"]` fetches one document, confirms its license from its own metadata, writes `source.*` and `meta.json`, and regenerates `ATTRIBUTION.md`. A license outside the allowlist exits non-zero and writes nothing. Kinds are `epmc`, `pmc`, and `pmc-oai` (JATS, the last as PMC's OAI-PMH record), `arxiv` and `ar5iv` (LaTeXML), `pdf` and `html` with `--doi`, and `grobid`, which runs a PDF fixture through a local Grobid server. `--dry-run` verifies without writing. The script's header documents each kind and where its license comes from.
 
 ## Rules
 

@@ -1,0 +1,24 @@
+{
+  "id": "pmc-oai-pmc10579850",
+  "format": "jats",
+  "flavor": "pmc",
+  "title": "Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation",
+  "identifiers": {
+    "pmcid": "PMC10579850",
+    "pmid": "37854874",
+    "doi": "10.12688/f1000research.130458.2"
+  },
+  "url": "https://pmc.ncbi.nlm.nih.gov/api/oai/v1/mh/?verb=GetRecord&identifier=oai:pubmedcentral.nih.gov:10579850&metadataPrefix=pmc",
+  "retrieved": "2026-11-15",
+  "license": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Okyere S, Ackora-Prah J, Bonyah E, Akwasi Adarkwa S. Numerical Scheme for Compartmental Models: New Matlab Software Codes for Numerical Simulation. F1000Research. 2023;12:445. doi:10.12688/f1000research.130458.2",
+  "features": [
+    "sub-article",
+    "mixed-citation"
+  ],
+  "regression": "cyanheads/scholarly-parse#45",
+  "notes": "PMC's OAI-PMH GetRecord record of the article pmc-pmc10579850 holds through efetch: the JATS sits in <OAI-PMH>/<GetRecord>/<record>/<metadata> after a <header> of set specs, with a default JATS namespace on <article>. Its Markdown matches that fixture's."
+}

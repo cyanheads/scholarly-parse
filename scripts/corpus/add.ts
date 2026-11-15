@@ -10,6 +10,7 @@
  *
  * epmc <PMCID|PPRID>            Europe PMC fullTextXML                    → jats/europepmc
  * pmc <PMCID>                   NCBI E-utilities efetch db=pmc            → jats/pmc
+ * pmc-oai <PMCID>               PMC OAI-PMH GetRecord, metadataPrefix=pmc → jats/pmc
  * arxiv <id-with-version>       https://arxiv.org/html/<id>               → latexml/arxiv
  * ar5iv <id>                    https://ar5iv.labs.arxiv.org/html/<id>    → latexml/ar5iv
  * pdf <url> --doi <doi>         a publisher PDF (or --arxiv <id> for an arXiv PDF)
@@ -50,7 +51,7 @@ import {
 import { CONTACT, decode, type HttpResult, request, type Upstream } from './http.js';
 
 type OpenLicenseId = (typeof OPEN_LICENSES)[number];
-type Kind = 'epmc' | 'pmc' | 'arxiv' | 'ar5iv' | 'pdf' | 'html' | 'grobid';
+type Kind = 'epmc' | 'pmc' | 'pmc-oai' | 'arxiv' | 'ar5iv' | 'pdf' | 'html' | 'grobid';
 type Identifiers = FixtureMeta['identifiers'];
 
 interface License {
@@ -80,7 +81,16 @@ interface WorkMeta {
   title: string;
 }
 
-const KINDS: readonly Kind[] = ['epmc', 'pmc', 'arxiv', 'ar5iv', 'pdf', 'html', 'grobid'];
+const KINDS: readonly Kind[] = [
+  'epmc',
+  'pmc',
+  'pmc-oai',
+  'arxiv',
+  'ar5iv',
+  'pdf',
+  'html',
+  'grobid',
+];
 const MAX_SOURCE_BYTES = 8 * 1024 * 1024;
 const SOURCE_FILE: Record<CorpusFormat, string> = {
   html: 'source.html',
@@ -496,6 +506,27 @@ async function fetchPmc(id: string): Promise<Fetched> {
   };
 }
 
+/** PMC's OAI-PMH record of an article: the JATS inside an `<OAI-PMH>` envelope's `<metadata>`. */
+async function fetchPmcOai(id: string): Promise<Fetched> {
+  const numeric = id.toUpperCase().replace(/^PMC/, '');
+  if (!/^\d+$/.test(numeric)) fail(`pmc-oai takes a PMCID, got "${id}"`);
+  const url = `https://pmc.ncbi.nlm.nih.gov/api/oai/v1/mh/?verb=GetRecord&identifier=oai:pubmedcentral.nih.gov:${numeric}&metadataPrefix=pmc`;
+  const result = await getOk(url, 'ncbi', 'application/xml');
+  // An `idDoesNotExist` or `cannotDisseminateFormat` error record holds no <article>.
+  const info = readJats(assertJats(result.bytes, url), `PMC${numeric} (OAI-PMH)`);
+  return {
+    attribution: info.attribution,
+    bytes: result.bytes,
+    identifiers: info.identifiers,
+    license: await resolveJatsLicense(info),
+    title: info.title,
+    defaultId: `pmc-oai-pmc${numeric}`,
+    flavor: 'pmc',
+    format: 'jats',
+    url,
+  };
+}
+
 // ── arXiv ───────────────────────────────────────────────────────────────────
 
 const ARXIV_ID = /^((?:\d{4}\.\d{4,5})|(?:[a-z-]+(?:\.[A-Z]{2})?\/\d{7}))(v\d+)?$/;
@@ -810,6 +841,9 @@ switch (kind) {
     break;
   case 'pmc':
     fetched = await fetchPmc(identifier);
+    break;
+  case 'pmc-oai':
+    fetched = await fetchPmcOai(identifier);
     break;
   case 'arxiv':
   case 'ar5iv':
