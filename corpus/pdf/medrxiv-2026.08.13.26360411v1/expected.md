@@ -106,7 +106,34 @@ In conclusion, we have substantially increased the number of loci and genes asso
 
 | Gene | HF Phenotype | Genetic | Novelty | Therapeutic | Drug Name | Condition | FDA-approved |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  | evidence for |  | modality |  |  |  |
+|  |  | evidence for HF |  | modality |  |  |  |
+| *Cardiovascular/Neurohormonal*† |  |  |  |  |  |  |  |
+|  |  |  |  |  | Aldosterone synthase inhibitors |  | Yes (Baxdrostat); Yes |
+| *CYP11B2* | HF | GWAS | Novel | Small molecule |  | Hypertension |  |
+|  |  |  |  |  | (Baxdrostat; Lorundrostat) |  | (Lorundrostat) |
+| *GUCY1A1* | HF | GWAS, MR | Novel | Small molecule | Vericiguat | HFrEF | Yes |
+| *ATP1B2* | HF | MR | Novel | Small molecule | Digoxin, Istaroxime | Atrial fibrillation, acute HF | Yes (Digoxin), No (Istaroxime) |
+| *PDE3A* | HFrEF,HF | GWAS | Novel | Small molecule | Milrinone | HF, pulmonary hypertension | Yes |
+| *NRG1* | HF | GWAS, MR | Novel | Antibody | JK07 | HF | No |
+| *ENPEP* | HF | MR | Novel | Small molecule | QGC-001 (Firibastat) | Hypertension, HF | No |
+| *ADM* | HF | MR | Known | Antibody | Enibarcimab | Septic shock, HF | No |
+| *EDNRA* | HF | GWAS | Known | Small molecule | Tezosentan, Bosentan | Pulmonary hypertension, diastolic HF | Yes (Bosentan); No (Tezosentan) |
+|  |  |  |  |  | Calcium channel blockers, | Hypertension, coronary artery disease, atrial |  |
+| *CACNB2* | HF | GWAS, MR | Known | Small molecule |  |  | Yes |
+|  |  |  |  |  | Dronedarone | fibrillation, congestive HF |  |
+|  |  |  |  |  |  | Coronary artery disease, cardiovascular |  |
+| *RXFP2* | HF | GWAS | Known | Protein | Serelaxin\*\* |  | No |
+|  |  |  |  |  |  | disease, HF, chronic kidney disease |  |
+| *Obesity/Metabolism\** |  |  |  |  |  |  |  |
+| *LEPR* | HF | MR | Novel | Protein | Metreleptin | Lipodystrophy, obesity | Yes |
+| *ACVR2A* | HF | GWAS, MR | Novel | Protein | Sotatercept, Bimagrumab | Pulmonary arterial hypertension, obesity | (Bimagrumab) |
+| *MC4R* | HF | GWAS | Known | Protein | Setmelanotide | Severe obesity | Yes |
+| *PCSK9* | HF | MR | Novel | Antibody, siRNA | Evolocumab, Alirocumab, Inclisiran | Hyperlipidemia | Yes |
+|  |  |  |  |  | Pelacarsen, Olpasiran, Zerlasiran, |  |  |
+| *LPA* | HF, HFrEF | GWAS, MR | Known | ASO, siRNA |  | ASCVD | No |
+|  |  |  |  |  | Lepodisiran |  |  |
+| Inflammation |  |  |  |  |  |  |  |
+| *IL6\** | HF | GWAS | Novel | Antibody | Ziltiviekimab, Pacibekitug | ASCVD, HFpEF | No |
 
 (A) (B) determined through comparison with previously reported HF GWAS and MR studies. Follow-up analyses were conducted on genome-wide significant signals to further characterize their functional and biological relevance. (B) Circular Manhattan plot of multi-ancestry HF, HFrEF, and HFpEF GWAS results. Circular Manhattan plot showing results for multi-ancestry all-cause HF (orange), HFrEF (blue) and HFpEF (green). The innermost ring denotes chromosome numbers. Loci are labeled by the gene most frequently implicated across four gene-mapping approaches (cS2G, V2G, nearest gene and MAGMA); in cases of ties, a single representative gene is displayed for visualization purposes. (A)
 

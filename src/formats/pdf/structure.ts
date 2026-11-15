@@ -12,13 +12,21 @@ import { kindFromTitle, splitSectionNumber } from '../../model/section-kinds.js'
 import { escapeInline } from '../../render/escape.js';
 import { flow } from './blocks.js';
 import type { PdfContext } from './context.js';
-import { joinLines, lineMarkdown, noteLabel, trimCells } from './inline.js';
-import { byColumn, cellText, insideBoldWord, type Layout, type Line, linesSize } from './layout.js';
+import { CAPTION_START } from './float-labels.js';
+import { cellMarkdown, joinLines, lineMarkdown, noteLabel, trimCells } from './inline.js';
+import {
+  abuts,
+  byColumn,
+  cellText,
+  insideBoldWord,
+  type Layout,
+  type Line,
+  linesSize,
+} from './layout.js';
 import {
   ABSTRACT_HEADING,
   ABSTRACT_RUN_IN,
   bareTitle,
-  CAPTION_START,
   type HeadingStyle,
   headingOf,
   isCaptionStart,
@@ -28,6 +36,7 @@ import {
   styleOf,
   words,
 } from './lines.js';
+import type { Run } from './load.js';
 import { references } from './references.js';
 
 export interface PdfStructure {
@@ -39,6 +48,7 @@ export interface PdfStructure {
   footnotes: Footnote[];
   keywords: string[];
   references: Reference[];
+  /** The title set on the first page, as inline Markdown. */
   title?: string;
 }
 
@@ -48,9 +58,12 @@ const ABSTRACT_PART =
 
 interface RawSection {
   depth?: number;
+  /** The heading as inline Markdown, its superscripts and subscripts kept. */
+  heading: string;
   lines: Line[];
   sections: RawSection[];
   style: HeadingStyle;
+  /** The heading's plain text, which its name is matched on. */
   title: string;
 }
 
@@ -64,6 +77,8 @@ interface Collected {
   abstract: AbstractPart[];
   /** The size the abstract text is set in. */
   abstractSize?: number;
+  /** Lines read as front matter, in reading order. */
+  front: Line[];
   keywords: string[];
   /** Footnote lines, in reading order. */
   notes: Line[];
@@ -91,10 +106,28 @@ export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
   const title = titleOf(layout.lines, layout.bodySize);
   const notes = noteLines(layout);
   let parts = collect(layout, title.lines, notes, false);
+  const hasNoBody = () => parts.roots.every((raw) => raw === parts.references || isBackMatter(raw));
   // No body section heading was recognized as one, only back matter: fall back to taking
   // any heading as the first.
-  if (parts.roots.every((raw) => raw === parts.references || isBackMatter(raw)))
-    parts = collect(layout, title.lines, notes, true);
+  if (hasNoBody()) parts = collect(layout, title.lines, notes, true);
+  // Prose with no section heading before the reference list (a conference report, an
+  // editorial) was all read as front matter: from its first prose line on, it is an
+  // untitled opening section, the lines taken as an unlabeled abstract left out.
+  if (hasNoBody()) {
+    const adopted = new Set(parts.abstract.flatMap((part) => part.lines));
+    const rest = parts.front.filter((line) => !adopted.has(line));
+    const start = rest.findIndex(
+      (line) => Math.abs(line.size - layout.bodySize) <= 0.3 && !line.bold && words(line.text) >= 5,
+    );
+    if (start !== -1)
+      parts.roots.unshift({
+        heading: '',
+        lines: rest.slice(start),
+        sections: [],
+        style: { bold: false, size: 0, upper: false },
+        title: '',
+      });
+  }
   if (!parts.references) ctx.diag.warn('structure-inferred', 'No reference list heading was found');
 
   const result: PdfStructure = {
@@ -134,7 +167,10 @@ export function structure(layout: Layout, ctx: PdfContext): PdfStructure {
   return result;
 }
 
-/** The title: the largest text of several words on the first page, in the runs set at that size. */
+/**
+ * The title, as inline Markdown: the largest text of several words on the first page, in
+ * the runs set at that size and the superscripts and subscripts between them.
+ */
 function titleOf(lines: Line[], bodySize: number): { lines: Set<Line>; text?: string } {
   const groups: Line[][] = [];
   for (const line of lines.filter((l) => l.page === lines[0]?.page)) {
@@ -151,12 +187,23 @@ function titleOf(lines: Line[], bodySize: number): { lines: Set<Line>; text?: st
     .sort((a, b) => (b[0]?.size ?? 0) - (a[0]?.size ?? 0));
   if (!group) return { lines: new Set() };
   const size = group[0]?.size ?? 0;
-  // A label set beside the title ("OPEN") or a footnote mark on it is another size.
+  const sized = (run: Run | undefined): run is Run =>
+    run !== undefined && Math.abs(run.size - size) <= 0.6;
+  // A label set beside the title ("OPEN") or a footnote mark on it is another size, opening
+  // or closing its line; a run of another size abutting title-size runs on both sides is a
+  // superscript or subscript in the title (`N⁶-Methyladenosine`).
+  const inTitle = (cell: Run[]) =>
+    cell.filter((run, i) => {
+      const [before, after] = [cell[i - 1], cell[i + 1]];
+      return (
+        sized(run) || (sized(before) && sized(after) && abuts(before, run) && abuts(run, after))
+      );
+    });
   // A title is set ragged, so a hyphen closing one of its lines belongs to a compound ("sixth-order").
   const text = group
     .map((line) =>
       line.cells
-        .map((cell) => cellText(cell.filter((run) => Math.abs(run.size - size) <= 0.6)))
+        .map((cell) => cellMarkdown(inTitle(cell), line))
         .filter(Boolean)
         .join(' '),
     )
@@ -272,18 +319,36 @@ function unlabeledAbstract(front: Line[], bodySize: number): Line[] {
 }
 
 /**
- * The bold runs opening a line that goes on in regular type, and the rest of the line. A
- * regular run inside a bold word (a ligature or apostrophe in another font) does not end it.
+ * A heading's lines as inline Markdown, read as the body is, but with no emphasis when every
+ * run is italic: then the italics are the heading's style, not a word's.
  */
-function leadingLabel(line: Line): { label: string; rest: Line } | undefined {
+function headingMarkdown(lines: Line[]): string {
+  const italic = lines.every((line) =>
+    line.cells.flat().every((run) => run.italic || !run.text.trim()),
+  );
+  const upright = (line: Line): Line => ({
+    ...line,
+    cells: line.cells.map((cell) => cell.map((run) => ({ ...run, italic: false }))),
+  });
+  return lines.map((line) => lineMarkdown(italic ? upright(line) : line)).join(' ');
+}
+
+/**
+ * The bold runs opening a line that goes on in regular type, as plain text and as inline
+ * Markdown, and the rest of the line. A regular run inside a bold word (a ligature or
+ * apostrophe in another font) does not end it.
+ */
+function leadingLabel(line: Line): { heading: string; label: string; rest: Line } | undefined {
   const [first = [], ...others] = line.cells;
   const count = first.findIndex(
     (run, index) => !run.bold && run.text.trim() !== '' && !insideBoldWord(first, index),
   );
   if (count <= 0) return;
+  const head = first.slice(0, count);
   const cells = [first.slice(count), ...others];
   return {
-    label: cellText(first.slice(0, count)),
+    heading: headingMarkdown([{ ...line, cells: [head] }]),
+    label: cellText(head),
     rest: { ...line, cells, text: cells.map(cellText).join(' ') },
   };
 }
@@ -306,7 +371,7 @@ function abstractLabel(line: Line): { rest: Line; title: string } | undefined {
 function runInHeading(
   line: Line,
   previous: Line | undefined,
-): { rest: Line; title: string } | undefined {
+): { heading: string; rest: Line; title: string } | undefined {
   if ((previous && !/[.!?:]["”’)]?$/.test(previous.text)) || isCaptionStart(line)) return;
   const found = leadingLabel(line);
   if (
@@ -316,7 +381,11 @@ function runInHeading(
     !/^(?:(?:\d{1,2}\.)*\d{1,2}\.?\s+)?\p{Lu}/u.test(found.label)
   )
     return;
-  return { rest: found.rest, title: found.label.replace(/[.:]$/, '').trim() };
+  return {
+    heading: found.heading,
+    rest: found.rest,
+    title: found.label.replace(/[.:]$/, '').trim(),
+  };
 }
 
 /**
@@ -325,7 +394,7 @@ function runInHeading(
  * own. The label ends in a colon and holds no comma or initials, so a bold author name
  * opening an entry (`Funder DC:`, `Funder, D. C.:`) stays in the list.
  */
-function backMatterLabel(line: Line): { rest: Line; title: string } | undefined {
+function backMatterLabel(line: Line): { heading: string; rest: Line; title: string } | undefined {
   const found = leadingLabel(line);
   if (
     !found ||
@@ -335,7 +404,7 @@ function backMatterLabel(line: Line): { rest: Line; title: string } | undefined 
   )
     return;
   const title = found.label.replace(/:$/, '').trim();
-  return kindFromTitle(title) ? { rest: found.rest, title } : undefined;
+  return kindFromTitle(title) ? { heading: found.heading, rest: found.rest, title } : undefined;
 }
 
 /**
@@ -346,9 +415,9 @@ function backMatterLabel(line: Line): { rest: Line; title: string } | undefined 
 function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: boolean): Collected {
   const { bodySize, lines } = layout;
   const edges = columnEdges(lines, bodySize);
-  const out: Collected = { abstract: [], keywords: [], notes: [], roots: [] };
-  const stack: RawSection[] = [];
   const front: Line[] = [];
+  const out: Collected = { abstract: [], front, keywords: [], notes: [], roots: [] };
+  const stack: RawSection[] = [];
   const partTitles = new Set<string>();
   // Widened so the checks below see the moves `startBody` makes.
   let state = 'front' as 'front' | 'abstract' | 'body';
@@ -401,7 +470,13 @@ function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: bo
     }
     if (stack.length === 0)
       placeSection(
-        { lines: [], sections: [], style: { bold: false, size: 0, upper: false }, title: '' },
+        {
+          heading: '',
+          lines: [],
+          sections: [],
+          style: { bold: false, size: 0, upper: false },
+          title: '',
+        },
         out.roots,
         stack,
       );
@@ -528,7 +603,7 @@ function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: bo
 
       // A heading wrapped over several lines: each further line has the same style, and the
       // line before it stopped only because the next word would not fit.
-      let text = line.text.trim();
+      const headingLines = [line];
       for (
         let last = line, next = lines[i + 1];
         next && (line.bold || line.size > bodySize + 0.9);
@@ -540,19 +615,20 @@ function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: bo
           next.bold === last.bold &&
           !headingOf(next, bodySize)?.strong &&
           words(next.text) <= 12 &&
-          !/[.:]$/.test(text) &&
+          !/[.:]$/.test(last.text.trim()) &&
           last.y - next.y < last.size * 1.6 &&
           !CAPTION_START.test(next.text) &&
           wrapped(last, next, edges);
         if (!joins) break;
-        text = `${text} ${next.text.trim()}`;
+        headingLines.push(next);
         i++;
       }
       open({
+        heading: headingMarkdown(headingLines),
         lines: [],
         sections: [],
         style,
-        title: text,
+        title: headingLines.map((part) => part.text.trim()).join(' '),
         ...(heading.depth && { depth: heading.depth }),
       });
       continue;
@@ -605,6 +681,7 @@ function collect(layout: Layout, title: Set<Line>, notes: NoteLines, lenient: bo
       const number = /^((?:\d{1,2}\.)*\d{1,2})\.?\s/.exec(runIn.title)?.[1];
       const style = { ...styleOf(line, runIn.title), bold: true, runIn: true };
       open({
+        heading: runIn.heading,
         lines: [runIn.rest],
         sections: [],
         style,
@@ -679,7 +756,7 @@ function convert(
   layout: Layout,
   ctx: PdfContext,
 ): Section | undefined {
-  const printed = splitSectionNumber(escapeInline(raw.title.replace(/[.:]$/, '')), undefined);
+  const printed = splitSectionNumber(raw.heading.replace(/[.:]$/, ''), undefined);
   const id = issueId(ctx.sectionIds, undefined, `s${ctx.sectionIds.size + 1}`);
   // Back matter set smaller than the body keeps its text: small means small for this section.
   const blocks = flow(

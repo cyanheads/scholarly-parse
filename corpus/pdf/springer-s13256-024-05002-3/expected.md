@@ -55,7 +55,7 @@ We report the case of a 47-year-old white Middle Eastern female, who was apparen
 | Sodium | 135–145 | 136 |
 | Calcium (Ca), serum | 8.4–10 | 8.51 |
 | Mg | 1.6–2.6 | 2 |
-| Troponin high sensitivity quan- | 0.008–0.02 | 0.027 |
+| Troponin high sensitivity quantitative | 0.008–0.02 | 0.027 |
 
 **Table 2.** Labratory results for Hemolytic workup
 
@@ -66,16 +66,21 @@ We report the case of a 47-year-old white Middle Eastern female, who was apparen
 | Lactate dehydrogenase total (LDH) | 135–214 | 836 |
 | Haptoglobin | 0.3–2 | 0.01 |
 | Reticulocytes % |  | 25.84 |
-| Direct Coombs test (DCT) |  | Positive + 4 |
+| Direct Coombs test (DCT) |  | Positive + 4 (IgG) / + 2 (C3d) |
+| Indirect Coombs test (ICT) |  | Positive + 3 |
 
 **Table 3.** Viral and Serological testing results
 
-| Test name | First day of admission |
-| --- | --- |
-| HIV Abs screening | Nonreactive |
-| Epstein–Barr virus IgG/IgM | Reactive/NR |
-| HCV | Nonreactive |
-| HBsAg screening | Nonreactive |
+| Test name | First day of admission | Fifth day of admission | Seventh day of admission |
+| --- | --- | --- | --- |
+| HIV Abs screening | Nonreactive |  |  |
+| Epstein–Barr virus IgG/IgM | Reactive/NR |  |  |
+| HCV | Nonreactive |  |  |
+| HBsAg screening | Nonreactive |  | Nonreactive |
+| HBc total |  | Reactive |  |
+| HBc IgM |  | Nonreactive |  |
+| HBsAb (anti-s) |  |  | Reactive 87.3 |
+| HBe Ab |  |  | Reactive |
 
 ## Discussion
 

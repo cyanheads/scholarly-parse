@@ -184,6 +184,7 @@ function stringOf(value: unknown): string | undefined {
   return;
 }
 
+/** Front matter; `visibleTitle` is the title the first page sets, already inline Markdown. */
 function extractMetadata(
   pdf: LoadedPdf,
   visibleTitle: string | undefined,
@@ -194,7 +195,7 @@ function extractMetadata(
   const title =
     visibleTitle ??
     (infoTitle && !PLACEHOLDER_TITLE.test(infoTitle) && infoTitle.split(/\s+/).length >= 3
-      ? infoTitle
+      ? escapeInline(infoTitle)
       : undefined);
   const creators = Array.isArray(xmp['dc:creator'])
     ? (xmp['dc:creator'] as unknown[]).map(stringOf).filter((name): name is string => !!name)
@@ -217,7 +218,7 @@ function extractMetadata(
       .filter(Boolean) ?? [];
   const allKeywords = keywords.length > 0 ? keywords : infoKeywords;
   return {
-    ...(title && { title: escapeInline(title) }),
+    ...(title && { title }),
     ...(authors.length > 0 && { authors }),
     ...(doi && { identifiers: { doi } }),
     ...(allKeywords.length > 0 && { keywords: allKeywords }),

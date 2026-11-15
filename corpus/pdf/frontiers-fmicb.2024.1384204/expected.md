@@ -1,4 +1,4 @@
-# Comparative analysis of the soil microbiome and carbohydrate content of Anthoxanthum nitens (Sweetgrass) and other Poaceae grass tissues and associated soils
+# Comparative analysis of the soil microbiome and carbohydrate content of *Anthoxanthum nitens* (Sweetgrass) and other Poaceae grass tissues and associated soils
 
 Marissa L. King, Barinder Bajwa, Naomi Hanna, Xiaohui Xing, Kristin E. Low, Patrick Neuberger, Erin Hall, Michael Veltri, Brett Weighill, Leeann Klassen, Noreen Plain Eagle, William Big Bull, Laura S. Lynes, Tony Montina, Philippe J. Thomas, Monika A. Gorzelak, D. Wade Abbott  
 DOI: 10.3389/fmicb.2024.1384204
@@ -59,9 +59,19 @@ Statistical analyses were carried out using normalized read abundances and class
 
 |  |  |  |
 | --- | --- | --- |
-| Sample | Top BLAST hit | Percent |
-
-identity (%)
+| Sample | Top BLAST hit | Percent identity (%) |
+| GH1 | *Anthoxanthum nitens* voucher CMN:CAN | 97.3 |
+| GH2 | *Anthoxanthum nitens* voucher CMN:CAN | 98.1 |
+| GH3 | *Anthoxanthum nitens* voucher CMN:CAN | 97.7 |
+| GH4 | *Anthoxanthum nitens* voucher CMN:CAN | 97.9 |
+| GH5 | *Anthoxanthum nitens* voucher CMN:CAN | 97.6 |
+| GH6 | *Anthoxanthum nitens* voucher CMN:CAN | 98.3 |
+| F1 | *Elymus glaucus* strain QH-5 | 83.6 |
+| F2 | *Bromus pumpellianus* voucher CAN:528978 | 96.3 |
+| F3 | *Setaria chondrachne* voucher HCCN-PJ008548-PB-261 | 79.5 |
+| F4 | *Elymus repens* isolate ER1 | 92.5 |
+| F5 | *Elymus repens* isolate ER1 | 89.4 |
+| F6 | *Elymus repens* isolate ER1 | 98.9 |
 
 ### 2.8 Soil chemistry
 

@@ -295,6 +295,10 @@ where, *a*\_1 = 0.9411 with 95% CI (0.8886, 0.9937), *b*\_1 = 117.8 with 95% CI 
 | *ψ*(*t*) | effectiveness of infection | Eq (23) | [35, 38] |
 |  | • acquired immunity | (Fig 2b) |  |
 | *P*(*τ*) | Viral load | Eq (24) (Fig 3) | [35, 39, 40] |
+|  |  | (Fig 3) |  |
+| *r*(*t*), *d*(*t*) | and death rates | Eq (25) | [35] |
+|  | and death rates | (Fig 5) |  |
+| *V*(*t*) | total vaccination function | Eq (20) | - |
 
 Now we fit the same data of vaccine-induced immunity with a stretched power-law function given by
 

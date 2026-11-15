@@ -1,16 +1,18 @@
 /**
  * @fileoverview A section's lines as typed blocks: paragraphs split at spacing and
  * indentation, captioned figures and tables (rows read from the lines of several cells
- * beside the caption, aligned into columns), and display equations.
+ * beside the caption and the lines of one cell among them, aligned into columns), and
+ * display equations.
  * @module src/formats/pdf/blocks
  */
 import type { Block, FigureBlock, TableBlock } from '../../model/document.js';
 import { largest } from '../../model/extremes.js';
 import { type GridBudget, truncatedGridMessage } from '../../model/table-grid.js';
 import type { PdfContext } from './context.js';
+import { CAPTION_START, TABLE_LABEL } from './float-labels.js';
 import { cellMarkdown, joinLines, lineMarkdown } from './inline.js';
 import type { Layout, Line } from './layout.js';
-import { CAPTION_START, formulaOf, isCaptionStart } from './lines.js';
+import { formulaOf, isCaptionStart } from './lines.js';
 import type { Run } from './load.js';
 
 /**
@@ -120,7 +122,10 @@ function rowCells(row: Line): Run[][] {
  * spans the cells of the fuller rows cover; each cell lands in the column it overlaps, or
  * else the nearest one left of it, so a row with an empty cell or a spanning header keeps
  * the others under their headings. Every row is as wide as the columns, and rows are kept
- * in order while the grid fits the cells left.
+ * in order while the grid fits the cells left. A line of one cell set closer under the line
+ * before it than 0.85 of the table's row pitch (the median gap between consecutive lines of
+ * several cells), in a column that line fills, continues that cell: a wrapped cell's next
+ * line. Without a pitch to measure, each line is a row.
  */
 function tableGrid(rows: Line[], budget: GridBudget): { rows: string[][]; truncated: boolean } {
   const split = rows.map(rowCells);
@@ -141,15 +146,35 @@ function tableGrid(rows: Line[], budget: GridBudget): { rows: string[][]; trunca
   }
   const kept = Math.min(split.length, Math.floor(budget.cells / spans.length));
   budget.cells -= kept * spans.length;
-  const grid = split.slice(0, kept).map((cells, k) => {
+  const pitches = rows
+    .slice(1)
+    .flatMap((row, k) =>
+      (split[k] as Run[][]).length > 1 && (split[k + 1] as Run[][]).length > 1
+        ? [(rows[k] as Line).y - row.y]
+        : [],
+    )
+    .sort((a, b) => a - b);
+  const pitch = pitches[Math.floor(pitches.length / 2)] ?? 0;
+  const grid: string[][] = [];
+  for (const [k, cells] of split.slice(0, kept).entries()) {
     const out = Array<string>(spans.length).fill('');
     for (const cell of cells) {
       const column = columnOf(spans, ...extent(cell));
       const text = cellMarkdown(cell, rows[k] as Line);
       out[column] = out[column] ? `${out[column]} ${text}` : text;
     }
-    return out;
-  });
+    // Only a line after the first has a row above it, so `rows[k - 1]` is read only then.
+    const above = grid.at(-1);
+    const column = cells.length === 1 ? columnOf(spans, ...extent(cells[0] as Run[])) : undefined;
+    if (
+      above &&
+      column !== undefined &&
+      above[column] &&
+      (rows[k - 1] as Line).y - (rows[k] as Line).y < 0.85 * pitch
+    )
+      above[column] = joinLines([above[column] as string, out[column] as string]);
+    else grid.push(out);
+  }
   return { rows: grid, truncated: kept < split.length };
 }
 
@@ -170,8 +195,9 @@ function columnOf(spans: [number, number][], left: number, right: number): numbe
 }
 
 /**
- * Each table caption's rows: the lines of several cells after it or, for a caption set
- * below its table, right before it on the same page.
+ * Each table caption's rows: the lines of several cells after it, with the lines of one
+ * cell among them ({@link continuesTable}), or, for a caption set below its table, the
+ * lines of several cells right before it on the same page.
  */
 function tableRows(
   lines: Line[],
@@ -183,17 +209,19 @@ function tableRows(
     !!line && line.cells.length > 1 && !claimed.has(line);
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i] as Line;
-    if (
-      !isCaptionStart(line) ||
-      !/^(?:Supplementary\s+)?Table/i.test(CAPTION_START.exec(line.text)?.[1] ?? '')
-    )
+    if (!isCaptionStart(line) || !TABLE_LABEL.test(CAPTION_START.exec(line.text)?.[1] ?? ''))
       continue;
     const caption = [line];
     let end = i;
     while (end + 1 < lines.length && continuesCaption(lines[end + 1] as Line, caption, lineGap))
       caption.push(lines[++end] as Line);
     const found: Line[] = [];
-    for (let j = end + 1; multiCell(lines[j]); j++) found.push(lines[j] as Line);
+    for (
+      let j = end + 1;
+      multiCell(lines[j]) || continuesTable(lines[j], found.at(-1), lineGap);
+      j++
+    )
+      found.push(lines[j] as Line);
     if (found.length === 0) {
       for (let j = i - 1; multiCell(lines[j]) && lines[j]?.page === line.page; j--)
         found.unshift(lines[j] as Line);
@@ -204,15 +232,36 @@ function tableRows(
   return { claimed, rows };
 }
 
-/** Whether `line` goes on with the caption so far. A label set alone on its line runs into text of another size or column width. */
+/**
+ * Whether a line of one cell goes on with a table whose last row so far is `last`: set in
+ * that row's size, in its page and column, within 1.6 line gaps under it, and not a caption
+ * of its own. A wrapped cell's next line is one, and so is a row label whose cells are empty.
+ */
+function continuesTable(line: Line | undefined, last: Line | undefined, lineGap: number): boolean {
+  if (!line || !last || line.cells.length !== 1 || isCaptionStart(line)) return false;
+  const gap = last.y - line.y;
+  return (
+    line.page === last.page &&
+    line.column === last.column &&
+    Math.abs(line.size - last.size) <= 0.3 &&
+    gap > 0 &&
+    gap <= 1.6 * lineGap
+  );
+}
+
+/**
+ * Whether `line` goes on with the caption so far. A label set alone on its line runs into
+ * text of another size or column width that starts where it does or is centred under it.
+ */
 function continuesCaption(line: Line, caption: Line[], lineGap: number): boolean {
   const last = caption.at(-1) as Line;
   const labelOnly =
     caption.length === 1 && CAPTION_START.exec(last.text)?.[0].length === last.text.length;
   if (line.page !== last.page || isCaptionStart(line) || line.cells.length > 1) return false;
+  const centre = (of: Line) => (of.x + of.right) / 2;
   if (
     labelOnly
-      ? Math.abs(line.x - last.x) > 4
+      ? Math.abs(line.x - last.x) > 4 && Math.abs(centre(line) - centre(last)) > 4
       : line.column !== last.column || Math.abs(line.size - last.size) > 0.6
   )
     return false;
@@ -224,7 +273,7 @@ function captionBlock(lines: Line[]): FigureBlock | TableBlock {
   const match = CAPTION_START.exec(first);
   const label = match?.[1]?.replace(/\s+/g, ' ');
   const caption = joinLines([match ? first.slice(match[0].length) : first, ...rest]);
-  if (label && /^(?:Supplementary\s+)?Table/i.test(label)) {
+  if (label && TABLE_LABEL.test(label)) {
     return {
       type: 'table',
       label,

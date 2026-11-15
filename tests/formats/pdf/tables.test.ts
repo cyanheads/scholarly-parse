@@ -85,6 +85,99 @@ describe('PDF tables', () => {
     ]);
   });
 
+  it('continues a caption whose lines are centred under a label set alone on its line', async () => {
+    // Each line centred on x 306 at its 10 pt Helvetica width (40.02, 137.83, 175.65).
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            ...OPENING,
+            { text: 'TABLE 1', x: 286, y: 500 },
+            { text: 'Mean fruit yield of each cultivar', x: 237.1, y: 488 },
+            { text: 'over three seasons, in tonnes a hectare', x: 218.2, y: 476 },
+            { text: 'Cultivar', x: 150, y: 460 },
+            { text: 'Yield', x: 300, y: 460 },
+            { text: 'Corfu', x: 150, y: 448 },
+            { text: '1,503', x: 300, y: 448 },
+          ],
+        ],
+      }),
+    );
+    expect(tablesOf(document.body)).toMatchObject([
+      {
+        caption: 'Mean fruit yield of each cultivar over three seasons, in tonnes a hectare',
+        label: 'TABLE 1',
+        rows: [
+          ['Cultivar', 'Yield'],
+          ['Corfu', '1,503'],
+        ],
+      },
+    ]);
+  });
+
+  it('keeps single-cell lines under a row in the table: a wrapped cell goes on with it, a label stands alone (#49)', async () => {
+    const row = (y: number, cells: [string, number][], font?: 'bold'): TextSpec[] =>
+      cells.map(([text, x]) => ({ ...(font && { font }), size: 8, text, x, y }));
+    // Rows 12 points apart and a wrapped cell's next line 7 points under it, all inside the
+    // frame the running text sets, which ends near x 320.
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            ...OPENING,
+            { font: 'bold', size: 9, text: 'Table 2.', x: 72, y: 480 },
+            { size: 9, text: 'Laboratory results', x: 110, y: 480 },
+            ...row(
+              465,
+              [
+                ['Test name', 72],
+                ['Normal range', 200],
+                ['Results', 280],
+              ],
+              'bold',
+            ),
+            ...row(453, [
+              ['Direct Coombs test (DCT)', 72],
+              ['Positive + 4', 280],
+            ]),
+            ...row(446, [['(IgG) / + 2', 280]]),
+            ...row(439, [['(C3d)', 280]]),
+            ...row(427, [
+              ['Indirect Coombs test (ICT)', 72],
+              ['Positive + 3', 280],
+            ]),
+            ...row(415, [
+              ['Troponin high sensitivity quan-', 72],
+              ['0.008-0.02', 200],
+              ['0.027', 280],
+            ]),
+            ...row(408, [['titative', 72]]),
+            ...row(396, [['HBc total', 72]]),
+            ...row(384, [
+              ['Haptoglobin', 72],
+              ['0.3-2', 200],
+              ['0.01', 280],
+            ]),
+            ...paragraph(['Running text of the paper goes on below the table here.'], { y: 340 }),
+          ],
+        ],
+      }),
+    );
+    expect(tablesOf(document.body)).toMatchObject([
+      {
+        headerRows: 1,
+        rows: [
+          ['Test name', 'Normal range', 'Results'],
+          ['Direct Coombs test (DCT)', '', 'Positive + 4 (IgG) / + 2 (C3d)'],
+          ['Indirect Coombs test (ICT)', '', 'Positive + 3'],
+          ['Troponin high sensitivity quantitative', '0.008-0.02', '0.027'],
+          ['HBc total', '', ''],
+          ['Haptoglobin', '0.3-2', '0.01'],
+        ],
+      },
+    ]);
+  });
+
   it('draws every table of a document from one grid budget, and says where it ran out', async () => {
     const first = staircase('Table 1', 1_000);
     const second = staircase('Table 2', 1_000);

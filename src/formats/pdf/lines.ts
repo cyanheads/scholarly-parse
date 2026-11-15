@@ -3,6 +3,7 @@
  * sure that is, a caption's first line, a figure's panel label, a display equation.
  * @module src/formats/pdf/lines
  */
+import { CAPTION_START } from './float-labels.js';
 import { cellText, type Line } from './layout.js';
 
 /** Headings a paper commonly uses, matched after any numbering is removed. */
@@ -14,10 +15,6 @@ export const REFERENCES_HEADING =
 export const ABSTRACT_HEADING = /^(?:abstract|summary)$/i;
 export const ABSTRACT_RUN_IN = /^(?:abstract|summary)\b\s*[.:—–-]?\s*(?=\S)/i;
 export const KEYWORDS_LINE = /^(?:key\s?words?|index terms)\b\s*[.:—–-]?\s*/i;
-
-/** A caption's label at the start of a line: `Figure 3.`, `Fig. 2:`, `Table S1 |`. */
-export const CAPTION_START =
-  /^((?:Supplementary\s+|Extended\s+Data\s+)?(?:Fig(?:ure)?s?|FIG(?:URE)?S?|Table|TABLE|Scheme|Chart|Box)\.?\s*S?\d+[A-Za-z]?)\s*(?:[.:|—–]\s*|\s+(?=\p{Lu})|$)/u;
 
 /** A printed section number: `1`, `2.1`, `IV.`, `B.` (the last two as IEEE sets them). */
 export function stripNumber(text: string): string {
@@ -100,8 +97,11 @@ export function headingOf(line: Line, bodySize: number): Heading | undefined {
   if (line.cells.length > 1 || line.math > 0.3) return;
   const bare = bareTitle(text);
   const known = KNOWN_HEADING.test(bare) && words(bare) <= 6;
-  // A panel label ("B)") or a fragment starting in lower case is figure lettering, not a heading.
-  if ((bare.match(/\p{L}/gu)?.length ?? 0) < 2 || (/^\p{Ll}/u.test(bare) && !known)) return;
+  // A panel label ("B)") or a fragment starting in lower case is figure lettering, not a
+  // heading; a symbol whose lower-case letters a digit or capital follows (`m6A`, `mTOR`, `p53`) may open one.
+  const symbol = /^\p{Ll}+[\p{N}\p{Lu}]/u.test(bare);
+  if ((bare.match(/\p{L}/gu)?.length ?? 0) < 2 || (/^\p{Ll}/u.test(bare) && !known && !symbol))
+    return;
   const numbered = /^((?:\d{1,2}\.)*\d{1,2})\.?\s+\p{Lu}/u.exec(text);
   const roman = /^[IVX]{1,4}\.\s+\p{Lu}/u.test(text);
   const big = line.size >= bodySize + 0.9 && line.size <= bodySize * 2.6;

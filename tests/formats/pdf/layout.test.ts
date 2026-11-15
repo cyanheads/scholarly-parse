@@ -73,6 +73,38 @@ describe('layout', () => {
     expect(texts.map((text) => text.trim())).not.toContain('4');
   });
 
+  it('reads a regular-face quotation mark hugging a bold word as part of a bold line', () => {
+    const bold = (text: string, x: number) => run(text, x, 600, { bold: true });
+    const regular = (text: string, x: number) => run(text, x, 600);
+    // Runs are 6 points a character: a word space is 4 points, a mark abutting its word 0.
+    const lineOf = (runs: Run[]) =>
+      layout([{ height: 792, number: 1, runs, width: 612 }]).lines.map((line) => [
+        line.text,
+        line.bold,
+      ]);
+    expect(
+      lineOf([
+        bold('Acts as a', 72),
+        regular('“', 130),
+        bold('Beacon', 136),
+        regular('”', 172),
+        bold('to Readers', 182),
+      ]),
+    ).toEqual([['Acts as a “Beacon” to Readers', true]]);
+    // Opening and closing the line, with nothing on the mark's other side.
+    expect(lineOf([regular('‘', 72), bold('Beacon', 78), regular('’', 114)])).toEqual([
+      ['‘Beacon’', true],
+    ]);
+    // A mark set apart from the word, a straight quote, and other punctuation stay regular.
+    expect(lineOf([bold('Acts as a', 72), regular('“', 130), bold('Beacon', 140)])[0]?.[1]).toBe(
+      false,
+    );
+    expect(lineOf([bold('Beacon', 72), regular('"', 108), bold('to Readers', 118)])[0]?.[1]).toBe(
+      false,
+    );
+    expect(lineOf([bold('See Table S4', 72), regular(').', 144)])[0]?.[1]).toBe(false);
+  });
+
   it('leaves a split lowercase letter alone outside a bold heading', () => {
     const texts = lineTexts([
       run('t', 72, 600),
@@ -260,6 +292,108 @@ describe('layout', () => {
         'A heading set across the page in two runs on one baseline',
       ]);
       expect(lines.filter(([column]) => column === -1)).toHaveLength(1);
+    });
+
+    describe('a table under its caption at the foot of the page (#49)', () => {
+      /** A caption at y 570 with nothing beside it, then 7 pt rows from the cells `[text, x]` of each row. */
+      const table = (caption: string, rows: [string, number][][]): Run[] => [
+        run(caption, 72, 570, { size: 8 }),
+        ...rows.flatMap((cells, i) =>
+          cells.map(([text, x]) => run(text, x, 556 - 10 * i, { size: 7 })),
+        ),
+      ];
+      /** The page's lines other than the two columns of prose `columns()` sets above the table. */
+      const footLines = (runs: Run[]) =>
+        pageLines(runs).filter(([, text]) => !String(text).includes('column'));
+
+      it('reads its rows whole when some row has cells on both sides of the gutter', () => {
+        const rows: [string, number][][] = [
+          [
+            ['Test name', 72],
+            ['First day', 200],
+            ['Fifth day', 340],
+            ['Seventh day', 460],
+          ],
+          [
+            ['HIV', 72],
+            ['Nonreactive', 200],
+          ],
+          [
+            ['HBc total', 72],
+            ['Reactive', 340],
+          ],
+          [
+            ['HBe Ab', 72],
+            ['Reactive', 460],
+          ],
+        ];
+        const runs = [...columns(), ...table('Table 3 Viral and serological tests', rows)];
+        expect(footLines(runs)).toEqual([
+          [-1, 'Table 3 Viral and serological tests'],
+          [-1, 'Test name First day Fifth day Seventh day'],
+          [-1, 'HIV Nonreactive'],
+          [-1, 'HBc total Reactive'],
+          [-1, 'HBe Ab Reactive'],
+        ]);
+        // The columns above it are read as before, left then right.
+        expect(
+          pageLines(runs)
+            .slice(0, 20)
+            .map(([column]) => column),
+        ).toEqual([...Array(10).fill(0), ...Array(10).fill(1)]);
+      });
+
+      it('keeps the columns of a table in one column and of rows set above their caption', () => {
+        const left: [string, number][][] = [
+          [
+            ['Test name', 72],
+            ['First day', 200],
+          ],
+          [
+            ['HIV', 72],
+            ['Nonreactive', 200],
+          ],
+        ];
+        expect(
+          footLines([...columns(), ...table('Table 3 Viral and serological tests', left)]),
+        ).toEqual([
+          [0, 'Table 3 Viral and serological tests'],
+          [0, 'Test name First day'],
+          [0, 'HIV Nonreactive'],
+        ]);
+        // Rows on both sides of the gutter, their caption set below them.
+        const above = [
+          run('Test name', 72, 570, { size: 7 }),
+          run('Fifth day', 340, 570, { size: 7 }),
+          run('HIV', 72, 560, { size: 7 }),
+          run('Reactive', 340, 560, { size: 7 }),
+          run('Table 4 Rows set above their caption', 72, 548, { size: 8 }),
+        ];
+        expect(footLines([...columns(), ...above])).toEqual([
+          [0, 'Test name'],
+          [0, 'HIV'],
+          [0, 'Table 4 Rows set above their caption'],
+          [1, 'Fifth day'],
+          [1, 'Reactive'],
+        ]);
+      });
+
+      it('looks for them in time linear in a page of captions', async () => {
+        // Under columns of prose that set the body size, `n` rows that are each a small table
+        // caption with nothing beside it and small rows after it.
+        const page = (n: number) => {
+          const prose = n / 4;
+          const height = 200 + 12 * prose + 8 * n;
+          const runs = [
+            ...columns(height - 100, prose),
+            ...Array.from({ length: n }, (_, i) =>
+              run('Table 1', 72, height - 120 - 12 * prose - 8 * i, { size: 7 }),
+            ),
+          ];
+          return [{ height, number: 1, runs, width: 612 }];
+        };
+        await expectLinear(page, layout, { from: 2_000, to: 32_000 });
+      });
     });
 
     it('assembles each side’s rows in time linear in a page of runs', async () => {

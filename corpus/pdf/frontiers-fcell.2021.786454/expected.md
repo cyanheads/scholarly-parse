@@ -1,4 +1,4 @@
-# Modulation of Phase Separation by RNA: A Glimpse on N -Methyladenosine Modification
+# Modulation of Phase Separation by RNA: A Glimpse on N^6-Methyladenosine Modification
 
 DOI: 10.3389/fcell.2021.786454
 
@@ -44,7 +44,7 @@ In addition to acting as seeds and platforms for formation of RNP granules, RNA 
 
 Contrary to acting as “seeds” or “glue,” when the concentration of RNA is excessively high, it exhibits a destructive effect on the already formed BioMCs. This effect may be caused by charge inversion due to the introduction of massive negatively charged RNA or hindering of protein–protein interaction by excess RNA (Banerjee et al., 2017; Mann et al., 2019). Given that the concentration of RNA in the nucleus is more than 10 times higher than that of the cytoplasm (Maharana et al., 2018), RNA in the nucleus may serve as buffer to limit the abnormal aggregation of FUS, TDP43, hnRNPA1, and other nuclear proteins (Maharana et al., 2018; Mann et al., 2019). On the contrary, under senescence or repeated external stimuli, TDP43 abnormally locate and accumulate in the cytoplasm to produce pathological aggregation (Gasset-Rosa et al., 2019). Notably, a dynamic RNA/protein ratio change may play a role in controlling RNP granule with tunable lifetimes through either promoting or preventing phase separation (Banerjee et al., 2017; Henninger et al., 2021). For instance, Henninger et al. (2021) reported that newborn RNAs contribute to feedback control of transcriptional condensates by reentrant phase transition. Specifically, small non-coding RNAs produced at the initiation of transcription promote the formation of transcription condensates mediated by phase separation, but the large amount of long-strand RNA produced by transcription elongation will in turn promote the dispersion of the transcription condensates, by which newborn RNA completes feedback regulation. Collectively, RNA plays various roles during phase separation depending on the context.
 
-### RNA m6A Modification Modulates Phase Separation
+### RNA m^6A Modification Modulates Phase Separation
 
 As mentioned above, the multivalent interaction is the key event for both formation and modulation of phase separation-mediated BioMCs. Recent studies showed that the interaction is widely affected by post-translational modification (PTM) of proteins participating in phase separation (Hofweber and Dormann, 2019). For instance, arginine methylation at RGG regions in LCDs reduces the phase separation potential of hnRNPA2 by disrupting arginine-mediated arginine–aromatic interactions (Ryan et al., 2018). Delocalized pi system can be provided by both aromatic amino acids and nucleobases, implying RNA–protein interaction is also a potential target modulated by arginine methylation. Proving this notion, arginine demethylation at the RGG region of G3BP1, which is considered important for RNA binding and initiation of SG establishment (3–6), is prerequisite for SG assembly (Tsai et al., 2016).
 
@@ -54,9 +54,7 @@ Recently, several groups have reported that multivalent m^6A-modified RNAs act a
 
 In this part, based on the current literature, we describe how m^6A modification alters the properties of target RNA (including RNA conformation, the capacity for proteinbinding, and the affinity to interact with other RNAs) and further discuss how these changes potentially contribute to phase separation.
 
-m^6A Acts as a “Beacon” to Recruit Reader
-
-### Proteins
+### m^6A Acts as a “Beacon” to Recruit Reader Proteins
 
 Interacting with diverse m^6A readers is recognized as a major mechanism for regulating various fate for m^6A-harboring RNA.
 
@@ -70,9 +68,7 @@ Another member of YTH domain-harboring protein with the potential to undergo pha
 
 As a whole, several m^6A readers themselves have a potential to trigger phase separation, and their anchoring on m^6A-modified RNA strongly enhances this potential.
 
-m^6A Acts as a “Structural Switcher” to
-
-### Modulate the Spectrum of RNA–Protein and RNA–RNA Interaction
+### m^6A Acts as a “Structural Switcher” to Modulate the Spectrum of RNA–Protein and RNA–RNA Interaction
 
 Liu et al. (2015) demonstrated that m^6A acts as a “structural switcher” to change the conformation of RNA harboring m^6A modification. Although m^6A modification could not preclude the Watson–Crick base pairing between A and U, it induces the methylamino group rotating from energetically favored *syn* geometry on the Watson–Crick face to higher-energy anticonformation, thus destabilizing the RNA duplex. The notion of m^6A destabilizing base pairing was further verified by the kinetic research that showed introducing m^6A significantly lowers the rate of duplex annealing, providing support for how m^6A reshapes the kinetics of conformational transition toward single-string preference (Shi et al., 2019). On the other hand, at the unstructured region, m^6A modification stabilizes the conformation due to stronger base–stacking interaction (Roost et al., 2015). Likewise, an *in vivo* transcriptome-wide RNA structure mapping study presented direct structural evidence that m^6A affects RNA structure, favoring the transition from paired to unpaired RNA (Spitale et al., 2015).
 
@@ -84,7 +80,7 @@ Another role for molecular switch mediated by m^6A is to regulate the kinetics o
 
 **FIGURE 3.** Two proposed working patterns for m^6A-related BioMCs. (A) m^6A modification acts as a sorting marker to decide RNA components and their associated molecular partners inside the condensates upon stress, and forming BioMCs will facilitate regulation of m^6A RNA for stress response. (B) On nascent RNAs, m^6A acts as a beacon to recruit m^6A readers, and then m^6A RNA–reader complexes stimulate formation of BioMCs, which play important roles for chromatin remodeling,
 
-### Phase Separation Provides Platforms for m6A-Regulating Bioprocesses
+### Phase Separation Provides Platforms for m^6A-Regulating Bioprocesses
 
 Although m^6A exhibits a great potential to modulate phase separation, the biological processes regulated through this manner remain largely unknown. Based on current literatures, we propose that phase separation may provide platforms for m^6A-regulating bioprocesses in two major working patterns with potential biological significance: cellular stress response and gene expression regulation (Figure 3).
 
@@ -106,10 +102,34 @@ Apart from *in vitro* experiments, the *in vivo* experiment is another available
 
 **TABLE 1.** Novel tools for site-specific m^6A editing without primary sequence changed.
 
-| Category | Reconstituted construct |
-| --- | --- |
-| CRISPR–CAS- | The fusion of YTHDF1 and dCas13b |
-| based | The fusion of YTHDF2 and dCas13b |
+| Category | Reconstituted construct | Working pattern | Ref |
+| --- | --- | --- | --- |
+| CRISPR–CAS- | The fusion of YTHDF1 and dCas13b | SgRNA guides editing system to targeted transcript, and fusioned | Rauch et al. |
+| based | The fusion of YTHDF2 and dCas13b | m^6A readers function to achieve translation/degradation | (2018) |
+|  |  | modulation |  |
+|  | The fusion of M3M14 and dCas9 | PAMer and sgRNA guide editing system to targeted site and | Liu et al. |
+|  | The fusion of ALKBH5/FTO and dCas9 | fusioned m^6A writer/eraser function to install/erase m^6A | (2019b) |
+|  |  | modification |  |
+|  | The fusion of ALKBH5 and dCas13b | SgRNA guides editing system to targeted transcript and fusioned | Li et al. |
+|  |  | ALKBH5 functions to erase m^6A modification | (2020b) |
+|  | The fusion of dCas13b and 10 copies of GCN4 peptides | SgRNA guides dCas13b–GCN4 fusions to targeted transcript and | Mo et al. |
+|  | cooperates with scFv-fusion RNA demethylase | further multiply recruit scFv fusion RNA demethylase to erase m^6A | (2020) |
+|  |  | modification |  |
+|  | The fusion of METTL3/METTL3:METTL14 and dCas13 | SgRNA guides editing system to targeted transcript and fusioned | Wilson et al. |
+|  |  | METTL3/METTL3:METTL14 function to achieve transmethylation | (2020) |
+|  | The RNA anchor probes containing dCas13b and CIBN (a | The RNA anchor binds the targeted RNA *via* crRNA, and METTL3/ | Zhao et al. |
+|  | truncated version of light-sensitive protein CIB1) cooperate with | METTL14 or FTO is recruited as the attraction of CRY2PHR and | (2020) |
+|  | the effector probe containing CRY2PHR(the photolyase | CIBN heterodimerization upon blue light irradiation to install/erase |  |
+|  | homology region of CRY2) and METTL3/METTL14 or FTO | m^6A modification |  |
+|  | The fusion of dCas13a and ALKBH5 | SgRNA guides editing system to targeted transcript, and fusioned | Chen et al. |
+|  |  | ALKBH5 functions to erase m^6A modification | (2021b) |
+| CRISPR–CAS- | The fusion of an effector protein, a RNA hairpin-binding protein, | gRNA guide editing system to targeted site, RNA hairpin-binding | Rauch et al. |
+| inspired | and ss-RNA-binding protein. YTHDF1/YTHDF2 was employed | protein binds to the structure of gRNA, ss-RNA-binding protein | (2019) |
+|  | as effector protein, TBP/SLBP as RNA hairpin-binding protein, | stabilizes and protects the gRNA prior to target engagement, and |  |
+|  | and ORF5/HBEGF/β-defensin as ss-RNA-binding protein | the effector protein works in a proximity-dependent manner |  |
+| Others | The fusion of programmable RNA-binding protein PUF and | PUFs with specific mRNA-binding regions guide editing system to | Shinoda et al. |
+|  | METTL14 | targeted transcript and fusioned METTL14/FTO function to install/ | (2020) |
+|  | The fusion of programmable RNA-binding protein PUF and FTO | erase m^6A modification |  |
 
 The ideal strategy is to site specifically modulate m^6A levels and interaction spectrum of target RNA without changing the primary sequence. Recently, several biological tools have been developed to achieve site-specific m^6A editing (Table 1) (Rauch et al., 2018; Liu et al., 2019b; Rauch et al., 2019; Li et al., 2020b; Mo et al., 2020; Shinoda et al., 2020; Wilson et al., 2020; Zhao et al., 2020; Chen et al., 2021b). The approach for developing new editing biology tools that interfere with RNA modification is using gRNA as the locator for the target sequence and refined Cas protein as the adaptor for the functional effectors to anchor and modulate target RNA. m^6A writers, erasers, and readers were integrated with Cas protein to regulate m^6A modification at specific sites on target RNA (Liu et al., 2019b; Rau et al., 2019; Li et al., 2020b; Mo et al., 2020; Chen et al., 2021b). For instance, Wilson et al. (2020) created nucleus-localized and cytoplasm-localized dCas13 fusions with a truncated METTL3 methyltransferase domain (nucleus-localized) and modified METTL3:METTL14 complex (cytoplasm-localized), which were able to install m^6A in specific sites of target RNAs. Similarly, dCas13b fusions with ALKBH5 succeeded to specifically remove m^6A of targeted mRNA. It is worth noting that one of the engineered tools exhibited equal efficiency in eliminating multiple modifications on a single target as well (Li et al., 2020b).
 

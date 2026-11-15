@@ -4,11 +4,12 @@
  * a table) stay apart. A first page's margin column (a sidebar beside the abstract) is
  * split off and read first. Each page is tested for a two-column gutter, its rows are
  * rebuilt on each side of it, and lines are read left column then right within each band
- * between full-width lines. Running headers, footers, page numbers, and margin text (a
- * publisher sidebar, line numbers) are dropped.
+ * between full-width lines, a table set across both columns among them. Running headers,
+ * footers, page numbers, and margin text (a publisher sidebar, line numbers) are dropped.
  * @module src/formats/pdf/layout
  */
 import { append, largest } from '../../model/extremes.js';
+import { FLOAT_LABEL, TABLE_LABEL } from './float-labels.js';
 import type { Page, Run } from './load.js';
 
 /** A line of text in one column: one cell for prose, several for a table row. */
@@ -389,7 +390,7 @@ export function cellText(cell: Run[]): string {
 }
 
 /** Whether `right` follows `left` with no word space between them: under 0.12 em apart, no whitespace at the join. */
-function abuts(left: Run, right: Run): boolean {
+export function abuts(left: Run, right: Run): boolean {
   return (
     right.x - (left.x + left.width) <= 0.12 * right.size &&
     !/\s$/.test(left.text) &&
@@ -400,12 +401,19 @@ function abuts(left: Run, right: Run): boolean {
 /**
  * Whether the regular run at `index` sits inside a bold word: bold runs abut it on both
  * sides (`Con` · `fl` · `ict`), as pdf.js reports a ligature or an apostrophe drawn from
- * another, regular font.
+ * another, regular font. A curly quotation mark drawn so belongs to the bold word it
+ * quotes when it abuts it (an opening mark the word after it, a closing one the word
+ * before) and the run on its other side is bold or there is none: `a` · `“` · `Beacon` ·
+ * `”` · `to`.
  */
 export function insideBoldWord(runs: Run[], index: number): boolean {
   const [before, run, after] = [runs[index - 1], runs[index], runs[index + 1]];
+  if (run === undefined) return false;
+  if (/^[“‘]$/u.test(run.text))
+    return after?.bold === true && abuts(run, after) && (before === undefined || before.bold);
+  if (/^[”’]$/u.test(run.text))
+    return before?.bold === true && abuts(before, run) && (after === undefined || after.bold);
   return (
-    run !== undefined &&
     /^\S+$/.test(run.text) &&
     before?.bold === true &&
     after?.bold === true &&
@@ -538,12 +546,51 @@ function bandBreaks(leftLines: Line[], rightLines: Line[]): number[] {
   return breaks.sort((a, b) => b - a);
 }
 
+/**
+ * The rows of tables set across a two-column page, by index: after a table caption with
+ * nothing beside it, every row of small type down to the first of body-size text, caption
+ * included, when one of those rows has cells on both sides of the gutter. Such a table's
+ * cells need not cross the gutter, so its rows would otherwise split there. A table in one
+ * column, and one captioned below its rows, is not one.
+ */
+function tablesAcross(
+  page: Page,
+  rowCells: Run[][][],
+  split: number,
+  bodySize: number,
+): Set<number> {
+  const across = new Set<number>();
+  const small = (cells: Run[][]) => dominantSize(cells.flat()) < bodySize - 0.3;
+  const bothSides = (cells: Run[][]) =>
+    cells.some((cell) => left(cell) < split - 2) && cells.some((cell) => left(cell) >= split - 2);
+  for (let i = 0; i < rowCells.length; i++) {
+    const caption = rowCells[i] as Run[][];
+    if (
+      !TABLE_LABEL.test(caption.map(cellText).join(' ')) ||
+      !caption.every((cell) => rightOf(cell) <= split + page.width * 0.03)
+    )
+      continue;
+    let end = i + 1;
+    while (end < rowCells.length && small(rowCells[end] as Run[][])) end++;
+    if (rowCells.slice(i + 1, end).some(bothSides)) for (let k = i; k < end; k++) across.add(k);
+    // A caption among these rows starts no band of its own: its rows are a part of these.
+    i = end - 1;
+  }
+  return across;
+}
+
 /** A page's lines in reading order. */
-function pageLines(page: Page, rowCells: Run[][][], split: number | undefined): Line[] {
+function pageLines(
+  page: Page,
+  rowCells: Run[][][],
+  split: number | undefined,
+  bodySize: number,
+): Line[] {
   if (split === undefined) {
     return rowCells.map((cells) => makeLine(cells, page.number, 0));
   }
   // Two columns: a band of column text ends at each line that spans the gutter.
+  const across = tablesAcross(page, rowCells, split, bodySize);
   const lines: Line[] = [];
   let leftBand: Line[] = [];
   let rightBand: Line[] = [];
@@ -558,7 +605,7 @@ function pageLines(page: Page, rowCells: Run[][][], split: number | undefined): 
     leftBand = [];
     rightBand = [];
   };
-  for (const cells of rowCells) {
+  for (const [at, cells] of rowCells.entries()) {
     // A left-column heading or line may overhang the gutter a little; a table row's cell may not,
     // or a full-width table would split into two columns.
     const overhang = cells.length === 1 ? page.width * 0.03 : 2;
@@ -566,7 +613,7 @@ function pageLines(page: Page, rowCells: Run[][][], split: number | undefined): 
     const leftCells = cells.filter(
       (cell) => left(cell) < split - 2 && rightOf(cell) <= split + overhang,
     );
-    if (leftCells.length + rightCells.length < cells.length) {
+    if (across.has(at) || leftCells.length + rightCells.length < cells.length) {
       flush();
       lines.push(makeLine(cells, page.number, -1));
       continue;
@@ -577,9 +624,6 @@ function pageLines(page: Page, rowCells: Run[][][], split: number | undefined): 
   flush();
   return lines;
 }
-
-/** The label a figure or table caption starts with. */
-const FLOAT_LABEL = /^(?:Fig(?:ure)?s?|FIG(?:URE)?S?|Table|TABLE)\.?\s*S?\d/;
 
 /** Text of a line with digits generalized, so "Page 3" and "Page 4" compare equal. */
 function shape(text: string): string {
@@ -672,7 +716,7 @@ export function layout(pages: Page[]): Layout {
   }
   const all = [
     ...(margin?.lines ?? []),
-    ...bodyPages.flatMap((page, i) => pageLines(page, cells[i] ?? [], splits[i])),
+    ...bodyPages.flatMap((page, i) => pageLines(page, cells[i] ?? [], splits[i], bodySize)),
   ];
   const drop = furniture(all, pages, bodySize);
   const lines = all.filter((line) => !drop.has(line) && line.text !== '');

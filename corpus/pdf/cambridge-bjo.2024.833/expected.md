@@ -154,6 +154,52 @@ Three serious adverse events were recorded during the trial – two in the inter
 | --- | --- | --- | --- |
 |  | Intervention (*N* = 24) | Control (*N* = 24) | Total (*N* = 48) |
 | Age (years, s.d.) | 29 (4) | 30 (6) | 29 (5) |
+| Relationship status: |  |  |  |
+| Married/civil partnership | 5 (21%) | 4 (17%) | 9 (19%) |
+| Cohabiting (living with partner) | 5 (21%) | 9 (38%) | 14 (29%) |
+| Spouse/partner deceased | 0 | 1 (4%) | 1 (2%) |
+| Separated | 1 (4%) | 1 (4%) | 2 (4%) |
+| Single /non-cohabiting partner | 12 (50%) | 8 (33%) | 20 (42%) |
+| Other | 1 (4%) | 1 (4%) | 2 (4%) |
+| Current living arrangements: |  |  |  |
+| Alone | 1 (4%) | 1 (4%) | 2 (4%) |
+| With spouse/partner | 3 (13%) | 1 (4%) | 4 (8%) |
+| With spouse/partner and child or children | 7 (29%) | 11 (46%) | 18 (38%) |
+| With child or children (but no spouse/partner) | 11 (46%) | 8 (33%) | 19 (40%) |
+| With other relatives | 1 (4%) | 1 (4%) | 2 (4%) |
+| None of the above | 1 (4%) | 2 (8%) | 3 (6%) |
+| Ethnicity: |  |  |  |
+| Asian/Asian British | 0 | 0 | 0 |
+| Black/African/Caribbean/Black British | 3 (13%) | 2 (8%) | 5 (10%) |
+| Mixed/Multiple ethnic groups | 3 (13%) | 5 (21%) | 8 (17%) |
+| White | 17 (71%) | 17 (71%) | 34 (71%) |
+| Other ethnic group | 1 (4%) | 0 | 1 (2%) |
+| Current work situation: |  |  |  |
+| In paid work (including self-employed) | 12 (50%) | 13 (54%) | 25 (52%) |
+| Unemployed | 5 (21%) | 2 (8%) | 7 (15%) |
+| Permanently sick or disabled | 1 (4%) | 2 (8%) | 3 (6%) |
+| Looking after home or family | 4 (17%) | 6 (25%) | 10 (21%) |
+| Full-time student | 1 (4%) | 0 | 1 (2%) |
+| Other | 1 (4%) | 1 (4%) | 2 (4%) |
+| Pregnancy status at recruitment: |  |  |  |
+| Currently pregnant | 9 (38%) | 9 (38%) | 18 (38%) |
+| Given birth in the last year | 15 (63%) | 15 (63%) | 30 (63%) |
+| Centre: |  |  |  |
+| South West | 12 (50%) | 12 (50%) | 24 (50%) |
+| London | 12 (50%) | 12 (50%) | 24 (50%) |
+| SAPAS (median, IQR) | 6 [5–7] | 7 [6.5–7.5] | 7 [5–7] |
+| BPD score (median, IQR) | 9 [8–9] | 9 [8–9] | 9 [8–9] |
+| ZAN-BPD-SR (mean, SD) | 15.3 (7.3) | 17.8 (6.2) | 16.5 (6.8) |
+| CORE-10 (median, IQR) | 25 [19–26] | 26 [22–27] | 25 [20–27] |
+| PSS (median, IQR)^a | 53 [40–61] | 47 [39–56] | 50 [40–60] |
+| Episodes of self-harm in the past week: |  |  |  |
+| Yes, once | 0 | 2 (8%) | 2 (4%) |
+| Yes, more than once | 0 | 0 | 0 |
+| No | 24 (100%) | 22 (92%) | 46 (96%) |
+| SWEMWBS (mean, SD) | 17.2 (3.7) | 16.8 (1.8) | 17.0 (8.5) |
+| WSAS (median, IQR) | 25 [20–31] | 28 [22–30] | 25 [20–30] |
+| EQ-5D-5L index value (median, IQR) | 0.78 [0.56–0.91] | 0.71 [0.45–0.84] | 0.75 [0.53–0.87] |
+| EQ-5D VAS (mean, SD) | 47 (24) | 50 (25) | 49 (24) |
 
 **Table 3.** Results from regression analyses of 4-month outcome data
 

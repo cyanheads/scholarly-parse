@@ -258,6 +258,102 @@ describe('parsePdf', () => {
     });
   });
 
+  describe('a caption labelled in another language (#88)', () => {
+    const TABLE_LABELS = ['Tab.', 'Tabel', 'Tabelle', 'Tableau', 'Tabla', 'Tabela', 'Tabella'];
+    const FIGURE_LABELS = ['Figuur', 'Abb.', 'Abbildung', 'Figura', 'Gambar'];
+    const opening = (top: number): TextSpec[] => [
+      {
+        font: 'bold',
+        size: 20,
+        text: 'Captions in the languages of their journals',
+        x: 72,
+        y: 750,
+      },
+      { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 720 },
+      ...paragraph(
+        Array.from(
+          { length: 12 },
+          (_, i) => `Line ${i + 1} of ordinary running text in the body of the paper.`,
+        ),
+        { y: top },
+      ),
+    ];
+    /** Each float block's type and label, in reading order. */
+    const floats = (document: ScholarlyDocument) =>
+      document.body
+        .flatMap((section) => section.blocks)
+        .flatMap((block) =>
+          block.type === 'table' || block.type === 'figure' ? [[block.type, block.label]] : [],
+        );
+    const expected = (form: (label: string) => string) => [
+      ...TABLE_LABELS.map((label) => ['table', form(label)]),
+      ...FIGURE_LABELS.map((label) => ['figure', form(label)]),
+    ];
+
+    it('opens a table or a figure at its label, Title-case and punctuated or UPPER-case alone', async () => {
+      const labels = [...TABLE_LABELS, ...FIGURE_LABELS];
+      const titled = await parse(
+        buildPdf({
+          pages: [
+            [
+              ...opening(700),
+              ...labels.map((label, i) => ({
+                text: `${label} 1. A caption set in the language of its journal`,
+                x: 72,
+                y: 540 - 24 * i,
+              })),
+            ],
+          ],
+        }),
+      );
+      expect(floats(titled)).toEqual(expected((label) => `${label} 1`));
+      // A label alone on its line, in capitals, with its caption on the line below.
+      const upper = await parse(
+        buildPdf({
+          pages: [
+            [
+              ...opening(700),
+              ...labels.flatMap((label, i): TextSpec[] => [
+                { text: `${label.toUpperCase()} 2`, x: 72, y: 540 - 30 * i },
+                { text: 'A caption set under its label', x: 72, y: 528 - 30 * i },
+              ]),
+            ],
+          ],
+        }),
+      );
+      expect(floats(upper)).toEqual(expected((label) => `${label.toUpperCase()} 2`));
+    });
+
+    it('leaves prose opening with a label and its number as prose', async () => {
+      const prose = [
+        'Tabla 1). La GPM se calcula a partir de los datos de cada grupo.',
+        'Tabel 3 memperlihatkan hasil pengukuran pada setiap kelompok.',
+      ];
+      const document = await parse(
+        buildPdf({
+          pages: [
+            [
+              ...opening(700),
+              ...paragraph([prose[0] as string], { y: 540 }),
+              ...paragraph([prose[1] as string], { y: 510 }),
+            ],
+          ],
+        }),
+      );
+      expect(floats(document)).toEqual([]);
+      expect(texts(document.body[0]?.blocks ?? [])).toEqual(expect.arrayContaining(prose));
+    });
+
+    it('keeps a caption set right of the text frame as page content', async () => {
+      const document = await parse(
+        buildPdf({
+          pages: [[...opening(700), { text: 'Gambar 4. Peta lokasi penelitian', x: 420, y: 540 }]],
+        }),
+      );
+      expect(floats(document)).toEqual([['figure', 'Gambar 4']]);
+    });
+  });
+
   it('splits a numbered reference list and reads identifiers', async () => {
     const { references } = await parse(PAPER);
     expect(references.map((reference) => reference.label)).toEqual(['1', '2', '3']);
@@ -307,6 +403,39 @@ describe('parsePdf', () => {
       'Modified RNA as a Switch',
     ]);
     expect(outline(document.back)).toEqual(['FUNDING']);
+  });
+
+  it('reads prose with no heading before the reference list as an untitled body section', async () => {
+    const report = [
+      'The symposium on historical word formation took place over two days in Munich,',
+      'and brought together researchers who study how English words were built.',
+    ];
+    const talks = [
+      'The first talk traced imitative words in the oldest texts, and the second asked',
+      'whether a corpus of glosses can show which of them were coined by their scribes.',
+    ];
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            { font: 'bold', size: 20, text: 'Conference report on word formation', x: 72, y: 720 },
+            ...paragraph(report, { y: 680 }),
+            ...paragraph(talks, { y: 640 }),
+            { font: 'bold', size: 12, text: 'References', x: 72, y: 600 },
+            ...paragraph(['1. Doe J. Imitative words in early English. J Tests. 2020;1:1-2.'], {
+              y: 585,
+            }),
+          ],
+        ],
+      }),
+    );
+    expect(document.body).toMatchObject([{ kind: 'body' }]);
+    expect(document.body[0]).not.toHaveProperty('title');
+    expect(texts(document.body[0]?.blocks ?? []).join(' ')).toBe(
+      `${report.join(' ')} ${talks.join(' ')}`,
+    );
+    expect(document.references).toHaveLength(1);
+    expect(document.diagnostics.warnings.map((warning) => warning.code)).not.toContain('no-body');
   });
 
   it('reads an abstract set in small type as the whole of the first column', async () => {
@@ -568,6 +697,48 @@ describe('parsePdf', () => {
         '## Modification of Page Layout Modulates Phase Separation',
       ]);
     }
+  });
+
+  it('reads a wrapped bold heading whole when its quote marks are regular or it opens with a lower-case symbol (#84)', async () => {
+    const body = (y: number) =>
+      paragraph(
+        [
+          'Body text of the section runs across the page in plain type,',
+          'and goes on for a second line of the paragraph before it ends.',
+          'A third line closes the paragraph with a stop at its end.',
+        ],
+        { y },
+      );
+    // `m`, a raised `6`, and `A Acts as a`, then `“Beacon”` with its marks in the regular
+    // face, each run at its Helvetica width and the bold word space (3.336) before `“` and `to`.
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            { font: 'bold', size: 20, text: 'A study of layout inference', x: 72, y: 720 },
+            { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 680 },
+            ...body(664),
+            { font: 'bold', size: 12, text: 'm', x: 72, y: 610 },
+            { font: 'bold', size: 8, text: '6', x: 82.668, y: 614 },
+            { font: 'bold', size: 12, text: 'A Acts as a', x: 87.116, y: 610 },
+            { size: 12, text: '“', x: 155.144, y: 610 },
+            { font: 'bold', size: 12, text: 'Beacon', x: 159.14, y: 610 },
+            { size: 12, text: '”', x: 202.484, y: 610 },
+            { font: 'bold', size: 12, text: 'to Recruit Reader', x: 209.816, y: 610 },
+            { font: 'bold', size: 12, text: 'Proteins', x: 72, y: 596 },
+            ...body(582),
+            { font: 'italic', size: 12, text: 'Myocardial metabolism', x: 72, y: 530 },
+            ...body(516),
+          ],
+        ],
+      }),
+    );
+    expect(toMarkdown(document).match(/^#+ .*$/gm)).toEqual([
+      '# A study of layout inference',
+      '## 1 Introduction',
+      '## m^6A Acts as a “Beacon” to Recruit Reader Proteins',
+      '### Myocardial metabolism',
+    ]);
   });
 
   it('ends a reference list at end matter opened by a bold back-matter label, whole or split', async () => {
@@ -876,6 +1047,31 @@ describe('parsePdf', () => {
     expect(texts(document.body[0]?.blocks ?? []).at(-1)).toContain(safe);
     expect(document.footnotes).toEqual([{ label: '1', text: safe }]);
     expect(document.references[2]).toMatchObject({ label: '3', text: safe });
+  });
+
+  it('keeps a superscript inside the title and its italics, leaving out a label and a note mark beside it (#85)', async () => {
+    // Each run at its Helvetica width: the label `OPEN` opens the first line, a raised `6` sits
+    // between title-size runs, and a raised note mark closes the second line.
+    const document = await parse(
+      buildPdf({
+        pages: [
+          [
+            { font: 'bold', size: 14, text: 'OPEN', x: 72, y: 720 },
+            { font: 'bold', size: 20, text: 'A glimpse on N', x: 115.676, y: 720 },
+            { font: 'bold', size: 13, text: '6', x: 261.256, y: 727 },
+            { font: 'bold', size: 20, text: '-Methyladenosine', x: 268.484, y: 720 },
+            { font: 'bold', size: 20, text: 'at $5 a genome in', x: 72, y: 696 },
+            { font: 'italic', size: 20, text: 'Anthoxanthum nitens', x: 245.4, y: 696 },
+            { font: 'bold', size: 12, text: '*', x: 433.28, y: 703 },
+            { font: 'bold', size: 12, text: '1 Introduction', x: 72, y: 650 },
+            ...paragraph(ABSTRACT, { y: 635 }),
+          ],
+        ],
+      }),
+    );
+    const title = 'A glimpse on N^6-Methyladenosine at \\$5 a genome in *Anthoxanthum nitens*';
+    expect(document.metadata.title).toBe(title);
+    expect(toMarkdown(document).split('\n')[0]).toBe(`# ${title}`);
   });
 
   it('falls back to the Info title, but not to a word processor placeholder', async () => {

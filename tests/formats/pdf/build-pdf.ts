@@ -25,11 +25,14 @@ export interface PdfSpec {
 
 const FONT_RESOURCE = { bold: 'F2', italic: 'F3', regular: 'F1' } as const;
 
+/** The curly quotation marks' codes in WinAnsiEncoding, written as octal escapes. */
+const WIN_ANSI_QUOTES: Record<string, string> = { '‘': '221', '’': '222', '“': '223', '”': '224' };
+
 function literal(text: string): string {
-  return `(${text.replace(/[\\()]/g, (char) => `\\${char}`)})`;
+  return `(${text.replace(/[\\()‘’“”]/g, (char) => `\\${WIN_ANSI_QUOTES[char] ?? char}`)})`;
 }
 
-/** Build the PDF. Text must be ASCII. */
+/** Build the PDF. Text must be ASCII, or one of the curly quotation marks. */
 export function buildPdf({ height = 792, info, pages, width = 612 }: PdfSpec): Uint8Array {
   const bodies: string[] = [
     '<< /Type /Catalog /Pages 2 0 R >>',
